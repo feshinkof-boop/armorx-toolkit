@@ -1,0 +1,10 @@
+# ARMORX Pro example macro
+@name Example Combo
+@trigger M1
+@mode tap
+@repeat 200
+
+A       80  50
+X      100  60
+B+RT   120  70
+Y       90 100
