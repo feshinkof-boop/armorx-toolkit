@@ -1,0 +1,82 @@
+# ARMORX Pro 144-byte configuration format
+
+## Envelope
+
+A known ARMORX Pro configuration is **144 bytes**:
+
+| Offset | Size | Meaning |
+|---:|---:|---|
+| 0 | 2 | CRC16, big-endian storage |
+| 2 | 2 | declared length, big-endian (`0x0090`) |
+| 4 | 108 | controller parameter block |
+| 112 | 32 | `mapKeys[32]` |
+
+## CRC
+
+The CRC uses the MODBUS-style polynomial `0xA001` with initial value `0xFFFF`, calculated over bytes `2..143`.
+
+The resulting 16-bit value is stored in bytes `0..1` in big-endian order.
+
+## Known parameter offsets
+
+The current builder exposes these named fields:
+
+| Offset | Field |
+|---:|---|
+| 4 | `motorSpeedIdx` |
+| 5 | `motorMax` |
+| 9 | `triggerMode` |
+| 10 | `triggerLeftDZCenter` |
+| 11 | `triggerLeftDZSide` |
+| 12 | `triggerRightDZCenter` |
+| 13 | `triggerRightDZSide` |
+| 14 | `joystickCircleLimit` |
+| 15 | `stickTurn` |
+| 16 | `stickLeftDZCenter` |
+| 17 | `stickLeftDZSide` |
+| 18 | `stickRightDZCenter` |
+| 19 | `stickRightDZSide` |
+| 20..25 | left-stick curve |
+| 28..33 | right-stick curve |
+| 36 | `sensorMode` |
+| 37 | `sensorDir` |
+| 38..39 | sensor right-key fields |
+| 40..43 | `sensorRightKeyBit` (u32 BE) |
+| 44..49 | sensor curve 0 |
+| 52..57 | sensor curve 1 |
+| 60..65 | sensor curve 2 |
+| 68 | `sensorMin` |
+| 69..72 | `sensorSwitch` (u32 BE) |
+| 80 | `turboSpeedIdx` |
+| 81..84 | `turboKey` (u32 BE) |
+| 112..143 | `mapKeys[32]` |
+
+Unknown and reserved bytes are preserved when patching a template.
+
+## Why patching a known-good template is preferred
+
+A freshly generated config can initialize unknown bytes to zero, but those bytes may have firmware-specific meaning. For practical use, prefer:
+
+```bash
+python tools/armorx_config.py patch known-good.json \
+  --set 'mapKey[M1]=A' \
+  -o modified.json
+```
+
+This preserves all unknown fields while recalculating the length and CRC.
+
+## Validation
+
+```bash
+python tools/armorx_config.py validate config.json
+```
+
+## Decode
+
+```bash
+python tools/armorx_config.py decode config.json -o decoded.json
+```
+
+## Current confidence
+
+The 144-byte envelope, CRC behavior, mapping region, and listed field offsets are implemented as current research findings. Unknown fields are explicitly left unresolved rather than assigned speculative names.
