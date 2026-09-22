@@ -1,15 +1,21 @@
+<!--
+Keywords: BIGBIG WON, BIGBIGWON, ARMORX Pro, ArmorX Pro, Xbox, Xbox controller,
+controller, gamepad, controller remapping, key mapping, controller macro, M1 M2 M3 M4
+-->
+
 <div align="center">
 
-# ArmorX Toolkit
+# BIGBIG WON ARMORX Pro — Xbox Controller Toolkit
 
-**Open-source tools and protocol documentation for the BIGBIG WON ARMORX Pro controller ecosystem.**
+**Open-source configuration, key-mapping, macro, and community tools for the BIGBIG WON ARMORX Pro controller ecosystem.**
 
-Build, inspect, remap, and research **ARMORX Pro** configurations and macros for **Xbox** controllers.
+Build, inspect, remap, validate, and research **ARMORX Pro** configurations and macros for **Xbox controllers**.
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Status](https://img.shields.io/badge/status-active%20research-orange)
-![Platform](https://img.shields.io/badge/platform-Xbox%20%7C%20ARMORX%20Pro-black)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-2ea44f)
+![Status](https://img.shields.io/badge/status-active%20research-f59e0b)
+![Platform](https://img.shields.io/badge/platform-Xbox%20controller-107C10?logo=xbox&logoColor=white)
+![Tests](https://github.com/feshinkof-boop/armorx-toolkit/actions/workflows/tests.yml/badge.svg)
 
 </div>
 
@@ -17,31 +23,36 @@ Build, inspect, remap, and research **ARMORX Pro** configurations and macros for
 
 ## Overview
 
-**ArmorX Toolkit** is a community-driven interoperability project for the **BIGBIG WON ARMORX Pro**, an accessory for **Xbox** controllers.
+**ArmorX Toolkit** is a community-driven interoperability project for the **BIGBIG WON ARMORX Pro**, an accessory for **Xbox controllers**.
 
-The project focuses on three things:
+The project focuses on:
 
 - decoding and generating ARMORX Pro controller configuration data;
 - building and validating controller macros;
-- documenting key mapping, config structure, timing behavior, and community/config exchange formats.
+- documenting **Xbox controller key mapping** and rear-button remapping;
+- documenting config structure, CRC, timing behavior, and unknown fields;
+- reproducing read-oriented community/config exchange behavior;
+- providing a clean base for future GUI and automation tools.
 
-The goal is to give controller enthusiasts, developers, and researchers a clean foundation for building better tools around **BIGBIG WON**, **ARMORX Pro**, **Xbox**, and controller customization.
+The goal is to give controller enthusiasts, developers, and researchers a solid foundation for building better tools around **BIGBIG WON**, **ARMORX Pro**, **Xbox**, and controller customization.
 
-> This is an independent community project. It is not affiliated with or endorsed by BIGBIG WON, MOJHON, Microsoft, or Xbox.
+> **Unofficial project.** Not affiliated with or endorsed by BIGBIG WON, MOJHON, Microsoft, or Xbox.
 
 ## Features
 
-- **144-byte config decoder and builder**
-- **CRC16 validation/recalculation**
-- **Xbox / ARMORX Pro key mapping**
-- **M1-M4 remapping support**
-- **Macro builder with timing and chords**
-- **Macro execution modes**
-- **Documented unknown/reserved fields**
-- **Community/config API research notes**
-- **Tests and reproducible examples**
+| Area | Current support |
+|---|---|
+| Config format | 144-byte decoder / builder |
+| Integrity | CRC16 validation + regeneration |
+| Key mapping | Named Xbox / ARMORX Pro IDs |
+| Rear buttons | M1-M4 remapping |
+| Macros | Timed steps, chords, cycle modes |
+| Config safety | Unknown/reserved bytes preserved when patching |
+| Community | Read-oriented config-list and share-code client |
+| Research | Evidence levels: PROVEN / STRONG EVIDENCE / UNKNOWN |
+| Quality | Pytest suite + GitHub Actions |
 
-## ARMORX Pro key mapping
+## ARMORX Pro / Xbox key mapping
 
 The following IDs are directly supported by the recovered ARMORX Pro mapping model.
 
@@ -82,7 +93,7 @@ mapKeys[23] = 0
 M1 -> A
 ```
 
-Some IDs remain intentionally undocumented until they are verified. See [docs/keymapping.md](docs/keymapping.md).
+Some IDs remain intentionally unresolved until directly verified. See [docs/keymapping.md](docs/keymapping.md).
 
 ## Config format
 
@@ -97,19 +108,19 @@ A controller config is **144 bytes**:
 
 Known fields include trigger settings, left/right stick deadzones, response curves, motion/sensor settings, turbo settings, and button mapping.
 
-See [docs/config-format.md](docs/config-format.md).
+Full reference: [docs/config-format.md](docs/config-format.md)
 
 ## Macro format
 
-Macros support:
+Macros currently support:
 
-- M1-M4 as trigger buttons
-- tap and long-press activation
-- cycle modes
-- multi-button chords
-- per-step hold duration
-- per-step interval
-- up to 16 steps on firmware V41-era behavior
+- M1-M4 as trigger buttons;
+- tap and long-press activation;
+- cycle modes;
+- multi-button chords;
+- per-step hold duration;
+- per-step interval;
+- up to 16 steps in the current V41-era model.
 
 Example:
 
@@ -125,7 +136,7 @@ B+RT   120   70
 Y       90  100
 ```
 
-See [docs/macro-format.md](docs/macro-format.md).
+Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Quick start
 
@@ -136,42 +147,69 @@ git clone https://github.com/feshinkof-boop/armorx-toolkit.git
 cd armorx-toolkit
 ```
 
-Inspect a config:
+### Inspect a config
 
 ```bash
 python tools/armorx_config.py decode config.json
 ```
 
-Patch a mapping:
+### Validate CRC and length
+
+```bash
+python tools/armorx_config.py validate config.json
+```
+
+### Remap M1 to A and M2 to B
 
 ```bash
 python tools/armorx_config.py patch config.json \
-  --map M1=A \
-  --map M2=B \
+  --set 'mapKey[M1]=A' \
+  --set 'mapKey[M2]=B' \
   -o patched_config.json
 ```
 
-Build a macro:
+### Show known key IDs
+
+```bash
+python tools/armorx_config.py keys
+```
+
+### Build a macro
 
 ```bash
 python tools/armorx_macro.py build examples/example_macro.txt -o macro.json
+python tools/armorx_macro.py inspect macro.json
 ```
 
-Run tests:
+### Community/config exchange client
+
+Preview a config-list request without sending it:
 
 ```bash
-python -m pytest -q
+python tools/armorx_community.py list \
+  --phone-uuid YOUR_PHONE_ID \
+  --dev-uuid YOUR_CONTROLLER_ID \
+  --dry-run
+```
+
+See [docs/community-api.md](docs/community-api.md) for the current scope and limitations.
+
+### Run tests
+
+```bash
+python -m pip install pytest
+python -m pytest
 ```
 
 ## Evidence standard
 
 Protocol claims in this repository are classified as:
 
-- **PROVEN** — directly reproduced or verified by multiple consistent observations.
-- **STRONG EVIDENCE** — highly consistent with protocol behavior but still awaiting one independent confirmation.
-- **UNKNOWN** — deliberately left unresolved.
+- **PROVEN** — directly reproduced or independently confirmed.
+- **STRONG EVIDENCE** — multiple signals agree, but one final confirmation is missing.
+- **UNKNOWN** — deliberately unresolved.
 
-Unknown bytes and IDs are not guessed.
+Unknown bytes and IDs are **not guessed**.
 
 ## Repository layout
 
@@ -181,6 +219,7 @@ armorx-toolkit/
 ├── ROADMAP.md
 ├── CONTRIBUTING.md
 ├── SECURITY.md
+├── CODE_OF_CONDUCT.md
 ├── LICENSE
 ├── docs/
 │   ├── config-format.md
@@ -191,12 +230,14 @@ armorx-toolkit/
 │   └── example_macro.txt
 ├── tools/
 │   ├── armorx_config.py
-│   └── armorx_macro.py
+│   ├── armorx_macro.py
+│   └── armorx_community.py
 ├── tests/
 │   ├── test_config.py
 │   └── test_macro.py
 └── .github/
     ├── ISSUE_TEMPLATE/
+    ├── PULL_REQUEST_TEMPLATE.md
     └── workflows/
 ```
 
@@ -207,16 +248,17 @@ Contributions are welcome, especially:
 - controlled config diffs;
 - confirmation of unknown key IDs;
 - additional firmware behavior;
-- controller captures from user-owned hardware;
+- anonymized captures from user-owned hardware;
+- **Xbox controller** mapping validation;
 - GUI ideas;
 - test fixtures;
 - documentation improvements.
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Roadmap](ROADMAP.md).
 
-## Search terms
+## Search / discovery keywords
 
-BIGBIG WON · BIGBIGWON · ARMORX Pro · ArmorX Pro · Xbox · Xbox controller · controller remapping · controller macro · gamepad · key mapping · M1 M2 M3 M4 · controller configuration
+**BIGBIG WON** · **BIGBIGWON** · **ARMORX Pro** · **ArmorX Pro** · **Xbox** · **Xbox controller** · **controller** · gamepad · controller remapping · controller macro · key mapping · M1 M2 M3 M4 · controller configuration
 
 ## License
 
