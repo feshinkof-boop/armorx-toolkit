@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use ArmorX Toolkit in research or tooling, please cite this repository."
+title: "ArmorX Toolkit: BIGBIG WON ARMORX Pro Xbox Controller Tools"
+type: software
+authors:
+  - family-names: "feshinkof-boop"
+repository-code: "https://github.com/feshinkof-boop/armorx-toolkit"
+license: MIT
+keywords:
+  - BIGBIG WON
+  - BIGBIGWON
+  - ARMORX Pro
+  - Xbox
+  - Xbox controller
+  - controller
+  - gamepad
+  - key mapping
+  - controller macro
+  - reverse engineering
