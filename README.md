@@ -217,6 +217,8 @@ Unknown bytes and IDs are **not guessed**.
 armorx-toolkit/
 ├── README.md
 ├── ROADMAP.md
+├── CHANGELOG.md
+├── CITATION.cff
 ├── CONTRIBUTING.md
 ├── SECURITY.md
 ├── CODE_OF_CONDUCT.md
@@ -234,7 +236,8 @@ armorx-toolkit/
 │   └── armorx_community.py
 ├── tests/
 │   ├── test_config.py
-│   └── test_macro.py
+│   ├── test_macro.py
+│   └── test_community.py
 └── .github/
     ├── ISSUE_TEMPLATE/
     ├── PULL_REQUEST_TEMPLATE.md
