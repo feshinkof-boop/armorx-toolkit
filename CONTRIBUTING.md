@@ -54,8 +54,9 @@ A minimal controlled-diff report is much more useful than a guess.
 ## Development
 
 ```bash
-python -m pip install pytest
+python -m pip install -e ".[dev]"
 python -m pytest
+armorx --help
 ```
 
 The current tools are directly runnable from `tools/`.
