@@ -1,0 +1,38 @@
+name: Protocol / mapping finding
+description: Submit a reproducible ARMORX Pro mapping or format finding
+title: "[Research] "
+labels: []
+body:
+  - type: dropdown
+    id: confidence
+    attributes:
+      label: Confidence
+      options:
+        - PROVEN
+        - STRONG EVIDENCE
+        - UNKNOWN / needs help
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Firmware version
+  - type: textarea
+    id: finding
+    attributes:
+      label: Finding
+      description: Describe the key ID, byte offset, field, or behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction evidence
+      description: Controlled diff, repeated hardware result, protocol trace, or another reproducible observation.
+    validations:
+      required: true
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Redaction check
+      description: Confirm that personal IDs, tokens, and unrelated private data were removed.
