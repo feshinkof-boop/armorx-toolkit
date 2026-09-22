@@ -140,45 +140,49 @@ Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Quick start
 
-Clone the repository:
+Clone and install the package:
 
 ```bash
 git clone https://github.com/feshinkof-boop/armorx-toolkit.git
 cd armorx-toolkit
+python -m pip install -e .
+```
+
+This installs one unified command:
+
+```bash
+armorx --help
 ```
 
 ### Inspect a config
 
 ```bash
-python tools/armorx_config.py decode config.json
+armorx config decode config.json
 ```
 
 ### Validate CRC and length
 
 ```bash
-python tools/armorx_config.py validate config.json
+armorx config validate config.json
 ```
 
 ### Remap M1 to A and M2 to B
 
 ```bash
-python tools/armorx_config.py patch config.json \
-  --set 'mapKey[M1]=A' \
-  --set 'mapKey[M2]=B' \
-  -o patched_config.json
+armorx config map config.json M1=A M2=B -o patched_config.json
 ```
 
 ### Show known key IDs
 
 ```bash
-python tools/armorx_config.py keys
+armorx config keys
 ```
 
-### Build a macro
+### Build and inspect a macro
 
 ```bash
-python tools/armorx_macro.py build examples/example_macro.txt -o macro.json
-python tools/armorx_macro.py inspect macro.json
+armorx macro build examples/example_macro.txt -o macro.json
+armorx macro inspect macro.json
 ```
 
 ### Community/config exchange client
@@ -186,18 +190,116 @@ python tools/armorx_macro.py inspect macro.json
 Preview a config-list request without sending it:
 
 ```bash
-python tools/armorx_community.py list \
+armorx community list \
   --phone-uuid YOUR_PHONE_ID \
   --dev-uuid YOUR_CONTROLLER_ID \
   --dry-run
 ```
 
-See [docs/community-api.md](docs/community-api.md) for the current scope and limitations.
+See [docs/cli.md](docs/cli.md) for the full command reference and [docs/community-api.md](docs/community-api.md) for the current community scope.
+
+### Legacy scripts remain available
+
+The original standalone scripts are intentionally preserved:
+
+```text
+tools/armorx_config.py
+tools/armorx_macro.py
+tools/armorx_community.py
+```
+
+They are not being removed; the new `armorx` command is the preferred interface.
 
 ### Run tests
 
 ```bash
-python -m pip install pytest
+python -m pip install -e ".[dev]"
+python -m pytest
+```
+
+## Evidence standard
+
+Protocol claims in this repository are classified as:
+
+- **PROVEN** — directly reproduced or independently confirmed.
+- **STRONG EVIDENCE** — multiple signals agree, but one final confirmation is missing.
+- **UNKNOWN** — deliberately unresolved.
+
+Unknown bytes and IDs are **not guessed**.
+
+## Repository layout
+
+```text
+armorx-toolkit/
+├── README.md
+├── ROADMAP.md
+├── CHANGELOG.md
+├── CITATION.cff
+├── CONTRIBUTING.md
+├── SECURITY.md
+├── CODE_OF_CONDUCT.md
+├── LICENSE
+├── pyproject.toml
+├── src/
+│   └── armorx/
+│       ├── __init__.py
+│       ├── __main__.py
+│       ├── cli.py
+│       ├── config.py
+│       ├── macro.py
+│       └── community.py
+├── docs/
+│   ├── cli.md
+│   ├── config-format.md
+│   ├── keymapping.md
+│   ├── macro-format.md
+│   └── community-api.md
+├── examples/
+│   └── example_macro.txt
+├── tools/                 # preserved standalone scripts
+│   ├── armorx_config.py
+│   ├── armorx_macro.py
+│   └── armorx_community.py
+├── tests/
+│   ├── test_cli.py
+│   ├── test_config.py
+│   ├── test_macro.py
+│   └── test_community.py
+└── .github/
+    ├── ISSUE_TEMPLATE/
+    ├── PULL_REQUEST_TEMPLATE.md
+    └── workflows/
+```
+
+## Community/config exchange client
+
+Preview a config-list request without sending it:
+
+```bash
+armorx community list \
+  --phone-uuid YOUR_PHONE_ID \
+  --dev-uuid YOUR_CONTROLLER_ID \
+  --dry-run
+```
+
+See [docs/cli.md](docs/cli.md) for the full command reference and [docs/community-api.md](docs/community-api.md) for the current community scope.
+
+### Legacy scripts remain available
+
+The original standalone scripts are intentionally preserved:
+
+```text
+tools/armorx_config.py
+tools/armorx_macro.py
+tools/armorx_community.py
+```
+
+They are not being removed; the new `armorx` command is the preferred interface.
+
+### Run tests
+
+```bash
+python -m pip install -e ".[dev]"
 python -m pytest
 ```
 
