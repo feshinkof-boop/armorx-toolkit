@@ -51,6 +51,14 @@ CUsbRecvThread::ReadFromUsb
 
 and uses `libusb_interrupt_transfer` for device I/O.
 
+The recovered short-packet send path passes the monitor's full HID record size
+(`m_nBulkSize`) to `libusb_interrupt_transfer`, with the short command copied
+at offset 0 of a zero-filled buffer. For the tested ARMORX Pro/dongle descriptor,
+the HID record size is 64 bytes. The application-side transfer buffer therefore
+starts directly with `0xA5`; there is no extra report-ID byte in the buffer
+passed by this code path. The transfer timeout in the recovered send routine is
+5000 ms.
+
 The library also contains explicit device-family strings for:
 
 ```text
@@ -81,7 +89,7 @@ The following request encodings are recovered from the Windows device library an
 
 | Operation | Request | Response evidence |
 |---|---|---|
-| GetMode | `A5 04 E2 8B` | parser checks `A5`, command `E2`, and checksum |
+| GetMode | `A5 04 E2 8B` | parser requires at least 16 bytes, checks `A5`, command `E2`, and checksum |
 | GetZkmVersion | `A5 04 0B B4` | parser accepts `A5 05 0B VV CC` |
 | GetProfileSize | `A5 04 D3 7C` | parser checks `A5`, command `D3`, and checksum |
 | GetMacroList | `A5 04 D5 7E` | dedicated parser exists |
@@ -113,9 +121,20 @@ CParserGetMode2
 
 This is consistent with the observed shared VID/PID: the PC software enumerates a common USB candidate first, then uses protocol-level information to decide which concrete device class is present.
 
-The recovered identification routine constructs both `CParserGetMode` and `CParserGetMode2` paths. Around the synchronous command transaction it waits approximately 500 ms and passes a 5000 ms timeout into `CUsbCmdHelper::SendRecvCmdKeyword`. If the first decode path does not produce an accepted result, the routine contains a second mode-query path rather than immediately classifying the device by VID/PID alone.
+The recovered identification routine contains both `CParserGetMode` and
+`CParserGetMode2` paths. Around synchronous command transactions it waits
+approximately 500 ms and uses a 5000 ms command timeout.
 
-One recovered mode-query command buffer is initialized as `A5 04 E2 00`; the final checksum byte is produced by the command-building path before transmission, yielding the documented `A5 04 E2 8B` request.
+A critical distinction is now statically confirmed:
+
+- `CParserGetMode` builds the 4-byte request `A5 04 E2 8B`.
+- `CParserGetMode2` is **not** another `E2` request. Its encoder builds a
+  5-byte `A5 05 19 PP CC` packet, where `PP` is a caller-supplied/state
+  parameter and `CC` is the additive checksum. Its response decoder expects
+  at least 19 bytes.
+
+The exact meaning and value source of `PP` remains **UNKNOWN**, so the toolkit
+does not send `GetMode2` yet.
 
 ## Current unresolved questions
 
