@@ -113,10 +113,13 @@ CParserGetMode2
 
 This is consistent with the observed shared VID/PID: the PC software enumerates a common USB candidate first, then uses protocol-level information to decide which concrete device class is present.
 
+The recovered identification routine constructs both `CParserGetMode` and `CParserGetMode2` paths. Around the synchronous command transaction it waits approximately 500 ms and passes a 5000 ms timeout into `CUsbCmdHelper::SendRecvCmdKeyword`. If the first decode path does not produce an accepted result, the routine contains a second mode-query path rather than immediately classifying the device by VID/PID alone.
+
+One recovered mode-query command buffer is initialized as `A5 04 E2 00`; the final checksum byte is produced by the command-building path before transmission, yielding the documented `A5 04 E2 8B` request.
+
 ## Current unresolved questions
 
 - Exact first-query sequence for ARMORX Pro versus ARMORX Dongle.
-- Exact retry/timeout behavior used by the production PC assistant.
 - Whether a controller-attached or paired state is required before some read commands respond.
 - Final mapping from protocol mode/device markers to ARMORX Pro and ARMORX Dongle.
 - Long-packet framing for full profile and firmware operations.
