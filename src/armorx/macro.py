@@ -156,7 +156,8 @@ def make_row(index: int, key_expr: str, duration: int = 200, interval: int = 100
         "showUpLine": not is_first,
         "showDownLine": not is_last,
         "showInterval": not is_last,
-        "showAdd": is_last,
+        # Captured V41 client traffic serializes showAdd=true for every row.
+        "showAdd": True,
     }
 
 
@@ -167,7 +168,12 @@ def build_rows(steps: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def build_macro_json(steps: list[dict[str, Any]]) -> str:
-    return compact_json(build_rows(steps))
+    """Build the exact captured V41 wire representation.
+
+    The app serializes macroJson as a JSON list of JSON-encoded row strings,
+    not as a direct list of row objects.
+    """
+    return compact_json([compact_json(row) for row in build_rows(steps)])
 
 
 def build_macro_object(*, name: str, trigger: str = "M1", mode: str = "long_press",
@@ -202,7 +208,8 @@ def build_add_macro_payload(*, phone_uuid: str, dev_uuid: str, macro_obj: dict[s
     return {
         "phoneUuid": phone_uuid,
         "devUuid": dev_uuid,
-        "inUse": macro_obj["inUse"],
+        # /dev/addMacro uses 0/1 on the wire even though share objects may use bool.
+        "inUse": int(bool(macro_obj["inUse"])),
         "runKey": macro_obj["runKey"],
         "runKeyName": macro_obj["runKeyName"],
         "isRepeat": macro_obj["isRepeat"],
@@ -268,8 +275,12 @@ def decode_macro_json(s: str) -> list[dict[str, Any]]:
         raise ValueError("macroJson top-level value must decode to a list")
     out = []
     for i, row in enumerate(rows):
+        # Captured V41 traffic uses List<String>, where each string is a
+        # JSON-encoded row. Accept direct objects too for backward compatibility.
+        if isinstance(row, str):
+            row = json.loads(row)
         if not isinstance(row, dict):
-            raise ValueError(f"row {i} must be an object")
+            raise ValueError(f"row {i} must be an object or a JSON-encoded object string")
         r = dict(row)
         for key in ("mapList", "keyNameList"):
             if key not in r or not isinstance(r[key], str):
