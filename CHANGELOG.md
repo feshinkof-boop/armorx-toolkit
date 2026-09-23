@@ -2,6 +2,20 @@
 
 All notable project changes are documented here.
 
+## Unreleased
+
+### Fixed
+
+- Match captured V41 macro wire serialization (`macroJson` is a JSON list of JSON-encoded row strings).
+- Serialize `/dev/addMacro` `inUse` as integer `0`/`1`.
+- Preserve captured `showAdd=true` behavior for every macro row.
+- Correct the structured `res2` config region to raw bytes `74..111` instead of treating it as reserved-only data.
+
+### Added
+
+- Regression tests for the captured macro wire format and the `res2` overlap.
+- USB/HID protocol research notes covering the shared ARMORX Pro/dongle USB identity and read/query command evidence.
+
 ## 0.1.0 — 2026-09-23
 
 First public release of **ArmorX Toolkit**, an open-source BIGBIG WON ARMORX Pro toolkit for Xbox controller configuration, key mapping, macros, and community/config research.
