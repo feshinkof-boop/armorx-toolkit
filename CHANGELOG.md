@@ -15,6 +15,7 @@ All notable project changes are documented here.
 
 - Regression tests for the captured macro wire format and the `res2` overlap.
 - USB/HID protocol research notes covering the shared ARMORX Pro/dongle USB identity and read/query command evidence.
+- Static-analysis correction distinguishing `GetMode` (`A5 04 E2 8B`) from parameterized `GetMode2` (`A5 05 19 PP CC`), plus confirmed fixed-record-size interrupt transfer behavior.
 
 ## 0.1.0 — 2026-09-23
 
