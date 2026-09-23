@@ -133,22 +133,31 @@ The recovered identification routine contains both `CParserGetMode` and
 `CParserGetMode2` paths. Around synchronous command transactions it waits
 approximately 500 ms and uses a 5000 ms command timeout.
 
-A critical distinction is now statically confirmed:
+A deeper vtable/call-site reconstruction corrects an earlier misidentification:
 
-- `CParserGetMode` builds the 4-byte request `A5 04 E2 8B`.
-- `CParserGetMode2` is **not** another `E2` request. Its encoder builds a
-  5-byte `A5 05 19 PP CC` packet, where `PP` is a caller-supplied/state
-  parameter and `CC` is the additive checksum. Its response decoder expects
-  at least 19 bytes.
+- `CParserGetMode` and `CParserGetMode2` share the same command encoder at
+  `0x1003E320`.
+- Both therefore issue the same 4-byte request: `A5 04 E2 8B`.
+- `CParserGetMode::Decode` accepts the 16-byte response layout.
+- `CParserGetMode2::Decode` accepts the 19-byte response layout.
+- The separate `A5 05 19 PP CC` encoder belongs to `CParserTestMode`, not
+  `CParserGetMode2`.
 
-The exact meaning and value source of `PP` remains **UNKNOWN**, so the toolkit
-does not send `GetMode2` yet.
+The device-matching routine sends the shared `E2` query and can interpret the
+reply using either response layout. It retries the identification transaction
+up to three times, with an approximately 500 ms delay between attempts and a
+5000 ms command timeout.
+
+For the 16-byte layout, the recovered code extracts a 9-byte device marker from
+response bytes 6..14. For the 19-byte layout it extracts the corresponding
+9-byte marker from response bytes 9..17. Those marker bytes are then used by
+the higher-level device matcher.
 
 ## Current unresolved questions
 
-- Exact first-query sequence for ARMORX Pro versus ARMORX Dongle.
-- Whether a controller-attached or paired state is required before some read commands respond.
-- Final mapping from protocol mode/device markers to ARMORX Pro and ARMORX Dongle.
+- Whether a controller-attached or paired state is required before the shared `E2` identification query responds.
+- Exact marker strings returned by ARMORX Pro and ARMORX Dongle on the tested hardware.
+- Final mapping from all protocol marker variants to concrete product/firmware combinations.
 - Long-packet framing for full profile and firmware operations.
 
 No write-config, firmware-update, or destructive command is considered documented until independently validated.
