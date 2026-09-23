@@ -47,7 +47,7 @@ A decoded row looks like:
   "showUpLine": false,
   "showDownLine": true,
   "showInterval": true,
-  "showAdd": false
+  "showAdd": true
 }
 ```
 
