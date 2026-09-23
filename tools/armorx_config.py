@@ -18,6 +18,12 @@ CONFIG_LEN = 144
 PARAM_START = 4
 MAPKEYS_START = 112
 
+# Captured /dev/shareConfig traffic exposes a 38-byte structured field named
+# res2 that mirrors raw config bytes 74..111 exactly. It overlaps known turbo
+# fields and therefore must not be treated as an ordinary reserved-only range.
+SHARE_RES2_START = 74
+SHARE_RES2_END = 112
+
 # ArmorX key IDs recovered directly from the old app AOT remap UI.
 # Values 5/12/15/20-22/27-31 intentionally remain unnamed here because the
 # old ArmorX picker did not directly identify them.
@@ -133,8 +139,8 @@ RESERVED_RANGES = [
     (50, 51, "reserved_after_sensor_curve0"),
     (58, 59, "reserved_after_sensor_curve1"),
     (66, 67, "reserved_after_sensor_curve2"),
-    (73, 79, "res"),
-    (85, 111, "res2"),
+    (73, 79, "reserved_73_79"),
+    (85, 111, "reserved_after_turbo"),
 ]
 
 
@@ -232,6 +238,12 @@ def decode(buf: List[int]) -> Dict[str, Any]:
         "fields": {},
         "groups": {},
         "reserved": {},
+        "share_regions": {
+            "res2": {
+                "offsets": [SHARE_RES2_START, SHARE_RES2_END - 1],
+                "bytes": buf[SHARE_RES2_START:SHARE_RES2_END],
+            }
+        },
     }
     f = d["fields"]
     for name, off in BYTE_FIELDS.items():
