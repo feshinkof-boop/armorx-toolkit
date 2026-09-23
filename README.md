@@ -108,6 +108,8 @@ Known fields include trigger settings, left/right stick deadzones, response curv
 
 Full reference: [docs/config-format.md](docs/config-format.md)
 
+USB/HID research: [docs/usb-protocol.md](docs/usb-protocol.md)
+
 ## Macro format
 
 Macros currently support:
