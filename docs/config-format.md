@@ -80,3 +80,16 @@ python tools/armorx_config.py decode config.json -o decoded.json
 ## Current confidence
 
 The 144-byte envelope, CRC behavior, mapping region, and listed field offsets are implemented as current research findings. Unknown fields are explicitly left unresolved rather than assigned speculative names.
+
+
+## Captured structured share serialization
+
+Captured `/dev/shareConfig` traffic for the 144-byte ArmorX Pro format adds evidence about the app's structured serializer:
+
+- `res2` is a 38-byte array that mirrors raw bytes **74..111** exactly.
+- This region overlaps known fields such as `turboSpeedIdx` at byte 80 and `turboKey` at bytes 81..84, so `res2` is a backing/raw region, not a reserved-only range.
+- `crc` in structured share JSON is serialized as a signed 16-bit integer, while the raw config stores the same bits as two big-endian bytes.
+- u32 fields such as `sensorRightKeyBit`, `sensorSwitch`, and `turboKey` are serialized by the captured client as lowercase hexadecimal strings without a `0x` prefix.
+- Server storage accepts raw 144-byte configs even when bytes 0..1 contain a stale or zero CRC; device-write code should still regenerate the CRC before sending a config to hardware.
+
+The precise placement/meaning of the separate six-byte structured field named `res` remains **UNKNOWN**.
