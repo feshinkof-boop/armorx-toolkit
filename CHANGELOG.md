@@ -15,7 +15,7 @@ All notable project changes are documented here.
 
 - Regression tests for the captured macro wire format and the `res2` overlap.
 - USB/HID protocol research notes covering the shared ARMORX Pro/dongle USB identity and read/query command evidence.
-- Static-analysis correction distinguishing `GetMode` (`A5 04 E2 8B`) from parameterized `GetMode2` (`A5 05 19 PP CC`), plus confirmed fixed-record-size interrupt transfer behavior.
+- Deeper vtable/call-site reconstruction: `GetMode` and `GetMode2` share the same `A5 04 E2 8B` request and differ in 16-byte vs 19-byte response layouts. The separate `A5 05 19 PP CC` encoder is `CParserTestMode`.
 
 ## 0.1.0 — 2026-09-23
 
