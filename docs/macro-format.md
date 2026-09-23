@@ -2,7 +2,7 @@
 
 ## Overview
 
-The ARMORX Pro macro model represents a macro as an outer object containing trigger/mode metadata plus a JSON-encoded list of timed action rows.
+The ARMORX Pro macro model represents a macro as an outer object containing trigger/mode metadata plus a `macroJson` string. Captured V41 traffic shows that `macroJson` decodes to a `List<String>`, where each string is itself a JSON-encoded row object.
 
 ## Trigger buttons
 
@@ -51,7 +51,7 @@ A decoded row looks like:
 }
 ```
 
-`mapList` and `keyNameList` are themselves JSON strings inside the row object.
+`mapList` and `keyNameList` are themselves JSON strings inside the row object. Captured V41 traffic also shows `showAdd: true` on every serialized row, including non-final rows.
 
 ## Timing
 
@@ -99,3 +99,18 @@ The current V41-era model supports up to 16 macro steps in the builder.
 ## Unknowns
 
 Share/Screenshot is not assigned a macro key ID without direct verification. Firmware-internal frame encoding is intentionally separate from the portable macro JSON representation documented here.
+
+
+## Captured V41 wire nesting
+
+The captured client uses three serialization layers:
+
+```text
+HTTP JSON object
+  -> macroJson: string
+      -> JSON List<String>
+          -> each string decodes to one row object
+              -> mapList/keyNameList are JSON strings
+```
+
+For `/dev/addMacro`, captured traffic sends `inUse` as integer `0` or `1`. Share objects can carry the same logical field as a JSON boolean.
