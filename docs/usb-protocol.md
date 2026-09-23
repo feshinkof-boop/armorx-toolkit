@@ -53,11 +53,19 @@ and uses `libusb_interrupt_transfer` for device I/O.
 
 The recovered short-packet send path passes the monitor's full HID record size
 (`m_nBulkSize`) to `libusb_interrupt_transfer`, with the short command copied
-at offset 0 of a zero-filled buffer. For the tested ARMORX Pro/dongle descriptor,
-the HID record size is 64 bytes. The application-side transfer buffer therefore
-starts directly with `0xA5`; there is no extra report-ID byte in the buffer
-passed by this code path. The transfer timeout in the recovered send routine is
-5000 ms.
+at offset 0 of a zero-filled buffer. `m_nBulkSize` is derived by
+`CUsbMonitor::GetHidRecordSize` from the HID report descriptor rather than
+being hard-coded from the endpoint's 64-byte max-packet value.
+
+On the tested hardware, the interrupt endpoints advertise 64-byte max packets,
+while the Windows HID layer exposes a 65-byte output-report buffer (report ID
+byte plus report data). The exact `m_nBulkSize` value selected by DevMgr for
+this descriptor has not yet been observed dynamically, so the toolkit does not
+collapse those two facts into a guessed transfer length.
+
+The application-side short-command buffer itself starts with `0xA5`; no
+additional protocol wrapper is added before the command. The recovered
+`libusb_interrupt_transfer` send call uses a 5000 ms timeout.
 
 The library also contains explicit device-family strings for:
 
