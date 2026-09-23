@@ -28,3 +28,12 @@ def test_proven_key_ids():
     assert mod.MAP_KEY_CODES["A"] == 0
     assert mod.MAP_KEY_CODES["RT"] == 9
     assert mod.MAP_KEY_CODES["M4"] == 26
+
+
+def test_share_res2_region_is_74_to_111():
+    cfg = mod.fresh()
+    cfg[74:112] = list(range(38))
+    decoded = mod.decode(cfg)
+    region = decoded["share_regions"]["res2"]
+    assert region["offsets"] == [74, 111]
+    assert region["bytes"] == list(range(38))
