@@ -16,6 +16,7 @@ Build, inspect, remap, validate, and research **ARMORX Pro** configurations and 
 ![Status](https://img.shields.io/badge/status-active%20research-f59e0b)
 ![Platform](https://img.shields.io/badge/platform-Xbox%20controller-107C10?logo=xbox&logoColor=white)
 ![Tests](https://github.com/feshinkof-boop/armorx-toolkit/actions/workflows/tests.yml/badge.svg)
+![Release](https://img.shields.io/github/v/release/feshinkof-boop/armorx-toolkit?display_name=tag)
 
 </div>
 
@@ -32,9 +33,7 @@ The project focuses on:
 - documenting **Xbox controller key mapping** and rear-button remapping;
 - documenting config structure, CRC, timing behavior, and unknown fields;
 - reproducing read-oriented community/config exchange behavior;
-- providing a clean base for future GUI and automation tools.
-
-The goal is to give controller enthusiasts, developers, and researchers a solid foundation for building better tools around **BIGBIG WON**, **ARMORX Pro**, **Xbox**, and controller customization.
+- providing a clean foundation for future GUI and direct-device tooling.
 
 > **Unofficial project.** Not affiliated with or endorsed by BIGBIG WON, MOJHON, Microsoft, or Xbox.
 
@@ -49,12 +48,11 @@ The goal is to give controller enthusiasts, developers, and researchers a solid 
 | Macros | Timed steps, chords, cycle modes |
 | Config safety | Unknown/reserved bytes preserved when patching |
 | Community | Read-oriented config-list and share-code client |
-| Research | Evidence levels: PROVEN / STRONG EVIDENCE / UNKNOWN |
+| CLI | Unified `armorx` command |
+| Research | PROVEN / STRONG EVIDENCE / UNKNOWN evidence levels |
 | Quality | Pytest suite + GitHub Actions |
 
 ## ARMORX Pro / Xbox key mapping
-
-The following IDs are directly supported by the recovered ARMORX Pro mapping model.
 
 | ID | ARMORX Pro / Xbox control | Aliases |
 |---:|---|---|
@@ -138,9 +136,16 @@ Y       90  100
 
 Full reference: [docs/macro-format.md](docs/macro-format.md)
 
-## Quick start
+## Installation
 
-Clone and install the package:
+### Stable v0.1.0
+
+```bash
+python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.1.0
+armorx --version
+```
+
+### Development checkout
 
 ```bash
 git clone https://github.com/feshinkof-boop/armorx-toolkit.git
@@ -148,46 +153,39 @@ cd armorx-toolkit
 python -m pip install -e .
 ```
 
-This installs one unified command:
+## Unified CLI
 
 ```bash
 armorx --help
 ```
 
-### Inspect a config
+Decode and validate a config:
 
 ```bash
 armorx config decode config.json
-```
-
-### Validate CRC and length
-
-```bash
 armorx config validate config.json
 ```
 
-### Remap M1 to A and M2 to B
+Remap M1 to A and M2 to B:
 
 ```bash
 armorx config map config.json M1=A M2=B -o patched_config.json
 ```
 
-### Show known key IDs
+Show known mapping IDs:
 
 ```bash
 armorx config keys
 ```
 
-### Build and inspect a macro
+Build and inspect a macro:
 
 ```bash
 armorx macro build examples/example_macro.txt -o macro.json
 armorx macro inspect macro.json
 ```
 
-### Community/config exchange client
-
-Preview a config-list request without sending it:
+Preview a community/config request without sending it:
 
 ```bash
 armorx community list \
@@ -196,11 +194,11 @@ armorx community list \
   --dry-run
 ```
 
-See [docs/cli.md](docs/cli.md) for the full command reference and [docs/community-api.md](docs/community-api.md) for the current community scope.
+Full CLI reference: [docs/cli.md](docs/cli.md)
 
-### Legacy scripts remain available
+## Legacy scripts
 
-The original standalone scripts are intentionally preserved:
+The original standalone scripts are intentionally preserved for direct use and backward compatibility:
 
 ```text
 tools/armorx_config.py
@@ -208,14 +206,7 @@ tools/armorx_macro.py
 tools/armorx_community.py
 ```
 
-They are not being removed; the new `armorx` command is the preferred interface.
-
-### Run tests
-
-```bash
-python -m pip install -e ".[dev]"
-python -m pytest
-```
+The unified `armorx` command is the preferred interface for new users.
 
 ## Evidence standard
 
@@ -256,87 +247,12 @@ armorx-toolkit/
 │   └── community-api.md
 ├── examples/
 │   └── example_macro.txt
-├── tools/                 # preserved standalone scripts
-│   ├── armorx_config.py
-│   ├── armorx_macro.py
-│   └── armorx_community.py
-├── tests/
-│   ├── test_cli.py
-│   ├── test_config.py
-│   ├── test_macro.py
-│   └── test_community.py
-└── .github/
-    ├── ISSUE_TEMPLATE/
-    ├── PULL_REQUEST_TEMPLATE.md
-    └── workflows/
-```
-
-## Community/config exchange client
-
-Preview a config-list request without sending it:
-
-```bash
-armorx community list \
-  --phone-uuid YOUR_PHONE_ID \
-  --dev-uuid YOUR_CONTROLLER_ID \
-  --dry-run
-```
-
-See [docs/cli.md](docs/cli.md) for the full command reference and [docs/community-api.md](docs/community-api.md) for the current community scope.
-
-### Legacy scripts remain available
-
-The original standalone scripts are intentionally preserved:
-
-```text
-tools/armorx_config.py
-tools/armorx_macro.py
-tools/armorx_community.py
-```
-
-They are not being removed; the new `armorx` command is the preferred interface.
-
-### Run tests
-
-```bash
-python -m pip install -e ".[dev]"
-python -m pytest
-```
-
-## Evidence standard
-
-Protocol claims in this repository are classified as:
-
-- **PROVEN** — directly reproduced or independently confirmed.
-- **STRONG EVIDENCE** — multiple signals agree, but one final confirmation is missing.
-- **UNKNOWN** — deliberately unresolved.
-
-Unknown bytes and IDs are **not guessed**.
-
-## Repository layout
-
-```text
-armorx-toolkit/
-├── README.md
-├── ROADMAP.md
-├── CHANGELOG.md
-├── CITATION.cff
-├── CONTRIBUTING.md
-├── SECURITY.md
-├── CODE_OF_CONDUCT.md
-├── LICENSE
-├── docs/
-│   ├── config-format.md
-│   ├── keymapping.md
-│   ├── macro-format.md
-│   └── community-api.md
-├── examples/
-│   └── example_macro.txt
 ├── tools/
 │   ├── armorx_config.py
 │   ├── armorx_macro.py
 │   └── armorx_community.py
 ├── tests/
+│   ├── test_cli.py
 │   ├── test_config.py
 │   ├── test_macro.py
 │   └── test_community.py
@@ -354,7 +270,7 @@ Contributions are welcome, especially:
 - confirmation of unknown key IDs;
 - additional firmware behavior;
 - anonymized captures from user-owned hardware;
-- **Xbox controller** mapping validation;
+- Xbox controller mapping validation;
 - GUI ideas;
 - test fixtures;
 - documentation improvements.
