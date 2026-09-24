@@ -110,6 +110,8 @@ Full reference: [docs/config-format.md](docs/config-format.md)
 
 USB/HID research: [docs/usb-protocol.md](docs/usb-protocol.md)
 
+Current Windows Assistant research shows that ARMORX Pro and the ARMORX dongle share the public `413D:2106` USB identity. The analyzed Assistant 1.0.6.1 build retains legacy ArmorX/Pro/Dongle factory classes, while its shipped `Skin=0` normal classifier does not assign those legacy factory types. See the USB/HID research document for the evidence and the read-only identification plan.
+
 ## Macro format
 
 Macros currently support:
@@ -246,7 +248,8 @@ armorx-toolkit/
 │   ├── config-format.md
 │   ├── keymapping.md
 │   ├── macro-format.md
-│   └── community-api.md
+│   ├── community-api.md
+│   └── usb-protocol.md
 ├── examples/
 │   └── example_macro.txt
 ├── tools/

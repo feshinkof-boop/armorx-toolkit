@@ -51,6 +51,23 @@ CUsbRecvThread::ReadFromUsb
 
 and uses `libusb_interrupt_transfer` for device I/O.
 
+`CUsbMonitor::GetHidRecordSize` obtains the HID report descriptor with a
+standard control transfer:
+
+```text
+bmRequestType = 0x81
+bRequest      = 0x06
+wValue        = 0x2200
+wIndex        = 0
+timeout       = 1000 ms
+```
+
+It parses HID report size/count/main items and stores the resulting record size.
+`CUsbRecvThread::ReadFromUsb` requests that record size from the IN endpoint
+with a 5000 ms timeout. For `0xA5` short frames it uses byte 1 as the actual
+short-frame length. Separate `0xA4` / `0xAB` receive/reassembly paths exist
+but are not yet fully decoded.
+
 The recovered short-packet send path passes the monitor's full HID record size
 (`m_nBulkSize`) to `libusb_interrupt_transfer`, with the short command copied
 at offset 0 of a zero-filled buffer. `m_nBulkSize` is derived by
@@ -113,51 +130,111 @@ Therefore a `GetZkmVersion` response carrying version byte `0x30` is **STRONG EV
 
 ## Device identification flow
 
-### STRONG EVIDENCE
+### PROVEN from static analysis
 
-Static analysis of `CDeviceMgr` shows a discovery path built around:
+A deeper call-site reconstruction corrects an earlier interpretation:
+`CDeviceMgr::IdentifyDevice` is **not** the normal classifier for the shared
+`413D:2106` ARMORX identity.
+
+`CDeviceMgr::IdentifyDevice` at `0x10035750` is reached from
+`GetDeviceVidPid` for bootloader/upgrade VID/PID pairs:
 
 ```text
-FindDevice
-GetMatchDevice
-IsMatchDevice
-IdentifyDevice
-GetDeviceVidPid
-CParserGetMode
-CParserGetMode2
+4C4A:2342
+4C4A:3442
 ```
 
-This is consistent with the observed shared VID/PID: the PC software enumerates a common USB candidate first, then uses protocol-level information to decide which concrete device class is present.
+That path dynamically references `BTUpgrade_HX.dll`. The normal
+`413D:2106` discovery path does not invoke this routine.
 
-The recovered identification routine contains both `CParserGetMode` and
-`CParserGetMode2` paths. Around synchronous command transactions it waits
-approximately 500 ms and uses a 5000 ms command timeout.
+For a recognized normal USB candidate such as `413D:2106`, the recovered path
+is:
 
-A deeper vtable/call-site reconstruction corrects an earlier misidentification:
+```text
+GetDeviceVidPid
+  -> recognized VID/PID record
+  -> open libusb handle
+  -> interrupt endpoint discovery
+  -> bulk endpoint fallback if interrupt discovery fails
+  -> HID report-descriptor parse / record-size calculation
+  -> IsDevice when no pre-identified concrete type exists
+  -> factory construction if IsDevice returns a supported device type
+```
 
-- `CParserGetMode` and `CParserGetMode2` share the same command encoder at
-  `0x1003E320`.
-- Both therefore issue the same 4-byte request: `A5 04 E2 8B`.
-- `CParserGetMode::Decode` accepts the 16-byte response layout.
-- `CParserGetMode2::Decode` accepts the 19-byte response layout.
-- The separate `A5 05 19 PP CC` encoder belongs to `CParserTestMode`, not
-  `CParserGetMode2`.
+For `413D:2106`, `GetDeviceVidPid` stores the packed VID/PID and leaves the
+type/identify field at `0`, so a later classifier is required before a
+concrete device object can be constructed.
 
-The device-matching routine sends the shared `E2` query and can interpret the
-reply using either response layout. It retries the identification transaction
-up to three times, with an approximately 500 ms delay between attempts and a
-5000 ms command timeout.
+### Current Assistant 1.0.6.1 / Skin=0 classifier
 
-For the 16-byte layout, the recovered code extracts a 9-byte device marker from
-response bytes 6..14. For the 19-byte layout it extracts the corresponding
-9-byte marker from response bytes 9..17. Those marker bytes are then used by
-the higher-level device matcher.
+The shipped `Skin.ini` contains:
+
+```ini
+[General]
+Skin=0
+```
+
+The downstream factory still contains legacy cases:
+
+```text
+type 2 -> ArmorX
+type 3 -> ArmorX Pro
+type 4 -> ArmorX Dongle
+```
+
+However, the analyzed `Skin=0` path in `CDeviceMgr::IsDevice`
+(`0x1002E8F0`) contains no assignment of legacy result types `2`, `3`, or
+`4`.
+
+This is **PROVEN static evidence** for the analyzed build. It means the current
+Assistant retains the legacy ARMORX classes and factory cases, but its normal
+`Skin=0` discovery mapping does not expose a route from the shared
+`413D:2106` identity to those legacy factory types. This is consistent with a
+legacy ARMORX device leaving the current UI's **Connect Device** state
+unavailable, but it does not by itself prove how every older Assistant build
+behaved.
+
+### E2 / GetMode identification query
+
+The recovered `CParserGetMode` and `CParserGetMode2` paths share the same
+encoder at `0x1003E320` and both issue:
+
+```text
+A5 04 E2 8B
+```
+
+The response layouts differ:
+
+- `CParserGetMode::Decode`: minimum 16 bytes; checks `A5`, command `E2`,
+  validates the checksum at byte 15, and extracts a 9-byte marker from bytes
+  6..14.
+- `CParserGetMode2::Decode`: minimum 19 bytes; checks the same `A5` / `E2`
+  fields, validates the checksum at byte 18, and extracts a 9-byte marker from
+  bytes 9..17.
+
+The separate `A5 05 19 PP CC` encoder belongs to `CParserTestMode`, not
+`CParserGetMode2`.
+
+`IsDevice` performs up to three identification attempts, with an approximately
+500 ms delay around attempts and a 5000 ms command timeout.
+
+The exact ARMORX Pro / Dongle marker responses remain pending direct USB
+capture. A read-only reproduction should therefore calculate the official HID
+record size first, start the IN reader before sending, and send only this proven
+`E2` query when testing the identification path.
 
 ## Current unresolved questions
 
-- Whether a controller-attached or paired state is required before the shared `E2` identification query responds.
-- Exact marker strings returned by ARMORX Pro and ARMORX Dongle on the tested hardware.
-- Final mapping from all protocol marker variants to concrete product/firmware combinations.
-- Long-packet framing for full profile and firmware operations.
+- Actual `E2` / GetMode response, if any, from ARMORX Pro and ARMORX Dongle in the controlled physical states.
+- Legacy ARMORX Pro and Dongle marker strings, if their firmware responds to `E2`.
+- How older Windows Assistant versions reached factory types `2` / `3` / `4`, or whether a different detector path/version supplied those types.
+- Exact runtime HID record size selected by `CUsbMonitor` for the tested descriptor.
+- Why the earlier direct PyUSB test reported a 65-byte write against a 64-byte interrupt max packet while receiving no reply.
+- Full `0xA4` / `0xAB` long-packet framing and profile/macro device-write behavior.
+- Meaning/source of the eight caller-provided bytes in the recovered `GetUUID` request shape `A5 0C EF <8 bytes> CC`.
+
+Earlier direct HID/PyUSB timeouts are not treated as evidence that the
+statically recovered commands are invalid because those probes did not yet
+reproduce the complete official monitor/thread initialization sequence.
 
 No write-config, firmware-update, or destructive command is considered documented until independently validated.

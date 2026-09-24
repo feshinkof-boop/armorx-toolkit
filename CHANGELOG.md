@@ -16,6 +16,9 @@ All notable project changes are documented here.
 - Regression tests for the captured macro wire format and the `res2` overlap.
 - USB/HID protocol research notes covering the shared ARMORX Pro/dongle USB identity and read/query command evidence.
 - Deeper vtable/call-site reconstruction: `GetMode` and `GetMode2` share the same `A5 04 E2 8B` request and differ in 16-byte vs 19-byte response layouts. The separate `A5 05 19 PP CC` encoder is `CParserTestMode`.
+- Corrected `CDeviceMgr::IdentifyDevice`: it is a bootloader/upgrade path for `4C4A:2342` / `4C4A:3442`, not normal `413D:2106` ARMORX discovery.
+- Documented the normal `413D:2106` path through HID record-size discovery and `CDeviceMgr::IsDevice`.
+- Documented that the current Assistant 1.0.6.1 `Skin=0` classifier does not assign legacy factory types `2=ArmorX`, `3=ArmorX Pro`, or `4=ArmorX Dongle`, even though those factory cases remain present.
 
 ## 0.1.0 — 2026-09-23
 

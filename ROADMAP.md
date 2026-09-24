@@ -16,7 +16,7 @@ ArmorX Toolkit is intentionally evidence-driven. Items move from research to sta
 
 ## Tooling
 
-- [ ] Turn the current scripts into a single installable CLI
+- [x] Turn the current scripts into a single installable CLI
 - [ ] Add a schema-aware config editor
 - [ ] Add a macro visualizer
 - [ ] Add a config diff command
@@ -25,6 +25,9 @@ ArmorX Toolkit is intentionally evidence-driven. Items move from research to sta
 
 ## Protocol research
 
+- [ ] Capture the proven `A5 04 E2 8B` identification response with a read-only DevMgr-matched probe across the controlled ARMORX Pro/dongle physical states
+- [ ] Recover how older Windows Assistant builds mapped normal `413D:2106` devices to legacy factory types `2` / `3` / `4`
+- [ ] Decode the `0xA4` / `0xAB` long-packet framing before attempting profile/macro device writes
 - [ ] Complete BLE write-path documentation
 - [ ] Document additional controller parameter fields
 - [ ] Validate joystick directional macro pseudo-keys
