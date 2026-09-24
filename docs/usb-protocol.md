@@ -62,7 +62,29 @@ wIndex        = 0
 timeout       = 1000 ms
 ```
 
-It parses HID report size/count/main items and stores the resulting record size.
+The routine first claims the interface through `libusb_claim_interface`;
+a negative claim result aborts this path. Its report-descriptor parser is not a
+standards HID parser. The recovered byte-level behavior is:
+
+- parsing begins at the 8-bit offset `(descriptor[0] + 1) & 0xFF`;
+- item stride is `(prefix & 3) + 1`, except size-code 3 is forced from 4 to 5;
+- `0x74..0x77` updates Report Size from the single byte at `idx+1`;
+- `0x94..0x97` clears EDX/Report Count, then each encoded data byte overwrites
+  EDX before being shifted by 0/8/16/24 bits. A normal one-byte `0x95`
+  Report Count therefore works as expected, while multi-byte counts do **not**
+  combine as a normal little-endian integer: only the final encoded byte,
+  shifted to its position, survives;
+- `0x80..0x83`, `0x90..0x93`, and `0xB0..0xB3` accumulate
+  `ReportSize * ReportCount` into separate Input, Output, and Feature totals;
+- `0xC0..0xC3` clears both Report Count (EDX) and Report Size;
+- other relevant HID globals such as Report ID / Push / Pop are ignored by this
+  custom parser;
+- the final monitor record size is `(input_bits + 7) / 8`: **Input total
+  only**. Output and Feature totals do not contribute.
+
+That result becomes `m_nBulkSize`, the length used for both interrupt OUT
+sends and interrupt IN reads.
+
 `CUsbRecvThread::ReadFromUsb` requests that record size from the IN endpoint
 with a 5000 ms timeout. For `0xA5` short frames it uses byte 1 as the actual
 short-frame length. Separate `0xA4` / `0xAB` receive/reassembly paths exist
@@ -215,13 +237,34 @@ The response layouts differ:
 The separate `A5 05 19 PP CC` encoder belongs to `CParserTestMode`, not
 `CParserGetMode2`.
 
-`IsDevice` performs up to three identification attempts, with an approximately
-500 ms delay around attempts and a 5000 ms command timeout.
+The recovered `IsDevice` timing is more specific than a simple three-attempt
+loop. There are up to three **outer** attempts, and each outer attempt can send
+the same E2 query twice:
+
+```text
+repeat up to 3 outer attempts:
+    Sleep(500 ms)
+    send A5 04 E2 8B
+    collect/parse for up to 5000 ms
+    if no valid identification:
+        Sleep(500 ms)
+        send A5 04 E2 8B again
+        collect/parse for up to 5000 ms
+```
+
+So the failure path can issue up to six E2 queries. The send thread has special
+pre-send delays for other opcodes (notably `0x0E` and `0x70` variants), but
+the E2 query has no additional send-thread delay beyond the `IsDevice`
+`Sleep(500)` calls above.
 
 The exact ARMORX Pro / Dongle marker responses remain pending direct USB
-capture. A read-only reproduction should therefore calculate the official HID
-record size first, start the IN reader before sending, and send only this proven
-`E2` query when testing the identification path.
+capture. A read-only reproduction should claim the interface, calculate the
+DevMgr record size with the custom parser above, start the IN reader before
+sending, and send only this proven `E2` query using the nested timing above.
+
+Do not infer the legacy ARMORX Dongle marker from newer/current classifier
+strings merely because one contains the word `DONGLE`; raw capture is still
+required to establish the legacy marker.
 
 ## Current unresolved questions
 

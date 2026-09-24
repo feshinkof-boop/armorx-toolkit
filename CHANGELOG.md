@@ -19,6 +19,9 @@ All notable project changes are documented here.
 - Corrected `CDeviceMgr::IdentifyDevice`: it is a bootloader/upgrade path for `4C4A:2342` / `4C4A:3442`, not normal `413D:2106` ARMORX discovery.
 - Documented the normal `413D:2106` path through HID record-size discovery and `CDeviceMgr::IsDevice`.
 - Documented that the current Assistant 1.0.6.1 `Skin=0` classifier does not assign legacy factory types `2=ArmorX`, `3=ArmorX Pro`, or `4=ArmorX Dongle`, even though those factory cases remain present.
+- Reconstructed the byte-level `GetHidRecordSize` parser, including its non-standard descriptor start/stride rules, one-byte Report Count behavior, multi-byte overwrite quirk, `0xC0` state reset, and input-only `m_nBulkSize` calculation.
+- Corrected `IsDevice` timing to the nested double-send structure: up to 3 outer attempts × 2 `A5 04 E2 8B` sends, with `Sleep(500)` before each send and a 5000 ms collection window.
+- Recorded the required `libusb_claim_interface` step before the report-descriptor/interrupt path.
 
 ## 0.1.0 — 2026-09-23
 
