@@ -178,6 +178,30 @@ COL:           0x1025053C
 
 The HID handle is attached to an I/O completion port with `CreateIoCompletionPort`. The backend uses overlapped I/O and an IOCP-style completion architecture. This confirms that receive completion is handled by an independent actor rather than by the command caller directly.
 
+## New application-side transfer-wrapper trace
+
+A later static narrowing pass corrected the previous assumption that the final transfer-length trace was blocked entirely behind the backend operations table.
+
+`CUsbSendThread::WriteToUsb` contains direct calls into an inner transfer wrapper at `0x1004CC50`:
+
+```text
+0x10049CF8  short-packet send -> call 0x1004CC50
+0x10049F8D  long-packet send  -> call 0x1004CC50
+0x1004A146  short-packet send -> call 0x1004CC50
+```
+
+All three sites supply a `0x1388` (5000 ms) timeout. The surrounding send-thread region is approximately `0x10049Bxx-0x1004A1xx`; the receive-side counterpart and the remaining monitor-field references lie approximately in `0x1004A500-0x1004AA00`.
+
+This materially narrows the unresolved transfer-length gate: the next static step is now a bounded direct trace through `0x1004CC50` to the libusb transfer constructor/fill path and the store into transfer `+0x68`, rather than another search for a caller of `0x10055BE0`.
+
+The IOCP core is likewise localized to `0x10050xxx-0x10052xxx`, including `GetQueuedCompletionStatus` at `0x10051D76`, `PostQueuedCompletionStatus` at `0x10050CDF`, `CancelIoEx` at `0x100510F8`, and `GetOverlappedResult` at `0x10051191`. The HID-open path's `CreateIoCompletionPort` call remains at `0x1005B2F6`.
+
+**Correction:** `CancelIoEx` and `GetOverlappedResult` are present and called inside the image's IOCP core. Earlier wording that described them as merely imported was too broad; the narrower statement is only that they were not observed on the already-traced GetMode caller path.
+
+The backend operations table remains live and is compared by pointer identity in several backend routines (including references to `0x101F86C8`, `0x101F86D8`, `0x101F86CC`, and `0x101F86C4`).
+
+**Gate status remains unchanged:** the exact numeric OUT/IN values assigned to transfer `+0x68`, the receive re-arm edge, and the exact IN-vs-OUT submission ordering are still deliberately **UNKNOWN** until those bounded blocks are read instruction-by-instruction.
+
 ## Still unknown
 
 The following are deliberately unresolved:
