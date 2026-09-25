@@ -304,6 +304,24 @@ rejection.
 The corrected primitive uses unmanaged `OVERLAPPED` storage, stable unmanaged
 buffers, fresh auto-reset events, and `CancelIoEx` for bounded cancellation.
 
+### Static trace update: direct application-side transfer wrapper
+
+A subsequent narrowing pass found that `CUsbSendThread::WriteToUsb` does not jump directly from the command object into the HID backend. Three send sites call an inner wrapper at `0x1004CC50`:
+
+```text
+0x10049CF8  short packet -> 0x1004CC50
+0x10049F8D  long packet  -> 0x1004CC50
+0x1004A146  short packet -> 0x1004CC50
+```
+
+Each site supplies the 5000 ms timeout. The matching receive-side wrapper is localized to approximately `0x1004A500-0x1004AA00`.
+
+This corrects the previous tracing model: the exact transfer-length assignment is now reachable through a bounded direct call chain. The remaining work is to read `0x1004CC50` through the libusb transfer fill/submission code and identify the exact store into transfer `+0x68`, then recover the IN submission/re-arm edge from the receive block.
+
+The IOCP core is localized to `0x10050xxx-0x10052xxx`; relevant calls include `GetQueuedCompletionStatus` at `0x10051D76`, `PostQueuedCompletionStatus` at `0x10050CDF`, `CancelIoEx` at `0x100510F8`, and `GetOverlappedResult` at `0x10051191`. The HID handle is attached to the completion port at the already recovered open path.
+
+These addresses narrow the gate but do not yet prove the numeric OUT/IN transfer lengths or ordering.
+
 ### Current gate
 
 Do **not** treat another live GetMode probe as justified until both are
