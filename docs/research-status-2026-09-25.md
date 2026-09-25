@@ -1,92 +1,96 @@
 # ArmorX / BIGBIG WON research status — 2026-09-25
 
-This document is the current handoff point for the USB/HID reverse-engineering work. It records only evidence suitable for the public repository and intentionally omits host-specific identifiers, private paths, account data, and machine/network details.
+This is the current handoff point for the USB/HID and Windows Assistant reverse-engineering work. It records only evidence suitable for the public repository and intentionally omits host-specific identifiers, serial numbers, account data, private paths, and machine/network details.
 
 ## Executive status
 
-The current blocker is **not** command checksum, Windows HID framing, or basic device access. Those pieces are now substantially understood.
+The low-level Windows HID transport gate is now **closed** for the tested BIGBIG WON wireless adapter:
 
-The remaining gate is the vendor application's exact libusb submission choreography:
+- the logical interrupt transfer size is **N = 64**, recovered live from both the receive and send worker objects;
+- the tested HID collection is unnumbered and exposes 65-byte Windows input/output reports (one report-ID slot plus 64 logical bytes);
+- the vendor receive worker keeps an IN transfer outstanding before OUT traffic;
+- a corrected unmanaged-overlapped standalone probe successfully completed 65/65-byte writes of the recovered GetMode request with a pre-posted 65-byte read.
 
-1. the final value assigned to the libusb transfer object's length field for GetMode OUT/IN;
-2. the exact ordering/lifecycle of the receive transfer relative to the OUT command.
+However, **two cold standalone GetMode attempts produced no response**. The remaining problem is not Windows write acceptance or the N value.
 
-Until both are closed statically, further live GetMode probing is **not justified**.
+The current Windows Assistant 1.0.6.1 path was then observed directly. A real fresh arrival of the normal 413D:2106 vendor HID caused native enumeration activity, but the Assistant opened no vendor HID session and issued no vendor ReadFile/WriteFile traffic. The hosted UI URL used by the application now returns only a tiny analytics stub rather than the historical application page. This provides the best code-supported explanation for the permanently idle/grey device UI in this build.
 
-## Tested live HID identity
+The next research branch should therefore treat the obsolete Windows web UI separately from the normal ARMOR-X Pro control path. Passive analysis of the BIGBIG WON ELITE mobile/Bluetooth workflow is the highest-value normal-device path; firmware/DFU flows remain separate.
 
-A present device matching the historical BIGBIG WON candidate was resolved uniquely as:
+## Physical hardware identification
+
+Photographs of the tested hardware establish the retail labels directly:
+
+- controller attachment: **BIGBIG WON ARMOR-X Pro**;
+- wireless receiver: **BIGBIG WON Wireless Adapter, model F20**.
+
+No serial number is recorded in this repository.
+
+Observed physical states:
+
+- ARMOR-X Pro off: receiver slowly flashes white;
+- ARMOR-X Pro on, Xbox controller disconnected: receiver becomes solid white and the PC-side identity is the normal 413D:2106 vendor HID;
+- ARMOR-X Pro on with an Xbox controller attached: the same physical receiver can re-enumerate into a Microsoft/Xbox-compatible identity chain (observed 045E:0B12 -> 045E:02FF).
+
+The last state is controller-attached passthrough behavior and must not be confused with the ARMOR-X-Pro-alone vendor state.
+
+## Tested normal vendor-HID identity
+
+The normal ARMOR-X-Pro-alone receiver state resolves as:
 
 ```text
-VID:                0x413D
-PID:                0x2106
-USB class:          HID (03/00/00), non-composite
-Usage Page:         0xFF7A
-Usage:              0x0001
-Manufacturer:       Zikway
-Product string:     HID zkm
-Input report ID:    0
-Output report ID:   0
-Input report bytes: 65
-Output report bytes:65
+VID:                 0x413D
+PID:                 0x2106
+USB class:           HID
+Usage Page:          0xFF7A
+Usage:               0x0001
+Manufacturer:        Zikway
+Product string:      HID zkm
+Input report bytes:  65
+Output report bytes: 65
 Feature report bytes:0
+Report ID:           0 / unnumbered
 ```
 
-The value caps show one unnumbered 64-byte input report and one unnumbered 64-byte output report. The extra byte in the Windows buffers is the report-ID slot, which is `0x00`.
+The underlying HID data payload is 64 bytes in each direction. The Windows report buffer is 65 bytes because byte zero is the report-ID slot.
 
-This identity alone still does **not** prove an exact retail product name.
+## BIGBIG WON handling of 413D:2106
 
-## BIGBIG WON ownership of 413D:2106
-
-Static analysis of Assistant 1.0.6.1 `DevMgr.dll` shows that BIGBIG WON explicitly recognizes:
+Static analysis of Assistant 1.0.6.1 `DevMgr.dll` proves that the normal VID/PID matcher accepts:
 
 ```text
+413D:2114
 413D:2104
 413D:2106
-413D:2114
 ```
 
-For `413D:2106`, the matcher stores the packed VID/PID but leaves the BIGBIG device type as the unresolved/default value. Product classification happens later from a device-supplied model string rather than from VID/PID alone.
+For these 413D devices the VID/PID stage stores the packed identifier and leaves the concrete product type at the default/classless value. Product classification happens later from a device-derived mark/model string.
 
-The only firmware-upgrade code path naming `413D:2106` directly is the Rainbow3-dongle NearLink/BS25 DFU path. That proves a Rainbow3-dongle relationship in the updater, but does **not** prove that every normal-mode `413D:2106` device is a Rainbow3 dongle.
-
-## ArmorX strings and product types
-
-The binary contains:
+The later classifier compares against mark strings including:
 
 ```text
-ARMOR-X
-ARMOR-X Pro
-ARMOR-X Dongle
-```
-
-but there is no `CDeviceArmorX` RTTI class and no direct static VID/PID -> ArmorX mapping.
-
-Those names live in a separate product-type/display-name table. Therefore the repository must not infer "ArmorX Pro" or "ArmorX Dongle" from `413D:2106` alone.
-
-## Runtime model-string source
-
-The runtime classifier `CDeviceMgr::IsDevice` does not receive the model string as a function argument. It obtains it from a device query and then compares it against known model codes such as:
-
-```text
+C4_DONGLE
+C4_SERVER
+ZJ-MJC6
 ZJ-C2SLD
+ZJ-C1pro
+ZJ-RANIBO
+ZJ-Rainbo
 ZJ-C2SL
+ZJ-BLACK_
+ZJ-C1ZJD
+ZJ-C1ZJ
 ZJ-GALE_L
 ZJ-GALE
-ZJ-Rainbo
-ZJ-RANIBO
-ZJ-C1pro
-ZJ-C1ZJ
-ZJ-C1ZJD
-C4_SERVER
-C4_DONGLE
 ```
 
-The missing value is therefore **device-derived**, not server-derived.
+Which mark the tested F20/ARMOR-X Pro pair actually returns remains a runtime fact and is **UNKNOWN** until captured. Do not infer a specific mark from VID/PID or a human-readable retail label.
 
-## GetMode protocol
+The same 413D family also appears in firmware-upgrade logic. In particular, 2104/2106 are referenced by a NearLink/BS25 DFU path using Usage Page 0xFFB1. That is distinct from the live normal collection at Usage Page 0xFF7A and does not make the normal 413D:2106 collection DFU-only.
 
-The recovered GetMode request builder produces exactly:
+## GetMode request and response parsing
+
+The recovered GetMode request is exactly:
 
 ```text
 A5 04 E2 8B
@@ -99,135 +103,168 @@ checksum = sum(previous bytes) & 0xFF
 A5 + 04 + E2 = 0x18B -> 0x8B
 ```
 
-The checksum algorithm was independently confirmed against another frame stored precomputed in the binary.
+Recovered E2 decoders:
 
-The normal decoder expects an `A5 10 E2 ...` response and extracts the model marker from logical response bytes `[6..13]`. A second decoder variant expects a longer E2 layout.
+- normal form: minimum 16 logical bytes, `A5`, opcode `E2`, checksum at byte 15, 9-byte marker at bytes 6..14;
+- longer/GetMode2 form: minimum 19 logical bytes, checksum at byte 18, 9-byte marker at bytes 9..17.
 
-## Windows HID report metadata
+The separate `A5 05 19 PP CC` encoder is TestMode, not GetMode2.
 
-Live metadata proved:
+## Runtime transfer-size closure
 
-- Output `ReportID = 0`
-- Input `ReportID = 0`
-- 64 data bytes each direction
-- 65-byte Windows report buffers
-- no feature report
+The long-standing `m_nBulkSize` blocker is closed.
 
-That rules out treating `0xA5` as a HID report ID for this collection.
+The receive and send worker objects have different vtables but both point through `worker+0x1C` to the same owner record. The owner's first DWORD was read live as:
 
-## Corrected overlapped-I/O finding
+```text
+owner+0x00 = 0x00000040
+```
 
-Two early PowerShell probe attempts used a managed by-ref `OVERLAPPED` structure. That implementation was invalid for pending I/O because P/Invoke marshalled temporary copies between calls.
+Therefore:
 
-A device-free named-pipe reproduction proved the defect: a successful 1 MiB overlapped write was incorrectly observed as `ERROR_IO_INCOMPLETE` with zero transferred.
+```text
+logical interrupt transfer size N = 64
+```
+
+This is **RUNTIME-PROVEN**.
+
+Static aliasing remains:
+
+```text
+request      = transfer_base + 0x58
+request+0x10 = transfer_base + 0x68
+```
+
+so the wrapper length and backend transfer length are the same storage.
+
+The HID backend config bytes `+0x6` and `+0x7` are still **STRONG EVIDENCE** for zero-initialized values based on the calloc-like allocation path and absence of later writers. The branch direction itself is proven: when `config+0x7 == 0`, the Windows-side HID write length is logical length + 1.
+
+## Vendor receive choreography
+
+The receive worker is persistent rather than request-local. Its loop:
+
+- checks its stop event;
+- posts one interrupt IN transfer;
+- uses a 5000 ms timeout;
+- dispatches the received packet;
+- returns to the loop and re-arms.
+
+This establishes that vendor traffic normally has an IN outstanding before OUT traffic.
+
+Response dispatch uses the current `CUsbCmd` pointer and virtual slot 2 -> `CUsbCmd::FromPacket`. `FromPacket` stores the response and calls `SetEvent(CUsbCmd+0x88)`.
+
+## Corrected live GetMode probe
+
+Earlier PowerShell attempts used an invalid managed/by-ref `OVERLAPPED` pattern. A device-free named-pipe reproduction proved that pattern could report false incomplete results.
 
 The corrected primitive uses:
 
-- unmanaged 32-byte `OVERLAPPED` storage;
-- the same stable pointer for submit/completion/cancellation;
-- unmanaged or pinned I/O buffers;
-- a fresh auto-reset event per operation;
-- bounded cancellation with `CancelIoEx`.
+- stable unmanaged `OVERLAPPED` storage;
+- stable unmanaged buffers;
+- fresh auto-reset events;
+- `CancelIoEx` on timeout;
+- `GetOverlappedResult` with the same exact `OVERLAPPED` pointer;
+- pre-posted IN before OUT.
 
-The corrected primitive was validated locally and then on the HID handle.
-
-## Confirmed live transaction result
-
-With the corrected primitive, a 65-byte unnumbered output report:
+A one-shot standalone transaction then produced:
 
 ```text
-00 A5 04 E2 8B 00 00 ... 00
+OUT requested:   65
+OUT transferred: 65
+OUT completion:  success / error 0
+IN requested:    65
+IN result:       timeout / 0 bytes
 ```
 
-completed successfully through Windows:
+A single permitted retry produced the same result.
+
+The exact standalone OUT report was:
 
 ```text
-STATUS_SUCCESS
-65 bytes transferred
+00 A5 04 E2 8B 00 ... 00
 ```
 
-A fresh 65-byte input read posted **after** that write received no report within the recovered 5000 ms window and was cancelled cleanly.
+65 bytes total: report-ID slot `00`, 4-byte GetMode command, then zero padding to the 64-byte logical transport size.
 
-This proves Windows accepted and transmitted that 65-byte HID report. It does **not** prove:
+This proves the host-side transport can submit that report successfully. It does **not** prove that the device recognizes cold E2 in that state or that the vendor's own reusable logical buffer always contains zero tail bytes.
 
-- that the firmware recognized E2 in that padded form;
-- that the vendor application itself submits 65 bytes;
-- that the firmware replies to a read posted after the OUT report;
-- the exact retail product identity.
+## Windows Assistant live observation
 
-## libusb backend closure
+Architecture-correct WOW64 module enumeration confirmed that `DevMgr.dll` is loaded by the live Assistant process. Earlier 64-bit module enumeration was misleading because it exposed only the WOW64 loader view.
 
-The embedded Windows HID backend is dispatched through a static operations table.
+A read-only Frida observer was placed on the logical interrupt wrapper at `DevMgr.dll + 0x4C8B0` and also instrumented relevant Win32 I/O APIs.
 
-Recovered:
+With ARMOR-X Pro on, Xbox controller disconnected, and the F20 receiver present as 413D:2106:
+
+- a real unplug/replug produced a fresh normal vendor-HID arrival;
+- native enumeration began about one second later;
+- the observer remained healthy and uncapped;
+- no vendor HID handle was opened;
+- wrapper calls remained zero;
+- vendor `ReadFile` / `WriteFile` remained zero;
+- no E2 or any other vendor frame was issued.
+
+This retires the hypothesis that another physical cycle alone will make the current Assistant open the vendor session.
+
+## Windows Assistant UI root cause
+
+The Assistant hosts an IE/ActiveX page through `CWebBrowserEx` / WndMgr. Its configured analysis URL is:
 
 ```text
-backend ops table: 0x101F8678
-transport slot:    0x101F86B8 -> 0x10055BE0
-table installer:   0x10058054
+http://app.mojhon.cn/HTML/Analysis/BigBigWonAssistant.51la.html
 ```
 
-`CUsbCmd::ToPacket` and `CUsbCmd::FromPacket` are adjacent virtual methods in the same vtable:
+The same value is present in the application's URL configuration.
+
+Direct HTTP requests using multiple user-agent variants and the application's own query parameters returned HTTP 200 but only a tiny analytics/tracker stub, not the historical application markup/JavaScript. No usable cached copy was found.
+
+The native bridge still exists:
 
 ```text
-vtable:        0x102425FC
-slot 1:        0x10049390  ToPacket
-slot 2:        0x10049430  FromPacket
-COL:           0x1025053C
+CWebBrowserEx::Invoke
+window.external
 ```
 
-The HID handle is attached to an I/O completion port with `CreateIoCompletionPort`. The backend uses overlapped I/O and an IOCP-style completion architecture. This confirms that receive completion is handled by an independent actor rather than by the command caller directly.
+and the native device-manager layer is created, but the page that historically drove the per-device session is no longer present server-side.
 
-## New application-side transfer-wrapper trace
-
-A later static narrowing pass corrected the previous assumption that the final transfer-length trace was blocked entirely behind the backend operations table.
-
-`CUsbSendThread::WriteToUsb` contains direct calls into an inner transfer wrapper at `0x1004CC50`:
+The current best-supported status is therefore:
 
 ```text
-0x10049CF8  short-packet send -> call 0x1004CC50
-0x10049F8D  long-packet send  -> call 0x1004CC50
-0x1004A146  short-packet send -> call 0x1004CC50
+UI_TRIGGER_ROOT_CAUSE_PROVEN
 ```
 
-All three sites supply a `0x1388` (5000 ms) timeout. The surrounding send-thread region is approximately `0x10049Bxx-0x1004A1xx`; the receive-side counterpart and the remaining monitor-field references lie approximately in `0x1004A500-0x1004AA00`.
+with one explicit limit: a working historical page was not separately replayed, so it is not claimed that every valid page would necessarily open this exact device session. What is proven is that the current configured page contains no application UI logic capable of doing so.
 
-This materially narrows the unresolved transfer-length gate: the next static step is now a bounded direct trace through `0x1004CC50` to the libusb transfer constructor/fill path and the store into transfer `+0x68`, rather than another search for a caller of `0x10055BE0`.
+## Important corrections
 
-The IOCP core is likewise localized to `0x10050xxx-0x10052xxx`, including `GetQueuedCompletionStatus` at `0x10051D76`, `PostQueuedCompletionStatus` at `0x10050CDF`, `CancelIoEx` at `0x100510F8`, and `GetOverlappedResult` at `0x10051191`. The HID-open path's `CreateIoCompletionPort` call remains at `0x1005B2F6`.
+- `413D:2106` is accepted by normal device matcher logic; it is not upgrade-only.
+- The 045E Xbox-compatible re-enumeration occurred with an Xbox controller physically attached to ARMOR-X Pro and is not the ARMOR-X-Pro-alone state.
+- The live logical transfer size is 64, not an unresolved static guess.
+- Vendor IN is persistent/pre-posted; the earlier post-write read did not reproduce vendor ordering.
+- A fresh vendor-HID arrival does trigger native enumeration, but it does not open a vendor session in the current Assistant/UI state.
+- The exact working standalone probe source used in the lab must be treated separately from older/stale copies; do not redeploy an older attachment over the reconciled working build.
 
-**Correction:** `CancelIoEx` and `GetOverlappedResult` are present and called inside the image's IOCP core. Earlier wording that described them as merely imported was too broad; the narrower statement is only that they were not observed on the already-traced GetMode caller path.
+## Current unresolved questions
 
-The backend operations table remains live and is compared by pointer identity in several backend routines (including references to `0x101F86C8`, `0x101F86D8`, `0x101F86CC`, and `0x101F86C4`).
+- What mark/model string the tested F20 + ARMOR-X Pro returns through the device identification protocol.
+- Why the device does not answer a cold standalone E2 despite correct N=64 framing and pre-posted IN.
+- What benign initialization/handshake, if any, normally precedes E2 in a functioning control application.
+- The exact normal Bluetooth/BLE protocol used by the BIGBIG WON ELITE mobile app with ARMOR-X Pro.
+- Whether a recoverable historical Assistant web page would initiate the legacy Windows vendor session.
+- Exact vendor ReadFile system-call length below the backend branch (the logical receive size is proven N=64 and the HID report metadata is 65 bytes, but the final Windows ReadFile call was not independently disassembled).
+- Exact runtime value of backend config `+0x6/+0x7` (zero remains strongly supported, not live-read).
 
-**Gate status remains unchanged:** the exact numeric OUT/IN values assigned to transfer `+0x68`, the receive re-arm edge, and the exact IN-vs-OUT submission ordering are still deliberately **UNKNOWN** until those bounded blocks are read instruction-by-instruction.
+## Recommended next research branch
 
-## Still unknown
+Do not spend more time power-cycling the receiver or trying to force the obsolete Windows UI.
 
-The following are deliberately unresolved:
+The highest-value next phase is:
 
-- exact GetMode OUT value assigned to libusb transfer `+0x68`;
-- exact GetMode IN transfer length;
-- exact Windows WriteFile/ReadFile lengths used by the vendor for E2;
-- exact IN-vs-OUT submission ordering;
-- whether the IN request is permanent/re-armed;
-- the concrete completion callback that invokes `CUsbCmd::FromPacket`;
-- the runtime value/source of the HID backend `config+0x7` report-ID-placement flag;
-- the exact device model marker returned by the tested `413D:2106` unit;
-- exact retail product mapping for that unit.
-
-## Next static work
-
-Before another live transaction:
-
-1. resolve COL `0x1025053C` to the concrete class;
-2. trace consumers of the backend ops table installed at object `+0x68`;
-3. locate the libusb transfer creator/submission wrapper and close the assignment into transfer `+0x68`;
-4. locate the IOCP service thread / `GetQueuedCompletionStatus` callback chain;
-5. recover the receive re-arm edge and exact IN/OUT ordering;
-6. resolve the completion key and the writer of `config+0x7`.
-
-Only when the transfer length and ordering are proven should a new live GetMode attempt be designed.
+1. preserve the Windows Assistant findings as a legacy/reference implementation;
+2. analyze the BIGBIG WON ELITE mobile application;
+3. capture the normal Bluetooth/BLE conversation with ARMOR-X Pro passively first;
+4. identify the normal runtime identity/version/configuration handshake;
+5. keep firmware/DFU/update behavior separate from normal configuration research.
 
 ## Evidence discipline
 
@@ -237,4 +274,4 @@ Use the repository's evidence labels consistently:
 - **STRONG EVIDENCE** — multiple independent signals agree but a final link remains unresolved.
 - **UNKNOWN** — deliberately unresolved.
 
-Do not upgrade `413D:2106` to an ArmorX, ArmorX Pro, ArmorX Dongle, Rainbow3 Dongle, or other retail product name until the runtime model marker is captured and mapped through the recovered factory.
+Do not infer device-side mark strings, firmware state, or destructive command semantics from human-readable product names alone.
