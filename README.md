@@ -255,6 +255,8 @@ armorx-toolkit/
 │   ├── keymapping.md
 │   ├── macro-format.md
 │   ├── community-api.md
+│   ├── android-protocol.md
+│   ├── bridge-status-2026-09-25.md
 │   └── usb-protocol.md
 ├── examples/
 │   └── example_macro.txt
