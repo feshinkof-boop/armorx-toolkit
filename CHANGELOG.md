@@ -13,6 +13,12 @@ All notable project changes are documented here.
 
 ### Added
 
+- Added a 2026-09-25 research handoff covering the current ArmorX/BIGBIG WON USB/HID reverse-engineering state and explicit next static-analysis gates.
+- Corrected the GetMode transport record: the logical command is proven, but the vendor's final libusb OUT/IN transfer lengths remain unresolved below the backend operations-table dispatch.
+- Documented the live HID metadata for the tested `413D:2106` collection: Usage Page `0xFF7A`, Usage `1`, unnumbered 64-byte input/output reports, and no feature report.
+- Documented the corrected unmanaged `OVERLAPPED` implementation and withdrew earlier device-rejection conclusions caused by PowerShell by-ref marshalling.
+- Recorded the first confirmed successful GetMode HID report transmission (`STATUS_SUCCESS`, 65 bytes) and the subsequent no-response result from a read posted after the write.
+- Recovered the embedded HID backend operations table, the `CUsbCmd` ToPacket/FromPacket vtable, and the `CreateIoCompletionPort`-based completion architecture.
 - Regression tests for the captured macro wire format and the `res2` overlap.
 - USB/HID protocol research notes covering the shared ARMORX Pro/dongle USB identity and read/query command evidence.
 - Deeper vtable/call-site reconstruction: `GetMode` and `GetMode2` share the same `A5 04 E2 8B` request and differ in 16-byte vs 19-byte response layouts. The separate `A5 05 19 PP CC` encoder is `CParserTestMode`.
