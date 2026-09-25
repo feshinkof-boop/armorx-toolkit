@@ -90,17 +90,20 @@ with a 5000 ms timeout. For `0xA5` short frames it uses byte 1 as the actual
 short-frame length. Separate `0xA4` / `0xAB` receive/reassembly paths exist
 but are not yet fully decoded.
 
-The recovered short-packet send path passes the monitor's full HID record size
-(`m_nBulkSize`) to `libusb_interrupt_transfer`, with the short command copied
-at offset 0 of a zero-filled buffer. `m_nBulkSize` is derived by
-`CUsbMonitor::GetHidRecordSize` from the HID report descriptor rather than
-being hard-coded from the endpoint's 64-byte max-packet value.
+The short-command path is proven to carry the command's own logical length
+through `CUsbCmd` (for GetMode, 4 bytes) and then enters the embedded libusb
+backend through a runtime operations table. A later closure pass found that the
+final assignment into the libusb transfer object's length field (`+0x68`) is
+below that dispatch boundary and has **not** yet been recovered. Therefore the
+repository no longer treats the exact Windows `WriteFile` length used by the
+vendor as proven.
 
-On the tested hardware, the interrupt endpoints advertise 64-byte max packets,
-while the Windows HID layer exposes a 65-byte output-report buffer (report ID
-byte plus report data). The exact `m_nBulkSize` value selected by DevMgr for
-this descriptor has not yet been observed dynamically, so the toolkit does not
-collapse those two facts into a guessed transfer length.
+On the tested hardware, live HID metadata shows an unnumbered 64-byte input
+report and unnumbered 64-byte output report, exposed to Windows as 65-byte
+buffers including report ID `0x00`. A corrected live probe proved Windows
+accepts a 65-byte padded GetMode report, but that does **not** establish that
+the vendor application itself submits 65 bytes. The exact vendor transfer
+length remains pending static closure through libusb's submission layer.
 
 The application-side short-command buffer itself starts with `0xA5`; no
 additional protocol wrapper is added before the command. The recovered
@@ -265,6 +268,53 @@ sending, and send only this proven `E2` query using the nested timing above.
 Do not infer the legacy ARMORX Dongle marker from newer/current classifier
 strings merely because one contains the word `DONGLE`; raw capture is still
 required to establish the legacy marker.
+
+## Current live/static GetMode status — 2026-09-25
+
+### PROVEN
+
+- The live `413D:2106` HID collection is unique on the tested system and uses
+  Usage Page `0xFF7A`, Usage `0x0001`.
+- Input and output report IDs are both `0`; each carries 64 bytes of data,
+  exposed as 65-byte Windows HID report buffers. No feature report is exposed.
+- GetMode logical request is exactly `A5 04 E2 8B`; the checksum is the
+  additive byte sum modulo 256.
+- The runtime model marker is device-derived through the GetMode path; it is
+  not supplied by the vendor server.
+- A corrected unmanaged-overlapped probe completed a 65-byte HID output report
+  with `STATUS_SUCCESS` and 65 bytes transferred.
+- A fresh input read posted **after** that write received no report within the
+  recovered 5000 ms collection window.
+- The embedded HID backend is installed through a static operation table at
+  `0x101F8678`; its transport slot points to `0x10055BE0`.
+- `CUsbCmd::ToPacket` and `CUsbCmd::FromPacket` are virtual methods in the
+  same vtable at `0x102425FC`.
+- Device-open code attaches the HID handle to an I/O completion port with
+  `CreateIoCompletionPort`. Receive completion is therefore handled by an
+  independent IOCP actor rather than by the command caller directly.
+
+### Important correction
+
+Two early live attempts used a managed by-ref `OVERLAPPED` PowerShell P/Invoke
+pattern. A device-free named-pipe reproduction proved that pattern could report
+`ERROR_IO_INCOMPLETE` / zero bytes after a successful asynchronous transfer.
+Those two completion results are therefore not valid evidence of device
+rejection.
+
+The corrected primitive uses unmanaged `OVERLAPPED` storage, stable unmanaged
+buffers, fresh auto-reset events, and `CancelIoEx` for bounded cancellation.
+
+### Current gate
+
+Do **not** treat another live GetMode probe as justified until both are
+statically closed:
+
+1. the exact GetMode OUT/IN value written into the libusb transfer length field
+   `+0x68`;
+2. the exact receive submission ordering / re-arm lifecycle relative to OUT.
+
+The current static handoff is documented in
+[research-status-2026-09-25.md](research-status-2026-09-25.md).
 
 ## Current unresolved questions
 
