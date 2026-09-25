@@ -13,6 +13,20 @@ All notable project changes are documented here.
 
 ### Added
 
+- Captured the complete normal Android/BLE first-contact path from the current BIGBIG WON app on real hardware.
+- Confirmed live runtime identity `ZJ-XT`, firmware revision `2741`, and standard battery characteristic `2A19`.
+- Documented the live vendor GATT transport: all-zero vendor service UUID, `FFE1` write-without-response, `FFE2` read/notify, and CCCD `2902`.
+- Proved that Android uses the same `A5` frame family and sum-mod-256 checksum as the recovered Windows protocol.
+- Decoded indexed `A4` fragmentation for 144-byte payloads.
+- Proved D6 as full 144-byte config read and D7 as full 144-byte config write with short D7 acknowledgement.
+- Confirmed the config CRC live as CRC-16/MODBUS-style over bytes 2..143 with big-endian storage.
+- Live-confirmed `offset 45 = sensorRightCurve0YDivx` during a profile change and `offset 135 = mapKeys[M1]` during M1 -> A remapping.
+- Added Android/BLE protocol documentation and a Windows/Android bridge-status document.
+- Replayed the Android-derived `0B -> EF -> D6` sequence over the proven Windows HID transport; all writes completed 65/65, but zero input reports were observed.
+- Corrected that bridge result to **LINK-STATE-INCONCLUSIVE** because USB identity `413D:2106` does not itself prove the F20 radio link was established; future real runs must record the physical LED/link state.
+- Recorded and corrected a Windows `SP_DEVICE_INTERFACE_DETAIL_DATA_W` path-offset bug that could falsely report the target as absent.
+
+
 - Closed the GetMode transport-size blocker with a read-only live observation: both send and receive workers share an owner whose transfer-size field is `0x40`, so logical interrupt size is **N=64**.
 - Recorded the retail hardware labels without serial data: ARMOR-X Pro plus BIGBIG WON Wireless Adapter model **F20**.
 - Recorded the corrected physical-state split: ARMOR-X-Pro-alone stays at vendor HID `413D:2106` (solid white receiver), while attaching an Xbox controller can re-enumerate the same receiver through an Xbox-compatible `045E:0B12 -> 045E:02FF` chain.
