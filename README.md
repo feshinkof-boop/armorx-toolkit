@@ -110,9 +110,13 @@ Full reference: [docs/config-format.md](docs/config-format.md)
 
 USB/HID research: [docs/usb-protocol.md](docs/usb-protocol.md)
 
+Android/BLE protocol: [docs/android-protocol.md](docs/android-protocol.md)
+
+Windows/Android bridge status: [docs/bridge-status-2026-09-25.md](docs/bridge-status-2026-09-25.md)
+
 Current reverse-engineering handoff: [docs/research-status-2026-09-25.md](docs/research-status-2026-09-25.md)
 
-Current hardware/runtime research identifies the tested pair as an **ARMOR-X Pro** with BIGBIG WON **F20 wireless adapter**. In the ARMOR-X-Pro-alone state the receiver exposes the normal vendor HID identity `413D:2106`; the logical interrupt record size is now runtime-proven as **64 bytes** (65-byte Windows HID reports including the report-ID slot). Two bounded vendor-shaped GetMode writes completed 65/65 bytes with IN pre-posted, but the device returned no E2 response. Assistant 1.0.6.1 accepts `413D:2106` in normal matcher logic, yet its current hosted web UI now resolves to an analytics stub and never opens a vendor session. See the USB/HID research and current handoff documents for the evidence and next Bluetooth/mobile-app research path.
+Current hardware/runtime research identifies the tested pair as an **ARMOR-X Pro** with BIGBIG WON **F20 wireless adapter**. The Android path is now live-captured: the controller reports mark `ZJ-XT`, uses a vendor BLE service with `FFE1` write / `FFE2` notify, and carries the same `A5` command family as the Windows implementation. D6 is proven as a full 144-byte config read and D7 as a full config write; long payloads use indexed `A4` fragments, and the existing config CRC/key-map model is confirmed against live traffic. On Windows, `413D:2106` still exposes 65-byte HID reports with logical N=64, but a transport-valid `0B -> EF -> D6` replay produced no input while the receiver's physical RF-link state was not recorded, so that result is now explicitly **LINK-STATE-INCONCLUSIVE**. See the Android/BLE, USB/HID, bridge-status, and current handoff documents for the evidence.
 
 ## Macro format
 
