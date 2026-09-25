@@ -112,7 +112,7 @@ USB/HID research: [docs/usb-protocol.md](docs/usb-protocol.md)
 
 Current reverse-engineering handoff: [docs/research-status-2026-09-25.md](docs/research-status-2026-09-25.md)
 
-Current Windows Assistant research shows that ARMORX Pro and the ARMORX dongle share the public `413D:2106` USB identity. The analyzed Assistant 1.0.6.1 build retains legacy ArmorX/Pro/Dongle factory classes, while its shipped `Skin=0` normal classifier does not assign those legacy factory types. See the USB/HID research document for the evidence and the read-only identification plan.
+Current hardware/runtime research identifies the tested pair as an **ARMOR-X Pro** with BIGBIG WON **F20 wireless adapter**. In the ARMOR-X-Pro-alone state the receiver exposes the normal vendor HID identity `413D:2106`; the logical interrupt record size is now runtime-proven as **64 bytes** (65-byte Windows HID reports including the report-ID slot). Two bounded vendor-shaped GetMode writes completed 65/65 bytes with IN pre-posted, but the device returned no E2 response. Assistant 1.0.6.1 accepts `413D:2106` in normal matcher logic, yet its current hosted web UI now resolves to an analytics stub and never opens a vendor session. See the USB/HID research and current handoff documents for the evidence and next Bluetooth/mobile-app research path.
 
 ## Macro format
 
