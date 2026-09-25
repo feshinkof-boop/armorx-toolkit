@@ -4,18 +4,28 @@ This is the current handoff point for the USB/HID and Windows Assistant reverse-
 
 ## Executive status
 
-The low-level Windows HID transport gate is now **closed** for the tested BIGBIG WON wireless adapter:
+The normal Android/BLE control path is now **captured end-to-end** and the low-level Windows HID transport remains **closed/proven**.
 
-- the logical interrupt transfer size is **N = 64**, recovered live from both the receive and send worker objects;
-- the tested HID collection is unnumbered and exposes 65-byte Windows input/output reports (one report-ID slot plus 64 logical bytes);
-- the vendor receive worker keeps an IN transfer outstanding before OUT traffic;
-- a corrected unmanaged-overlapped standalone probe successfully completed 65/65-byte writes of the recovered GetMode request with a pre-posted 65-byte read.
+Android live traffic establishes:
 
-However, **two cold standalone GetMode attempts produced no response**. The remaining problem is not Windows write acceptance or the N value.
+- runtime mark/model `ZJ-XT`, firmware revision `2741`, and standard battery characteristic `2A19`;
+- vendor GATT transport on the all-zero Bluetooth-base service UUID with `FFE1` write-without-response and `FFE2` read/notify;
+- the same `A5` frame/checksum family already recovered from Windows;
+- indexed `A4` fragmentation for long payloads;
+- D6 as a complete 144-byte configuration read;
+- D7 as a complete 144-byte configuration write;
+- live validation of the config CRC and two existing field mappings.
 
-The current Windows Assistant 1.0.6.1 path was then observed directly. A real fresh arrival of the normal 413D:2106 vendor HID caused native enumeration activity, but the Assistant opened no vendor HID session and issued no vendor ReadFile/WriteFile traffic. The hosted UI URL used by the application now returns only a tiny analytics stub rather than the historical application page. This provides the best code-supported explanation for the permanently idle/grey device UI in this build.
+Windows remains:
 
-The next research branch should therefore treat the obsolete Windows web UI separately from the normal ARMOR-X Pro control path. Passive analysis of the BIGBIG WON ELITE mobile/Bluetooth workflow is the highest-value normal-device path; firmware/DFU flows remain separate.
+- logical interrupt transfer size **N = 64**;
+- 65-byte Windows HID input/output reports including report-ID slot 0;
+- persistent/pre-posted IN behavior proven;
+- vendor-shaped writes complete successfully.
+
+A bounded Windows replay of Android's normal read sequence `0B -> EF -> D6` completed all writes but returned zero input reports. That result is now explicitly **TRANSPORT-VALID / LINK-STATE-INCONCLUSIVE** because the F20's physical LED/RF-link state was not recorded; `413D:2106` alone does not prove the receiver is linked to the ARMOR-X Pro.
+
+The immediate next gate is one read-only replay with the F20 explicitly confirmed **solid white**, ARMOR-X Pro powered on, Xbox controller disconnected, and no present USB 045E composite node. Firmware/DFU remains separate.
 
 ## Physical hardware identification
 
@@ -84,7 +94,7 @@ ZJ-GALE_L
 ZJ-GALE
 ```
 
-Which mark the tested F20/ARMOR-X Pro pair actually returns remains a runtime fact and is **UNKNOWN** until captured. Do not infer a specific mark from VID/PID or a human-readable retail label.
+The Android/BLE path captured the tested controller's runtime mark directly as `ZJ-XT` through the standard Model Number String and advertising/manufacturer data. This closes the controller-side runtime-mark question without inferring it from VID/PID or retail labeling. The exact content of a future E2 marker over the F20 HID path remains unresolved.
 
 The same 413D family also appears in firmware-upgrade logic. In particular, 2104/2106 are referenced by a NearLink/BS25 DFU path using Usage Page 0xFFB1. That is distinct from the live normal collection at Usage Page 0xFF7A and does not make the normal 413D:2106 collection DFU-only.
 
@@ -235,6 +245,64 @@ UI_TRIGGER_ROOT_CAUSE_PROVEN
 
 with one explicit limit: a working historical page was not separately replayed, so it is not claimed that every valid page would necessarily open this exact device session. What is proven is that the current configured page contains no application UI logic capable of doing so.
 
+## Android/BLE milestone
+
+The tested app is `com.moojiang.bigbigwon` v2.23.0609 (versionCode 12), implemented as Flutter/Dart AOT and using `flutter_reactive_ble` / RxAndroidBle2.
+
+The complete normal first-contact sequence was captured on a real non-root Android device with passive Frida instrumentation. The live vendor service is:
+
+```text
+00000000-0000-1000-8000-00805f9b34fb
+FFE1 = write without response
+FFE2 = read + notify
+2902 = CCCD
+```
+
+Identity reads:
+
+```text
+2A24 = ZJ-XT
+2A26 = 2741
+2A19 = 91% in the captured session
+```
+
+Initial app traffic:
+
+```text
+A5 04 0B B4
+A5 0C EF 00 00 00 00 00 00 00 00 A0
+A5 04 D6 7F
+```
+
+D6 is proven as a full 144-byte config read. D7 is proven as a full 144-byte config write. Long images use ten indexed A4 fragments, and the per-frame checksum is the same sum-mod-256 rule as Windows.
+
+The 144-byte image's own CRC is independently confirmed live as CRC-16/MODBUS-style over bytes 2..143 with big-endian storage. Controlled UI changes also live-confirmed:
+
+```text
+offset 45  = sensorRightCurve0YDivx, 0x0A -> 0x28 on profile change
+offset 135 = mapKeys[23] / M1,       0x17 -> 0x00 on M1 -> A
+```
+
+See [android-protocol.md](android-protocol.md).
+
+## Windows/Android bridge milestone
+
+A corrected standalone HID probe replayed the Android-derived read sequence over a live `413D:2106` F20 interface. A probe bug was first fixed: the Windows device-interface detail path had been read four bytes too far into `SP_DEVICE_INTERFACE_DETAIL_DATA_W`, producing invalid `?\\hid#...` paths and false target-absent results.
+
+After correction:
+
+- the target opened successfully and matched VID/PID;
+- Report ID 0 and 65-byte input/output report sizes were independently confirmed;
+- all three writes completed 65/65 with error 0;
+- no input reports were observed;
+- E2 remained unsent because it was gated on a D6 reply.
+
+The run is **not** a protocol-negative result because the receiver's physical LED/RF-link state was not recorded. USB `413D:2106` can exist while the F20 is not linked to the ARMOR-X Pro.
+
+Future real-send probes now require an explicit physical link-state annotation. The next bounded run must use a confirmed `solid_white` receiver with ARMOR-X Pro on and Xbox controller disconnected.
+
+See [bridge-status-2026-09-25.md](bridge-status-2026-09-25.md).
+
 ## Important corrections
 
 - `413D:2106` is accepted by normal device matcher logic; it is not upgrade-only.
@@ -246,25 +314,29 @@ with one explicit limit: a working historical page was not separately replayed, 
 
 ## Current unresolved questions
 
-- What mark/model string the tested F20 + ARMOR-X Pro returns through the device identification protocol.
-- Why the device does not answer a cold standalone E2 despite correct N=64 framing and pre-posted IN.
-- What benign initialization/handshake, if any, normally precedes E2 in a functioning control application.
-- The exact normal Bluetooth/BLE protocol used by the BIGBIG WON ELITE mobile app with ARMOR-X Pro.
+- Actual E2/GetMode response, if any, from the tested F20 + ARMOR-X Pro pair in a positively recorded linked state.
+- Why the F20 HID path produced no input during the transport-valid but link-state-inconclusive `0B -> EF -> D6` replay.
+- Whether E2 requires a state transition not exercised by the Android app.
+- Meaning of Android-observed opcode `0E`.
+- Exact semantics of the temporally correlated `D2 01` / `D2 00` version-page pair.
+- Purpose of the unused AE00/AE01/AE02 GATT family.
+- Exact Dart AOT dispatch sites for D6/D7/D2 in the compressed-pointer snapshot.
 - Whether a recoverable historical Assistant web page would initiate the legacy Windows vendor session.
-- Exact vendor ReadFile system-call length below the backend branch (the logical receive size is proven N=64 and the HID report metadata is 65 bytes, but the final Windows ReadFile call was not independently disassembled).
-- Exact runtime value of backend config `+0x6/+0x7` (zero remains strongly supported, not live-read).
+- Exact final Windows ReadFile system-call length below the backend branch.
+- Exact runtime value of backend config `+0x6/+0x7`.
 
 ## Recommended next research branch
 
-Do not spend more time power-cycling the receiver or trying to force the obsolete Windows UI.
+The mobile/BLE capture milestone is complete. Do not repeat broad Android reconnaissance.
 
-The highest-value next phase is:
+Next:
 
-1. preserve the Windows Assistant findings as a legacy/reference implementation;
-2. analyze the BIGBIG WON ELITE mobile application;
-3. capture the normal Bluetooth/BLE conversation with ARMOR-X Pro passively first;
-4. identify the normal runtime identity/version/configuration handshake;
-5. keep firmware/DFU/update behavior separate from normal configuration research.
+1. keep the Android capture and field-correlation results as the normal-protocol reference;
+2. repeat the Windows `0B -> EF -> D6` bridge test once with the F20 physically confirmed `solid_white`, ARMOR-X Pro on, Xbox controller disconnected, and no present USB 045E composite node;
+3. preserve raw 65-byte HID input reports before interpretation;
+4. issue one E2 only if D6 replies in that same initialized session;
+5. if the linked-state run remains silent, compare the standalone Windows HID open/claim/I/O behavior against the vendor backend instead of guessing new command permutations;
+6. keep config writes, firmware and DFU outside this read-only bridge gate.
 
 ## Evidence discipline
 
