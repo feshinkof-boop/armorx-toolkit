@@ -90,20 +90,31 @@ with a 5000 ms timeout. For `0xA5` short frames it uses byte 1 as the actual
 short-frame length. Separate `0xA4` / `0xAB` receive/reassembly paths exist
 but are not yet fully decoded.
 
-The short-command path is proven to carry the command's own logical length
-through `CUsbCmd` (for GetMode, 4 bytes) and then enters the embedded libusb
-backend through a runtime operations table. A later closure pass found that the
-final assignment into the libusb transfer object's length field (`+0x68`) is
-below that dispatch boundary and has **not** yet been recovered. Therefore the
-repository no longer treats the exact Windows `WriteFile` length used by the
-vendor as proven.
+The application-side command payload for GetMode begins with the 4-byte frame
+`A5 04 E2 8B`, but the interrupt transport uses a larger fixed logical record.
 
-On the tested hardware, live HID metadata shows an unnumbered 64-byte input
-report and unnumbered 64-byte output report, exposed to Windows as 65-byte
-buffers including report ID `0x00`. A corrected live probe proved Windows
-accepts a 65-byte padded GetMode report, but that does **not** establish that
-the vendor application itself submits 65 bytes. The exact vendor transfer
-length remains pending static closure through libusb's submission layer.
+A read-only live observation closed the long-standing transfer-size question:
+the send and receive worker objects both point through `worker+0x1C` to the
+same owner record, whose first DWORD is `0x40`. Therefore the logical
+interrupt transfer size is **N = 64 (RUNTIME-PROVEN)**.
+
+Static aliasing also proves that the wrapper length and backend transfer length
+are the same storage:
+
+```text
+request      = transfer_base + 0x58
+request+0x10 = transfer_base + 0x68
+```
+
+Live HID metadata shows an unnumbered 64-byte input report and unnumbered
+64-byte output report, exposed to Windows as 65-byte buffers including report
+ID `0x00`. A corrected unmanaged-overlapped standalone probe, with the IN
+posted before OUT, completed two 65/65-byte GetMode writes successfully. Both
+pre-posted 65-byte reads timed out with zero response bytes.
+
+This proves the host-side transport framing and N value. It does **not** prove
+that cold E2 is sufficient to make the device answer, nor that the vendor's
+reusable 64-byte logical buffer always has zero-filled tail bytes.
 
 The application-side short-command buffer itself starts with `0xA5`; no
 additional protocol wrapper is added before the command. The recovered
@@ -269,83 +280,82 @@ Do not infer the legacy ARMORX Dongle marker from newer/current classifier
 strings merely because one contains the word `DONGLE`; raw capture is still
 required to establish the legacy marker.
 
-## Current live/static GetMode status — 2026-09-25
+## Current live/runtime GetMode status — 2026-09-25
 
 ### PROVEN
 
-- The live `413D:2106` HID collection is unique on the tested system and uses
-  Usage Page `0xFF7A`, Usage `0x0001`.
-- Input and output report IDs are both `0`; each carries 64 bytes of data,
-  exposed as 65-byte Windows HID report buffers. No feature report is exposed.
-- GetMode logical request is exactly `A5 04 E2 8B`; the checksum is the
-  additive byte sum modulo 256.
-- The runtime model marker is device-derived through the GetMode path; it is
-  not supplied by the vendor server.
-- A corrected unmanaged-overlapped probe completed a 65-byte HID output report
-  with `STATUS_SUCCESS` and 65 bytes transferred.
-- A fresh input read posted **after** that write received no report within the
-  recovered 5000 ms collection window.
-- The embedded HID backend is installed through a static operation table at
-  `0x101F8678`; its transport slot points to `0x10055BE0`.
-- `CUsbCmd::ToPacket` and `CUsbCmd::FromPacket` are virtual methods in the
-  same vtable at `0x102425FC`.
-- Device-open code attaches the HID handle to an I/O completion port with
-  `CreateIoCompletionPort`. Receive completion is therefore handled by an
-  independent IOCP actor rather than by the command caller directly.
+- The normal ARMOR-X-Pro-alone receiver state is `413D:2106`, Usage Page
+  `0xFF7A`, Usage `0x0001`, with 65-byte Windows input/output reports and
+  no feature report.
+- The tested wireless receiver is physically labeled BIGBIG WON Wireless
+  Adapter model **F20**; the controller attachment is physically labeled
+  **ARMOR-X Pro**. Serial numbers are intentionally not recorded.
+- Logical interrupt transfer size is **N = 64**, read live from the owner record
+  shared by both the send and receive worker objects.
+- GetMode logical request is exactly `A5 04 E2 8B`.
+- The receive worker is persistent and keeps an IN transfer outstanding before
+  vendor OUT traffic.
+- The corrected unmanaged-overlapped standalone probe completed a 65-byte
+  Windows HID write successfully with a 65-byte IN already pending.
+- A second bounded attempt behaved identically: 65 bytes written successfully,
+  no input report within 5000 ms.
+- `413D:2106` is accepted by the normal Assistant matcher. VID/PID alone leaves
+  it classless; later classification depends on a device-derived mark string.
+- A fresh 413D:2106 arrival while the Assistant observer was healthy caused
+  native enumeration activity but no vendor HID handle, no logical-wrapper
+  call, and no vendor ReadFile/WriteFile.
+- The current Assistant's configured IE/ActiveX page URL returns an analytics
+  stub instead of the historical application UI. The native `window.external`
+  bridge exists, but the server-side page that would drive the per-device
+  session is no longer present.
 
-### Important correction
+### Live physical-state correction
 
-Two early live attempts used a managed by-ref `OVERLAPPED` PowerShell P/Invoke
-pattern. A device-free named-pipe reproduction proved that pattern could report
-`ERROR_IO_INCOMPLETE` / zero bytes after a successful asynchronous transfer.
-Those two completion results are therefore not valid evidence of device
-rejection.
+When ARMOR-X Pro is powered with no Xbox controller attached, the F20 receiver
+remains in the normal `413D:2106` vendor-HID state and is observed solid
+white.
 
-The corrected primitive uses unmanaged `OVERLAPPED` storage, stable unmanaged
-buffers, fresh auto-reset events, and `CancelIoEx` for bounded cancellation.
-
-### Static trace update: direct application-side transfer wrapper
-
-A subsequent narrowing pass found that `CUsbSendThread::WriteToUsb` does not jump directly from the command object into the HID backend. Three send sites call an inner wrapper at `0x1004CC50`:
-
-```text
-0x10049CF8  short packet -> 0x1004CC50
-0x10049F8D  long packet  -> 0x1004CC50
-0x1004A146  short packet -> 0x1004CC50
-```
-
-Each site supplies the 5000 ms timeout. The matching receive-side wrapper is localized to approximately `0x1004A500-0x1004AA00`.
-
-This corrects the previous tracing model: the exact transfer-length assignment is now reachable through a bounded direct call chain. The remaining work is to read `0x1004CC50` through the libusb transfer fill/submission code and identify the exact store into transfer `+0x68`, then recover the IN submission/re-arm edge from the receive block.
-
-The IOCP core is localized to `0x10050xxx-0x10052xxx`; relevant calls include `GetQueuedCompletionStatus` at `0x10051D76`, `PostQueuedCompletionStatus` at `0x10050CDF`, `CancelIoEx` at `0x100510F8`, and `GetOverlappedResult` at `0x10051191`. The HID handle is attached to the completion port at the already recovered open path.
-
-These addresses narrow the gate but do not yet prove the numeric OUT/IN transfer lengths or ordering.
+When an Xbox controller is physically attached through ARMOR-X Pro, the same
+receiver can re-enumerate into a Microsoft/Xbox-compatible chain (observed
+`045E:0B12 -> 045E:02FF`). That is passthrough behavior and must not be
+treated as the ARMOR-X-Pro-alone vendor state.
 
 ### Current gate
 
-Do **not** treat another live GetMode probe as justified until both are
-statically closed:
+The transport gate is closed. The remaining device-behavior gate is:
 
-1. the exact GetMode OUT/IN value written into the libusb transfer length field
-   `+0x68`;
-2. the exact receive submission ordering / re-arm lifecycle relative to OUT.
+1. determine what benign initialization/state normally precedes E2, if any;
+2. capture the normal control protocol from a functioning application path.
 
-The current static handoff is documented in
+Because the current Windows Assistant web UI is effectively dead server-side,
+the recommended normal-device path is passive analysis of the BIGBIG WON ELITE
+mobile/Bluetooth workflow. Firmware/DFU paths should remain separate.
+
+The current handoff is documented in
 [research-status-2026-09-25.md](research-status-2026-09-25.md).
 
 ## Current unresolved questions
 
-- Actual `E2` / GetMode response, if any, from ARMORX Pro and ARMORX Dongle in the controlled physical states.
-- Legacy ARMORX Pro and Dongle marker strings, if their firmware responds to `E2`.
-- How older Windows Assistant versions reached factory types `2` / `3` / `4`, or whether a different detector path/version supplied those types.
-- Exact runtime HID record size selected by `CUsbMonitor` for the tested descriptor.
-- Why the earlier direct PyUSB test reported a 65-byte write against a 64-byte interrupt max packet while receiving no reply.
-- Full `0xA4` / `0xAB` long-packet framing and profile/macro device-write behavior.
-- Meaning/source of the eight caller-provided bytes in the recovered `GetUUID` request shape `A5 0C EF <8 bytes> CC`.
+- Actual `E2` / GetMode response, if any, from the tested F20 + ARMOR-X Pro
+  pair after the correct normal initialization/state is established.
+- The exact runtime mark/model string returned by that pair.
+- What benign command history or device state, if any, must precede E2.
+- The normal Bluetooth/BLE protocol used by the BIGBIG WON ELITE mobile app.
+- Whether a recoverable historical Assistant web page can still initiate the
+  legacy Windows vendor session.
+- Exact final Windows ReadFile length in the vendor backend (logical receive
+  size is N=64 and HID metadata is 65 bytes, but the system-call branch was not
+  independently disassembled).
+- Exact runtime values of backend config `+0x6/+0x7`; zero remains strongly
+  supported by the allocation/dataflow analysis.
+- Full `0xA4` / `0xAB` long-packet framing and profile/macro device-write
+  behavior.
+- Meaning/source of the eight caller-provided bytes in the recovered
+  `GetUUID` request shape `A5 0C EF <8 bytes> CC`.
 
-Earlier direct HID/PyUSB timeouts are not treated as evidence that the
-statically recovered commands are invalid because those probes did not yet
-reproduce the complete official monitor/thread initialization sequence.
+Cold standalone E2 timeouts are not treated as proof that the recovered E2
+command is invalid: the host transport is now proven, while the device's
+required initialization/state remains unresolved.
 
-No write-config, firmware-update, or destructive command is considered documented until independently validated.
+No write-config, firmware-update, DFU, or destructive command is considered
+documented until independently validated.
