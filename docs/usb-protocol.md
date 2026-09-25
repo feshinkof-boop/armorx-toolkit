@@ -136,7 +136,15 @@ so device-type discrimination happens above the common USB identity.
 
 Short commands use the `0xA5` packet family.
 
-Longer transfer paths also contain separate framing/reassembly logic; those formats are not yet considered fully documented here.
+Live Android traffic has now closed the normal long-transfer framing used for the 144-byte configuration image. Long frames use:
+
+```text
+A4 | length | opcode | fragment_index | up to 15 data bytes | checksum
+```
+
+The frame checksum remains `sum(previous bytes) & 0xFF`. A 144-byte image is carried in ten fragments: indices 1..10, with 15 data bytes in fragments 1..9 and 9 data bytes in fragment 10. Android write-without-response traffic may interleave fragments from pipelined passes, so reassembly must use the fragment index rather than sequential arrival alone.
+
+The separate `0xAB` path remains unresolved.
 
 A simple checksum helper used by decoded short commands is:
 
@@ -154,6 +162,8 @@ The following request encodings are recovered from the Windows device library an
 | GetZkmVersion | `A5 04 0B B4` | parser accepts `A5 05 0B VV CC` |
 | GetProfileSize | `A5 04 D3 7C` | parser checks `A5`, command `D3`, and checksum |
 | GetMacroList | `A5 04 D5 7E` | dedicated parser exists |
+| ReadConfig (Android live) | `A5 04 D6 7F` | device returns a complete 144-byte config as ten A4/D6 fragments |
+| WriteConfig (Android live) | ten A4/D7 fragments carrying 144 bytes | device emits short acknowledgement `A5 05 D7 00 81`; not every observed write had a captured ack |
 
 Captured legacy application traffic identifies an ARMOR-X Pro with:
 
@@ -322,36 +332,32 @@ treated as the ARMOR-X-Pro-alone vendor state.
 
 ### Current gate
 
-The transport gate is closed. The remaining device-behavior gate is:
+The Android normal-control path is now captured and documented in [android-protocol.md](android-protocol.md). Its first-contact read sequence is:
 
-1. determine what benign initialization/state normally precedes E2, if any;
-2. capture the normal control protocol from a functioning application path.
+```text
+A5 04 0B B4
+A5 0C EF 00 00 00 00 00 00 00 00 A0
+A5 04 D6 7F
+```
 
-Because the current Windows Assistant web UI is effectively dead server-side,
-the recommended normal-device path is passive analysis of the BIGBIG WON ELITE
-mobile/Bluetooth workflow. Firmware/DFU paths should remain separate.
+A Windows replay of those three frames used the proven 65-byte report transport, kept IN pre-posted, and completed every write 65/65 with error 0, but received zero input reports. That run is **TRANSPORT-VALID / LINK-STATE-INCONCLUSIVE** because the F20's physical RF-link/LED state was not recorded. A healthy `413D:2106` USB node alone does not prove the receiver is linked to the ARMOR-X Pro.
+
+The next bounded gate is therefore to repeat the same read-only sequence once with the physical receiver explicitly confirmed **solid white**, ARMOR-X Pro powered on, Xbox controller disconnected, and no present USB 045E composite node. E2 remains gated on a successful D6 reply.
 
 The current handoff is documented in
 [research-status-2026-09-25.md](research-status-2026-09-25.md).
 
 ## Current unresolved questions
 
-- Actual `E2` / GetMode response, if any, from the tested F20 + ARMOR-X Pro
-  pair after the correct normal initialization/state is established.
-- The exact runtime mark/model string returned by that pair.
-- What benign command history or device state, if any, must precede E2.
-- The normal Bluetooth/BLE protocol used by the BIGBIG WON ELITE mobile app.
-- Whether a recoverable historical Assistant web page can still initiate the
-  legacy Windows vendor session.
-- Exact final Windows ReadFile length in the vendor backend (logical receive
-  size is N=64 and HID metadata is 65 bytes, but the system-call branch was not
-  independently disassembled).
-- Exact runtime values of backend config `+0x6/+0x7`; zero remains strongly
-  supported by the allocation/dataflow analysis.
-- Full `0xA4` / `0xAB` long-packet framing and profile/macro device-write
-  behavior.
-- Meaning/source of the eight caller-provided bytes in the recovered
-  `GetUUID` request shape `A5 0C EF <8 bytes> CC`.
+- Actual `E2` / GetMode response, if any, from the tested F20 + ARMOR-X Pro pair in a positively recorded linked state.
+- Why the Windows F20 HID channel produced no reply to the Android-derived `0B -> EF -> D6` sequence in the link-state-inconclusive run.
+- Whether E2 requires a device/link state not exercised by the Android application.
+- Whether a recoverable historical Assistant web page would initiate the legacy Windows vendor session.
+- Exact final Windows ReadFile length in the vendor backend (logical receive size is N=64 and HID metadata is 65 bytes, but the final system-call branch was not independently disassembled).
+- Exact runtime values of backend config `+0x6/+0x7`; zero remains strongly supported by the allocation/dataflow analysis.
+- The separate `0xAB` long-packet path.
+- Meaning/source of the eight caller-provided bytes in the recovered `GetUUID` request shape `A5 0C EF <8 bytes> CC`. Android first contact used eight zero bytes.
+- Meaning of Android-observed opcode `0E`, exact D2 semantics, and purpose of the unused AE00/AE01/AE02 GATT family.
 
 Cold standalone E2 timeouts are not treated as proof that the recovered E2
 command is invalid: the host transport is now proven, while the device's
