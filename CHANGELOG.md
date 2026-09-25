@@ -13,6 +13,15 @@ All notable project changes are documented here.
 
 ### Added
 
+- Closed the GetMode transport-size blocker with a read-only live observation: both send and receive workers share an owner whose transfer-size field is `0x40`, so logical interrupt size is **N=64**.
+- Recorded the retail hardware labels without serial data: ARMOR-X Pro plus BIGBIG WON Wireless Adapter model **F20**.
+- Recorded the corrected physical-state split: ARMOR-X-Pro-alone stays at vendor HID `413D:2106` (solid white receiver), while attaching an Xbox controller can re-enumerate the same receiver through an Xbox-compatible `045E:0B12 -> 045E:02FF` chain.
+- Added the first vendor-shaped live GetMode test with IN pre-posted before OUT: two bounded 65-byte writes completed successfully, both reads timed out with zero reply.
+- Documented that `413D:2106` is accepted by normal Assistant matcher logic and is classless at VID/PID stage; later product classification depends on a device-derived ZJ-/C4-style mark string.
+- Added live Windows Assistant observation: a fresh `413D:2106` arrival triggers native enumeration but no vendor HID session, wrapper call, ReadFile, or WriteFile.
+- Established the current Assistant UI failure mode: its configured IE/ActiveX analysis URL now returns only a tiny analytics stub, leaving the native per-device session undriven; status recorded as `UI_TRIGGER_ROOT_CAUSE_PROVEN`.
+- Updated the recommended next research branch to passive BIGBIG WON ELITE mobile/Bluetooth analysis, keeping firmware/DFU paths separate.
+
 - Added a 2026-09-25 research handoff covering the current ArmorX/BIGBIG WON USB/HID reverse-engineering state and explicit next static-analysis gates.
 - Corrected the GetMode transport record: the logical command is proven, but the vendor's final libusb OUT/IN transfer lengths remain unresolved below the backend operations-table dispatch.
 - Documented the live HID metadata for the tested `413D:2106` collection: Usage Page `0xFF7A`, Usage `1`, unnumbered 64-byte input/output reports, and no feature report.
