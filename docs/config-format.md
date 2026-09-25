@@ -93,3 +93,22 @@ Captured `/dev/shareConfig` traffic for the 144-byte ArmorX Pro format adds evid
 - Server storage accepts raw 144-byte configs even when bytes 0..1 contain a stale or zero CRC; device-write code should still regenerate the CRC before sending a config to hardware.
 
 The precise placement/meaning of the separate six-byte structured field named `res` remains **UNKNOWN**.
+
+
+## Live BLE confirmation — 2026-09-25
+
+A captured normal Android/BLE session independently confirmed the device-side 144-byte image and CRC behavior:
+
+- D6 returns one complete 144-byte config image.
+- D7 writes one complete 144-byte config image even for a one-byte logical edit.
+- Every captured outbound D7 image carried a valid CRC-16/MODBUS-style value over bytes 2..143, stored big-endian in bytes 0..1.
+- Controlled profile switching changed only the CRC plus byte 45, already named `sensorRightCurve0YDivx`, from `0x0A` to `0x28`.
+- Controlled rear-button remapping M1 -> A changed only the CRC plus byte 135. Since `mapKeys` begins at 112 and M1 is source ID 23, `112 + 23 = 135`; the value changed `0x17 -> 0x00` (M1 -> A).
+
+This live capture therefore confirms the serialized mapping direction:
+
+```text
+mapKeys[source_button_id] = target_button_id
+```
+
+The BLE transport details are documented in [android-protocol.md](android-protocol.md).
