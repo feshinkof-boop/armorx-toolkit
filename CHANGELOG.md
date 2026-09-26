@@ -2,6 +2,8 @@
 
 All notable project changes are documented here.
 
+## Unreleased
+
 ## 0.2.0 — 2026-09-26
 
 Second public release of **ArmorX Toolkit**.
