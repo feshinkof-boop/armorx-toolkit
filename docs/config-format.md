@@ -77,6 +77,10 @@ python tools/armorx_config.py validate config.json
 python tools/armorx_config.py decode config.json -o decoded.json
 ```
 
+## Factory templates and other sizes (2026-09-25)
+
+The 2.23 app embeds factory-default templates for 88/144/240-byte configs, and 2.24 adds 280/484-byte families (C1 Pro-class devices, not ARMOR-X Pro). The live ARMOR-X Pro device image matched the embedded 144-byte template `bc536085f138a2ed…` except that the app recomputed the CRC (0x7F67) before sending. Extracted reproducibly by `scripts/extract_default_configs.py` into `research/default-config-templates.json`; analysis in `research/default-config-analysis.md`. The app derives the effective configuration length from the reassembled D6 payload (checkConfigLength; 0xFE padding terminator), not from a dedicated device-reported length field. A4 frame length byte = total frame bytes (chunk+5). ARMOR-X Pro remains 144 bytes.
+
 ## Current confidence
 
 The 144-byte envelope, CRC behavior, mapping region, and listed field offsets are implemented as current research findings. Unknown fields are explicitly left unresolved rather than assigned speculative names.

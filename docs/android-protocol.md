@@ -101,7 +101,7 @@ The eight zero bytes in the captured EF request are a live instance of the Windo
 A5 0C EF <8 bytes> checksum
 ```
 
-The semantic meaning of those eight bytes remains **UNKNOWN**.
+Static analysis of the 2.23 Dart AOT builder (`_ArmorXProWidgetState::getDeviceUUID` @0x791a30) proves the eight request bytes are **compiled zero literals** with no runtime source and no caller-overridable parameter: in the analyzed Android 2.23 client implementation, the eight EF request-data bytes are fixed zero literals. The EF reply's bytes 3..10 are hex-formatted into the 16-char `devUuid` string that the app sends to `/dev/register` (see `research/apk-2.23.0609/ef-dataflow.md`).
 
 ## A4 fragmentation
 
@@ -227,6 +227,8 @@ D6 read
 
 The position is consistent with an apply/commit-style action, but the semantic meaning of opcode 0E is **UNKNOWN** and should not be promoted from ordering alone.
 
+Static analysis (2.23/2.24): 0E is a post-write command emitted by multiple configuration-related workflows (`writeDevice` after config/macro/DPI writes; also `writeConnectModeConfig`, `getConnectModel`, `getMTU`, and the 2.24 calibration pages key their response parsers on it). The device echoes the 5-byte frame verbatim. No decoder names it; do not call it commit/apply/save without direct evidence.
+
 ### D2
 
 A unique pair:
@@ -237,6 +239,8 @@ D2 00
 ```
 
 occurred only while the version/firmware information page was opened. This is a temporal correlation only. The exact D2 semantics remain **UNKNOWN**.
+
+Static analysis (2.23): both D2 encoders live in `rainbow_test.dart` (`testModeSwitch1` @0x881a78 -> `A5 05 D2 00 7C`; `testModeSwitch` @0x8b1d68 -> `A5 05 D2 01 7D`) — the controller test-mode UI. The version page hosts the test-mode entry; the earlier "version page" association is corrected to: D2 is emitted by the test-mode UI path. Device-side semantics of the 00/01 flag remain UNKNOWN. In 2.24 a second D2 family appears in the configV484 stick pages.
 
 ## Instrumentation lessons
 
@@ -252,11 +256,14 @@ The public project `ceeprus/armorx-battery` independently reads the Armor X Pro 
 
 ## Current unknowns
 
-- Meaning of opcode 0E.
-- Exact D2 semantics.
-- Purpose of the unused AE00/AE01/AE02 GATT family.
-- Exact static Dart AOT dispatch sites for D6/D7/D2 in the compressed-pointer snapshot.
+- Meaning of opcode 0E beyond "post-write command" (multiple workflows; device echoes it).
+- Exact device-side semantics of D2's 00/01 flag (client-side: test-mode UI path).
+- Purpose of the unused AE00/AE01/AE02 GATT family (no reference in either analyzed build).
 - Whether the Windows/F20 HID path exposes the same normal command stream once the RF link state and backend behavior are reproduced.
-- Whether E2/GetMode requires a state transition not exercised by the Android application.
+- Whether E2/GetMode requires a state transition not exercised by the Android application (no reachable E2 frame-construction or response-decoding path was found in the analyzed Android 2.23 and 2.24 builds — see `research/android-frame-builder-reconciliation.md`).
+
+## Static dispatch closure (2026-09-25)
+
+The formerly open "exact static Dart AOT dispatch sites" question is closed for both analyzed builds by full Blutter dumps: 13 frame-builder functions in 2.23 and 21 in 2.24 are enumerated in `research/android-frame-builders-*.json`, and 5/10 response dispatchers in `research/android-response-dispatchers-*.json`. The config-length derivation (checkConfigLength, -2/0xFE padding terminator) and the 88/144/240/280/484 family routing are documented in `research/config-format-family-map.md`; factory templates with verified CRCs are in `research/default-config-templates.json`.
 
 Firmware/DFU/update behavior remains intentionally separate.

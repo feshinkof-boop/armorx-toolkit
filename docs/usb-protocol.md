@@ -355,8 +355,8 @@ The current handoff is documented in
 - Whether a recoverable historical Assistant web page would initiate the legacy Windows vendor session.
 - Exact final Windows ReadFile length in the vendor backend (logical receive size is N=64 and HID metadata is 65 bytes, but the final system-call branch was not independently disassembled).
 - Exact runtime values of backend config `+0x6/+0x7`; zero remains strongly supported by the allocation/dataflow analysis.
-- The separate `0xAB` long-packet path.
-- Meaning/source of the eight caller-provided bytes in the recovered `GetUUID` request shape `A5 0C EF <8 bytes> CC`. Android first contact used eight zero bytes.
+- Which device or feature produces `0xAB` frames (transport and reassembly decoded; producer UNKNOWN).
+- Meaning of the eight caller-provided bytes in the recovered `GetUUID` request shape `A5 0C EF <8 bytes> CC`: the analyzed Android client hardcodes eight zero literals, and the reply (not the request) supplies the device UUID.
 - Meaning of Android-observed opcode `0E`, exact D2 semantics, and purpose of the unused AE00/AE01/AE02 GATT family.
 
 Cold standalone E2 timeouts are not treated as proof that the recovered E2

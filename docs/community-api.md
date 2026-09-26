@@ -55,3 +55,13 @@ A config-list result is scoped to the supplied identifiers and request parameter
 The repository does not include brute-force code, credential testing, destructive operations, or broad identifier enumeration.
 
 Community tooling should stay limited to normal client-compatible behavior and data the user is authorized to access.
+
+
+## Cross-client reconciliation (2026-09-25)
+
+The Windows Assistant 1.0.6.1 (WndMgr.dll `CJsonCreator`) uses the same host
+(`http://m.bigbigwon.com:8080`) and the same `/dev/*` endpoint family with the
+same JSON field names. Full three-client endpoint matrix (Android 2.23,
+Android 2.24 adds `/dev/queryGameList`, Windows adds `/dev/queryFirewareList`):
+see `research/server-api-map.md`. No brute-force or enumeration behavior is
+used or documented.

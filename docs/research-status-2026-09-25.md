@@ -312,6 +312,33 @@ See [bridge-status-2026-09-25.md](bridge-status-2026-09-25.md).
 - A fresh vendor-HID arrival does trigger native enumeration, but it does not open a vendor session in the current Assistant/UI state.
 - The exact working standalone probe source used in the lab must be treated separately from older/stale copies; do not redeploy an older attachment over the reconciled working build.
 
+## Android static-analysis closure (2026-09-25, second pass)
+
+Full Blutter dumps of 2.23.0609 and 2.24.0919 (verified provenance: APK SHA256
+7ed18b77…/0bae884b…; Dart 2.19.6 / 3.2.3) closed the Android static gaps:
+
+- Frame-builder index: 13 functions (2.23) / 21 (2.24) — `research/android-frame-builders-*.json`;
+- Response-dispatcher index: 5 (2.23) / 10 (2.24) — `research/android-response-dispatchers-*.json`;
+- Internal-buffer vs wire-frame reconciliation (length byte = total frame bytes; A4 len = chunk+5;
+  EF request carries eight compiled zero literals) — `research/android-frame-builder-reconciliation.md`;
+- EF reply → devUuid → /dev/register dataflow — `research/apk-2.23.0609/ef-dataflow.md`;
+- D6 A4 reassembly offsets, completion, and config-length derivation (checkConfigLength,
+  0xFE terminator; static 0xfd8/0x1030) — `research/config-format-family-map.md`;
+- Factory default templates 88/144/240 (+280/484 in 2.24) with independently recomputed CRCs
+  (240-byte template CRC 0x1605 self-validates; live ARMOR-X Pro config equals the bc536085
+  144-byte template with recomputed CRC 0x7F67) — `research/default-config-templates.json`;
+- Rigorous E2 absence: no reachable E2 frame-construction or response-decoding path in either
+  analyzed build;
+- D2 corrected to the test-mode UI path (rainbow_test.dart);
+- 0E characterized narrowly as a post-write command emitted by multiple workflows;
+- Semantic 2.23↔2.24 differential incl. device-enum renumbering (ARMOR-X Pro 6→8) and the
+  280/484 C1 Pro-class families — `research/apk-version-diff-2.23-vs-2.24.md`;
+- Server API map cross-reconciled with the Windows Assistant (same host/endpoints) —
+  `research/server-api-map.md`;
+- Windows AB long-packet path decoded (send pacing + receive stream reassembly by AB markers) —
+  `research/windows/ab-protocol.md`; web-bridge data-model inventory — `research/windows/web-bridge.md`;
+- Probe timing reviewed against the verified Android init order — `research/windows/probe-timing-review.md`.
+
 ## Current unresolved questions
 
 - Actual E2/GetMode response, if any, from the tested F20 + ARMOR-X Pro pair in a positively recorded linked state.

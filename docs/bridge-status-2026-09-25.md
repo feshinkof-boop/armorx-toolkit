@@ -152,6 +152,14 @@ Then rerun exactly once:
 
 Do not send D7, 0E, firmware, DFU or guessed commands.
 
+## Timing review against verified Android init (2026-09-25)
+
+The probe sequence was compared with the verified Android vendor-command
+subsequence (`research/windows/probe-timing-review.md`): the probe's order
+(persistent IN, 0B, collect, EF, collect, D6) is faithful; the only
+Android-observed protocol delay is 500 ms before D6. No command bytes change.
+The 2A26-read gate before EF is standard GATT and is not emulated over HID.
+
 ## Current conclusion
 
 The Windows host-side transport is proven capable of submitting correctly addressed 65-byte reports, but the Android-derived read sequence has not yet been tested under a positively recorded `solid_white` RF-linked state.
