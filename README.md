@@ -33,7 +33,7 @@ The project focuses on:
 - documenting **Xbox controller key mapping** and rear-button remapping;
 - documenting config structure, CRC, timing behavior, and unknown fields;
 - reproducing read-oriented community/config exchange behavior;
-- providing a clean foundation for future GUI and direct-device tooling.
+- providing a public Windows BLE configurator alongside the CLI.
 
 > **Unofficial project.** Not affiliated with or endorsed by BIGBIG WON, MOJHON, Microsoft, or Xbox.
 
