@@ -124,21 +124,21 @@ jobs:
         run: |
           $body = gh release view v0.2.0 --json body -q .body
           if ($body -notmatch '## Windows GUI') {
-            $body += @"
-
-## Windows GUI
-
-The release assets include the public **ArmorX Windows v0.2.0** configurator for Windows 10/11 x64.
-
-- `ArmorX-Windows-v0.2.0.exe` — self-contained single-file app
-- `ArmorX-Windows-v0.2.0-win-x64.zip` — self-contained folder build fallback
-- `ArmorX-Windows-v0.2.0-source.zip` — public GUI source
-- `ArmorX-Windows-v0.2.0-SHA256SUMS.txt` — SHA256 checksums
-
-Public GUI features: Connect/Recover, automatic BLE recovery after device sleep, config read, sticks/triggers/gyro/turbo editing, M1-M4 remapping including live-proven Guide/Xbox ID 12, local profiles, and full write/save/read-back verification.
-
-The internal research/capture application and Research Autopilot are not included.
-"@
-            $body | Set-Content -Encoding utf8 .\release-body.md
+            $section = @(
+              '',
+              '## Windows GUI',
+              '',
+              'The release assets include the public **ArmorX Windows v0.2.0** configurator for Windows 10/11 x64.',
+              '',
+              '- `ArmorX-Windows-v0.2.0.exe` — self-contained single-file app',
+              '- `ArmorX-Windows-v0.2.0-win-x64.zip` — self-contained folder build fallback',
+              '- `ArmorX-Windows-v0.2.0-source.zip` — public GUI source',
+              '- `ArmorX-Windows-v0.2.0-SHA256SUMS.txt` — SHA256 checksums',
+              '',
+              'Public GUI features: Connect/Recover, automatic BLE recovery after device sleep, config read, sticks/triggers/gyro/turbo editing, M1-M4 remapping including live-proven Guide/Xbox ID 12, local profiles, and full write/save/read-back verification.',
+              '',
+              'The internal research/capture application and Research Autopilot are not included.'
+            ) -join "`n"
+            ($body + $section) | Set-Content -Encoding utf8 .\release-body.md
             gh release edit v0.2.0 --notes-file .\release-body.md
           }
