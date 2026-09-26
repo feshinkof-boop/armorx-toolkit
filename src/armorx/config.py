@@ -24,15 +24,18 @@ MAPKEYS_START = 112
 SHARE_RES2_START = 74
 SHARE_RES2_END = 112
 
-# ArmorX key IDs recovered directly from the old app AOT remap UI.
-# Values 5/12/15/20-22/27-31 intentionally remain unnamed here because the
-# old ArmorX picker did not directly identify them.
+# ArmorX key IDs recovered from the old app AOT remap UI plus controlled
+# live BLE remap tests. ID 12 (Guide/Mode) is now live-proven. ID 15 remains
+# provisional because the autonomous run recorded a conflicting chooser value
+# plus an operator note of "screenshot". Values 5/15/20-22/27-31 therefore
+# remain unnamed in the stable CLI until their semantics are cleanly confirmed.
 MAP_KEY_CODES = {
     "A": 0, "B": 1, "EMPTY": 2, "NONE": 2, "CLEAR": 2,
     "X": 3, "Y": 4,
     "LB": 6, "RB": 7, "LT": 8, "RT": 9,
     "VIEW": 10, "SELECT": 10,
     "MENU": 11, "START": 11,
+    "GUIDE": 12, "MODE": 12, "XBOX": 12, "HOME": 12,
     "L3": 13, "LS": 13, "LS_CLICK": 13,
     "R3": 14, "RS": 14, "RS_CLICK": 14,
     "DPAD_UP": 16, "UP": 16,
@@ -44,7 +47,7 @@ MAP_KEY_CODES = {
 
 CANONICAL_KEY_NAMES = {
     0:"A", 1:"B", 2:"EMPTY", 3:"X", 4:"Y",
-    6:"LB", 7:"RB", 8:"LT", 9:"RT", 10:"VIEW", 11:"MENU",
+    6:"LB", 7:"RB", 8:"LT", 9:"RT", 10:"VIEW", 11:"MENU", 12:"GUIDE",
     13:"L3", 14:"R3", 16:"DPAD_UP", 17:"DPAD_DOWN",
     18:"DPAD_LEFT", 19:"DPAD_RIGHT",
     23:"M1", 24:"M2", 25:"M3", 26:"M4",
@@ -390,7 +393,9 @@ def cmd_keys(args: argparse.Namespace) -> None:
         rows.append({
             "id": i,
             "name": CANONICAL_KEY_NAMES.get(i),
-            "status": "proven_old_app" if i in CANONICAL_KEY_NAMES else "unresolved_or_unexposed",
+            "status": ("proven_live" if i == 12 else
+                       "proven_old_app" if i in CANONICAL_KEY_NAMES else
+                       "unresolved_or_unexposed"),
         })
     write_json(None, rows)
 
