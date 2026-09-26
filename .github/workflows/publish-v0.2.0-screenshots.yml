@@ -1,0 +1,134 @@
+name: Publish v0.2.0 screenshots
+
+on:
+  push:
+    branches:
+      - docs/v0.2.0-screenshots
+    paths:
+      - ".release/screenshots-v0.2.0/**"
+      - ".github/workflows/publish-v0.2.0-screenshots.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reconstruct and verify screenshots
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(find .release/screenshots-v0.2.0 -name 'part*.b64' | wc -l)" -eq 7
+          cat .release/screenshots-v0.2.0/part*.b64 | tr -d '\r\n' | base64 -d > /tmp/armorx-v020-screenshots.zip
+          echo "7b0b106f603e98ef42a6126369a04838ba780eeee8d522675bb8276be7441b9b  /tmp/armorx-v020-screenshots.zip" | sha256sum -c -
+          mkdir -p /tmp/armorx-shots
+          unzip -q /tmp/armorx-v020-screenshots.zip -d /tmp/armorx-shots
+          echo "b657bf42a9f0c7e73c205ec36ae2a8366d7ef7fe00bc2ec6001e701b2844530f  /tmp/armorx-shots/01-main-connected.webp" | sha256sum -c -
+          echo "1cfe8e6ee559806c90707b6d61abc3e650eb4c89cb17f8e7cb43ca11cc819153  /tmp/armorx-shots/02-trigger-settings.webp" | sha256sum -c -
+          echo "969713cccebf4e3d053d2b4e9597d8f9c3c67e284123c3e88b3886c46a7e0641  /tmp/armorx-shots/03-rear-buttons.webp" | sha256sum -c -
+          echo "83b1ba182f65bc7cbea73458f765bc7f4597666e468e6d60154651381a552ddd  /tmp/armorx-shots/04-profiles.webp" | sha256sum -c -
+          test "$(find /tmp/armorx-shots -maxdepth 1 -type f | wc -l)" -eq 4
+
+      - name: Add screenshots and README preview to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git switch -C main origin/main
+          mkdir -p docs/assets/windows/v0.2.0
+          cp /tmp/armorx-shots/*.webp docs/assets/windows/v0.2.0/
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("README.md")
+          text = path.read_text(encoding="utf-8")
+
+          start = "<!-- WINDOWS_GUI_PREVIEW_START -->"
+          end = "<!-- WINDOWS_GUI_PREVIEW_END -->"
+          section = """<!-- WINDOWS_GUI_PREVIEW_START -->
+          ## Windows GUI preview
+
+          ArmorX Toolkit v0.2.0 also includes a public Windows 10/11 x64 configurator for ARMOR-X Pro over BLE. It provides normal end-user configuration only; the internal research/capture application and Research Autopilot are separate and are not part of the public GUI.
+
+          | Connected + stick settings | Trigger settings |
+          | --- | --- |
+          | ![ArmorX Windows connected and stick settings](docs/assets/windows/v0.2.0/01-main-connected.webp) | ![ArmorX Windows trigger settings](docs/assets/windows/v0.2.0/02-trigger-settings.webp) |
+          | **Rear button remapping** | **Local profiles** |
+          | ![ArmorX Windows rear-button remapping](docs/assets/windows/v0.2.0/03-rear-buttons.webp) | ![ArmorX Windows local profiles](docs/assets/windows/v0.2.0/04-profiles.webp) |
+
+          The Windows app supports Connect / Recover, configuration read, sticks, triggers, gyro, turbo, M1-M4 remapping, local profiles, and full-image Apply & Verify with read-back verification.
+
+          <!-- WINDOWS_GUI_PREVIEW_END -->
+          """
+
+          if start in text and end in text:
+              before = text.split(start, 1)[0]
+              after = text.split(end, 1)[1]
+              text = before + section + after.lstrip("\n")
+          elif "## ARMORX Pro / Xbox key mapping" in text:
+              text = text.replace("## ARMORX Pro / Xbox key mapping", section + "\n## ARMORX Pro / Xbox key mapping", 1)
+          else:
+              raise SystemExit("README insertion marker not found")
+
+          path.write_text(text, encoding="utf-8")
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs/assets/windows/v0.2.0
+          if git diff --cached --quiet; then
+            echo "No repository changes required."
+          else
+            git commit -m "docs: add Windows v0.2.0 screenshots"
+            git push origin HEAD:main
+          fi
+
+      - name: Add screenshots to v0.2.0 release description
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release view v0.2.0 --json body -q .body > /tmp/release-body.md
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("/tmp/release-body.md")
+          body = path.read_text(encoding="utf-8")
+          start = "<!-- WINDOWS_GUI_SCREENSHOTS_START -->"
+          end = "<!-- WINDOWS_GUI_SCREENSHOTS_END -->"
+          section = """<!-- WINDOWS_GUI_SCREENSHOTS_START -->
+          ## Windows GUI screenshots
+
+          ### Connected device and stick settings
+
+          ![ArmorX Windows connected and stick settings](https://raw.githubusercontent.com/feshinkof-boop/armorx-toolkit/main/docs/assets/windows/v0.2.0/01-main-connected.webp)
+
+          ### Trigger settings
+
+          ![ArmorX Windows trigger settings](https://raw.githubusercontent.com/feshinkof-boop/armorx-toolkit/main/docs/assets/windows/v0.2.0/02-trigger-settings.webp)
+
+          ### Rear buttons — M1-M4 remapping
+
+          ![ArmorX Windows rear-button remapping](https://raw.githubusercontent.com/feshinkof-boop/armorx-toolkit/main/docs/assets/windows/v0.2.0/03-rear-buttons.webp)
+
+          ### Local profiles
+
+          ![ArmorX Windows local profiles](https://raw.githubusercontent.com/feshinkof-boop/armorx-toolkit/main/docs/assets/windows/v0.2.0/04-profiles.webp)
+
+          The screenshots above are from the public v0.2.0 Windows configurator. The internal research/capture application and Research Autopilot are not included in this public app.
+          <!-- WINDOWS_GUI_SCREENSHOTS_END -->
+          """
+
+          if start in body and end in body:
+              before = body.split(start, 1)[0].rstrip()
+              after = body.split(end, 1)[1].lstrip()
+              body = before + "\n\n" + section + ("\n\n" + after if after else "")
+          else:
+              body = body.rstrip() + "\n\n" + section
+
+          path.write_text(body.rstrip() + "\n", encoding="utf-8")
+          PY
+          gh release edit v0.2.0 --notes-file /tmp/release-body.md
