@@ -1,0 +1,144 @@
+name: Build public Windows v0.2.0
+
+on:
+  push:
+    branches:
+      - windows/public-v0.2.0
+    paths:
+      - ".release/public-gui/**"
+      - ".github/workflows/windows-public-v0.2.0.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reconstruct verified public GUI source
+        shell: pwsh
+        run: |
+          $parts = Get-ChildItem .\.release\public-gui\part*.b64 | Sort-Object Name
+          if ($parts.Count -ne 6) { throw "Expected 6 source archive parts, found $($parts.Count)" }
+          $b64 = ($parts | ForEach-Object { (Get-Content $_.FullName -Raw).Trim() }) -join ''
+          $zip = Join-Path $PWD 'ArmorX-Windows-v0.2.0-public-source.zip'
+          [IO.File]::WriteAllBytes($zip, [Convert]::FromBase64String($b64))
+          $hash = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($hash -ne '369f7da797dbabacb9e7409cd2a3dddf59d83e17856ae2fbcbec285c3d6356e3') {
+            throw "Source archive SHA256 mismatch: $hash"
+          }
+          Expand-Archive $zip -DestinationPath $PWD -Force
+          if (-not (Test-Path .\windows\ArmorX.Windows\ArmorX.Windows.csproj)) {
+            throw "Public GUI project missing after extraction"
+          }
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore and compile
+        shell: pwsh
+        run: |
+          dotnet restore .\windows\ArmorX.Windows\ArmorX.Windows.csproj
+          dotnet build .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release --no-restore
+
+      - name: Publish single-file EXE
+        shell: pwsh
+        run: |
+          $out = Join-Path $PWD 'artifacts\single'
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj `
+            -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true `
+            -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:DebugType=None -p:DebugSymbols=false `
+            -o $out
+          Copy-Item (Join-Path $out 'ArmorX-Windows.exe') .\ArmorX-Windows-v0.2.0.exe
+
+      - name: Public app self-test
+        shell: pwsh
+        run: |
+          $p = Start-Process .\ArmorX-Windows-v0.2.0.exe -ArgumentList '--self-test' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Core self-test failed with exit code $($p.ExitCode)" }
+          $p = Start-Process .\ArmorX-Windows-v0.2.0.exe -ArgumentList '--ui-smoke' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "WPF/XAML smoke test failed with exit code $($p.ExitCode)" }
+
+      - name: Publish reliable folder build
+        shell: pwsh
+        run: |
+          $folder = Join-Path $PWD 'artifacts\folder\ArmorX-Windows-v0.2.0'
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj `
+            -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=false `
+            -p:DebugType=None -p:DebugSymbols=false `
+            -o $folder
+          Compress-Archive -Path "$folder\*" -DestinationPath .\ArmorX-Windows-v0.2.0-win-x64.zip -Force
+
+      - name: Package public Windows source
+        shell: pwsh
+        run: |
+          Compress-Archive -Path .\windows\ArmorX.Windows, .\windows\README.md, .\windows\build.ps1 -DestinationPath .\ArmorX-Windows-v0.2.0-source.zip -Force
+
+      - name: Generate SHA256 checksums
+        shell: pwsh
+        run: |
+          $files = @(
+            'ArmorX-Windows-v0.2.0.exe',
+            'ArmorX-Windows-v0.2.0-win-x64.zip',
+            'ArmorX-Windows-v0.2.0-source.zip'
+          )
+          $lines = foreach ($file in $files) {
+            $hash = (Get-FileHash $file -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $file"
+          }
+          $lines | Set-Content -Encoding ascii .\ArmorX-Windows-v0.2.0-SHA256SUMS.txt
+          Get-Content .\ArmorX-Windows-v0.2.0-SHA256SUMS.txt
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-Windows-v0.2.0
+          path: |
+            ArmorX-Windows-v0.2.0.exe
+            ArmorX-Windows-v0.2.0-win-x64.zip
+            ArmorX-Windows-v0.2.0-source.zip
+            ArmorX-Windows-v0.2.0-SHA256SUMS.txt
+
+      - name: Attach Windows assets to v0.2.0 release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload v0.2.0 `
+            .\ArmorX-Windows-v0.2.0.exe `
+            .\ArmorX-Windows-v0.2.0-win-x64.zip `
+            .\ArmorX-Windows-v0.2.0-source.zip `
+            .\ArmorX-Windows-v0.2.0-SHA256SUMS.txt `
+            --clobber
+
+      - name: Add Windows GUI section to release notes
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $body = gh release view v0.2.0 --json body -q .body
+          if ($body -notmatch '## Windows GUI') {
+            $body += @"
+
+## Windows GUI
+
+The release assets include the public **ArmorX Windows v0.2.0** configurator for Windows 10/11 x64.
+
+- `ArmorX-Windows-v0.2.0.exe` — self-contained single-file app
+- `ArmorX-Windows-v0.2.0-win-x64.zip` — self-contained folder build fallback
+- `ArmorX-Windows-v0.2.0-source.zip` — public GUI source
+- `ArmorX-Windows-v0.2.0-SHA256SUMS.txt` — SHA256 checksums
+
+Public GUI features: Connect/Recover, automatic BLE recovery after device sleep, config read, sticks/triggers/gyro/turbo editing, M1-M4 remapping including live-proven Guide/Xbox ID 12, local profiles, and full write/save/read-back verification.
+
+The internal research/capture application and Research Autopilot are not included.
+"@
+            $body | Set-Content -Encoding utf8 .\release-body.md
+            gh release edit v0.2.0 --notes-file .\release-body.md
+          }
