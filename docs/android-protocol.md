@@ -59,7 +59,15 @@ FFE2  read + notify
 
 No explicit MTU request was made in the captured first-contact session, so notifications used the default ATT MTU of 23 and carried at most 20 bytes.
 
-A second vendor-looking service/characteristic family `AE00/AE01/AE02` was present but was not used by the captured normal session. Its purpose remains **UNKNOWN**.
+A second vendor-looking service/characteristic family `AE00/AE01/AE02` is present. A later controlled Windows BLE inventory on the same ARMOR-X Pro established:
+
+```text
+AE01  WriteWithoutResponse
+AE02  Notify
+AE02 CCCD 2902
+```
+
+Passive AE02 subscription succeeded, but no AE02 notifications appeared during clean standalone or controller-attached idle windows. No guessed AE01 writes were sent. Its application semantics therefore remain **UNKNOWN**.
 
 An earlier working note guessed an `FFE0` service by convention. Live GATT enumeration corrected that: the actual vendor service UUID is the all-zero Bluetooth-base UUID above.
 
@@ -225,9 +233,18 @@ D7 acknowledgement
 D6 read
 ```
 
-The position is consistent with an apply/commit-style action, but the semantic meaning of opcode 0E is **UNKNOWN** and should not be promoted from ordering alone.
+Static analysis (2.23/2.24) showed 0E as a post-write command emitted by multiple configuration-related workflows (`writeDevice` after config/macro/DPI writes; also `writeConnectModeConfig`, `getConnectModel`, `getMTU`, and the 2.24 calibration pages key their response parsers on it).
 
-Static analysis (2.23/2.24): 0E is a post-write command emitted by multiple configuration-related workflows (`writeDevice` after config/macro/DPI writes; also `writeConnectModeConfig`, `getConnectModel`, `getMTU`, and the 2.24 calibration pages key their response parsers on it). The device echoes the 5-byte frame verbatim. No decoder names it; do not call it commit/apply/save without direct evidence.
+A controlled 2026-09-26 power-cycle experiment now provides direct live evidence for configuration persistence:
+
+1. D7 wrote a one-byte logical M1 mapping change (plus CRC).
+2. D6 immediately read the new image back exactly.
+3. Without 0E, a power cycle reverted the controller to the previously persisted configuration.
+4. Repeating the same D7 write followed by `A5 05 0E 00 B8` preserved the new configuration across power cycle.
+
+Therefore, for the tested ARMOR-X Pro configuration-write path, **D7 applies the image to live/volatile state and 0E persists that written configuration across power loss**. This conclusion is intentionally limited to the tested configuration path; it does not claim a broader firmware-internal implementation.
+
+In the Windows BLE run, each 0E transmit was followed by two identical FFE2 notifications of `A5 05 0E 00 B8`.
 
 ### D2
 
@@ -238,9 +255,37 @@ D2 01
 D2 00
 ```
 
-occurred only while the version/firmware information page was opened. This is a temporal correlation only. The exact D2 semantics remain **UNKNOWN**.
+Static analysis (2.23) placed both D2 encoders in `rainbow_test.dart` (`testModeSwitch1` @0x881a78 -> `A5 05 D2 00 7C`; `testModeSwitch` @0x8b1d68 -> `A5 05 D2 01 7D`) — the controller test-mode UI.
 
-Static analysis (2.23): both D2 encoders live in `rainbow_test.dart` (`testModeSwitch1` @0x881a78 -> `A5 05 D2 00 7C`; `testModeSwitch` @0x8b1d68 -> `A5 05 D2 01 7D`) — the controller test-mode UI. The version page hosts the test-mode entry; the earlier "version page" association is corrected to: D2 is emitted by the test-mode UI path. Device-side semantics of the 00/01 flag remain UNKNOWN. In 2.24 a second D2 family appears in the configV484 stick pages.
+A controlled live Windows BLE test now closes the primary ARMOR-X Pro semantics:
+
+- `A5 05 D2 01 7D` enables a continuous raw-input stream on FFE2.
+- `A5 05 D2 00 7C` disables it.
+- 4,812 18-byte reports were captured over 75.20 s (~63.98 Hz).
+- All 4,812 checksums validated.
+
+Raw report layout:
+
+```text
+byte 0      A5
+byte 1      12  (18-byte frame)
+byte 2      02  (raw input report)
+byte 3      rear buttons: bit0=M2, bit1=M3, bit2=M4
+byte 4      bit0=Up, bit1=Down, bit2=Left, bit3=Right, bit7=M1
+byte 5      bit0=LT digital, bit1=RT digital, bit5=L3, bit6=R3
+byte 6      bit0=A, bit1=B, bit3=X, bit4=Y, bit6=LB, bit7=RB
+bytes 7..8  left-stick X, signed 16-bit big-endian
+bytes 9..10 left-stick Y, signed 16-bit big-endian
+bytes 11..12 right-stick X, signed 16-bit big-endian
+bytes 13..14 right-stick Y, signed 16-bit big-endian
+byte 15     LT analog 0..255
+byte 16     RT analog 0..255
+byte 17     additive checksum modulo 256
+```
+
+Observed stick extrema were -32768 / +32767. D2 is therefore a controller-test/raw-input streaming mode on the tested ARMOR-X Pro path, not a firmware/version query.
+
+In 2.24 a second D2 family also appears in configV484 stick pages; that separate family is not generalized from this ARMOR-X Pro result.
 
 ## Instrumentation lessons
 
@@ -256,9 +301,8 @@ The public project `ceeprus/armorx-battery` independently reads the Armor X Pro 
 
 ## Current unknowns
 
-- Meaning of opcode 0E beyond "post-write command" (multiple workflows; device echoes it).
-- Exact device-side semantics of D2's 00/01 flag (client-side: test-mode UI path).
-- Purpose of the unused AE00/AE01/AE02 GATT family (no reference in either analyzed build).
+- Broader semantics of 0E outside the tested configuration-write persistence path.
+- Purpose/application protocol of AE01/AE02 beyond the proven GATT properties and passive-notify behavior.
 - Whether the Windows/F20 HID path exposes the same normal command stream once the RF link state and backend behavior are reproduced.
 - Whether E2/GetMode requires a state transition not exercised by the Android application (no reachable E2 frame-construction or response-decoding path was found in the analyzed Android 2.23 and 2.24 builds — see `research/android-frame-builder-reconciliation.md`).
 
