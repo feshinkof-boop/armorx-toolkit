@@ -67,6 +67,7 @@ The project focuses on:
 | 9 | **RT** | Right Trigger |
 | 10 | **View** | Select |
 | 11 | **Menu** | Start |
+| 12 | **Guide** | Xbox / Mode / Home |
 | 13 | **L3** | Left Stick Click |
 | 14 | **R3** | Right Stick Click |
 | 16 | **D-pad Up** | Up |
@@ -91,7 +92,7 @@ mapKeys[23] = 0
 M1 -> A
 ```
 
-Some IDs remain intentionally unresolved until directly verified. See [docs/keymapping.md](docs/keymapping.md).
+ID 12 is live-proven as Guide/Xbox/Mode. Other IDs remain intentionally unresolved until directly verified; ID 15 is only a provisional Share/Capture/Screenshot candidate. See [docs/keymapping.md](docs/keymapping.md).
 
 ## Config format
 
@@ -116,7 +117,9 @@ Windows/Android bridge status: [docs/bridge-status-2026-09-25.md](docs/bridge-st
 
 Current reverse-engineering handoff: [docs/research-status-2026-09-25.md](docs/research-status-2026-09-25.md)
 
-Current hardware/runtime research identifies the tested pair as an **ARMOR-X Pro** with BIGBIG WON **F20 wireless adapter**. The Android path is now live-captured: the controller reports mark `ZJ-XT`, uses a vendor BLE service with `FFE1` write / `FFE2` notify, and carries the same `A5` command family as the Windows implementation. D6 is proven as a full 144-byte config read and D7 as a full config write; long payloads use indexed `A4` fragments, and the existing config CRC/key-map model is confirmed against live traffic. On Windows, `413D:2106` still exposes 65-byte HID reports with logical N=64, but a transport-valid `0B -> EF -> D6` replay produced no input while the receiver's physical RF-link state was not recorded, so that result is now explicitly **LINK-STATE-INCONCLUSIVE**. See the Android/BLE, USB/HID, bridge-status, and current handoff documents for the evidence.
+Latest controlled live BLE findings: [docs/live-ble-research-2026-09-26.md](docs/live-ble-research-2026-09-26.md)
+
+Current hardware/runtime research identifies the tested pair as an **ARMOR-X Pro** with BIGBIG WON **F20 wireless adapter**. The Android path is live-captured: the controller reports mark `ZJ-XT`, uses a vendor BLE service with `FFE1` write / `FFE2` notify, and carries the same `A5` command family as the Windows implementation. D6 is proven as a full 144-byte config read and D7 as a full config write; long payloads use indexed `A4` fragments, and the existing config CRC/key-map model is confirmed against live traffic. A later controlled Windows BLE suite additionally proved that D7 changes are volatile across power loss unless followed by `0E`, decoded D2 as the ~64 Hz raw-input test stream, and live-confirmed key ID 12 as Guide/Xbox/Mode. ID 15 remains only a provisional Share/Capture/Screenshot candidate. On Windows USB/HID, `413D:2106` still exposes 65-byte reports with logical N=64, but the bounded HID replay remains **LINK-STATE-INCONCLUSIVE**. See the Android/BLE, live-BLE, USB/HID, bridge-status, and handoff documents for evidence and limits.
 
 ## Macro format
 
