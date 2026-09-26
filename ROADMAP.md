@@ -21,7 +21,7 @@ ArmorX Toolkit is intentionally evidence-driven. Items move from research to sta
 - [ ] Add a macro visualizer
 - [ ] Add a config diff command
 - [ ] Add import/export helpers for community-shared configs
-- [ ] Add an optional desktop GUI
+- [x] Add a public Windows desktop GUI
 
 ## Protocol research
 
