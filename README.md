@@ -52,6 +52,21 @@ The project focuses on:
 | Research | PROVEN / STRONG EVIDENCE / UNKNOWN evidence levels |
 | Quality | Pytest suite + GitHub Actions |
 
+<!-- WINDOWS_GUI_PREVIEW_START -->
+## Windows GUI preview
+
+ArmorX Toolkit v0.2.0 also includes a public Windows 10/11 x64 configurator for ARMOR-X Pro over BLE. It provides normal end-user configuration only; the internal research/capture application and Research Autopilot are separate and are not part of the public GUI.
+
+| Connected + stick settings | Trigger settings |
+| --- | --- |
+| ![ArmorX Windows connected and stick settings](docs/assets/windows/v0.2.0/01-main-connected.webp) | ![ArmorX Windows trigger settings](docs/assets/windows/v0.2.0/02-trigger-settings.webp) |
+| **Rear button remapping** | **Local profiles** |
+| ![ArmorX Windows rear-button remapping](docs/assets/windows/v0.2.0/03-rear-buttons.webp) | ![ArmorX Windows local profiles](docs/assets/windows/v0.2.0/04-profiles.webp) |
+
+The Windows app supports Connect / Recover, configuration read, sticks, triggers, gyro, turbo, M1-M4 remapping, local profiles, and full-image Apply & Verify with read-back verification.
+
+<!-- WINDOWS_GUI_PREVIEW_END -->
+
 ## ARMORX Pro / Xbox key mapping
 
 | ID | ARMORX Pro / Xbox control | Aliases |
