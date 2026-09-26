@@ -4,6 +4,23 @@ All notable project changes are documented here.
 
 ## Unreleased
 
+## 0.2.0 — 2026-09-26
+
+Second public release of **ArmorX Toolkit**.
+
+This release remains the installable Python toolkit/CLI. The Windows research/capture application, Autopilot runner, raw BLE recorder, guided experiment UI, and researcher-only diagnostics are not included as public release features.
+
+### Public toolkit highlights
+
+- Live-proven Guide / Xbox / Mode mapping is available as key ID `12`.
+- V41 macro serialization now matches captured client wire format.
+- `/dev/addMacro` serializes `inUse` as integer `0`/`1`.
+- Macro rows preserve captured `showAdd=true` behavior.
+- Structured config `res2` correctly mirrors raw bytes `74..111`.
+- Unknown and unresolved IDs remain unassigned rather than guessed.
+- Python 3.10–3.13 remains covered by CI.
+
+
 ### Fixed
 
 - Match captured V41 macro wire serialization (`macroJson` is a JSON list of JSON-encoded row strings).

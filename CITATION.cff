@@ -17,3 +17,5 @@ keywords:
   - key mapping
   - controller macro
   - reverse engineering
+version: "0.2.0"
+date-released: "2026-09-26"

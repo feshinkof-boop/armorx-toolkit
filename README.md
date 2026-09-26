@@ -151,10 +151,13 @@ Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Installation
 
-### Stable v0.1.0
+> **Public release scope:** v0.2.0 is the installable Python toolkit/CLI. The internal Windows research/capture application, Autopilot workflows, raw BLE recorder, guided hardware experiments, and researcher-only diagnostics are **not** part of this public release.
+
+
+### Stable v0.2.0
 
 ```bash
-python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.1.0
+python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.2.0
 armorx --version
 ```
 

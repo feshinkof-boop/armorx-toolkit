@@ -50,3 +50,9 @@ def test_add_macro_payload_uses_integer_inuse():
     )
     assert payload["inUse"] == 1
     assert isinstance(payload["inUse"], int)
+
+
+def test_guide_key_is_available_as_live_proven_mapping():
+    assert mod.KEY_IDS["GUIDE"] == 12
+    assert mod.KEY_IDS["MODE"] == 12
+    assert mod.CANONICAL_NAMES[12] == "GUIDE"

@@ -1,3 +1,4 @@
+import importlib.metadata
 import json
 from pathlib import Path
 
@@ -79,3 +80,15 @@ def test_community_list_dry_run(tmp_path: Path):
         "pageNum": 1,
         "configType": 1,
     }
+
+
+def test_config_keys_reports_guide_as_proven_live(capsys):
+    rc = main(["config", "keys"])
+    assert rc == 0
+    rows = json.loads(capsys.readouterr().out)
+    guide = next(row for row in rows if row["id"] == 12)
+    assert guide == {"id": 12, "name": "GUIDE", "status": "proven_live"}
+
+
+def test_distribution_version_matches_runtime_version():
+    assert importlib.metadata.version("armorx-toolkit") == __version__

@@ -28,7 +28,7 @@ KEY_IDS: dict[str, int] = {
     "SELECT": 10,
     "MENU": 11,
     "START": 11,
-    "GUIDE": 12,  # strongly supported by standard Xbox/Linux ordering; old macro picker normally doesn't expose it
+    "GUIDE": 12,  # live-proven on ARMOR-X Pro firmware 2741; old macro picker normally doesn't expose it
     "MODE": 12,
     "L3": 13,
     "LS": 13,
@@ -375,7 +375,7 @@ def cmd_keys(_: argparse.Namespace) -> int:
         elif 34 <= kid <= 49:
             note = " (joystick pseudo-key; strong evidence mapping)"
         elif kid == 12:
-            note = " (Guide/Mode; strongly supported)"
+            note = " (Guide/Xbox/Mode; proven live)"
         else:
             note = ""
         print(f"{kid:2d}  {name}{note}")
