@@ -1,0 +1,59 @@
+name: Materialize public Windows v0.2.1 source
+
+on:
+  push:
+    branches:
+      - windows/public-v0.2.1
+    paths:
+      - ".github/workflows/materialize-public-v0.2.1.yml"
+      - ".release/public-gui/**"
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: windows/public-v0.2.1
+
+      - name: Reconstruct verified v0.2.0 public GUI source
+        shell: pwsh
+        run: |
+          $parts = Get-ChildItem .\.release\public-gui\part*.b64 | Sort-Object Name
+          if ($parts.Count -ne 6) { throw "Expected 6 source archive parts, found $($parts.Count)" }
+          $b64 = ($parts | ForEach-Object { (Get-Content $_.FullName -Raw).Trim() }) -join ''
+          $zip = Join-Path $PWD 'ArmorX-Windows-v0.2.0-public-source.zip'
+          [IO.File]::WriteAllBytes($zip, [Convert]::FromBase64String($b64))
+          $hash = (Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($hash -ne '369f7da797dbabacb9e7409cd2a3dddf59d83e17856ae2fbcbec285c3d6356e3') {
+            throw "Source archive SHA256 mismatch: $hash"
+          }
+          Expand-Archive $zip -DestinationPath $PWD -Force
+          if (-not (Test-Path .\windows\ArmorX.Windows\ArmorX.Windows.csproj)) {
+            throw "Public GUI project missing after extraction"
+          }
+          Remove-Item .\windows\ArmorX.Windows\bin -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item .\windows\ArmorX.Windows\obj -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item $zip -Force
+
+      - name: Apply compile fix already proven in v0.2.0
+        shell: pwsh
+        run: |
+          $transport = '.\windows\ArmorX.Windows\Bluetooth\ArmorXBleTransport.cs'
+          $source = Get-Content $transport -Raw
+          $source = $source.Replace('Windows.Devices.Radios.RadioState.On', 'global::Windows.Devices.Radios.RadioState.On')
+          Set-Content -Path $transport -Value $source -Encoding utf8
+
+      - name: Commit materialized source
+        shell: pwsh
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add windows
+          if (-not (git diff --cached --quiet)) {
+            git commit -m "windows: materialize public source for v0.2.1 development"
+            git push origin HEAD:windows/public-v0.2.1
+          }
