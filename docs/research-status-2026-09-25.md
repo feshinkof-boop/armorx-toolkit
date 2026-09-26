@@ -339,22 +339,39 @@ Full Blutter dumps of 2.23.0609 and 2.24.0919 (verified provenance: APK SHA256
   `research/windows/ab-protocol.md`; web-bridge data-model inventory — `research/windows/web-bridge.md`;
 - Probe timing reviewed against the verified Android init order — `research/windows/probe-timing-review.md`.
 
+## 2026-09-26 live BLE addendum
+
+A controlled Windows BLE autonomous suite on firmware 2741 closed several questions that were still open when this 2026-09-25 handoff was written. Full sanitized details are in [live-ble-research-2026-09-26.md](live-ble-research-2026-09-26.md).
+
+New live conclusions:
+
+- D7 applies a valid 144-byte configuration to the current/live state.
+- A D7-only change reverted after power cycle in the controlled test.
+- The same D7 change followed by `A5 05 0E 00 B8` survived power cycle; for the tested configuration path, 0E is therefore the persistence step.
+- `D2 01` enables a continuous ~64 Hz raw-input stream and `D2 00` disables it; the 18-byte raw report layout is decoded in the live-BLE document.
+- key ID 12 is live-proven as Guide / Xbox / Mode through a controlled M1 remap.
+- ID 15 is only a provisional Share/Capture/Screenshot candidate because the structured chooser and operator note conflict.
+- AE01 is WriteWithoutResponse and AE02 is Notify; passive AE02 subscription succeeded, but no AE traffic appeared during clean idle windows.
+- standalone and controller-attached D6 images and GATT inventories matched in the tested session.
+
+The autonomous run began from a previously persisted M1 -> B state. That image is a test-start baseline, **not** a factory/default reference.
+
 ## Current unresolved questions
 
 - Actual E2/GetMode response, if any, from the tested F20 + ARMOR-X Pro pair in a positively recorded linked state.
 - Why the F20 HID path produced no input during the transport-valid but link-state-inconclusive `0B -> EF -> D6` replay.
 - Whether E2 requires a state transition not exercised by the Android app.
-- Meaning of Android-observed opcode `0E`.
-- Exact semantics of the temporally correlated `D2 01` / `D2 00` version-page pair.
-- Purpose of the unused AE00/AE01/AE02 GATT family.
-- Exact Dart AOT dispatch sites for D6/D7/D2 in the compressed-pointer snapshot.
+- Broader semantics of 0E outside the tested configuration-write persistence path.
+- AE01 application-write semantics and whether AE02 is used by another feature/state.
 - Whether a recoverable historical Assistant web page would initiate the legacy Windows vendor session.
 - Exact final Windows ReadFile system-call length below the backend branch.
 - Exact runtime value of backend config `+0x6/+0x7`.
+- Exact FC/DPI command semantics, FF lighting payload structure, and D8 macro device encoding.
+- Clean confirmation of key ID 15 and purpose-specific testing of IDs 5, 20, 21, 22, 27, 28, 29, 30, and 31.
 
 ## Recommended next research branch
 
-The mobile/BLE capture milestone is complete. Do not repeat broad Android reconnaissance.
+The broad Android/BLE capture milestone is complete. Do not repeat broad reconnaissance; use targeted experiments for the remaining named gaps.
 
 Next:
 
