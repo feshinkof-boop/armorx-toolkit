@@ -33,6 +33,10 @@ jobs:
           if (-not (Test-Path .\windows\ArmorX.Windows\ArmorX.Windows.csproj)) {
             throw "Public GUI project missing after extraction"
           }
+          $transport = '.\windows\ArmorX.Windows\Bluetooth\ArmorXBleTransport.cs'
+          $source = Get-Content $transport -Raw
+          $source = $source.Replace('Windows.Devices.Radios.RadioState.On', 'global::Windows.Devices.Radios.RadioState.On')
+          Set-Content -Path $transport -Value $source -Encoding utf8
 
       - uses: actions/setup-dotnet@v4
         with:
