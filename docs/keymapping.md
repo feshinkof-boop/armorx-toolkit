@@ -17,6 +17,7 @@ This page documents the current `mapKeys[32]` model for the **BIGBIG WON ARMORX 
 | 9 | RT | PROVEN |
 | 10 | View / Select | PROVEN |
 | 11 | Menu / Start | PROVEN |
+| 12 | Guide / Xbox / Mode | PROVEN LIVE |
 | 13 | L3 / Left Stick Click | PROVEN |
 | 14 | R3 / Right Stick Click | PROVEN |
 | 16 | D-pad Up | PROVEN |
@@ -67,17 +68,19 @@ The low IDs closely match the common Linux/Xbox gamepad ordering:
 14 ThumbR -> R3
 ```
 
-ID 12 is therefore **strongly supported** as Guide/Mode, but it is not marked as a normal proven remap target here.
+ID 12 is now **PROVEN LIVE** as Guide / Xbox / Mode. A controlled M1 remap to target ID 12 was written and read back successfully on firmware 2741, and the operator observed the Guide/Xbox/Mode action.
 
 ## Unresolved slots
 
 These IDs remain intentionally unresolved or version-specific:
 
 ```text
-5, 12, 15, 20, 21, 22, 27, 28, 29, 30, 31
+5, 15, 20, 21, 22, 27, 28, 29, 30, 31
 ```
 
-The Share/Screenshot control is not assigned a numeric ID until it is directly verified.
+ID 15 is a **provisional Share/Capture/Screenshot candidate** only. In the 2026-09-26 autonomous sweep, the structured observation chooser was set to Guide/Mode while the operator note said `screenshot`; because those two observations conflict, ID 15 is not promoted to a stable symbolic mapping yet.
+
+The remaining IDs 5, 20, 21, 22, 27, 28, 29, 30, and 31 produced no visible action in that attached-controller M1 sweep. That result does **not** prove they are unused or reserved.
 
 ## Contribution target
 
