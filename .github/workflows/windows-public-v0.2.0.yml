@@ -79,9 +79,11 @@ jobs:
             -o $folder
           Compress-Archive -Path "$folder\*" -DestinationPath .\ArmorX-Windows-v0.2.0-win-x64.zip -Force
 
-      - name: Package public Windows source
+      - name: Package clean public Windows source
         shell: pwsh
         run: |
+          Remove-Item .\windows\ArmorX.Windows\bin -Recurse -Force -ErrorAction SilentlyContinue
+          Remove-Item .\windows\ArmorX.Windows\obj -Recurse -Force -ErrorAction SilentlyContinue
           Compress-Archive -Path .\windows\ArmorX.Windows, .\windows\README.md, .\windows\build.ps1 -DestinationPath .\ArmorX-Windows-v0.2.0-source.zip -Force
 
       - name: Generate SHA256 checksums
