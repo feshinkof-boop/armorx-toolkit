@@ -1,0 +1,20 @@
+{
+ "path": "com.moojiang.bigbigwon_2.24.0919_24.apk",
+ "apk_sha256": "0bae884badc004991e638b0e62a0a6afc07256a5deabd8bb833f0bb36638f305",
+ "size": 16087829,
+ "package": "com.moojiang.bigbigwon",
+ "versionCode": 24,
+ "versionName": "2.24.0919",
+ "minSdk": null,
+ "targetSdk": null,
+ "permissions": [
+  "android.permission.BLUETOOTH",
+  "android.permission.BLUETOOTH_ADMIN",
+  "android.permission.BLUETOOTH_ADVERTISE",
+  "android.permission.BLUETOOTH_CONNECT",
+  "android.permission.BLUETOOTH_PRIVILEGED",
+  "android.permission.BLUETOOTH_SCAN",
+  "android.permission.INTERNET",
+  "com.moojiang.bigbigwon.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+ ]
+}

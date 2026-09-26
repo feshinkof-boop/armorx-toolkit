@@ -1,0 +1,85 @@
+{
+ "generated": "2026-09-25",
+ "note": "Private identifiers, serials, MACs and raw proprietary binaries are not committed; this manifest records provenance and hashes.",
+ "artifacts": [
+  {
+   "artifact": "~/armorx/base_apk/base.apk",
+   "sha256": "7ed18b774bf8beab0ff2ff11bc0669f4cacb9baa5cc309bf277752592a2bc892",
+   "size": 35958605,
+   "source": "Google Drive share (user), 2026-09-25",
+   "analysis_status": "Blutter-dumped, fully indexed (2.23.0609)",
+   "public_suitable": false,
+   "package": "com.moojiang.bigbigwon",
+   "versionName": "2.23.0609",
+   "versionCode": 12,
+   "arch": "arm64-v8a (also armeabi-v7a, x86_64)",
+   "engine": "adb4292f3ec25074ca70abcd2d5c7251",
+   "dart": "2.19.6",
+   "flutter": "3.7"
+  },
+  {
+   "artifact": "/tmp/com.moojiang.bigbigwon_2.24.0919_24.apk",
+   "sha256": "0bae884badc004991e638b0e62a0a6afc07256a5deabd8bb833f0bb36638f305",
+   "size": 16087829,
+   "source": "local APK collection (prior session)",
+   "analysis_status": "Blutter-dumped, fully indexed (2.24.0919)",
+   "public_suitable": false,
+   "package": "com.moojiang.bigbigwon",
+   "versionName": "2.24.0919",
+   "versionCode": 24,
+   "arch": "arm64-v8a",
+   "engine": "f71c76320d35b65f1164dbaa6d95fe09",
+   "dart": "3.2.3",
+   "flutter": "3.16"
+  },
+  {
+   "artifact": "~/armorx_handoff/project/raw_private/current/DevMgr.dll",
+   "sha256": "653cb3219abd09338c1590375a60162e6e4fd7b72c1856aaa7b796b7da7d709c",
+   "size": 7299472,
+   "source": "Windows Assistant 1.0.6.1 install",
+   "analysis_status": "Prior static analysis preserved (devmgr_static/)",
+   "public_suitable": false,
+   "product": "BIGBIG WON Assistant DevMgr"
+  },
+  {
+   "artifact": "~/armorx_research/dongle_baseline_v13/artifacts/BigBigWonAssistant.exe",
+   "sha256": "45cfd9562b73ece6d08b29e0f71c1568bea3d5a84b63e11dca8c8ed83289945b",
+   "size": 583056,
+   "source": "Windows Assistant 1.0.6.1",
+   "analysis_status": "prior analysis (dongle_baseline_v13)",
+   "public_suitable": false
+  },
+  {
+   "artifact": "~/armorx_research/dongle_baseline_v13/artifacts/NetMgr.dll",
+   "sha256": "26ba759955bb7804ad3f3428b4908f4cd044ff45728a1cafda00c3ec1c5302c0",
+   "size": 2234768,
+   "source": "Windows Assistant 1.0.6.1",
+   "analysis_status": "inventory only",
+   "public_suitable": false
+  },
+  {
+   "artifact": "~/armorx_research/dongle_baseline_v13/artifacts/WndMgr.dll",
+   "sha256": "998d1306bffec1b34dbbc96a50be3bca3a4e2e11e9131f3bc7a6f2e7389045a5",
+   "size": 24313232,
+   "source": "Windows Assistant 1.0.6.1",
+   "analysis_status": "inventory only",
+   "public_suitable": false
+  },
+  {
+   "artifact": "~/armorx_research/android_lab/captures/armorx_ble_capture_run2.jsonl",
+   "sha256": "d74a4c8c90baf4532736a7341f1aa8978420ee8debe496ae982a6669fd804330",
+   "size": 1693909,
+   "source": "Frida passive capture on test phone",
+   "analysis_status": "primary live evidence (d6_d7_semantics, frame census)",
+   "public_suitable": false
+  },
+  {
+   "artifact": "~/armorx_research/android_lab/captures/armorx_ble_capture_run1.jsonl",
+   "sha256": "7f2a1fcec1c8acd6ccdd50a44bcc60ace4c9e36e222b35fdadb5afdd96860958",
+   "size": 98205,
+   "source": "Frida passive capture",
+   "analysis_status": "secondary live evidence",
+   "public_suitable": false
+  }
+ ]
+}

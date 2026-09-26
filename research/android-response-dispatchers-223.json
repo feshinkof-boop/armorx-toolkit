@@ -1,0 +1,79 @@
+{
+ "version": "2.23.0609",
+ "scan_rule": "package:moojiang functions with raw 0xA5/0xA4/0xAB compares plus known opcode compares",
+ "dispatcher_count": 5,
+ "dispatchers": [
+  {
+   "file": "moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+   "function": "[closure] void <anonymous closure>(dynamic, List<int>)",
+   "addr": "0x761b6c",
+   "header_checks": [
+    "0xA5"
+   ],
+   "opcodes_compared": [
+    "0B",
+    "EF"
+   ],
+   "evidence": "raw cmp against 0xA5/0xA4 + Smi-tagged opcode cmp in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_more.dart",
+   "function": "[closure] void <anonymous closure>(dynamic, List<int>)",
+   "addr": "0x8af5e8",
+   "header_checks": [
+    "0xA5"
+   ],
+   "opcodes_compared": [
+    "D4",
+    "FC"
+   ],
+   "evidence": "raw cmp against 0xA5/0xA4 + Smi-tagged opcode cmp in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart",
+   "function": "[closure] void <anonymous closure>(dynamic, List<int>)",
+   "addr": "0x808d68",
+   "header_checks": [
+    "0xA5",
+    "0xA4"
+   ],
+   "opcodes_compared": [
+    "0E",
+    "A4",
+    "D4",
+    "D6",
+    "D7"
+   ],
+   "evidence": "raw cmp against 0xA5/0xA4 + Smi-tagged opcode cmp in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_root.dart",
+   "function": "[closure] void <anonymous closure>(dynamic, List<int>)",
+   "addr": "0x7febb4",
+   "header_checks": [
+    "0xA5"
+   ],
+   "opcodes_compared": [
+    "0B",
+    "EF"
+   ],
+   "evidence": "raw cmp against 0xA5/0xA4 + Smi-tagged opcode cmp in one function"
+  },
+  {
+   "file": "moojiang/widgets/general/configs_config.dart",
+   "function": "[closure] void <anonymous closure>(dynamic, List<int>)",
+   "addr": "0x8abf40",
+   "header_checks": [
+    "0xA5",
+    "0xA4"
+   ],
+   "opcodes_compared": [
+    "0E",
+    "A4",
+    "D6",
+    "D7"
+   ],
+   "evidence": "raw cmp against 0xA5/0xA4 + Smi-tagged opcode cmp in one function"
+  }
+ ]
+}

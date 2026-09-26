@@ -1,0 +1,18 @@
+{
+ "path": "base.apk",
+ "apk_sha256": "7ed18b774bf8beab0ff2ff11bc0669f4cacb9baa5cc309bf277752592a2bc892",
+ "size": 35958605,
+ "package": "com.moojiang.bigbigwon",
+ "versionCode": 12,
+ "versionName": "2.23.0609",
+ "minSdk": null,
+ "targetSdk": null,
+ "permissions": [
+  "android.permission.BLUETOOTH",
+  "android.permission.BLUETOOTH_ADMIN",
+  "android.permission.BLUETOOTH_ADVERTISE",
+  "android.permission.BLUETOOTH_CONNECT",
+  "android.permission.BLUETOOTH_SCAN",
+  "android.permission.INTERNET"
+ ]
+}

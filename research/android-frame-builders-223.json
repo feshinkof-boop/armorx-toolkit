@@ -1,0 +1,125 @@
+{
+ "version": "2.23.0609",
+ "scan_rule": "functions in package:moojiang containing Smi 330 (0xA5) plus at least one known opcode Smi store",
+ "frame_builder_count": 13,
+ "frame_builders": [
+  {
+   "file": "moojiang/units/gamepadset.dart",
+   "function": "static _ writeDevice(/* No info */) async",
+   "addr": "0x7989bc",
+   "opcodes": [
+    "0E"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/units/gamepadset.dart",
+   "function": "static _ writeLightConfig(/* No info */) async",
+   "addr": "0x7f8158",
+   "opcodes": [
+    "A4",
+    "FF"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/units/gamepadset.dart",
+   "function": "static _ writeDpiConfig(/* No info */) async",
+   "addr": "0x7fdee4",
+   "opcodes": [
+    "FC"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+   "function": "_ getZKMVer(/* No info */) async",
+   "addr": "0x7617f4",
+   "opcodes": [
+    "0B"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+   "function": "_ getDeviceUUID(/* No info */) async",
+   "addr": "0x791a30",
+   "opcodes": [
+    "EF"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_test.dart",
+   "function": "_ testModeSwitch1(/* No info */)",
+   "addr": "0x881a78",
+   "opcodes": [
+    "D2"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_test.dart",
+   "function": "_ testModeSwitch(/* No info */) async",
+   "addr": "0x8b1d68",
+   "opcodes": [
+    "D2"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_more.dart",
+   "function": "_ getDpi(/* No info */) async",
+   "addr": "0x8af8ec",
+   "opcodes": [
+    "FC"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_more.dart",
+   "function": "_ getInputModel(/* No info */) async",
+   "addr": "0x8afa98",
+   "opcodes": [
+    "D4"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart",
+   "function": "_ getDeviceConfig(/* No info */) async",
+   "addr": "0x810d2c",
+   "opcodes": [
+    "D6"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_root.dart",
+   "function": "_ getDeviceUUID(/* No info */) async",
+   "addr": "0x7ff67c",
+   "opcodes": [
+    "EF"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/rainbow/rainbow_root.dart",
+   "function": "_ getZKMVer(/* No info */) async",
+   "addr": "0x800610",
+   "opcodes": [
+    "0B"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  },
+  {
+   "file": "moojiang/widgets/general/configs_config.dart",
+   "function": "_ getDeviceConfig(/* No info */) async",
+   "addr": "0x8abc64",
+   "opcodes": [
+    "D6"
+   ],
+   "evidence": "A5-Smi(330) header store + opcode Smi stores in one function"
+  }
+ ]
+}

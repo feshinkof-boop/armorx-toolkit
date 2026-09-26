@@ -1,0 +1,318 @@
+{
+ "generated": "2026-09-25",
+ "source_scans": [
+  "android-frame-builders-223.json",
+  "android-frame-builders-224.json",
+  "android-response-dispatchers-223.json",
+  "android-response-dispatchers-224.json"
+ ],
+ "live_capture": "armorx_ble_capture_run2.jsonl (2.23.0609, ARMOR-X Pro, private path)",
+ "opcodes": [
+  {
+   "opcode": "0B",
+   "request": "A5 04 0B B4",
+   "android_2_23": {
+    "builders": [
+     "moojiang/widgets/armor-x_pro/armorx_pro_root.dart :: _ getZKMVer @ 0x7617f4",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: _ getZKMVer @ 0x800610"
+    ],
+    "parsers": [
+     "moojiang/widgets/armor-x_pro/armorx_pro_root.dart :: [closure] void <anonymous closure> @ 0x761b6c",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: [closure] void <anonymous closure> @ 0x7febb4"
+    ]
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/widgets/armor-x_pro/armorx_pro_root.dart :: _ getZKMVer @ 0x78c208",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: _ getZKMVer @ 0x8975d4",
+     "moojiang/widgets/general/frame_config_macros.dart :: _ stopTranscribe @ 0x8293ec",
+     "moojiang/widgets/general/frame_config_macros.dart :: _ startTranscribe @ 0x82d038"
+    ],
+    "parsers": [
+     "moojiang/widgets/armor-x_pro/armorx_pro_root.dart :: [closure] void <anonymous closure> @ 0x78c9fc",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: [closure] void <anonymous closure> @ 0x896928"
+    ]
+   },
+   "live_evidence": "OUT a5040bb4 x2; IN a5050b30e5 x1 (zkm=0x30=48) \u2014 PROVEN_LIVE"
+  },
+  {
+   "opcode": "0E",
+   "request": "A5 05 0E 00 B8",
+   "android_2_23": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: static _ writeDevice @ 0x7989bc"
+    ],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x808d68",
+     "moojiang/widgets/general/configs_config.dart :: [closure] void <anonymous closure> @ 0x8abf40"
+    ]
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: static _ writeDevice @ 0x8003b0",
+     "moojiang/units/gamepadset.dart :: static _ writeConnectModeConfig @ 0x894b1c",
+     "moojiang/widgets/rainbow/rainbow_more.dart :: _ getConnectModel @ 0x91b7a8",
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: _ writeDevice @ 0x8a9e20",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: _ getMTU @ 0x897724"
+    ],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x8a9318",
+     "moojiang/widgets/other/calibration/stick_calibration.dart :: [closure] void <anonymous closure> @ 0x9187b0",
+     "moojiang/widgets/other/calibration/motion_calibration.dart :: [closure] void <anonymous closure> @ 0x917954"
+    ]
+   },
+   "live_evidence": "OUT a5050e00b8 x14; IN identical echo x14 \u2014 PROVEN_LIVE"
+  },
+  {
+   "opcode": "A4",
+   "request": "long-frame envelope",
+   "android_2_23": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: static _ writeLightConfig @ 0x7f8158"
+    ],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x808d68",
+     "moojiang/widgets/general/configs_config.dart :: [closure] void <anonymous closure> @ 0x8abf40"
+    ]
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: static _ writeLightConfig @ 0x88a5dc"
+    ],
+    "parsers": [
+     "moojiang/widgets/configV484/configs_mian.dart :: [closure] void <anonymous closure> @ 0x911914",
+     "moojiang/widgets/configV280/configs_mian.dart :: [closure] void <anonymous closure> @ 0x90f774",
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x8a9318",
+     "moojiang/widgets/general/configs_config.dart :: [closure] void <anonymous closure> @ 0x912c6c",
+     "moojiang/widgets/general/configs_config_only_c1.dart :: [closure] void <anonymous closure> @ 0x9145d0"
+    ]
+   },
+   "live_evidence": "fragment envelope proven live (D6/D7 censuses)"
+  },
+  {
+   "opcode": "AB",
+   "request": "unknown (Windows 0xAB long-packet family)",
+   "android_2_23": {
+    "builders": [],
+    "parsers": []
+   },
+   "android_2_24": {
+    "builders": [],
+    "parsers": []
+   },
+   "live_evidence": "no Android builder/parser found \u2014 UNKNOWN_ANDROID; Windows receive/reassembly path exists per docs/usb-protocol.md"
+  },
+  {
+   "opcode": "D2",
+   "request": "A5 05 D2 00 7C / A5 05 D2 01 7D",
+   "android_2_23": {
+    "builders": [
+     "moojiang/widgets/rainbow/rainbow_test.dart :: _ testModeSwitch1 @ 0x881a78",
+     "moojiang/widgets/rainbow/rainbow_test.dart :: _ testModeSwitch @ 0x8b1d68"
+    ],
+    "parsers": []
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/widgets/configV484/config_stick_view.dart :: _ testModeSwitch @ 0x911308",
+     "moojiang/widgets/rainbow/rainbow_test.dart :: _ testModeSwitch @ 0x91e380",
+     "moojiang/widgets/rainbow/rainbow_test.dart :: _ testModeSwitch1 @ 0x93371c"
+    ],
+    "parsers": []
+   },
+   "live_evidence": "OUT a505d2017d/a505d2007c x2 each; IN identical echo x2 each \u2014 PROVEN_LIVE"
+  },
+  {
+   "opcode": "D3",
+   "request": "A5 04 D3 7C (2.24 getMaxSize)",
+   "android_2_23": {
+    "builders": [],
+    "parsers": []
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/widgets/general/frame_config_macros.dart :: _ getMaxSize @ 0x9157c0"
+    ],
+    "parsers": []
+   }
+  },
+  {
+   "opcode": "D4",
+   "request": "A5 04 D4 .. (getInputModel)",
+   "android_2_23": {
+    "builders": [
+     "moojiang/widgets/rainbow/rainbow_more.dart :: _ getInputModel @ 0x8afa98"
+    ],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_more.dart :: [closure] void <anonymous closure> @ 0x8af5e8",
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x808d68"
+    ]
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: _ getOnBoardConfig @ 0x91b988"
+    ],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_more.dart :: [closure] void <anonymous closure> @ 0x91a404",
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x8a9318"
+    ]
+   }
+  },
+  {
+   "opcode": "D5",
+   "request": "A5 04 D5 7E (Windows GetMacroList)",
+   "android_2_23": {
+    "builders": [],
+    "parsers": []
+   },
+   "android_2_24": {
+    "builders": [],
+    "parsers": []
+   },
+   "live_evidence": "not observed in Android capture \u2014 UNKNOWN_ANDROID"
+  },
+  {
+   "opcode": "D6",
+   "request": "A5 04 D6 7F",
+   "android_2_23": {
+    "builders": [
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: _ getDeviceConfig @ 0x810d2c",
+     "moojiang/widgets/general/configs_config.dart :: _ getDeviceConfig @ 0x8abc64"
+    ],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x808d68",
+     "moojiang/widgets/general/configs_config.dart :: [closure] void <anonymous closure> @ 0x8abf40"
+    ]
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: _ getDeviceConfig @ 0x8a8798",
+     "moojiang/widgets/general/configs_config_only_c1.dart :: _ getDeviceConfig @ 0x91433c"
+    ],
+    "parsers": [
+     "moojiang/widgets/configV484/configs_mian.dart :: [closure] void <anonymous closure> @ 0x911914",
+     "moojiang/widgets/configV280/configs_mian.dart :: [closure] void <anonymous closure> @ 0x90f774",
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x8a9318",
+     "moojiang/widgets/general/configs_config.dart :: [closure] void <anonymous closure> @ 0x912c6c",
+     "moojiang/widgets/general/configs_config_only_c1.dart :: [closure] void <anonymous closure> @ 0x9145d0"
+    ]
+   },
+   "live_evidence": "OUT a504d67f x32; IN A4/D6 20B x144 + 14B x16 = 16 complete 144B images \u2014 PROVEN_LIVE"
+  },
+  {
+   "opcode": "D7",
+   "request": "10 x A4/D7 fragments (144B image)",
+   "android_2_23": {
+    "builders": [],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x808d68",
+     "moojiang/widgets/general/configs_config.dart :: [closure] void <anonymous closure> @ 0x8abf40"
+    ]
+   },
+   "android_2_24": {
+    "builders": [],
+    "parsers": [
+     "moojiang/widgets/configV484/configs_mian.dart :: [closure] void <anonymous closure> @ 0x911914",
+     "moojiang/widgets/configV280/configs_mian.dart :: [closure] void <anonymous closure> @ 0x90f774",
+     "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart :: [closure] void <anonymous closure> @ 0x8a9318",
+     "moojiang/widgets/general/configs_config.dart :: [closure] void <anonymous closure> @ 0x912c6c"
+    ]
+   },
+   "live_evidence": "OUT A4/D7 20B x306 + 14B x34 = 17 complete 144B images; IN a505d70081 x13 \u2014 PROVEN_LIVE"
+  },
+  {
+   "opcode": "D8",
+   "request": "A4/D8 fragments (writeMacroConfig @0x798134/0x79833c/0x798658/0x7987a0, 2.23)",
+   "android_2_23": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: writeMacroConfig @ 0x797fa0 (A4,D8 region)"
+    ],
+    "parsers": []
+   },
+   "android_2_24": {
+    "builders": [],
+    "parsers": []
+   },
+   "live_evidence": "not in frame-builder scan (A5-Smi scan rule) nor dispatcher scan; NO_RESPONSE_HANDLER_FOUND \u2014 PROVEN_STATIC writer, parser UNKNOWN"
+  },
+  {
+   "opcode": "E2",
+   "request": "A5 04 E2 8B (Windows only; checksum 8B = A5+04+E2 & 0xFF)",
+   "android_2_23": {
+    "builders": [],
+    "parsers": []
+   },
+   "android_2_24": {
+    "builders": [],
+    "parsers": []
+   },
+   "live_evidence": "no OUT/IN in Android capture; no reachable builder/parser in either analyzed build \u2014 ABSENT_STATIC",
+   "windows": "CParserGetMode::Decode (min 16B, checksum@15, marker@6..14) / CParserGetMode2::Decode (min 19B, checksum@18, marker@9..17); encoder 0x1003E320; IsDevice sends up to 6 E2 queries (3 outer x 2)"
+  },
+  {
+   "opcode": "EF",
+   "request": "A5 0C EF 00 00 00 00 00 00 00 00 A0",
+   "android_2_23": {
+    "builders": [
+     "moojiang/widgets/armor-x_pro/armorx_pro_root.dart :: _ getDeviceUUID @ 0x791a30",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: _ getDeviceUUID @ 0x7ff67c"
+    ],
+    "parsers": [
+     "moojiang/widgets/armor-x_pro/armorx_pro_root.dart :: [closure] void <anonymous closure> @ 0x761b6c",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: [closure] void <anonymous closure> @ 0x7febb4"
+    ]
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/widgets/armor-x_pro/armorx_pro_root.dart :: _ getDeviceUUID @ 0x7b4c48",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: _ getDeviceUUID @ 0x8972a4"
+    ],
+    "parsers": [
+     "moojiang/widgets/armor-x_pro/armorx_pro_root.dart :: [closure] void <anonymous closure> @ 0x78c9fc",
+     "moojiang/widgets/rainbow/rainbow_root.dart :: [closure] void <anonymous closure> @ 0x896928"
+    ]
+   },
+   "live_evidence": "OUT a50cef0000000000000000a0 x2; IN a50cef<8B uuid> x1 \u2014 PROVEN_LIVE"
+  },
+  {
+   "opcode": "FC",
+   "request": "A5 05 FC 00 .. (getDpi)",
+   "android_2_23": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: static _ writeDpiConfig @ 0x7fdee4",
+     "moojiang/widgets/rainbow/rainbow_more.dart :: _ getDpi @ 0x8af8ec"
+    ],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_more.dart :: [closure] void <anonymous closure> @ 0x8af5e8"
+    ]
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: static _ writeDpiConfig @ 0x894000",
+     "moojiang/widgets/rainbow/rainbow_more.dart :: _ getDpi @ 0x91b090",
+     "moojiang/widgets/general/frame_config_macros.dart :: _ stopTranscribe @ 0x8293ec",
+     "moojiang/widgets/general/frame_config_macros.dart :: _ startTranscribe @ 0x82d038"
+    ],
+    "parsers": [
+     "moojiang/widgets/rainbow/rainbow_more.dart :: [closure] void <anonymous closure> @ 0x91a404"
+    ]
+   }
+  },
+  {
+   "opcode": "FF",
+   "request": "A4/FF fragments (writeLightConfig)",
+   "android_2_23": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: static _ writeLightConfig @ 0x7f8158"
+    ],
+    "parsers": []
+   },
+   "android_2_24": {
+    "builders": [
+     "moojiang/units/gamepadset.dart :: static _ writeLightConfig @ 0x88a5dc"
+    ],
+    "parsers": []
+   }
+  }
+ ]
+}
