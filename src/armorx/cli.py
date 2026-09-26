@@ -52,7 +52,9 @@ def cmd_config_keys(_: argparse.Namespace) -> int:
                 "id": i,
                 "name": config_mod.CANONICAL_KEY_NAMES.get(i),
                 "status": (
-                    "proven_old_app"
+                    "proven_live"
+                    if i == 12
+                    else "proven_old_app"
                     if i in config_mod.CANONICAL_KEY_NAMES
                     else "unresolved_or_unexposed"
                 ),
