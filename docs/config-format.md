@@ -116,3 +116,25 @@ mapKeys[source_button_id] = target_button_id
 ```
 
 The BLE transport details are documented in [android-protocol.md](android-protocol.md).
+
+
+## Live persistence behavior — 2026-09-26
+
+A controlled BLE power-cycle experiment on firmware 2741 distinguished live application from persistence:
+
+- D7 wrote a complete valid 144-byte image.
+- D6 immediately read the written image back exactly.
+- When 0E was deliberately omitted, a power cycle restored the previously persisted configuration.
+- Repeating the same D7 write followed by `A5 05 0E 00 B8` made the new image survive the power cycle.
+
+For the tested configuration path:
+
+```text
+D7 = apply complete config image to live/volatile state
+0E = persist the written config across power loss
+D6 = read current live config image
+```
+
+The test changed only `mapKeys[23]` (M1 target) plus the derived CRC, so unrelated config bytes were held constant.
+
+A separate standalone-vs-controller-attached comparison found the 144-byte D6 image byte-for-byte identical across those two physical states in the tested session.

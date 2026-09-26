@@ -13,6 +13,12 @@ All notable project changes are documented here.
 
 ### Added
 
+- Added sanitized results from the 2026-09-26 autonomous Windows BLE research suite on firmware 2741.
+- Proved by controlled power-cycle testing that D7 applies the current 144-byte config to live/volatile state, while `A5 05 0E 00 B8` persists that written config across power loss.
+- Decoded D2 on ARMOR-X Pro as a ~64 Hz raw-input test stream and documented the 18-byte report layout, including buttons, sticks, and analog triggers.
+- Live-confirmed map key ID 12 as Guide / Xbox / Mode; ID 15 remains a provisional Share/Capture/Screenshot candidate because the recorded observations conflict.
+- Documented AE01 as WriteWithoutResponse and AE02 as Notify with passive subscription; no AE traffic was observed during clean tested idle windows.
+- Confirmed the 144-byte D6 image and GATT inventory were unchanged between standalone and controller-attached states in the tested session.
 - Captured the complete normal Android/BLE first-contact path from the current BIGBIG WON app on real hardware.
 - Confirmed live runtime identity `ZJ-XT`, firmware revision `2741`, and standard battery characteristic `2A19`.
 - Documented the live vendor GATT transport: all-zero vendor service UUID, `FFE1` write-without-response, `FFE2` read/notify, and CCCD `2902`.

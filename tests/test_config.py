@@ -27,6 +27,9 @@ def test_named_mapkey_patch():
 def test_proven_key_ids():
     assert mod.MAP_KEY_CODES["A"] == 0
     assert mod.MAP_KEY_CODES["RT"] == 9
+    assert mod.MAP_KEY_CODES["GUIDE"] == 12
+    assert mod.MAP_KEY_CODES["MODE"] == 12
+    assert mod.CANONICAL_KEY_NAMES[12] == "GUIDE"
     assert mod.MAP_KEY_CODES["M4"] == 26
 
 
