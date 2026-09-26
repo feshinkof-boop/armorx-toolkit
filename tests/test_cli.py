@@ -92,3 +92,10 @@ def test_config_keys_reports_guide_as_proven_live(capsys):
 
 def test_distribution_version_matches_runtime_version():
     assert importlib.metadata.version("armorx-toolkit") == __version__
+
+
+def test_macro_keys_reports_guide_as_proven_live(capsys):
+    rc = main(["macro", "keys"])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "12  GUIDE (Guide/Xbox/Mode; proven live)" in out

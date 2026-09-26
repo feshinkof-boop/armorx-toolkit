@@ -221,7 +221,7 @@ def cmd_macro_keys(_: argparse.Namespace) -> int:
         elif 34 <= key_id <= 49:
             note = " (joystick pseudo-key; strong evidence mapping)"
         elif key_id == 12:
-            note = " (Guide/Mode; strongly supported)"
+            note = " (Guide/Xbox/Mode; proven live)"
         else:
             note = ""
         print(f"{key_id:2d}  {name}{note}")

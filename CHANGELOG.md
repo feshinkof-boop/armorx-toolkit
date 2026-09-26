@@ -20,7 +20,6 @@ This release remains the installable Python toolkit/CLI. The Windows research/ca
 - Unknown and unresolved IDs remain unassigned rather than guessed.
 - Python 3.10–3.13 remains covered by CI.
 
-
 ### Fixed
 
 - Match captured V41 macro wire serialization (`macroJson` is a JSON list of JSON-encoded row strings).
@@ -28,7 +27,9 @@ This release remains the installable Python toolkit/CLI. The Windows research/ca
 - Preserve captured `showAdd=true` behavior for every macro row.
 - Correct the structured `res2` config region to raw bytes `74..111` instead of treating it as reserved-only data.
 
-### Added
+### Research documentation updates
+
+The following are published protocol/documentation findings, not public GUI/device-control features:
 
 - Added sanitized results from the 2026-09-26 autonomous Windows BLE research suite on firmware 2741.
 - Proved by controlled power-cycle testing that D7 applies the current 144-byte config to live/volatile state, while `A5 05 0E 00 B8` persists that written config across power loss.
