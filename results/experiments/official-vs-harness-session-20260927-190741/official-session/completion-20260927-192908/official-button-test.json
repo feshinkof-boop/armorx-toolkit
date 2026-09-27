@@ -1,0 +1,6 @@
+{
+ "performed": false,
+ "reason": "no official session capture; the A-button popup was never raised because nothing could be measured",
+ "official_idle_a5_12_02_count": null,
+ "official_a_button_result": null
+}

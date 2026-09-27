@@ -1,0 +1,11 @@
+{
+ "generated_at": "2026-09-27T19:29:08.137506-04:00",
+ "measurable": false,
+ "reason": "no ADB transport (USB_DEVICE_NOT_PRESENT after an acknowledged operator setup request)",
+ "armorx_bond_state": "UNKNOWN",
+ "encryption_state": "UNKNOWN",
+ "smp_activity": "UNKNOWN",
+ "existing_bonds_preserved": true,
+ "nothing_unpaired": true,
+ "explicitly_not_guessed": true
+}

@@ -1,0 +1,3 @@
+NOT AVAILABLE - no ADB transport.
+No serial/model/fingerprint could be read, so no emulator-vs-physical
+check could be performed either. Nothing is assumed about the device.

@@ -48,3 +48,10 @@ Runtime-only: discovery, identity reads, the proven `0B` query, D2 enable/disabl
 CCCD operations, passive capture, D6 read. No D7/D8, no configuration/DPI/lighting/macro write, no
 RCSP/AE01/OTA/firmware/bootloader command, no flash access, no guessed command, and **no unknown
 official-app traffic was replayed** (none was captured to replay).
+
+## Completion attempts
+
+- **20260927-192908** — official-app capture attempted, **blocked at the ADB transport**
+  (`USB_DEVICE_NOT_PRESENT`: no USB device after an acknowledged operator setup request, and
+  `adb connect ...:5555` refused). See `official-session/completion-20260927-192908/verdict.md`.
+  The harness measurements above are unaffected and were not recaptured.

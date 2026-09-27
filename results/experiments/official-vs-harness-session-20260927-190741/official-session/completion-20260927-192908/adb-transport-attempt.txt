@@ -1,0 +1,42 @@
+ADB transport attempt — 2026-09-27T19:29:08.137506-04:00   (research HEAD 069546f2ae7c4a3da87cd6bb2d00332fb89ecf6b)
+
+# Phase 1 — before asking the operator
+$ adb kill-server ; adb start-server
+  * daemon not running; starting now at tcp:5037
+  * daemon started successfully
+$ adb devices -l
+  List of devices attached            <- EMPTY
+$ lsusb | grep -viE "root hub"
+  Bus 001 Device 002: ID 1ea7:0066 SHARKOON Technologies GmbH [Mediatrack Edge Mini Keyboard]
+  Bus 001 Device 003: ID 0489:e10d Foxconn / Hon Hai
+  Bus 001 Device 005: ID 0bda:b720 Realtek Semiconductor Corp. RTL8723BU 802.11g/n WLAN Adapter
+  -> no Android device present
+
+# Phase 2A — ONE modal popup (kdialog), ONE sound, click = ACK
+  ack: {"status": "ACK", "action_id": "armorx_android_usb_setup", "response": "done",
+         "clicked_at": "2026-09-27T19:27:05-04:00"}
+  requested: USB DATA cable + unlock + Developer options + USB debugging +
+             File transfer/Android Auto mode + accept "Allow USB debugging"
+
+# Detection window — polled 12x over ~90 s after the acknowledgement
+  every poll: adb devices -> (empty);  lsusb -> no new device
+  CLASSIFICATION: USB_DEVICE_NOT_PRESENT
+  (the popup was NOT re-raised, per the interaction contract)
+
+# Late recheck
+$ adb devices -l
+  List of devices attached            <- still EMPTY
+$ lsusb | grep -viE "root hub"
+  (no Android device)
+$ tailscale ping -c 1 100.115.227.84
+  pong from v2304a (100.115.227.84) via 192.168.0.237:43965 in 53ms     <- phone is online
+$ adb connect 100.115.227.84:5555
+  failed to connect ...: Connection refused
+
+# Deliberately NOT done
+  - no random TCP ports tried (5555 only, and only because it is the documented legacy port)
+  - no "adb tcpip 5555" (needs an existing USB transport; there is none)
+  - no wireless-debug pairing detour (the brief allows it only if the phone is first detected over USB)
+  - no root bypass, no security-setting change, no install/uninstall
+
+RESULT: ADB_READY not achieved. Official-app capture remains impossible.

@@ -26,3 +26,4 @@
 {"event":"acknowledged","action_id":"armorx_android_setup","acknowledged_at":"2026-09-27T19:09:22-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_power_on_harness_session","acknowledged_at":"2026-09-27T19:11:06-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_power_on_harness_3","acknowledged_at":"2026-09-27T19:19:56-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_android_usb_setup","acknowledged_at":"2026-09-27T19:27:05-04:00","response":"done","status":"ACK"}
