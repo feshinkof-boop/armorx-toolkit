@@ -10,6 +10,23 @@ public static class ConfigDiff
         bool includeCrc = false) =>
         Compare(before.ToArray(), after.ToArray(), includeCrc);
 
+    public static IReadOnlyList<ConfigByteChange> CompareEditable(byte[] before, byte[] after)
+    {
+        var all = Compare(before, after, includeCrc: false);
+        return all.Where(x => IsPublicEditableOffset(x.Offset)).ToArray();
+    }
+
+    public static bool IsPublicEditableOffset(int offset) =>
+        offset is 4 or 5
+        || offset is >= 9 and <= 25
+        || offset is >= 28 and <= 33
+        || offset is >= 36 and <= 49
+        || offset is >= 52 and <= 57
+        || offset is >= 60 and <= 65
+        || offset is >= 68 and <= 72
+        || offset is >= 80 and <= 84
+        || offset is >= 135 and <= 138;
+
     public static IReadOnlyList<ConfigByteChange> Compare(
         byte[] before,
         byte[] after,
@@ -42,7 +59,7 @@ public static class ConfigDiff
 
         for (var i = 2; i < ArmorXConfig144.Size; i++)
         {
-            if (editorBaseline[i] != desired[i])
+            if (IsPublicEditableOffset(i) && editorBaseline[i] != desired[i])
                 current[i] = desired[i];
         }
 
