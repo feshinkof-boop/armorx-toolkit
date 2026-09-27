@@ -1,0 +1,28 @@
+{"ts":"2026-09-27T16:52:46-04:00","event":"alert_requested","action_id":"alert_test","message":"ARMOR-X ALERT TEST
+
+You should see this popup and hear a repeating alert sound.
+
+Reply  ALERT TEST OK  in Hermes ONLY if you SAW this popup AND HEARD the sound.
+
+If not, reply: NO POPUP / NO SOUND / NOTHING -- Hermes will troubleshoot and retry.","interval":20}
+{"ts":"2026-09-27T16:52:46-04:00","event":"alert_start","action_id":"alert_test","popup_backend":"kdialog","sound_player":"pw-play","sound_file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"supervisor_pid":190154}
+{"ts":"2026-09-27T16:52:46-04:00","event":"popup_raised","backend":"kdialog","raise_number":1}
+{"ts":"2026-09-27T16:52:46-04:00","event":"sound_loop_start","player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"pid":190248}
+{"ts":"2026-09-27T16:52:52-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T16:52:59-04:00","event":"popup_dismissed_replaying","raise_number":1}
+{"ts":"2026-09-27T16:53:01-04:00","event":"popup_raised","backend":"kdialog","raise_number":2}
+{"ts":"2026-09-27T16:53:04-04:00","event":"popup_dismissed_replaying","raise_number":2}
+{"ts":"2026-09-27T16:53:06-04:00","event":"popup_raised","backend":"kdialog","raise_number":3}
+{"ts":"2026-09-27T16:53:08-04:00","event":"popup_dismissed_replaying","raise_number":3}
+{"ts":"2026-09-27T16:53:10-04:00","event":"popup_raised","backend":"kdialog","raise_number":4}
+{"ts":"2026-09-27T16:53:13-04:00","event":"popup_dismissed_replaying","raise_number":4}
+{"ts":"2026-09-27T16:53:15-04:00","event":"popup_raised","backend":"kdialog","raise_number":5}
+{"ts":"2026-09-27T16:53:16-04:00","event":"popup_dismissed_replaying","raise_number":5}
+{"ts":"2026-09-27T16:53:18-04:00","event":"sound_played","iteration":2,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T16:53:18-04:00","event":"popup_raised","backend":"kdialog","raise_number":6}
+{"ts":"2026-09-27T16:53:20-04:00","event":"popup_dismissed_replaying","raise_number":6}
+{"ts":"2026-09-27T16:53:22-04:00","event":"popup_raised","backend":"kdialog","raise_number":7}
+{"ts":"2026-09-27T16:53:22-04:00","event":"alert_loop_end","action_id":"alert_test"}
+{"ts":"2026-09-27T16:53:22-04:00","event":"sound_loop_stop","iterations":2}
+{"ts":"2026-09-27T16:53:24-04:00","event":"alert_stopped","action_id":"alert_test","loop_stopped":1}
+{"ts": "2026-09-27T16:53:34-04:00", "event": "operator_acknowledged", "action_id": "alert_test", "response": "ALERT TEST OK", "saw_popup": true, "heard_sound": true}

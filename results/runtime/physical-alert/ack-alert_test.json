@@ -1,0 +1,21 @@
+{
+ "action_id": "alert_test",
+ "title": "ARMOR-X ACTION REQUIRED",
+ "message": "ARMOR-X ALERT TEST",
+ "requested_timestamp": "2026-09-27T16:52:46-04:00",
+ "acknowledged_timestamp": "2026-09-27T16:53:34-04:00",
+ "operator_response": "ALERT TEST OK",
+ "operator_confirmed": {
+  "saw_popup": true,
+  "heard_sound": true
+ },
+ "popup_backend": "kdialog persistent --msgbox, re-raised every 2s (live Plasma session env)",
+ "sound_backend": "pw-play to all PipeWire sinks, automation/armorx-alert.wav, every 20s",
+ "verification": {
+  "shell_exit_code": "NOT treated as proof",
+  "screenshot_proof": "results/runtime/physical-alert/proof/alert-popup-proof.png (3440x1440, dialog visible and legible)",
+  "audio_stream_proof": "pactl sink-input 3763 on sink 2630 (hdmi) during playback",
+  "operator_reply": "ALERT TEST OK"
+ },
+ "ALERT_SYSTEM_VALIDATED": true
+}

@@ -1,0 +1,7 @@
+2026-09-27T16:52:46-04:00 alert start: [alert_test] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T16:52:46-04:00 alert start: [alert_test] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T16:52:50-04:00 alert running: supervisor=190154 action=alert_test
+Terminated                 sleep 2
+2026-09-27T16:53:22-04:00 alert loop ended for [alert_test]
+2026-09-27T16:53:22-04:00 alert loop ended for [alert_test]
+2026-09-27T16:53:31-04:00 alert stopped (stopped=0)

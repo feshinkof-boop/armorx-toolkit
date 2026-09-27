@@ -2,202 +2,282 @@
 # =============================================================================
 # physical-action-alert.sh -- "the operator is not watching the chat" alerter
 #
-# The operator is away from the Hermes window, so a chat-only request is not
-# enough: every physical request must ALSO raise a desktop popup and an audible
-# sound, and keep repeating until it is acknowledged.
+# The operator will NOT sit in front of the Hermes window. A chat-only request
+# is therefore not acceptable: every physical request must raise a REAL VISIBLE
+# persistent desktop window AND a REAL AUDIBLE repeating sound, until the
+# operator answers in Hermes.
 #
 # USAGE
-#   physical-action-alert.sh start "<ACTION_ID>" "<MESSAGE>" [--interval SECONDS]
-#                                                   [--title TITLE] [--sound FILE]
-#                                                   [--no-repeat]
+#   physical-action-alert.sh start "<ACTION_ID>" "<MESSAGE>" [--title TITLE]
+#                                                           [--interval SECONDS]
 #   physical-action-alert.sh stop
 #   physical-action-alert.sh status
-#   physical-action-alert.sh selftest        # one popup + one sound, no loop
+#   physical-action-alert.sh test          # raises the ARMOR-X ALERT TEST gate
 #
-# BEHAVIOUR
-#   * CRITICAL-urgency desktop notification (persistent where the server allows)
-#   * immediately audible sound, then notification+sound repeated every
-#     --interval seconds (default 30) until `stop`
-#   * exactly ONE alert loop is maintained: `start` while one is running
-#     replaces it (and logs that it did)
-#   * never blocks: the loop is detached, state/pid files under
-#     logs/physical-action-alert/, every event appended to alert.log + alert.jsonl
+# ONLY ONE ArmorX alert may be active at a time: `start` replaces any previous
+# one (and records that it did).
 #
-# MECHANISM AUTO-DETECTION (nothing is assumed to exist)
-#   notify : notify-send  ->  kdialog  ->  gdbus org.freedesktop.Notifications
-#   sound  : paplay  ->  pw-play  ->  aplay  ->  canberra-gtk-play  ->  terminal bell
+# STATE  results/runtime/physical-alert/
+#   action-id  message  started-at  notifier-pid  sound-loop-pid  backend-used
+#   supervisor-pid  state.json  alert.log  alert.jsonl  stop-requested
 #
-# SAFETY: read-only with respect to the experiment; it only makes noise. It never
-#         touches the radio, the device or any config.
+# POPUP BACKENDS (in order, first that works WINS and is recorded)
+#   1. kdialog persistent modal dialog   (--msgbox: stays until dismissed)
+#   2. zenity persistent warning/question dialog
+#   3. yad (only if already available)
+#   4. critical notify-send PLUS a visible Konsole alert window
+# A transient notification ALONE is never sufficient; notify-send is never
+# chosen while kdialog exists.
+#
+# AUDIO BACKENDS (in order)
+#   pw-play -> paplay -> aplay -> canberra-gtk-play -> terminal bell
+# The generated tone automation/armorx-alert.wav is used when present, and the
+# sound is played on EVERY sink (the default sink here is HDMI, and a monitor
+# without speakers must not be allowed to swallow the alert).
+#
+# HONESTY RULES (hard)
+#   * a shell exit code of 0 is NOT evidence that the popup was visible or the
+#     sound audible. Only a screenshot or the operator's own confirmation is.
+#   * this script never touches the radio, the device or any device config,
+#     never changes the system master volume, and never kills plasmashell,
+#     unrelated notifications or unrelated dialogs.
 # =============================================================================
 set -uo pipefail
 
 LAB_ROOT="${LAB_ROOT:-/home/salamanka/armorx-lab}"
-STATE_DIR="$LAB_ROOT/logs/physical-action-alert"
+STATE_DIR="$LAB_ROOT/results/runtime/physical-alert"
+SUP_PID_FILE="$STATE_DIR/supervisor-pid"
+NOTIF_PID_FILE="$STATE_DIR/notifier-pid"
+SOUND_PID_FILE="$STATE_DIR/sound-loop-pid"
 STATE_JSON="$STATE_DIR/state.json"
-PID_FILE="$STATE_DIR/loop.pid"
-ALERT_LOG="$STATE_DIR/alert.log"
-ALERT_JSONL="$STATE_DIR/alert.jsonl"
-DEFAULT_INTERVAL=30
-LAST_NOTIF_SHOWN=""
+STOP_FILE="$STATE_DIR/stop-requested"
+LOG="$STATE_DIR/alert.log"
+JSONL="$STATE_DIR/alert.jsonl"
+
+DEFAULT_INTERVAL=20
+DEFAULT_TITLE="ARMOR-X ACTION REQUIRED"
+ALERT_SOUND="${ALERT_SOUND:-$LAB_ROOT/automation/armorx-alert.wav}"
+ENV_FILE="$LAB_ROOT/automation/plasma-session.env"
+WRAPPER="$LAB_ROOT/automation/run-in-plasma-session.sh"
+MAX_RELAUNCHES=100
 
 mkdir -p "$STATE_DIR"
 
-log()  { printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$ALERT_LOG" >&2; }
-json() { printf '%s\n' "$1" >> "$ALERT_JSONL"; }
+log()  { printf '%s %s\n' "$(date -Is)" "$*" | tee -a "$LOG" >&2; }
+json() { printf '%s\n' "$1" >>"$JSONL"; }
 
-# --- session environment: recover it from the real logged-in session ----------
+# --- session environment: always recovered from the LIVE plasma process ------
 session_env() {
+  if [ -x "$WRAPPER" ]; then
+    "$WRAPPER" refresh-env >/dev/null 2>&1 || true
+  fi
+  # shellcheck disable=SC1090
+  [ -f "$ENV_FILE" ] && . "$ENV_FILE"
   : "${XDG_RUNTIME_DIR:=/run/user/$(id -u)}"
   if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ] && [ -S "$XDG_RUNTIME_DIR/bus" ]; then
-    export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+    DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
   fi
-  if [ -z "${DISPLAY:-}" ]; then
-    # inherit from a live graphical process of the same user
-    for p in plasmashell ksmserver kwin_wayland kwin_x11; do
-      pid="$(pgrep -u "$(id -u)" -x "$p" 2>/dev/null | head -1)"
-      [ -n "${pid:-}" ] || continue
-      for var in DISPLAY WAYLAND_DISPLAY; do
-        val="$(tr '\0' '\n' < "/proc/$pid/environ" 2>/dev/null | sed -n "s/^$var=//p" | head -1)"
-        [ -n "${val:-}" ] && export "$var=$val"
-      done
-      [ -n "${DISPLAY:-}${WAYLAND_DISPLAY:-}" ] && break
-    done
-  fi
-  : "${WAYLAND_DISPLAY:=wayland-0}"
-  : "${DISPLAY:=:0}"
-  export XDG_RUNTIME_DIR DISPLAY WAYLAND_DISPLAY DBUS_SESSION_BUS_ADDRESS
+  export XDG_RUNTIME_DIR DBUS_SESSION_BUS_ADDRESS
+  export DISPLAY="${DISPLAY:-:0}"
+  export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-0}"
+  export XAUTHORITY HOME USER LOGNAME PATH
 }
 
-# --- mechanism detection ------------------------------------------------------
-detect_notify() {
-  for m in notify-send kdialog gdbus; do
-    command -v "$m" >/dev/null 2>&1 && { printf '%s' "$m"; return 0; }
-  done
+# --- backend detection -------------------------------------------------------
+popup_backend() {
+  if command -v kdialog >/dev/null 2>&1; then printf 'kdialog'; return; fi
+  if command -v zenity  >/dev/null 2>&1; then printf 'zenity';  return; fi
+  if command -v yad     >/dev/null 2>&1; then printf 'yad';     return; fi
+  if command -v notify-send >/dev/null 2>&1 && command -v konsole >/dev/null 2>&1; then
+    printf 'notify+konsole'; return
+  fi
+  if command -v notify-send >/dev/null 2>&1; then printf 'notify-send'; return; fi
   printf 'none'
 }
-detect_sound() {
-  for m in paplay pw-play aplay canberra-gtk-play; do
-    command -v "$m" >/dev/null 2>&1 && { printf '%s' "$m"; return 0; }
+
+sound_player() {
+  for m in pw-play paplay aplay canberra-gtk-play; do
+    command -v "$m" >/dev/null 2>&1 && { printf '%s' "$m"; return; }
   done
   printf 'bell'
 }
 
-SOUND_CANDIDATES=(
-  /usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga
-  /usr/share/sounds/freedesktop/stereo/dialog-warning.oga
-  /usr/share/sounds/freedesktop/stereo/complete.oga
-  /usr/share/sounds/Oxygen-Im-Error-On-Connection.ogg
-  /usr/share/sounds/alsa/Front_Center.wav
-)
-pick_sound() {
-  [ -n "${ALERT_SOUND:-}" ] && { printf '%s' "$ALERT_SOUND"; return; }
-  for f in "${SOUND_CANDIDATES[@]}"; do
-    [ -r "$f" ] && { printf '%s' "$f"; return; }
-  done
-  printf ''
-}
-
-play_sound() {
-  local mech="$1" file="$2"
-  # Play on EVERY sink, not just the default: the default here is HDMI, and a monitor with no
-  # speakers would silently swallow the alert. Extra sinks cost nothing.
-  local sinks=""
+# --- audible alert ------------------------------------------------------------
+play_sound_once() {
+  local player="$1" file="$2" sinks="" s n=0
   if command -v pactl >/dev/null 2>&1; then
     sinks="$(pactl list short sinks 2>/dev/null | awk '{print $2}')"
   fi
-  case "$mech" in
+  case "$player" in
+    pw-play)
+      # pw-play takes one target per invocation; hit the default plus every sink id
+      [ -n "$file" ] && { pw-play "$file" >/dev/null 2>&1; }
+      if command -v pactl >/dev/null 2>&1; then
+        for s in $(pactl list short sinks 2>/dev/null | awk '{print $1}'); do
+          [ "$s" = "0" ] && continue
+          pw-play --target="$s" "$file" >/dev/null 2>&1 &
+          n=$((n + 1))
+        done
+      fi
+      ;;
     paplay)
       [ -n "$file" ] || return 0
       if [ -n "$sinks" ]; then
         while IFS= read -r s; do
           [ -n "$s" ] || continue
-          paplay --device="$s" "$file" >/dev/null 2>&1 &
-        done <<< "$sinks"
-        wait 2>/dev/null
+          paplay --volume=65536 --device="$s" "$file" >/dev/null 2>&1 &
+          n=$((n + 1))
+        done <<<"$sinks"
       else
-        paplay "$file" >/dev/null 2>&1
+        paplay --volume=65536 "$file" >/dev/null 2>&1
       fi
       ;;
-    pw-play) [ -n "$file" ] && pw-play "$file" >/dev/null 2>&1 ;;
     aplay)   [ -n "$file" ] && aplay -q "$file" >/dev/null 2>&1 ;;
     canberra-gtk-play) canberra-gtk-play -i alarm-clock-elapsed >/dev/null 2>&1 ;;
-    *)       printf '\a' >/dev/tty 2>/dev/null || printf '\a' ;;
+    bell)    printf '\a' ;;
   esac
+  [ "$n" -gt 0 ] && wait 2>/dev/null
   return 0
 }
 
-show_notification() {
-  local mech="$1" title="$2" body="$3"
-  local id=""
-  case "$mech" in
-    notify-send)
-      # -u critical + -t 0: stays on screen until dismissed where supported
-      id="$(notify-send -u critical -t 0 -a "Hermes ARMOR-X lab" -p "$title" "$body" 2>/dev/null)"
-      ;;
+# --- persistent popup --------------------------------------------------------
+# Runs as its own process (notifier-pid). Blocks until the user dismisses it,
+# then exits - the supervisor re-raises it, so the alert stays visible.
+raise_popup_blocking() {
+  local backend="$1" title="$2" body="$3"
+  case "$backend" in
     kdialog)
-      # kdialog has no urgency knob; run it detached so it cannot block the loop
-      (kdialog --title "$title" --error "$body" >/dev/null 2>&1 &) ;;
-    gdbus)
-      id="$(gdbus call --session --dest org.freedesktop.Notifications \
-              --object-path /org/freedesktop/Notifications \
-              --method org.freedesktop.Notifications.Notify \
-              "Hermes ARMOR-X lab" 0 "" "$title" "$body" "[]" "{\"urgency\": <byte 2>}" 0 2>/dev/null \
-              | tr -dc '0-9')"
+      kdialog --title "$title" --msgbox "$body" 2>>"$STATE_DIR/popup-errors.log"
+      ;;
+    zenity)
+      zenity --warning --title="$title" --text="$body" --width=560 2>>"$STATE_DIR/popup-errors.log"
+      ;;
+    yad)
+      yad --title="$title" --text="$body" --center --width=560 --button=OK 2>>"$STATE_DIR/popup-errors.log"
+      ;;
+    notify+konsole)
+      notify-send -u critical -t 0 -a "Hermes ARMOR-X lab" "$title" "$body"
+      konsole -p tabtitle="$title" -e bash -lc \
+        "printf '\033[1;31m%s\033[0m\n\n%s\n\nKEEP THIS WINDOW OPEN UNTIL YOU RESPOND IN HERMES\n' '$title' '$body'; exec sleep 86400" \
+        >>"$STATE_DIR/popup-errors.log" 2>&1
+      ;;
+    notify-send)
+      notify-send -u critical -t 0 -a "Hermes ARMOR-X lab" "$title" "$body"
+      sleep 30
       ;;
   esac
-  LAST_NOTIF_SHOWN="$id"
 }
 
-close_notification() {
-  [ -n "${LAST_NOTIF_SHOWN:-}" ] || return 0
-  gdbus call --session --dest org.freedesktop.Notifications \
-    --object-path /org/freedesktop/Notifications \
-    --method org.freedesktop.Notifications.CloseNotification \
-    "$LAST_NOTIF_SHOWN" >/dev/null 2>&1 || true
-}
-
-# --- the repeating loop (runs detached) --------------------------------------
-run_loop() {
-  local action_id="$1" title="$2" body="$3" interval="$4" repeat="$5"
+# --- sub-process: sound loop (writes its own pid) ----------------------------
+cmd_soundloop() {
+  local interval="$1"
+  printf '%s\n' "$$" >"$SOUND_PID_FILE"
   session_env
-  local nmech smech sfile
-  nmech="$(detect_notify)"; smech="$(detect_sound)"; sfile="$(pick_sound)"
-  json "$(printf '{"ts":"%s","event":"alert_start","action_id":"%s","notify_mechanism":"%s","sound_mechanism":"%s","sound_file":"%s","interval":%s,"repeat":%s,"pid":%s}' \
-      "$(date -Is)" "$action_id" "$nmech" "$smech" "$sfile" "$interval" "$repeat" "$$")"
-  log "alert start: [$action_id] via notify=$nmech sound=$smech file=$sfile every ${interval}s"
+  local player file
+  player="$(sound_player)"
+  file=""
+  [ -r "$ALERT_SOUND" ] && file="$ALERT_SOUND"
+  if [ -z "$file" ]; then
+    for f in /usr/share/sounds/oxygen/stereo/dialog-error-critical.ogg \
+             /usr/share/sounds/freedesktop/stereo/dialog-warning.oga \
+             /usr/share/sounds/alsa/Front_Center.wav; do
+      [ -r "$f" ] && { file="$f"; break; }
+    done
+  fi
+  json "$(printf '{"ts":"%s","event":"sound_loop_start","player":"%s","file":"%s","interval":%s,"pid":%s}' \
+        "$(date -Is)" "$player" "$file" "$interval" "$$")"
   local i=0
   while :; do
+    [ -f "$STOP_FILE" ] && break
     i=$((i + 1))
-    show_notification "$nmech" "$title" "$body"
-    play_sound "$smech" "$sfile"
-    json "$(printf '{"ts":"%s","event":"alert_fired","action_id":"%s","iteration":%s,"notification_id":"%s"}' \
-        "$(date -Is)" "$action_id" "$i" "$LAST_NOTIF_SHOWN")"
-    if [ "$repeat" = "0" ]; then break; fi
-    [ "$repeat" -gt 0 ] 2>/dev/null && [ "$i" -ge "$repeat" ] && break
-    sleep "$interval" &
-    wait $! 2>/dev/null
-    # stop is signalled by removing the pid file / a stop-request file
-    [ -f "$STATE_DIR/stop-requested" ] && break
-    [ -f "$PID_FILE" ] || break
+    play_sound_once "$player" "$file"
+    json "$(printf '{"ts":"%s","event":"sound_played","iteration":%s,"player":"%s","file":"%s"}' \
+          "$(date -Is)" "$i" "$player" "$file")"
+    # interruptible sleep so `stop` is immediate
+    local waited=0
+    while [ "$waited" -lt "$interval" ]; do
+      sleep 1
+      waited=$((waited + 1))
+      [ -f "$STOP_FILE" ] && { json "$(printf '{"ts":"%s","event":"sound_loop_stop","iterations":%s}' "$(date -Is)" "$i")"; return 0; }
+    done
   done
-  json "$(printf '{"ts":"%s","event":"alert_loop_end","action_id":"%s","iterations":%s}' \
-      "$(date -Is)" "$action_id" "$i")"
-  log "alert loop ended after $i iteration(s)"
+  json "$(printf '{"ts":"%s","event":"sound_loop_stop","iterations":%s}' "$(date -Is)" "$i")"
+  return 0
+}
+
+# --- sub-process: popup manager (writes notifier-pid) ------------------------
+cmd_dialog() {
+  local backend="$1" title="$2" body="$3"
+  session_env
+  local raises=0
+  while :; do
+    [ -f "$STOP_FILE" ] && break
+    raises=$((raises + 1))
+    [ "$raises" -gt "$MAX_RELAUNCHES" ] && { log "popup manager: giving up after $MAX_RELAUNCHES raises"; break; }
+    json "$(printf '{"ts":"%s","event":"popup_raised","backend":"%s","raise_number":%s}' "$(date -Is)" "$backend" "$raises")"
+    # this blocks until the operator dismisses the window
+    raise_popup_blocking "$backend" "$title" "$body"
+    [ -f "$STOP_FILE" ] && break
+    json "$(printf '{"ts":"%s","event":"popup_dismissed_replaying","raise_number":%s}' "$(date -Is)" "$raises")"
+    sleep 2
+  done
+  return 0
+}
+
+# --- supervisor: owns the popup manager + sound loop -------------------------
+cmd_supervise() {
+  local action_id="$1" title="$2" body="$3" interval="$4"
+  printf '%s\n' "$$" >"$SUP_PID_FILE"
+  session_env
+  local backend player
+  backend="$(popup_backend)"
+  player="$(sound_player)"
+  printf '%s\n' "$backend" >"$STATE_DIR/backend-used"
+  json "$(printf '{"ts":"%s","event":"alert_start","action_id":"%s","popup_backend":"%s","sound_player":"%s","sound_file":"%s","interval":%s,"supervisor_pid":%s}' \
+        "$(date -Is)" "$action_id" "$backend" "$player" "$ALERT_SOUND" "$interval" "$$")"
+  log "alert start: [$action_id] popup=$backend sound=$player file=$ALERT_SOUND every ${interval}s"
+
+  ( trap '' TERM; exec "$0" _soundloop "$interval" ) >>"$LOG" 2>&1 &
+  local spid=$!
+  ( trap '' TERM; exec "$0" _dialog "$backend" "$title" "$body" ) >>"$LOG" 2>&1 &
+  local dpid=$!
+  printf '%s\n' "$dpid" >"$NOTIF_PID_FILE"
+  local n
+  while :; do
+    [ -f "$STOP_FILE" ] && break
+    [ -f "$SUP_PID_FILE" ] || break
+    # keep exactly one of each alive
+    if ! kill -0 "$spid" 2>/dev/null; then
+      json "$(printf '{"ts":"%s","event":"sound_loop_restart"}' "$(date -Is)")"
+      ( trap '' TERM; exec "$0" _soundloop "$interval" ) >>"$LOG" 2>&1 &
+      spid=$!
+    fi
+    if ! kill -0 "$dpid" 2>/dev/null; then
+      n="$(pgrep -f "$0 _dialog" 2>/dev/null | wc -l)"
+      if [ "$n" -eq 0 ]; then
+        json "$(printf '{"ts":"%s","event":"popup_manager_restart"}' "$(date -Is)")"
+        ( trap '' TERM; exec "$0" _dialog "$backend" "$title" "$body" ) >>"$LOG" 2>&1 &
+        dpid=$!
+        printf '%s\n' "$dpid" >"$NOTIF_PID_FILE"
+      fi
+    fi
+    sleep 2
+  done
+  json "$(printf '{"ts":"%s","event":"alert_loop_end","action_id":"%s"}' "$(date -Is)" "$action_id")"
+  log "alert loop ended for [$action_id]"
+  return 0
 }
 
 # --- commands ----------------------------------------------------------------
 cmd_start() {
-  local action_id="" message="" interval="$DEFAULT_INTERVAL" title="ARMOR-X ACTION REQUIRED"
-  local repeat=-1
+  local action_id="" message="" interval="$DEFAULT_INTERVAL" title="$DEFAULT_TITLE"
   action_id="${1:-}"; shift || true
-  message="${1:-}"; shift || true
+  message="${1:-}";   shift || true
   while [ $# -gt 0 ]; do
     case "$1" in
       --interval) interval="$2"; shift 2 ;;
-      --title)    title="$2"; shift 2 ;;
+      --title)    title="$2";    shift 2 ;;
       --sound)    ALERT_SOUND="$2"; shift 2 ;;
-      --no-repeat) repeat=1; shift ;;
       *) shift ;;
     esac
   done
@@ -205,111 +285,125 @@ cmd_start() {
   [ -n "$message" ]   || { log "ERROR: start needs <MESSAGE>"; exit 2; }
 
   cmd_stop --quiet || true
-  rm -f "$STATE_DIR/stop-requested"
+  rm -f "$STOP_FILE"
   session_env
-
-  # Detached loop: the script re-invokes ITSELF in `_loop` mode under setsid, so the
-  # alert can never block Hermes and the loop is a real process we can kill by pid.
-  ALERT_SOUND="${ALERT_SOUND:-}" setsid "$0" _loop "$action_id" "$title" "$message" \
-      "$interval" "$repeat" >>"$ALERT_LOG" 2>&1 &
-  local loop_pid=$!
-  printf '%s\n' "$loop_pid" > "$PID_FILE"
-  cat > "$STATE_JSON" <<EOF
+  printf '%s\n' "$action_id"       >"$STATE_DIR/action-id"
+  printf '%s\n' "$message"         >"$STATE_DIR/message"
+  printf '%s\n' "$(date -Is)"      >"$STATE_DIR/started-at"
+  printf '%s\n' "$(popup_backend)" >"$STATE_DIR/backend-used"
+  cat >"$STATE_JSON" <<EOF
 {
  "action_id": "$action_id",
  "title": "$title",
  "message": "$message",
  "requested_at": "$(date -Is)",
  "interval_seconds": $interval,
- "repeat": $repeat,
- "loop_pid": $loop_pid,
- "notify_mechanism": "$(detect_notify)",
- "sound_mechanism": "$(detect_sound)",
- "sound_file": "$(pick_sound)",
+ "popup_backend": "$(popup_backend)",
+ "sound_player": "$(sound_player)",
+ "sound_file": "$ALERT_SOUND",
  "state": "WAITING_FOR_PHYSICAL_ACTION"
 }
 EOF
-  json "$(printf '{"ts":"%s","event":"alert_requested","action_id":"%s","message":"%s","interval":%s,"loop_pid":%s}' \
-      "$(date -Is)" "$action_id" "$message" "$interval" "$loop_pid")"
-  sleep 2
-  if kill -0 "$loop_pid" 2>/dev/null; then
-    log "alert running: pid=$loop_pid action=$action_id"
+  json "$(printf '{"ts":"%s","event":"alert_requested","action_id":"%s","message":"%s","interval":%s}' \
+        "$(date -Is)" "$action_id" "$message" "$interval")"
+
+  # detached supervisor -- cannot block Hermes, is a real pid we can stop
+  ALERT_SOUND="$ALERT_SOUND" setsid nohup "$0" _supervise "$action_id" "$title" "$message" "$interval" \
+      >>"$LOG" 2>&1 &
+  local spid=$!
+  printf '%s\n' "$spid" >"$SUP_PID_FILE"
+  sleep 4
+  if kill -0 "$spid" 2>/dev/null; then
+    log "alert running: supervisor=$spid action=$action_id"
     exit 0
   fi
-  log "ERROR: alert loop exited immediately - see $ALERT_LOG"
+  log "ERROR: alert supervisor exited immediately - see $LOG"
   exit 3
 }
 
 cmd_stop() {
   local quiet=0; [ "${1:-}" = "--quiet" ] && quiet=1
   local stopped=0 pid
-  if [ -f "$PID_FILE" ]; then
-    pid="$(cat "$PID_FILE" 2>/dev/null)"
+  touch "$STOP_FILE"
+  for f in "$SUP_PID_FILE" "$SOUND_PID_FILE" "$NOTIF_PID_FILE"; do
+    [ -f "$f" ] || continue
+    pid="$(cat "$f" 2>/dev/null)"
     if [ -n "${pid:-}" ] && kill -0 "$pid" 2>/dev/null; then
-      # stop the loop and any child it spawned (sleep / player / notifier)
       pkill -TERM -P "$pid" 2>/dev/null || true
       kill -TERM "$pid" 2>/dev/null || true
-      sleep 1
-      kill -0 "$pid" 2>/dev/null && { pkill -KILL -P "$pid" 2>/dev/null || true; kill -KILL "$pid" 2>/dev/null || true; }
       stopped=1
     fi
-    rm -f "$PID_FILE"
-  fi
-  touch "$STATE_DIR/stop-requested"
-  # close any visible persistent notification we raised
-  session_env
+  done
+  sleep 1
+  # kill any surviving own-mode children (ours only -- matched by this script path)
+  for mode in _soundloop _dialog _supervise; do
+    pkill -TERM -f "$0 $mode" 2>/dev/null || true
+  done
+  sleep 1
+  for mode in _soundloop _dialog _supervise; do
+    pkill -KILL -f "$0 $mode" 2>/dev/null || true
+  done
+  # the visible window itself (only a kdialog/zenity/yad we raised)
+  pkill -KILL -f "kdialog --title $DEFAULT_TITLE" 2>/dev/null || true
   if [ -f "$STATE_JSON" ]; then
-    LAST_NOTIF_SHOWN="$(sed -n 's/.*"notification_id"[^0-9]*\([0-9]\+\).*/\1/p' "$ALERT_JSONL" 2>/dev/null | tail -1)"
-    close_notification
-    local aid; aid="$(sed -n 's/.*"action_id": *"\([^"]*\)".*/\1/p' "$STATE_JSON" | head -1)"
-    json "$(printf '{"ts":"%s","event":"alert_stopped","action_id":"%s","loop_stopped":%s}' \
-        "$(date -Is)" "$aid" "$stopped")"
-    rm -f "$STATE_JSON"
+    local aid
+    aid="$(sed -n 's/.*"action_id": *"\([^"]*\)".*/\1/p' "$STATE_JSON" | head -1)"
+    json "$(printf '{"ts":"%s","event":"alert_stopped","action_id":"%s","loop_stopped":%s}' "$(date -Is)" "$aid" "$stopped")"
   fi
-  # verify nothing of ours is left behind
-  local remaining=0
-  if [ -f "$ALERT_LOG" ]; then
-    remaining="$(pgrep -f "physical-action-alert.sh" 2>/dev/null | grep -v "^$$\$" | wc -l)"
-  fi
-  [ "$quiet" -eq 1 ] || log "alert stopped (loop_stopped=$stopped, remaining_alert_procs=$remaining)"
+  rm -f "$SUP_PID_FILE" "$SOUND_PID_FILE" "$NOTIF_PID_FILE" "$STATE_JSON"
+  [ "$quiet" -eq 1 ] || log "alert stopped (stopped=$stopped)"
   return 0
 }
 
 cmd_status() {
+  local alive_sup=false alive_dlg=false alive_snd=false
+  for pair in "$SUP_PID_FILE:alive_sup" "$NOTIF_PID_FILE:alive_dlg" "$SOUND_PID_FILE:alive_snd"; do
+    f="${pair%%:*}"; v="${pair##*:}"
+    if [ -f "$f" ]; then
+      pid="$(cat "$f" 2>/dev/null)"
+      if [ -n "${pid:-}" ] && kill -0 "$pid" 2>/dev/null; then
+        case "$v" in alive_sup) alive_sup=true ;; alive_dlg) alive_dlg=true ;; alive_snd) alive_snd=true ;; esac
+      fi
+    fi
+  done
   if [ -f "$STATE_JSON" ]; then
     cat "$STATE_JSON"
-    pid="$(cat "$PID_FILE" 2>/dev/null || true)"
-    if [ -n "${pid:-}" ] && kill -0 "$pid" 2>/dev/null; then
-      echo "\"loop_alive\": true"
+    echo "\"supervisor_alive\": $alive_sup,"
+    echo "\"notifier_alive\": $alive_dlg,"
+    echo "\"sound_loop_alive\": $alive_snd,"
+    if $alive_sup || $alive_dlg || $alive_snd; then
+      echo "\"active_alert\": true"
     else
-      echo "\"loop_alive\": false"
+      echo "\"active_alert\": false"
     fi
   else
-    echo '{"state": "NO_ACTIVE_ALERT"}'
+    echo '{"state": "NO_ACTIVE_ALERT", "active_alert": false}'
   fi
 }
 
-cmd_selftest() {
-  session_env
-  local nmech smech sfile
-  nmech="$(detect_notify)"; smech="$(detect_sound)"; sfile="$(pick_sound)"
-  echo "notify mechanism : $nmech"
-  echo "sound mechanism  : $smech"
-  echo "sound file       : ${sfile:-<terminal bell>}"
-  echo "DISPLAY=$DISPLAY WAYLAND_DISPLAY=$WAYLAND_DISPLAY"
-  echo "DBUS_SESSION_BUS_ADDRESS=${DBUS_SESSION_BUS_ADDRESS:-<unset>} XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR:-<unset>}"
-  show_notification "$nmech" "ARMOR-X lab notification selftest" \
-    "If you can see this popup AND hear a sound, the alert path works."
-  echo "notification id  : ${LAST_NOTIF_SHOWN:-<none>}"
-  play_sound "$smech" "$sfile"
-  echo "selftest complete"
+cmd_test() {
+  cmd_start "alert_test" \
+"ARMOR-X ALERT TEST
+
+You should see this popup and hear a repeating alert sound.
+
+Reply  ALERT TEST OK  in Hermes ONLY if you SAW this popup AND HEARD the sound.
+
+If not, reply: NO POPUP / NO SOUND / NOTHING -- Hermes will troubleshoot and retry."
+  rc=$?
+  echo "---"
+  echo "alert test requested (rc=$rc). A 0 exit code proves only that the processes started:"
+  echo "it is NOT proof that the window was visible or the sound audible."
+  cmd_status
 }
 
 case "${1:-}" in
-  _loop)    shift; run_loop "$@" ;;
-  start)    shift; cmd_start "$@" ;;
-  stop)     shift; cmd_stop "$@" ;;
-  status)   cmd_status ;;
-  selftest) cmd_selftest ;;
-  *) sed -n '2,40p' "$0" | sed 's/^# \{0,1\}//' ; exit 2 ;;
+  _supervise) shift; cmd_supervise "$@" ;;
+  _soundloop) shift; cmd_soundloop "$@" ;;
+  _dialog)    shift; cmd_dialog "$@" ;;
+  start)      shift; cmd_start "$@" ;;
+  stop)       shift; cmd_stop "$@" ;;
+  status)     cmd_status ;;
+  test)       cmd_test ;;
+  *) sed -n '2,45p' "$0" | sed 's/^# \{0,1\}//'; exit 2 ;;
 esac

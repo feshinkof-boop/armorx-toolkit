@@ -1,0 +1,10 @@
+ALERT_PREVIOUS_VALIDATION = INVALID
+
+Recorded 2026-09-27 (recovery pass).
+
+Evidence (armorx-lab/logs/physical-action-alert/alert.jsonl, old implementation):
+  - popup backend chosen was notify-send (transient notification), never kdialog
+  - exactly ONE sound iteration fired (16:38:33), loop stopped 16:38:38
+  - operator reports: NO popup seen, NO sound heard
+Conclusion: the previous "alert validated" claim was based on shell exit codes only
+and is void. New alert system = kdialog persistent dialog + repeating WAV tone.
