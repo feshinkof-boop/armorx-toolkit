@@ -29,8 +29,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw "Frozen release commit is unavailable: $frozen" }
           $existingTag = git ls-remote --tags origin "refs/tags/v0.2.1"
           if ($existingTag) { throw "Tag v0.2.1 already exists; refusing to overwrite it." }
-          gh release view v0.2.1 *> $null
-          if ($LASTEXITCODE -eq 0) { throw "Release v0.2.1 already exists; refusing to overwrite it." }
+          $existingRelease = gh release list --limit 100 --json tagName --jq '.[] | select(.tagName == "v0.2.1") | .tagName'
+          if ($existingRelease) { throw "Release v0.2.1 already exists; refusing to overwrite it." }
 
       - name: Download exact validated Final RC artifact
         shell: pwsh
