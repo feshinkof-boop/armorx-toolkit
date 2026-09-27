@@ -1,0 +1,554 @@
+{
+ "artifact": "ARMOR-X Pro configuration: raw bytes vs normalized semantic representation",
+ "device": {
+  "model_mark": "ZJ-XT",
+  "firmware": "2741",
+  "ble_address": "2D:37:35:6D:66:11",
+  "serial": "ZJ-XT_2741_2D-37-35-6D-66-11"
+ },
+ "baseline": {
+  "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "length": 144,
+  "declared_length": 144
+ },
+ "raw": {
+  "note": "byte-exact device state; never re-typed by hand, always copied from the captured image",
+  "mapkeys_region": {
+   "absolute_offsets": [
+    112,
+    143
+   ],
+   "bytes_hex": "000102030405060708090a0b0c0d0e0f10111213141516010d191a1b1c1d1e1f",
+   "pairs": [
+    {
+     "index": 0,
+     "source_id": 0,
+     "absolute_offset": 112,
+     "raw_byte": "0x00",
+     "target_id": 0
+    },
+    {
+     "index": 1,
+     "source_id": 1,
+     "absolute_offset": 113,
+     "raw_byte": "0x01",
+     "target_id": 1
+    },
+    {
+     "index": 2,
+     "source_id": 2,
+     "absolute_offset": 114,
+     "raw_byte": "0x02",
+     "target_id": 2
+    },
+    {
+     "index": 3,
+     "source_id": 3,
+     "absolute_offset": 115,
+     "raw_byte": "0x03",
+     "target_id": 3
+    },
+    {
+     "index": 4,
+     "source_id": 4,
+     "absolute_offset": 116,
+     "raw_byte": "0x04",
+     "target_id": 4
+    },
+    {
+     "index": 5,
+     "source_id": 5,
+     "absolute_offset": 117,
+     "raw_byte": "0x05",
+     "target_id": 5
+    },
+    {
+     "index": 6,
+     "source_id": 6,
+     "absolute_offset": 118,
+     "raw_byte": "0x06",
+     "target_id": 6
+    },
+    {
+     "index": 7,
+     "source_id": 7,
+     "absolute_offset": 119,
+     "raw_byte": "0x07",
+     "target_id": 7
+    },
+    {
+     "index": 8,
+     "source_id": 8,
+     "absolute_offset": 120,
+     "raw_byte": "0x08",
+     "target_id": 8
+    },
+    {
+     "index": 9,
+     "source_id": 9,
+     "absolute_offset": 121,
+     "raw_byte": "0x09",
+     "target_id": 9
+    },
+    {
+     "index": 10,
+     "source_id": 10,
+     "absolute_offset": 122,
+     "raw_byte": "0x0A",
+     "target_id": 10
+    },
+    {
+     "index": 11,
+     "source_id": 11,
+     "absolute_offset": 123,
+     "raw_byte": "0x0B",
+     "target_id": 11
+    },
+    {
+     "index": 12,
+     "source_id": 12,
+     "absolute_offset": 124,
+     "raw_byte": "0x0C",
+     "target_id": 12
+    },
+    {
+     "index": 13,
+     "source_id": 13,
+     "absolute_offset": 125,
+     "raw_byte": "0x0D",
+     "target_id": 13
+    },
+    {
+     "index": 14,
+     "source_id": 14,
+     "absolute_offset": 126,
+     "raw_byte": "0x0E",
+     "target_id": 14
+    },
+    {
+     "index": 15,
+     "source_id": 15,
+     "absolute_offset": 127,
+     "raw_byte": "0x0F",
+     "target_id": 15
+    },
+    {
+     "index": 16,
+     "source_id": 16,
+     "absolute_offset": 128,
+     "raw_byte": "0x10",
+     "target_id": 16
+    },
+    {
+     "index": 17,
+     "source_id": 17,
+     "absolute_offset": 129,
+     "raw_byte": "0x11",
+     "target_id": 17
+    },
+    {
+     "index": 18,
+     "source_id": 18,
+     "absolute_offset": 130,
+     "raw_byte": "0x12",
+     "target_id": 18
+    },
+    {
+     "index": 19,
+     "source_id": 19,
+     "absolute_offset": 131,
+     "raw_byte": "0x13",
+     "target_id": 19
+    },
+    {
+     "index": 20,
+     "source_id": 20,
+     "absolute_offset": 132,
+     "raw_byte": "0x14",
+     "target_id": 20
+    },
+    {
+     "index": 21,
+     "source_id": 21,
+     "absolute_offset": 133,
+     "raw_byte": "0x15",
+     "target_id": 21
+    },
+    {
+     "index": 22,
+     "source_id": 22,
+     "absolute_offset": 134,
+     "raw_byte": "0x16",
+     "target_id": 22
+    },
+    {
+     "index": 23,
+     "source_id": 23,
+     "absolute_offset": 135,
+     "raw_byte": "0x01",
+     "target_id": 1
+    },
+    {
+     "index": 24,
+     "source_id": 24,
+     "absolute_offset": 136,
+     "raw_byte": "0x0D",
+     "target_id": 13
+    },
+    {
+     "index": 25,
+     "source_id": 25,
+     "absolute_offset": 137,
+     "raw_byte": "0x19",
+     "target_id": 25
+    },
+    {
+     "index": 26,
+     "source_id": 26,
+     "absolute_offset": 138,
+     "raw_byte": "0x1A",
+     "target_id": 26
+    },
+    {
+     "index": 27,
+     "source_id": 27,
+     "absolute_offset": 139,
+     "raw_byte": "0x1B",
+     "target_id": 27
+    },
+    {
+     "index": 28,
+     "source_id": 28,
+     "absolute_offset": 140,
+     "raw_byte": "0x1C",
+     "target_id": 28
+    },
+    {
+     "index": 29,
+     "source_id": 29,
+     "absolute_offset": 141,
+     "raw_byte": "0x1D",
+     "target_id": 29
+    },
+    {
+     "index": 30,
+     "source_id": 30,
+     "absolute_offset": 142,
+     "raw_byte": "0x1E",
+     "target_id": 30
+    },
+    {
+     "index": 31,
+     "source_id": 31,
+     "absolute_offset": 143,
+     "raw_byte": "0x1F",
+     "target_id": 31
+    }
+   ]
+  }
+ },
+ "normalized": {
+  "note": "semantic view for a future .axprofile format; labels marked UNKNOWN are not guessed",
+  "mapkeys_source_to_target": [
+   {
+    "source_id": 0,
+    "source_label_static": "A",
+    "source_label_live": "A",
+    "target_id": 0,
+    "target_label_static": "A",
+    "target_label_live": "A",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 1,
+    "source_label_static": "B",
+    "source_label_live": "B",
+    "target_id": 1,
+    "target_label_static": "B",
+    "target_label_live": "B",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 2,
+    "source_label_static": "Empty",
+    "source_label_live": null,
+    "target_id": 2,
+    "target_label_static": "Empty",
+    "target_label_live": null,
+    "identity_mapping": true
+   },
+   {
+    "source_id": 3,
+    "source_label_static": "X",
+    "source_label_live": "X",
+    "target_id": 3,
+    "target_label_static": "X",
+    "target_label_live": "X",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 4,
+    "source_label_static": "Y",
+    "source_label_live": "Y",
+    "target_id": 4,
+    "target_label_static": "Y",
+    "target_label_live": "Y",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 5,
+    "source_label_static": "UNKNOWN",
+    "source_label_live": null,
+    "target_id": 5,
+    "target_label_static": "UNKNOWN",
+    "target_label_live": null,
+    "identity_mapping": true
+   },
+   {
+    "source_id": 6,
+    "source_label_static": "LB",
+    "source_label_live": "LB",
+    "target_id": 6,
+    "target_label_static": "LB",
+    "target_label_live": "LB",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 7,
+    "source_label_static": "RB",
+    "source_label_live": "RB",
+    "target_id": 7,
+    "target_label_static": "RB",
+    "target_label_live": "RB",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 8,
+    "source_label_static": "LT",
+    "source_label_live": "LT",
+    "target_id": 8,
+    "target_label_static": "LT",
+    "target_label_live": "LT",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 9,
+    "source_label_static": "RT",
+    "source_label_live": null,
+    "target_id": 9,
+    "target_label_static": "RT",
+    "target_label_live": null,
+    "identity_mapping": true
+   },
+   {
+    "source_id": 10,
+    "source_label_static": "View",
+    "source_label_live": "View/Select",
+    "target_id": 10,
+    "target_label_static": "View",
+    "target_label_live": "View/Select",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 11,
+    "source_label_static": "Menu",
+    "source_label_live": "Menu/Start",
+    "target_id": 11,
+    "target_label_static": "Menu",
+    "target_label_live": "Menu/Start",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 12,
+    "source_label_static": "Guide/Xbox",
+    "source_label_live": "Guide/Xbox",
+    "target_id": 12,
+    "target_label_static": "Guide/Xbox",
+    "target_label_live": "Guide/Xbox",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 13,
+    "source_label_static": "L3",
+    "source_label_live": "L3",
+    "target_id": 13,
+    "target_label_static": "L3",
+    "target_label_live": "L3",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 14,
+    "source_label_static": "R3",
+    "source_label_live": "R3",
+    "target_id": 14,
+    "target_label_static": "R3",
+    "target_label_live": "R3",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 15,
+    "source_label_static": "Capture",
+    "source_label_live": "Capture/Share",
+    "target_id": 15,
+    "target_label_static": "Capture",
+    "target_label_live": "Capture/Share",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 16,
+    "source_label_static": "D-pad Up",
+    "source_label_live": "D-pad Up",
+    "target_id": 16,
+    "target_label_static": "D-pad Up",
+    "target_label_live": "D-pad Up",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 17,
+    "source_label_static": "D-pad Down",
+    "source_label_live": "D-pad Down",
+    "target_id": 17,
+    "target_label_static": "D-pad Down",
+    "target_label_live": "D-pad Down",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 18,
+    "source_label_static": "D-pad Left",
+    "source_label_live": "D-pad Left",
+    "target_id": 18,
+    "target_label_static": "D-pad Left",
+    "target_label_live": "D-pad Left",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 19,
+    "source_label_static": "D-pad Right",
+    "source_label_live": "D-pad Right",
+    "target_id": 19,
+    "target_label_static": "D-pad Right",
+    "target_label_live": "D-pad Right",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 20,
+    "source_label_static": "UNKNOWN",
+    "source_label_live": "UNATTRIBUTED - one frame with id 20 appeared in this window; it cannot be tied to RT with confidence",
+    "target_id": 20,
+    "target_label_static": "UNKNOWN",
+    "target_label_live": "UNATTRIBUTED - one frame with id 20 appeared in this window; it cannot be tied to RT with confidence",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 21,
+    "source_label_static": "UNKNOWN",
+    "source_label_live": null,
+    "target_id": 21,
+    "target_label_static": "UNKNOWN",
+    "target_label_live": null,
+    "identity_mapping": true
+   },
+   {
+    "source_id": 22,
+    "source_label_static": "UNKNOWN",
+    "source_label_live": null,
+    "target_id": 22,
+    "target_label_static": "UNKNOWN",
+    "target_label_live": null,
+    "identity_mapping": true
+   },
+   {
+    "source_id": 23,
+    "source_label_static": "M1",
+    "source_label_live": "M1",
+    "target_id": 1,
+    "target_label_static": "B",
+    "target_label_live": "B",
+    "identity_mapping": false
+   },
+   {
+    "source_id": 24,
+    "source_label_static": "M2",
+    "source_label_live": "M2",
+    "target_id": 13,
+    "target_label_static": "L3",
+    "target_label_live": "L3",
+    "identity_mapping": false
+   },
+   {
+    "source_id": 25,
+    "source_label_static": "M3",
+    "source_label_live": "M3",
+    "target_id": 25,
+    "target_label_static": "M3",
+    "target_label_live": "M3",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 26,
+    "source_label_static": "M4",
+    "source_label_live": "M4",
+    "target_id": 26,
+    "target_label_static": "M4",
+    "target_label_live": "M4",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 27,
+    "source_label_static": "M5",
+    "source_label_live": "M5",
+    "target_id": 27,
+    "target_label_static": "M5",
+    "target_label_live": "M5",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 28,
+    "source_label_static": "M6",
+    "source_label_live": "M6",
+    "target_id": 28,
+    "target_label_static": "M6",
+    "target_label_live": "M6",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 29,
+    "source_label_static": "M7",
+    "source_label_live": "M7",
+    "target_id": 29,
+    "target_label_static": "M7",
+    "target_label_live": "M7",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 30,
+    "source_label_static": "UNKNOWN",
+    "source_label_live": "extra button (as pressed by the operator)",
+    "target_id": 30,
+    "target_label_static": "UNKNOWN",
+    "target_label_live": "extra button (as pressed by the operator)",
+    "identity_mapping": true
+   },
+   {
+    "source_id": 31,
+    "source_label_static": "UNKNOWN",
+    "source_label_live": null,
+    "target_id": 31,
+    "target_label_static": "UNKNOWN",
+    "target_label_live": null,
+    "identity_mapping": true
+   }
+  ],
+  "observations": [
+   "every source slot currently maps to its own id (identity mapping) - the unit is on stock mapping",
+   "source id 2 is labelled 'Empty' and source ids 5, 30, 31 have no live-verified physical button",
+   "the ID-15 experiment set abs offset 127 (source slot 15) to 0x02 = the NIL/empty target"
+  ]
+ },
+ "evidence_labels": {
+  "raw bytes": "PROVEN LIVE (captured D6 image)",
+  "labels from live D2 capture": "PROVEN LIVE",
+  "labels from static analysis": "PROVEN STATIC"
+ },
+ "next_format_note": "A community format should store the normalized view plus the raw image; the raw image is the only thing that can be written back byte-exactly."
+}
