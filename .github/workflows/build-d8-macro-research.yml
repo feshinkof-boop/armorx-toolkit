@@ -1,0 +1,91 @@
+name: Build D8 Macro Discovery Research
+
+on:
+  push:
+    branches:
+      - research/d8-macro-autopilot
+    paths:
+      - "windows/ArmorX.Windows/**"
+      - ".github/workflows/build-d8-macro-research.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Assert research/public separation and D8 TX lock
+        shell: pwsh
+        run: |
+          $project = ".\windows\ArmorX.Windows"
+          $runner = Get-Content "$project\Research\D8ResearchWindow.xaml.cs" -Raw
+          if ($runner -match 'OpWriteMacro') {
+            throw "Production D8 discovery runner references OpWriteMacro. D8 TX must remain locked."
+          }
+          if ($runner -match 'FragmentLong\s*\([^\)]*0xD8') {
+            throw "Production D8 discovery runner contains a D8 fragment writer."
+          }
+          $frames = Get-Content "$project\Protocol\ArmorXFrames.cs" -Raw
+          if ($frames -notmatch 'OpGetMacroList\s*=\s*0xD5') { throw "D5 opcode missing." }
+          if ($frames -notmatch 'OpWriteMacro\s*=\s*0xD8') { throw "D8 opcode marker missing." }
+          $app = Get-Content "$project\App.xaml.cs" -Raw
+          if ($app -notmatch 'synthetic-self-test') { throw "Synthetic D8 analyzer self-test missing." }
+          Write-Host "Safety gate PASS: D8 write remains unavailable in the production research runner."
+
+      - name: Restore and compile
+        shell: pwsh
+        run: |
+          dotnet restore .\windows\ArmorX.Windows\ArmorX.Windows.csproj
+          dotnet build .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release --no-restore
+
+      - name: Publish single-file research EXE
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force .\artifacts | Out-Null
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj `
+            -c Release -r win-x64 --self-contained true `
+            -p:PublishSingleFile=true `
+            -p:IncludeNativeLibrariesForSelfExtract=true `
+            -p:DebugType=None -p:DebugSymbols=false `
+            -o .\artifacts\publish
+          Copy-Item .\artifacts\publish\ArmorX-D8-Research.exe .\artifacts\ArmorX-D8-Research-v0.3.0-research.1.exe
+
+      - name: Run core and WPF smoke tests
+        shell: pwsh
+        run: |
+          $exe = ".\artifacts\ArmorX-D8-Research-v0.3.0-research.1.exe"
+          $p = Start-Process $exe -ArgumentList '--self-test' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "D8 research self-test failed with exit code $($p.ExitCode)" }
+          $p = Start-Process $exe -ArgumentList '--ui-smoke' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "D8 research WPF smoke test failed with exit code $($p.ExitCode)" }
+
+      - name: Package exact research source and checksums
+        shell: pwsh
+        run: |
+          git archive --format=zip --output=".\artifacts\ArmorX-D8-Research-v0.3.0-research.1-source.zip" ${{ github.sha }} windows/ArmorX.Windows
+          $files = @(
+            "ArmorX-D8-Research-v0.3.0-research.1.exe",
+            "ArmorX-D8-Research-v0.3.0-research.1-source.zip"
+          )
+          $lines = foreach ($file in $files) {
+            $hash = (Get-FileHash (Join-Path .\artifacts $file) -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $file"
+          }
+          $lines | Set-Content -Encoding ascii .\artifacts\SHA256SUMS.txt
+          Get-Content .\artifacts\SHA256SUMS.txt
+
+      - name: Upload validated research build
+        uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-D8-Research-v0.3.0-research.1
+          path: |
+            artifacts/ArmorX-D8-Research-v0.3.0-research.1.exe
+            artifacts/ArmorX-D8-Research-v0.3.0-research.1-source.zip
+            artifacts/SHA256SUMS.txt
