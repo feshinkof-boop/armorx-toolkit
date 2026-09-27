@@ -1,0 +1,2627 @@
+[
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x0A",
+  "site": "0x91e1cc",
+  "raw": 20
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x0B",
+  "site": "0x91e1e0",
+  "raw": 22
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x10",
+  "site": "0x91e1e8",
+  "raw": 32
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x11",
+  "site": "0x91e1f0",
+  "raw": 34
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x12",
+  "site": "0x91e1f8",
+  "raw": 36
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x13",
+  "site": "0x91e200",
+  "raw": 38
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x0B",
+  "site": "0x91e218",
+  "raw": 22
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x10",
+  "site": "0x91e22c",
+  "raw": 32
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x11",
+  "site": "0x91e240",
+  "raw": 34
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x12",
+  "site": "0x91e254",
+  "raw": 36
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x05",
+  "site": "0x91e3d0",
+  "raw": 10
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_raw",
+  "opcode": "0x0B",
+  "site": "0x91e3e4",
+  "raw": 11
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x08",
+  "site": "0x91e3ec",
+  "raw": 16
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_raw",
+  "opcode": "0x11",
+  "site": "0x91e3f4",
+  "raw": 17
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x09",
+  "site": "0x91e3fc",
+  "raw": 18
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_raw",
+  "opcode": "0x13",
+  "site": "0x91e404",
+  "raw": 19
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_raw",
+  "opcode": "0x0B",
+  "site": "0x91e47c",
+  "raw": 11
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x08",
+  "site": "0x91e4f0",
+  "raw": 16
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_raw",
+  "opcode": "0x11",
+  "site": "0x91e560",
+  "raw": 17
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x09",
+  "site": "0x91e5d0",
+  "raw": 18
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x05",
+  "site": "0x91e9ac",
+  "raw": 10
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x91e184",
+  "kind": "cmp_raw",
+  "opcode": "0x0B",
+  "site": "0x91e9b4",
+  "raw": 11
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x08",
+  "site": "0x921308",
+  "raw": 16
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x11",
+  "site": "0x921310",
+  "raw": 17
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x09",
+  "site": "0x921330",
+  "raw": 18
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x13",
+  "site": "0x921338",
+  "raw": 19
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x13",
+  "site": "0x921344",
+  "raw": 38
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x29",
+  "site": "0x92134c",
+  "raw": 41
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x17",
+  "site": "0x921354",
+  "raw": 46
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x31",
+  "site": "0x92135c",
+  "raw": 49
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x11",
+  "site": "0x921368",
+  "raw": 34
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x25",
+  "site": "0x921370",
+  "raw": 37
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x15",
+  "site": "0x921378",
+  "raw": 42
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x2D",
+  "site": "0x921380",
+  "raw": 45
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x13",
+  "site": "0x92201c",
+  "raw": 38
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x29",
+  "site": "0x922024",
+  "raw": 41
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x17",
+  "site": "0x92202c",
+  "raw": 46
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x31",
+  "site": "0x922034",
+  "raw": 49
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x13",
+  "site": "0x922044",
+  "raw": 38
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x29",
+  "site": "0x92204c",
+  "raw": 41
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x17",
+  "site": "0x92205c",
+  "raw": 46
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x31",
+  "site": "0x922064",
+  "raw": 49
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x11",
+  "site": "0x92217c",
+  "raw": 34
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x25",
+  "site": "0x922184",
+  "raw": 37
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x15",
+  "site": "0x92218c",
+  "raw": 42
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x2D",
+  "site": "0x922194",
+  "raw": 45
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x11",
+  "site": "0x9221a4",
+  "raw": 34
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x25",
+  "site": "0x9221ac",
+  "raw": 37
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x15",
+  "site": "0x9221bc",
+  "raw": 42
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x2D",
+  "site": "0x9221c4",
+  "raw": 45
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x08",
+  "site": "0x9222dc",
+  "raw": 16
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x11",
+  "site": "0x9222e4",
+  "raw": 17
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x08",
+  "site": "0x9222f4",
+  "raw": 16
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x11",
+  "site": "0x9222fc",
+  "raw": 17
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x09",
+  "site": "0x922414",
+  "raw": 18
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x13",
+  "site": "0x92241c",
+  "raw": 19
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x09",
+  "site": "0x92242c",
+  "raw": 18
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x9210a8",
+  "kind": "cmp_raw",
+  "opcode": "0x13",
+  "site": "0x922434",
+  "raw": 19
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7acc9c",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x7acd7c",
+  "raw": 59
+ },
+ {
+  "file": "units/component.dart",
+  "class": "_ChangeKeyDialogState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7acc9c",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x7acd88",
+  "raw": 59
+ },
+ {
+  "file": "units/configbutton.dart",
+  "class": "_ColorPickerViewState",
+  "function": "_ handleTouchWheel(/* No info */) )",
+  "addr": "0x89666c",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x3C",
+  "site": "0x8966ac",
+  "raw": 120
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "static _ changeGamepadDef(/* No info */) )",
+  "addr": "0x79c894",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x79ccd4",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "static _ changeGamepadDef(/* No info */) )",
+  "addr": "0x79c894",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x79ce40",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "static _ changeGamepadDef(/* No info */) )",
+  "addr": "0x79c894",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x79cfd4",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x79e158",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x79eae8",
+  "raw": 59
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x79e158",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x79eaf4",
+  "raw": 59
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7a5758",
+  "raw": 61
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x11",
+  "site": "0x7a5ac8",
+  "raw": 34
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x11",
+  "site": "0x7a5ad0",
+  "raw": 34
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x23",
+  "site": "0x7a5ae8",
+  "raw": 35
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x12",
+  "site": "0x7a5af8",
+  "raw": 36
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x25",
+  "site": "0x7a5b08",
+  "raw": 37
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x13",
+  "site": "0x7a5b18",
+  "raw": 38
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x27",
+  "site": "0x7a5b28",
+  "raw": 39
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x14",
+  "site": "0x7a5b38",
+  "raw": 40
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x29",
+  "site": "0x7a5b48",
+  "raw": 41
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x15",
+  "site": "0x7a5b58",
+  "raw": 42
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x2B",
+  "site": "0x7a5b70",
+  "raw": 43
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x16",
+  "site": "0x7a5b88",
+  "raw": 44
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x2D",
+  "site": "0x7a5ba0",
+  "raw": 45
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x17",
+  "site": "0x7a5bb8",
+  "raw": 46
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x2F",
+  "site": "0x7a5bd0",
+  "raw": 47
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x18",
+  "site": "0x7a5be8",
+  "raw": 48
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x31",
+  "site": "0x7a5c00",
+  "raw": 49
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a5c38",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7a6334",
+  "raw": 61
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a56c4",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7a6510",
+  "raw": 61
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a74c4",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x7a8994",
+  "raw": 59
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a74c4",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x7a89a0",
+  "raw": 59
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet",
+  "function": "List<int> toList(GamepadSet) )",
+  "addr": "0x7a0c50",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a1138",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet",
+  "function": "List<int> toList(GamepadSet) )",
+  "addr": "0x7a0c50",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a11bc",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet",
+  "function": "List<int> toList(GamepadSet) )",
+  "addr": "0x7a0c50",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a1ae4",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet",
+  "function": "List<int> toList(GamepadSet) )",
+  "addr": "0x7a0c50",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a1b00",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet",
+  "function": "List<int> toList(GamepadSet) )",
+  "addr": "0x7a0c50",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a1b48",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "MacroRow",
+  "function": "factory _ MacroRow.fromJson(/* No info */) )",
+  "addr": "0x7a67fc",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7a6b18",
+  "raw": 61
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "MacroRow",
+  "function": "factory _ MacroRow.fromJson(/* No info */) )",
+  "addr": "0x7a67fc",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7a6b70",
+  "raw": 61
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "MacroRow",
+  "function": "factory _ MacroRow.fromJson(/* No info */) )",
+  "addr": "0x7a67fc",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7a6bc8",
+  "raw": 61
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "MacroRow",
+  "function": "factory _ MacroRow.fromJson(/* No info */) )",
+  "addr": "0x7a67fc",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7a6c24",
+  "raw": 61
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a2a3c",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a2af4",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a2b78",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a32a8",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a3368",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a33f4",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a3550",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a3610",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a369c",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a3848",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a3864",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadSet30",
+  "function": "List<int> toList(GamepadSet30) )",
+  "addr": "0x7a1f60",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x7a38ac",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "LightData",
+  "function": "factory _ LightData.fromJson(/* No info */) )",
+  "addr": "0x7a448c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7a4850",
+  "raw": 61
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadParam",
+  "function": "_ GamepadParam(/* No info */) )",
+  "addr": "0x79d264",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x79d6a0",
+  "raw": 63
+ },
+ {
+  "file": "units/gamepadset.dart",
+  "class": "GamepadParam",
+  "function": "_ GamepadParam(/* No info */) )",
+  "addr": "0x79d264",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x79d6b4",
+  "raw": 63
+ },
+ {
+  "file": "units/openurl.dart",
+  "class": "_OpenUrlState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x898cac",
+  "kind": "eq_smi",
+  "opcode": "0x02",
+  "site": "0x898ce0"
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x79263c",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x792670",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x7933dc",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x793410",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x793ca0",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x793cd4",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x7944d8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x79450c",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x795110",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x795144",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x795858",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x79588c",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x796548",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x79657c",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x79725c",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x797290",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x798628",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x79865c",
+  "raw": 400
+ },
+ {
+  "file": "units/server.dart",
+  "class": "::",
+  "function": "[closure] static dynamic <anonymous closure>(dynamic, Response<dynamic>) )",
+  "addr": "0x799464",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0xC8",
+  "site": "0x799498",
+  "raw": 400
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x05",
+  "site": "0x9296e0",
+  "raw": 10
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_raw",
+  "opcode": "0x0B",
+  "site": "0x9296f4",
+  "raw": 11
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x08",
+  "site": "0x9296fc",
+  "raw": 16
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_raw",
+  "opcode": "0x11",
+  "site": "0x929704",
+  "raw": 17
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x09",
+  "site": "0x92970c",
+  "raw": 18
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_raw",
+  "opcode": "0x13",
+  "site": "0x929714",
+  "raw": 19
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_raw",
+  "opcode": "0x0B",
+  "site": "0x929788",
+  "raw": 11
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x08",
+  "site": "0x9297f8",
+  "raw": 16
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_raw",
+  "opcode": "0x11",
+  "site": "0x92987c",
+  "raw": 17
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x09",
+  "site": "0x929900",
+  "raw": 18
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x11",
+  "site": "0x929a00",
+  "raw": 34
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CircleButtonState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x929698",
+  "kind": "cmp_raw",
+  "opcode": "0x31",
+  "site": "0x929a08",
+  "raw": 49
+ },
+ {
+  "file": "units/theme.dart",
+  "class": "_CheckboxPainter",
+  "function": "_ _drawBox(/* No info */) )",
+  "addr": "0x6fa06c",
+  "kind": "cmp_raw",
+  "opcode": "0x0F",
+  "site": "0x6fa118",
+  "raw": 15
+ },
+ {
+  "file": "widgets/home.dart",
+  "class": "_DeviceListState",
+  "function": "[closure] dynamic <anonymous closure>(dynamic, dynamic) )",
+  "addr": "0x8d272c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8d276c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/home.dart",
+  "class": "_DeviceListState",
+  "function": "[closure] dynamic <anonymous closure>(dynamic, dynamic) )",
+  "addr": "0x8d2ae0",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8d2b20",
+  "raw": 61
+ },
+ {
+  "file": "widgets/home.dart",
+  "class": "_DeviceListState",
+  "function": "[closure] dynamic <anonymous closure>(dynamic, dynamic) )",
+  "addr": "0x8d3414",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8d3454",
+  "raw": 61
+ },
+ {
+  "file": "widgets/home.dart",
+  "class": "_DeviceListState",
+  "function": "[closure] dynamic <anonymous closure>(dynamic, dynamic) )",
+  "addr": "0x8d3538",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8d3578",
+  "raw": 61
+ },
+ {
+  "file": "widgets/lang.dart",
+  "class": "LangWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8d5e34",
+  "kind": "eq_smi",
+  "opcode": "0x02",
+  "site": "0x8d5e78"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "_ delConfigResponse(/* No info */) )",
+  "addr": "0x8a9158",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8a94cc",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x89d578",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x89d620",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x52",
+  "site": "0x89b48c",
+  "raw": 164
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0xD6",
+  "site": "0x89b4b4"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x01",
+  "site": "0x89b4ec"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x02",
+  "site": "0x89b578"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x03",
+  "site": "0x89b604"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x04",
+  "site": "0x89b690"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x05",
+  "site": "0x89b71c"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x06",
+  "site": "0x89b7a8"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x07",
+  "site": "0x89b834"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x08",
+  "site": "0x89b8c0"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x09",
+  "site": "0x89b94c"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x0A",
+  "site": "0x89b9d8"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "cmp_raw",
+  "opcode": "0xA5",
+  "site": "0x89bc00",
+  "raw": 165
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0x0E",
+  "site": "0x89bc2c"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0xD4",
+  "site": "0x89bc94"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x89b438",
+  "kind": "eq_smi",
+  "opcode": "0xD7",
+  "site": "0x89bd00"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, BoxCode) )",
+  "addr": "0x92a3c0",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x14",
+  "site": "0x92a404",
+  "raw": 40
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ delMacroResponse(/* No info */) )",
+  "addr": "0x8c1a04",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8c1d78",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ addMacroResponse(/* No info */) )",
+  "addr": "0x8be610",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8becd4",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ changeMacroResponse(/* No info */) )",
+  "addr": "0x8bd310",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8bd794",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ changeMacroResponse(/* No info */) )",
+  "addr": "0x8bd310",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8bde48",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ changeMacroRunkeyResponse(/* No info */) )",
+  "addr": "0x8abe8c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ac330",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ changeMacroRunkeyResponse(/* No info */) )",
+  "addr": "0x8abe8c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ac47c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ changeMacroRepeatResponse(/* No info */) )",
+  "addr": "0x8bf7f8",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8bfcc8",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ onInUse(/* No info */) )",
+  "addr": "0x8c0820",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8c0a0c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ setMacroConfig(/* No info */) )",
+  "addr": "0x8acad0",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8acd30",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ setMacroConfig(/* No info */) )",
+  "addr": "0x8acad0",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ace3c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ setMacroConfig(/* No info */) )",
+  "addr": "0x8acad0",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ad1b0",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ setMacroConfig(/* No info */) )",
+  "addr": "0x8acad0",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ad2bc",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8ae57c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ae5ec",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8ae57c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ae6c4",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8ae57c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ae7e4",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8ae57c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8aea60",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8ae57c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8aeb6c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8ae57c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8aed78",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8ae57c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8aef84",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8ae57c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8af1c8",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8ab51c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ab728",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_config_macro.dart",
+  "class": "_ArmorXProMacroWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8ab51c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ab8d4",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "_ devRegisterResponse(/* No info */) )",
+  "addr": "0x7aa2f8",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x7aa66c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x7ab44c",
+  "kind": "cmp_raw",
+  "opcode": "0xA5",
+  "site": "0x7ab4a0",
+  "raw": 165
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x7ab44c",
+  "kind": "eq_smi",
+  "opcode": "0xEF",
+  "site": "0x7ab4cc"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x7ab44c",
+  "kind": "eq_smi",
+  "opcode": "0x0B",
+  "site": "0x7ab604"
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] List<Widget> <anonymous closure>(dynamic, BuildContext, bool) )",
+  "addr": "0x92c270",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x2D",
+  "site": "0x92c5d4",
+  "raw": 90
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] List<Widget> <anonymous closure>(dynamic, BuildContext, bool) )",
+  "addr": "0x92c270",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x2D",
+  "site": "0x92c5e8",
+  "raw": 90
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] List<Widget> <anonymous closure>(dynamic, BuildContext, bool) )",
+  "addr": "0x92c270",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x23",
+  "site": "0x92c5f0",
+  "raw": 70
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] List<Widget> <anonymous closure>(dynamic, BuildContext, bool) )",
+  "addr": "0x92c270",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x23",
+  "site": "0x92c604",
+  "raw": 70
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] List<Widget> <anonymous closure>(dynamic, BuildContext, bool) )",
+  "addr": "0x92c270",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x14",
+  "site": "0x92c60c",
+  "raw": 40
+ },
+ {
+  "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] List<Widget> <anonymous closure>(dynamic, BuildContext, bool) )",
+  "addr": "0x92c270",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x14",
+  "site": "0x92c620",
+  "raw": 40
+ },
+ {
+  "file": "widgets/rainbow/rainbow_instructions.dart",
+  "class": "_RainbowInstructionsState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8d8104",
+  "kind": "eq_smi",
+  "opcode": "0x02",
+  "site": "0x8d8138"
+ },
+ {
+  "file": "widgets/rainbow/rainbow_root.dart",
+  "class": "_RainbowWidget",
+  "function": "_ devRegisterResponse(/* No info */) )",
+  "addr": "0x7999ec",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x799d60",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_root.dart",
+  "class": "_RainbowWidget",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x7a97f8",
+  "kind": "cmp_raw",
+  "opcode": "0xA5",
+  "site": "0x7a984c",
+  "raw": 165
+ },
+ {
+  "file": "widgets/rainbow/rainbow_root.dart",
+  "class": "_RainbowWidget",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x7a97f8",
+  "kind": "eq_smi",
+  "opcode": "0xEF",
+  "site": "0x7a9878"
+ },
+ {
+  "file": "widgets/rainbow/rainbow_root.dart",
+  "class": "_RainbowWidget",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x7a97f8",
+  "kind": "eq_smi",
+  "opcode": "0x0B",
+  "site": "0x7a99b0"
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_config.dart",
+  "class": "_RainbowDeviceConfigWidgetState",
+  "function": "_ delConfigResponse(/* No info */) )",
+  "addr": "0x8a40c0",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8a4434",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_config.dart",
+  "class": "_RainbowDeviceConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8a03b8",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8a0410",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_config.dart",
+  "class": "_RainbowDeviceConfigWidgetState",
+  "function": "_ initState(/* No info */) )",
+  "addr": "0x8d8918",
+  "kind": "eq_smi",
+  "opcode": "0x02",
+  "site": "0x8d894c"
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_config.dart",
+  "class": "_RainbowDeviceConfigWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8a293c",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x48",
+  "site": "0x8a2a14",
+  "raw": 144
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_light.dart",
+  "class": "_RainbowLightConfigWidgetState",
+  "function": "_ delConfigResponse(/* No info */) )",
+  "addr": "0x8e0ddc",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8e1150",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_light.dart",
+  "class": "_RainbowLightConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8dee08",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8dee60",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_light.dart",
+  "class": "_RainbowLightConfigWidgetState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x944a1c",
+  "kind": "cmp_raw",
+  "opcode": "0x0F",
+  "site": "0x944fc4",
+  "raw": 15
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_light.dart",
+  "class": "_RainbowLightConfigWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8da8b8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x05",
+  "site": "0x8dcd1c",
+  "raw": 10
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ delMacroResponse(/* No info */) )",
+  "addr": "0x8bc634",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8bc9a8",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ addMacroResponse(/* No info */) )",
+  "addr": "0x8b1348",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b1a0c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ changeMacroResponse(/* No info */) )",
+  "addr": "0x8b0084",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b0504",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ changeMacroResponse(/* No info */) )",
+  "addr": "0x8b0084",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b0b88",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ changeMacroRunkeyResponse(/* No info */) )",
+  "addr": "0x8b2624",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b2ac8",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ changeMacroRunkeyResponse(/* No info */) )",
+  "addr": "0x8b2624",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b2c14",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ changeMacroRepeatResponse(/* No info */) )",
+  "addr": "0x8b9b4c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8ba01c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ onInUse(/* No info */) )",
+  "addr": "0x8bab84",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8bad70",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ setMacroConfig(/* No info */) )",
+  "addr": "0x8b2cf8",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b2f58",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ setMacroConfig(/* No info */) )",
+  "addr": "0x8b2cf8",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b3064",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ setMacroConfig(/* No info */) )",
+  "addr": "0x8b2cf8",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b33d8",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ setMacroConfig(/* No info */) )",
+  "addr": "0x8b2cf8",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b34e4",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8af304",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8af374",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8af304",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8af44c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8af304",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8af56c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8af304",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8af7e8",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8af304",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8af8f4",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8af304",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8afb00",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8af304",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8afd0c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "_ pageRet(/* No info */) )",
+  "addr": "0x8af304",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8aff50",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8b1cb4",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b1ec0",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_tab_macro.dart",
+  "class": "_RainbowMacroConfigWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8b1cb4",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x8b206c",
+  "raw": 61
+ },
+ {
+  "file": "widgets/rainbow/rainbow_test.dart",
+  "class": "_RainbowTestState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8e2408",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x09",
+  "site": "0x8e245c",
+  "raw": 18
+ },
+ {
+  "file": "widgets/general/config_macros.dart",
+  "class": "_ConfigMacroWidgetState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x92d24c",
+  "kind": "cmp_raw",
+  "opcode": "0x3D",
+  "site": "0x92d788",
+  "raw": 61
+ },
+ {
+  "file": "widgets/general/config_macros.dart",
+  "class": "_ConfigMacroWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8b5bc8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x05",
+  "site": "0x8b5c10",
+  "raw": 10
+ },
+ {
+  "file": "widgets/general/config_mapkey.dart",
+  "class": "_ConfigMapkeyWidgetState",
+  "function": "_ turboClick(/* No info */) )",
+  "addr": "0x8c96b0",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x8c971c",
+  "raw": 63
+ },
+ {
+  "file": "widgets/general/config_mapkey.dart",
+  "class": "_ConfigMapkeyWidgetState",
+  "function": "_ turboClick(/* No info */) )",
+  "addr": "0x8c96b0",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x8c9780",
+  "raw": 63
+ },
+ {
+  "file": "widgets/general/config_mapkey.dart",
+  "class": "_ConfigMapkeyWidgetState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x92e87c",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x0A",
+  "site": "0x92e9c4",
+  "raw": 20
+ },
+ {
+  "file": "widgets/general/config_mapkey.dart",
+  "class": "_ConfigMapkeyWidgetState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x92e87c",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x0A",
+  "site": "0x92eba4",
+  "raw": 20
+ },
+ {
+  "file": "widgets/general/config_mapkey.dart",
+  "class": "_ConfigMapkeyWidgetState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x92e87c",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x0A",
+  "site": "0x92ed20",
+  "raw": 20
+ },
+ {
+  "file": "widgets/general/config_mapkey.dart",
+  "class": "_ConfigMapkeyWidgetState",
+  "function": "_ build(/* No info */) )",
+  "addr": "0x92e87c",
+  "kind": "cmp_raw",
+  "opcode": "0x3F",
+  "site": "0x92edf0",
+  "raw": 63
+ },
+ {
+  "file": "widgets/general/config_mapkey.dart",
+  "class": "_ConfigMapkeyWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8c8514",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x0A",
+  "site": "0x8c86ac",
+  "raw": 20
+ },
+ {
+  "file": "widgets/general/config_mapkey.dart",
+  "class": "_ConfigMapkeyWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8c8514",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x0A",
+  "site": "0x8c895c",
+  "raw": 20
+ },
+ {
+  "file": "widgets/general/config_motion.dart",
+  "class": "_DeviceSwitchState",
+  "function": "_ labelClick(/* No info */) )",
+  "addr": "0x8c9cac",
+  "kind": "eq_smi",
+  "opcode": "0x10",
+  "site": "0x8c9d54"
+ },
+ {
+  "file": "widgets/general/config_stick.dart",
+  "class": "_ConfigStickWidgetState",
+  "function": "_ setStickButton(/* No info */) )",
+  "addr": "0x8ce914",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x8cea78",
+  "raw": 59
+ },
+ {
+  "file": "widgets/general/config_stick.dart",
+  "class": "_ConfigStickWidgetState",
+  "function": "_ setStickButton(/* No info */) )",
+  "addr": "0x8ce914",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x8cea84",
+  "raw": 59
+ },
+ {
+  "file": "widgets/general/config_stick.dart",
+  "class": "_ConfigStickWidgetState",
+  "function": "_ setStickButton(/* No info */) )",
+  "addr": "0x8ce914",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x8cebdc",
+  "raw": 59
+ },
+ {
+  "file": "widgets/general/config_stick.dart",
+  "class": "_ConfigStickWidgetState",
+  "function": "_ setStickButton(/* No info */) )",
+  "addr": "0x8ce914",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x8cebe8",
+  "raw": 59
+ },
+ {
+  "file": "widgets/general/config_stick.dart",
+  "class": "_ConfigStickWidgetState",
+  "function": "_ setLeftCurve(/* No info */) )",
+  "addr": "0x8cdc24",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x8cde54",
+  "raw": 59
+ },
+ {
+  "file": "widgets/general/config_stick.dart",
+  "class": "_ConfigStickWidgetState",
+  "function": "_ setLeftCurve(/* No info */) )",
+  "addr": "0x8cdc24",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x8cde60",
+  "raw": 59
+ },
+ {
+  "file": "widgets/general/config_stick.dart",
+  "class": "_ConfigStickWidgetState",
+  "function": "_ setRightCurve(/* No info */) )",
+  "addr": "0x8cbce0",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x8cbf10",
+  "raw": 59
+ },
+ {
+  "file": "widgets/general/config_stick.dart",
+  "class": "_ConfigStickWidgetState",
+  "function": "_ setRightCurve(/* No info */) )",
+  "addr": "0x8cbce0",
+  "kind": "cmp_raw",
+  "opcode": "0x3B",
+  "site": "0x8cbf1c",
+  "raw": 59
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "_ initState(/* No info */) )",
+  "addr": "0x8cf6a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x18",
+  "site": "0x8cf80c",
+  "raw": 48
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "_ initState(/* No info */) )",
+  "addr": "0x8cf6a8",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x48",
+  "site": "0x8cf8d8",
+  "raw": 144
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8a64b4",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x18",
+  "site": "0x8a64f0",
+  "raw": 48
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x52",
+  "site": "0x8a6a58",
+  "raw": 164
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0xD6",
+  "site": "0x8a6a80"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x01",
+  "site": "0x8a6ab8"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x02",
+  "site": "0x8a6b40"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x03",
+  "site": "0x8a6bcc"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x04",
+  "site": "0x8a6c58"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x05",
+  "site": "0x8a6ce4"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x06",
+  "site": "0x8a6d70"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "cmp_smi_or_raw",
+  "opcode": "0x18",
+  "site": "0x8a6d9c",
+  "raw": 48
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x07",
+  "site": "0x8a70a4"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x08",
+  "site": "0x8a7130"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x09",
+  "site": "0x8a71bc"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0x0A",
+  "site": "0x8a7248"
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "cmp_raw",
+  "opcode": "0xA5",
+  "site": "0x8a7b24",
+  "raw": 165
+ },
+ {
+  "file": "widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+  "addr": "0x8a6a04",
+  "kind": "eq_smi",
+  "opcode": "0xD7",
+  "site": "0x8a7b50"
+ }
+]

@@ -1,0 +1,312 @@
+{
+ "build": "2.22.0901",
+ "serializers_present": [
+  {
+   "class": "GamepadSet30",
+   "family": "144",
+   "length": 144,
+   "file": "units/gamepadset.dart",
+   "toList_addr": "0x7a1a7c (approximate start of the GP30 toList block; CRC prologue 0x7a3798-0x7a37c8, param insert 0x7a3770 region, sublist(2,144) @0x7a37d0)",
+   "evidence": "PROVEN STATIC",
+   "structure": "bytes0-1 CRC BE; bytes2-3 length BE (144); bytes4-111 parameter block (108 bytes) via replaceRange(4,112,paramList); bytes112-143 mapKeys[32] via replaceRange(112,144,map)",
+   "note": "this is the ARMOR-X Pro serializer"
+  },
+  {
+   "class": "GamepadSet",
+   "family": "88",
+   "length": 88,
+   "file": "units/gamepadset.dart",
+   "toList_addr": "0x7a0ba4 (CRC prologue 0x79cf84 / 0x7a1a80 region; replaceRange(56,88,map) and sublist(2,88))",
+   "evidence": "PROVEN STATIC",
+   "structure": "bytes0-1 CRC BE; bytes2-3 length BE (88); bytes4-55 parameter block (52 bytes); bytes56-87 mapKeys[32]"
+  }
+ ],
+ "serializers_absent": [
+  240,
+  280,
+  335,
+  456,
+  484,
+  508
+ ],
+ "absent_evidence": "see grep results: ZERO mov-immediate hits for Smi 0x1e0(240), 0x230(280), 0x1c8(456), 0x1e4(484), 0x1fc(508) in asm/moojiang; only 88 (Smi 0xb0) and 144 (Smi 0x120) occur, 2 hits each.",
+ "armorx_pro_serializer": {
+  "class": "GamepadSet30",
+  "param_class": "GamepadParam30",
+  "config_length": 144,
+  "evidence": "PROVEN STATIC",
+  "file": "units/gamepadset.dart"
+ },
+ "armorx_144_byte_position_map": {
+  "0-1": {
+   "role": "CRC-16/MODBUS, big-endian",
+   "writer": "inline CRC loop in GamepadSet30::toList",
+   "evidence": "PROVEN STATIC"
+  },
+  "2-3": {
+   "role": "config length, big-endian",
+   "value": 144,
+   "writer": "field_b of the frame list",
+   "evidence": "PROVEN STATIC"
+  },
+  "4-111": {
+   "role": "parameter block, 108 bytes",
+   "writer": "replaceRange(4,112,paramList)",
+   "evidence": "PROVEN STATIC"
+  },
+  "112-143": {
+   "role": "mapKeys[32]",
+   "writer": "replaceRange(112,144,map)",
+   "evidence": "PROVEN STATIC"
+  }
+ },
+ "verified_field_positions": [
+  {
+   "config_byte": 4,
+   "param_index": 0,
+   "field": "GamepadParam30.motorSpeedIdx",
+   "evidence": "STRONG EVIDENCE",
+   "site": "param[0] store in GamepadSet30::toList"
+  },
+  {
+   "config_byte": 5,
+   "param_index": 1,
+   "field": "GamepadParam30.motorMax",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 9,
+   "param_index": 5,
+   "field": "GamepadParam30.triggerMode",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 10,
+   "param_index": 6,
+   "field": "GamepadParam30.triggerLeftDZ (deadzone center)",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 69,
+   "param_index": 65,
+   "field": "GamepadParam30.sensorSwitch u32 BE (byte 0)",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 70,
+   "param_index": 66,
+   "field": "sensorSwitch byte 1",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 71,
+   "param_index": 67,
+   "field": "sensorSwitch byte 2",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 72,
+   "param_index": 68,
+   "field": "sensorSwitch byte 3 (LSB)",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 80,
+   "param_index": 76,
+   "field": "GamepadParam30.turboSpeedIdx",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 81,
+   "param_index": 77,
+   "field": "GamepadParam30.turboKey u32 BE (MSB)",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "config_byte": 84,
+   "param_index": 80,
+   "field": "GamepadParam30.turboKey u32 BE (LSB)",
+   "evidence": "STRONG EVIDENCE"
+  }
+ ],
+ "literal_store_param_indices": [
+  0,
+  1,
+  5,
+  6,
+  7,
+  8,
+  9,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  32,
+  33,
+  34,
+  35,
+  36,
+  40,
+  41,
+  42,
+  43,
+  44,
+  45,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  56,
+  57,
+  58,
+  59,
+  60
+ ],
+ "param_indices_written_via_computed_index": [
+  2,
+  3,
+  4,
+  10,
+  22,
+  23,
+  30,
+  31,
+  37,
+  38,
+  39,
+  46,
+  47,
+  54,
+  55,
+  61,
+  62,
+  63,
+  64,
+  65,
+  66,
+  67,
+  68,
+  69,
+  70,
+  71,
+  72,
+  73,
+  74,
+  75,
+  76,
+  77,
+  78,
+  79,
+  80,
+  81,
+  82,
+  83,
+  84,
+  85,
+  86,
+  87,
+  88,
+  89,
+  90,
+  91,
+  92,
+  93,
+  94,
+  95,
+  96,
+  97,
+  98,
+  99,
+  100,
+  101,
+  102,
+  103,
+  104,
+  105,
+  106,
+  107
+ ],
+ "comparison_vs_408": {
+  "source": "/home/salamanka/armorx-lab/baselines/imported-research/config-144-reconstruction.md",
+  "result": "MATCH on every cross-checked position",
+  "positions": [
+   {
+    "pos": "bytes 0-1",
+    "v408": "CRC-16/MODBUS big-endian",
+    "v222": "identical",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "bytes 2-3",
+    "v408": "length big-endian",
+    "v222": "identical",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "bytes 4-111",
+    "v408": "108-byte parameter block",
+    "v222": "replaceRange(4,112,...)",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "bytes 112-143",
+    "v408": "mapKeys[32]",
+    "v222": "replaceRange(112,144,map)",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "byte 5",
+    "v408": "motorMax",
+    "v222": "motorMax",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "byte 9",
+    "v408": "triggerMode",
+    "v222": "triggerMode",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "byte 10",
+    "v408": "triggerLeftDeadzone",
+    "v222": "triggerLeftDZ",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "bytes 69-72",
+    "v408": "sensorSwitch u32 BE",
+    "v222": "sensorSwitch u32 BE",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "byte 80",
+    "v408": "turboSpeedIdx",
+    "v222": "turboSpeedIdx",
+    "verdict": "MATCH"
+   },
+   {
+    "pos": "bytes 81-84",
+    "v408": "turboKey u32 BE",
+    "v222": "turboKey u32 BE",
+    "verdict": "MATCH"
+   }
+  ],
+  "discrepancy_note": "The 4.0.8 document is internally inconsistent: its section-2 cross-check list says '80 turboSpeedIdx, 81-84 turboKey u32 BE' while its section-3 table says bytes 76 and 77-80. The 2.22 evidence (param[76]->byte80, param[77..80]->bytes81..84) agrees with section 2. Treat the section-3 rows 76/77-80 as an off-by-four transcription slip in that document, not as a real difference.",
+  "gap_structure_note": "2.22's literal stores leave gaps at param indices [2,3,4,10,22,23,30,31,37,38,39,46,47,54,55]; 4.0.8 likewise leaves byte 8 (UNKNOWN) and others unwritten. Full byte-for-byte equivalence of the untouched residue cannot be asserted from 2.22 alone."
+ }
+}

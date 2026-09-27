@@ -1,0 +1,285 @@
+[
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+  "class": "::",
+  "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x79c5d4",
+  "array": [
+   165,
+   5,
+   14,
+   0,
+   0
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 14,
+    "data": [
+     0
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 184,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x89adac",
+  "array": [
+   165,
+   4,
+   212,
+   0
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 212,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 125,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+  "class": "_ArmorXProConfigWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x89bff8",
+  "array": [
+   165,
+   4,
+   214,
+   0
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 214,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 127,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7aadd0",
+  "array": [
+   165,
+   12,
+   239,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 12,
+    "opcode": 239,
+    "data": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 160,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7ab7f8",
+  "array": [
+   165,
+   4,
+   11,
+   0
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 11,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 180,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+  "class": "_RainbowWidget",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x79c074",
+  "array": [
+   165,
+   12,
+   239,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 12,
+    "opcode": 239,
+    "data": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 160,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+  "class": "_RainbowWidget",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x7a9b8c",
+  "array": [
+   165,
+   4,
+   11,
+   0
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 11,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 180,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+  "class": "_RainbowTestState",
+  "function": "_ testModeSwitch1(/* No info */) )",
+  "addr": "0x8e1efc",
+  "array": [
+   165,
+   5,
+   210,
+   0,
+   124
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 210,
+    "data": [
+     0
+    ],
+    "stored_checksum": 124,
+    "computed_checksum": 124,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+  "class": "_RainbowTestState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8e3be4",
+  "array": [
+   165,
+   5,
+   210,
+   1,
+   125
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 210,
+    "data": [
+     1
+    ],
+    "stored_checksum": 125,
+    "computed_checksum": 125,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+  "addr": "0x8a60f4",
+  "array": [
+   165,
+   4,
+   214,
+   0
+  ],
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 214,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 127,
+    "checksum_ok": true
+   }
+  ]
+ }
+]

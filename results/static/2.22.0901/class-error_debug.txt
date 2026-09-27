@@ -1,0 +1,2080 @@
+	>, but no `catchError` was provided.
+	FileSystemException: Cannot open file
+	errorCode
+	exception
+                Previous 'emit' call has thrown exception 
+            // TODO: Right now the distance to circle calculation is performed in a space normalized
+            Flow exception transparency is violated:
+        }.firstOrError()
+      // Will throw a ProviderNotFoundError, because `context` is associated
+  //   value in binary format, or produce an error.
+  ComposedException 
+ <invalid Dart instruction address>
+ Exception in completion handler 
+ Failed assertion:
+ Failed to monitor adapter state.
+ Failed to parse HTTP, 
+ Failed to parse header value [
+ IFlutterError8
+ Landroid/os/DeadObjectException;
+ Ljava/lang/InterruptedException;
+ Ljava/lang/NoClassDefFoundError;
+ Ljava/lang/NoSuchFieldException;
+ Ljava/lang/NullPointerException;
+ error 
+ errorCallback
+ exceptions occurred. 
+ failed with status 
+ lerrorDetail
+ newUninitializedMessageException
+ no-asserts
+ read failed
+!.Invalid response status code with 
+!3I error 
+!Dart_IsError( Dart_TypedDataAcquireData(data_handle, &type, &data, &num_acquired))
+!Landroid/webkit/WebResourceError;
+!Ljava/lang/IllegalStateException;
+!Ljava/lang/NoSuchMethodException;
+!Ljava/lang/NumberFormatException;
+!LogIfError(allow_insecure_connections_result)
+!LogIfError(embedder_config_type)
+!LogIfError(http_connection_hook_closure)
+!LogIfError(http_lib)
+!LogIfError(result)
+!LogIfError(set_domain_network_policy_result)
+!LogIfError(set_http_connection_hook_result)
+!]AbstractClassInstantiationError
+!_Future@4048458.immediateError
+!_debugReportException@598042623
+!function(t,o){"object"==typeof module&&module.exports?module.exports=o():t.Toastify=o()}(this,(function(t){var o=function(t){return new o.lib.init(t)};function i(t,o){return o.offset[t]?isNaN(o.offset[t])?o.offset[t]:o.offset[t]+"px":"0px"}function s(t,o){return!(!t||"string"!=typeof o)&&!!(t.className&&t.className.trim().split(/\s+/gi).indexOf(o)>-1)}return o.lib=o.prototype={toastify:"1.9.3",constructor:o,init:function(t){return t||(t={}),this.options={},this.toastElement=null,this.options.text=t.text||"Hi there!",this.options.node=t.node,this.options.duration=0===t.duration?0:t.duration||3e3,this.options.selector=t.selector,this.options.callback=t.callback||function(){},this.options.destination=t.destination,this.options.newWindow=t.newWindow||!1,this.options.close=t.close||!1,this.options.gravity="bottom"===t.gravity?"toastify-bottom":"toastify-top",this.options.positionLeft=t.positionLeft||!1,this.options.position=t.position||"",this.options.backgroundColor=t.backgroundColor,this.options.avatar=t.avatar||"",this.options.className=t.className||"",this.options.stopOnFocus=void 0===t.stopOnFocus||t.stopOnFocus,this.options.onClick=t.onClick,this.options.offset=t.offset||{x:0,y:0},this},buildToast:function(){if(!this.options)throw"Toastify is not initialized";var t=document.createElement("div");if(t.className="toastify on "+this.options.className,this.options.position?t.className+=" toastify-"+this.options.position:!0===this.options.positionLeft?(t.className+=" toastify-left",console.warn("Property `positionLeft` will be depreciated in further versions. Please use `position` instead.")):t.className+=" toastify-right",t.className+=" "+this.options.gravity,this.options.backgroundColor&&(t.style.background=this.options.backgroundColor),this.options.node&&this.options.node.nodeType===Node.ELEMENT_NODE)t.appendChild(this.options.node);else if(t.innerHTML=this.options.text,""!==this.options.avatar){var o=document.createElement("img");o.src=this.options.avatar,o.className="toastify-avatar","left"==this.options.position||!0===this.options.positionLeft?t.appendChild(o):t.insertAdjacentElement("afterbegin",o)}if(!0===this.options.close){var s=document.createElement("span");s.innerHTML="&#10006;",s.className="toast-close",s.addEventListener("click",function(t){t.stopPropagation(),this.removeElement(this.toastElement),window.clearTimeout(this.toastElement.timeOutValue)}.bind(this));var n=window.innerWidth>0?window.innerWidth:screen.width;("left"==this.options.position||!0===this.options.positionLeft)&&n>360?t.insertAdjacentElement("afterbegin",s):t.appendChild(s)}if(this.options.stopOnFocus&&this.options.duration>0){var e=this;t.addEventListener("mouseover",(function(o){window.clearTimeout(t.timeOutValue)})),t.addEventListener("mouseleave",(function(){t.timeOutValue=window.setTimeout((function(){e.removeElement(t)}),e.options.duration)}))}if(void 0!==this.options.destination&&t.addEventListener("click",function(t){t.stopPropagation(),!0===this.options.newWindow?window.open(this.options.destination,"_blank"):window.location=this.options.destination}.bind(this)),"function"==typeof this.options.onClick&&void 0===this.options.destination&&t.addEventListener("click",function(t){t.stopPropagation(),this.options.onClick()}.bind(this)),"object"==typeof this.options.offset){var a=i("x",this.options),p=i("y",this.options),r="left"==this.options.position?a:"-"+a,l="toastify-top"==this.options.gravity?p:"-"+p;t.style.transform="translate("+r+","+l+")"}return t},showToast:function(){var t;if(this.toastElement=this.buildToast(),!(t=void 0===this.options.selector?document.body:document.getElementById(this.options.selector)))throw"Root element is not defined";return t.insertBefore(this.toastElement,t.firstChild),o.reposition(),this.options.duration>0&&(this.toastElement.timeOutValue=window.setTimeout(function(){this.removeElement(this.toastElement)}.bind(this),this.options.duration)),this},hideToast:function(){this.toastElement.timeOutValue&&clearTimeout(this.toastElement.timeOutValue),this.removeElement(this.toastElement)},removeElement:function(t){t.className=t.className.replace(" on",""),window.setTimeout(function(){this.options.node&&this.options.node.parentNode&&this.options.node.parentNode.removeChild(this.options.node),t.parentNode&&t.parentNode.removeChild(t),this.options.callback.call(t),o.reposition()}.bind(this),400)}},o.reposition=function(){for(var t,o={top:15,bottom:15},i={top:15,bottom:15},n={top:15,bottom:15},e=document.getElementsByClassName("toastify"),a=0;a<e.length;a++){t=!0===s(e[a],"toastify-top")?"toastify-top":"toastify-bottom";var p=e[a].offsetHeight;t=t.substr(9,t.length-1);(window.innerWidth>0?window.innerWidth:screen.width)<=360?(e[a].style[t]=n[t]+"px",n[t]+=p+15):!0===s(e[a],"toastify-left")?(e[a].style[t]=o[t]+"px",o[t]+=p+15):(e[a].style[t]=i[t]+"px",i[t]+=p+15)}return this},o.lib.init.prototype=o.lib,o}));
+"Failed to resize the platform view
+"Invalid type8
+"Ljava/lang/ClassNotFoundException;
+"Ljava/lang/IllegalAccessException;
+"Ljava/lang/InstantiationException;
+"Ljava/util/NoSuchElementException;
+"Nonnull field "errorCode" is null.
+"convertConnectionErrorToDeviceInfo
+"dLateError.fieldNI
+"integration-testing_debugAgentTest
+"p*uConnectionError
+#(FallThroughError._create@0150898
+#ApiError
+#Failed to access getChildId method.
+#Failed to handle method call result
+#GetLastError8
+#Invalid header field name, with 
+#Protocol message had invalid UTF-8.
+#SocketException
+#_completeOnAsyncError
+#base: disabled by previous error
+#gif: internal error: inconsistent ri/wi
+#lzw: internal error: inconsistent I/O
+#presentError8
+#skip returned invalid result: 
+$Checksum check failed.
+$Failed to load embedding extension: 
+$Invalid device posture getter/setter
+$Invalid value in input: 
+$Ljava/lang/IllegalArgumentException;
+$Received exception while registering
+$_CompileTimeError
+$package:http/src/exception.dart
+%ErrorDescription.
+%Failed to close existing event stream
+%Invalid display feature getter/setter
+%Ljava/lang/IndexOutOfBoundsException;
+%Ljava/util/ServiceConfigurationError;
+%_DelayedError@4048458
+%s expects argument 'handle' to be an error handle.  Did you forget to check Dart_IsError first?
+%s failed to acquire mutex
+%s failed to broadcast
+%s failed to release mutex
+%s: %d: error: 
+%s: invalid index %d passed in to access native instance field
+%s: invalid index %d passed in to set native instance field
+%s:%d: fatal error: "---- did not expect to get called here"
+%s:%d: fatal error: "Allocation too large (%zu bytes requested)"
+%s:%d: fatal error: "Buffer size is too big."
+%s:%d: fatal error: "Can't flatten with already drawn."
+%s:%d: fatal error: "Color transform intrinsics not allowed."
+%s:%d: fatal error: "GrSlug drawing not supported."
+%s:%d: fatal error: "Illegal texture sampler index"
+%s:%d: fatal error: "Internal error: not a generic type"
+%s:%d: fatal error: "Internal error: not a struct"
+%s:%d: fatal error: "Invalid GrMaskFormat"
+%s:%d: fatal error: "Invalid Size"
+%s:%d: fatal error: "Invalid interpolation"
+%s:%d: fatal error: "Invalid round rect type."
+%s:%d: fatal error: "Invalid type"
+%s:%d: fatal error: "JPEG error with no jmp_buf set."
+%s:%d: fatal error: "Manual framebuffer barrier not supported."
+%s:%d: fatal error: "No children allowed."
+%s:%d: fatal error: "Not implemented."
+%s:%d: fatal error: "RRect should always be simple or nine-patch."
+%s:%d: fatal error: "Should have been one of the above cases."
+%s:%d: fatal error: "Sigma is out of range."
+%s:%d: fatal error: "SkBitmap::tryAllocPixels failed ColorType:%d AlphaType:%d [w:%d h:%d] rb:%zu"
+%s:%d: fatal error: "Subclass must override this if advertising this optimization."
+%s:%d: fatal error: "This is not a subclass of GrBlobSubRun."
+%s:%d: fatal error: "This should never wrap as it should only be called once for each GrOp subclass."
+%s:%d: fatal error: "Too many Resource Types"
+%s:%d: fatal error: "Too many skgpu::UniqueKey Domains"
+%s:%d: fatal error: "Unexpected GL texture target."
+%s:%d: fatal error: "Unexpected blend mode."
+%s:%d: fatal error: "Unexpected degenerate test stage."
+%s:%d: fatal error: "Unexpected mode"
+%s:%d: fatal error: "Unexpected origin"
+%s:%d: fatal error: "Unexpected samper type"
+%s:%d: fatal error: "Unexpected texture target"
+%s:%d: fatal error: "Unexpected texture type"
+%s:%d: fatal error: "Unhandled format."
+%s:%d: fatal error: "Uninitialized occluder type?"
+%s:%d: fatal error: "Unknown GrBackend"
+%s:%d: fatal error: "Unknown mask format."
+%s:%d: fatal error: "Unknown region op."
+%s:%d: fatal error: "Unknown shader var type."
+%s:%d: fatal error: "Unknown shader variable type modifier."
+%s:%d: fatal error: "Unknown vertex attrib type"
+%s:%d: fatal error: "Unsupported output type."
+%s:%d: fatal error: "Unsupported type conversion"
+%s:%d: fatal error: "assert(%s)"
+%s:%d: fatal error: "emitBlendCodeForDstRead not implemented."
+%s:%d: fatal error: "emitOutputsForBlendState not implemented."
+%s:%d: fatal error: "error: %.*s
+%s:%d: fatal error: "error: %s: %d: %.*sNo SkSL error reporter configured, treating this as a fatal error
+%s:%d: fatal error: "fixedFunctionFlags() not implemented."
+%s:%d: fatal error: "internal error; setting was not folded to a constant during compilation
+%s:%d: fatal error: "invalid GrPrimitiveType"
+%s:%d: fatal error: "non-mesh-based GrPrimitiveType"
+%s:%d: fatal error: "unexpected CT"
+%s:%d: fatal error: "unexpected enum"
+%s:%d: fatal error: "uniforms not allowed"
+%s:%d: fatal error: "unknown segType"
+%s:%d: fatal error: "unsupported binary operator"
+%s:%d: fatal error: "unsupported matrix column count (%d)"
+%s:%d: fatal error: "unsupported matrix type"
+%s:%d: fatal error: "unsupported positioning mode"
+%s:%d: fatal error: "unsupported prefix operator"
+%s:%d: fatal error: "unsupported row count (%d)"
+%s:%d: fatal error: "unsupported symbol type %d
+%s:%d: fatal error: "unsupported vector column count (%d)"
+%s:%d: fatal error: "unsupported vector type"
+&init:_webNonDebugFramePattern@283425567
+&wData on failed connection
+'#read(byte[]) returned invalid result: 
+'%s': Failed type check: line %d pos %d: 
+'%s': Failed type check: line %ld pos %ld: 
+': Failed assertion: line 
+'Ljava/util/concurrent/TimeoutException;
+'Lorg/xmlpull/v1/XmlPullParserException;
+'Scan failed because feature unsupported
+'_processUncaughtError@4048458
+'dart:_internal/errors.dart
+'get:addError8
+'init:debugPrint
+(Error Code: %X + idx: %d )
+(Error Code: %X + idx: %ld )
+(Failed to access getParentNodeId method.
+(Failed to access getSourceNodeId method.
+(GFlutterErrorDetails
+(Ljava/lang/ReflectiveOperationException;
+(Ljava/security/NoSuchAlgorithmException;
+(ML3Invalid data.
+(Scan failed because of an internal error
+(Unknown error
+)Ljava/lang/UnsupportedOperationException;
+)Ljava/security/PrivilegedExceptionAction;
+)Ljava/security/PrivilegedExceptionAction<
+)PlatformException(
+)RequestConnectionPriorityFailed(deviceId=
+)error(Throwable(connection.errorMessage))
+*FormatException.
+*Invalid cookie date 8
+*Ljava/lang/ArrayIndexOutOfBoundsException;
+*Scan failed because it has already started
+*UnimplementedError
+*aInvalid Type8
+*gL+InvalidOperation
+*get:_hasError@439181401
++Debug metadata version mismatch. Expected: 
++Error while calling the start scan function
++Landroid/content/ActivityNotFoundException;
++LanguageError
++LateError
++Ljava/lang/Thread$UncaughtExceptionHandler;
++Ljava/util/ConcurrentModificationException;
++PathException
++Protocol message tag had invalid wire type.
++RemoteError.8
++Sending memory pressure warning to Flutter.
++createConnectionError
++toDebugString
+, debuggingEnabled: 
+, errorMessage=
+, exceptions=
+, invalid port '
+, invalid port \'
+, threw an IOException (should never happen).
+,$errorType
+,:Ciget:onError
+,AEfailedToConnect
+,CY server_error_connect_failed
+,Error while trying to connect via reflection
+,ErrorHint.
+,Fatal exception in coroutines machinery for 
+,Ljava/util/concurrent/CancellationException;
+,\"get:_ignoreError@4048458
+,_RenderFlex&RenderBox&ContainerRenderObjectMixin&RenderBoxContainerDefaultsMixin&DebugOverflowIndicatorMixin@520478290
+,kotlin/coroutines/jvm/internal/DebugProbesKt
+--timeline_streams=Compiler,Dart,Debugger,Embedder,GC,Isolate,VM,API
+-Error while processing client operation queue
+-Exception in undelivered element handler for 
+-HTTP request failed. Client is already closed.
+-Invalid value
+-Ljava/lang/reflect/InvocationTargetException;
+-ProviderNullException
+-RedirectException
+-Scan failed because out of hardware resources
+-Uncaught exception in binary message listener
+-_HelperError@389019562
+-package:xml/src/xml/utils/exceptions.dart
+-~UnimplementedError: 8
+.&get:server_error_timeout
+../../third_party/dart/runtime/vm/exceptions.cc
+.@IsolateSpawnException
+.AXmlException8
+.Exception in invokeOnCancellation handler for 
+.IndexError
+.Lkotlinx/coroutines/CoroutineExceptionHandler;
+// `INVALID_ARGUMENT` error if any path is unmappable.
+// a field mask, producing an error if not.
+// variants, absence of any variant indicates an error.
+/ErrorWidget
+/Exception in resume onCancellation handler for 
+/OSError_inProgressErrorCode
+/[LateInitializationError: 
+/[Lkotlinx/coroutines/CoroutineExceptionHandler;
+/_buildErrorResponse@609206865
+/_errorCodeToErrorType@1415267066
+/o_exceptionOrErrorFromResponse@14069316
+/package:protobuf/src/protobuf/field_error.dart
+/sys/kernel/debug/tracing/trace_marker
+0(Invalid encoding before padding
+02Error_throwWithStackTrace
+0Connection using reflection failed, closing gatt
+0GATT exception from MAC address %s, with type %s
+0Invalid format: Invalid/Unsupported security dictionary.
+0Lkotlinx/coroutines/CoroutineExceptionHandler$a;
+0cancelOnError
+0}_FlutterErrorDetailsNode@264022608
+0~Invalid unicode escape
+1 Invalid base64 padding, more than two '=' characters8
+1441d6b13b8623fa7fbf61433abebd31product no-code_comments no-dwarf_stack_traces_mode lazy_async_stacks no-lazy_dispatchers dedup_instructions no-asserts arm-eabi softfp no-compressed-pointers null-safety
+1441d6b13b8623fa7fbf61433abebd31product no-code_comments no-dwarf_stack_traces_mode lazy_async_stacks no-lazy_dispatchers dedup_instructions no-asserts arm64-sysv compressed-pointers null-safety
+1441d6b13b8623fa7fbf61433abebd31product no-code_comments no-dwarf_stack_traces_mode lazy_async_stacks no-lazy_dispatchers dedup_instructions no-asserts x64-sysv compressed-pointers null-safety
+1Cannot open an encrypted document. The password is invalid.
+1Error while processing connection operation queue
+1FfailedSslHandshake
+1Landroid/content/res/Resources$NotFoundException;
+1Ljava/util/concurrent/RejectedExecutionException;
+1Protocol message contained an invalid tag (zero).
+1The errorMapper returned a null CompletableSource
+1VersionedParcel encountered NoSuchMethodException
+1_evaluateAssertion
+1kotlinx/coroutines/debug/internal/DebugProbesImpl
+1onWebResourceError
+2998InvalidParameter
+2ClassCastException("Inst
+2CyclicInitializationError.
+2Failed to access the getRecordSourceNodeId method.
+2Invalid Format: V and R entries of the Encryption dictionary does not match.8
+2Invalid format
+2Uncaught exception in binary message reply handler
+2VersionedParcel encountered ClassNotFoundException
+2VersionedParcel encountered IllegalAccessException
+2djconvertWindowsErrorToString
+2dumpErrorToConsole
+2error(IllegalStateExcept
+2errorMaxLines: "
+3Invalid cross reference table.
+3Lkotlinx/coroutines/debug/internal/DebugProbesImpl;
+3RangeError (index): Index out of range
+3Scan failed because application registration failed
+3_ErrorImageCompleter@484477495
+3_cancelAndErrorClosure@4048458
+3_handleError@40484588
+3finishRequestWithError
+3package:flutter/src/rendering/error.dart
+3set:_errorMessage@14069316
+4Cannot send errors on sockets
+4Exception while trying to handle coroutine exception
+4Failed to parse header value8
+4Invalid UTF-8 byte
+4Invalid arguments for 'overflow' method sent to dev.flutter/channel-buffers (second argument must be a boolean)
+4Landroid/provider/Settings$SettingNotFoundException;
+4QueueOperation terminated with a DeadObjectException
+4_InvalidConnectionState@1068393572
+4_invalidArgument@14069316
+4`get:errorLock
+4get:errorText
+4package:path/src/path_exception.dart8
+5	Internal error: unexpected format for ready message: '
+5Reading from byte array should not throw IOException.
+5VersionedParcel encountered InvocationTargetException
+5_printDebugString@16065589
+5get:no_location_permission_error
+5~_FlutterError&Error&DiagnosticableTreeMixin@264022608
+6FU_evaluateAssertion@0150898
+6H_error@1334379619
+6Invalid proxy configuration 8
+6Qhchannel-error
+6QueueOperation terminated with an unexpected exception
+6The getChildId method threw an exception when invoked.
+6WebResourceErrorData8
+6tonReceivedError
+6tpackage:flutter/src/foundation/debug.dart
+7!_exceptionFromResponse@14069316
+7': Failed assertion: line 
+73MissingPluginException(
+7Connection failed
+7Invalid surface. The platform view cannot be displayed.
+7Invalid texture. The platform view cannot be displayed.
+7Lkotlinx/coroutines/android/AndroidExceptionPreHandler;
+7_rootHandleUncaughtError@4048458
+7hS_buildError@389019562
+7ipackage:flutter/src/rendering/debug_overflow_indicator.dart
+8 gsFailed to decode data using encoding '
+8Actually not, but can't throw other exceptions due to RS
+8Lcom/signify/hue/flutterreactiveble/model/ScanErrorType;
+8Module with the Main dispatcher had failed to initialize
+8_RenderFlex&RenderBox&ContainerRenderObjectMixin&RenderBoxContainerDefaultsMixin&DebugOverflowIndicatorMixin@520478290.
+91_createErrorWidget@6403580318
+9IntegerDivisionByZeroException.
+9Landroid/content/pm/PackageManager$NameNotFoundException;
+9Unexpected exception thrown by generated accessor method.
+9UnsupportedError
+9[Lcom/signify/hue/flutterreactiveble/model/ScanErrorType;
+9debugLabel
+9jXmlParentException
+:$a<Internal CLR error.
+:<Invalid size in block
+:Actually not, but can't pass out an exception otherwise...
+:CharacteristicValueUpdateError.
+:RemoteError
+:dev.flutter.pigeon.WebViewClientFlutterApi.onReceivedError
+:dynamic_assert_assignable_stc_check
+:exception_var
+;-9debugPrintThrottled
+;?TlsException8
+;Chain of Causes for CompositeException In Order Received =>
+;Failed to decode data using encoding 'utf-8'8
+;Invalid character in cookie value, code unit: '
+;Lcom/signify/hue/flutterreactiveble/ble/MtuNegotiateFailed;
+;The getParentNodeId method threw an exception when invoked.
+;The getSourceNodeId method threw an exception when invoked.
+;bNoSuchMethodError_existingMethodSignature
+<)]TlsException.
+<,ErrorHint
+<Failed to spawn new JNI connected shell from existing shell.
+<Invalid HTTP header field name: 
+<Lcom/signify/hue/flutterreactiveble/ble/CharOperationFailed;
+<Received error while converting exception to string>
+<Received error while converting stack trace to string>
+<debugFillDescription8
+=	?ErrorInterceptorHandler
+=FlutterErrorDetailsForPointerEventDispatcher8
+=Fpackage:string_scanner/src/exception.dart
+=Invalid cross reference table
+=Invalid status code 8
+=LateError.localADI
+=The longArrayGetIndex method threw an exception when invoked.
+> but the matching
+provider returned null.
+
+To fix the error, consider changing Provider<
+> debug logs of scanned devices disabled
+>, but no `catchError` was provided.
+>, but no `catchError` was provided.
+
+Exception:
+
+>.
+  This usually happens when you are creating a provider and trying to read it immediately.
+
+  For example, instead of:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // Will throw a ProviderNotFoundError, because `context` is associated
+      // to the widget that is the parent of `Provider<Example>`
+      child: Text(context.watch<Example>()),
+    ),
+  }
+  ```
+
+  consider using `builder` like so:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // we use `builder` to obtain a new `BuildContext` that has access to the provider
+      builder: (context) {
+        // No longer throws
+        return Text(context.watch<Example>()),
+      }
+    ),
+  }
+  ```
+
+If none of these solutions work, consider asking for help on StackOverflow:
+https://stackoverflow.com/questions/tagged/flutter
+
+>Array range is invalid. Buffer.length=%d, offset=%d, length=%d
+>FlutterEngine failed to attach to its native Object reference.
+>Getting current working directory failed
+>Lcom/signify/hue/flutterreactiveble/ble/ConnectionUpdateError;
+>Lcom/signify/hue/flutterreactiveble/model/ConnectionErrorType;
+>]8rinit:_debugPrintBuffer@281110992
+>_addError@4048458
+>_errorInterceptorWrapper
+>`shared_preferences_ios` threw an error: 
+>profile_name_error
+?, debuggingEnabled: 8	[
+?Contains invalid characters.8
+?Invalid locale "
+?PInvalid length, must be multiple of four
+?[Lcom/signify/hue/flutterreactiveble/model/ConnectionErrorType;
+?debuggingEnabled
+?fSdart:core/exceptions.dart
+@An exception was throw by 
+@Lcom/signify/hue/flutterreactiveble/model/NegotiateMtuErrorType;
+@NoSuchMethodError: Cannot assign to final variable '8
+@Proxy failed to establish tunnel (
+@^@_onError@13463476
+@dev.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled
+AClientException
+AFormatException: Invalid radix-10 number
+ASN1Time error %d
+AThe getRecordSourceNodeId method threw an exception when invoked.
+A[Lcom/signify/hue/flutterreactiveble/model/NegotiateMtuErrorType;
+A`WebResourceErrorType8
+AbstractClassInstantiationError
+AbstractClassInstantiationError._create@0150898
+Adev.flutter.pigeon.WebViewClientFlutterApi.onReceivedRequestError
+AllocateUnhandledException
+An exception was throw by 
+Another exception was thrown: 
+ApiError
+ArgumentError
+ArgumentError.
+ArgumentError.value
+ArgumentErrorUnboxedInt64
+ArgumentNullError
+Assertion failed: 
+AssertionError
+AssertionError_throwNew
+AssertionError_throwNewSource
+AsyncError
+AsyncStarMoveNext_debuggerStepCheck
+B%DioErrorType.
+B;)hInvalid bytes parameter in SecureSocket.read (bytes: 
+B;Path.combine() failed.  This may be due an invalid path; in particular, check for NaN values.
+BLcom/signify/hue/flutterreactiveble/model/CharacteristicErrorType;
+BLcom/signify/hue/flutterreactiveble/model/ClearGattCacheErrorType;
+Background Compilation Failed
+Base64 decode error: 
+BwError: The widget 
+By default, only errors are logged. This flag enabled logging at all severity levels. This is NOT a per shell flag and affect log levels for all shells in the process.
+C:Error: Could not find the correct Provider<
+CDeferredLoadException
+CFailed to access longArrayGetIndex method or the childNodeId field.
+CInvalid base64 padding, padded length must be multiple of four, is 
+CLcom/signify/hue/flutterreactiveble/debugutils/PerformanceAnalyzer;
+COMException
+COMException8
+CRC error
+CRL path validation error
+CSystem property 'kotlinx.coroutines.debug' has unrecognized value '
+C[Lcom/signify/hue/flutterreactiveble/model/CharacteristicErrorType;
+C[Lcom/signify/hue/flutterreactiveble/model/ClearGattCacheErrorType;
+C_rootHandleError@4048458
+Can only get exceptions from error handles.
+Can only get stacktraces from error handles.
+Cannot invoke native callback while unwind error propagates.
+Cannot open an encrypted document. The password is invalid.
+Cannot send errors on sockets
+CastError
+CertificateException
+CertificateException.
+CharOperationFailed(deviceId=
+CharacteristicValueUpdateError
+CharacteristicValueUpdateError.
+Check failed.
+Check failed: 
+CheckOffsets failed. Try updating offsets by running ./tools/run_offsets_extractor.sh
+Checksum check failed.
+ClientException
+Codec failed to produce an image, possibly due to invalid image data.
+Comma separated list of timeline streams to record. Valid values: all, API, Compiler, CompilerVerbose, Dart, Debugger, Embedder, GC, Isolate, and VM.
+Compute debugger stacktrace on every N stack overflow checks
+ConcurrentModificationError
+Connection failed
+ConnectionError
+ConnectionError.
+ConnectionUpdateError(deviceId=
+Contains invalid characters.
+Converting object to an encodable object failed:
+Could not close library due to error '
+Could not create surface from invalid Android context.
+Could not dump SKP from read-only or invalid persistent cache.
+Could not find a WebResourceErrorType for errorCode: 
+CreateDartIsolateGroup failed: 
+CreateRootIsolate failed: 
+Creation failed
+Cyclic error in JSON stringify
+CyclicInitializationError
+CyclicInitializationError.
+D>_completeError@4048458
+DInvalid empty scheme8
+DRT_ArgumentError
+DRT_ArgumentErrorUnboxedInt64
+DRT_ArgumentNullError
+DRT_DispatchTableNullError
+DRT_IntegerDivisionByZeroException
+DRT_LateFieldAssignedDuringInitializationError
+DRT_LateFieldNotInitializedError
+DRT_NonBoolTypeError
+DRT_NullCastError
+DRT_NullError
+DRT_NullErrorWithSelector
+DRT_RangeError
+Dart Error: 
+Dart Error: %s
+Dart Unhandled Exception: %s, stack trace: %s
+Dart code runs with assertions enabled when the runtime mode is debug. In profile and release product modes, assertions are disabled. This flag may be specified if the user wishes to run with assertions disabled in the debug product mode (i.e. with JIT or DBC).
+Dart_ErrorGetException
+Dart_ErrorGetStackTrace
+Dart_ErrorHasException
+Dart_GetError
+Dart_GetStickyError
+Dart_Initialize: Invalid Dart_InitializeParams version.
+Dart_IsApiError
+Dart_IsCompilationError
+Dart_IsError
+Dart_IsFatalError
+Dart_IsUnhandledExceptionError
+Dart_NewApiError
+Dart_NewCompilationError
+Dart_NewUnhandledExceptionError
+Dart_PropagateError
+Dart_RunLoopAsync() failed: %s. Please file a Dart VM bug report.
+Dart_ThrowException
+Data on failed connection
+Debug support
+DebugLogger
+DebugOverflowIndicatorMixin
+DebugProbes.kt
+DebugStepCheck
+Debugger
+Debugging: stops program if deoptimizing same function too often
+Decompression error in IDAT
+DecompressorHuffmanTree: fixed trees generation failed
+DeferredLoadException
+DeferredLoadException: '
+DeferredLoadException: \'
+Developer_debugger
+DioError
+DioError [
+DioErrorType
+DioErrorType.
+DioErrorType8
+Directory listing failed
+Disable to make importing dart:ffi an error.
+Disable to make importing dart:mirrors an error.
+DispatchTableNullError
+DsendError
+Dv	FlutterError.
+EError occured when writing 
+EGL Error: 
+ELcom/signify/hue/flutterreactiveble/debugutils/HexStringConversionKt;
+ELorg/chromium/support_lib_boundary/WebResourceErrorBoundaryInterface;
+EUsbErrorRollOver
+EVget:_error@4048458
+E_CastError@0150898
+Engine run configuration was invalid.
+Error
+Error 
+Error handler must accept one Object or one Object and a StackTrace as arguments, and return a value of the returned future's type
+Error handler must accept one Object or one Object and a StackTrace as arguments, and return a value of the returned future\'s type
+Error handler must accept one Object or one Object and a StackTrace as arguments.
+Error occured when reading 
+Error occured when writing 
+Error on 
+Error saving preferences to disk: 
+Error unsubscribing from notifications: 
+Error when setting cursors: 
+Error while cleaning up the Dart VM: 
+Error while initializing the Dart VM: 
+Error while setting Dart VM flags: 
+Error: Could not access file callbacks.
+Error: Could not find the correct Provider<
+Error: The widget 
+Error: null
+ErrorDescription
+ErrorDescription.
+ErrorHint
+ErrorHint.
+ErrorInterceptorHandler
+ErrorSummary
+ErrorSummary.
+ErrorWidget
+ErrorWidget.withDetails
+Error_throwWithStackTrace
+Errors:
+Errorï¼Same key \'In Use\'
+Exception
+Exception '%s' thrown:
+Exception caught by 
+Exception caught by 8
+Exception.
+Exception:
+Exception: 
+ExceptionHandlers
+Exists failed
+F-get:server_error_connect_failed
+F_debugSetAllowIgnoredCallsToMarkNeedsBuild@5980426238
+F`url_launcher_ios` threw an error: 
+Failed
+Failed adding interrupt fd to epoll instance
+Failed assertion: boolean expression must not be null
+Failed creating epoll file descriptor: %i
+Failed host lookup: '
+Failed host lookup: \'
+Failed receiving notification message
+Failed requirement.
+Failed to RegisterNatives with FlutterJNI
+Failed to access the internal image decoder registry on this isolate. Please file a bug on https://github.com/flutter/flutter/issues.
+Failed to allocate memory for bitmap of size 
+Failed to allocate storage.
+Failed to close event stream
+Failed to close process exit code pipe
+Failed to commit: %d (%s)
+Failed to compute certificate's sha1
+Failed to connect
+Failed to create ZLibDeflateFilter
+Failed to create ZLibInflateFilter
+Failed to create copy program.
+Failed to create invertible rotation matrix!
+Failed to create mipmap program.
+Failed to create platform view rendering surface
+Failed to create temporary file %s
+Failed to decode at %lx
+Failed to decode data using encoding '
+Failed to decode data using encoding 'utf-8'
+Failed to decode data using encoding \'
+Failed to decode data using encoding \'utf-8\'
+Failed to decode image
+Failed to decommit: %d (%s)
+Failed to deserialize the passed arguments to the new isolate.
+Failed to deserialize the passed entrypoint to the new isolate.
+Failed to enqueue delayed entrypoint invocation.
+Failed to find FlutterJNI Class.
+Failed to find root cert cache
+Failed to get certificate bytes
+Failed to get error message
+Failed to handle message
+Failed to handle message reply
+Failed to handle method call
+Failed to invert
+Failed to load WindowExtensions
+Failed to load dynamic library '%s': %s
+Failed to load: 
+Failed to lookup symbol '%s': %s
+Failed to open event stream
+Failed to parse HTTP, 
+Failed to parse header value
+Failed to parse header value [
+Failed to parse json file: 
+Failed to parse the message.
+Failed to register FlutterJNI.nativeImageHeaderCallback method
+Failed to reserve region for compressed heap: %d (%s)
+Failed to resolve entrypoint function.
+Failed to resolve native function '%s' in '%s'
+Failed to retrieve environment variables.
+Failed to retrieve stack bounds
+Failed to set IO task runner priority
+Failed to set UI task runner priority
+Failed to set Workers task runner priority
+Failed to set epoll fd close on exec
+Failed to set pipe fd close on exec
+Failed to set pipe fd non blocking
+Failed to set priority
+Failed to set raster task runner priority
+Failed to set up Skia Gr context.
+Failed to start %s. OS returned an error (code %d) which can't be fully converted to Dart string (%s): %s
+Failed to start event handler thread %d
+Failed to start exit code handler worker thread %d
+Failed to write certificate to PEM
+Failed to write entire process exit message
+Failed to write exit code: %d
+Failed writing 
+FallThroughError
+FallThroughError._create@0150898
+Fatal Error occurred at 
+Fatal error in Array::New: invalid len %d
+Fatal error in Array::New: invalid len %ld
+Fatal error in Context::New: invalid num_variables %d
+Fatal error in Context::New: invalid num_variables %ld
+Fatal error in ExternalTypedData::New: invalid len %d
+Fatal error in ExternalTypedData::New: invalid len %ld
+Fatal error in OneByteString::New: invalid len %d
+Fatal error in OneByteString::New: invalid len %ld
+Fatal error in TwoByteString::New: invalid len %d
+Fatal error in TwoByteString::New: invalid len %ld
+Fatal error in TypeArguments::New: invalid len %d
+Fatal error in TypeArguments::New: invalid len %ld
+Fatal error in TypedData::New: invalid len %d
+Fatal error in TypedData::New: invalid len %ld
+Fatal error in Utils::VSNPrint with format '%s'
+Fatal error in dart:async: %s
+FdescribeForError
+FileSystemException
+FileSystemException.
+FileSystemException.8
+FileSystemException: Cannot open file
+Filter error, bad data
+Flutter initialization failed.
+FlutterError
+FlutterError.
+FlutterErrorDetails
+FlutterErrorDetailsForPointerEventDispatcher
+FormatException
+FormatException.
+FormatException: Invalid radix-10 number
+Found invalid MessageSet item.
+Frame setup failed
+Future.error
+G"_addErrorWithReplacement@4048458
+GAn exception received, indicating that the adapter has became unusable.
+GL_ARB_invalidate_subdata
+GL_EXT_debug_marker
+GL_KHR_debug
+GOSError
+G_DeferredNotLoadedError@0150898
+GeSourceSpanException
+GetLastError
+Getting current working directory failed
+H failed with status 8
+H-Invalid file mode for this operation8
+HError handler must accept one Object or one Object and a StackTrace as arguments, and return a value of the returned future's type
+HLcom/signify/hue/flutterreactiveble/ble/RequestConnectionPriorityFailed;
+HTTP request failed. Client is already closed.
+Handle check failed: saw %s expected %s
+Handshake error in client
+Handshake error in server
+HandshakeException
+HandshakeException.
+HonError
+Http status error [
+HttpException
+HttpException: 
+ICC profile length invalid (not a multiple of 4)
+IInvalid character in cookie name, code unit: '
+IOException
+IOException encountered
+IP Address:<invalid>
+IP`device_info_plus_windows` threw an error: 
+I[class _AssertionError
+IerrorColor
+Ignoring flag: %s is an invalid value for flag %s
+Ignoring invalid time value
+Illegal IPv4 address, invalid character
+Image callback was invalid
+Image dimensions for scene were invalid.
+IndexError
+IndexError.
+Ino_nearbydevice_permission_error
+Input file read error
+IntegerDivisionByZeroException
+IntegerDivisionByZeroException.
+Internal CLR error.
+Internal error.
+Internal error: Undefined object type.
+Internal error: expected positive number, got 
+Internal error: unexpected format for ready message: '
+Internal error: unexpected format for ready message: \'
+InternalError: '
+InternalError: \'
+Invalid 
+Invalid Data.
+Invalid Format
+Invalid Format: Unsupported security filter
+Invalid Format: V and R entries of the Encryption dictionary does not match.
+Invalid HTTP header field name: 
+Invalid HTTP header field value: 
+Invalid IHDR data
+Invalid IHDR length
+Invalid IPv6 address with scope ID
+Invalid JPEG file structure: SOS before SOF
+Invalid JPEG file structure: missing SOS marker
+Invalid JPEG file structure: two SOF markers
+Invalid JPEG file structure: two SOI markers
+Invalid JSON
+Invalid MIME type
+Invalid PDF Document Format
+Invalid Password
+Invalid SOS parameters for sequential JPEG
+Invalid SkSL:
+Invalid Type
+Invalid URL encoding
+Invalid UTF-8 byte
+Invalid UTF8 sequence encountered, 
+Invalid Unicode escape sequence
+Invalid argument
+Invalid argument count.
+Invalid argument passed to Filter_Process
+Invalid argument.
+Invalid argument: count must be a positive int less than or equal to 4096.
+Invalid arguments for 'overflow' method sent to dev.flutter/channel-buffers (arguments must be a two-element list, channel name and flag state)
+Invalid arguments for 'overflow' method sent to dev.flutter/channel-buffers (channel name must be less than 254 characters long)
+Invalid arguments for 'overflow' method sent to dev.flutter/channel-buffers (first argument must be a string)
+Invalid arguments for 'overflow' method sent to dev.flutter/channel-buffers (second argument must be a boolean)
+Invalid arguments for 'resize' method sent to dev.flutter/channel-buffers (arguments must be a two-element list, channel name and new capacity)
+Invalid arguments for 'resize' method sent to dev.flutter/channel-buffers (channel name must be less than 254 characters long)
+Invalid arguments for 'resize' method sent to dev.flutter/channel-buffers (first argument must be a string)
+Invalid arguments for 'resize' method sent to dev.flutter/channel-buffers (second argument must be an integer in the range 0 to 2147483647)
+Invalid arguments for \'overflow\' method sent to dev.flutter/channel-buffers (arguments must be a two-element list, channel name and flag state)
+Invalid arguments for \'overflow\' method sent to dev.flutter/channel-buffers (channel name must be less than 254 characters long)
+Invalid arguments for \'overflow\' method sent to dev.flutter/channel-buffers (first argument must be a string)
+Invalid arguments for \'overflow\' method sent to dev.flutter/channel-buffers (second argument must be a boolean)
+Invalid arguments for \'resize\' method sent to dev.flutter/channel-buffers (arguments must be a two-element list, channel name and new capacity)
+Invalid arguments for \'resize\' method sent to dev.flutter/channel-buffers (channel name must be less than 254 characters long)
+Invalid arguments for \'resize\' method sent to dev.flutter/channel-buffers (first argument must be a string)
+Invalid arguments for \'resize\' method sent to dev.flutter/channel-buffers (second argument must be an integer in the range 0 to 2147483647)
+Invalid attempt to read row data
+Invalid background palette index
+Invalid base64 data
+Invalid base64 encoding length 
+Invalid base64 padding, '=' not at the end
+Invalid base64 padding, \'=\' not at the end
+Invalid base64 padding, more than two '=' characters
+Invalid base64 padding, more than two \'=\' characters
+Invalid base64 padding, padded length must be multiple of four, is 
+Invalid bit depth for RGB image
+Invalid bit depth for RGBA image
+Invalid bit depth for grayscale image
+Invalid bit depth for grayscale+alpha image
+Invalid bit depth for paletted image
+Invalid bit depth in IHDR
+Invalid buffer size in _ExternalBuffer
+Invalid bytes parameter in SecureSocket.read (bytes: 
+Invalid call to OSThread::EnableThreadInterrupts()
+Invalid capture group name
+Invalid certificate verification context
+Invalid character
+Invalid character class
+Invalid character in cookie name, code unit: '
+Invalid character in cookie name, code unit: \'
+Invalid character in cookie path, code unit: '
+Invalid character in cookie path, code unit: \'
+Invalid character in cookie value, code unit: '
+Invalid character in cookie value, code unit: \'
+Invalid cid: %d, obj: %p, tags: %x. Corrupt heap?
+Invalid cid: %ld, obj: %p, tags: %x. Corrupt heap?
+Invalid class escape
+Invalid color quantization mode change
+Invalid color type in IHDR
+Invalid color type/bit depth combination in IHDR
+Invalid component ID %d in SOS
+Invalid compression type specified
+Invalid content length 
+Invalid cookie date 
+Invalid crop request
+Invalid cross reference table
+Invalid cross reference table.
+Invalid data.
+Invalid decimal escape
+Invalid double
+Invalid empty scheme
+Invalid encoding before padding
+Invalid encrypted buffer size in _ExternalBuffer
+Invalid envelope
+Invalid envelope: 
+Invalid escape
+Invalid file mode for this operation
+Invalid filter method in IHDR
+Invalid filter type specified
+Invalid format
+Invalid format for pCAL parameter
+Invalid format: Invalid/Unsupported security dictionary.
+Invalid group
+Invalid header field name, with 
+Invalid hex digit
+Invalid host
+Invalid icon
+Invalid identity escape in Unicode pattern
+Invalid image color type specified
+Invalid image data
+Invalid image height in IHDR
+Invalid image type.
+Invalid image width in IHDR
+Invalid index passed in to access list element
+Invalid index passed in to set list element
+Invalid index to read
+Invalid indices [%d, %d]
+Invalid interlace type specified
+Invalid internet address 
+Invalid isolate configuration.
+Invalid isolate snapshot.
+Invalid length in input bytes
+Invalid length parameter in SecureSocket.read (length: 
+Invalid length passed in to access array elements
+Invalid length passed in to access list elements
+Invalid length passed in to set array elements
+Invalid length, must be multiple of four
+Invalid loading unit
+Invalid locale "
+Invalid memory pool code %d
+Invalid method call
+Invalid method call: 
+Invalid named capture referenced
+Invalid named reference
+Invalid number
+Invalid number of arguments in evaluate response
+Invalid number of colors in palette
+Invalid number of histogram entries specified
+Invalid number of transparent colors specified
+Invalid number4
+Invalid offerInternal result 
+Invalid offset parameter in SecureSocket.read (offset: 
+Invalid offset/length passed in to access list
+Invalid pCAL equation type
+Invalid padding character
+Invalid palette
+Invalid palette length
+Invalid palette size, hIST allocation skipped
+Invalid params
+Invalid path
+Invalid port
+Invalid port 
+Invalid port8
+Invalid position
+Invalid progressive parameters Ss=%d Se=%d Ah=%d Al=%d
+Invalid progressive parameters at scan script entry %d
+Invalid property name
+Invalid property name in character class
+Invalid proxy configuration 
+Invalid radix-
+Invalid range: 
+Invalid request method
+Invalid request, empty URI
+Invalid request, unexpected 
+Invalid response line
+Invalid response line, failed to parse HTTP version
+Invalid response status code with 
+Invalid response, invalid HTTP version
+Invalid response, status code is over 3 digits
+Invalid sBIT depth specified
+Invalid sCAL height
+Invalid sCAL unit
+Invalid sCAL width
+Invalid sRGB rendering intent specified
+Invalid scan script at entry %d
+Invalid size in block
+Invalid snapshot
+Invalid status code 
+Invalid time specified for tIME chunk
+Invalid type
+Invalid type: 
+Invalid unicode escape
+Invalid unicode escape 
+Invalid uniform type: '%s'
+Invalid value
+Invalid value in input: 
+Invalid vm isolate snapshot seen
+InvalidOperation
+InvalidParameter
+InvalidParameter.
+InvalidProtocolBufferException
+InvalidProtocolBufferException: 
+Invalidate
+Invalidate FB Type
+Invalidity Date
+Ipackage:protobuf/src/protobuf/exceptions.dart
+Isolate %s is already scheduled on mutator thread %p, failed to schedule from os thread 0x%lx
+Isolate %s is already scheduled on mutator thread %p, failed to schedule from os thread 0x%x
+Isolate creation failed
+Isolate exited without result or error.
+Isolate snapshot invalid and could not be inferred from settings.
+IsolateSpawnException
+IsolateSpawnException.
+IsolateSpawnException: 
+Isolate_getDebugName
+Issuer certificate lookup error
+IterableElementError(
+J	_CastError@0150898._create@0150898
+J&\{Type error in reference parser: 
+J<Lexical Error: Unmatched Input.
+J=ArgumentError
+JSON error: 
+JWindowsException
+J__HelperErrorState&State&SingleTickerProviderStateMixin@389019562
+Java OOM'd in exception handling, check logcat
+Jset:_errorCode@14069316
+JsonCyclicError
+JsonUnsupportedObjectError
+K$`package_info_plus_linux` threw an error: 
+KP_printDebug@160655898
+K`GonReceivedRequestError
+LException.
+LRJpackage:dio/src/dio_error.dart
+LServiceExtensionResponse.error
+LV*Error unsubscribing from notifications: 
+LanguageError
+LateError
+LateError.fieldADI
+LateError.fieldAI
+LateError.fieldNI
+LateError.localADI
+LateError.localAI
+LateError.localNI
+LateFieldAssignedDuringInitializationError
+LateFieldNotInitializedError
+LateInitializationError: 
+LateInitializationErrorSharedWithFPURegs
+LateInitializationErrorSharedWithoutFPURegs
+Lexical Error: Unmatched Input.
+Ljava/io/FileNotFoundException;
+Ljava/io/IOException;
+Ljava/lang/ArithmeticException;
+Ljava/lang/AssertionError;
+Ljava/lang/ClassCastException;
+Ljava/lang/Error;
+Ljava/lang/Exception;
+Ljava/lang/LinkageError;
+Ljava/lang/NoSuchFieldError;
+Ljava/lang/NoSuchMethodError;
+Ljava/lang/OutOfMemoryError;
+Ljava/lang/RuntimeException;
+Ljava/lang/SecurityException;
+Ljava/lang/VirtualMachineError;
+LocaleDataException
+LocaleDataException: 
+Logger_PrintDebugString
+Logical_Order_Exception
+Lorg/json/JSONException;
+Lz*Invalid IPv6 address with scope ID
+MCertificateException8
+MCharacteristicValueUpdateError
+M_GetLastError@1567009611
+Memory allocation failed while processing sCAL
+MissingPluginException(
+MjavaScriptExceptionOccurred
+MtuNegotiateFailed(deviceId=
+N1{?ArgumentError.value
+NArgumentError.
+NPPnativeGetError
+NSt3__112future_errorE
+NSt3__114error_categoryE
+NSt3__123__future_error_categoryE
+NTInvalid internet address 
+N^Codec failed to produce an image, possibly due to invalid image data.
+N_TypeError@0150898._create@0150898
+N_convertInvalid@10003594
+Nby a synchronously-called image error listener
+Network request failed!
+NewArgumentError
+NewError
+Nnull cannot be cast to non-null type kotlinx.coroutines.CompletedExceptionally
+No Dart frames on stack, cannot propagate error.
+No Dart frames on stack, cannot throw exception
+No IDAT data (internal error)
+No SkSL error reporter configured, treating this as a fatal error
+No further exceptions
+NoSuchMethodError
+NoSuchMethodError._withType@0150898
+NoSuchMethodError: 
+NoSuchMethodError: Cannot assign to final variable '
+NoSuchMethodError: Cannot assign to final variable \'
+NoSuchMethodError_existingMethodSignature
+NonBoolTypeError
+NotificationLite.Error[
+NullArgErrorSharedWithFPURegs
+NullArgErrorSharedWithoutFPURegs
+NullCastError
+NullCastErrorSharedWithFPURegs
+NullCastErrorSharedWithoutFPURegs
+NullErrorSharedWithFPURegs
+NullErrorSharedWithoutFPURegs
+NullErrorWithSelector
+NullThrownError
+NullThrownError.
+O<_errorMessage@14069316
+OIOException
+OInvalid request, empty URI
+OS Error
+OSError
+OSError.
+OSError_inProgressErrorCode
+O_createErrorHandlerAndKey@484477495
+Objects of type ApiError should not occur in object graphs
+Objects of type Error should not occur in object graphs
+Objects of type ExceptionHandlers should not occur in object graphs
+Objects of type LanguageError should not occur in object graphs
+Objects of type UnhandledException should not occur in object graphs
+Objects of type UnwindError should not occur in object graphs
+OcheckContainInvalidChar
+OutOfMemoryError
+OutOfMemoryError.
+Output file write error --- out of disk space?
+Override the random seed for debugging.
+P:dynamic_assert_assignable_stc_check8
+PBInvalid range: 
+PError registering plugin app_settings, com.example.appsettings.AppSettingsPlugin
+PGATT exception from %s, status %d (%s), type %s. (Look up status 0x%02x here %s)
+P_asyncErrorWrapperHelper@4048458
+P_setError@4048458
+ParserException
+Path.combine() failed.  This may be due an invalid path; in particular, check for NaN values.
+PathException
+PathException: 
+Pipe creation failed
+PlatformConfiguration_reportUnhandledException
+PlatformConfiguration_setIsolateDebugName
+PlatformException
+PlatformException(
+Poll failed
+Print a message when an isolate is paused but there is no debugger attached.
+Protocol message contained an invalid tag (zero).
+Protocol message tag had invalid wire type.
+ProviderNotFoundException
+ProviderNullException
+Proxy failed to establish tunnel (
+Q*_throwLocaleError@831381073
+Q4eagerError
+QInvalid HTTP header field value: 
+Q`url_launcher_macos` threw an error: 
+R5InvalidParameter.
+RHandshakeException.
+RLateError.localAI
+RangeError
+RangeError (end): Invalid value: Not in inclusive range
+RangeError (index): Index out of range
+RangeError.
+RangeError.range
+RangeError.value
+RangeErrorSharedWithFPURegs
+RangeErrorSharedWithoutFPURegs
+ReachabilityError
+ReachabilityError: 
+Read Error
+Read failed
+Read failed on temporary file
+Read from EMS failed
+Read from XMS failed
+RedirectException
+RedirectException: 
+RemoteError
+RemoteError.
+Remove all existing persistent cache. This is mainly for debugging purposes such as reproducing the shader compilation jank.
+RenderErrorBox
+RenderErrorBox.
+ResolveDynamic error '%s': %s.
+Return value check failed: saw '%s' expected a dart Instance or an Error.
+RunExceptionHandler
+R~get:completeError
+S#_AssertionError@0150898
+S:exception_var
+SCreation failed
+SInvalid radix-
+SLcom/signify/hue/flutterreactiveble/debugutils/HexStringConversionKt$toHexString$1;
+S[_debugPrintCompleter@281110992
+S_CastError
+See the exception details for which permission(s) are required, and consider adding them to your Android Manifest as described in:
+Seek failed on temporary file
+Server exception
+ServiceExtensionResponse.error
+Setting thread priority to %d failed: errno = %d
+Sget:_errorName@0150898
+Shader compilation error
+Show names of internal classes (e.g. "OneByteString") in error messages instead of showing the corresponding interface names (e.g. "String"). Also show legacy nullability in type names.
+Silence warnings.
+SkSL Error:
+SkString: vsnprintf reported error.
+SnapshotWriter Error
+SocketBase_IsBindError
+SocketException
+Socket_GetError
+SourceSpanException
+SourceSpanFormatException
+Speculative inlining failed
+St11logic_error
+St9exception
+StackOverflowError
+StackOverflowError.
+Start the application paused in the Dart debugger.
+StateError
+StorageError
+Stream has been disposed.
+An ImageStream is considered disposed once at least one listener has been added and subsequently all listeners have been removed and no handles are outstanding from the keepAlive method.
+To resolve this error, maintain at least one listener on the stream, or create an ImageStreamCompleterHandle from the keepAlive method, or create a new stream for the image.
+StringScannerException
+Suite B: certificate version invalid
+Suite B: invalid ECC curve
+Suite B: invalid public key algorithm
+Suite B: invalid signature algorithm
+T"CastError
+TException: 
+TKx"Internal error: Undefined object type.
+TODO4O4
+TOO_MANY_WARNING_ALERTS
+TWebResourceErrorType.
+Task runners to run the shell were invalid.
+TextSelection.invalid
+The GL proc resolver's glGetString(GL_VERSION) failed
+The RxJavaPlugins.onSubscribe hook returned a null CompletableObserver. Please check the handler provided to RxJavaPlugins.setOnCompletableSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The RxJavaPlugins.onSubscribe hook returned a null FlowableSubscriber. Please check the handler provided to RxJavaPlugins.setOnFlowableSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The RxJavaPlugins.onSubscribe hook returned a null MaybeObserver. Please check the handler provided to RxJavaPlugins.setOnMaybeSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The RxJavaPlugins.onSubscribe hook returned a null Observer. Please change the handler provided to RxJavaPlugins.setOnObservableSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The RxJavaPlugins.onSubscribe hook returned a null SingleObserver. Please check the handler provided to RxJavaPlugins.setOnSingleSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The character "z" is invalid inside an ASCII85 block.
+The error handler of Future.catchError must return a value of the future's type
+The error handler of Future.catchError must return a value of the future\'s type
+The error handler of Future.then must return a value of the returned future's type
+The error handler of Future.then must return a value of the returned future\'s type
+The exception could not be delivered to the consumer because it has already canceled/disposed the flow or the exception has nowhere to go to begin with. Further reading: https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0#error-handling | 
+The exception was not handled due to missing onError handler in the subscribe() method call. Further reading: https://github.com/ReactiveX/RxJava/wiki/Error-Handling | 
+This error is not an unhandled exception error.
+Thread merging failed: owner_entry was already subsumed by others, owner=
+Thread merging failed: subsumed_entry already owns others, owner=
+Thread merging failed: subsumed_entry was already subsumed by others, owner=
+Thread unmerging failed: owner_entry didn't own the given subsumed queue id, owner=
+Thread unmerging failed: owner_entry doesn't own anyone, owner=
+Thread unmerging failed: owner_entry was subsumed by others, owner=
+Thread unmerging failed: subsumed_entry wasn't subsumed by others, owner=
+Throw API error on invalid member access throuh native API. See entry_point_pragma.md
+ThrowArgumentError
+TimeoutException
+TimeoutException after 
+Tkdev.flutter.pigeon.WebViewClientFlutterApi.onReceivedError
+TlsException
+TlsException.
+To fix the error, consider changing Provider<
+To resolve this error, maintain at least one listener on the stream, or create an ImageStreamCompleterHandle from the keepAlive method, or create a new stream for the image.
+Tpackage:flutter_reactive_ble/src/debug_logger.dart
+Trace Skia calls. This is useful when debugging the GPU threed.By default, Skia tracing is not enabled to reduce the number of traced events
+Trace debugger stacktrace collection
+Traces all failed optimization attempts
+TransformLayer is constructed with an invalid matrix.
+TranspileException
+Treat warnings as errors.
+TwebViewInvalidated
+Type error in reference parser: 
+TypeError
+TypeError_throwNew
+UIllegal IPv4 address, invalid character
+UMissingPluginException
+URangeError (end): Invalid value: Not in inclusive range
+UWebResourceError
+U_AMBIGUOUS_ALIAS_WARNING
+U_PLUGIN_CHANGED_LEVEL_WARNING
+U_SAFECLONE_ALLOCATED_WARNING
+U_SORT_KEY_TOO_SHORT_WARNING
+U_STATE_OLD_WARNING
+U_STRING_NOT_TERMINATED_WARNING
+U_USING_DEFAULT_WARNING
+U_USING_FALLBACK_WARNING
+U_completeOnAsyncError@4048458
+UdebugPrintStack
+UeOutOfMemoryError
+Unhandled Exception: 
+Unhandled error: 
+Unhandled exception:
+UnhandledException
+UnimplementedError
+UnimplementedError: 
+Unknown ColorFilter type. This is an error. If you're seeing this, please file an issue at https://github.com/flutter/flutter/issues/new.
+Unknown ColorFilter type. This is an error. If you're seeing this, please file an issue at https://github.com/flutter/flutter/issues/new.(
+Unknown ColorFilter type. This is an error. If you\'re seeing this, please file an issue at https://github.com/flutter/flutter/issues/new.
+Unknown EGL Error
+Unknown error
+Unknown error encoding image.
+Unknown error occured during Isolate spawning.
+UnsupportedError
+UnsupportedError.
+UnwindError
+UsbErrorRollOver
+UsbErrorUndefined
+VEncountered unknown scanning error code: %d -> check android.bluetooth.le.ScanCallback
+VError occured when reading 
+VInvalid method call: 
+VM initialization failed-VM Flags not initialized.
+VM snapshot invalid and could not be inferred from settings.
+Verbose debugger messages
+WARNING
+WARNING: '%s' is accessed through Dart C API without being marked as an entry point; its tree-shaken signature cannot be verified.
+WARNING: Clip mask requires stencil, but stencil unavailable. Draw will be ignored.
+WARNING: Failed to allocate index buffer for DefaultPathRenderer.
+WARNING: Failed to allocate vertex buffer for DefaultPathRenderer.
+WARNING: Failed to allocate vertex buffer for GrVertexChunk.
+WARNING: Failed to make dmsaa attachment. Render pass will be dropped.
+WARNING: See https://github.com/dart-lang/sdk/blob/master/runtime/docs/compiler/aot/entry_point_pragma.md
+WARNING: capping window rectangles at %i. HW advertises support for %i.
+WARNING: failed to attach a stencil buffer. Rendering will be skipped.
+WARNING: onFlushRenderTask failed to execute.
+WConcurrentModificationError
+WNullThrownError
+Wait for process exit failed: %d
+Warning: Failed to open service response size log file: %s
+WebResourceError
+WebResourceErrorData
+WebResourceErrorType
+WebResourceErrorType.
+WindowsException
+Write Error
+Write failed
+Write failed on temporary file --- out of disk space?
+Write to EMS failed
+Write to XMS failed
+W|X_parseWebNonDebugFrame@283425567
+X509.issuer failed to find issuer's common name.
+X509.subject failed to find subject's common name.
+X@ZyRangeError.
+XDecompressorHuffmanTree: fixed trees generation failed
+XFreportError
+XInvalid arguments for 'resize' method sent to dev.flutter/channel-buffers (channel name must be less than 254 characters long)
+XIterableElementError8
+XXBrAbstractClassInstantiationError._create@0150898
+X_assertJavascriptChannelNamesAreUnique@1405497903
+XerrorStyle
+XmlException
+XmlNodeTypeException
+XmlNodeTypeException: 
+XmlParentException
+XmlParentException: 
+XmlParserException
+XmlParserException: 
+XmlParserException: 8
+Y_moveNextDebuggerStepCheck@4048458
+YhelperError
+Z'1_debugPrintedCharacters@281110992
+ZInvalid response line, failed to parse HTTP version
+Z_getFieldError@1052070143
+[. Please read KDoc to 'handleFatalException' method and report this incident to maintainers
+[BOGUS UErrorCode]
+[SkFontMgr Android Parser] %s:%d:%d error %d: %s.
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%c%c%c%c' axis specified more than once
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' alias target not found
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' entity declaration found, stopping processing
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' is an invalid axis stylevalue
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' is an invalid axis tag
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' is an invalid index
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' is an invalid weight
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' tag not recognized, skipping
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' unexpected language found
+[SkFontMgr Android Parser] %s:%d:%d: warning: '%s' unexpected variant found
+[|Vdart:async/async_error.dart
+\': Failed assertion: line 
+\AassureDioError
+\Error on 
+\ExceptionHandlers
+]Disconnect operation has been executed but finished with an error - considering disconnected.
+]IndexError.
+]Invalid port 
+]Server exception
+]X`url_launcher_windows` threw an error: 
+]XmlParserException
+]error_text
+]onError called with null. Null values are generally not allowed in 2.x operators and sources.
+]whandleError callback must take either an Object (the error), or both an Object (the error) and a StackTrace.8
+^9uUAssertion failed: 
+^Failed host lookup: '
+^V`shared_preferences_windows` threw an error: 
+^_cancelAndError@4048458
+^_getErrorStyle@389019562
+^npackage:source_span/src/span_exception.dart
+^sInvalid double
+^vm:notify-debugger-on-exception
+_>PathException: 
+_AssertionError
+_AssertionError@0150898
+_AssertionError@0150898._create@0150898
+_CastError
+_CastError@0150898
+_CastError@0150898._create@0150898
+_CompileTimeError
+_CompileTimeError@0150898
+_DeferredNotLoadedError@0150898
+_DelayedError@4048458
+_Error registering plugin url_launcher_android, io.flutter.plugins.urllauncher.UrlLauncherPlugin
+_Error.
+_Error@1334379619
+_ErrorDiagnostic@264022608
+_ErrorDiagnostic@264022608.
+_ErrorImageCompleter@484477495
+_ErrorType.
+_ErrorType@1330134110
+_Exception@0150898
+_FlutterError&Error&DiagnosticableTreeMixin@264022608
+_FlutterErrorDetailsNode@264022608
+_Future@4048458.immediateError
+_GetLastError@1567009611
+_HandleErrorStream@4048458
+_HelperError@389019562
+_HelperErrorState@389019562
+_InternalError
+_InternalError@0150898
+_InternalError@0150898.
+_InvalidConnectionState@1068393572
+_OSError.
+_OjUnwindError
+_RenderFlex&RenderBox&ContainerRenderObjectMixin&RenderBoxContainerDefaultsMixin&DebugOverflowIndicatorMixin@520478290
+_RenderFlex&RenderBox&ContainerRenderObjectMixin&RenderBoxContainerDefaultsMixin&DebugOverflowIndicatorMixin@520478290.
+_StringScannerException
+_TypeError
+_TypeError@0150898
+_TypeError@0150898._create@0150898
+__HelperErrorState&State&SingleTickerProviderStateMixin@389019562
+__assert2
+_addError@4048458
+_addErrorWithReplacement@4048458
+_addEventError@4048458
+_assertJavascriptChannelNamesAreUnique@1405497903
+_asyncCompleteError@4048458
+_asyncErrorWrapperHelper@4048458
+_buildError@389019562
+_buildErrorResponse@609206865
+_cancelAndError@4048458
+_cancelAndErrorClosure@4048458
+_completeDoneError@13463476
+_completeDoneError@14069316
+_completeError@4048458
+_completeOnAsyncError
+_completeOnAsyncError@4048458
+_completeWithErrorCallback@4048458
+_convertInvalid@10003594
+_createErrorHandlerAndKey@484477495
+_createErrorWidget@640358031
+_debugPrintBuffer@281110992
+_debugPrintCompleter@281110992
+_debugPrintScheduled@281110992
+_debugPrintStopwatch@281110992
+_debugPrintTask@281110992
+_debugPrintedCharacters@281110992
+_debugReportException@528266271
+_debugReportException@598042623
+_debugReportException@679188862
+_debugSetAllowIgnoredCallsToMarkNeedsBuild@598042623
+_defaultErrorWidgetBuilder@598042623
+_defaultErrorWidgetBuilder@5980426238
+_error@1330134110
+_error@1334379619
+_errorCode
+_errorCode@14069316
+_errorCodeToErrorType@1415267066
+_errorCount@264022608
+_errorInterceptorWrapper
+_errorMessage
+_errorMessage@14069316
+_evaluateAssertion
+_evaluateAssertion@0150898
+_exceptionFromResponse@14069316
+_exceptionOrErrorFromResponse@14069316
+_exceptionsHolder
+_getErrorStyle@389019562
+_getFieldError@1052070143
+_handleError@4048458
+_handleFormatError@0150898
+_invalidArgument@14069316
+_invokeErrorHandler@4048458
+_isErrorResponse@14069316
+_iso_stub_AllocateUnhandledExceptionStub
+_iso_stub_DispatchTableNullErrorStub
+_iso_stub_LateInitializationErrorSharedWithFPURegsStub
+_iso_stub_LateInitializationErrorSharedWithoutFPURegsStub
+_iso_stub_NullArgErrorSharedWithFPURegsStub
+_iso_stub_NullArgErrorSharedWithoutFPURegsStub
+_iso_stub_NullCastErrorSharedWithFPURegsStub
+_iso_stub_NullCastErrorSharedWithoutFPURegsStub
+_iso_stub_NullErrorSharedWithFPURegsStub
+_iso_stub_NullErrorSharedWithoutFPURegsStub
+_iso_stub_RangeErrorSharedWithFPURegsStub
+_iso_stub_RangeErrorSharedWithoutFPURegsStub
+_moveNextDebuggerStepCheck@4048458
+_nullErrorHandler@4048458
+_onError@13463476
+_onError@14069316
+_parseWebNonDebugFrame@283425567
+_printDebug@16065589
+_printDebugString@16065589
+_processUncaughtError@4048458
+_rFuture.error8
+_registerErrorHandler@4048458
+_reportBodyError@13463476
+_reportError@14069316
+_reportHttpError@13463476
+_reportSizeLimitError@13463476
+_reportUnhandledException@16065589
+_rootErrorCallback@4048458
+_rootHandleError@4048458"
+_rootHandleUncaughtError@4048458
+_sendError@4048458
+_setDebuggingEnabled@1415267066
+_setError@4048458
+_setErrorObject@4048458
+_setFieldFailedMessage@1052070143
+_throwException@831381073
+_throwLocaleError@831381073
+_throwNewNullAssertion
+_throwNewNullAssertion@0150898
+_toWebResourceError@1413160685
+_validateErrorCode@5383715
+_webNonDebugFramePattern@283425567
+`$Error handler must accept one Object or one Object and a StackTrace as arguments.
+`'AssertionError_throwNew
+`^>7_reportError@14069316
+`device_info_plus_linux` threw an error: 
+`device_info_plus_windows` threw an error: 
+`get:debugLabel
+`hLogger_PrintDebugString
+`package_info_plus_linux` threw an error: 
+`package_info_plus_windows` threw an error: 
+`package_info_plus_windows` threw an error: 8
+`shared_preferences_android` threw an error: 
+`shared_preferences_ios` threw an error: 
+`shared_preferences_linux` threw an error: 
+`shared_preferences_macos` threw an error: 
+`shared_preferences_windows` threw an error: 
+`url_launcher_android` threw an error: 
+`url_launcher_ios` threw an error: 
+`url_launcher_linux` threw an error: 
+`url_launcher_macos` threw an error: 
+`url_launcher_windows` threw an error: 
+aFormatException
+aMThe error handler of Future.catchError must return a value of the future's type
+aSocket_GetError
+adart:core/errors.dart
+addError
+addSingleErrorToStream
+adev.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled
+aeR_invokeErrorHandler@4048458
+afinishResponseWithError
+aget:_addError@4048458
+ainvalid font name
+alorderexceptionK
+assert
+assertion failed !LogIfError(Dart_GetNativeFieldsOfArgument( args, 0, DartWrappable::kNumberOfNativeFields, native_fields))
+assertion failed !LogIfError(Dart_SetNativeInstanceField( wrapper, kPeerIndex, reinterpret_cast<intptr_t>(this)))
+assertion failed !LogIfError(Dart_SetNativeInstanceField(wrapper, kPeerIndex, 0))
+assertion failed !LogIfError(wrapper)
+assertion failed !native_fields[DartWrappable::kPeerIndex]
+assertion failed !task_dispatcher_ && dispatcher
+assertion failed 0 <= i
+assertion failed dart_state
+assertion failed i < num_elements_
+assureDioError
+b5LCertificateException.
+bError registering plugin reactive_ble_mobile, com.signify.hue.flutterreactiveble.ReactiveBlePlugin
+bMInvalid Password
+bSuper calls with default arguments not supported in this target, function: toCancellationException
+b]RedirectException: 
+by a synchronously-called image error listener
+c0_onError@14069316
+c8_nullErrorHandler@4048458
+cError registering plugin package_info_plus, dev.fluttercommunity.plus.packageinfo.PackageInfoPlugin
+cInvalid hex digit
+cXmlParentException: 8
+cancelOnError
+catchError
+cdebugWordWrap
+cencodeErrorEnvelope
+channel-error
+checkContainInvalidChar
+class _AssertionError
+completeError
+convertCharacteristicError
+convertClearGattCacheError
+convertScanErrorInfo
+convertWebResourceError
+convertWindowsErrorToString
+createConnectionError
+createError
+dError registering plugin fluttertoast, io.github.ponnamkarthik.toast.fluttertoast.FlutterToastPlugin
+dIntegerDivisionByZeroException
+dart:_internal/errors.dart
+dart:async/async_error.dart
+dart:core-patch/errors_patch.dart
+dart:core/errors.dart
+dart:core/exceptions.dart
+dart:debugger
+data_.generic == Traits::InvalidValue() || data_.generic != value
+debugFillDescription
+debugFormatDouble
+debugLabel
+debugPrint
+debugPrintStack
+debugPrintThrottled
+debugStatus
+debugWordWrap
+debugging
+debuggingEnabled
+deflateEnd failed (ignored)
+describeForError
+dev.flutter.pigeon.WebViewClientFlutterApi.onReceivedError
+dev.flutter.pigeon.WebViewClientFlutterApi.onReceivedRequestError
+dev.flutter.pigeon.WebViewHostApi.setWebContentsDebuggingEnabled
+disable-dart-asserts
+dlerror
+dreceiveDataWhenStatusError
+dumpErrorToConsole
+eError registering plugin device_info_plus, dev.fluttercommunity.plus.device_info.DeviceInfoPlusPlugin
+eId, "read char failed"))
+e_Error@1334379619
+eagerError
+ect.onError(throwable) })
+edev.flutter.pigeon.WebViewClientFlutterApi.onReceivedRequestError
+eeInvalid response, invalid HTTP version
+eglGetError
+empty ExceptionHandlers
+enableDebugLogging
+encodeErrorEnvelope
+entropy fill failed
+env->ExceptionCheck() == JNI_FALSE
+error
+error in processing external entity reference
+error in user chunk
+error is null
+error writing ancillary chunked compressed data
+error.IsUnwindError()
+error: Unable to read '
+errorBorder
+errorBorder: 
+errorCallback
+errorCode
+errorColor
+errorDetail
+errorMapper is null
+errorMaxLines
+errorMaxLines: "
+errorMessage
+errorStyle
+errorStyle: "
+errorSupplier is null
+errorText
+errorText: "
+errorType
+error_message
+error_text
+errors is empty
+errors was null
+eserver_error_connect_error
+exception is null
+exceptionAsString
+exceptions
+exceptions was null
+expected 'require', 'enable', 'warn', or 'disable'
+f	completeError
+fInvalid arguments for 'overflow' method sent to dev.flutter/channel-buffers (arguments must be a two-element list, channel name and flag state)
+failed to connect 
+failed to get flags from urandom fd
+failed to open /dev/urandom
+failed to set FD_CLOEXEC on urandom fd
+failedSslHandshake
+failedToConnect
+fast allocation failed
+fcntl(F_GETFD) failed
+fcntl(F_GETFL) failed
+fcntl(F_SETFD, FD_CLOEXEC) failed
+fcntl(F_SETFL, O_NONBLOCK) failed
+fdN Failed assertion:
+ferror
+finishRequestWithError
+finishResponseWithError
+fml::jni::CheckException(env)
+focusedErrorBorder
+focusedErrorBorder: 
+format error in CRL's lastUpdate field
+format error in CRL's nextUpdate field
+format error in certificate's notAfter field
+format error in certificate's notBefore field
+formatException
+gExists failed
+gInternal error.
+gai_strerror
+get:_addError@4048458
+get:_completeError@4048458
+get:_error@4048458
+get:_errorExplanation@0150898
+get:_errorName@0150898
+get:_hasError@4391814018
+get:_hasIntrinsicError@439181401
+get:_ignoreError@4048458
+get:_inProgressErrorCode@14069316
+get:addError
+get:completeError
+get:debugDescription
+get:debugLabel
+get:error
+get:errorLock
+get:errorText
+get:errorZone
+get:hasError
+get:hasErrorCallback
+get:helperError
+get:no_location_permission_error
+get:no_nearbydevice_permission_error
+get:onError
+get:profile_name_error
+get:server_error_connect_error
+get:server_error_connect_failed
+get:server_error_server
+get:server_error_timeout
+getError
+getErrorCode
+getErrorMessage
+getReadingExceptionMessage
+getSerializingExceptionMessage
+getUncaughtExceptionHandler
+getUncaughtExceptionPreHandler
+ginvalid start colon.8
+glDebugMessageCallbackKHR
+glDebugMessageControlKHR
+glDebugMessageInsertKHR
+glGetDebugMessageLogKHR
+glGetError
+glInvalidateFramebuffer
+glInvalidateSubFramebuffer
+glPopDebugGroupKHR
+glPushDebugGroupKHR
+hError registering plugin webview_flutter_android, io.flutter.plugins.webviewflutter.WebViewFlutterPlugin
+h`url_launcher_linux` threw an error: 
+handleError
+handleError callback must take either an Object (the error), or both an Object (the error) and a StackTrace.
+handleException
+handleNotificationError
+handleUncaughtError
+helperError
+hintOnError
+hit null error with cid %d, caller context: 
+hit null error with cid %ld, caller context: 
+hnJ3Invalid arguments for 'overflow' method sent to dev.flutter/channel-buffers (channel name must be less than 254 characters long)
+hserver_error_server
+i<_HelperErrorState@389019562
+iCCP: invalid keyword
+iErrorDescription
+iLocaleDataException
+iTXt: invalid compression
+iTXt: invalid keyword
+i_rootErrorCallback@4048458
+iisErrorResponse
+inSameErrorZone
+init:_GetLastError@1567009611
+init:_debugPrintBuffer@281110992
+init:_debugPrintStopwatch@281110992
+init:_webNonDebugFramePattern@283425567
+init:debugPrint
+init:onError
+init:onError8
+init:presentError
+internal error
+internal error checking chromaticities
+internal error handling cHRM coefficients
+internal error handling cHRM->XYZ
+internal error: array alloc
+internal error: array realloc
+internal progressive row size calculation error
+internal row logic error
+internal row size calculation error
+internal row width error
+internal sequential row size calculation error
+internal write transform logic error
+invalid CA certificate
+invalid Dart_CObject type
+invalid ICC profile color space
+invalid TypedData type
+invalid after png_start_read_image or png_read_update_info
+invalid argument
+invalid arguments to '
+invalid arguments to '%s' constructor (expected %d elements, but found %d)
+invalid arguments to '%s' constructor (expected %zu elements, but found %zu)
+invalid array length
+invalid background gamma type
+invalid bit length repeat
+invalid block type
+invalid callback type - 
+invalid chromaticities
+invalid chunk type
+invalid code -- missing end-of-block
+invalid code lengths set
+invalid color
+invalid composing range: (
+invalid composing start: 
+invalid condition
+invalid data
+invalid device address 
+invalid distance code
+invalid distance too far back
+invalid distances set
+invalid embedded Abstract ICC profile
+invalid expression
+invalid font name
+invalid for loop initializer
+invalid gray level
+invalid index
+invalid init declaration
+invalid length
+invalid library (0)
+invalid literal/length code
+invalid literal/lengths set
+invalid location in png_set_unknown_chunks
+invalid loop expression
+invalid manufacture id
+invalid non-CA certificate (has CA markings)
+invalid operator in loop expression
+invalid or inconsistent certificate extension
+invalid or inconsistent certificate policy extension
+invalid parameter count
+invalid quantifier.
+invalid relational operator
+invalid rendering intent
+invalid sRGB rendering intent
+invalid scan mode 
+invalid selection end: 
+invalid selection start: 
+invalid selection: (
+invalid signature
+invalid start colon.
+invalid stored block lengths
+invalid string length
+invalid swizzle component '%c'
+invalid swizzle mask '
+invalid text selection: 
+invalid token
+invalid type
+invalid type for loop index
+invalid typeddata length
+invalid unit
+invalid user transform pixel depth
+invalid utf8
+invalid values
+invalid window size
+invalid window size (libpng)
+invalid with alpha channel
+invalidate
+invalidateChildInParent
+invalidateScopeData
+invalidityDate
+isContentInvalid
+isErrorResponse
+isInvalidFlight
+jHInternal error: expected positive number, got 
+jSJ/Invalid offset parameter in SecureSocket.read (offset: 
+jStackOverflowError
+j_debugPrintBuffer@281110992
+j_webNonDebugFramePattern@283425567
+javaScriptExceptionOccurred
+kError registering plugin permission_handler_android, com.baseflow.permissionhandler.PermissionHandlerPlugin
+kErrorSummary8
+kGpopOrInvalidate
+kM_completeWithErrorCallback@4048458
+kM_toWebResourceError@1413160685
+kPlatformException
+k_ErrorDiagnostic@264022608
+k_registerErrorHandler@4048458
+kotlinx.coroutines.debug
+l29aInvalidProtocolBufferException: 
+lIsolateSpawnException.
+l_debugPrintScheduled@281110992
+l_reportUnhandledException@16065589
+length failed
+libpng error: %s
+libpng warning: %s
+link failed but did not provide an info log
+lk0@errorBorder: 
+loget:debugDescription8
+mCCyclicInitializationError
+mError registering plugin flutter_native_splash, net.jonhanson.flutter_native_splash.FlutterNativeSplashPlugin
+mErrorWidget.withDetails
+mIsolate exited without result or error.
+matchesErrorTest
+mprotect error: %d (%s)
+munmap error: %d (%s)
+munmap of codec SkData failed
+n-N2Write failed8
+n_error@1330134110
+nativeGetError
+no_location_permission_error
+no_location_permission_error8
+no_nearbydevice_permission_error
+not well-formed (invalid token)
+ntget:no_nearbydevice_permission_error8
+o3invalid text selection: 
+o<Invalid method call
+oBluetoothAdapter is disabled, calling BluetoothLeScanner.stopScan(ScanCallback) may cause IllegalStateException
+oError saving preferences to disk: 
+oLateError.fieldAI
+oLateError.localNI
+oNoSuchMethodError: 
+o_completeDoneError@13463476
+o_throwNewNullAssertion
+oerrorMaxLines
+oget:hasError8
+onDescendantInvalidated
+onError
+onError is null
+onReceivedError
+onReceivedHttpError
+onReceivedRequestError
+onScanFailed
+onWebResourceError
+operation failed
+opportunistic entropy fill failed
+pAnother exception was thrown: 
+pAssertionError
+pCAL: invalid keyword
+p_HandleErrorStream@4048458
+package:dio/src/dio_error.dart
+package:flutter/src/foundation/assertions.dart
+package:flutter/src/foundation/debug.dart
+package:flutter/src/rendering/debug_overflow_indicator.dart
+package:flutter/src/rendering/error.dart
+package:flutter_reactive_ble/src/debug_logger.dart
+package:http/src/exception.dart
+package:path/src/path_exception.dart
+package:petitparser/src/core/exception.dart
+package:protobuf/src/protobuf/exceptions.dart
+package:protobuf/src/protobuf/field_error.dart
+package:source_span/src/span_exception.dart
+package:string_scanner/src/exception.dart
+package:webview_flutter_platform_interface/src/types/web_resource_error.dart
+package:webview_flutter_platform_interface/src/types/web_resource_error.dart8
+package:webview_flutter_platform_interface/src/types/web_resource_error_type.dart
+package:win32/src/exceptions.dart
+package:xml/src/xml/utils/exceptions.dart
+perror
+pget:_hasIntrinsicError@439181401
+png_set_filler is invalid for low bit depth gray output
+popOrInvalidate
+presentError
+profile_name_error
+pthread error: %d (%s)
+pthread_setspecific failed (
+qConnectionError.
+qDioError
+qError registering plugin shared_preferences_android, io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin
+qInvalid response, status code is over 3 digits
+q_completeDoneError@14069316
+q`[ProviderNotFoundException
+qdebugPrint
+qkStateError
+r&Invalid number of arguments in evaluate response
+rNoSuchMethodError._withType@0150898
+rbInvalid character in cookie path, code unit: '
+read char failed
+read failed
+readSync failed
+receiveDataWhenStatusError
+reference to invalid character number
+reportError
+result.IsError()
+s$_TypeError
+sDebug
+sDebugMatchers
+sHfTranspileException
+sKget:_completeError@4048458
+sPLT: invalid keyword
+save_buffer error
+seerrorText: "8
+sendError
+server_error_connect_error
+server_error_connect_failed
+server_error_server
+server_error_timeout
+set:_errorCode@14069316
+set:_errorMessage@14069316
+setContentInvalid
+setError
+setWebContentsDebuggingEnabled
+setct-ErrorTBS
+sf%The error handler of Future.then must return a value of the returned future's type
+sfRead failed
+sfocusedErrorBorder: 8
+showError
+siJsonCyclicError
+silent_warnings
+stream error
+strerror
+strerror_r
+strerror_r failed
+subscribeActual failed
+syntax error
+t:}%, invalid port '
+t?get:_errorExplanation@0150898
+tEXt: invalid keyword
+tInvalid argument
+tInvalid arguments for 'resize' method sent to dev.flutter/channel-buffers (second argument must be an integer in the range 0 to 2147483647)
+throwIfError
+throwIfError8
+toDebugString
+trace_debugger_stacktrace
+trace_failed_optimization_attempts
+uFallThroughError
+uReachabilityError
+u_AssertionError
+uncaughtException
+unknown certificate verification error
+unknown error
+unsupported or invalid name constraint syntax
+unsupported or invalid name syntax
+uuidBytes length invalid - 
+uvexceptionAsString
+v0.dart:core-patch/errors_patch.dart
+v0WInvalid type: 
+vHttp status error [
+vInvalid URL encoding8
+vTNetwork request failed!
+validateErrorArgs
+verbose_debug
+vm:notify-debugger-on-exception
+wQ1_reportBodyError@13463476
+warn
+warn_on_pause_with_no_debugger
+warning
+warning: value specified for --new_gen_semi_max_size %d is larger than the physically addressable range, using %d instead.`
+warning: value specified for --new_gen_semi_max_size %d is larger than the physically addressable range, using %ld instead.`
+warning: value specified for --old_gen_heap_size %d is larger than the physically addressable range, using 0(unlimited) instead.`
+warning: vm.max_map_count (%zu) is not large enough to support --old_gen_heap_size=%d. Consider increasing it with `sysctl -w vm.max_map_count=%zu`
+warning_as_error
+webViewInvalidated
+when reporting an error to an image listener
+when reporting an error to an image listener8
+wrapFormatException
+writeFrom failed
+x0>Rwarning
+xError registering plugin syncfusion_flutter_pdfviewer, com.syncfusion.flutter.pdfviewer.SyncfusionFlutterPdfViewerPlugin
+xget:hasErrorCallback8
+xpackage:petitparser/src/core/exception.dart
+y+LateError.fieldADI
+z6A3_Exception@0150898
+zDpPlatformConfiguration_reportUnhandledException
+zException
+zTXt: invalid compression type
+zTXt: invalid keyword
+zXmlNodeTypeException8
+zlib IO error
+zw:DebugOverflowIndicatorMixin
+{x*server_error_timeout8
+|Invalid arguments for 'resize' method sent to dev.flutter/channel-buffers (arguments must be a two-element list, channel name and new capacity)
+|showError
+|u_handleFormatError@0150898
+}_debugReportException@528266271
+}`device_info_plus_linux` threw an error: 
+}g_setFieldFailedMessage@1052070143
+~$</_ErrorType.
+~Invalid request, unexpected 8
+~TimeoutException after 
+~X_validateErrorCode@5383715

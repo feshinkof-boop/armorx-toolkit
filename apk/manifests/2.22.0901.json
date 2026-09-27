@@ -1,0 +1,822 @@
+{
+ "build_key": "2.22.0901",
+ "label": "2.22.0901",
+ "original_filename": "BIGBIG_WON_2.22.0901.apk",
+ "original_path": "/home/salamanka/armorx-lab/apk/original/2.22.0901/BIGBIG_WON_2.22.0901.apk",
+ "origin_host_path": "/home/salamanka/Downloads/BIGBIG_WON_2.22.0901.apk",
+ "lab_copy_note": "The frozen lab file is a byte-identical copy (cmp clean, same sha256) of the user's Downloads original. It is the only 2.22.0901 APK on this host.",
+ "size_bytes": 27608134,
+ "sha256": "785684ec28a6fe0b111597933527b1cc0e53c3332ed4cc8c8db4112539c0361c",
+ "sha1": "b499545be833889464fc6cdc734d49eba7fa7d36",
+ "md5": "e3af489d0a700de3580fb50d3312e8d3",
+ "mtime": "2026-09-27 10:51:41 -0400 (origin /home/salamanka/Downloads/BIGBIG_WON_2.22.0901.apk)",
+ "lab_copy_mtime": "2026-09-27 10:55:02 -0400",
+ "lab_copy_sha256sum_file": "apk/original/2.22.0901/SHA256SUM.txt (matches recomputed sha256)",
+ "apk_zip_structure": {
+  "container": "single fat APK (no split)",
+  "entry_count": 123,
+  "total_uncompressed_bytes": 64016010,
+  "total_compressed_bytes": 27580430,
+  "compression_methods": {
+   "deflate (8)": 89,
+   "store (0)": 34
+  },
+  "dex_files": [
+   "classes.dex"
+  ],
+  "top_level": {
+   "lib": {
+    "entries": 6,
+    "uncompressed_bytes": 60848324,
+    "note": "3 ABIs x {libapp.so, libflutter.so}"
+   },
+   "res": {
+    "entries": 42,
+    "uncompressed_bytes": 61850
+   },
+   "META-INF": {
+    "entries": 38,
+    "uncompressed_bytes": 41161,
+    "note": "15 *.kotlin_module + CERT.RSA/CERT.SF/MANIFEST.MF + services/"
+   },
+   "assets": {
+    "entries": 15,
+    "uncompressed_bytes": 1289545,
+    "note": "assets/flutter_assets/** (PNG/GIF/TTF/JSON/OTF, no config blobs)"
+   },
+   "google": {
+    "entries": 10,
+    "uncompressed_bytes": 51905,
+    "note": "google/protobuf/*.proto (well-known types, library artifact)"
+   },
+   "kotlin": {
+    "entries": 7,
+    "uncompressed_bytes": 24359,
+    "note": "*.kotlin_builtins"
+   },
+   "classes.dex": {
+    "entries": 1,
+    "uncompressed_bytes": 1664028
+   },
+   "resources.arsc": {
+    "entries": 1,
+    "uncompressed_bytes": 24800
+   },
+   "AndroidManifest.xml": {
+    "entries": 1,
+    "uncompressed_bytes": 5180
+   },
+   "bledata.proto": {
+    "entries": 1,
+    "uncompressed_bytes": 3144
+   },
+   "DebugProbesKt.bin": {
+    "entries": 1,
+    "uncompressed_bytes": 1714
+   }
+  },
+  "evidence": "PROVEN STATIC - python zipfile.ZipFile(infolist) on the untouched APK"
+ },
+ "package": "com.moojiang.bigbigwon",
+ "versionName": "2.22.0901",
+ "versionCode": 3,
+ "app_label": "BIGBIG WON",
+ "min_sdk": 21,
+ "target_sdk": 32,
+ "compile_sdk": 33,
+ "compile_sdk_evidence": "PROVEN STATIC - aapt dump xmltree AndroidManifest.xml: android:compileSdkVersion=(type 0x10)0x21 (=33), android:compileSdkVersionCodename=\"13\"",
+ "application_class": "android.app.Application (default)",
+ "application_class_note": "The <application> element carries NO android:name attribute, so the AOSP default Application class is used. Flutter bootstraps through MainActivity, not a custom Application subclass.",
+ "app_component_factory": "androidx.core.app.CoreComponentFactory",
+ "uses_cleartext_traffic": true,
+ "uses_cleartext_traffic_note": "android:usesCleartextTraffic=(type 0x12)0xffffffff -> true; required for the plaintext http://m.bigbigwon.com:8080 API",
+ "permissions": [
+  {
+   "name": "android.permission.INTERNET"
+  },
+  {
+   "name": "android.permission.BLUETOOTH",
+   "maxSdkVersion": 30
+  },
+  {
+   "name": "android.permission.BLUETOOTH_ADMIN",
+   "maxSdkVersion": 30
+  },
+  {
+   "name": "android.permission.ACCESS_COARSE_LOCATION",
+   "maxSdkVersion": 32
+  },
+  {
+   "name": "android.permission.ACCESS_FINE_LOCATION",
+   "maxSdkVersion": 32
+  },
+  {
+   "name": "android.permission.BLUETOOTH_CONNECT"
+  },
+  {
+   "name": "android.permission.BLUETOOTH_SCAN",
+   "usesPermissionFlags": "neverForLocation (0x10000)"
+  },
+  {
+   "name": "android.permission.ACCESS_COARSE_LOCATION",
+   "element": "uses-permission-sdk-23",
+   "maxSdkVersion": 30
+  },
+  {
+   "name": "android.permission.ACCESS_FINE_LOCATION",
+   "element": "uses-permission-sdk-23",
+   "maxSdkVersion": 30
+  }
+ ],
+ "activities": [
+  {
+   "name": "com.moojiang.bigbigwon.MainActivity",
+   "exported": true,
+   "launchMode": "singleTop",
+   "configChanges": "orientation|screenLayout|...|keyboardHidden (0x40003fb4)",
+   "windowSoftInputMode": "adjustResize",
+   "hardwareAccelerated": true,
+   "intent_filters": [
+    {
+     "action": "android.intent.action.MAIN",
+     "category": "android.intent.category.LAUNCHER"
+    }
+   ],
+   "meta_data": [
+    "io.flutter.embedding.android.NormalTheme",
+    "io.flutter.embedding.android.SplashScreenDrawable"
+   ]
+  },
+  {
+   "name": "io.flutter.plugins.urllauncher.WebViewActivity",
+   "exported": false
+  }
+ ],
+ "services": [],
+ "receivers": [],
+ "providers": [],
+ "uses_libraries": [
+  "androidx.window.extensions (required=false)",
+  "androidx.window.sidecar (required=false)"
+ ],
+ "manifest_evidence": "PROVEN STATIC - aapt dump xmltree on the untouched APK (AndroidManifest.xml). No <service>, <receiver> or <provider> element exists; the only non-activity component is MainActivity + the Flutter WebViewActivity.",
+ "abi_set": [
+  "arm64-v8a",
+  "armeabi-v7a",
+  "x86_64"
+ ],
+ "abi_evidence": "PROVEN STATIC - lib/{arm64-v8a,armeabi-v7a,x86_64}/{libapp.so,libflutter.so} present in the APK",
+ "split_structure": null,
+ "split_structure_note": "single fat APK; no split manifest attribute; no <service>/<provider>; all three ABIs bundled",
+ "signing_certificate": {
+  "subject": "C=cn, ST=sz, L=sz, O=moojiang, OU=moojiang, CN=moojiang",
+  "subject_keytool_order": "CN=moojiang, OU=moojiang, O=moojiang, L=sz, ST=sz, C=cn",
+  "issuer": "C=cn, ST=sz, L=sz, O=moojiang, OU=moojiang, CN=moojiang",
+  "serial": "5EA0DB29",
+  "validity": "2022-03-18 -> 2049-08-03",
+  "sig_alg": "SHA256withRSA",
+  "pubkey": "2048-bit RSA",
+  "sha256_fingerprint": "54:72:58:CA:21:7A:1D:2B:27:80:39:EF:81:74:A4:18:A8:B0:05:85:5E:21:8B:4A:08:E7:6E:00:F2:34:C7:8C",
+  "sha1_fingerprint": "34:3E:87:93:83:94:16:2F:C9:AD:6C:C1:8F:7E:67:1D:55:5A:C7:94",
+  "subject_key_identifier": "EF:1D:7D:2D:D5:63:B3:7C:67:17:AB:8E:91:77:52:B4:8A:82:D0:6D",
+  "v1_signature_file": "META-INF/CERT.RSA",
+  "apk_signing_block": {
+   "present": true,
+   "magic": "APK Sig Block 42 at file offset 0x1A5C990 (27597456)",
+   "block_size": 8184,
+   "pairs": [
+    {
+     "id": "0x7109871a",
+     "scheme": "v2",
+     "len": 1517,
+     "signer_cert_sha256_fingerprint": "54:72:58:CA:21:7A:1D:2B:27:80:39:EF:81:74:A4:18:A8:B0:05:85:5E:21:8B:4A:08:E7:6E:00:F2:34:C7:8C"
+    },
+    {
+     "id": "0x504b4453",
+     "scheme": "UNKNOWN (opaque pair; not a documented v2/v3/v3.1/source-stamp ID)",
+     "len": 2776
+    },
+    {
+     "id": "0x42726577",
+     "scheme": "verity padding (all-zero payload)",
+     "len": 3843
+    }
+   ],
+   "v3_note": "No 0xf05368c0 (v3) or 0x1b93ad61 (v3.1) pair; this build carries v1 + v2 only.",
+   "evidence": "PROVEN STATIC - custom parser over the APK Signing Block; v2 signer certificate extracted and verified with openssl x509"
+  },
+  "evidence": "PROVEN STATIC - keytool -printcert -file META-INF/CERT.RSA and openssl x509 on the v2 block signer certificate; both yield the identical certificate"
+ },
+ "certificate_comparison": {
+  "2.22.0901": "CN=moojiang serial 5EA0DB29 SHA256 54:72:58:CA:...:34:C7:8C",
+  "2.23.0609": "CN=moojiang serial 5EA0DB29 SHA256 54:72:58:CA:...:34:C7:8C (byte-identical certificate)",
+  "2.24.0919": "CN=Android Debug serial 0DCA795A SHA256 44:C3:BB:8C:...:B2:95:41",
+  "4.0.8": "Google Play App Signing (C=US,...CN=Android) SHA256 F7:45:43:34:...:18:7B:62",
+  "signer_relationship_classification": "SAME KEY as 2.23.0609 - the release 'moojiang' upload/release key. NOT a debug key (2.24 is), NOT Play App Signing (4.0.8 is). This is the earliest build in the set that carries the release key, extending the release-key lineage back to 2.22.0901.",
+  "evidence": "PROVEN STATIC - keytool -printcert on apk/extracted/{2.22.0901,2.23,2.24}/META-INF/CERT.RSA plus the recorded 4.0.8 v2/v3 certificate"
+ },
+ "dart_version": "2.17.5 (stable) (Tue Jun 21 11:05:10 2022 +0200) on \"android_arm64\"",
+ "dart_evidence": "PROVEN STATIC - libflutter.so version banner (lib/arm64-v8a/libflutter.so; armeabi-v7a/x86_64 report \"android_arm\"/\"android_x64\")",
+ "flutter_engine_hash": "1441d6b13b8623fa7fbf61433abebd31",
+ "flutter_engine_evidence": "PROVEN STATIC - libapp.so Dart snapshot header (magic f5f5dcdc @0x1b0, 32-hex engine hash @0x1c4)",
+ "flutter_version": "3.3.x",
+ "flutter_version_evidence": "INFERRED - Flutter framework version is not stored in the APK; inferred from Dart 2.17.5 (Flutter 3.3 branch)",
+ "ble_library": "flutter_reactive_ble",
+ "ble_library_evidence": "PROVEN STATIC - libapp.so / pp.txt strings: package:flutter_reactive_ble/**, package:reactive_ble_mobile/src/converter/protobuf_converter, bledata.proto (java_package com.signify.hue.flutterreactiveble)",
+ "server_hosts": {
+  "api": "http://m.bigbigwon.com:8080",
+  "oss": [
+   "https://bigbig-won-cn.oss-cn-shanghai.aliyuncs.com",
+   "https://bigbigwon-jp.oss-ap-northeast-1.aliyuncs.com",
+   "https://bigwon-us.oss-us-west-1.aliyuncs.com"
+  ],
+  "www_support": [
+   "https://www.bigbigwon.com",
+   "https://www.bigbigwon.cn",
+   "https://jp.bigbigwon.com",
+   "https://kr.bigbigwon.com"
+  ],
+  "evidence": "PROVEN STATIC - libapp.so string pool (pp.txt). NOTE: no bigwon-germany OSS host in 2.22 (added by 2.23); the OSS path segment is the misspelt 'AEMOR-X' for the ArmorX Pro manuals."
+ },
+ "server_endpoints": [
+  "/dev/register",
+  "/dev/userLogin",
+  "/dev/queryConfigList",
+  "/dev/addConfig",
+  "/dev/changeConfig",
+  "/dev/renameConfig",
+  "/dev/delConfig",
+  "/dev/queryMacroList",
+  "/dev/addMacro",
+  "/dev/changeMacro",
+  "/dev/delMacro",
+  "/dev/queryDefaultConfig",
+  "/dev/setConfig"
+ ],
+ "server_endpoints_note": "13 endpoints. vs 2.23: 2.22 LACKS /dev/shareConfig and /dev/importShareConfig. 2.22 HAS /dev/queryDefaultConfig (also in 2.23/2.24; dropped by 4.0.8). 2.22 has NO /dev/queryGameList (that endpoint exists only in 2.24).",
+ "device_enum": [
+  {
+   "id": 0,
+   "name": "devNone"
+  },
+  {
+   "id": 1,
+   "name": "devRainbow"
+  },
+  {
+   "id": 2,
+   "name": "devRainbowS"
+  },
+  {
+   "id": 3,
+   "name": "devArmorX"
+  }
+ ],
+ "armorx_enum_value": 3,
+ "device_enum_evidence": "PROVEN STATIC - objs.txt Obj!Device@8fce31..8fce91 (off_8 index / off_10 name). Only FOUR members exist (grep 'Obj!Device@' = 4); no devBLITZ_*, devCHOCO, devC2SL, devMSY or devRainbow2Pro.",
+ "device_labels": [
+  "Rainbow",
+  "RAINBOW",
+  "ArmorX Pro",
+  "ARMOR-X Pro"
+ ],
+ "device_labels_note": "2.22 carries BOTH 'Rainbow' and the uppercase 'RAINBOW', and both 'ArmorX Pro' and 'ARMOR-X Pro'. Later builds drop 'RAINBOW' and 'ArmorX Pro' and add 'Rainbow S' / 'Rainbow2 PRO'.",
+ "device_label_evidence": "PROVEN STATIC - pp.txt string pool",
+ "ble_uuid_table": [
+  {
+   "uuid": "00000000-0000-1000-8000-00805f9b34fb",
+   "role": "vendor service (all-zero service UUID)",
+   "evidence": "PROVEN STATIC - pp.txt"
+  },
+  {
+   "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb",
+   "role": "FFE1 - command write characteristic",
+   "evidence": "PROVEN STATIC - pp.txt"
+  },
+  {
+   "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb",
+   "role": "FFE2 - notify/read characteristic",
+   "evidence": "PROVEN STATIC - pp.txt"
+  }
+ ],
+ "named_uuid_symbols": [
+  "uuidRainbowService",
+  "uuidRainbowRead",
+  "uuidRainbowWrite"
+ ],
+ "config_sizes": [
+  88,
+  144
+ ],
+ "config_templates": [
+  {
+   "len": 88,
+   "pp_off": "0x46480",
+   "sha256": "9eaea1d6a42c49a45ccd2bc5e6c4e44345e2558f7dd989c06a90e9cae4a9afa6",
+   "sha256_prefix": "9eaea1d6a42c49a4",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0xC800",
+   "crc_self_valid": false,
+   "family": "universal 88-byte default; byte-identical in 2.23/2.24/4.0.8"
+  },
+  {
+   "len": 144,
+   "pp_off": "0x46488",
+   "sha256": "b8f5735ccb070b36b93651e1d058b54a23247ba7edb38872be3cd7697e45e595",
+   "sha256_prefix": "b8f5735ccb070b36",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0xB811",
+   "crc_self_valid": false,
+   "family": "ARMOR-X Pro 144 family; identical to bc536085f138a2ed (2.23/2.24/4.0.8) EXCEPT byte 4 (0x00 here vs 0x33 in every later build)"
+  }
+ ],
+ "config_evidence": "PROVEN STATIC - pp.txt Dart string literals \"[..]\" parsed as decimal byte arrays",
+ "config_crc": "CRC-16/MODBUS (init 0xFFFF, poly 0xA001) over bytes 2..end, stored big-endian at bytes 0..1; the stored value is 0x0000 in these default templates (placeholders), so only the recomputed CRC is meaningful here",
+ "config_length_rule": "UNKNOWN for 2.22 in this pass - not re-derived from asm; the two defaults declare their length at bytes 2..3 big-endian (0x0058 / 0x0090).",
+ "opcode_inventory": {
+  "source": "results/static/2.22.0901/command-index.json (AOT pass over the 2.22 Blutter tree)",
+  "checksum_rule": "A5/A4 frame checksum = (sum of every preceding frame byte) & 0xFF, written into the final element by ::getCheckSum (gamepadset.dart:87 @0x79c368). Reproduced exactly for all 10 byte-exact builders.",
+  "frame_families": {
+   "A5": "short frame [0xA5, total_len, opcode, payload..., checksum]",
+   "A4": "indexed fragmentation [0xA4, len, opcode, frag_index, payload...] (exact field order UNKNOWN, see notes)",
+   "AB": "NOT PRESENT in 2.22"
+  },
+  "opcodes": {
+   "04": {
+    "opcode": "0x04",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "battery read",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "STRONG EVIDENCE",
+    "ui": "none"
+   },
+   "05": {
+    "opcode": "0x05",
+    "family": "A5/AB",
+    "status": "ABSENT",
+    "role": "(4.0.8: writeMotionDpiConfig)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "STRONG EVIDENCE",
+    "ui": "none"
+   },
+   "06": {
+    "opcode": "0x06",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: writeLightConfig)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "STRONG EVIDENCE",
+    "ui": "none"
+   },
+   "07": {
+    "opcode": "0x07",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "STRONG EVIDENCE",
+    "ui": "none"
+   },
+   "0B": {
+    "opcode": "0x0B",
+    "family": "A5",
+    "status": "PRESENT",
+    "role": "read (firmware/MCU version query)",
+    "frame": "A5 04 0B B4",
+    "builder": "_RainbowWidget::getZKMVer (closure) / _ArmorXProWidgetState::getZKMVer (closure)",
+    "address": "0x7a9b8c (Rainbow) ; 0x7ab7f8 (ARMOR-X Pro)",
+    "evidence": "PROVEN STATIC",
+    "ui": "Rainbow / ARMOR-X Pro first-contact; on reply getDeviceParam + getBatteryParam are called (armorx_pro_root.dart:3332/3342)"
+   },
+   "0E": {
+    "opcode": "0x0E",
+    "family": "A5",
+    "status": "PRESENT",
+    "role": "write / post-write command",
+    "frame": "A5 05 0E 00 B8",
+    "builder": "GamepadDef::writeDevice (closure)",
+    "address": "0x79c5d4",
+    "evidence": "PROVEN STATIC",
+    "ui": "emitted after config / macro / DPI writes (gamepadset.dart ::_writeDevice family)"
+   },
+   "1A": {
+    "opcode": "0x1A",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "1B": {
+    "opcode": "0x1B",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "25": {
+    "opcode": "0x25",
+    "family": "AB",
+    "status": "ABSENT",
+    "role": "(4.0.8: getMotionDpi)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "STRONG EVIDENCE",
+    "ui": "none"
+   },
+   "26": {
+    "opcode": "0x26",
+    "family": "AB",
+    "status": "ABSENT",
+    "role": "(4.0.8: getMotionList)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "STRONG EVIDENCE",
+    "ui": "none"
+   },
+   "34": {
+    "opcode": "0x34",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "70": {
+    "opcode": "0x70",
+    "family": "A5",
+    "status": "PRESENT",
+    "role": "send (lighting configuration)",
+    "frame": "A5 ?? 70 00 00 00 (AllocateArray(12)=6 elements; element0=0xA5, element1=0x00 placeholder, element2=0x70, elements 3-5 = 0; length/checksum patched later)",
+    "builder": "GamepadDef::writeLightConfig (closure)",
+    "address": "0x7a74c4 (opcode immediate at 0x7a7ba0)",
+    "evidence": "STRONG EVIDENCE",
+    "ui": "Rainbow light-config page"
+   },
+   "73": {
+    "opcode": "0x73",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "A9": {
+    "opcode": "0xA9",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "D2": {
+    "opcode": "0xD2",
+    "family": "A5",
+    "status": "PRESENT",
+    "role": "send (controller test-mode switch)",
+    "frame": "A5 05 D2 00 7C (off) and A5 05 D2 01 7D (on)",
+    "builder": "_RainbowTestState::testModeSwitch1 ; _RainbowTestState::testModeSwitch (closure)",
+    "address": "0x8e1efc ; 0x8e3be4",
+    "evidence": "PROVEN STATIC",
+    "ui": "Rainbow test page (widgets/rainbow/rainbow_test.dart)"
+   },
+   "D3": {
+    "opcode": "0xD3",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: getMaxSize)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "D4": {
+    "opcode": "0xD4",
+    "family": "A5",
+    "status": "PRESENT",
+    "role": "read (on-board config / input model)",
+    "frame": "A5 04 D4 7D",
+    "builder": "_ArmorXProConfigWidgetState::getOnBoardConfig (closure)",
+    "address": "0x89adac",
+    "evidence": "PROVEN STATIC",
+    "ui": "ARMOR-X Pro config page"
+   },
+   "D6": {
+    "opcode": "0xD6",
+    "family": "A5 (req) / A4 (reply)",
+    "status": "PRESENT",
+    "role": "read device configuration",
+    "frame": "A5 04 D6 7F",
+    "builder": "_ArmorXProConfigWidgetState::getDeviceConfig (closure) ; _ConfigsConfigWidgetState::getDeviceConfig (closure)",
+    "address": "0x89bff8 ; 0x8a60f4",
+    "evidence": "PROVEN STATIC",
+    "ui": "ARMOR-X Pro config page / generic config page"
+   },
+   "D7": {
+    "opcode": "0xD7",
+    "family": "A4",
+    "status": "PRESENT",
+    "role": "write device configuration (indexed fragmentation)",
+    "frame": "A4 fragment list, base [0xA4] built by AllocateArray(2) at 0x7a040c; 0xD7 appended into the fragment at 0x7a07d0; payload from GamepadSet30::toList / GamepadSet::toList",
+    "builder": "GamepadDef::writeDeviceConfig (closure)",
+    "address": "0x7a005c (opcode immediate 430 = Smi 0xD7 at 0x7a07d0)",
+    "evidence": "STRONG EVIDENCE",
+    "ui": "config write (ARMOR-X Pro config page, generic config page, armorx_pro_config_config.dart:6701, configs_config.dart:2755)"
+   },
+   "D8": {
+    "opcode": "0xD8",
+    "family": "A4",
+    "status": "PRESENT",
+    "role": "write macro / macro protocol (indexed fragmentation)",
+    "frame": "A4 fragment list carrying 0xD8",
+    "builder": "GamepadDef::writeMacroConfig (closure) ; GamepadDef::writeLightConfig (closure)",
+    "address": "0x79e158 (opcode immediate 432 = Smi 0xD8 at 0x79e778 and 0x79ebf4) ; 0x7a74c4 (0x7a8aa0)",
+    "evidence": "STRONG EVIDENCE",
+    "ui": "ARMOR-X Pro macro page (_ArmorXProMacroWidgetState), Rainbow macro page"
+   },
+   "DA": {
+    "opcode": "0xDA",
+    "family": "A4",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "DD": {
+    "opcode": "0xDD",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: charging light effect)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "E1": {
+    "opcode": "0xE1",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: connect mode)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "E2": {
+    "opcode": "0xE2",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: readFirmware)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "E3": {
+    "opcode": "0xE3",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "E4": {
+    "opcode": "0xE4",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: getMTU)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "EF": {
+    "opcode": "0xEF",
+    "family": "A5",
+    "status": "PRESENT",
+    "role": "read (device UUID)",
+    "frame": "A5 0C EF 00 00 00 00 00 00 00 00 A0",
+    "builder": "_ArmorXProWidgetState::getDeviceUUID (closure) ; _RainbowWidget::getDeviceUUID (closure)",
+    "address": "0x7aadd0 ; 0x79c074",
+    "evidence": "PROVEN STATIC",
+    "ui": "first-contact; POST /dev/register"
+   },
+   "F2": {
+    "opcode": "0xF2",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "F3": {
+    "opcode": "0xF3",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "F4": {
+    "opcode": "0xF4",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "F5": {
+    "opcode": "0xF5",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: logo colour)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "F6": {
+    "opcode": "0xF6",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: DPI / charging)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "F7": {
+    "opcode": "0xF7",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: step length / SOCD)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "F8": {
+    "opcode": "0xF8",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: brightness compensation)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "FC": {
+    "opcode": "0xFC",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "(4.0.8: DPI / transcribe)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "FD": {
+    "opcode": "0xFD",
+    "family": "A5",
+    "status": "ABSENT",
+    "role": "-",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   },
+   "FF": {
+    "opcode": "0xFF",
+    "family": "payload",
+    "status": "PRESENT (payload marker, not an opcode)",
+    "role": "lighting payload marker",
+    "frame": "appears inside the A5 70 lighting payload, not in the opcode slot",
+    "builder": "GamepadDef::writeLightConfig (closure)",
+    "address": "0x7a74c4 (immediate 510 = Smi 0xFF at 0x7a7a3c)",
+    "evidence": "STRONG EVIDENCE",
+    "ui": "Rainbow light config"
+   },
+   "AB": {
+    "opcode": "0xAB",
+    "family": "AB",
+    "status": "ABSENT",
+    "role": "(motion/other family)",
+    "frame": null,
+    "builder": null,
+    "address": null,
+    "evidence": "PROVEN STATIC",
+    "ui": "none"
+   }
+  }
+ },
+ "library_inventory_flutter": [
+  "flutter_reactive_ble",
+  "reactive_ble_mobile",
+  "reactive_ble_platform_interface",
+  "app_settings",
+  "device_info_plus",
+  "package_info_plus",
+  "permission_handler",
+  "shared_preferences",
+  "path_provider",
+  "url_launcher",
+  "webview_flutter_android",
+  "fluttertoast",
+  "dio",
+  "http",
+  "intl",
+  "provider",
+  "crypto",
+  "protobuf",
+  "petitparser",
+  "nested",
+  "collection",
+  "characters",
+  "source_span",
+  "path",
+  "file",
+  "async"
+ ],
+ "library_inventory_note": "Flutter/Dart packages referenced by the Dart pool (package:**). Java/Kotlin side is a normal Flutter app (only MainActivity + urllauncher WebViewActivity in the manifest).",
+ "notable": [
+  "Earliest build in the set (versionCode 3). Device enum has only 4 members; ARMOR-X = index 3.",
+  "Signed with the SAME release 'moojiang' key as 2.23 (first proof the release key predates 2.23).",
+  "Has /dev/queryDefaultConfig; lacks /dev/shareConfig, /dev/importShareConfig and /dev/queryGameList.",
+  "The literal 'ZJ-XT' and any 'ZJ-' token are ABSENT from every decompressed artifact.",
+  "Opaque signing-block pair id 0x504b4453 present (role UNKNOWN)."
+ ],
+ "manifest_version": 1,
+ "generated_from": "2.22.0901 inventoried in this pass from the frozen APK; modelled on apk/manifests/{2.23,2.24,4.0.8}.json",
+ "armorx_config_length": "144 bytes - serializer GamepadSet30/GamepadParam30, proven for 2.22 in results/static/2.22.0901/config-map.md; layout identical to 4.0.8 (CRC 0-1 BE, len 2-3 BE, params 4-111, mapKeys 112-143)",
+ "e2": "ABSENT",
+ "ab_family": "ABSENT in 2.22 - no 0xAB frame builder or dispatcher found (results/static/2.22.0901/command-index.md); the AB motion-DPI family first appears in 4.0.8",
+ "d8": {
+  "opcode": "0xD8",
+  "family": "A4",
+  "status": "PRESENT",
+  "role": "write macro / macro protocol (indexed fragmentation)",
+  "frame": "A4 fragment list carrying 0xD8",
+  "builder": "GamepadDef::writeMacroConfig (closure) ; GamepadDef::writeLightConfig (closure)",
+  "address": "0x79e158 (opcode immediate 432 = Smi 0xD8 at 0x79e778 and 0x79ebf4) ; 0x7a74c4 (0x7a8aa0)",
+  "evidence": "STRONG EVIDENCE",
+  "ui": "ARMOR-X Pro macro page (_ArmorXProMacroWidgetState), Rainbow macro page"
+ },
+ "fc_f6": "ABSENT in 2.22 - no 0xFC and no 0xF6 builder/dispatcher; no DPI implementation of any kind exists in this build (results/static/2.22.0901/fc-dpi.md). FC arrives by 2.23; F6 is a later legacy branch.",
+ "scan_prefixes": {
+  "armorx_scan_prefix": "ARMOR-X Pro_",
+  "evidence": "home.dart + object pool, 2.22 AOT tree"
+ }
+}

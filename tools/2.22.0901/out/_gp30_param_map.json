@@ -1,0 +1,378 @@
+[
+ {
+  "site": "0x7a2028",
+  "param_index": 0,
+  "config_byte": 4,
+  "value_reg": "r0",
+  "source_reg": "r8",
+  "source_field": "field_7"
+ },
+ {
+  "site": "0x7a20f4",
+  "param_index": 0,
+  "config_byte": 4,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2144",
+  "param_index": 1,
+  "config_byte": 5,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2194",
+  "param_index": 5,
+  "config_byte": 9,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a21f8",
+  "param_index": 6,
+  "config_byte": 10,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2248",
+  "param_index": 7,
+  "config_byte": 11,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a22ac",
+  "param_index": 8,
+  "config_byte": 12,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a22fc",
+  "param_index": 9,
+  "config_byte": 13,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a234c",
+  "param_index": 11,
+  "config_byte": 15,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a23b0",
+  "param_index": 12,
+  "config_byte": 16,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2400",
+  "param_index": 13,
+  "config_byte": 17,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2464",
+  "param_index": 14,
+  "config_byte": 18,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a24b4",
+  "param_index": 15,
+  "config_byte": 19,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2518",
+  "param_index": 16,
+  "config_byte": 20,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2568",
+  "param_index": 17,
+  "config_byte": 21,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a25b8",
+  "param_index": 18,
+  "config_byte": 22,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2608",
+  "param_index": 19,
+  "config_byte": 23,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2658",
+  "param_index": 20,
+  "config_byte": 24,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a26a8",
+  "param_index": 21,
+  "config_byte": 25,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a270c",
+  "param_index": 24,
+  "config_byte": 28,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a275c",
+  "param_index": 25,
+  "config_byte": 29,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a27ac",
+  "param_index": 26,
+  "config_byte": 30,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a27fc",
+  "param_index": 27,
+  "config_byte": 31,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a284c",
+  "param_index": 28,
+  "config_byte": 32,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a289c",
+  "param_index": 29,
+  "config_byte": 33,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a28ec",
+  "param_index": 32,
+  "config_byte": 36,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a293c",
+  "param_index": 33,
+  "config_byte": 37,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a298c",
+  "param_index": 34,
+  "config_byte": 38,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a29dc",
+  "param_index": 35,
+  "config_byte": 39,
+  "value_reg": "r0",
+  "source_reg": "r2",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2a88",
+  "param_index": 36,
+  "config_byte": 40,
+  "value_reg": "r0",
+  "source_reg": "r5",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2c70",
+  "param_index": 40,
+  "config_byte": 44,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2cc0",
+  "param_index": 41,
+  "config_byte": 45,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2d10",
+  "param_index": 42,
+  "config_byte": 46,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2d60",
+  "param_index": 43,
+  "config_byte": 47,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2db0",
+  "param_index": 44,
+  "config_byte": 48,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2e00",
+  "param_index": 45,
+  "config_byte": 49,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2e64",
+  "param_index": 48,
+  "config_byte": 52,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2eb4",
+  "param_index": 49,
+  "config_byte": 53,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2f04",
+  "param_index": 50,
+  "config_byte": 54,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2f54",
+  "param_index": 51,
+  "config_byte": 55,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2fa4",
+  "param_index": 52,
+  "config_byte": 56,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a2ff4",
+  "param_index": 53,
+  "config_byte": 57,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a3058",
+  "param_index": 56,
+  "config_byte": 60,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a30a8",
+  "param_index": 57,
+  "config_byte": 61,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a30f8",
+  "param_index": 58,
+  "config_byte": 62,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a3148",
+  "param_index": 59,
+  "config_byte": 63,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ },
+ {
+  "site": "0x7a3198",
+  "param_index": 60,
+  "config_byte": 64,
+  "value_reg": "r0",
+  "source_reg": "r4",
+  "source_field": "field_b"
+ }
+]

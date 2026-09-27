@@ -1,0 +1,674 @@
+{
+ "build": "2.22.0901",
+ "package": "com.moojiang.bigbigwon",
+ "sha256": "785684ec28a6fe0b111597933527b1cc0e53c3332ed4cc8c8db4112539c0361c",
+ "dart": "2.17.5",
+ "source": "Blutter AOT asm tree /home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out",
+ "smi_rule": "printed immediate = 2 x value (verified: #0x14a=0xA5; #0x20000=keyUp=0x10000)",
+ "bit_index_relationship": {
+  "convention": "value == 1 << id (bit index == key id, NO +1 offset)",
+  "evidence": [
+   "18 static getters in units/gamepadset.dart",
+   "pp.txt:27316 powers-of-two List(32)",
+   "config_mapkey.dart:273 turboClick lsl 1<<id"
+  ],
+  "evidence_label": "PROVEN STATIC",
+  "correction_to_import": "imported 4.0.8 'keyCapture=0x10000, bit=id+1' is CONTRADICTED; 4.0.8 define.dart:1583 keyCapture=0x8000 (bit15), keyUp=0x10000 (bit16)"
+ },
+ "map_builders": [
+  {
+   "symbol": "_ChangeKeyButtonState.initState",
+   "file": "units/component.dart",
+   "line": 3909,
+   "addr": "0x895878"
+  },
+  {
+   "symbol": "_CircleButtonState.initState",
+   "file": "units/theme.dart",
+   "line": 5286,
+   "addr": "0x8994f8"
+  }
+ ],
+ "map_builder_count": 2,
+ "map_builder_count_408": 6,
+ "turbo_eligible_key_ids": [
+  23,
+  24,
+  25,
+  26,
+  0,
+  1,
+  3,
+  4,
+  16,
+  17,
+  18,
+  19,
+  6,
+  8,
+  7,
+  9,
+  13,
+  14,
+  10,
+  11
+ ],
+ "turbo_eligible_source": "config_mapkey.dart:273 @0x8c96d8, pp.txt:57877 List(32/20)",
+ "header_bit_constants": {
+  "keyY": 16,
+  "rightStickY": 32,
+  "keyL1": 64,
+  "keyR1": 128,
+  "keyL2": 256,
+  "keyR2": 512,
+  "keySelect": 1024,
+  "keyStart": 2048,
+  "keyRThumb": 16384,
+  "keyUp": 65536,
+  "keyDown": 131072,
+  "keyLeft": 262144,
+  "keyRight": 524288,
+  "keyM1": 8388608,
+  "keyM2": 16777216,
+  "keyM3": 33554432,
+  "keyM4": 67108864,
+  "keyM6": 268435456,
+  "_keyA_INFERRED": 1,
+  "_keyB_INFERRED": 2,
+  "_keyX_INFERRED": 8,
+  "_keyLThumb_INFERRED": 8192
+ },
+ "ids": [
+  {
+   "id": 0,
+   "label": "A",
+   "l10n_key": "key_A",
+   "localized_en": "A",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x8958d4",
+   "id_mov_addr": "0x8958f8"
+  },
+  {
+   "id": 1,
+   "label": "B",
+   "l10n_key": "key_B",
+   "localized_en": "B",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x895958",
+   "id_mov_addr": "0x895978"
+  },
+  {
+   "id": 2,
+   "label": "NIL",
+   "l10n_key": "key_C",
+   "localized_en": "NIL",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x8959d8",
+   "id_mov_addr": "0x8959fc"
+  },
+  {
+   "id": 3,
+   "label": "X",
+   "l10n_key": "key_X",
+   "localized_en": "X",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x895a5c",
+   "id_mov_addr": "0x895a80"
+  },
+  {
+   "id": 4,
+   "label": "Y",
+   "l10n_key": "key_Y",
+   "localized_en": "Y",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyY",
+    "value": "0x10",
+    "bit": 4
+   },
+   "label_addr": "0x895ae0",
+   "id_mov_addr": "0x895b04"
+  },
+  {
+   "id": 5,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": {
+    "name": "rightStickY",
+    "value": "0x20",
+    "bit": 5
+   }
+  },
+  {
+   "id": 6,
+   "label": "LB",
+   "l10n_key": "key_LB",
+   "localized_en": "LB",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyL1",
+    "value": "0x40",
+    "bit": 6
+   },
+   "label_addr": "0x895b64",
+   "id_mov_addr": "0x895b88"
+  },
+  {
+   "id": 7,
+   "label": "RB",
+   "l10n_key": "key_RB",
+   "localized_en": "RB",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyR1",
+    "value": "0x80",
+    "bit": 7
+   },
+   "label_addr": "0x895be8",
+   "id_mov_addr": "0x895c0c"
+  },
+  {
+   "id": 8,
+   "label": "LT",
+   "l10n_key": "key_LT",
+   "localized_en": "LT",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyL2",
+    "value": "0x100",
+    "bit": 8
+   },
+   "label_addr": "0x895c6c",
+   "id_mov_addr": "0x895c90"
+  },
+  {
+   "id": 9,
+   "label": "RT",
+   "l10n_key": "key_RT",
+   "localized_en": "RT",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyR2",
+    "value": "0x200",
+    "bit": 9
+   },
+   "label_addr": "0x895cf0",
+   "id_mov_addr": "0x895d14"
+  },
+  {
+   "id": 10,
+   "label": "Select",
+   "l10n_key": "key_Select",
+   "localized_en": "Select",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keySelect",
+    "value": "0x400",
+    "bit": 10
+   },
+   "label_addr": "0x895d74",
+   "id_mov_addr": "0x895d98"
+  },
+  {
+   "id": 11,
+   "label": "Start",
+   "l10n_key": "key_Start",
+   "localized_en": "Start",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyStart",
+    "value": "0x800",
+    "bit": 11
+   },
+   "label_addr": "0x895df8",
+   "id_mov_addr": "0x895e1c"
+  },
+  {
+   "id": 12,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 13,
+   "label": "L3",
+   "l10n_key": "key_L3",
+   "localized_en": "L3",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x895e7c",
+   "id_mov_addr": "0x895ea0"
+  },
+  {
+   "id": 14,
+   "label": "R3",
+   "l10n_key": "key_R3",
+   "localized_en": "R3",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyRThumb",
+    "value": "0x4000",
+    "bit": 14
+   },
+   "label_addr": "0x895f00",
+   "id_mov_addr": "0x895f24"
+  },
+  {
+   "id": 15,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 16,
+   "label": "▲",
+   "l10n_key": "key_Dpad_up",
+   "localized_en": "▲",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyUp",
+    "value": "0x10000",
+    "bit": 16
+   },
+   "label_addr": "0x895f84",
+   "id_mov_addr": "0x895fa8"
+  },
+  {
+   "id": 17,
+   "label": "▼",
+   "l10n_key": "key_Dpad_down",
+   "localized_en": "▼",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyDown",
+    "value": "0x20000",
+    "bit": 17
+   },
+   "label_addr": "0x896008",
+   "id_mov_addr": "0x89602c"
+  },
+  {
+   "id": 18,
+   "label": "◀",
+   "l10n_key": "key_Dpad_left",
+   "localized_en": "◀",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyLeft",
+    "value": "0x40000",
+    "bit": 18
+   },
+   "label_addr": "0x89608c",
+   "id_mov_addr": "0x8960b0"
+  },
+  {
+   "id": 19,
+   "label": "▶",
+   "l10n_key": "key_Dpad_right",
+   "localized_en": "▶",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyRight",
+    "value": "0x80000",
+    "bit": 19
+   },
+   "label_addr": "0x896110",
+   "id_mov_addr": "0x896134"
+  },
+  {
+   "id": 20,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 21,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 22,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 23,
+   "label": "M1",
+   "l10n_key": "key_M1",
+   "localized_en": "M1",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyM1",
+    "value": "0x800000",
+    "bit": 23
+   },
+   "label_addr": "0x896194",
+   "id_mov_addr": "0x8961b8"
+  },
+  {
+   "id": 24,
+   "label": "M2",
+   "l10n_key": "key_M2",
+   "localized_en": "M2",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyM2",
+    "value": "0x1000000",
+    "bit": 24
+   },
+   "label_addr": "0x896218",
+   "id_mov_addr": "0x89623c"
+  },
+  {
+   "id": 25,
+   "label": "M3",
+   "l10n_key": "key_M3",
+   "localized_en": "M3",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyM3",
+    "value": "0x2000000",
+    "bit": 25
+   },
+   "label_addr": "0x89629c",
+   "id_mov_addr": "0x8962c0"
+  },
+  {
+   "id": 26,
+   "label": "M4",
+   "l10n_key": "key_M4",
+   "localized_en": "M4",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": {
+    "name": "keyM4",
+    "value": "0x4000000",
+    "bit": 26
+   },
+   "label_addr": "0x896320",
+   "id_mov_addr": "0x896344"
+  },
+  {
+   "id": 27,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 28,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": {
+    "name": "keyM6",
+    "value": "0x10000000",
+    "bit": 28
+   }
+  },
+  {
+   "id": 29,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 30,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 31,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 32,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 33,
+   "label": null,
+   "l10n_key": null,
+   "localized_en": null,
+   "source": "key_remap",
+   "evidence": "UNKNOWN (absent from both 2.22 id maps and the full l10n catalog)",
+   "bit_constant": null
+  },
+  {
+   "id": 34,
+   "label": "R←",
+   "l10n_key": null,
+   "localized_en": "R←",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 35,
+   "label": "R→",
+   "l10n_key": null,
+   "localized_en": "R→",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 36,
+   "label": "R↑",
+   "l10n_key": null,
+   "localized_en": "R↑",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 37,
+   "label": "R↓",
+   "l10n_key": null,
+   "localized_en": "R↓",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 38,
+   "label": "L←",
+   "l10n_key": null,
+   "localized_en": "L←",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 39,
+   "label": "L→",
+   "l10n_key": null,
+   "localized_en": "L→",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 40,
+   "label": "L↑",
+   "l10n_key": null,
+   "localized_en": "L↑",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 41,
+   "label": "L↓",
+   "l10n_key": null,
+   "localized_en": "L↓",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 42,
+   "label": "R↖",
+   "l10n_key": null,
+   "localized_en": "R↖",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 43,
+   "label": "R↗",
+   "l10n_key": null,
+   "localized_en": "R↗",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 44,
+   "label": "R↙",
+   "l10n_key": null,
+   "localized_en": "R↙",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 45,
+   "label": "R↘",
+   "l10n_key": null,
+   "localized_en": "R↘",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 46,
+   "label": "L↖",
+   "l10n_key": null,
+   "localized_en": "L↖",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 47,
+   "label": "L↗",
+   "l10n_key": null,
+   "localized_en": "L↗",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 48,
+   "label": "L↙",
+   "l10n_key": null,
+   "localized_en": "L↙",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  },
+  {
+   "id": 49,
+   "label": "L↘",
+   "l10n_key": null,
+   "localized_en": "L↘",
+   "source": "key_remap",
+   "evidence": "PROVEN STATIC",
+   "bit_constant": null,
+   "label_addr": "0x899e14+"
+  }
+ ],
+ "id15_terminology": {
+  "2.22": "absent (not Capture, not Share)",
+  "2.23": "absent (historical)",
+  "2.24": "Capture (historical)",
+  "4.0.8": "Capture (historical)",
+  "share_used_as_label": false
+ },
+ "limitations": [
+  "2.22 config key-remap byte slice not named mapKeys in this build; its byte range is UNKNOWN",
+  "keyA/keyB/keyX/keyLThumb getter bodies not emitted by Blutter -> values INFERRED from bit==id"
+ ]
+}

@@ -1,0 +1,183 @@
+{
+ "schema": "device-enum-history/v1",
+ "what": "How the Dart `enum Device` of the BIGBIG WON / MOJHON app grew across the four analysed builds.",
+ "method": "Each build's enum instances are read from its own Blutter objs.txt (`Obj!Device@<addr> : { off_8: int(<id>), off_10: \"<symbol>\" }`). No build's conclusion is carried into another: ids and names below are quoted per build from that build's objs.txt.",
+ "evidence_label": "PROVEN STATIC (objs.txt of the respective build)",
+ "armorx_id_by_build": {
+  "2.22.0901": 3,
+  "2.23": 6,
+  "2.24": 8,
+  "4.0.8": 10
+ },
+ "enum_size_by_build": {
+  "2.22.0901": 4,
+  "2.23": 7,
+  "2.24": 9,
+  "4.0.8": 13
+ },
+ "builds": {
+  "2.22.0901": {
+   "source": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/objs.txt",
+   "dart": "2.17.5",
+   "entries": [
+    {
+     "id": 0,
+     "symbol": "devNone",
+     "display": "(none / placeholder)"
+    },
+    {
+     "id": 1,
+     "symbol": "devRainbow",
+     "display": "RAINBOW"
+    },
+    {
+     "id": 2,
+     "symbol": "devRainbowS",
+     "display": "UNKNOWN"
+    },
+    {
+     "id": 3,
+     "symbol": "devArmorX",
+     "display": "ARMOR-X Pro"
+    }
+   ]
+  },
+  "2.23": {
+   "source": "~/armorx/re/blutter_out/objs.txt",
+   "entries": [
+    {
+     "id": 0,
+     "symbol": "devNone"
+    },
+    {
+     "id": 1,
+     "symbol": "devRainbow"
+    },
+    {
+     "id": 2,
+     "symbol": "devRainbowS"
+    },
+    {
+     "id": 3,
+     "symbol": "devRainbow2Pro"
+    },
+    {
+     "id": 4,
+     "symbol": "devBLITZ_ULT"
+    },
+    {
+     "id": 5,
+     "symbol": "devBLITZ_LITE"
+    },
+    {
+     "id": 6,
+     "symbol": "devArmorX"
+    }
+   ]
+  },
+  "2.24": {
+   "source": "~/armorx/re/v224/blutter_out/objs.txt",
+   "entries": [
+    {
+     "id": 0,
+     "symbol": "devNone"
+    },
+    {
+     "id": 1,
+     "symbol": "devRainbow"
+    },
+    {
+     "id": 2,
+     "symbol": "devRainbowS"
+    },
+    {
+     "id": 3,
+     "symbol": "devRainbow2Pro"
+    },
+    {
+     "id": 4,
+     "symbol": "devRainbow2Lite"
+    },
+    {
+     "id": 5,
+     "symbol": "devC2SL"
+    },
+    {
+     "id": 6,
+     "symbol": "devBLITZ_ULT"
+    },
+    {
+     "id": 7,
+     "symbol": "devCHOCO"
+    },
+    {
+     "id": 8,
+     "symbol": "devArmorX"
+    }
+   ]
+  },
+  "4.0.8": {
+   "source": "/home/salamanka/armorx-re/mygt408/blutter_out/objs.txt",
+   "entries": [
+    {
+     "id": 0,
+     "symbol": "devNone"
+    },
+    {
+     "id": 1,
+     "symbol": "devRainbow"
+    },
+    {
+     "id": 2,
+     "symbol": "devRainbowS"
+    },
+    {
+     "id": 3,
+     "symbol": "devRainbow2Pro"
+    },
+    {
+     "id": 4,
+     "symbol": "devRainbow3"
+    },
+    {
+     "id": 5,
+     "symbol": "devMSY"
+    },
+    {
+     "id": 6,
+     "symbol": "devRainbow2Lite"
+    },
+    {
+     "id": 7,
+     "symbol": "devC2SL"
+    },
+    {
+     "id": 8,
+     "symbol": "devBLITZ_ULT"
+    },
+    {
+     "id": 9,
+     "symbol": "devCHOCO"
+    },
+    {
+     "id": 10,
+     "symbol": "devArmorX"
+    },
+    {
+     "id": 11,
+     "symbol": "devGale2"
+    },
+    {
+     "id": 12,
+     "symbol": "devKeyboardDouJiangV1"
+    }
+   ]
+  }
+ },
+ "growth_notes": [
+  "2.22 -> 2.23: devRainbow2Pro(3), devBLITZ_ULT(4), devBLITZ_LITE(5) inserted before devArmorX, pushing ARMOR-X from id 3 to id 6. devRainbowS stays 2.",
+  "2.23 -> 2.24: devRainbow2Lite(4) and devC2SL(5) inserted before devBLITZ_ULT; devBLITZ_ULT moves 4->6, devCHOCO(7) added, devArmorX 6->8. devBLITZ_LITE is REMOVED.",
+  "2.24 -> 4.0.8: devRainbow3(4) and devMSY(5) inserted at the front of the tail block; ids shift again; devGale2(11) and devKeyboardDouJiangV1(12) appended. devArmorX 8->10.",
+  "Model: new devices are inserted into the middle of the enum, so every insertion renumbers all later ids. Any code or captured traffic that keys on the numeric device id is build-specific."
+ ]
+}

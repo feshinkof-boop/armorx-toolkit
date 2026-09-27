@@ -1,0 +1,33 @@
+,kotlin/coroutines/jvm/internal/DebugProbesKt
+java/lang/Object
+probeCoroutineCreated
+B(Lkotlin/coroutines/Continuation;)Lkotlin/coroutines/Continuation;
+c<T:Ljava/lang/Object;>(Lkotlin/coroutines/Continuation<-TT;>;)Lkotlin/coroutines/Continuation<TT;>;
+#Lorg/jetbrains/annotations/NotNull;
+completion
+kotlin/jvm/internal/Intrinsics
+checkNotNullParameter
+'(Ljava/lang/Object;Ljava/lang/String;)V
+1kotlinx/coroutines/debug/internal/DebugProbesImpl
+INSTANCE
+3Lkotlinx/coroutines/debug/internal/DebugProbesImpl;
+-probeCoroutineCreated$kotlinx_coroutines_core
+ Lkotlin/coroutines/Continuation;
+probeCoroutineResumed
+#(Lkotlin/coroutines/Continuation;)V
+&(Lkotlin/coroutines/Continuation<*>;)V
+frame
+-probeCoroutineResumed$kotlinx_coroutines_core
+probeCoroutineSuspended
+/probeCoroutineSuspended$kotlinx_coroutines_core
+Lkotlin/Metadata;
+"integration-testing_debugAgentTest
+DebugProbes.kt
+Code
+LineNumberTable
+LocalVariableTable
+	Signature
+RuntimeInvisibleAnnotations
+$RuntimeInvisibleParameterAnnotations
+SourceFile
+RuntimeVisibleAnnotations

@@ -1,0 +1,45 @@
+### sha256/sha1/md5/size/mtime
+785684ec28a6fe0b111597933527b1cc0e53c3332ed4cc8c8db4112539c0361c  apk/original/2.22.0901/BIGBIG_WON_2.22.0901.apk
+b499545be833889464fc6cdc734d49eba7fa7d36  apk/original/2.22.0901/BIGBIG_WON_2.22.0901.apk
+e3af489d0a700de3580fb50d3312e8d3  apk/original/2.22.0901/BIGBIG_WON_2.22.0901.apk
+27608134 2026-09-27 10:55:02.324554484 -0400
+
+### signing cert (keytool)
+Owner: CN=moojiang, OU=moojiang, O=moojiang, L=sz, ST=sz, C=cn
+Issuer: CN=moojiang, OU=moojiang, O=moojiang, L=sz, ST=sz, C=cn
+Serial number: 5ea0db29
+Valid from: Fri Mar 18 01:31:40 EDT 2022 until: Tue Aug 03 01:31:40 EDT 2049
+Certificate fingerprints:
+	 SHA1: 34:3E:87:93:83:94:16:2F:C9:AD:6C:C1:8F:7E:67:1D:55:5A:C7:94
+	 SHA256: 54:72:58:CA:21:7A:1D:2B:27:80:39:EF:81:74:A4:18:A8:B0:05:85:5E:21:8B:4A:08:E7:6E:00:F2:34:C7:8C
+Signature algorithm name: SHA256withRSA
+Subject Public Key Algorithm: 2048-bit RSA key
+Version: 3
+
+Extensions: 
+
+#1: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: EF 1D 7D 2D D5 63 B3 7C   67 17 AB 8E 91 77 52 B4  ...-.c..g....wR.
+0010: 8A 82 D0 6D                                        ...m
+
+### v2 block cert (openssl x509)
+subject=C=cn, ST=sz, L=sz, O=moojiang, OU=moojiang, CN=moojiang
+issuer=C=cn, ST=sz, L=sz, O=moojiang, OU=moojiang, CN=moojiang
+serial=5EA0DB29
+sha256 Fingerprint=54:72:58:CA:21:7A:1D:2B:27:80:39:EF:81:74:A4:18:A8:B0:05:85:5E:21:8B:4A:08:E7:6E:00:F2:34:C7:8C
+
+### 'ZJ-XT' search (decompressed)
+0 hits in extracted tree
+pp.txt: 0
+
+### device enum (objs.txt)
+    off_10: "devNone"
+    off_10: "devRainbow"
+    off_10: "devRainbowS"
+    off_10: "devArmorX"
+
+### config defaults
+len=88 sha=9eaea1d6a42c49a4 stored=0x0000 calc=0xC800 selfvalid=False
+len=144 sha=b8f5735ccb070b36 stored=0x0000 calc=0xB811 selfvalid=False

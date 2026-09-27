@@ -19,3 +19,7 @@ frida/tools/**
 *.bundle
 *.patch
 .venv-frida/**
+
+# derived Blutter trees are regenerable (see logs/blutter-*.log for the exact command)
+static/blutter/**
+static/jadx/**

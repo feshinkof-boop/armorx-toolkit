@@ -1,0 +1,523 @@
+	GATT_BUSY
+	GATT_MORE
+	N`A8
+	notifyAll
+	scanMode_
+    // A negative x coordinate in the atlas indicates that the path is transposed.
+    CharacteristicAddress characteristic = 1;
+    ServicesWithCharacteristics servicesWithCharacteristicsToDiscover = 2;
+    Uuid characteristicId = 1;
+    Uuid characteristicUuid = 3;
+    Uuid serviceUuid = 1;
+    Uuid serviceUuid = 2;
+    int32 scanMode = 2;
+    repeated DiscoveredCharacteristic characteristics = 4;
+    repeated ServiceWithCharacteristics items = 1;
+    repeated Uuid characteristicUuids = 2;
+    repeated Uuid characteristics = 2;
+    repeated Uuid serviceUuids = 1;
+    repeated Uuid serviceUuids = 7;
+  // indicates a breaking change and the minor version an additive,
+ CharacteristicChangedEvent{UUID=
+ CharacteristicValueInfoOrBuilder
+ WriteCharacteristicInfoOrBuilder
+ flutter_reactive_ble_char_update
+!!notify_panel_notification_icon_bg
+!DiscoveredCharacteristicOrBuilder
+!Landroid/bluetooth/BluetoothGatt;
+!NotifyNoMoreCharacteristicRequest
+!notify_panel_notification_icon_bg
+!package:flutter_reactive_ble/src/connected_device_operation.dart
+"Characteristic Extended Properties
+"Characteristic Presentation Format
+"CharacteristicNotificationId{UUID=
+"Couldn't get iBluetoothGatt object
+"NotifyCharacteristicRequest.8
+"ReadCharacteristicRequestOrBuilder
+"ensureCharacteristicUuidsIsMutable
+"writeCharacteristicWithoutResponse
+#Characteristic not found with UUID 
+#Client Characteristic Configuration
+#Server Characteristic Configuration
+#ServiceWithCharacteristicsOrBuilder
+#WriteCharacteristicRequestOrBuilder
+#execute$reactive_ble_mobile_release
+#getCharacteristicUuidsOrBuilderList
+$Couldn't create BluetoothGatt object
+$DiscoveredCharacteristic
+$NotifyCharacteristicRequestOrBuilder
+$ServicesWithCharacteristicsOrBuilder
+$characteristic
+%flutter_reactive_ble_connected_device
+%notifyListeners
+%readCharacteristic$lambda-10$lambda-8
+%readCharacteristic$lambda-10$lambda-9
+%s: getrandom indicates that the entropy pool has not been initialized. Rather than continue with poor entropy, this process will block until entropy is available.
+&BluetoothGatt.refresh() returned false
+&^^yflutter_reactive_ble_status
+&access$writeCharacteristicWithResponse
+&initialize$reactive_ble_mobile_release
+&package:reactive_ble_platform_interface/src/model/discovered_characteristic.dart
+&servicesWithCharacteristicsToDiscover_
+'readCharMessage.characteristic.deviceId
+((characteristicId: 
+(Landroid/bluetooth/BluetoothGattService;
+(characteristic: 
+(characteristicId: 
+(getServicesWithCharacteristicsToDiscover
+(hasServicesWithCharacteristicsToDiscover
+(serviceUuid
+(setServicesWithCharacteristicsToDiscover
+(writeCharMessage.characteristic.deviceId
+) with characteristic UUID 
+)Landroid/bluetooth/BluetoothGattCallback;
+)access$writeCharacteristicWithoutResponse
+)getConnection$reactive_ble_mobile_release
+)sGnotifyPropertyChangedListeners
+*	A5
+*NotifyNoMoreCharacteristicRequestOrBuilder
+*clearGattCache$reactive_ble_mobile_release
+*clearServicesWithCharacteristicsToDiscover
+*gflutter_reactive_ble_scan
+*mergeServicesWithCharacteristicsToDiscover
+*setRxBleClient$reactive_ble_mobile_release
++A8}
++Landroid/bluetooth/BluetoothGattDescriptor;
++getCurrentQueue$reactive_ble_mobile_release
+, characteristic=
+, characteristicIds: 
+, characteristics: 
+, serviceUuids: 
+, serviceUuids=
+,7G%_notifyListeners@718016095
+,disconnectDevice$reactive_ble_mobile_release
+-, serviceUuids: 
+-> Characteristics:
+-A8+
+-A8}
+-GATT_INSUF_AUTHORIZATION or GATT_CONN_TIMEOUT
+-package:reactive_ble_platform_interface/src/model/uuid.dart
+._notifyZeroHandler@1026248
+/)_notifyRemoved@616188637
+// able to accept both UTC and other timezones (as indicated by an offset).
+// are optional. The "Z" suffix indicates the timezone ("UTC"); the timezone
+// is required. A proto3 JSON serializer should always use UTC (as indicated by
+// variants, absence of any variant indicates an error.
+/Landroid/bluetooth/BluetoothGattCharacteristic;
+/ReadCharacteristicRequest.
+/package:reactive_ble_platform_interface/src/model/discovered_service.g.dart
+0000FFE1-0000-1000-8000-00805F9B34FB
+0000FFE1-0000-1000-8000-00805F9B34FB8
+0000FFE2-0000-1000-8000-00805F9B34FB
+0CharacteristicValueInfo._@10672343118
+0Connection using reflection failed, closing gatt
+0GATT exception from MAC address %s, with type %s
+0NoBleCharacteristicDataReceived
+0getActiveConnections$reactive_ble_mobile_release
+0setActiveConnections$reactive_ble_mobile_release
+1createDeviceConnector$reactive_ble_mobile_release
+2request.characteristic.c
+3Cannot find client characteristic config descriptor
+3getConnectionDisposable$reactive_ble_mobile_release
+3package:reactive_ble_platform_interface/src/model/result.dart
+3setConnectionDisposable$reactive_ble_mobile_release
+4Cannot write client characteristic config descriptor
+4Y[A4#
+6serviceUuids8
+8 -> check android.bluetooth.BluetoothGattCharacteristic)
+8$" characteristicValueFrom
+8CharacteristicAddress._@1067234311
+8createNotifyNoMoreCharacteristicRequest
+:&flutter_reactive_ble_method
+::res/drawable-hdpi-v4/notify_panel_notification_icon_bg.png
+::res/drawable-mdpi-v4/notify_panel_notification_icon_bg.png
+:CharacteristicValueUpdateError.
+;/get:readCharacteristic
+;;res/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png
+<WriteCharacteristicRequest.
+?getConnectionDisposable$reactive_ble_mobile_release$annotations
+@ofGpackage:reactive_ble_mobile/src/converter/args_to_protubuf_converter.dart
+A4
+A5
+A8
+AXget:characteristics
+Apple A4
+Apple A5
+Apple A8
+BLcom/signify/hue/flutterreactiveble/model/CharacteristicErrorType;
+Bpackage:reactive_ble_platform_interface/src/model/ble_status.dart
+CM`A8
+C[Lcom/signify/hue/flutterreactiveble/model/CharacteristicErrorType;
+Characteristic 
+Characteristic Aggregate Format
+Characteristic User Description
+CharacteristicAddress
+CharacteristicAddress.
+CharacteristicAddress._@1067234311
+CharacteristicAddressOrBuilder
+CharacteristicReadOperation{
+CharacteristicValue
+CharacteristicValueInfo
+CharacteristicValueInfo._@1067234311
+CharacteristicValueInfo.fromBuffer
+CharacteristicValueUpdateError
+CharacteristicValueUpdateError.
+CharacteristicWriteOperation{
+DK|package:reactive_ble_platform_interface/src/model/connection_state_update.dart
+Dget:characteristicId8
+DiscoveredCharacteristic
+DiscoveredCharacteristic._@1067234311
+D{package:flutter_reactive_ble/src/device_connector.dart
+FcreateReadCharacteristicRequest
+GATT_AUTH_FAIL
+GATT_CCC_CFG_ERR
+GATT_CMD_STARTED
+GATT_CONGESTED
+GATT_CONN_CANCEL
+GATT_CONN_FAIL_ESTABLISH
+GATT_CONN_LMP_TIMEOUT
+GATT_CONN_TERMINATE_LOCAL_HOST
+GATT_CONN_TERMINATE_PEER_USER
+GATT_DB_FULL
+GATT_ENCRYPED_NO_MITM
+GATT_ERROR
+GATT_ERR_UNLIKELY
+GATT_ILLEGAL_PARAMETER
+GATT_INSUF_AUTHENTICATION
+GATT_INSUF_ENCRYPTION
+GATT_INSUF_KEY_SIZE
+GATT_INSUF_RESOURCE
+GATT_INTERNAL_ERROR
+GATT_INVALID_ATTR_LEN
+GATT_INVALID_CFG
+GATT_INVALID_HANDLE
+GATT_INVALID_OFFSET
+GATT_INVALID_PDU
+GATT_NOT_ENCRYPTED
+GATT_NOT_FOUND
+GATT_NOT_LONG
+GATT_NO_RESOURCES
+GATT_OUT_OF_RANGE
+GATT_PENDING
+GATT_PRC_IN_PROGRESS
+GATT_PREPARE_Q_FULL
+GATT_READ_NOT_PERMIT
+GATT_REQ_NOT_SUPPORTED
+GATT_SERVICE_STARTED
+GATT_SUCCESS
+GATT_UNSUPPORT_GRP_TYPE
+GATT_WRITE_NOT_PERMIT
+GATT_WRONG_STATE
+GConnection priority must have valid value from BluetoothGatt (received 
+HLcom/signify/hue/flutterreactiveble/ProtobufModel$CharacteristicAddress;
+Ibcharacteristics
+JDwfNotifyCharacteristicRequest
+JLcom/signify/hue/flutterreactiveble/ProtobufModel$CharacteristicValueInfo;
+JLcom/signify/hue/flutterreactiveble/ProtobufModel$WriteCharacteristicInfo;
+KLcom/signify/hue/flutterreactiveble/ProtobufModel$DiscoveredCharacteristic;
+KWriteCharacteristicInfo.fromBuffer
+L>GwnotifyDependent
+LLcom/signify/hue/flutterreactiveble/ProtobufModel$ReadCharacteristicRequest;
+LRc*WriteCharacteristicFailure
+Launch settings indicated that the VM should shut down in the process when done but a previous launch asked the VM to leak in the same process. For proper VM shutdown, all VM launches must indicate that they should shut down when done.
+MCharacteristicValueUpdateError
+MLcom/signify/hue/flutterreactiveble/ProtobufModel$ServiceWithCharacteristics;
+MLcom/signify/hue/flutterreactiveble/ProtobufModel$WriteCharacteristicRequest;
+MTUSIZE_FIELD_NUMBER
+MTU_TOO_SMALL
+NCharacteristicAddress.
+NLcom/signify/hue/flutterreactiveble/ProtobufModel$NotifyCharacteristicRequest;
+NLcom/signify/hue/flutterreactiveble/ProtobufModel$ServicesWithCharacteristics;
+NcharacteristicUuids
+NoBleCharacteristicDataReceived
+NotifyCharacteristicRequest
+NotifyCharacteristicRequest.
+NotifyCharacteristicRequest._@1067234311
+NotifyNoMoreCharacteristicRequest
+NotifyNoMoreCharacteristicRequest.
+NotifyNoMoreCharacteristicRequest._@1067234311
+ON_MTU_CHANGED
+OWriteCharacteristicRequest
+OXCharacteristicValueInfo.fromBuffer
+Opackage:flutter_reactive_ble/src/device_scanner.dart8
+PGATT exception from %s, status %d (%s), type %s. (Look up status 0x%02x here %s)
+PLcom/signify/hue/flutterreactiveble/ProtobufModel$CharacteristicAddress$Builder;
+Pget:serviceUuids
+Q?A5
+QLcom/signify/hue/flutterreactiveble/ProtobufModel$CharacteristicAddressOrBuilder;
+QcharacteristicId
+QualifiedCharacteristic
+Qypackage:reactive_ble_platform_interface/src/model/qualified_characteristic.dart
+R)A5
+RLcom/signify/hue/flutterreactiveble/ProtobufModel$CharacteristicValueInfo$Builder;
+RLcom/signify/hue/flutterreactiveble/ProtobufModel$WriteCharacteristicInfo$Builder;
+ReadCharacteristicRequest
+ReadCharacteristicRequest.
+ReadCharacteristicRequest._@1067234311
+RoCharacteristicValue
+SLcom/signify/hue/flutterreactiveble/ProtobufModel$CharacteristicValueInfoOrBuilder;
+SLcom/signify/hue/flutterreactiveble/ProtobufModel$DiscoveredCharacteristic$Builder;
+SLcom/signify/hue/flutterreactiveble/ProtobufModel$WriteCharacteristicInfoOrBuilder;
+ServiceWithCharacteristics
+ServiceWithCharacteristics._@1067234311
+ServicesWithCharacteristics
+ServicesWithCharacteristics._@1067234311
+SsubscribeCharacteristic
+T9Y2package:reactive_ble_mobile/src/select_from.dart
+TLcom/signify/hue/flutterreactiveble/ProtobufModel$DiscoveredCharacteristicOrBuilder;
+TLcom/signify/hue/flutterreactiveble/ProtobufModel$NotifyNoMoreCharacteristicRequest;
+TLcom/signify/hue/flutterreactiveble/ProtobufModel$ReadCharacteristicRequest$Builder;
+Tpackage:flutter_reactive_ble/src/debug_logger.dart
+TuXonotifyStatusListeners
+ULcom/signify/hue/flutterreactiveble/ProtobufModel$ReadCharacteristicRequestOrBuilder;
+ULcom/signify/hue/flutterreactiveble/ProtobufModel$ServiceWithCharacteristics$Builder;
+ULcom/signify/hue/flutterreactiveble/ProtobufModel$WriteCharacteristicRequest$Builder;
+Unknown characteristic
+VLcom/signify/hue/flutterreactiveble/ProtobufModel$NotifyCharacteristicRequest$Builder;
+VLcom/signify/hue/flutterreactiveble/ProtobufModel$ServiceWithCharacteristicsOrBuilder;
+VLcom/signify/hue/flutterreactiveble/ProtobufModel$ServicesWithCharacteristics$Builder;
+VLcom/signify/hue/flutterreactiveble/ProtobufModel$WriteCharacteristicRequestOrBuilder;
+VwriteCharacteristicWithoutResponse
+WAttempted to notify ActivityAware plugins of onNewIntent, but no Activity was attached.
+WLcom/signify/hue/flutterreactiveble/PluginController$writeCharacteristicWithResponse$1;
+WLcom/signify/hue/flutterreactiveble/ProtobufModel$NotifyCharacteristicRequestOrBuilder;
+WLcom/signify/hue/flutterreactiveble/ProtobufModel$ServicesWithCharacteristicsOrBuilder;
+WWriteCharacteristicInfo._@10672343118
+WriteCharacteristicFailure
+WriteCharacteristicFailure.
+WriteCharacteristicInfo
+WriteCharacteristicInfo._@1067234311
+WriteCharacteristicInfo.fromBuffer
+WriteCharacteristicRequest
+WriteCharacteristicRequest.
+WriteCharacteristicRequest._@1067234311
+ZCharacteristic %s supports properties: %s (%d) does not have any property matching %s (%d)
+ZLcom/signify/hue/flutterreactiveble/PluginController$writeCharacteristicWithoutResponse$1;
+ZwriteCharacteristicWithResponse(Ljava/lang/String;Ljava/util/UUID;[B)Lio/reactivex/Single;
+[Attempted to notify ActivityAware plugins of onUserLeaveHint, but no Activity was attached.
+\Attempted to notify ActivityAware plugins of onActivityResult, but no Activity was attached.
+\Lcom/signify/hue/flutterreactiveble/ProtobufModel$NotifyNoMoreCharacteristicRequest$Builder;
+\Lcom/signify/hue/flutterreactiveble/ble/ReactiveBleClient$writeCharacteristicWithResponse$1;
+\dyn:get:characteristicId
+]	get:subScribeToCharacteristic
+]Disconnect operation has been executed but GATT instance was null - considering disconnected.
+]Lcom/signify/hue/flutterreactiveble/ProtobufModel$NotifyNoMoreCharacteristicRequestOrBuilder;
+]notify
+]writeCharacteristicWithoutResponse(Ljava/lang/String;Ljava/util/UUID;[B)Lio/reactivex/Single;
+^A8!
+^ServicesWithCharacteristics
+^vm:notify-debugger-on-exception
+_Attempted to notify ActivityAware plugins of onSaveInstanceState, but no Activity was attached.
+_Dcharacteristic
+_Lcom/signify/hue/flutterreactiveble/ble/ReactiveBleClient$writeCharacteristicWithoutResponse$1;
+_notify@632042876
+_notifyEventHandler@1026248
+_notifyHighlightModeListeners@632042876
+_notifyListeners@718016095
+_notifyRemoved@616188637
+_notifyZeroHandler@1026248
+_readCharacteristic@908250675
+_readCharacteristic@914408380
+access$readCharacteristic
+addAllCharacteristicUuids
+addAllCharacteristics
+addCharacteristicUuids
+addCharacteristics
+bAttempted to notify ActivityAware plugins of onRestoreInstanceState, but no Activity was attached.
+bError registering plugin reactive_ble_mobile, com.signify.hue.flutterreactiveble.ReactiveBlePlugin
+bset:characteristic
+cWriteCharacteristicFailure.
+charInfo.characteristic
+characteristic
+characteristic-two-field
+characteristicId
+characteristicId_
+characteristicUuid
+characteristicUuid_
+characteristicUuids
+characteristicUuids_
+characteristicValueFrom
+characteristic_
+characteristics
+characteristics_
+clearCharacteristic
+clearCharacteristicId
+clearCharacteristicUuid
+clearCharacteristicUuids
+clearCharacteristics
+convertCharacteristicError
+convertCharacteristicInfo
+convertWriteCharacteristicInfo
+createCharacteristicAddress
+createNotifyCharacteristicRequest
+createNotifyNoMoreCharacteristicRequest
+createReadCharacteristicRequest
+d, characteristicIds: 
+dyn:get:characteristicId
+ensureCharacteristicsIsMutable
+fAttempted to notify ActivityAware plugins of onRequestPermissionsResult, but no Activity was attached.
+flutter_reactive_ble_char_update
+flutter_reactive_ble_connected_device
+flutter_reactive_ble_method
+flutter_reactive_ble_method$
+flutter_reactive_ble_scan
+flutter_reactive_ble_status
+fromBluetoothGattService
+g7package:flutter_reactive_ble/src/discovered_devices_registry.dart
+gDiscoveredCharacteristic._@1067234311
+g_notifyHighlightModeListeners@632042876
+gattService.characteristics
+gattService.includedServices
+gattService.uuid
+get:characteristic
+get:characteristicId
+get:characteristicUuid
+get:characteristicUuids
+get:characteristicValueStream
+get:characteristics
+get:notify
+get:readCharacteristic
+get:serviceUuid
+get:serviceUuids
+get:subScribeToCharacteristic
+getBluetoothGatt
+getCharacteristic
+getCharacteristicId
+getCharacteristicUuid
+getCharacteristicUuids
+getCharacteristicUuidsCount
+getCharacteristicUuidsList
+getCharacteristicUuidsOrBuilder
+getCharacteristics
+getCharacteristicsCount
+getCharacteristicsList
+getCharacteristicsOrBuilder
+getCharacteristicsOrBuilderList
+h+vServicesWithCharacteristics._@1067234311
+hasCharacteristic
+hasCharacteristicId
+hasCharacteristicUuid
+iR@9h}A8
+id-characteristic-two-basis
+inotify_add_watch
+inotify_init
+inotify_rm_watch
+ireadCharacteristic(Lio/flutter/plugin/common/MethodCall;Lio/flutter/plugin/common/MethodChannel$Result;)V
+isubscribeToCharacteristic
+k~_readCharacteristic@908250675
+lqualifiedCharacteristicFrom
+lset:characteristicUuid
+mZsubScribeToCharacteristic
+mergeCharacteristic
+mergeCharacteristicId
+mergeCharacteristicUuid
+message CharacteristicAddress {
+message CharacteristicValueInfo {
+message DiscoveredCharacteristic {
+message NotifyCharacteristicRequest {
+message NotifyNoMoreCharacteristicRequest {
+message ReadCharacteristicRequest {
+message ServiceWithCharacteristics {
+message ServicesWithCharacteristics {
+message WriteCharacteristicInfo {
+message WriteCharacteristicRequest {
+mpackage:flutter_reactive_ble/src/rx_ext/serial_disposable.dart
+n:get:serviceUuid
+nAPwhile notifying status listeners for 
+notify
+notifyClients
+notifyDependent
+notifyListeners
+notifyLowMemoryWarning
+notifyPropertyChangedListeners
+notifyStatusListeners
+notifyValueChanged
+notifyViewEntered
+notifyViewExited
+onCharacteristicChanged
+onCharacteristicRead
+onCharacteristicWrite
+opackage:flutter_reactive_ble/src/reactive_ble.dart
+package:flutter_reactive_ble/src/connected_device_operation.dart
+package:flutter_reactive_ble/src/debug_logger.dart
+package:flutter_reactive_ble/src/device_connector.dart
+package:flutter_reactive_ble/src/device_scanner.dart
+package:flutter_reactive_ble/src/discovered_devices_registry.dart
+package:flutter_reactive_ble/src/reactive_ble.dart
+package:flutter_reactive_ble/src/rx_ext/repeater.dart
+package:flutter_reactive_ble/src/rx_ext/serial_disposable.dart
+package:reactive_ble_mobile/src/converter/args_to_protubuf_converter.dart
+package:reactive_ble_mobile/src/converter/protobuf_converter.dart
+package:reactive_ble_mobile/src/generated/bledata.pb.dart
+package:reactive_ble_mobile/src/reactive_ble_mobile_platform.dart
+package:reactive_ble_mobile/src/select_from.dart
+package:reactive_ble_platform_interface/src/model/ble_status.dart
+package:reactive_ble_platform_interface/src/model/characteristic_value.dart
+package:reactive_ble_platform_interface/src/model/connection_state_update.dart
+package:reactive_ble_platform_interface/src/model/connection_state_update.g.dart
+package:reactive_ble_platform_interface/src/model/discovered_characteristic.dart
+package:reactive_ble_platform_interface/src/model/discovered_device.dart
+package:reactive_ble_platform_interface/src/model/discovered_device.g.dart
+package:reactive_ble_platform_interface/src/model/discovered_service.dart
+package:reactive_ble_platform_interface/src/model/discovered_service.g.dart
+package:reactive_ble_platform_interface/src/model/generic_failure.dart
+package:reactive_ble_platform_interface/src/model/qualified_characteristic.dart
+package:reactive_ble_platform_interface/src/model/result.dart
+package:reactive_ble_platform_interface/src/model/scan_mode.dart
+package:reactive_ble_platform_interface/src/model/unit.dart
+package:reactive_ble_platform_interface/src/model/uuid.dart
+package:reactive_ble_platform_interface/src/model/write_characteristic_info.dart
+package:reactive_ble_platform_interface/src/reactive_ble_platform_interface.dart
+qoNotifyNoMoreCharacteristicRequest._@1067234311
+qualifiedCharacteristicFrom
+qwriteCharacteristicWithResponse
+readCharMessage.characteristic
+readCharacteristic
+readCharacteristic$lambda-10
+readCharacteristic$lambda-2
+readCharacteristic$lambda-3
+removeCharacteristicUuids
+removeCharacteristics
+request.characteristic
+request.characteristic.deviceId
+rhttps://android.googlesource.com/platform/external/bluetooth/bluedroid/+/android-5.1.0_r1/stack/include/gatt_api.h
+scanMessage.serviceUuidsList
+scanMode
+serviceUuid
+serviceUuid_
+serviceUuids
+serviceUuids_
+servicesWithCharacteristicsToDiscover
+set:characteristic
+set:characteristicUuid
+set:scanMode
+set:scanMode8
+set:serviceUuid
+setCharacteristic
+setCharacteristicId
+setCharacteristicNotification
+setCharacteristicUuid
+setCharacteristicUuids
+setCharacteristics
+subScribeToCharacteristic
+subscribeCharacteristic
+subscribeToCharacteristic
+t>mwriteCharacteristicInfoFrom
+tlXWreadCharacteristic
+v?package:reactive_ble_platform_interface/src/model/discovered_service.dart
+vm:notify-debugger-on-exception
+vwriteCharacteristicWithResponse(Lio/flutter/plugin/common/MethodCall;Lio/flutter/plugin/common/MethodChannel$Result;)V
+wCharacteristicAddress
+wReadCharacteristicRequest._@1067234311
+while notifying listeners for 
+while notifying status listeners for 
+writeCharacteristic
+writeCharacteristicInfoFrom
+writeCharacteristicWithResponse
+writeCharacteristicWithoutResponse
+wservicesWithCharacteristicsToDiscover
+ywriteCharacteristicWithoutResponse(Lio/flutter/plugin/common/MethodCall;Lio/flutter/plugin/common/MethodChannel$Result;)V
+z(NotifyNoMoreCharacteristicRequest.
+{characteristicUuid
+|0000FFE2-0000-1000-8000-00805F9B34FB8
+~ServiceWithCharacteristics

@@ -1,0 +1,205 @@
+        // FIXME(crbug.com/800804,skbug.com/11268): Consider normalizing the exponents in A,B,C at
+        // FIXME(crbug.com/800804,skbug.com/11268): This normalize() can overflow.
+    // FIXME(crbug.com/800804,skbug.com/11268): This can overflow if we don't normalize exponents.
+    // FIXME(crbug.com/800804,skbug.com/11268): This normalize() can overflow.
+    // See: https://www.microsoft.com/en-us/research/wp-content/uploads/2005/01/p1000-loop.pdf
+  // 1970-01-01T00:00:00Z. Must be from 0001-01-01T00:00:00Z to
+  // 9999-12-31T23:59:59Z inclusive.
+  // type.googleapis.com.
+  // types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
+  // versioning](http://semver.org) where the major version number
+  https://api.flutter.dev/flutter/dart-ui/ChannelBuffers-class.html
+  https://api.flutter.dev/flutter/material/Scaffold/of.html
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ * https://github.com/apvarun/toastify-js
+ Copyright (C) 2016 and later: Unicode, Inc. and others. License & terms of use: http://www.unicode.org/copyright.html 
+ channel was discarded before it could be handled.
+This happens when a plugin sends messages to the framework side before the framework has had an opportunity to register a listener. See the ChannelBuffers API documentation for details on how to configure the channel to expect more messages, or to expect messages to get discarded:
+  https://api.flutter.dev/flutter/dart-ui/ChannelBuffers-class.html
+ or higher. 
+
+PC update tool and firmware download address: https://www.bigbigwon.com/support/
+ ë²ì  ì´ì ë²ì ì¼ë¡ ìë°ì´í¸íì­ìì¤.
+
+PC ëêµ¬ ë° íì¨ì´ ë¤ì´ë¡ë ì£¼ì: https://kr.bigbigwon.com/support/
+!function(t,o){"object"==typeof module&&module.exports?module.exports=o():t.Toastify=o()}(this,(function(t){var o=function(t){return new o.lib.init(t)};function i(t,o){return o.offset[t]?isNaN(o.offset[t])?o.offset[t]:o.offset[t]+"px":"0px"}function s(t,o){return!(!t||"string"!=typeof o)&&!!(t.className&&t.className.trim().split(/\s+/gi).indexOf(o)>-1)}return o.lib=o.prototype={toastify:"1.9.3",constructor:o,init:function(t){return t||(t={}),this.options={},this.toastElement=null,this.options.text=t.text||"Hi there!",this.options.node=t.node,this.options.duration=0===t.duration?0:t.duration||3e3,this.options.selector=t.selector,this.options.callback=t.callback||function(){},this.options.destination=t.destination,this.options.newWindow=t.newWindow||!1,this.options.close=t.close||!1,this.options.gravity="bottom"===t.gravity?"toastify-bottom":"toastify-top",this.options.positionLeft=t.positionLeft||!1,this.options.position=t.position||"",this.options.backgroundColor=t.backgroundColor,this.options.avatar=t.avatar||"",this.options.className=t.className||"",this.options.stopOnFocus=void 0===t.stopOnFocus||t.stopOnFocus,this.options.onClick=t.onClick,this.options.offset=t.offset||{x:0,y:0},this},buildToast:function(){if(!this.options)throw"Toastify is not initialized";var t=document.createElement("div");if(t.className="toastify on "+this.options.className,this.options.position?t.className+=" toastify-"+this.options.position:!0===this.options.positionLeft?(t.className+=" toastify-left",console.warn("Property `positionLeft` will be depreciated in further versions. Please use `position` instead.")):t.className+=" toastify-right",t.className+=" "+this.options.gravity,this.options.backgroundColor&&(t.style.background=this.options.backgroundColor),this.options.node&&this.options.node.nodeType===Node.ELEMENT_NODE)t.appendChild(this.options.node);else if(t.innerHTML=this.options.text,""!==this.options.avatar){var o=document.createElement("img");o.src=this.options.avatar,o.className="toastify-avatar","left"==this.options.position||!0===this.options.positionLeft?t.appendChild(o):t.insertAdjacentElement("afterbegin",o)}if(!0===this.options.close){var s=document.createElement("span");s.innerHTML="&#10006;",s.className="toast-close",s.addEventListener("click",function(t){t.stopPropagation(),this.removeElement(this.toastElement),window.clearTimeout(this.toastElement.timeOutValue)}.bind(this));var n=window.innerWidth>0?window.innerWidth:screen.width;("left"==this.options.position||!0===this.options.positionLeft)&&n>360?t.insertAdjacentElement("afterbegin",s):t.appendChild(s)}if(this.options.stopOnFocus&&this.options.duration>0){var e=this;t.addEventListener("mouseover",(function(o){window.clearTimeout(t.timeOutValue)})),t.addEventListener("mouseleave",(function(){t.timeOutValue=window.setTimeout((function(){e.removeElement(t)}),e.options.duration)}))}if(void 0!==this.options.destination&&t.addEventListener("click",function(t){t.stopPropagation(),!0===this.options.newWindow?window.open(this.options.destination,"_blank"):window.location=this.options.destination}.bind(this)),"function"==typeof this.options.onClick&&void 0===this.options.destination&&t.addEventListener("click",function(t){t.stopPropagation(),this.options.onClick()}.bind(this)),"object"==typeof this.options.offset){var a=i("x",this.options),p=i("y",this.options),r="left"==this.options.position?a:"-"+a,l="toastify-top"==this.options.gravity?p:"-"+p;t.style.transform="translate("+r+","+l+")"}return t},showToast:function(){var t;if(this.toastElement=this.buildToast(),!(t=void 0===this.options.selector?document.body:document.getElementById(this.options.selector)))throw"Root element is not defined";return t.insertBefore(this.toastElement,t.firstChild),o.reposition(),this.options.duration>0&&(this.toastElement.timeOutValue=window.setTimeout(function(){this.removeElement(this.toastElement)}.bind(this),this.options.duration)),this},hideToast:function(){this.toastElement.timeOutValue&&clearTimeout(this.toastElement.timeOutValue),this.removeElement(this.toastElement)},removeElement:function(t){t.className=t.className.replace(" on",""),window.setTimeout(function(){this.options.node&&this.options.node.parentNode&&this.options.node.parentNode.removeChild(this.options.node),t.parentNode&&t.parentNode.removeChild(t),this.options.callback.call(t),o.reposition()}.bind(this),400)}},o.reposition=function(){for(var t,o={top:15,bottom:15},i={top:15,bottom:15},n={top:15,bottom:15},e=document.getElementsByClassName("toastify"),a=0;a<e.length;a++){t=!0===s(e[a],"toastify-top")?"toastify-top":"toastify-bottom";var p=e[a].offsetHeight;t=t.substr(9,t.length-1);(window.innerWidth>0?window.innerWidth:screen.width)<=360?(e[a].style[t]=n[t]+"px",n[t]+=p+15):!0===s(e[a],"toastify-left")?(e[a].style[t]=o[t]+"px",o[t]+=p+15):(e[a].style[t]=i[t]+"px",i[t]+=p+15)}return this},o.lib.init.prototype=o.lib,o}));
+" is not supported by the platform. Refer to https://flutter.dev/docs/release/breaking-changes/network-policy-ios-android.
+":39
+"http://m.bigbigwon.com:8080
+(flutter.baseflow.com/permissions/methods
+.com.android.voicemail.permission.ADD_VOICEMAIL
+.comment
+//       "@type": "type.googleapis.com/google.profile.Person",
+//       "@type": "type.googleapis.com/google.protobuf.Duration",
+//     // A Windows tick is 100 nanoseconds. Windows epoch 1601-01-01T00:00:00Z
+//     // is 11644473600 seconds before Unix epoch 1970-01-01T00:00:00Z.
+// 'type.googleapis.com/full.type.name' as the type URL and the unpack
+// 01:30 UTC on January 15, 2017.
+// 3339](https://www.ietf.org/rfc/rfc3339.txt) date strings.
+// For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past
+// The range is from 0001-01-01T00:00:00Z to 9999-12-31T23:59:59.999999999Z. By
+// [RFC 3339](https://www.ietf.org/rfc/rfc3339.txt) format. That is, the
+// [`strftime`](https://docs.python.org/2/library/time.html#time.strftime) with
+// [toISOString()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString)
+// http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D
+// https://developers.google.com/protocol-buffers/
+// in the type URL, for example "foo.bar.com/x/y.z" will yield type
+// smear](https://developers.google.com/time/smear).
+// this message itself. See https://cloud.google.com/apis/design/glossary for
+/012$345$$$$6789&$%&$$$$$$$$$'()*+,-'.//012$345$$$$6789&$%:'()*+$$$$$$012$345$$$$(789;$()*+$$$$$$$$$$345$$$$$789;$)*+$$$$$$$$$$$$$$$$$$789$*+$$$$$$$$$$$$$$$$$$789$+$$$$$$$$$$$$$$$$$$789$78$8$)*+$$$$$$$$$$345$$$$$789;$)*+$$$$$$$$$$$45$$$$$789;$)*+$$$$$$$$$$$$5$$$$$789;$=<)*+$$$$$$$$$$$$$$$$$$789;$()*+$$$$$$012$345$$$$(789;$()*+$$$$$$$12$345$$$$(789;$()*+$$$$$$$$2$345$$$$(789;$'()*+$-'$$$012$345$$$$(789;$'()*+$$'$$$012$345$$$$(789;$'()*+,-'$$$012$345$$$$(789;$%&$$$$$$$$$'()*+,-'.$/012$345$$$$6789&$%:::::::::::::::::::::()*+::::::::::345:::::789;:?>
+/dev/addConfig
+/dev/addMacro
+/dev/changeConfig
+/dev/changeMacro
+/dev/delConfig
+/dev/delMacro
+/dev/null
+/dev/queryConfigList
+/dev/queryDefaultConfig
+/dev/queryMacroList
+/dev/register
+/dev/renameConfig
+/dev/setConfig
+/dev/userLogin
+0,1,2,1:2,3,4,1:2,5,6,7,1:3,8,1:18,9,1,10,11,12,13,14,15,16,17,18,19,20,21,7,8:2,22,23,24,25,13,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57
+0000000:00
+1,2,3,4:2,5,37,6,3:3,4,3:2,7,8,9,3,42,3:2,44,10,3:2,46,48,11,50,52,3:2,38,3:2,12,3,54,-1:39,2:3,-1,2:6,-1,2:26,-1:5,13,-1:40,36,-1:37,9:2,-1:2,9:2,-1:3,9:21,-1:23,45,-1:41,11,49,-1:36,15,-1:11,35:3,84,35:33,-1:9,55,-1:34,14,-1:51,85,-1:18,63,17,63:8,64,63:26,-1,30:3,82,30:33,-1:20,56,-1:2,57,-1:33,41,-1:51,58,-1:36,43,-1:29,59,-1:31,47,-1:38,86,-1:3,60,-1:45,16,-1:36,51,-1:28,62,-1:35,53,-1:39,18,-1:52,65,-1:26,66,-1:3,67,-1:33,56,-1:31,87,-1:42,19,-1:35,20,-1:16,55:3,-1,55:6,-1,-1:26,-1,64,39,64,63,64:33,-1:24,69,-1:31,70,-1:49,71,-1:30,72,-1:35,74,-1:35,75,-1:49,21,-1:40,22,-1:40,76,-1:19,23,-1:39,77,-1:35,78,-1:41,79,-1:35,80,-1:50,24,-1:25,25,-1:15,1,26:2,27:2,26,28,26:4,27,40,29,26:7,29:3,26:3,29,26:2,29,26:2,29,26:4,-1:11,30,-1:26,1,31,32,31:4,33,31:4,34,31:25,-1:11,35,-1:50,61,-1:34,68,-1:34,73,-1:19
+1:10;X<z=
+1dart.vm.not.a.compile.time.constant
+2.17.5 (stable) (Tue Jun 21 11:05:10 2022 +0200) on "android_arm"
+2.17.5 (stable) (Tue Jun 21 11:05:10 2022 +0200) on "android_arm64"
+2.17.5 (stable) (Tue Jun 21 11:05:10 2022 +0200) on "android_x64"
+3,17:8,3,11,17,3,4,17:18,3,17:4,1,17:2,7,2,17,26,17,26,28,16,27:10,17:2,5,17,6,17:2,13:6,17:11,35,17:8,14,12,15,17:3,23,30,13,33,21,22,17:2,36,31,17,24,34,32,29,17:2,19,25,18,20,17:2,37,17:2,10,17,10,17:128,8,9,0:2
+3IN/dev/queryConfigList8
+:1080
+;" is not supported by the platform. Refer to https://flutter.dev/docs/release/breaking-changes/network-policy-ios-android.
+<1,2,3,4:2,5,37,6,3:3,4,3:2,7,8,9,3,42,3:2,44,10,3:2,46,48,11,50,52,3:2,38,3:2,12,3,54,-1:39,2:3,-1,2:6,-1,2:26,-1:5,13,-1:40,36,-1:37,9:2,-1:2,9:2,-1:3,9:21,-1:23,45,-1:41,11,49,-1:36,15,-1:11,35:3,84,35:33,-1:9,55,-1:34,14,-1:51,85,-1:18,63,17,63:8,64,63:26,-1,30:3,82,30:33,-1:20,56,-1:2,57,-1:33,41,-1:51,58,-1:36,43,-1:29,59,-1:31,47,-1:38,86,-1:3,60,-1:45,16,-1:36,51,-1:28,62,-1:35,53,-1:39,18,-1:52,65,-1:26,66,-1:3,67,-1:33,56,-1:31,87,-1:42,19,-1:35,20,-1:16,55:3,-1,55:6,-1,-1:26,-1,64,39,64,63,64:33,-1:24,69,-1:31,70,-1:49,71,-1:30,72,-1:35,74,-1:35,75,-1:49,21,-1:40,22,-1:40,76,-1:19,23,-1:39,77,-1:35,78,-1:41,79,-1:35,80,-1:50,24,-1:25,25,-1:15,1,26:2,27:2,26,28,26:4,27,40,29,26:7,29:3,26:3,29,26:2,29,26:2,29,26:4,-1:11,30,-1:26,1,31,32,31:4,33,31:4,34,31:25,-1:11,35,-1:50,61,-1:34,68,-1:34,73,-1:19
+>.
+  This usually happens when you are creating a provider and trying to read it immediately.
+
+  For example, instead of:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // Will throw a ProviderNotFoundError, because `context` is associated
+      // to the widget that is the parent of `Provider<Example>`
+      child: Text(context.watch<Example>()),
+    ),
+  }
+  ```
+
+  consider using `builder` like so:
+
+  ```
+  Widget build(BuildContext context) {
+    return Provider<Example>(
+      create: (_) => Example(),
+      // we use `builder` to obtain a new `BuildContext` that has access to the provider
+      builder: (context) {
+        // No longer throws
+        return Text(context.watch<Example>()),
+      }
+    ),
+  }
+  ```
+
+If none of these solutions work, consider asking for help on StackOverflow:
+https://stackoverflow.com/questions/tagged/flutter
+
+>/dev/changeConfig
+>~v./dev/renameConfig
+?yohttps://www.bigbigwon.com/usercenter/privacy/
+Android (7155654, based on r399163b1) clang version 11.0.5 (https://android.googlesource.com/toolchain/llvm-project 87f1315dfbea7c137aa2e6d362dbb457e388158d)
+B;Path.combine() failed.  This may be due an invalid path; in particular, check for NaN values.
+E/dev/addMacro
+ERROR: See https://github.com/dart-lang/sdk/blob/master/runtime/docs/compiler/aot/entry_point_pragma.md
+F/https://bigbigwon-jp.oss-ap-northeast-1.aliyuncs.com/product-pic/C1/Download/RAINBOW-user%20manual-KR.pdf
+F8:80
+Failed to access the internal image decoder registry on this isolate. Please file a bug on https://github.com/flutter/flutter/issues.
+I4:1080
+L^!1https://
+Lhttp://www.w3.org/1999/02/22-rdf-syntax-ns#
+M0,1,2,1:2,3,4,1:2,5,6,7,1:3,8,1:18,9,1,10,11,12,13,14,15,16,17,18,19,20,21,7,8:2,22,23,24,25,13,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57
+O/dev/register
+PC update tool and firmware download address: https://www.bigbigwon.com/support/
+Path.combine() failed.  This may be due an invalid path; in particular, check for NaN values.
+QTickerFuture.complete
+Running tests that layout and measure text will not yield consistent results across various platforms. Enabling this option will make font resolution default to the Ahem test font on all platforms (See https://www.w3.org/Style/CSS/Test/Fonts/Ahem/). This option is only available on the desktop test shells.
+RxAndroidBle library needs a BluetoothAdapter to be available in the system to work. If this is a test on an emulator then you can use 'https://github.com/Polidea/RxAndroidBle/tree/master/mockrxandroidble'
+Shttps://www.bigbigwon.com/usercenter/user-agreement/8
+TextDecoration.combine([
+The RxJavaPlugins.onSubscribe hook returned a null CompletableObserver. Please check the handler provided to RxJavaPlugins.setOnCompletableSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The RxJavaPlugins.onSubscribe hook returned a null FlowableSubscriber. Please check the handler provided to RxJavaPlugins.setOnFlowableSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The RxJavaPlugins.onSubscribe hook returned a null MaybeObserver. Please check the handler provided to RxJavaPlugins.setOnMaybeSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The RxJavaPlugins.onSubscribe hook returned a null Observer. Please change the handler provided to RxJavaPlugins.setOnObservableSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The RxJavaPlugins.onSubscribe hook returned a null SingleObserver. Please check the handler provided to RxJavaPlugins.setOnSingleSubscribe for invalid null returns. Further reading: https://github.com/ReactiveX/RxJava/wiki/Plugins
+The exception could not be delivered to the consumer because it has already canceled/disposed the flow or the exception has nowhere to go to begin with. Further reading: https://github.com/ReactiveX/RxJava/wiki/What's-different-in-2.0#error-handling | 
+The exception was not handled due to missing onError handler in the subscribe() method call. Further reading: https://github.com/ReactiveX/RxJava/wiki/Error-Handling | 
+There are currently no image decoders installed. If you're writing your own platform embedding, you can register new image decoders via `ImageGeneratorRegistry::AddFactory` on the `ImageGeneratorRegistry` provided by the engine. Otherwise, please file a bug on https://github.com/flutter/flutter/issues.
+There are several ways to avoid this problem. The simplest is to use a Builder to get a context that is "under" the Scaffold. For an example of this, please see the documentation for Scaffold.of():
+  https://api.flutter.dev/flutter/material/Scaffold/of.html
+TickerFuture.complete
+Uhttps://bigwon-us.oss-us-west-1.aliyuncs.com/product-pic/AEMOR-X/%E4%B8%8B%E8%BD%BD/armorx%20Pro%20user%20manual-EN.pdf
+Unknown ColorFilter type. This is an error. If you're seeing this, please file an issue at https://github.com/flutter/flutter/issues/new.
+Unknown ColorFilter type. This is an error. If you're seeing this, please file an issue at https://github.com/flutter/flutter/issues/new.(
+Unknown ColorFilter type. This is an error. If you\'re seeing this, please file an issue at https://github.com/flutter/flutter/issues/new.
+WARNING: See https://github.com/dart-lang/sdk/blob/master/runtime/docs/compiler/aot/entry_point_pragma.md
+_H:http://
+`https://www.bigbigwon.cn/usercenter/privacy/8	Z
+failed to open /dev/urandom
+fhttps://bigbig-won-cn.oss-cn-shanghai.aliyuncs.com/product-pic/AEMOR-X/%E4%B8%8B%E8%BD%BD/armorx%20Pro%E7%94%B5%E5%AD%90%E8%AF%B4%E6%98%8E%E4%B9%A6-CN.pdf
+flutter.baseflow.com/permissions/methods
+h8:80
+http://
+http://m.bigbigwon.com:8080
+http://ns.adobe.com/xap/1.0/
+http://ns.adobe.com/xap/1.0/8
+http://purl.org/dc/elements/1.1/
+http://purl.org/dc/elements/1.1/b
+http://www.w3.org/1999/02/22-rdf-syntax-ns#
+http://www.w3.org/2000/xmlns/
+http://www.w3.org/XML/1998/namespace
+https://
+https://bigbig-won-cn.oss-cn-shanghai.aliyuncs.com/product-pic/AEMOR-X/%E4%B8%8B%E8%BD%BD/armorx%20Pro%E7%94%B5%E5%AD%90%E8%AF%B4%E6%98%8E%E4%B9%A6-CN.pdf
+https://bigbig-won-cn.oss-cn-shanghai.aliyuncs.com/product-pic/C1/%E4%B8%8B%E8%BD%BD/C1%E7%94%B5%E5%AD%90%E8%AF%B4%E6%98%8E%E4%B9%A6-CN.pdf
+https://bigbigwon-jp.oss-ap-northeast-1.aliyuncs.com/product-pic/AEMOR-X/%E4%B8%8B%E8%BD%BD/armorx%20Pro%20user%20manual-JP.pdf
+https://bigbigwon-jp.oss-ap-northeast-1.aliyuncs.com/product-pic/C1/Download/RAINBOW-user%20manual-JP.pdf
+https://bigbigwon-jp.oss-ap-northeast-1.aliyuncs.com/product-pic/C1/Download/RAINBOW-user%20manual-KR.pdf
+https://bigwon-us.oss-us-west-1.aliyuncs.com/product-pic/AEMOR-X/%E4%B8%8B%E8%BD%BD/armorx%20Pro%20user%20manual-EN.pdf
+https://bigwon-us.oss-us-west-1.aliyuncs.com/product-pic/C1/%E4%B8%8B%E8%BD%BD/RAINBOW-user%20manual-EN.pdf
+https://developer.android.com/guide/topics/permissions/overview
+https://stackoverflow.com/questions/tagged/flutter
+https://www.bigbigwon.cn/usercenter/privacy/
+https://www.bigbigwon.cn/usercenter/user-agreement/
+https://www.bigbigwon.com/usercenter/privacy/
+https://www.bigbigwon.com/usercenter/user-agreement/
+iso_8859-1:1987
+iso_8859-2:1987
+iso_8859-3:1988
+iso_8859-4:1988
+iso_8859-5:1988
+iso_8859-6:1987
+iso_8859-7:1987
+iso_8859-8:1988
+iso_8859-9:1989
+lyhttps://bigwon-us.oss-us-west-1.aliyuncs.com/product-pic/C1/%E4%B8%8B%E8%BD%BD/RAINBOW-user%20manual-EN.pdf
+n/dev/userLogin
+q/dev/queryDefaultConfig
+rhttps://android.googlesource.com/platform/external/bluetooth/bluedroid/+/android-5.1.0_r1/stack/include/gatt_api.h
+rx2.computation-priority
+rx2.computation-threads
+v:45
+vTextDecoration.combine([
+xml=http://www.w3.org/XML/1998/namespace
+z{"mode":3,"speed":255,"bright":255,"same":false,"leftList":"[0, 0, 255]","rightList":"[255, 0, 255]"}
+{"mode":3,"speed":255,"bright":255,"same":false,"leftList":"[0, 0, 255]","rightList":"[255, 0, 255]"}
+{https://bigbig-won-cn.oss-cn-shanghai.aliyuncs.com/product-pic/C1/%E4%B8%8B%E8%BD%BD/C1%E7%94%B5%E5%AD%90%E8%AF%B4%E6%98%8E%E4%B9%A6-CN.pdf
+~~R8{"compilation-mode":"release","has-checksums":false,"min-api":21,"pg-map-id":"97fe2eb","r8-mode":"compatibility","version":"2.1.62"}
+ãã¼ã¸ã§ã³ä»¥ä¸ã«æ´æ°ãã¦ãã ããã
+
+PCãã¼ã«ããã³ãã¡ã¼ã ã¦ã§ã¢ãã¦ã³ã­ã¼ãã¢ãã¬ã¹ï¼https://jp.bigbigwon.com/support/
+çæ¬æä»¥ä¸çæ¬ã
+
+PCå·¥å·ååºä»¶ä¸è½½å°åï¼https://www.bigbigwon.cn/support/

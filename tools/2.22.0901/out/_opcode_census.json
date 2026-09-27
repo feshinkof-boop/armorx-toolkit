@@ -1,0 +1,2864 @@
+{
+ "4": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "5": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/main.dart",
+    "class": "_MoojiangMainState",
+    "function": "_ initPlatformState(/* No info */) async )",
+    "addr": "0x8948d4",
+    "line_addr": "0x8948ec",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "::",
+    "function": "static void openUrl(String) async )",
+    "addr": "0x7abae4",
+    "line_addr": "0x7abafc",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91e184",
+    "line_addr": "0x91e3d0",
+    "reg": "3",
+    "smi": 10,
+    "byte": 5,
+    "via": "cmp"
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91e184",
+    "line_addr": "0x91e9ac",
+    "reg": "0",
+    "smi": 10,
+    "byte": 5,
+    "via": "cmp"
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChoosingRadioRowState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91db9c",
+    "line_addr": "0x91de0c",
+    "reg": "2",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChoosingRadioRowState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91db9c",
+    "line_addr": "0x91de6c",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "static _ changeGamepadDef(/* No info */) )",
+    "addr": "0x79c894",
+    "line_addr": "0x79cb78",
+    "reg": "3",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c5d4",
+    "line_addr": "0x79c628",
+    "reg": "2",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c5d4",
+    "line_addr": "0x79c63c",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c5d4",
+    "line_addr": "0x79c67c",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79e158",
+    "line_addr": "0x79eb7c",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a8a28",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet",
+    "function": "List<int> toList(GamepadSet) )",
+    "addr": "0x7a0c50",
+    "line_addr": "0x7a104c",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadDef",
+    "function": "_ GamepadDef(/* No info */) )",
+    "addr": "0x7a4f2c",
+    "line_addr": "0x7a5160",
+    "reg": "4",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam30",
+    "function": "_ GamepadParam30(/* No info */) )",
+    "addr": "0x79f000",
+    "line_addr": "0x79f15c",
+    "reg": "16",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam30",
+    "function": "_ GamepadParam30(/* No info */) )",
+    "addr": "0x79f000",
+    "line_addr": "0x79f2a4",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam",
+    "function": "_ GamepadParam(/* No info */) )",
+    "addr": "0x79d264",
+    "line_addr": "0x79d588",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/theme.dart",
+    "class": "_CircleButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x929698",
+    "line_addr": "0x9296e0",
+    "reg": "3",
+    "smi": 10,
+    "byte": 5,
+    "via": "cmp"
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/ble/ble_scanner.dart",
+    "class": "BleScanner",
+    "function": "_ stopScan(/* No info */) async )",
+    "addr": "0x96a8e8",
+    "line_addr": "0x96a900",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/home.dart",
+    "class": "_HomeWidgetState",
+    "function": "_ getLangShare(/* No info */) async )",
+    "addr": "0x8d4ae0",
+    "line_addr": "0x8d4af8",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/home.dart",
+    "class": "_HomeWidgetState",
+    "function": "_ _changeLanguage(/* No info */) async )",
+    "addr": "0x8d4ea4",
+    "line_addr": "0x8d4ebc",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/home.dart",
+    "class": "_DeviceListState",
+    "function": "_ showAgreeDialog(/* No info */) async )",
+    "addr": "0x8d40e8",
+    "line_addr": "0x8d4100",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/home.dart",
+    "class": "_DeviceListState",
+    "function": "_ getAgree(/* No info */) async )",
+    "addr": "0x8d3e14",
+    "line_addr": "0x8d3e2c",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/home.dart",
+    "class": "_DeviceListState",
+    "function": "_ requestPermission(/* No info */) async )",
+    "addr": "0x8d1144",
+    "line_addr": "0x8d115c",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/home.dart",
+    "class": "_DeviceListState",
+    "function": "_ _connectDevice(/* No info */) async )",
+    "addr": "0x8d1fe8",
+    "line_addr": "0x8d2000",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/lang.dart",
+    "class": "LangWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8d5504",
+    "line_addr": "0x8d59c0",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "_ getDeviceConfig(/* No info */) async )",
+    "addr": "0x89be9c",
+    "line_addr": "0x89beb4",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "_ getOnBoardConfig(/* No info */) async )",
+    "addr": "0x89ac50",
+    "line_addr": "0x89ac68",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "_ setUserConfig(/* No info */) )",
+    "addr": "0x8a9aa0",
+    "line_addr": "0x8aa0dc",
+    "reg": "16",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "_ setUserConfig(/* No info */) )",
+    "addr": "0x8a9aa0",
+    "line_addr": "0x8aa100",
+    "reg": "16",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "_ saveDeviceConfig(/* No info */) async )",
+    "addr": "0x89a460",
+    "line_addr": "0x89a478",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "_ renameName(/* No info */) async )",
+    "addr": "0x8a96c0",
+    "line_addr": "0x8a96d8",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x89a9c4",
+    "line_addr": "0x89aae0",
+    "reg": "16",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x89a9c4",
+    "line_addr": "0x89ab04",
+    "reg": "16",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89b71c",
+    "reg": "16",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "_ onRepeatTimeClose(/* No info */) async )",
+    "addr": "0x8c1f70",
+    "line_addr": "0x8c1f88",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "_ dialogClick(/* No info */) async )",
+    "addr": "0x8ab3ec",
+    "line_addr": "0x8ab404",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "_ renameName(/* No info */) async )",
+    "addr": "0x8c22b8",
+    "line_addr": "0x8c22d0",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "_ getZKMVer(/* No info */) async )",
+    "addr": "0x7ab69c",
+    "line_addr": "0x7ab6b4",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "_ getDeviceUUID(/* No info */) async )",
+    "addr": "0x7aac74",
+    "line_addr": "0x7aac8c",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_config_light.dart",
+    "class": "_RainbowLightLightState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9413ac",
+    "line_addr": "0x941fc0",
+    "reg": "2",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_config_light.dart",
+    "class": "_RainbowLightLightState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9413ac",
+    "line_addr": "0x94201c",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_config_light.dart",
+    "class": "_RainbowNewConfigLightWidgetState",
+    "function": "_ saveLightConfig(/* No info */) async )",
+    "addr": "0x8d7290",
+    "line_addr": "0x8d72a8",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "_ getZKMVer(/* No info */) async )",
+    "addr": "0x7a9a30",
+    "line_addr": "0x7a9a48",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "_ getDeviceUUID(/* No info */) async )",
+    "addr": "0x79bf18",
+    "line_addr": "0x79bf30",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_config.dart",
+    "class": "_RainbowDeviceConfigWidgetState",
+    "function": "_ renameName(/* No info */) async )",
+    "addr": "0x8a1b68",
+    "line_addr": "0x8a1b80",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "_ init(/* No info */) async )",
+    "addr": "0x8e1b44",
+    "line_addr": "0x8e1b5c",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "_ saveDefaultLight(/* No info */) async )",
+    "addr": "0x8d8c14",
+    "line_addr": "0x8d8c48",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "_ renameName(/* No info */) async )",
+    "addr": "0x8e1348",
+    "line_addr": "0x8e1360",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8da8b8",
+    "line_addr": "0x8dcd1c",
+    "reg": "0",
+    "smi": 10,
+    "byte": 5,
+    "via": "cmp"
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "[closure] Future<void> <anonymous closure>(dynamic, bool) async )",
+    "addr": "0x8dd798",
+    "line_addr": "0x8dd7c0",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "_ onRepeatTimeClose(/* No info */) async )",
+    "addr": "0x8bcba0",
+    "line_addr": "0x8bcbb8",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "_ dialogClick(/* No info */) async )",
+    "addr": "0x8b1b84",
+    "line_addr": "0x8b1b9c",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "_ renameName(/* No info */) async )",
+    "addr": "0x8bcee8",
+    "line_addr": "0x8bcf00",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "_ testModeSwitch(/* No info */) async )",
+    "addr": "0x8e3a88",
+    "line_addr": "0x8e3aa0",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "_ testModeSwitch1(/* No info */) )",
+    "addr": "0x8e1efc",
+    "line_addr": "0x8e1f18",
+    "reg": "2",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "_ testModeSwitch1(/* No info */) )",
+    "addr": "0x8e1efc",
+    "line_addr": "0x8e1f2c",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "_ testModeSwitch1(/* No info */) )",
+    "addr": "0x8e1efc",
+    "line_addr": "0x8e1f68",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8e3be4",
+    "line_addr": "0x8e3c38",
+    "reg": "2",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8e3be4",
+    "line_addr": "0x8e3c4c",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8e3be4",
+    "line_addr": "0x8e3c88",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_macros.dart",
+    "class": "_ConfigMacroWidgetState",
+    "function": "_ saveMacroConfig(/* No info */) async )",
+    "addr": "0x8b85f8",
+    "line_addr": "0x8b8610",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_macros.dart",
+    "class": "_ConfigMacroWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8b5bc8",
+    "line_addr": "0x8b5c10",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5,
+    "via": "cmp"
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "_ConfigStickWidgetState",
+    "function": "_ getSave(/* No info */) async )",
+    "addr": "0x8cf174",
+    "line_addr": "0x8cf18c",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "StickCurveSave",
+    "function": "factory _ StickCurveSave.fromList(/* No info */) )",
+    "addr": "0x8ca700",
+    "line_addr": "0x8ca828",
+    "reg": "16",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "_ getDeviceConfig(/* No info */) async )",
+    "addr": "0x8a5f98",
+    "line_addr": "0x8a5fb0",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "_ saveDeviceConfig(/* No info */) async )",
+    "addr": "0x8a7d34",
+    "line_addr": "0x8a7d4c",
+    "reg": "1",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8a6a04",
+    "line_addr": "0x8a6ce4",
+    "reg": "16",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/device_info.dart",
+    "class": "_DeviceInfoState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x93eb78",
+    "line_addr": "0x93f0a4",
+    "reg": "2",
+    "smi": 10,
+    "byte": 5
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/device_info.dart",
+    "class": "_DeviceInfoState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x93eb78",
+    "line_addr": "0x93f100",
+    "reg": "17",
+    "smi": 10,
+    "byte": 5
+   }
+  ],
+  "raw_cmp": []
+ },
+ "6": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "::",
+    "function": "static _ showVerLowDialog(/* No info */) async )",
+    "addr": "0x78efa8",
+    "line_addr": "0x78efc0",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeTimeDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x920708",
+    "line_addr": "0x920cc8",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeTimeDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x920708",
+    "line_addr": "0x920d34",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x9211c8",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x9218fc",
+    "reg": "8",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921dc0",
+    "reg": "8",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7b84",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7be0",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a239c",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam30",
+    "function": "_ GamepadParam30(/* No info */) )",
+    "addr": "0x79f000",
+    "line_addr": "0x79f2f4",
+    "reg": "0",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/server.dart",
+    "class": "::",
+    "function": "static _ delConfig(/* No info */) async )",
+    "addr": "0x795fc4",
+    "line_addr": "0x795ff8",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/server.dart",
+    "class": "::",
+    "function": "static _ delMacro(/* No info */) async )",
+    "addr": "0x796abc",
+    "line_addr": "0x796af0",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/ble/ble_device_interactor.dart",
+    "class": "BleDeviceInteractor",
+    "function": "_ readCharacteristic(/* No info */) async )",
+    "addr": "0x9694a8",
+    "line_addr": "0x9694c0",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89b7a8",
+    "reg": "16",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "_ onChangeRunKey(/* No info */) async )",
+    "addr": "0x8bfdfc",
+    "line_addr": "0x8bfe14",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "_ onRepeatTime(/* No info */) async )",
+    "addr": "0x8bee3c",
+    "line_addr": "0x8bee54",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "_ runKeyDlg(/* No info */) async )",
+    "addr": "0x8c00e0",
+    "line_addr": "0x8c00f8",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "_ _readCharacteristic(/* No info */) async )",
+    "addr": "0x79badc",
+    "line_addr": "0x79baf4",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "_ setDefaultLight(/* No info */) )",
+    "addr": "0x8d8ef4",
+    "line_addr": "0x8d9054",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "_ setDefaultLight(/* No info */) )",
+    "addr": "0x8d8ef4",
+    "line_addr": "0x8d90b4",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x944a1c",
+    "line_addr": "0x944d7c",
+    "reg": "16",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x944a1c",
+    "line_addr": "0x944df0",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x944a1c",
+    "line_addr": "0x944e5c",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "_ onChangeRunKey(/* No info */) async )",
+    "addr": "0x8ba150",
+    "line_addr": "0x8ba168",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "_ onRepeatTime(/* No info */) async )",
+    "addr": "0x8b91bc",
+    "line_addr": "0x8b91d4",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "_ runKeyDlg(/* No info */) async )",
+    "addr": "0x8ba434",
+    "line_addr": "0x8ba44c",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9457cc",
+    "line_addr": "0x946768",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9457cc",
+    "line_addr": "0x9467cc",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ _ConfigMapkeyWidgetState(/* No info */) )",
+    "addr": "0x8c9a38",
+    "line_addr": "0x8c9ae0",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8c8df0",
+    "line_addr": "0x8c8e80",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] SimpleDialog <anonymous closure>(dynamic, BuildContext) )",
+    "addr": "0x8c9000",
+    "line_addr": "0x8c93c8",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] SimpleDialog <anonymous closure>(dynamic, BuildContext) )",
+    "addr": "0x8c9000",
+    "line_addr": "0x8c958c",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] SimpleDialog <anonymous closure>(dynamic, BuildContext) )",
+    "addr": "0x8c9000",
+    "line_addr": "0x8c95f0",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "_ConfigStickWidgetState",
+    "function": "_ setSaveCurve(/* No info */) async )",
+    "addr": "0x8cb478",
+    "line_addr": "0x8cb490",
+    "reg": "1",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "_ConfigStickWidgetState",
+    "function": "[closure] Widget stickComponent(dynamic, bool) )",
+    "addr": "0x936398",
+    "line_addr": "0x936ab0",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "_ConfigStickWidgetState",
+    "function": "[closure] Widget stickComponent(dynamic, bool) )",
+    "addr": "0x936398",
+    "line_addr": "0x936b1c",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "_ConfigStickWidgetState",
+    "function": "[closure] Widget stickComponent(dynamic, bool) )",
+    "addr": "0x936398",
+    "line_addr": "0x9375ec",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "_ConfigStickWidgetState",
+    "function": "[closure] Widget stickComponent(dynamic, bool) )",
+    "addr": "0x936398",
+    "line_addr": "0x937658",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "_ConfigStickWidgetState",
+    "function": "[closure] Widget stickComponent(dynamic, bool) )",
+    "addr": "0x936398",
+    "line_addr": "0x937928",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "_ConfigStickWidgetState",
+    "function": "[closure] Widget stickComponent(dynamic, bool) )",
+    "addr": "0x936398",
+    "line_addr": "0x937994",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "StickCurveSave",
+    "function": "factory _ StickCurveSave.fromList(/* No info */) )",
+    "addr": "0x8ca700",
+    "line_addr": "0x8ca850",
+    "reg": "16",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_trigger.dart",
+    "class": "_DeviceLeftTriggerState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x93b570",
+    "line_addr": "0x93ba30",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_trigger.dart",
+    "class": "_DeviceLeftTriggerState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x93b570",
+    "line_addr": "0x93ba9c",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_trigger.dart",
+    "class": "_DeviceRightTriggerState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x93c368",
+    "line_addr": "0x93c710",
+    "reg": "2",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_trigger.dart",
+    "class": "_DeviceRightTriggerState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x93c368",
+    "line_addr": "0x93c77c",
+    "reg": "17",
+    "smi": 12,
+    "byte": 6
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8a6a04",
+    "line_addr": "0x8a6d70",
+    "reg": "16",
+    "smi": 12,
+    "byte": 6
+   }
+  ],
+  "raw_cmp": []
+ },
+ "7": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x9211d8",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/configbutton.dart",
+    "class": "_ColorPickerListState",
+    "function": "_ _ColorPickerListState(/* No info */) )",
+    "addr": "0x898160",
+    "line_addr": "0x89817c",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/configbutton.dart",
+    "class": "_ColorPickerListState",
+    "function": "_ _ColorPickerListState(/* No info */) )",
+    "addr": "0x898160",
+    "line_addr": "0x8981dc",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/configbutton.dart",
+    "class": "_ColorPickerListState",
+    "function": "_ _ColorPickerListState(/* No info */) )",
+    "addr": "0x898160",
+    "line_addr": "0x89820c",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/configbutton.dart",
+    "class": "_ColorPickerListState",
+    "function": "_ _ColorPickerListState(/* No info */) )",
+    "addr": "0x898160",
+    "line_addr": "0x89826c",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/configbutton.dart",
+    "class": "_ColorPickerListState",
+    "function": "_ _ColorPickerListState(/* No info */) )",
+    "addr": "0x898160",
+    "line_addr": "0x89837c",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/configbutton.dart",
+    "class": "_ColorPickerListState",
+    "function": "_ _ColorPickerListState(/* No info */) )",
+    "addr": "0x898160",
+    "line_addr": "0x8983e4",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/configbutton.dart",
+    "class": "_ColorPickerListState",
+    "function": "_ _ColorPickerListState(/* No info */) )",
+    "addr": "0x898160",
+    "line_addr": "0x8984f4",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/configbutton.dart",
+    "class": "_ColorPickerListState",
+    "function": "_ _ColorPickerListState(/* No info */) )",
+    "addr": "0x898160",
+    "line_addr": "0x898558",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7c38",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7c78",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7cb4",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a2450",
+    "reg": "1",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam30",
+    "function": "_ GamepadParam30(/* No info */) )",
+    "addr": "0x79f000",
+    "line_addr": "0x79f354",
+    "reg": "0",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/server.dart",
+    "class": "::",
+    "function": "static _ queryConfigList(/* No info */) async )",
+    "addr": "0x796c40",
+    "line_addr": "0x796c64",
+    "reg": "1",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/server.dart",
+    "class": "::",
+    "function": "static _ changeMacroRunkey(/* No info */) async )",
+    "addr": "0x79525c",
+    "line_addr": "0x795290",
+    "reg": "1",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x929f2c",
+    "line_addr": "0x92a294",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x929f2c",
+    "line_addr": "0x92a30c",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89b834",
+    "reg": "16",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x92a524",
+    "line_addr": "0x92a8f8",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x92a524",
+    "line_addr": "0x92a970",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_config.dart",
+    "class": "_RainbowDeviceConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x944480",
+    "line_addr": "0x9447e8",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_config.dart",
+    "class": "_RainbowDeviceConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x944480",
+    "line_addr": "0x944860",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8da8b8",
+    "line_addr": "0x8dc23c",
+    "reg": "0",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9451f4",
+    "line_addr": "0x945570",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9451f4",
+    "line_addr": "0x9455e8",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8e2408",
+    "line_addr": "0x8e2474",
+    "reg": "16",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ _ConfigMapkeyWidgetState(/* No info */) )",
+    "addr": "0x8c9a38",
+    "line_addr": "0x8c9af0",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8c8df0",
+    "line_addr": "0x8c8e90",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_motion.dart",
+    "class": "_ConfigMotionWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x92f54c",
+    "line_addr": "0x92f6c8",
+    "reg": "2",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_motion.dart",
+    "class": "_ConfigMotionWidgetState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x92f54c",
+    "line_addr": "0x92f738",
+    "reg": "17",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_stick.dart",
+    "class": "StickCurveSave",
+    "function": "factory _ StickCurveSave.fromList(/* No info */) )",
+    "addr": "0x8ca700",
+    "line_addr": "0x8ca878",
+    "reg": "16",
+    "smi": 14,
+    "byte": 7
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8a6a04",
+    "line_addr": "0x8a70a4",
+    "reg": "16",
+    "smi": 14,
+    "byte": 7
+   }
+  ],
+  "raw_cmp": []
+ },
+ "11": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91e184",
+    "line_addr": "0x91e1e0",
+    "reg": "2",
+    "smi": 22,
+    "byte": 11,
+    "via": "cmp"
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91e184",
+    "line_addr": "0x91e218",
+    "reg": "2",
+    "smi": 22,
+    "byte": 11,
+    "via": "cmp"
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921240",
+    "reg": "17",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet",
+    "function": "List<int> toList(GamepadSet) )",
+    "addr": "0x7a0c50",
+    "line_addr": "0x7a12dc",
+    "reg": "1",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam",
+    "function": "_ GamepadParam(/* No info */) )",
+    "addr": "0x79d264",
+    "line_addr": "0x79d790",
+    "reg": "1",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x7ab44c",
+    "line_addr": "0x7ab604",
+    "reg": "16",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7ab7f8",
+    "line_addr": "0x7ab868",
+    "reg": "17",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x7a97f8",
+    "line_addr": "0x7a99b0",
+    "reg": "16",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a9b8c",
+    "line_addr": "0x7a9bfc",
+    "reg": "17",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8e2408",
+    "line_addr": "0x8e3010",
+    "reg": "16",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ _ConfigMapkeyWidgetState(/* No info */) )",
+    "addr": "0x8c9a38",
+    "line_addr": "0x8c9b18",
+    "reg": "17",
+    "smi": 22,
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8c8df0",
+    "line_addr": "0x8c8eb8",
+    "reg": "17",
+    "smi": 22,
+    "byte": 11
+   }
+  ],
+  "raw_cmp": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91e184",
+    "line_addr": "0x91e3e4",
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91e184",
+    "line_addr": "0x91e47c",
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91e184",
+    "line_addr": "0x91e9b4",
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/theme.dart",
+    "class": "_CircleButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x929698",
+    "line_addr": "0x9296f4",
+    "byte": 11
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/theme.dart",
+    "class": "_CircleButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x929698",
+    "line_addr": "0x929788",
+    "byte": 11
+   }
+  ]
+ },
+ "12": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921844",
+    "reg": "16",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921b30",
+    "reg": "11",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921dc8",
+    "reg": "11",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet",
+    "function": "List<int> toList(GamepadSet) )",
+    "addr": "0x7a0c50",
+    "line_addr": "0x7a137c",
+    "reg": "1",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a20b0",
+    "reg": "6",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a2a38",
+    "reg": "3",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a32a4",
+    "reg": "3",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a354c",
+    "reg": "0",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "LightData",
+    "function": "Map<String, dynamic> toJson(LightData) )",
+    "addr": "0x7a3fcc",
+    "line_addr": "0x7a42d4",
+    "reg": "2",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam30",
+    "function": "_ GamepadParam30(/* No info */) )",
+    "addr": "0x79f000",
+    "line_addr": "0x79f414",
+    "reg": "0",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam",
+    "function": "_ GamepadParam(/* No info */) )",
+    "addr": "0x79d264",
+    "line_addr": "0x79d800",
+    "reg": "1",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/theme.dart",
+    "class": "_CheckboxPainter",
+    "function": "_ _drawBox(/* No info */) )",
+    "addr": "0x6fa06c",
+    "line_addr": "0x6fa2ec",
+    "reg": "16",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7aadd0",
+    "line_addr": "0x7aae24",
+    "reg": "2",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7aadd0",
+    "line_addr": "0x7aae38",
+    "reg": "17",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7aadd0",
+    "line_addr": "0x7aaeb0",
+    "reg": "17",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c074",
+    "line_addr": "0x79c0c8",
+    "reg": "2",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c074",
+    "line_addr": "0x79c0dc",
+    "reg": "17",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c074",
+    "line_addr": "0x79c154",
+    "reg": "17",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ didUpdateWidget(/* No info */) )",
+    "addr": "0x954750",
+    "line_addr": "0x954854",
+    "reg": "1",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ didUpdateWidget(/* No info */) )",
+    "addr": "0x954750",
+    "line_addr": "0x9549ac",
+    "reg": "1",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ initState(/* No info */) )",
+    "addr": "0x8c7fe8",
+    "line_addr": "0x8c808c",
+    "reg": "1",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ initState(/* No info */) )",
+    "addr": "0x8c7fe8",
+    "line_addr": "0x8c81e4",
+    "reg": "1",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] SimpleDialog <anonymous closure>(dynamic, BuildContext) )",
+    "addr": "0x8c9000",
+    "line_addr": "0x8c9334",
+    "reg": "16",
+    "smi": 24,
+    "byte": 12
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8a6a04",
+    "line_addr": "0x8a77ac",
+    "reg": "1",
+    "smi": 24,
+    "byte": 12
+   }
+  ],
+  "raw_cmp": []
+ },
+ "14": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921230",
+    "reg": "17",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921bec",
+    "reg": "12",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921dcc",
+    "reg": "12",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c5d4",
+    "line_addr": "0x79c644",
+    "reg": "17",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet",
+    "function": "List<int> toList(GamepadSet) )",
+    "addr": "0x7a0c50",
+    "line_addr": "0x7a14bc",
+    "reg": "1",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a2838",
+    "reg": "1",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam30",
+    "function": "_ GamepadParam30(/* No info */) )",
+    "addr": "0x79f000",
+    "line_addr": "0x79f2f8",
+    "reg": "16",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam",
+    "function": "_ GamepadParam(/* No info */) )",
+    "addr": "0x79d264",
+    "line_addr": "0x79d8e0",
+    "reg": "1",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89bc2c",
+    "reg": "16",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ _ConfigMapkeyWidgetState(/* No info */) )",
+    "addr": "0x8c9a38",
+    "line_addr": "0x8c9b08",
+    "reg": "17",
+    "smi": 28,
+    "byte": 14
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8c8df0",
+    "line_addr": "0x8c8ea8",
+    "reg": "17",
+    "smi": 28,
+    "byte": 14
+   }
+  ],
+  "raw_cmp": []
+ },
+ "26": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet",
+    "function": "List<int> toList(GamepadSet) )",
+    "addr": "0x7a0c50",
+    "line_addr": "0x7a0ccc",
+    "reg": "7",
+    "smi": 52,
+    "byte": 26
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a2f90",
+    "reg": "1",
+    "smi": 52,
+    "byte": 26
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+    "class": "_ArmorXProMacroWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8c0274",
+    "line_addr": "0x8c02ec",
+    "reg": "17",
+    "smi": 52,
+    "byte": 26
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_macro.dart",
+    "class": "_RainbowMacroConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8ba5c8",
+    "line_addr": "0x8ba640",
+    "reg": "17",
+    "smi": 52,
+    "byte": 26
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "_ _ConfigMapkeyWidgetState(/* No info */) )",
+    "addr": "0x8c9a38",
+    "line_addr": "0x8c9a98",
+    "reg": "17",
+    "smi": 52,
+    "byte": 26
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/config_mapkey.dart",
+    "class": "_ConfigMapkeyWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8c8df0",
+    "line_addr": "0x8c8ed8",
+    "reg": "17",
+    "smi": 52,
+    "byte": 26
+   }
+  ],
+  "raw_cmp": []
+ },
+ "27": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8da8b8",
+    "line_addr": "0x8dca14",
+    "reg": "0",
+    "smi": 54,
+    "byte": 27
+   }
+  ],
+  "raw_cmp": []
+ },
+ "37": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x9211a0",
+    "reg": "17",
+    "smi": 74,
+    "byte": 37
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_light.dart",
+    "class": "_RainbowLightConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8da8b8",
+    "line_addr": "0x8dc180",
+    "reg": "2",
+    "smi": 74,
+    "byte": 37
+   }
+  ],
+  "raw_cmp": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921370",
+    "byte": 37
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x922184",
+    "byte": 37
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x9221ac",
+    "byte": 37
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a56c4",
+    "line_addr": "0x7a5b08",
+    "byte": 37
+   }
+  ]
+ },
+ "38": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921148",
+    "reg": "17",
+    "smi": 76,
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a34d4",
+    "reg": "1",
+    "smi": 76,
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "List<int> toList(GamepadSet30) )",
+    "addr": "0x7a1f60",
+    "line_addr": "0x7a34e8",
+    "reg": "5",
+    "smi": 76,
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam30",
+    "function": "_ GamepadParam30(/* No info */) )",
+    "addr": "0x79f000",
+    "line_addr": "0x79f980",
+    "reg": "1",
+    "smi": 76,
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam30",
+    "function": "_ GamepadParam30(/* No info */) )",
+    "addr": "0x79f000",
+    "line_addr": "0x79f994",
+    "reg": "1",
+    "smi": 76,
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadParam",
+    "function": "_ GamepadParam(/* No info */) )",
+    "addr": "0x79d264",
+    "line_addr": "0x79da84",
+    "reg": "16",
+    "smi": 76,
+    "byte": 38
+   }
+  ],
+  "raw_cmp": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyButtonState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x91e184",
+    "line_addr": "0x91e200",
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x921344",
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x92201c",
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/component.dart",
+    "class": "_ChangeKeyDialogState",
+    "function": "_ build(/* No info */) )",
+    "addr": "0x9210a8",
+    "line_addr": "0x922044",
+    "byte": 38
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a56c4",
+    "line_addr": "0x7a5b18",
+    "byte": 38
+   }
+  ]
+ },
+ "52": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "112": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7ba0",
+    "reg": "17",
+    "smi": 224,
+    "byte": 112
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a8624",
+    "reg": "17",
+    "smi": 224,
+    "byte": 112
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "GamepadSet30",
+    "function": "_ GamepadSet30(/* No info */) )",
+    "addr": "0x7a6d70",
+    "line_addr": "0x7a6f64",
+    "reg": "16",
+    "smi": 224,
+    "byte": 112
+   }
+  ],
+  "raw_cmp": []
+ },
+ "115": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "210": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "_ testModeSwitch1(/* No info */) )",
+    "addr": "0x8e1efc",
+    "line_addr": "0x8e1f34",
+    "reg": "17",
+    "smi": 420,
+    "byte": 210
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8e3be4",
+    "line_addr": "0x8e3c54",
+    "reg": "17",
+    "smi": 420,
+    "byte": 210
+   }
+  ],
+  "raw_cmp": []
+ },
+ "211": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "212": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x89adac",
+    "line_addr": "0x89ae1c",
+    "reg": "17",
+    "smi": 424,
+    "byte": 212
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89bc94",
+    "reg": "16",
+    "smi": 424,
+    "byte": 212
+   }
+  ],
+  "raw_cmp": []
+ },
+ "214": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89b4b4",
+    "reg": "16",
+    "smi": 428,
+    "byte": 214
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x89bff8",
+    "line_addr": "0x89c068",
+    "reg": "17",
+    "smi": 428,
+    "byte": 214
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8a60f4",
+    "line_addr": "0x8a6164",
+    "reg": "17",
+    "smi": 428,
+    "byte": 214
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8a6a04",
+    "line_addr": "0x8a6a80",
+    "reg": "16",
+    "smi": 428,
+    "byte": 214
+   }
+  ],
+  "raw_cmp": []
+ },
+ "215": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a005c",
+    "line_addr": "0x7a07d0",
+    "reg": "17",
+    "smi": 430,
+    "byte": 215
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89bd00",
+    "reg": "16",
+    "smi": 430,
+    "byte": 215
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8a6a04",
+    "line_addr": "0x8a7b50",
+    "reg": "16",
+    "smi": 430,
+    "byte": 215
+   }
+  ],
+  "raw_cmp": []
+ },
+ "216": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79e158",
+    "line_addr": "0x79e778",
+    "reg": "17",
+    "smi": 432,
+    "byte": 216
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79e158",
+    "line_addr": "0x79ebf4",
+    "reg": "17",
+    "smi": 432,
+    "byte": 216
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a8aa0",
+    "reg": "17",
+    "smi": 432,
+    "byte": 216
+   }
+  ],
+  "raw_cmp": []
+ },
+ "218": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "221": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "225": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "226": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "227": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "228": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "239": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7aadd0",
+    "line_addr": "0x7aae40",
+    "reg": "17",
+    "smi": 478,
+    "byte": 239
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x7ab44c",
+    "line_addr": "0x7ab4cc",
+    "reg": "16",
+    "smi": 478,
+    "byte": 239
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c074",
+    "line_addr": "0x79c0e4",
+    "reg": "17",
+    "smi": 478,
+    "byte": 239
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x7a97f8",
+    "line_addr": "0x7a9878",
+    "reg": "16",
+    "smi": 478,
+    "byte": 239
+   }
+  ],
+  "raw_cmp": []
+ },
+ "242": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "243": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "244": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "245": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "246": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "247": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "248": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "252": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "253": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "255": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7a3c",
+    "reg": "17",
+    "smi": 510,
+    "byte": 255
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a8070",
+    "reg": "17",
+    "smi": 510,
+    "byte": 255
+   }
+  ],
+  "raw_cmp": []
+ },
+ "171": {
+  "smi_mov": [],
+  "raw_cmp": []
+ },
+ "165": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c5d4",
+    "line_addr": "0x79c634",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7b90",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x89adac",
+    "line_addr": "0x89ae0c",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x89bff8",
+    "line_addr": "0x89c058",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7aadd0",
+    "line_addr": "0x7aae30",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7ab7f8",
+    "line_addr": "0x7ab858",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79c074",
+    "line_addr": "0x79c0d4",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a9b8c",
+    "line_addr": "0x7a9bec",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "_ testModeSwitch1(/* No info */) )",
+    "addr": "0x8e1efc",
+    "line_addr": "0x8e1f24",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "class": "_RainbowTestState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8e3be4",
+    "line_addr": "0x8e3c44",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x8a60f4",
+    "line_addr": "0x8a6154",
+    "reg": "17",
+    "smi": 330,
+    "byte": 165
+   }
+  ],
+  "raw_cmp": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89bc00",
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+    "class": "_ArmorXProWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x7ab44c",
+    "line_addr": "0x7ab4a0",
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+    "class": "_RainbowWidget",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x7a97f8",
+    "line_addr": "0x7a984c",
+    "byte": 165
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8a6a04",
+    "line_addr": "0x8a7b24",
+    "byte": 165
+   }
+  ]
+ },
+ "164": {
+  "smi_mov": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79e158",
+    "line_addr": "0x79e358",
+    "reg": "17",
+    "smi": 328,
+    "byte": 164
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x79e158",
+    "line_addr": "0x79e428",
+    "reg": "17",
+    "smi": 328,
+    "byte": 164
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a005c",
+    "line_addr": "0x7a040c",
+    "reg": "17",
+    "smi": 328,
+    "byte": 164
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a005c",
+    "line_addr": "0x7a04f4",
+    "reg": "17",
+    "smi": 328,
+    "byte": 164
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a7b04",
+    "reg": "17",
+    "smi": 328,
+    "byte": 164
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "class": "::",
+    "function": "[closure] static dynamic async_op(dynamic, dynamic, dynamic) )",
+    "addr": "0x7a74c4",
+    "line_addr": "0x7a82e0",
+    "reg": "17",
+    "smi": 328,
+    "byte": 164
+   }
+  ],
+  "raw_cmp": [
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+    "class": "_ArmorXProConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x89b438",
+    "line_addr": "0x89b48c",
+    "byte": 164
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+    "class": "_ConfigsConfigWidgetState",
+    "function": "[closure] void <anonymous closure>(dynamic, List<int>) )",
+    "addr": "0x8a6a04",
+    "line_addr": "0x8a6a58",
+    "byte": 164
+   }
+  ]
+ }
+}

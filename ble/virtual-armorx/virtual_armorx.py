@@ -387,37 +387,51 @@ class ArmorXPeripheral:
     # -- lifecycle ----------------------------------------------------------
 
     async def run(self) -> None:
-        link = LocalLink()
-        sock = self.args.local_transport
-        try:
-            os.unlink(sock)
-        except FileNotFoundError:
-            pass
+        c_periph = c_peer = None
+        if self.args.mode == "direct":
+            # Attach the peripheral Host straight onto an externally-provided
+            # controller HCI link (e.g. the emulator's netsim RootCanal chip).
+            # No local Controllers / LocalLink: the transport *is* the HCI link
+            # to a real controller, exactly like Device.with_hci over TCP.
+            peer_transport = await open_transport(self.args.transport)
+            self.device = Device.with_hci(
+                f"{NAME_PREFIX}{self.args.name_suffix}",
+                self.args.address,
+                peer_transport.source,
+                peer_transport.sink,
+            )
+        else:
+            link = LocalLink()
+            sock = self.args.local_transport
+            try:
+                os.unlink(sock)
+            except FileNotFoundError:
+                pass
 
-        local_server = await open_transport(f"unix-server:{sock}")
-        local_client = await open_transport(f"unix-client:{sock}")
-        c_periph = Controller(
-            "C_PERIPH",
-            host_source=local_server.source,
-            host_sink=local_server.sink,
-            link=link,
-            public_address=self.args.address,
-        )
-        peer_transport = await open_transport(self.args.transport)
-        c_peer = Controller(
-            "C_PEER",
-            host_source=peer_transport.source,
-            host_sink=peer_transport.sink,
-            link=link,
-            public_address=self.args.peer_address,
-        )
+            local_server = await open_transport(f"unix-server:{sock}")
+            local_client = await open_transport(f"unix-client:{sock}")
+            c_periph = Controller(
+                "C_PERIPH",
+                host_source=local_server.source,
+                host_sink=local_server.sink,
+                link=link,
+                public_address=self.args.address,
+            )
+            peer_transport = await open_transport(self.args.transport)
+            c_peer = Controller(
+                "C_PEER",
+                host_source=peer_transport.source,
+                host_sink=peer_transport.sink,
+                link=link,
+                public_address=self.args.peer_address,
+            )
 
-        self.device = Device.with_hci(
-            f"{NAME_PREFIX}{self.args.name_suffix}",
-            self.args.address,
-            local_client.source,
-            local_client.sink,
-        )
+            self.device = Device.with_hci(
+                f"{NAME_PREFIX}{self.args.name_suffix}",
+                self.args.address,
+                local_client.source,
+                local_client.sink,
+            )
         for service in self.build_services():
             self.device.add_service(service)
         self.wire_events()
@@ -426,14 +440,25 @@ class ArmorXPeripheral:
 
         ad = AdvertisingData(
             [
+                (AdvertisingData.FLAGS, bytes([0x06])),
                 (AdvertisingData.COMPLETE_LOCAL_NAME, f"{NAME_PREFIX}{self.args.name_suffix}".encode()),
+            ]
+        )
+        # The 128-bit vendor service UUID does not fit in the 31-byte legacy
+        # advertising payload alongside the name, so it goes in the scan
+        # response (a real controller rejects an over-long AD with
+        # HCI_Error(INVALID_COMMAND_PARAMETERS)).
+        sd = AdvertisingData(
+            [
                 (
                     AdvertisingData.INCOMPLETE_LIST_OF_128_BIT_SERVICE_CLASS_UUIDS,
                     bytes(reversed(bytes.fromhex(VENDOR_SERVICE.replace("-", "")))),
                 ),
             ]
         )
-        await self.device.start_advertising(advertising_data=bytes(ad), auto_restart=True)
+        await self.device.start_advertising(
+            advertising_data=bytes(ad), scan_response_data=bytes(sd), auto_restart=True
+        )
         self.logs.jsonl(
             "advertising_started",
             name=f"{NAME_PREFIX}{self.args.name_suffix}",
@@ -474,7 +499,17 @@ def parse_args(argv=None):
         default="/tmp/armorx_periph_hci.sock",
         help="UNIX socket path for the peripheral's own local HCI pipe",
     )
-    parser.add_argument("--address", default="F0:0A:A5:00:00:01", help="peripheral BD address")
+    parser.add_argument(
+        "--mode",
+        choices=["bridge", "direct"],
+        default="bridge",
+        help="bridge = two local Controllers on a LocalLink (TCP selftest model); "
+        "direct = attach the peripheral Host straight onto the transport's HCI "
+        "(use this for android-netsim / a real controller)",
+    )
+    parser.add_argument(
+        "--address", default="F0:0A:A5:00:00:01", help="peripheral BD address"
+    )
     parser.add_argument(
         "--peer-address", default="F0:0A:A5:00:00:02", help="peer-controller BD address"
     )

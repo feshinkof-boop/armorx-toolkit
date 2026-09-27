@@ -29,6 +29,7 @@ LAB = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 HOOKS = os.path.join(LAB, "frida", "hooks")
 
 VERSION_PKG = {
+    "2.22": "com.moojiang.bigbigwon",
     "2.23": "com.moojiang.bigbigwon",
     "2.24": "com.moojiang.bigbigwon",
     "4.0.8": "com.moojiang.bigbigwon.mygt",
@@ -44,6 +45,7 @@ def main():
     ap.add_argument("--device", default=None, help="device id, e.g. emulator-5554")
     ap.add_argument("--with-net", action="store_true", help="also load network hooks")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--extra", action="append", default=[], help="extra JS file(s) to load (repeatable)")
     args = ap.parse_args()
 
     pkg = args.package or VERSION_PKG[args.version]
@@ -62,6 +64,7 @@ def main():
         sources.append(os.path.join(HOOKS, "shared", "network-http-hooks.js"))
     sources.append(os.path.join(HOOKS, "shared", "bt-platform-hooks.js"))
     sources.append(os.path.join(HOOKS, "shared", "flutter-plugin-probe.js"))
+    sources.extend(args.extra)
     sources.append(entry)
 
     script_src = "\n;\n".join(open(s, "r", encoding="utf-8").read() for s in sources)

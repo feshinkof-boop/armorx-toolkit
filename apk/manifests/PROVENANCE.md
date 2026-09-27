@@ -74,3 +74,29 @@ Function code addresses cited from each tree (e.g. `getZKMVer @0x7617f4` for 2.2
 matching `libapp.so`, so the trees and the extracted binaries are the same builds.
 
 Nothing under `~/armorx-re/repo` was written to; the repository stayed clean.
+
+---
+
+## 2.22.0901 — provenance (added in the 2.22 inventory pass)
+
+**The file came from the user's Downloads directory; no download was performed in this pass.**
+
+| Field | Value |
+|---|---|
+| Original (on this host) | `/home/salamanka/Downloads/BIGBIG_WON_2.22.0901.apk` |
+| Frozen lab copy | `/home/salamanka/armorx-lab/apk/original/2.22.0901/BIGBIG_WON_2.22.0901.apk` |
+| Copy relationship | byte-identical (`cmp` clean, matching sha256) |
+| Copies on this host | **exactly one** APK — the Downloads original and its lab copy are the *same file content*; no second, independent 2.22.0901 build exists on this host |
+| size | 27,608,134 bytes |
+| mtime | 2026-09-27 10:51:41 -0400 (Downloads original) |
+| sha256 | `785684ec28a6fe0b111597933527b1cc0e53c3332ed4cc8c8db4112539c0361c` |
+| sha1 | `b499545be833889464fc6cdc734d49eba7fa7d36` |
+| md5 | `e3af489d0a700de3580fb50d3312e8d3` |
+
+The lab copy's own `SHA256SUM.txt` records the same sha256 and was re-verified by recomputation.
+The APK was **never modified, re-signed or installed** — all work in this pass was read-only over the
+untouched APK and over `apk/extracted/2.22.0901/` (produced by `unzip` in an earlier pass), plus the
+already-existing Blutter tree at `static/blutter/2.22.0901/blutter_out/`.
+
+Derived artifact written in this pass: `apk/manifests/2.22.0901.json`, and the deliverables under
+`results/static/2.22.0901/` and `results/version-diff/server-api-history.md`.

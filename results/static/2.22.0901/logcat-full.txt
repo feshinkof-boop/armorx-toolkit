@@ -1,0 +1,510 @@
+--------- beginning of main
+09-27 11:29:02.220 D/OneSearchSuggestProvider( 1303): Created the binder channel successfully for end point service =com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService , mChannel=Q0{delegate=L0{logId=9, target=directaddress:///AndroidComponentAddress%5BIntent%20%7B%20act=grpc.io.action.BIND%20cmp=com.google.android.googlequicksearchbox/com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService%20%7D%5D}} , mOneSearchConnection=y1.J@ff1e76f
+09-27 11:29:02.242 I/ContentCaptureHelper( 1865): Setting logging level to DEBUG
+09-27 11:29:02.242 D/ContentCaptureManager( 1865): setFlushViewTreeAppearingEventDisabled(): setting to false
+09-27 11:29:02.251 W/BcSmartspaceCard( 1303): No title view to update
+09-27 11:29:02.251 I/BcSmartspaceCard( 1303): setFormattedContentDescription: textView=SUBTITLE, text=null, iconDescription=null, contentDescription=null
+09-27 11:29:02.256 I/AiAiEcho( 1493): Predicting[0]: 
+09-27 11:29:02.256 I/AiAiEcho( 1493): Ranked targets strategy: SORT, count: 0, ranking metadata: 
+09-27 11:29:02.257 I/AiAiEcho( 1493): #postPredictionTargets: Sending updates to UISurface lockscreen with targets# 0
+09-27 11:29:02.257 I/AiAiEcho( 1493): #postPredictionTargets: Sending updates to UISurface home with targets# 0
+09-27 11:29:02.257 I/AiAiEcho( 1493): #postPredictionTargets: Sending updates to UISurface media_data_manager with targets# 0
+09-27 11:29:02.264 D/SsMediaDataProvider(  722): Forwarding Smartspace updates []
+09-27 11:29:02.291 D/CompatibilityChangeReporter( 1303): Compat change id reported: 163400105; UID 10153; state: ENABLED
+09-27 11:29:02.291 W/TextView( 1303): onProvideContentCaptureStructure(): calling assumeLayout()
+09-27 11:29:02.305 D/EGL_emulation(  722): app_time_stats: avg=2281.46ms min=2281.46ms max=2281.46ms count=1
+09-27 11:29:02.309 W/TextView( 1303): onProvideContentCaptureStructure(): calling assumeLayout()
+09-27 11:29:02.310 D/MainContentCaptureSession( 1303): Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+09-27 11:29:02.310 D/MainContentCaptureSession( 1303): Flushing 63 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+09-27 11:29:02.330 D/MainContentCaptureSession( 1303): Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+09-27 11:29:02.331 D/MainContentCaptureSession( 1303): Flushing 19 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+09-27 11:29:02.370 I/A       ( 1865): Constructor was called
+09-27 11:29:02.376 I/A       ( 1865): No savedInstanceState.
+09-27 11:29:02.376 I/A       ( 1865): makeRequest: subscribing to new source
+09-27 11:29:02.378 I/A       ( 1865): OnCreate Was Called
+09-27 11:29:02.382 I/A       ( 1865): getMinusOnePromotion
+09-27 11:29:02.451 I/A       ( 1865): #startAppFlow
+--------- beginning of system
+09-27 11:29:02.468 W/JobScheduler(  527): Job didn't exist in JobStore: c0d70b1 #u0a141/1034 com.google.android.apps.photos/com.google.android.libraries.social.mediamonitor.MediaMonitorJobSchedulerService
+09-27 11:29:02.482 W/UriGrantsManagerService(  527): No permission grants found for com.google.android.apps.photos
+09-27 11:29:02.483 W/UriGrantsManagerService(  527): No permission grants found for com.google.android.apps.photos
+09-27 11:29:02.511 I/A       ( 1865): #endAppFlow
+09-27 11:29:02.511 I/A       ( 1865): getAccountMenuPromotion
+09-27 11:29:02.512 I/earchbox:search( 1865): Background young concurrent copying GC freed 53608(3121KB) AllocSpace objects, 48(1748KB) LOS objects, 42% free, 19MB/34MB, paused 460us,839us total 209.471ms
+09-27 11:29:02.519 I/earchbox:search( 1865): JIT allocated 64KB for compiled code of java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.ala.e()
+09-27 11:29:02.526 I/A       ( 1865): #enqueuePeriodicJob: running = false
+09-27 11:29:02.534 W/TransactionTracing(  374): Could not find layer handle 0x76e708fd7b30
+09-27 11:29:02.536 W/UriGrantsManagerService(  527): No permission grants found for com.google.android.apps.photos
+09-27 11:29:02.537 W/UriGrantsManagerService(  527): No permission grants found for com.google.android.apps.photos
+09-27 11:29:02.540 I/XmpUtil ( 1602): XMP parse: only JPEG file is supported
+09-27 11:29:02.546 I/A       ( 1865): onApplyWindowInsets: systemWindowInsets=Insets{left=0, top=63, right=0, bottom=63}
+09-27 11:29:02.546 I/A       ( 1865): onApplyWindowInsets: systemWindowInsets=Insets{left=0, top=63, right=0, bottom=63}
+09-27 11:29:02.568 I/A       ( 1865): loading data on surface MinusOne.
+09-27 11:29:02.582 I/A       ( 1865): Created gRPC endpoint to "search" for service class com.google.android.apps.search.googleapp.search.suggest.plugins.onesearch.server.OneSearchSuggestService
+09-27 11:29:02.593 I/A       ( 1865): #accountsLoadedAppFlow
+09-27 11:29:02.594 W/UriGrantsManagerService(  527): No permission grants found for com.google.android.apps.photos
+09-27 11:29:02.595 W/UriGrantsManagerService(  527): No permission grants found for com.google.android.apps.photos
+09-27 11:29:02.596 W/A       ( 1865): Didn't find the session (MAIN_FEED, true)
+09-27 11:29:02.601 W/A       ( 1865): Can't get WAA status for Mavatar!
+09-27 11:29:02.601 W/A       ( 1865): java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Class java.lang.Object.getClass()' on a null object reference
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.apps.tiktok.dataservice.z.b(PG:1)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.apps.tiktok.dataservice.at.a(PG:1)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.apps.tiktok.tracing.ec.a(PG:2)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.aj.a(PG:2)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.ac.apply(PG:1)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.h.e(PG:2)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.j.run(PG:9)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.bf.execute(PG:1)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.d.i(PG:1)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.d.l(PG:12)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.d.n(PG:2)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.i.f(PG:1)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.common.util.concurrent.j.run(PG:12)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.android.libraries.i.ae.run(PG:1)
+09-27 11:29:02.601 W/A       ( 1865): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+09-27 11:29:02.601 W/A       ( 1865): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.android.libraries.i.k.run(PG:2)
+09-27 11:29:02.601 W/A       ( 1865): 	at com.google.android.libraries.i.p.run(PG:4)
+09-27 11:29:02.601 W/A       ( 1865): 	at java.lang.Thread.run(Thread.java:1012)
+09-27 11:29:02.605 W/A       ( 1865): Can't get WAA status for Mavatar!
+09-27 11:29:02.605 W/A       ( 1865): java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Class java.lang.Object.getClass()' on a null object reference
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.apps.tiktok.dataservice.z.b(PG:1)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.apps.tiktok.dataservice.at.a(PG:1)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.apps.tiktok.tracing.ec.a(PG:2)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.aj.a(PG:2)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.ac.apply(PG:1)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.h.e(PG:2)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.j.run(PG:9)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.bf.execute(PG:1)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.d.i(PG:1)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.d.l(PG:12)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.d.n(PG:2)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.i.f(PG:1)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.common.util.concurrent.j.run(PG:12)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.android.libraries.i.ae.run(PG:1)
+09-27 11:29:02.605 W/A       ( 1865): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1137)
+09-27 11:29:02.605 W/A       ( 1865): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:637)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.android.libraries.i.k.run(PG:2)
+09-27 11:29:02.605 W/A       ( 1865): 	at com.google.android.libraries.i.p.run(PG:4)
+09-27 11:29:02.605 W/A       ( 1865): 	at java.lang.Thread.run(Thread.java:1012)
+09-27 11:29:02.613 W/UriGrantsManagerService(  527): No permission grants found for com.google.android.apps.photos
+09-27 11:29:02.614 W/UriGrantsManagerService(  527): No permission grants found for com.google.android.apps.photos
+09-27 11:29:02.622 W/A       ( 1865): Didn't find the session (MAIN_FEED, true)
+09-27 11:29:02.625 I/GoogleInputMethodService( 1414): GoogleInputMethodService.onFinishInput():3227 
+09-27 11:29:02.626 D/MainContentCaptureSession( 1303): Flushing 0 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_ROOT
+09-27 11:29:02.626 W/ContentCaptureService( 1493): handleSendEvents() received empty list of events
+09-27 11:29:02.634 W/TransactionTracing(  374): Could not find layer handle 0x76e708fd5cd0
+09-27 11:29:02.638 I/GoogleInputMethodService( 1414): GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+09-27 11:29:02.638 I/GoogleInputMethodService( 1414): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.google.android.apps.nexuslauncher fieldId=-1 fieldName=null extras=null}, false)
+09-27 11:29:02.638 I/GoogleInputMethodService( 1414): GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+09-27 11:29:02.638 I/GoogleInputMethodService( 1414): GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+09-27 11:29:02.658 V/ClearcutMetricXmitter( 1865): Transmission is done.
+09-27 11:29:02.658 V/ClearcutMetricXmitter( 1865): Transmission is done.
+09-27 11:29:02.676 I/A       ( 1865): Created StreamSubTree successfully, items 5
+09-27 11:29:02.677 I/A       ( 1865): RenderableStreamDataSource#loadData - sessionStatus(SUCCESS)
+09-27 11:29:02.677 I/A       ( 1865): RenderableStreamDataSource#loadData - cacheHit
+09-27 11:29:02.678 I/A       ( 1865): RenderableStreamDataSource#loadData - succeed, cache status: Cache hit
+09-27 11:29:02.678 I/A       ( 1865): StreamFragmentPeer#onNewData called, renderable slices 7
+09-27 11:29:02.910 I/earchbox:search( 1865): JIT allocated 50KB for compiled code of java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.mw.a()
+09-27 11:29:02.941 I/earchbox:search( 1865): JIT allocated 100KB for compiled code of java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.amm.c()
+09-27 11:29:02.941 I/earchbox:search( 1865): Compiler allocated 5215KB to compile java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.amm.c()
+09-27 11:29:02.957 W/View    ( 1865): requestLayout() improperly called by android.widget.FrameLayout{a79ac66 V.E...... ......ID 0,0-1080,525 #7f0b0fee app:id/googleapp_discover_header_container} during layout: running second layout pass
+09-27 11:29:02.981 I/earchbox:search( 1865): JIT allocated 65KB for compiled code of java.lang.Object com.google.android.apps.gsa.binaries.velvet.app.ala.d()
+09-27 11:29:03.198 W/l2c_link(  821): packages/modules/Bluetooth/system/stack/l2cap/l2c_link.cc:500 l2c_link_timeout: TODO: Remove this callback into bcm_sec_disconnect
+09-27 11:29:03.198 I/btm_acl (  821): packages/modules/Bluetooth/system/stack/acl/btm_acl.cc:192 hci_btsnd_hcic_disconnect: Disconnecting peer:xx:xx:xx:xx:00:01 reason:Remote Terminated Connection comment:stack::l2cap::l2c_link::l2c_link_timeout All channels closed
+09-27 11:29:03.206 E/bluetooth(  821): packages/modules/Bluetooth/system/stack/btm/btm_sco.cc:950 btm_sco_on_disconnected: Unable to find sco connection
+09-27 11:29:03.206 I/btm_acl (  821): packages/modules/Bluetooth/system/stack/acl/btm_acl.cc:2639 btm_acl_iso_disconnected: ISO disconnection from GD, handle: 0x200, reason: 0x16
+09-27 11:29:03.206 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/eatt/eatt_impl.h:899 disconnect:  Device: f0:0a:a5:00:00:01, cid: 0xffff
+09-27 11:29:03.206 W/bt_stack(  821): [WARNING:eatt_impl.h(903)] disconnect no eatt device found
+09-27 11:29:03.206 I/bt_stack(  821): [INFO:gatt_attr.cc(348)] gatt_connect_cback: remove untrusted client status, bda=f0:0a:a5:00:00:01
+09-27 11:29:03.206 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gap/gap_ble.cc:303 client_connect_cback: No active GAP service found for peer:xx:xx:xx:xx:00:01 callback:Disconnected
+09-27 11:29:03.206 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_act.cc:1264 bta_gattc_conn_cback: Disconnected att_id:3 addr:xx:xx:xx:xx:00:01, transport:BT_TRANSPORT_LE reason:GATT_CONN_TERMINATE_LOCAL_HOST
+09-27 11:29:03.206 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_act.cc:1264 bta_gattc_conn_cback: Disconnected att_id:4 addr:xx:xx:xx:xx:00:01, transport:BT_TRANSPORT_LE reason:GATT_CONN_TERMINATE_LOCAL_HOST
+09-27 11:29:03.206 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_act.cc:1264 bta_gattc_conn_cback: Disconnected att_id:5 addr:xx:xx:xx:xx:00:01, transport:BT_TRANSPORT_LE reason:GATT_CONN_TERMINATE_LOCAL_HOST
+09-27 11:29:03.206 D/BtGatt.GattService(  821): onClientConnected() connId=6, address=F0:0A:A5:00:00:01, connected=false
+09-27 11:29:03.206 E/bta_gattc_main(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_main.cc:395 bta_gattc_hdl_event: Ignore unknown conn ID: 3
+09-27 11:29:03.206 E/bta_gattc_main(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_main.cc:395 bta_gattc_hdl_event: Ignore unknown conn ID: 4
+09-27 11:29:03.206 E/bta_gattc_main(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_main.cc:395 bta_gattc_hdl_event: Ignore unknown conn ID: 5
+09-27 11:29:03.206 I/btif_av (  821): packages/modules/Bluetooth/system/btif/src/btif_av.cc:3490 btif_av_acl_disconnected: btif_av_acl_disconnected: Peer f0:0a:a5:00:00:01 : ACL Disconnected
+09-27 11:29:03.207 I/btif_av (  821): packages/modules/Bluetooth/system/btif/src/btif_av.cc:1116 FindOrCreatePeer: BtifAvPeer *BtifAvSource::FindOrCreatePeer(const RawAddress &, tBTA_AV_HNDL): Create peer: peer_address=f0:0a:a5:00:00:01 bta_handle=0x41 peer_id=0
+09-27 11:29:03.207 I/btif_av (  821): packages/modules/Bluetooth/system/btif/src/btif_av.cc:3417 btif_av_get_peer_sep: No active sink or source peer found
+09-27 11:29:03.207 I/bt_btif_a2dp_source(  821): packages/modules/Bluetooth/system/btif/src/btif_a2dp_source.cc:714 btif_a2dp_source_on_idle: btif_a2dp_source_on_idle: state=STATE_OFF
+09-27 11:29:03.207 I/btif_av (  821): packages/modules/Bluetooth/system/btif/src/btif_av.cc:3417 btif_av_get_peer_sep: No active sink or source peer found
+09-27 11:29:03.207 I/bt_btif_a2dp_source(  821): packages/modules/Bluetooth/system/btif/src/btif_a2dp_source.cc:714 btif_a2dp_source_on_idle: btif_a2dp_source_on_idle: state=STATE_OFF
+09-27 11:29:03.207 I/btif_av (  821): packages/modules/Bluetooth/system/btif/src/btif_av.cc:1161 DeleteIdlePeers: DeleteIdlePeers: Deleting idle peer: f0:0a:a5:00:00:01 bta_handle=0x41
+09-27 11:29:03.207 D/BtGatt.GattService(  821): onClientConnected() uid_not_found=android.uid.bluetooth:1002
+09-27 11:29:03.207 D/BluetoothGattServer(  821): onServerConnectionState() - status=0 serverIf=6 device=F0:0A:A5:00:00:01
+09-27 11:29:03.207 D/BtGatt.GattService(  821): Gatt Logging: metric_id=1, app_uid=-1
+09-27 11:29:03.207 D/BtGatt.GattService(  821): Gatt Logging: metric_id=1, session_index=6, connection state=0, connection status=-1
+09-27 11:29:03.209 I/BatteryStateMachine(  821): make for device F0:0A:A5:00:00:01
+09-27 11:29:03.209 V/BluetoothDatabase(  821): getProfileConnectionPolicy: device XX:XX:XX:00:00:01 profile=A2DP, connectionPolicy=-1
+09-27 11:29:03.209 W/BASM_Disconnected(  821): DISCONNECT ignored: F0:0A:A5:00:00:01
+09-27 11:29:03.212 V/BluetoothDatabase(  821): getProfileConnectionPolicy: device XX:XX:XX:00:00:01 profile=HEADSET, connectionPolicy=-1
+09-27 11:29:03.214 V/BluetoothDatabase(  821): getProfileConnectionPolicy: device XX:XX:XX:00:00:01 profile=HID_HOST, connectionPolicy=-1
+09-27 11:29:03.220 V/BluetoothDatabase(  821): getProfileConnectionPolicy: device XX:XX:XX:00:00:01 profile=PAN, connectionPolicy=-1
+09-27 11:29:03.220 V/BluetoothDatabase(  821): getProfileConnectionPolicy: device XX:XX:XX:00:00:01 profile=HAP_CLIENT, connectionPolicy=-1
+09-27 11:29:03.220 V/BluetoothDatabase(  821): getProfileConnectionPolicy: device XX:XX:XX:00:00:01 profile=BATTERY, connectionPolicy=-1
+09-27 11:29:03.222 W/BluetoothEventManager(  722): AclStateChangedHandler: activeDevice is null
+09-27 11:29:03.223 W/BluetoothEventManager(  887): AclStateChangedHandler: activeDevice is null
+09-27 11:29:03.228 I/BistoWorker( 1865): bluetoothConnectionStateChanged. Action: android.bluetooth.device.action.ACL_DISCONNECTED
+09-27 11:29:03.229 I/BistoWorker( 1865): Failed to get bistoDeviceInfo F0:0A:A5:00:00:01
+09-27 11:29:03.232 I/Nearby  ( 1140): is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+09-27 11:29:03.234 I/NearbyDiscovery( 1140): onAclChange: state=DISCONNECTED, device=XX:XX:XX:XX:00:01 [CONTEXT service_id=265 ]
+09-27 11:29:03.236 I/DeviceDetector( 1865): Not bonded or not refresh cache.
+09-27 11:29:05.412 I/wpa_supplicant(  719): wlan0: CTRL-EVENT-BEACON-LOSS 
+09-27 11:29:05.824 I/ActivityManager(  527): Force stopping com.moojiang.bigbigwon appid=10175 user=0: from pid 527
+09-27 11:29:05.834 D/CarrierSvcBindHelper(  885): onHandleForceStop: [com.moojiang.bigbigwon]
+09-27 11:29:05.834 D/CarrierSvcBindHelper(  885): No carrier app for: 0
+09-27 11:29:05.841 W/ContextImpl(  527): Calling a method in the system process without a qualified user: android.app.ContextImpl.startActivity:1071 android.content.ContextWrapper.startActivity:432 <bottom of call stack> <bottom of call stack> <bottom of call stack> 
+09-27 11:29:05.841 W/ContextImpl(  527): Calling a method in the system process without a qualified user: android.app.ContextImpl.startActivity:1083 android.app.ContextImpl.startActivity:1072 android.content.ContextWrapper.startActivity:432 <bottom of call stack> <bottom of call stack> 
+09-27 11:29:05.841 I/ActivityTaskManager(  527): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.moojiang.bigbigwon cmp=com.moojiang.bigbigwon/.MainActivity} from uid 1000
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 265464455; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 265452344; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 266124927; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 265451093; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 265456536; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 255940284; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 236283604; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 263959004; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 264304459; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 264301586; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 254631730; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 273509367; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 263259275; UID 10175; state: DISABLED
+09-27 11:29:05.846 D/CompatibilityChangeReporter(  527): Compat change id reported: 194480991; UID 10175; state: ENABLED
+09-27 11:29:05.847 D/CompatibilityChangeReporter(  527): Compat change id reported: 174042980; UID 10175; state: DISABLED
+09-27 11:29:05.848 D/CompatibilityChangeReporter(  527): Compat change id reported: 184838306; UID 10175; state: DISABLED
+09-27 11:29:05.848 D/CompatibilityChangeReporter(  527): Compat change id reported: 185004937; UID 10175; state: DISABLED
+09-27 11:29:05.849 V/SplashScreenExceptionList(  527): SplashScreen checking exception for package com.moojiang.bigbigwon (target sdk:32) -> false
+09-27 11:29:05.849 D/CompatibilityChangeReporter(  527): Compat change id reported: 205907456; UID 10175; state: DISABLED
+09-27 11:29:05.866 D/SplashScreenView(  722): Build android.window.SplashScreenView{197ded6 V.E...... ......ID 0,0-0,0}
+09-27 11:29:05.866 D/SplashScreenView(  722): Icon: view: android.widget.ImageView{3134557 V.ED..... ......I. 0,0-0,0 #10204dd android:id/splashscreen_icon_view} drawable: com.android.wm.shell.startingsurface.SplashscreenIconDrawableFactory$ImmobileIconDrawable@69f3844 size: 420
+09-27 11:29:05.866 D/SplashScreenView(  722): Branding: view: android.view.View{d87dd2d G.ED..... ......I. 0,0-0,0 #10204dc android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+09-27 11:29:05.873 W/Parcel  (  722): Expecting binder but got null!
+09-27 11:29:05.877 D/CompatibilityChangeReporter(  527): Compat change id reported: 194833441; UID 10175; state: DISABLED
+09-27 11:29:05.878 D/CompatibilityChangeReporter(  527): Compat change id reported: 135634846; UID 10175; state: DISABLED
+09-27 11:29:05.878 D/CompatibilityChangeReporter(  527): Compat change id reported: 143937733; UID 10175; state: ENABLED
+09-27 11:29:05.878 D/CompatibilityChangeReporter(  527): Compat change id reported: 168419799; UID 10175; state: DISABLED
+09-27 11:29:05.878 D/CompatibilityChangeReporter(  527): Compat change id reported: 273564678; UID 10175; state: DISABLED
+09-27 11:29:05.879 D/CoreBackPreview(  527): Window{ca395d9 u0 Splash Screen com.moojiang.bigbigwon}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@6b167f, mPriority=0}
+09-27 11:29:05.881 D/MainContentCaptureSession( 1303): Flushing 1 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=FULL
+09-27 11:29:05.895 I/jiang.bigbigwon( 5035): Using CollectorTypeCC GC.
+09-27 11:29:05.897 W/jiang.bigbigwon( 5035): Unexpected CPU variant for x86: x86_64.
+09-27 11:29:05.897 W/jiang.bigbigwon( 5035): Known variants: atom, sandybridge, silvermont, kabylake, default
+09-27 11:29:05.897 D/Zygote  (  328): Forked child process 5035
+09-27 11:29:05.897 I/ActivityManager(  527): Start proc 5035:com.moojiang.bigbigwon/u0a175 for next-top-activity {com.moojiang.bigbigwon/com.moojiang.bigbigwon.MainActivity}
+09-27 11:29:05.899 I/BpBinder(  374): onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+09-27 11:29:05.927 D/EGL_emulation( 1303): app_time_stats: avg=286.27ms min=4.97ms max=3048.02ms count=12
+09-27 11:29:05.944 I/adbd    ( 4091): jdwp connection from 5035
+09-27 11:29:06.169 W/TransactionTracing(  374): Could not find layer handle 0x76e708fda530
+09-27 11:29:06.247 D/MainContentCaptureSession( 1303): Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARING
+09-27 11:29:06.247 D/MainContentCaptureSession( 1303): Flushing 2 event(s) for act:com.google.android.apps.nexuslauncher/.NexusLauncherActivity [state=2 (ACTIVE), disabled=false], reason=VIEW_TREE_APPEARED
+09-27 11:29:06.247 D/CompatibilityChangeReporter( 5035): Compat change id reported: 171979766; UID 10175; state: ENABLED
+09-27 11:29:06.256 D/nativeloader( 5035): Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.extensions.jar. target_sdk_version=32, uses_libraries=ALL, library_path=/data/app/~~USGyAgMA1oDlnUJSO7A5Cw==/com.moojiang.bigbigwon-Yy5I6BUsxbSTwsfFDQhhLQ==/lib/x86_64:/data/app/~~USGyAgMA1oDlnUJSO7A5Cw==/com.moojiang.bigbigwon-Yy5I6BUsxbSTwsfFDQhhLQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.moojiang.bigbigwon
+09-27 11:29:06.261 D/nativeloader( 5035): Configuring classloader-namespace for other apk /system_ext/framework/androidx.window.sidecar.jar. target_sdk_version=32, uses_libraries=ALL, library_path=/data/app/~~USGyAgMA1oDlnUJSO7A5Cw==/com.moojiang.bigbigwon-Yy5I6BUsxbSTwsfFDQhhLQ==/lib/x86_64:/data/app/~~USGyAgMA1oDlnUJSO7A5Cw==/com.moojiang.bigbigwon-Yy5I6BUsxbSTwsfFDQhhLQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.moojiang.bigbigwon
+09-27 11:29:06.262 D/nativeloader( 5035): Configuring classloader-namespace for other apk /data/app/~~USGyAgMA1oDlnUJSO7A5Cw==/com.moojiang.bigbigwon-Yy5I6BUsxbSTwsfFDQhhLQ==/base.apk. target_sdk_version=32, uses_libraries=, library_path=/data/app/~~USGyAgMA1oDlnUJSO7A5Cw==/com.moojiang.bigbigwon-Yy5I6BUsxbSTwsfFDQhhLQ==/lib/x86_64:/data/app/~~USGyAgMA1oDlnUJSO7A5Cw==/com.moojiang.bigbigwon-Yy5I6BUsxbSTwsfFDQhhLQ==/base.apk!/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.moojiang.bigbigwon
+09-27 11:29:06.289 D/EGL_emulation(  722): app_time_stats: avg=44621.02ms min=2.69ms max=758112.69ms count=17
+09-27 11:29:06.318 V/GraphicsEnvironment( 5035): ANGLE Developer option for 'com.moojiang.bigbigwon' set to: 'default'
+09-27 11:29:06.318 V/GraphicsEnvironment( 5035): ANGLE GameManagerService for com.moojiang.bigbigwon: false
+09-27 11:29:06.319 V/GraphicsEnvironment( 5035): Neither updatable production driver nor prerelease driver is supported.
+09-27 11:29:06.320 D/NetworkSecurityConfig( 5035): No Network Security Config specified, using platform default
+09-27 11:29:06.320 D/NetworkSecurityConfig( 5035): No Network Security Config specified, using platform default
+09-27 11:29:06.334 D/libEGL  ( 5035): loaded /vendor/lib64/egl/libEGL_emulation.so
+09-27 11:29:06.340 D/libEGL  ( 5035): loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+09-27 11:29:06.353 D/libEGL  ( 5035): loaded /vendor/lib64/egl/libGLESv2_emulation.so
+09-27 11:29:06.358 W/jiang.bigbigwon( 5035): type=1400 audit(0.0:25): avc: denied { read } for name="max_map_count" dev="proc" ino=68741 scontext=u:r:untrusted_app:s0:c175,c256,c512,c768 tcontext=u:object_r:proc_max_map_count:s0 tclass=file permissive=0 app=com.moojiang.bigbigwon
+09-27 11:29:06.402 D/HostConnection( 5035): HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+09-27 11:29:06.410 D/EGL_emulation( 5035): eglCreateContext: 0x7725fec29250: maj 3 min 0 rcv 3
+09-27 11:29:06.412 D/EGL_emulation( 5035): eglCreateContext: 0x7725fec28a10: maj 3 min 0 rcv 3
+09-27 11:29:06.424 D/HostConnection( 5035): HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+09-27 11:29:06.425 D/EGL_emulation( 5035): eglMakeCurrent: 0x7725fec28a10: ver 3 0 (tinfo 0x77282bd28100) (first time)
+09-27 11:29:06.463 W/FlutterActivityAndFragmentDelegate( 5035): A splash screen was provided to Flutter, but this is deprecated. See flutter.dev/go/android-splash-migration for migration steps.
+09-27 11:29:06.484 D/CompatibilityChangeReporter( 5035): Compat change id reported: 237531167; UID 10175; state: DISABLED
+09-27 11:29:06.493 W/Parcel  ( 5035): Expecting binder but got null!
+09-27 11:29:06.495 D/CoreBackPreview(  527): Window{d3f2375 u0 com.moojiang.bigbigwon/com.moojiang.bigbigwon.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@820037b, mPriority=0}
+09-27 11:29:06.515 D/HostConnection( 5035): HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+09-27 11:29:06.516 I/hwservicemanager(  171): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+09-27 11:29:06.516 I/Gralloc4( 5035): mapper 4.x is not supported
+09-27 11:29:06.516 W/OpenGLRenderer( 5035): Failed to initialize 101010-2 format, error = EGL_SUCCESS
+09-27 11:29:06.522 D/EGL_emulation( 5035): eglCreateContext: 0x7725fec242d0: maj 3 min 0 rcv 3
+09-27 11:29:06.523 I/hwservicemanager(  171): getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+09-27 11:29:06.523 D/EGL_emulation( 5035): eglMakeCurrent: 0x7725fec242d0: ver 3 0 (tinfo 0x77282bd28180) (first time)
+09-27 11:29:06.523 I/servicemanager(  170): Could not find android.hardware.graphics.allocator.IAllocator/default in the VINTF manifest.
+09-27 11:29:06.528 D/EGL_emulation(  722): app_time_stats: avg=256.58ms min=3.57ms max=3636.53ms count=16
+09-27 11:29:06.530 W/Gralloc4( 5035): allocator 4.x is not supported
+09-27 11:29:06.534 D/HostConnection( 5035): HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+09-27 11:29:06.540 D/HostConnection( 5035): HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+09-27 11:29:06.540 D/EGL_emulation( 5035): eglMakeCurrent: 0x7725fec29250: ver 3 0 (tinfo 0x77282bd28200) (first time)
+09-27 11:29:06.541 D/EGL_emulation( 5035): eglCreateContext: 0x7725fec29610: maj 3 min 0 rcv 3
+09-27 11:29:06.552 E/SurfaceSyncer( 5035): Failed to find sync for id=0
+09-27 11:29:07.022 I/ActivityTaskManager(  527): Displayed com.moojiang.bigbigwon/.MainActivity: +1s179ms
+09-27 11:29:07.022 I/ActivityTaskManager(  527): Fully drawn com.moojiang.bigbigwon/.MainActivity: +1s180ms
+09-27 11:29:07.024 I/Choreographer( 5035): Skipped 30 frames!  The application may be doing too much work on its main thread.
+09-27 11:29:07.122 D/CompatibilityChangeReporter(  527): Compat change id reported: 214016041; UID 10175; state: DISABLED
+09-27 11:29:07.143 I/GoogleInputMethodService( 1414): GoogleInputMethodService.onFinishInput():3227 
+09-27 11:29:07.144 I/GoogleInputMethodService( 1414): GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 0, unlocked = true
+09-27 11:29:07.144 I/GoogleInputMethodService( 1414): GoogleInputMethodService.onStartInput():1877 onStartInput(EditorInfo{inputType=0x0(NULL) imeOptions=0x0 privateImeOptions=null actionName=UNSPECIFIED actionLabel=null actionId=0 initialSelStart=-1 initialSelEnd=-1 initialCapsMode=0x0 hintText=null label=null packageName=com.moojiang.bigbigwon fieldId=-1 fieldName=null extras=null}, false)
+09-27 11:29:07.144 I/GoogleInputMethodService( 1414): GoogleInputMethodService.shouldHideHeaderOnInitialState():4008 ShouldHideHeaderOnInitialState = false
+09-27 11:29:07.144 I/GoogleInputMethodService( 1414): GoogleInputMethodService.updateDeviceLockedStatus():2087 repeatCheckTimes = 2, unlocked = true
+09-27 11:29:07.150 D/OneSearchSuggestProvider( 1303): Shut down the binder channel
+09-27 11:29:07.150 I/s.nexuslauncher( 1303): oneway function results for code 2 on binder at 0x77258ec8bc20 will be dropped but finished with status UNKNOWN_TRANSACTION
+09-27 11:29:07.160 D/BtGatt.ScanManager(  821): uid 10119 isForeground true scanMode -1
+09-27 11:29:07.305 D/EGL_emulation(  722): app_time_stats: avg=19.90ms min=1.15ms max=226.20ms count=32
+09-27 11:29:07.530 D/BoundBrokerSvc( 1140): onUnbind: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-27 11:29:07.545 D/EGL_emulation(  722): app_time_stats: avg=127.13ms min=14.64ms max=441.62ms count=8
+09-27 11:29:07.565 W/InputManager-JNI(  527): Input channel object 'ca395d9 Splash Screen com.moojiang.bigbigwon (client)' was disposed without first being removed with the input manager!
+09-27 11:29:07.578 D/CoreBackPreview(  527): Window{ca395d9 u0 Splash Screen com.moojiang.bigbigwon EXITING}: Setting back callback null
+09-27 11:29:07.640 D/CompatibilityChangeReporter(  527): Compat change id reported: 161145287; UID 10175; state: DISABLED
+09-27 11:29:07.682 I/resolv  (  327): GetAddrInfoHandler::run: {101 101 101 983141 10175 0}
+09-27 11:29:07.683 I/resolv  (  327): res_nmkquery: (QUERY, IN, A)
+09-27 11:29:07.683 I/resolv  (  327): res_nmkquery: (QUERY, IN, AAAA)
+09-27 11:29:07.818 W/TransactionTracing(  374): Could not find layer handle 0x76e708fd9bd0
+09-27 11:29:07.818 W/TransactionTracing(  374): Could not find layer handle 0x76e708fd9990
+09-27 11:29:07.818 W/TransactionTracing(  374): Could not find layer handle 0x76e708fd9d50
+09-27 11:29:07.818 W/TransactionTracing(  374): Could not find layer handle 0x76e708fd9d50
+09-27 11:29:07.818 W/TransactionTracing(  374): Could not find layer handle 0x76e708fd9990
+09-27 11:29:08.025 I/resolv  (  327): res_nsend: used send_dg 94 terrno: 0
+09-27 11:29:08.025 I/resolv  (  327): doQuery: rcode=0, ancount=0, return value=94
+09-27 11:29:08.095 I/resolv  (  327): res_nsend: used send_dg 49 terrno: 0
+09-27 11:29:08.095 I/resolv  (  327): doQuery: rcode=0, ancount=1, return value=49
+09-27 11:29:08.338 D/EGL_emulation(  722): app_time_stats: avg=25.26ms min=0.99ms max=168.71ms count=29
+09-27 11:29:12.215 V/ClearcutMetricXmitter( 1865): Transmission is done.
+09-27 11:29:13.345 I/wpa_supplicant(  719): wlan0: CTRL-EVENT-BEACON-LOSS 
+09-27 11:29:20.577 D/TaplEvents( 1303): TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=702.0, y[0]=1818.0, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=890155, downTime=890155, deviceId=-1, source=0x1002, displayId=0, eventId=-1048994995 }
+09-27 11:29:20.578 D/TaplEvents( 1303): TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=702.0, y[0]=1818.0, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=890155, downTime=890155, deviceId=-1, source=0x1002, displayId=0, eventId=-846869030 }
+09-27 11:29:21.281 I/wpa_supplicant(  719): wlan0: CTRL-EVENT-BEACON-LOSS 
+09-27 11:29:25.613 D/TaplEvents( 1303): TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_DOWN, actionButton=0, id[0]=0, x[0]=540.0, y[0]=700.0, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=895191, downTime=895191, deviceId=-1, source=0x1002, displayId=0, eventId=-178931009 }
+09-27 11:29:25.614 D/TaplEvents( 1303): TIS / TouchInteractionService.onInputEvent: MotionEvent { action=ACTION_UP, actionButton=0, id[0]=0, x[0]=540.0, y[0]=700.0, toolType[0]=TOOL_TYPE_FINGER, buttonState=0, classification=NONE, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=895191, downTime=895191, deviceId=-1, source=0x1002, displayId=0, eventId=-220534899 }
+09-27 11:29:25.618 D/permissions_handler( 5035): No permissions found in manifest for: []3
+09-27 11:29:25.621 D/AudioFlinger(  366): mixer(0x7012c97fb9a0) throttle end: throttle time(38)
+09-27 11:29:25.626 D/EGL_emulation( 5035): app_time_stats: avg=3714.48ms min=31.24ms max=17933.15ms count=5
+09-27 11:29:25.632 D/BluetoothAdapter( 5035): isLeEnabled(): ON
+09-27 11:29:25.639 D/BtGatt.GattService(  821): registerScanner() - UUID=b0b12284-0f8c-4fe5-b557-a6f7ddcade8b
+09-27 11:29:25.639 I/bt_stack(  821): [INFO:le_scanning_manager.cc(141)] RegisterScanner in shim layer
+09-27 11:29:25.644 D/BtGatt.GattService(  821): onScannerRegistered() - UUID=b0b12284-0f8c-4fe5-b557-a6f7ddcade8b, scannerId=3, status=0
+09-27 11:29:25.644 D/BluetoothLeScanner( 5035): onScannerRegistered() - status=0 scannerId=3 mScannerId=0
+09-27 11:29:25.644 D/BtGatt.GattService(  821): start scan with filters
+09-27 11:29:25.644 D/BtGatt.GattService(  821): enforcePrivilegedPermissionIfNeeded(null)
+09-27 11:29:25.648 D/BtGatt.ScanManager(  821): startScan()  [ScanClient scanModeApp 1 scanModeUsed 1 [appScanStats com.moojiang.bigbigwon]]
+09-27 11:29:25.648 D/ActivityAttributionService(  821): notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+09-27 11:29:25.648 I/bt_btif (  821): packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+09-27 11:29:25.649 D/BtGatt.ScanManager(  821): handling starting scan
+09-27 11:29:25.651 D/BtGatt.ScanManager(  821): scanMode is upgraded for  [ScanClient scanModeApp 1 scanModeUsed 2 [appScanStats com.moojiang.bigbigwon]]
+09-27 11:29:25.651 I/bt_stack(  821): [INFO:le_scanning_manager.cc(238)] ScanFilterEnable in shim layer
+09-27 11:29:25.653 D/BtGatt.GattService(  821): onScanFilterEnableDisabled() - clientIf=3, status=0, action=1
+09-27 11:29:25.653 D/BtGatt.ScanManager(  821): callback done for scannerId - 3 status - 0
+09-27 11:29:25.653 D/BtGatt.ScanManager(  821): configureFilterParamter 500 10000 1 0
+09-27 11:29:25.653 I/bt_stack(  821): [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+09-27 11:29:25.653 D/BtGatt.GattService(  821): onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+09-27 11:29:25.653 D/BtGatt.ScanManager(  821): callback done for scannerId - 3 status - 0
+09-27 11:29:25.653 D/BtGatt.ScanManager(  821): configureRegularScanParams() - queue=3
+09-27 11:29:25.653 I/bt_stack(  821): [INFO:le_scanning_manager.cc(154)] Scan in shim layer stopped
+09-27 11:29:25.653 D/BtGatt.ScanManager(  821): Start gattClientScanNative with old scanMode 0 new scanMode 2 ( in MS: 100 / 100, in scan unit: 160 / 160 ) [ScanClient scanModeApp 1 scanModeUsed 2 [appScanStats com.moojiang.bigbigwon]]
+09-27 11:29:25.653 I/bt_stack(  821): [INFO:le_scanning_manager.cc(250)] SetScanParameters in shim layer
+09-27 11:29:25.653 I/bt_stack(  821): [INFO:le_scanning_manager.cc(154)] Scan in shim layer started
+09-27 11:29:25.653 D/BtGatt.ScanManager(  821): apply scan timeout (300000)to scannerId 3
+09-27 11:29:25.653 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:190 unregister_client: Client unregistered
+09-27 11:29:25.653 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:659 stop_scan: Scanning already stopped, return!
+09-27 11:29:25.653 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:175 register_client: Client registered
+09-27 11:29:25.656 D/BtGatt.GattService(  821): onScanParamSetupCompleted : 0
+09-27 11:29:26.663 D/EGL_emulation( 5035): app_time_stats: avg=30.36ms min=5.35ms max=131.89ms count=29
+09-27 11:29:27.268 D/BluetoothAdapter( 5035): isLeEnabled(): ON
+09-27 11:29:27.268 D/BtGatt.GattService(  821): stopScan() - queue size =3
+09-27 11:29:27.268 D/ActivityAttributionService(  821): notifyActivityAttributionInfo UID=1002 packageName=com.google.android.bluetooth deviceAddress=no_active_device_address
+09-27 11:29:27.268 I/bt_btif (  821): packages/modules/Bluetooth/system/btif/src/bluetooth.cc:465 get_profile_interface: get_profile_interface: id = activity_attribution
+09-27 11:29:27.269 D/BtGatt.ScanManager(  821): handling stopping scan  [ScanClient scanModeApp 1 scanModeUsed 2 [appScanStats com.moojiang.bigbigwon]]
+09-27 11:29:27.269 I/bt_stack(  821): [INFO:le_scanning_manager.cc(174)] ScanFilterParamSetup in shim layer
+09-27 11:29:27.269 D/BtGatt.GattService(  821): onScanFilterParamsConfigured() - clientIf=3, status=0, action=0, availableSpace=0
+09-27 11:29:27.269 D/BtGatt.ScanManager(  821): callback done for scannerId - 3 status - 0
+09-27 11:29:27.269 D/BtGatt.ScanManager(  821): configureRegularScanParams() - queue=2
+09-27 11:29:27.269 I/bt_stack(  821): [INFO:le_scanning_manager.cc(154)] Scan in shim layer stopped
+09-27 11:29:27.269 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:190 unregister_client: Client unregistered
+09-27 11:29:27.269 D/BtGatt.ScanManager(  821): Start gattClientScanNative with old scanMode 2 new scanMode 0 ( in MS: 1400 / 140, in scan unit: 2240 / 224 ) [ScanClient scanModeApp 1 scanModeUsed 0 [appScanStats com.google.uid.shared:10119]]
+09-27 11:29:27.269 I/bt_stack(  821): [INFO:le_scanning_manager.cc(250)] SetScanParameters in shim layer
+09-27 11:29:27.270 D/BtGatt.GattService(  821): onScanParamSetupCompleted : 0
+09-27 11:29:27.270 I/bt_stack(  821): [INFO:le_scanning_manager.cc(154)] Scan in shim layer started
+09-27 11:29:27.270 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_scanning_manager.cc:659 stop_scan: Scanning already stopped, return!
+09-27 11:29:27.270 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:175 register_client: Client registered
+09-27 11:29:27.271 D/BtGatt.GattService(  821): unregisterScanner() - scannerId=3
+09-27 11:29:27.271 I/bt_stack(  821): [INFO:le_scanning_manager.cc(148)] Unregister in shim layer, scanner_id:3
+09-27 11:29:27.332 D/BluetoothGatt( 5035): connect() - device: F0:0A:A5:00:00:01, auto: true
+09-27 11:29:27.332 D/BluetoothGatt( 5035): registerApp()
+09-27 11:29:27.336 D/BluetoothGatt( 5035): registerApp() - UUID=1fe47314-bad9-46dc-bd98-5e1c95589a94
+09-27 11:29:27.336 D/BtGatt.GattService(  821): registerClient() - UUID=1fe47314-bad9-46dc-bd98-5e1c95589a94
+09-27 11:29:27.338 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gatt/gatt_api.cc:1125 GATT_Register: Allocated name:GattClient uuid:cf5df227-af00-0ce4-e04d-81533f1bc642 gatt_if:7 eatt_support:0
+09-27 11:29:27.338 D/BtGatt.GattService(  821): onClientRegistered() - UUID=1fe47314-bad9-46dc-bd98-5e1c95589a94, clientIf=7
+09-27 11:29:27.338 D/BluetoothGatt( 5035): onClientRegistered() - status=0 clientIf=7
+09-27 11:29:27.338 D/BtGatt.GattService(  821): clientConnect() - address=F0:0A:A5:00:00:01, isDirect=false, opportunistic=false, phy=1
+09-27 11:29:27.339 D/BtGatt.GattService(  821): Gatt Logging: metric_id=1, app_uid=10175
+09-27 11:29:27.339 D/BtGatt.GattService(  821): Gatt Logging: metric_id=1, session_index=7, connection state=1, connection status=-1
+09-27 11:29:27.339 I/bt_btif_gattc(  821): packages/modules/Bluetooth/system/btif/src/btif_gatt_client.cc:365 btif_gattc_open_impl: Transport=2, device type=2, address type =1, phy=1
+09-27 11:29:27.339 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_act.cc:434 bta_gattc_init_bk_conn: Not a connected remote device yet
+09-27 11:29:27.339 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:257 ack_pause: Client already in paused state
+09-27 11:29:27.339 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:257 ack_pause: Client already in paused state
+09-27 11:29:27.339 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:257 ack_pause: Client already in paused state
+09-27 11:29:27.372 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:576 OnCommandComplete: Received command complete with op_code LE_ADD_DEVICE_TO_FILTER_ACCEPT_LIST
+09-27 11:29:27.372 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:286 resume_registered_clients: Resuming registered clients
+09-27 11:29:27.373 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/acl_manager/le_impl.h:712 update_connectability_state_after_armed: Le connection state machine armed state:ConnectabilityState::ARMED status:SUCCESS
+09-27 11:29:27.689 D/EGL_emulation( 5035): app_time_stats: avg=27.58ms min=4.99ms max=285.51ms count=31
+09-27 11:29:28.220 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/metrics/metrics_state.cc:174 AddStateChangedEvent: LEConnectionMetricsRemoteDevice: Transaction State 0x00000002, Connection Type 0x00000001, Origin Type 0x00000001
+09-27 11:29:28.220 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/metrics/metrics_state.cc:58 AddStateChangedEvent: LEConnectionMetricState:  Origin Type: 0x00000001, Connection Type: 0x00000001, Transaction State: 0x00000002
+09-27 11:29:28.220 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gatt/connection_manager.cc:437 on_connection_complete: Le connection completed to device:f0:0a:a5:00:00:01
+09-27 11:29:28.220 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gatt/connection_manager.cc:437 on_connection_complete: Le connection completed to device:f0:0a:a5:00:00:01
+09-27 11:29:28.220 I/bt_btm_ble(  821): packages/modules/Bluetooth/system/stack/btm/btm_ble.cc:1788 btm_ble_connected: Updating device record timestamp for existing ble connection
+09-27 11:29:28.220 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:257 ack_pause: Client already in paused state
+09-27 11:29:28.220 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:257 ack_pause: Client already in paused state
+09-27 11:29:28.220 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:257 ack_pause: Client already in paused state
+09-27 11:29:28.228 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:576 OnCommandComplete: Received command complete with op_code LE_REMOVE_DEVICE_FROM_FILTER_ACCEPT_LIST
+09-27 11:29:28.228 I/bluetooth(  821): packages/modules/Bluetooth/system/gd/hci/le_address_manager.cc:286 resume_registered_clients: Resuming registered clients
+09-27 11:29:28.242 I/bt_stack(  821): [INFO:gatt_attr.cc(946)] gatt_sr_init_cl_status: bda=f0:0a:a5:00:00:01, cl_supp_feat=0000, aware=1
+09-27 11:29:28.242 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gap/gap_ble.cc:303 client_connect_cback: No active GAP service found for peer:xx:xx:xx:xx:00:01 callback:Connected
+09-27 11:29:28.243 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_act.cc:1258 bta_gattc_conn_cback: Connected client_if:3 addr:xx:xx:xx:xx:00:01, transport:BT_TRANSPORT_LE reason:GATT_CONN_OK
+09-27 11:29:28.243 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_act.cc:1258 bta_gattc_conn_cback: Connected client_if:4 addr:xx:xx:xx:xx:00:01, transport:BT_TRANSPORT_LE reason:GATT_CONN_OK
+09-27 11:29:28.243 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_act.cc:1258 bta_gattc_conn_cback: Connected client_if:5 addr:xx:xx:xx:xx:00:01, transport:BT_TRANSPORT_LE reason:GATT_CONN_OK
+09-27 11:29:28.243 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gatt/gatt_main.cc:381 gatt_update_app_use_link_flag: disable link idle timer for f0:0a:a5:00:00:01
+09-27 11:29:28.243 I/bt_stack(  821): [INFO:l2c_api.cc(1603)] L2CA_MarkLeLinkAsActivesetting link to f0:0a:a5:00:00:01 as active
+09-27 11:29:28.243 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gatt/gatt_api.cc:1074 GATT_SetIdleTimeout: idle_timeout=65535, is_active=1, status=1 (1-OK 0-not performed)
+09-27 11:29:28.243 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_act.cc:1258 bta_gattc_conn_cback: Connected client_if:7 addr:xx:xx:xx:xx:00:01, transport:BT_TRANSPORT_LE reason:GATT_CONN_OK
+09-27 11:29:28.243 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gatt/connection_manager.cc:437 on_connection_complete: Le connection completed to device:f0:0a:a5:00:00:01
+09-27 11:29:28.243 I/bt_stack(  821): [INFO:l2c_api.cc(1603)] L2CA_MarkLeLinkAsActivesetting link to f0:0a:a5:00:00:01 as active
+09-27 11:29:28.243 I/bluetooth(  821): packages/modules/Bluetooth/system/stack/gatt/gatt_api.cc:1074 GATT_SetIdleTimeout: idle_timeout=65535, is_active=1, status=1 (1-OK 0-not performed)
+09-27 11:29:28.243 W/btm_acl (  821): packages/modules/Bluetooth/system/stack/acl/btm_acl.cc:2327 acl_peer_supports_sniff_subrating: Unable to find active acl
+09-27 11:29:28.243 I/bt_btif_dm(  821): packages/modules/Bluetooth/system/btif/src/btif_dm.cc:583 btif_update_remote_version_property: Remote version info valid:true [xx:xx:xx:xx:00:01]: c, e0, 0
+09-27 11:29:28.243 E/bta_gattc_main(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_main.cc:395 bta_gattc_hdl_event: Ignore unknown conn ID: 3
+09-27 11:29:28.243 E/bta_gattc_main(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_main.cc:395 bta_gattc_hdl_event: Ignore unknown conn ID: 4
+09-27 11:29:28.243 E/bta_gattc_main(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_main.cc:395 bta_gattc_hdl_event: Ignore unknown conn ID: 5
+09-27 11:29:28.243 E/bt_stack(  821): [ERROR:bta_gattc_db_storage.cc(79)] bta_gattc_load_db: can't open GATT cache file /data/misc/bluetooth/gatt_cache_f00aa5000001 for reading, error: No such file or directory
+09-27 11:29:28.243 I/bt_stack(  821): [INFO:bta_gattc_act.cc(824)] bta_gattc_start_discover: pending service discovery, read db hash first
+09-27 11:29:28.243 D/BtGatt.GattService(  821): onClientConnected() connId=6, address=F0:0A:A5:00:00:01, connected=true
+09-27 11:29:28.243 D/BtGatt.GattService(  821): onClientConnected() uid_not_found=android.uid.bluetooth:1002
+09-27 11:29:28.243 D/BluetoothGattServer(  821): onServerConnectionState() - status=0 serverIf=6 device=F0:0A:A5:00:00:01
+09-27 11:29:28.243 D/BtGatt.GattService(  821): Gatt Logging: metric_id=1, app_uid=-1
+09-27 11:29:28.243 D/BtGatt.GattService(  821): Gatt Logging: metric_id=1, session_index=6, connection state=2, connection status=-1
+09-27 11:29:28.243 V/BluetoothDatabase(  821): getProfileConnectionPolicy: device XX:XX:XX:00:00:01 profile=BATTERY, connectionPolicy=-1
+09-27 11:29:28.243 E/BatteryService(  821): Cannot connect to F0:0A:A5:00:00:01 : Remote does not have Battery UUID
+09-27 11:29:28.254 I/BluetoothPhonePolicy(  821): processDeviceConnected, device=F0:0A:A5:00:00:01
+09-27 11:29:28.254 D/BluetoothDatabase(  821): setConnection: device XX:XX:XX:00:00:01 and isA2dpDevice=false
+09-27 11:29:28.254 D/BluetoothDatabase(  821): Updating last connected time for device: XX:XX:XX:00:00:01 to 1
+09-27 11:29:28.254 D/BluetoothDatabase(  821): updateDatabase XX:XX:XX:00:00:01
+09-27 11:29:28.262 E/bt_stack(  821): [ERROR:bta_gattc_db_storage.cc(79)] bta_gattc_load_db: can't open GATT cache file /data/misc/bluetooth/gatt_hash_90F0E05FBB116128A10275D4B81B8387 for reading, error: No such file or directory
+09-27 11:29:28.262 I/bluetooth(  821): packages/modules/Bluetooth/system/bta/hearing_aid/hearing_aid.cc:2004 GetDeviceCount: Not initialized yet
+09-27 11:29:28.262 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=1, s_handle=0x0001, e_handle=0xffff
+09-27 11:29:28.264 W/BluetoothEventManager(  887): AclStateChangedHandler: activeDevice is null
+09-27 11:29:28.268 D/BtGatt.GattService(  821): onConnected() - clientIf=7, connId=7, address=F0:0A:A5:00:00:01
+09-27 11:29:28.268 D/BtGatt.GattService(  821): onConnected() - adding permit for address=F0:0A:A5:00:00:01
+09-27 11:29:28.268 D/BtGatt.GattService(  821): Gatt Logging: metric_id=1, session_index=7, connection state=2, connection status=0
+09-27 11:29:28.268 D/BluetoothGatt( 5035): onClientConnectionState() - status=0 clientIf=7 device=F0:0A:A5:00:00:01
+09-27 11:29:28.270 D/BtGatt.GattService(  821): onServerConnUpdate() - connId=6, status=0
+09-27 11:29:28.270 D/BluetoothGattServer(  821): onConnectionUpdated() - Device=F0:0A:A5:00:00:01 interval=6 latency=0 timeout=500 status=0
+09-27 11:29:28.272 D/BtGatt.GattService(  821): onClientConnUpdate() - connId=7, status=0
+09-27 11:29:28.272 I/BistoWorker( 1865): bluetoothConnectionStateChanged. Action: android.bluetooth.device.action.ACL_CONNECTED
+09-27 11:29:28.272 W/BluetoothEventManager(  722): AclStateChangedHandler: activeDevice is null
+09-27 11:29:28.272 I/BistoWorker( 1865): Failed to get bistoDeviceInfo F0:0A:A5:00:00:01
+09-27 11:29:28.274 D/BluetoothGatt( 5035): onConnectionUpdated() - Device=F0:0A:A5:00:00:01 interval=6 latency=0 timeout=500 status=0
+09-27 11:29:28.275 D/CompatibilityChangeReporter(  527): Compat change id reported: 168419799; UID 10108; state: DISABLED
+09-27 11:29:28.275 D/CompatibilityChangeReporter(  527): Compat change id reported: 273564678; UID 10108; state: DISABLED
+09-27 11:29:28.276 I/Nearby  ( 1140): is blocked device type false, isAuto=false, isIot=false, isLatchsky=false, isChinaWearable=false, isTv=false, isWearable=false (supportWearOs=false), isChromeOsDevice=false (supportChromeOs=false) [CONTEXT service_id=49 ]
+09-27 11:29:28.281 I/NearbyDiscovery( 1140): onAclChange: state=CONNECTED, device=XX:XX:XX:XX:00:01 [CONTEXT service_id=265 ]
+09-27 11:29:28.295 I/CAR.StubWirelessUuid( 4734): Received intent Intent { act=android.bluetooth.device.action.ACL_CONNECTED flg=0x5000010 cmp=com.google.android.projection.gearhead/com.google.android.apps.auto.carservice.gmscorecompatstub.StubWirelessUuidRegistrationReceiver (has extras) }
+09-27 11:29:28.295 I/CAR.StubWirelessUuid( 4734): Registering AAW UUID
+09-27 11:29:28.298 D/BluetoothAdapterService(  821): Cannot start RFCOMM listener: UUID c26cf572-3369-4cf2-b5cc-d2cd130f5b2c already in use.
+09-27 11:29:28.304 I/NearbyDiscovery( 1140): FastPair: lock scan rate if needed, device=XX:XX:XX:XX:00:01, bondState=10 [CONTEXT service_id=265 ]
+09-27 11:29:28.307 I/NearbyDiscovery( 1140): FastPairBattery: No associated accountKey is found when query battery info, address:XX:XX:XX:XX:00:01 [CONTEXT service_id=265 ]
+09-27 11:29:28.313 D/BluetoothGatt( 5035): discoverServices() - device: F0:0A:A5:00:00:01
+09-27 11:29:28.315 I/DeviceDetector( 1865): Not bonded or not refresh cache.
+09-27 11:29:28.324 D/BtGatt.GattService(  821): discoverServices() - address=F0:0A:A5:00:00:01, connId=7
+09-27 11:29:28.361 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=3, s_handle=0x0001, e_handle=0x0005
+09-27 11:29:28.371 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=4, s_handle=0x0001, e_handle=0x0005
+09-27 11:29:28.407 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=3, s_handle=0x0006, e_handle=0x000d
+09-27 11:29:28.422 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=4, s_handle=0x0006, e_handle=0x000d
+09-27 11:29:28.493 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=5, s_handle=0x0009, e_handle=0x0009
+09-27 11:29:28.508 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=3, s_handle=0x000e, e_handle=0x0013
+09-27 11:29:28.521 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=4, s_handle=0x000e, e_handle=0x0013
+09-27 11:29:28.598 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=5, s_handle=0x0013, e_handle=0x0013
+09-27 11:29:28.620 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=3, s_handle=0x0014, e_handle=0x0018
+09-27 11:29:28.629 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=4, s_handle=0x0014, e_handle=0x0018
+09-27 11:29:28.664 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=3, s_handle=0x0019, e_handle=0x001c
+09-27 11:29:28.674 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=4, s_handle=0x0019, e_handle=0x001c
+09-27 11:29:28.694 I/bt_stack(  821): [INFO:gatt_api.cc(781)] GATTC_Discover conn_id=0x0007, disc_type=5, s_handle=0x001c, e_handle=0x001c
+09-27 11:29:28.706 I/bt_stack(  821): [INFO:bta_gattc_cache.cc(211)] bta_gattc_explore_srvc_finished: service discovery finished
+09-27 11:29:28.706 D/BtGatt.GattService(  821): onSearchCompleted() - connId=7, status=0
+09-27 11:29:28.707 I/bt_bta_gattc(  821): packages/modules/Bluetooth/system/bta/gatt/bta_gattc_cache.cc:957 bta_gattc_get_gatt_db: bta_gattc_get_gatt_db
+09-27 11:29:28.707 D/BtGatt.GattService(  821): onGetGattDb() - address=F0:0A:A5:00:00:01
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got service with UUID=00001800-0000-1000-8000-00805f9b34fb id: 1
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=00002a00-0000-1000-8000-00805f9b34fb id: 3
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=00002a01-0000-1000-8000-00805f9b34fb id: 5
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got service with UUID=00001801-0000-1000-8000-00805f9b34fb id: 6
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=00002a05-0000-1000-8000-00805f9b34fb id: 8
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got descriptor with UUID=00002902-0000-1000-8000-00805f9b34fb id: 9
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=00002b29-0000-1000-8000-00805f9b34fb id: 11
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=00002b2a-0000-1000-8000-00805f9b34fb id: 13
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got service with UUID=00000000-0000-1000-8000-00805f9b34fb id: 14
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=0000ffe1-0000-1000-8000-00805f9b34fb id: 16
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=0000ffe2-0000-1000-8000-00805f9b34fb id: 18
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got descriptor with UUID=00002902-0000-1000-8000-00805f9b34fb id: 19
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got service with UUID=0000180a-0000-1000-8000-00805f9b34fb id: 20
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=00002a24-0000-1000-8000-00805f9b34fb id: 22
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=00002a26-0000-1000-8000-00805f9b34fb id: 24
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got service with UUID=0000180f-0000-1000-8000-00805f9b34fb id: 25
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got characteristic with UUID=00002a19-0000-1000-8000-00805f9b34fb id: 27
+09-27 11:29:28.707 D/BtGatt.GattService(  821): got descriptor with UUID=00002902-0000-1000-8000-00805f9b34fb id: 28
+09-27 11:29:28.708 D/BluetoothGatt( 5035): onSearchComplete() = Device=F0:0A:A5:00:00:01 Status=0
+09-27 11:29:28.709 D/BtGatt.GattService(  821): onServerConnUpdate() - connId=6, status=0
+09-27 11:29:28.709 D/BluetoothGattServer(  821): onConnectionUpdated() - Device=F0:0A:A5:00:00:01 interval=40 latency=0 timeout=500 status=0
+09-27 11:29:28.709 D/BtGatt.GattService(  821): onClientConnUpdate() - connId=7, status=0
+09-27 11:29:28.710 D/BluetoothGatt( 5035): onConnectionUpdated() - Device=F0:0A:A5:00:00:01 interval=40 latency=0 timeout=500 status=0
+09-27 11:29:28.734 D/BluetoothGatt( 5035): setCharacteristicNotification() - uuid: 0000ffe2-0000-1000-8000-00805f9b34fb enable: true
+09-27 11:29:28.735 D/BtGatt.GattService(  821): registerForNotification() - address=F0:0A:A5:00:00:01 enable: true
+09-27 11:29:28.735 D/BtGatt.GattService(  821): onRegisterForNotifications() - address=null, status=0, registered=1, handle=18
+09-27 11:29:28.741 D/BtGatt.GattService(  821): writeCharacteristic() - trying to acquire permit.
+09-27 11:29:28.742 D/BtGatt.GattService(  821): onWriteCharacteristic() - increasing permit for address=F0:0A:A5:00:00:01
+09-27 11:29:28.787 E/flutter ( 5035): [ERROR:flutter/lib/ui/ui_dart_state.cc(198)] Unhandled Exception: RangeError (end): Invalid value: Only valid value is 2: 4
+09-27 11:29:28.787 E/flutter ( 5035): #0      RangeError.checkValidRange (dart:core/errors.dart:356)
+09-27 11:29:28.787 E/flutter ( 5035): #1      _IntListMixin.getRange (dart:typed_data-patch/typed_data_patch.dart:198)
+09-27 11:29:28.787 E/flutter ( 5035): #2      _ArmorXProWidgetState.onNewReceivedData (package:moojiang/widgets/armor-x_pro/armorx_pro_root.dart:129)
+09-27 11:29:28.787 E/flutter ( 5035): #3      _ArmorXProWidgetState._readCharacteristic (package:moojiang/widgets/armor-x_pro/armorx_pro_root.dart:147)
+09-27 11:29:28.787 E/flutter ( 5035): <asynchronous suspension>
+09-27 11:29:28.787 E/flutter ( 5035): 
+09-27 11:29:28.823 D/EGL_emulation( 5035): app_time_stats: avg=32.74ms min=6.84ms max=213.25ms count=30
+09-27 11:29:29.473 I/wpa_supplicant(  719): wlan0: CTRL-EVENT-BEACON-LOSS 
+--------- beginning of kernel
+09-27 11:29:29.824 I/logd    (    0): logdr: UID=0 GID=0 PID=5118 n tail=12 logMask=99 pid=0 start=0ns deadline=0ns
+09-27 11:29:33.691 W/ProcessState( 5121): Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+09-27 11:29:33.707 I/hwservicemanager(  171): getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+09-27 11:29:33.708 I/Gralloc4( 5121): mapper 4.x is not supported
+09-27 11:29:33.720 D/HostConnection( 5121): HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_multi_configs ANDROID_EMU_hwc_color_transform GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+09-27 11:29:33.875 I/MediaProvider( 1467): Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x1400010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+09-27 11:29:33.880 W/MediaProvider( 1467): isAppCloneUserPair for user 0: false
+09-27 11:29:33.888 I/MediaProvider( 1467): End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x1400010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+09-27 11:29:33.922 I/NetworkScheduler.Stats( 1140): Task com.google.android.gms/com.google.android.gms.ipa.base.IpaGcmTaskService started execution. cause:9 exec_start_elapsed_seconds: 903 [CONTEXT service_id=218 ]
+09-27 11:29:33.926 I/NetworkScheduler.Stats( 1140): Task com.google.android.gms/com.google.android.gms.ipa.base.IpaGcmTaskService finished executing. cause:9 result: 1 elapsed_millis: 13 uptime_millis: 13 exec_start_elapsed_seconds: 903 [CONTEXT service_id=218 ]
+09-27 11:29:33.927 D/BoundBrokerSvc( 1140): onBind: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-27 11:29:33.927 D/BoundBrokerSvc( 1140): Loading bound service for intent: Intent { act=com.google.android.gms.scheduler.ACTION_PROXY_SCHEDULE dat=chimera-action:/... cmp=com.google.android.gms/.chimera.PersistentApiService }
+09-27 11:29:37.120 D/ConnectivityService(  527): requestNetwork for uid/pid:10141/1602 activeRequest: null callbackRequest: 175 [NetworkRequest [ REQUEST id=176, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.apps.photos UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+09-27 11:29:37.120 D/WifiNetworkFactory(  527): got request NetworkRequest [ REQUEST id=176, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.apps.photos UnderlyingNetworks: Null] ]
+09-27 11:29:37.120 D/UntrustedWifiNetworkFactory(  527): got request NetworkRequest [ REQUEST id=176, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.apps.photos UnderlyingNetworks: Null] ]
+09-27 11:29:37.120 D/OemPaidWifiNetworkFactory(  527): got request NetworkRequest [ REQUEST id=176, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.apps.photos UnderlyingNetworks: Null] ]
+09-27 11:29:37.120 D/MultiInternetWifiNetworkFactory(  527): got request NetworkRequest [ REQUEST id=176, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10141 RequestorUid: 10141 RequestorPkg: com.google.android.apps.photos UnderlyingNetworks: Null] ]
+09-27 11:29:37.120 D/ConnectivityService(  527): NetReassign [176 : null → 101] [c 0] [a 0] [i 1]
+09-27 11:29:37.409 I/wpa_supplicant(  719): wlan0: CTRL-EVENT-BEACON-LOSS 
+09-27 11:29:38.059 W/healthd (    0): battery l=100 v=5000 t=25.0 h=2 st=2 c=900000 fc=3000000 cc=10 chg=a
+09-27 11:29:38.917 D/PickerSyncController( 1467): syncAllMedia
+09-27 11:29:38.917 D/PickerSyncController( 1467): syncAllMediaFromProvider() LOCAL, auth=com.android.providers.media.photopicker, retry=true
+09-27 11:29:38.917 D/PickerSyncController( 1467): getSyncRequestParams() LOCAL, auth=com.android.providers.media.photopicker
+09-27 11:29:38.918 D/PickerSyncController( 1467):    Latest ID/Gen=1405:e6c37534-842a-4a4d-be4c-43864c10638c:external_primary/107
+09-27 11:29:38.918 D/PickerSyncController( 1467):    Cached ID/Gen=1405:e6c37534-842a-4a4d-be4c-43864c10638c:external_primary/103
+09-27 11:29:38.918 D/PickerSyncController( 1467):    RESULT=SyncRequestParams{type=MEDIA_INCREMENTAL, gen=103, latest=Bundle[{last_media_sync_generation=107, media_collection_id=1405:e6c37534-842a-4a4d-be4c-43864c10638c:external_primary}]}
+09-27 11:29:38.918 I/PickerSyncController( 1467): Executing SyncAdd. isLocal: true. authority: com.android.providers.media.photopicker
+09-27 11:29:38.918 I/PickerSyncController( 1467): Paged sync successful. QueryArgs: Bundle[{android.provider.extra.SYNC_GENERATION=103}]. Result count: 1. Cursor count: 1
+09-27 11:29:38.919 I/PickerSyncController( 1467): Executing SyncRemove. isLocal: true. authority: com.android.providers.media.photopicker
+09-27 11:29:38.922 I/PickerSyncController( 1467): Paged sync successful. QueryArgs: Bundle[{android.provider.extra.SYNC_GENERATION=103}]. Result count: 0. Cursor count: 0
+09-27 11:29:38.922 D/PickerSyncController( 1467): syncAllMediaFromProvider() CLOUD, auth=null, retry=true
+09-27 11:29:38.922 D/PickerSyncController( 1467): getSyncRequestParams() CLOUD, auth=null
+09-27 11:29:38.922 D/PickerSyncController( 1467):    RESULT=SyncRequestParams{type=MEDIA_RESET, gen=0, latest=null}
+09-27 11:29:38.922 I/PickerSyncController( 1467): Executing SyncReset. isLocal: false. authority: null
+09-27 11:29:38.922 I/PickerSyncController( 1467): SyncReset. isLocal:false. authority: null. result count: 0
+09-27 11:29:38.922 D/PickerSyncController( 1467): Ignoring cache media info for null authority with bundle: null
+09-27 11:29:38.922 I/PickerSyncController( 1467): Executing SyncAlbumReset. isLocal: true. authority: com.android.providers.media.photopicker. albumId: null
+09-27 11:29:38.922 I/PickerSyncController( 1467): Successfully executed SyncResetAlbum. authority: com.android.providers.media.photopicker. albumId: null. Result count: 0
+09-27 11:29:38.922 I/PickerSyncController( 1467): Executing SyncAlbumReset. isLocal: false. authority: null. albumId: null
+09-27 11:29:38.922 I/PickerSyncController( 1467): Successfully executed SyncResetAlbum. authority: null. albumId: null. Result count: 0

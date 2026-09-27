@@ -1,0 +1,457 @@
+{
+ "build": {
+  "app_version": "2.22.0901",
+  "dart": "2.17.5",
+  "arch": "arm64-v8a",
+  "apk_sha256": "785684ec28a6fe0b111597933527b1cc0e53c3332ed4cc8c8db4112539c0361c",
+  "disasm": "static/blutter/2.22.0901/blutter_out/",
+  "binary": "/home/salamanka/armorx/re/blutter/bin/blutter_dartvm2.17.5_android_arm64"
+ },
+ "immediate_decoding_rules": {
+  "list_int_write_path": "byte value B stored in List<int> appears as Smi: raw imm = 2*B  (0xA4 -> #0x148, 0xD8 -> #0x1b0, 0x0A -> #0x14, 15 -> raw 0xf in mul, but Smi 30 in an element store)",
+  "uint8list_read_path": "compare literals are raw byte values (#0xa4, #0xd8, #0x1ac=428 -> 0xD6)"
+ },
+ "write_path": [
+  {
+   "hop": 1,
+   "what": "UI record template (default macro envelope)",
+   "file": "asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+   "addr": "0x92aa14",
+   "line": 15206,
+   "fields": {
+    "changed": false,
+    "id": -2,
+    "inUse": false,
+    "runKey": 46,
+    "runKeyName": "M1",
+    "isRepeat": false,
+    "repeatTime": 200,
+    "macroName": "",
+    "macroJson": ""
+   },
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 2,
+   "what": "UI handlers calling applicationMacro",
+   "file": "asm/moojiang/widgets/armor-x_pro/armorx_pro_config_macro.dart",
+   "addrs": [
+    "0x8bed24 (addMacroResponse)",
+    "0x8ac3b0,0x8ac4cc (changeMacroRunkeyResponse)",
+    "0x8bfd18 (changeMacroRepeatResponse)",
+    "0x8c18c8 (changeMacroUseRepeatTimeResponse)",
+    "0x8be534 (changeMacroInUseResponse)",
+    "0x8bdfc4 (anonymous closure)"
+   ],
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 3,
+   "what": "applicationMacro: jsonDecode + MacroRow, build GamepadDef (10+7n)",
+   "file": "asm/moojiang/units/gamepadset.dart",
+   "addr": "0x7a559c (body 0x7a56c4)",
+   "lines": "4764-6295",
+   "evidence": {
+    "len_calc": [
+     "0x7a6234 mul x0,x1,#7",
+     "0x7a6238 add x0,x0,#0xa"
+    ],
+    "key_bitmask": "0x7a5c38-0x7a5c48 (1<<k, k<=0x21)",
+    "stick_table": "0x7a5ad0-0x7a5c14 (k=0x22..0x31)",
+    "map_type_0x80": "0x7a5c9c r17=256 -> Smi 128",
+    "time_div8": "0x7a5c80 sdiv ...,#8",
+    "calls_writeMacroConfig": "0x7a66f4"
+   },
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 4,
+   "what": "writeMacroConfig: payload, chunking, framing, terminator",
+   "file": "asm/moojiang/units/gamepadset.dart",
+   "addr": "0x79dfc8 (body 0x79e158)",
+   "lines": "2312-3654",
+   "evidence": {
+    "concat": "0x79e1ec field_1b int + 0x79e2a0 changeGamepadDef -> 0x79e8b4 ListMixin::+",
+    "nfrags": "0x79e300 fmov d1,#15.0 ; 0x79e310 fcvtps",
+    "chunk": "0x79e50c mul #15 (start) ; 0x79e54c mul #15 (end) ; 0x79e5b0 clamp ; 0x79ea88 sdiv 15",
+    "A4": "0x79e358 / 0x79e428 (#0x148)",
+    "len_byte": "0x79e658 sub (segLen) ; 0x79e65c add #5",
+    "D8": "0x79e778 / 0x79ebf4 (#0x1b0)",
+    "terminator": "0x79eb7c r17=10 (Dart 5) ; 0x79ec24 add x1,x3,#1 (nfrags+1) ; 0x79eca8 append",
+    "inter_fragment_delay": "0x79edf4 r17=4"
+   },
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 5,
+   "what": "getCheckSum = sum(bytes) & 0xFF",
+   "file": "asm/moojiang/units/gamepadset.dart",
+   "addr": "0x79c368",
+   "evidence": {
+    "mask": "0x79c438 mov x11,#0xff ; 0x79c43c ubfx ; 0x79c440 and"
+   },
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 6,
+   "what": "changeGamepadDef = D8 payload serializer (10-byte header + 7-byte records)",
+   "file": "asm/moojiang/units/gamepadset.dart",
+   "addr": "0x79c894",
+   "lines": "413-1249",
+   "only_caller": "writeMacroConfig (0x79e2a0)",
+   "evidence": {
+    "crc_init_0xFFFF": "0x79cf10 mov x6,#0xffff",
+    "crc_poly_0xA001": "0x79cf84 r16=40961",
+    "crc_rounds": "0x79cf60 cmp x7,#8",
+    "crc_over_bytes_2_onward": "0x79cef4 sublist(2,...)",
+    "crc_hi_to_elem0": "0x79d008",
+    "crc_lo_to_elem1": "0x79d028",
+    "len_hi_lo": "0x79c960 asr #8 / 0x79c994",
+    "runKey_default_5": "0x79ca70 r9=5",
+    "record_count": "0x79cb80 mul #7 ; 0x79cbac add #0xa",
+    "record_bytes": "0x79cc24 (type) 0x79cca4/0x79cd2c (time 16b BE) 0x79cd60/0x79cdbc/0x79ce18/0x79ce78 (key 32b BE)"
+   },
+   "label": "PROVEN STATIC"
+  }
+ ],
+ "d8_payload_layout": {
+  "header_bytes": 10,
+  "frame_bytes": 7,
+  "frame_count": "nsteps = (length-10)/7",
+  "fields": [
+   {
+    "off": 0,
+    "size": 2,
+    "name": "crc16",
+    "endian": "BE",
+    "semantics": "CRC-16/MODBUS init 0xFFFF poly 0xA001 over payload[2:]",
+    "label": "PROVEN STATIC"
+   },
+   {
+    "off": 2,
+    "size": 2,
+    "name": "length",
+    "endian": "BE",
+    "semantics": "10 + 7*nsteps",
+    "label": "PROVEN STATIC"
+   },
+   {
+    "off": 4,
+    "size": 1,
+    "name": "att.type",
+    "endian": "-",
+    "semantics": "GamepadAtt.type",
+    "label": "STRONG EVIDENCE"
+   },
+   {
+    "off": 5,
+    "size": 1,
+    "name": "runKey",
+    "endian": "-",
+    "semantics": "GamepadAtt.setting = trigger key id (default 46)",
+    "label": "PROVEN STATIC"
+   },
+   {
+    "off": 6,
+    "size": 1,
+    "name": "runKey_defaulted",
+    "endian": "-",
+    "semantics": "GamepadAtt.key ; 0 -> 5",
+    "label": "PROVEN STATIC"
+   },
+   {
+    "off": 7,
+    "size": 1,
+    "name": "isRepeat",
+    "endian": "-",
+    "semantics": "GamepadAtt.att",
+    "label": "STRONG EVIDENCE"
+   },
+   {
+    "off": 8,
+    "size": 2,
+    "name": "repeatTime",
+    "endian": "BE",
+    "semantics": "GamepadAtt.d",
+    "label": "STRONG EVIDENCE"
+   },
+   {
+    "off": 10,
+    "size": 7,
+    "name": "macro_step[]",
+    "endian": "mixed",
+    "semantics": "GamepadDefMap: [type=0x80][time=duration/8 16b BE][key 32b BE]",
+    "label": "PROVEN STATIC"
+   }
+  ],
+  "extra_element": {
+   "semantics": "one int context element (runKey at call site) concatenated with the GamepadDef serialization",
+   "order": "UNKNOWN (prefix vs suffix)",
+   "label": "UNKNOWN"
+  }
+ },
+ "fragmentation": {
+  "opcode_data": "0xA4",
+  "command_byte": "0xD8",
+  "chunk": 15,
+  "chunk_source": "hard-coded literal",
+  "mtu_logic": false,
+  "subpackageLength": false,
+  "device_chunk_table": false,
+  "frame": "A4 | len | D8 | ordinal | seg[<=15] | csum",
+  "frame_total_bytes": "5 + segLen",
+  "len_byte": "segLen + 5 (= total frame length)",
+  "terminator": "A4 05 D8 <nfrags+1> <csum>   (5 bytes, segLen=0)",
+  "commit_byte_0x0A": "CONTRADICTED - no 0x0A byte exists in the terminator",
+  "ordinal_byte": "PROVEN at frame offset 3 (value nfrags+1 in the terminator; data-fragment value UNKNOWN)",
+  "lab_discrepancy_resolution": "payload+5 is correct for 2.22: the missing byte in the payload+4 reading is the ordinal at frame offset 3",
+  "receive_reassembly": "A4 ... <opcode@4> ... <ordinal@6> ; step 15 ; ord 2 -> off 0, ord 4 -> off 15 (UNKNOWN ordinal semantics)"
+ },
+ "constants": {
+  "15": {
+   "sites": [
+    "gamepadset.dart:2464 0x79e300",
+    "gamepadset.dart:2646 0x79e50c",
+    "gamepadset.dart:2665 0x79e54c",
+    "gamepadset.dart:2700 0x79e5b0",
+    "gamepadset.dart:3134 0x79ea88",
+    "gamepadset.dart:2525 (Smi 30)",
+    "configs_config.dart:3210-3265 replaceRange 0/15/30"
+   ],
+   "governs": "fragment size (write and receive)",
+   "label": "PROVEN STATIC"
+  },
+  "20": {
+   "sites": [
+    "units/component.dart fmov 20.0 (UI)",
+    "units/theme.dart fmov 20.0 (UI)"
+   ],
+   "governs": "not fragmentation",
+   "label": "PROVEN STATIC (negative)"
+  },
+  "43": {
+   "sites": [
+    "gamepadset.dart:19246 / 19404 -> sublist(43,102) in GamepadParam"
+   ],
+   "governs": "readback field offset (59 bytes)",
+   "label": "PROVEN STATIC"
+  },
+  "48": {
+   "sites": [
+    "gamepadset.dart:17577 -> sublist(16,48) in GamepadParam30"
+   ],
+   "governs": "readback field (32 bytes)",
+   "label": "PROVEN STATIC"
+  },
+  "64": {
+   "sites": [
+    "gamepadset.dart:17609 -> sublist(24,64) in GamepadParam30"
+   ],
+   "governs": "readback field (40 bytes)",
+   "label": "PROVEN STATIC"
+  },
+  "67": {
+   "sites": [],
+   "governs": "absent",
+   "label": "PROVEN STATIC (negative)"
+  },
+  "72": {
+   "sites": [
+    "gamepadset.dart:17609 / 19246 -> sublist(...,72)"
+   ],
+   "governs": "readback field end bound",
+   "label": "PROVEN STATIC"
+  }
+ },
+ "decode_path": [
+  {
+   "hop": 1,
+   "what": "A4 notification dispatcher + reassembly",
+   "file": "asm/moojiang/widgets/general/configs_config.dart",
+   "addr": "0x8a6a04",
+   "line": 3107,
+   "evidence": {
+    "A4_test": "0x8a6a58 cmp x1,#0xa4",
+    "opcode_test": "0x8a6a80 r16=428 (0xD6)",
+    "ordinal_test": "0x8a6ab8 r16=2",
+    "sublist": "0x8a6ae8 sublist(4,38)",
+    "write0": "replaceRange(0,15)",
+    "write15": "replaceRange(15,30)"
+   },
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 1,
+   "what": "same dispatcher family",
+   "file": "asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+   "addr": "0x89b48c",
+   "line": 7286,
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 1,
+   "what": "same dispatcher family",
+   "file": "asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+   "addr": "?",
+   "line": 3179,
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 1,
+   "what": "same dispatcher family",
+   "file": "asm/moojiang/widgets/rainbow/rainbow_root.dart",
+   "addr": "?",
+   "line": 3163,
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 2,
+   "what": "fixed-offset config blob parsers",
+   "file": "asm/moojiang/units/gamepadset.dart",
+   "addr": "GamepadParam30 @line 17217 / GamepadParam @line 18539",
+   "offsets": {
+    "GamepadParam30": [
+     "sublist(16,48)",
+     "sublist(24,64)",
+     "sublist(34,72)",
+     "sublist(70,216) 0x79fb04"
+    ],
+    "GamepadParam": [
+     "sublist(11,32)",
+     "sublist(16,40)",
+     "sublist(32,68)",
+     "sublist(34,72)",
+     "sublist(36,76)",
+     "sublist(38,80)",
+     "sublist(43,102) 0x79dbfc"
+    ]
+   },
+   "u32_read": "0x79fa74-0x79fad4 byte-swap then toRadixString(16)",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 3,
+   "what": "macro JSON deserializer (only macro deserializer present)",
+   "name": "MacroRow.fromJson",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "hop": 4,
+   "what": "device->app D8 macro parser",
+   "name": "none",
+   "label": "PROVEN STATIC (negative)"
+  }
+ ],
+ "open_questions": {
+  "chunk_size": {
+   "status": "RESOLVED",
+   "value": 15,
+   "experiment": "capture one D8 apply; bytes between A4 and D8 must be 15"
+  },
+  "readback_format": {
+   "status": "STILL UNKNOWN (no D8 readback exists; generic fixed-offset blob parser only)",
+   "experiment": "read device notifications after a macro apply; check whether data[4]==0xD8 occurs"
+  },
+  "repeat_time_unit": {
+   "status": "PARTIALLY RESOLVED (ms, low confidence)",
+   "evidence": "UI ChangeTimeDialog(\"ms\") 0x8bf504 for macro interval/duration; no scaling applied on the wire",
+   "experiment": "set repeatTime=1000 and time the on-device repetition period"
+  },
+  "commit_terminator": {
+   "status": "CONTRADICTED for 2.22 (no 0x0A)",
+   "actual": "A4 05 D8 <nfrags+1> <csum>",
+   "experiment": "diff the final A4 frame of a 2.22 apply vs a 4.0.8 apply"
+  },
+  "extra_payload_byte_order": {
+   "status": "UNKNOWN",
+   "experiment": "replay prefix vs suffix variant, or read a stored macro back"
+  },
+  "receive_ordinal_semantics": {
+   "status": "UNKNOWN",
+   "experiment": "capture a multi-fragment notification burst and log data[6]"
+  },
+  "disable_all_zero_frame": {
+   "status": "UNKNOWN",
+   "experiment": "send a 7-byte zeroed record and observe"
+  },
+  "data_fragment_ordinal_value": {
+   "status": "UNKNOWN",
+   "experiment": "capture a 3+ fragment apply and log frame byte 3 of each"
+  }
+ },
+ "test_vectors": {
+  "T1_single_step_100ms_key0": {
+   "payload_hex": "11 FB 00 11 00 2E 2E 00 00 C8 80 00 0C 00 00 00 01",
+   "payload_len": 17,
+   "crc16_modbus": "11fb",
+   "nfrags": 2,
+   "frames_ordinal_i+1": [
+    "A4 14 D8 01 11 FB 00 11 00 2E 2E 00 00 C8 80 00 0C 00 00 5E",
+    "A4 07 D8 02 00 01 86",
+    "A4 05 D8 03 84"
+   ],
+   "frames_ordinal_i": [
+    "A4 14 D8 00 11 FB 00 11 00 2E 2E 00 00 C8 80 00 0C 00 00 5D",
+    "A4 07 D8 01 00 01 85",
+    "A4 05 D8 03 84"
+   ]
+  },
+  "T2_two_steps_200ms_400ms": {
+   "payload_hex": "29 24 00 18 00 2E 2E 00 00 C8 80 00 19 00 00 00 01 80 00 32 00 00 00 02",
+   "payload_len": 24,
+   "crc16_modbus": "2924",
+   "nfrags": 2,
+   "frames_ordinal_i+1": [
+    "A4 14 D8 01 29 24 00 18 00 2E 2E 00 00 C8 80 00 19 00 00 B3",
+    "A4 0E D8 02 00 01 80 00 32 00 00 00 02 41",
+    "A4 05 D8 03 84"
+   ],
+   "frames_ordinal_i": [
+    "A4 14 D8 00 29 24 00 18 00 2E 2E 00 00 C8 80 00 19 00 00 B2",
+    "A4 0E D8 01 00 01 80 00 32 00 00 00 02 40",
+    "A4 05 D8 03 84"
+   ]
+  },
+  "T3_zero_step": {
+   "payload_hex": "D0 2A 00 11 00 2E 2E 00 00 C8 80 00 00 00 00 00 00",
+   "payload_len": 17,
+   "crc16_modbus": "d02a",
+   "nfrags": 2,
+   "frames_ordinal_i+1": [
+    "A4 14 D8 01 D0 2A 00 11 00 2E 2E 00 00 C8 80 00 00 00 00 40",
+    "A4 07 D8 02 00 00 85",
+    "A4 05 D8 03 84"
+   ],
+   "frames_ordinal_i": [
+    "A4 14 D8 00 D0 2A 00 11 00 2E 2E 00 00 C8 80 00 00 00 00 3F",
+    "A4 07 D8 01 00 00 84",
+    "A4 05 D8 03 84"
+   ]
+  },
+  "T4_stick_pattern_k0x23": {
+   "payload_hex": "05 AB 00 11 00 2E 2E 00 00 C8 80 00 0A 7F 00 00 00",
+   "payload_len": 17,
+   "crc16_modbus": "05ab",
+   "nfrags": 2,
+   "frames_ordinal_i+1": [
+    "A4 14 D8 01 05 AB 00 11 00 2E 2E 00 00 C8 80 00 0A 7F 00 7F",
+    "A4 07 D8 02 00 00 85",
+    "A4 05 D8 03 84"
+   ],
+   "frames_ordinal_i": [
+    "A4 14 D8 00 05 AB 00 11 00 2E 2E 00 00 C8 80 00 0A 7F 00 7E",
+    "A4 07 D8 01 00 00 84",
+    "A4 05 D8 03 84"
+   ]
+  }
+ },
+ "test_vector_caveats": "DERIVED, not captured. Payload = 10-byte header + 7-byte records, with NO extra element (see open_questions.extra_payload_byte_order). CRC-16/MODBUS recomputed independently over payload[2:]. Frames are given in both ordinal conventions because the data-fragment ordinal VALUE is UNKNOWN; the terminator frame (ordinal = nfrags+1) is PROVEN.",
+ "cross_version_chunk": {
+  "2.22.0901": "hard-coded 15 (PROVEN)",
+  "2.23": "hard-coded 15 at 0x7980fc/0x79e970/0x7f8704 (PROVEN by grep)",
+  "2.24": "subpackageLength() @0x7b9064 returns {20,48,72} -> minus 5 = {15,43,67} (PROVEN body)",
+  "4.0.8": "subpackageLength() @0x819190 returns {20,72,48} -> minus 5 = {15,43,67} (PROVEN body)",
+  "conclusion": "chunk = subpackageLength() - 5 ; 2.22/2.23 are hard-wired to the subpackageLength()==20 class",
+  "label": "STRONG EVIDENCE / INFERRED for the device-id mapping"
+ }
+}

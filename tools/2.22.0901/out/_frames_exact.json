@@ -1,0 +1,22 @@
+[
+ {
+  "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+  "class": "_RainbowTestState",
+  "function": "_ testModeSwitch1(/* No info */) )",
+  "addr": "0x8e1efc",
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 210,
+    "data": [
+     0
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 124,
+    "checksum_ok": true
+   }
+  ]
+ }
+]
