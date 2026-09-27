@@ -1,0 +1,42 @@
+name: Validate public Windows v0.2.1
+
+on:
+  push:
+    branches:
+      - windows/public-v0.2.1
+    paths:
+      - "windows/ArmorX.Windows/**"
+      - ".github/workflows/validate-windows-v0.2.1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      - name: Build
+        shell: pwsh
+        run: |
+          dotnet restore .\windows\ArmorX.Windows\ArmorX.Windows.csproj
+          dotnet build .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release --no-restore
+      - name: Publish
+        shell: pwsh
+        run: |
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false -o .\artifacts
+      - name: Self-test
+        shell: pwsh
+        run: |
+          $exe = '.\artifacts\ArmorX-Windows.exe'
+          $p = Start-Process $exe -ArgumentList '--self-test' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Self-test failed: $($p.ExitCode)" }
+          $p = Start-Process $exe -ArgumentList '--ui-smoke' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "UI smoke failed: $($p.ExitCode)" }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-Windows-v0.2.1-ci
+          path: artifacts/ArmorX-Windows.exe
