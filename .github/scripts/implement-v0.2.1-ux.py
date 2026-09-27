@@ -128,7 +128,7 @@ public sealed class ProfileStore
 
     private static ArmorXProfile ValidateProfile(ArmorXProfile? profile)
     {
-        profile ??= throw new InvalidDataException("Invalid profile JSON.");
+        if (profile is null) throw new InvalidDataException("Invalid profile JSON.");
         profile.Name = NormalizeName(profile.Name);
         byte[] bytes;
         try { bytes = profile.GetConfigBytes(); }
