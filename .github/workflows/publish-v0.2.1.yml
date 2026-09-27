@@ -1,0 +1,189 @@
+name: Publish ArmorX Windows v0.2.1
+
+on:
+  push:
+    branches:
+      - windows/public-v0.2.1
+    paths:
+      - ".github/workflows/publish-v0.2.1.yml"
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  publish:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Assert frozen release commit and release absence
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $frozen = "5133de9612e83613dd8741f9f61f51910c2ee77f"
+          git cat-file -e "$frozen^{commit}"
+          if ($LASTEXITCODE -ne 0) { throw "Frozen release commit is unavailable: $frozen" }
+          $existingTag = git ls-remote --tags origin "refs/tags/v0.2.1"
+          if ($existingTag) { throw "Tag v0.2.1 already exists; refusing to overwrite it." }
+          gh release view v0.2.1 *> $null
+          if ($LASTEXITCODE -eq 0) { throw "Release v0.2.1 already exists; refusing to overwrite it." }
+
+      - name: Download exact validated Final RC artifact
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          New-Item -ItemType Directory -Force .\release-assets | Out-Null
+          gh run download 36282004919 --name "ArmorX-Windows-v0.2.1-RC" --dir .\release-assets
+          $expected = @(
+            "ArmorX-Windows-v0.2.1-RC.exe",
+            "ArmorX-Windows-v0.2.1-RC-win-x64.zip",
+            "ArmorX-Windows-v0.2.1-RC-Setup.exe",
+            "ArmorX-Windows-v0.2.1-RC-SHA256SUMS.txt"
+          )
+          foreach ($file in $expected) {
+            if (-not (Test-Path (Join-Path .\release-assets $file))) { throw "Validated RC artifact is missing $file" }
+          }
+
+      - name: Verify validated RC artifact checksums before promotion
+        shell: pwsh
+        run: |
+          $sumFile = ".\release-assets\ArmorX-Windows-v0.2.1-RC-SHA256SUMS.txt"
+          $lines = Get-Content $sumFile | Where-Object { $_.Trim() }
+          if ($lines.Count -ne 3) { throw "Expected 3 RC checksum entries, found $($lines.Count)." }
+          foreach ($line in $lines) {
+            if ($line -notmatch '^([0-9a-fA-F]{64})\s{2}(.+)$') { throw "Malformed checksum line: $line" }
+            $expected = $Matches[1].ToLowerInvariant()
+            $name = $Matches[2]
+            $path = Join-Path .\release-assets $name
+            if (-not (Test-Path $path)) { throw "Checksum target missing: $name" }
+            $actual = (Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($actual -ne $expected) { throw "Checksum mismatch for $name" }
+          }
+
+      - name: Promote RC binaries to final v0.2.1 asset names
+        shell: pwsh
+        run: |
+          Move-Item .\release-assets\ArmorX-Windows-v0.2.1-RC.exe .\release-assets\ArmorX-Windows-v0.2.1.exe
+          Move-Item .\release-assets\ArmorX-Windows-v0.2.1-RC-win-x64.zip .\release-assets\ArmorX-Windows-v0.2.1-win-x64.zip
+          Move-Item .\release-assets\ArmorX-Windows-v0.2.1-RC-Setup.exe .\release-assets\ArmorX-Windows-v0.2.1-Setup.exe
+          Remove-Item .\release-assets\ArmorX-Windows-v0.2.1-RC-SHA256SUMS.txt -Force
+
+      - name: Package exact frozen Windows source
+        shell: pwsh
+        run: |
+          $frozen = "5133de9612e83613dd8741f9f61f51910c2ee77f"
+          git archive --format=zip --output=".\release-assets\ArmorX-Windows-v0.2.1-source.zip" $frozen windows/ArmorX.Windows windows/README.md windows/build.ps1
+          if ($LASTEXITCODE -ne 0) { throw "Source archive creation failed." }
+
+      - name: Generate final SHA256 checksum manifest
+        shell: pwsh
+        run: |
+          $files = @(
+            "ArmorX-Windows-v0.2.1.exe",
+            "ArmorX-Windows-v0.2.1-win-x64.zip",
+            "ArmorX-Windows-v0.2.1-Setup.exe",
+            "ArmorX-Windows-v0.2.1-source.zip"
+          )
+          $lines = foreach ($file in $files) {
+            $path = Join-Path .\release-assets $file
+            $hash = (Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $file"
+          }
+          $lines | Set-Content -Encoding ascii .\release-assets\ArmorX-Windows-v0.2.1-SHA256SUMS.txt
+          Get-Content .\release-assets\ArmorX-Windows-v0.2.1-SHA256SUMS.txt
+
+      - name: Write final release notes
+        shell: pwsh
+        run: |
+          @'
+          # ArmorX Toolkit v0.2.1
+
+          **Public Windows safety and reliability release**
+
+          v0.2.1 promotes the validated public Windows configurator with a safer configuration-write workflow while keeping the internal research/capture application completely separate.
+
+          ## Windows v0.2.1 highlights
+
+          - Automatic full 144-byte pre-write backup before every configuration write.
+          - Review pending changes with exact byte offsets and before/after values.
+          - Clear pending-change state in the public UI.
+          - Restore last backup with confirmation and complete read-back verification.
+          - Restore is itself reversible: the current device image is backed up before a restore.
+          - Immediately before writing, the app re-reads the controller and merges only the user's edited semantic bytes onto that fresh image, preserving unrelated/reserved bytes.
+          - D7 full-image write, persistence command, and complete 144-byte read-back verification remain mandatory for successful Apply & Verify.
+          - Portable single-file EXE, folder-build fallback, and tested per-user installer/uninstaller.
+
+          ## Downloads
+
+          - ArmorX-Windows-v0.2.1-Setup.exe — recommended Windows installer.
+          - ArmorX-Windows-v0.2.1.exe — portable self-contained single-file application.
+          - ArmorX-Windows-v0.2.1-win-x64.zip — self-contained folder-build fallback.
+          - ArmorX-Windows-v0.2.1-source.zip — exact public Windows source from the frozen release commit.
+          - ArmorX-Windows-v0.2.1-SHA256SUMS.txt — SHA256 checksums.
+
+          ## Validation
+
+          This release is promoted directly from the successful Final RC artifact built from commit 5133de9612e83613dd8741f9f61f51910c2ee77f.
+
+          The validated pipeline passed the public application self-test, WPF/XAML UI smoke test, installer installation test, installed-app self-test, and silent uninstall test.
+
+          ## Compatibility
+
+          Directly validated hardware baseline: ARMOR-X Pro / ZJ-XT, firmware 2741. Other firmware versions are not yet independently validated.
+
+          ## Public vs research builds
+
+          The public Windows application does not include Research Lab, Research Autopilot, raw BLE capture, D2 experiments, AE research tools, unknown-ID sweeps, or evidence-bundle tooling.
+
+          ## Windows SmartScreen
+
+          The binaries are currently unsigned community builds. Windows may show an Unknown publisher / SmartScreen warning even when the downloaded SHA256 matches the published checksum file.
+          '@ | Set-Content -Encoding utf8 .\release-notes-v0.2.1.md
+
+      - name: Create immutable v0.2.1 release from frozen commit
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $frozen = "5133de9612e83613dd8741f9f61f51910c2ee77f"
+          $assets = @(
+            ".\release-assets\ArmorX-Windows-v0.2.1.exe",
+            ".\release-assets\ArmorX-Windows-v0.2.1-win-x64.zip",
+            ".\release-assets\ArmorX-Windows-v0.2.1-Setup.exe",
+            ".\release-assets\ArmorX-Windows-v0.2.1-source.zip",
+            ".\release-assets\ArmorX-Windows-v0.2.1-SHA256SUMS.txt"
+          )
+          gh release create v0.2.1 --target $frozen --title "ArmorX Toolkit v0.2.1" --notes-file .\release-notes-v0.2.1.md @assets
+          if ($LASTEXITCODE -ne 0) { throw "GitHub release creation failed." }
+
+      - name: Audit published tag and release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $frozen = "5133de9612e83613dd8741f9f61f51910c2ee77f"
+          git fetch --tags origin
+          $tagSha = (git rev-list -n 1 v0.2.1).Trim()
+          if ($tagSha -ne $frozen) { throw "Published tag points to $tagSha instead of $frozen" }
+          $release = gh release view v0.2.1 --json isDraft,isPrerelease,tagName,url,assets | ConvertFrom-Json
+          if ($release.isDraft) { throw "Release unexpectedly remained a draft." }
+          if ($release.isPrerelease) { throw "Release unexpectedly marked prerelease." }
+          if ($release.tagName -ne "v0.2.1") { throw "Unexpected tag name." }
+          $expectedAssets = @(
+            "ArmorX-Windows-v0.2.1.exe",
+            "ArmorX-Windows-v0.2.1-win-x64.zip",
+            "ArmorX-Windows-v0.2.1-Setup.exe",
+            "ArmorX-Windows-v0.2.1-source.zip",
+            "ArmorX-Windows-v0.2.1-SHA256SUMS.txt"
+          )
+          $actual = @($release.assets | ForEach-Object { $_.name })
+          foreach ($name in $expectedAssets) {
+            if ($name -notin $actual) { throw "Published release is missing $name" }
+          }
+          if ($actual.Count -ne $expectedAssets.Count) { throw "Unexpected asset count: $($actual.Count)" }
+          Write-Host "Release audit PASS: $($release.url)"
