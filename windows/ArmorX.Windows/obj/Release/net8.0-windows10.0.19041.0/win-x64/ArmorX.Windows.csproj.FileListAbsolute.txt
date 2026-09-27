@@ -478,3 +478,6 @@ D:\a\armorx-toolkit\armorx-toolkit\windows\ArmorX.Windows\obj\Release\net8.0-win
 D:\a\armorx-toolkit\armorx-toolkit\windows\ArmorX.Windows\obj\Release\net8.0-windows10.0.19041.0\win-x64\refint\ArmorX-Windows.dll
 D:\a\armorx-toolkit\armorx-toolkit\windows\ArmorX.Windows\obj\Release\net8.0-windows10.0.19041.0\win-x64\ArmorX.Windows.genruntimeconfig.cache
 D:\a\armorx-toolkit\armorx-toolkit\windows\ArmorX.Windows\obj\Release\net8.0-windows10.0.19041.0\win-x64\ref\ArmorX-Windows.dll
+D:\a\armorx-toolkit\armorx-toolkit\windows\ArmorX.Windows\bin\Release\net8.0-windows10.0.19041.0\win-x64\ArmorX-Windows.pdb
+D:\a\armorx-toolkit\armorx-toolkit\windows\ArmorX.Windows\obj\Release\net8.0-windows10.0.19041.0\win-x64\ArmorX.Windows.sourcelink.json
+D:\a\armorx-toolkit\armorx-toolkit\windows\ArmorX.Windows\obj\Release\net8.0-windows10.0.19041.0\win-x64\ArmorX-Windows.pdb

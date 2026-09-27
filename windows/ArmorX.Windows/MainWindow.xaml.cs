@@ -4,9 +4,11 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using Microsoft.Win32;
 using ArmorX.Windows.Bluetooth;
 using ArmorX.Windows.Config;
 using ArmorX.Windows.Device;
+using ArmorX.Windows.Infrastructure;
 using ArmorX.Windows.Profiles;
 
 namespace ArmorX.Windows;
@@ -16,6 +18,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private readonly ArmorXBleTransport _transport = new();
     private readonly ProfileStore _profileStore = new();
     private readonly BackupStore _backupStore = new();
+    private readonly UserDiagnosticLog _diagnostics = new();
     private readonly SemaphoreSlim _connectGate = new(1, 1);
     private ArmorXDeviceSession? _session;
     private EditableArmorXConfig? _config;
@@ -69,6 +72,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     {
         InitializeComponent();
         DataContext = this;
+        _diagnostics.Add("Application started.");
 
         _transport.DeviceSeen += Transport_DeviceSeen;
         _transport.ConnectionChanged += Transport_ConnectionChanged;
@@ -78,6 +82,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             await RefreshProfilesAsync();
             _transport.EnsurePersistentDiscovery();
             var adapter = await _transport.GetAdapterStatusAsync();
+            _diagnostics.Add($"Bluetooth status: {adapter}.");
             ConnectionDetail = adapter == "Bluetooth ready"
                 ? "Bluetooth ready. Turn on the ARMOR-X Pro, then choose Connect / Recover."
                 : adapter;
@@ -107,12 +112,14 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             if (connected)
             {
+                _diagnostics.Add("BLE connection established.");
                 ConnectionHeadline = "Connected";
                 ConnectionDetail = "ARMOR-X Pro is ready.";
                 return;
             }
 
             if (_closing || _manualDisconnect || _connectionOperation) return;
+            _diagnostics.Add("Device disconnected or entered sleep; recovery started.");
             ConnectionHeadline = "Disconnected / asleep";
             ConnectionDetail = "Turn the ARMOR-X Pro back on. Automatic recovery is active.";
             StatusText = "Waiting for ARMOR-X Pro to wake...";
@@ -243,6 +250,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             BatteryText = session.BatteryPercent is int b ? $"{b}%" : "-";
             ConnectionHeadline = "Connected to ARMOR-X Pro";
             ConnectionDetail = $"{ModelText} · firmware {FirmwareText}";
+            _diagnostics.Add($"Device ready: model {ModelText}, firmware {FirmwareText}, battery {BatteryText}.");
             StatusText = "Connected. Reading configuration...";
 
             var config = await session.ReadConfigAsync(cancellationToken);
@@ -316,6 +324,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             var config = await _session.ReadConfigAsync();
             LoadDeviceConfig(config);
+            _diagnostics.Add($"Configuration read completed; CRC {(config.CrcValid ? "valid" : "invalid")}.");
             StatusText = $"Configuration refreshed · CRC {(config.CrcValid ? "valid" : "invalid")} 0x{config.StoredCrc:X4}.";
         });
     }
@@ -391,6 +400,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             }
 
             SafetyText = $"Verified · pre-write backup: {Path.GetFileName(backupPath)}";
+            _diagnostics.Add($"Apply & Verify passed; {changes.Count} semantic byte change(s), CRC 0x{result.ReadBackConfig.StoredCrc:X4}.");
             StatusText = $"Saved and verified · CRC 0x{result.ReadBackConfig.StoredCrc:X4}.";
             MessageBox.Show(
                 "Settings saved successfully. The complete 144-byte read-back matches. A pre-write backup was kept automatically.",
@@ -460,6 +470,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             }
 
             SafetyText = $"Backup restored and verified · undo backup: {Path.GetFileName(undoPath)}";
+            _diagnostics.Add($"Backup restore verified; CRC 0x{result.ReadBackConfig.StoredCrc:X4}.");
             StatusText = $"Backup restored and verified · CRC 0x{result.ReadBackConfig.StoredCrc:X4}.";
             MessageBox.Show("Backup restored successfully and all 144 read-back bytes match.",
                 "Restore last backup", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -496,6 +507,148 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Config = new EditableArmorXConfig(new ArmorXConfig144(profile.GetConfigBytes()));
             ProfileNameBox.Text = profile.Name;
             StatusText = $"Loaded '{profile.Name}' into the editor. The controller has not been changed yet.";
+        });
+    }
+
+    private async void ImportProfile_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new OpenFileDialog
+        {
+            Title = "Import ArmorX profile",
+            Filter = "ArmorX profile (*.json)|*.json|JSON files (*.json)|*.json|All files (*.*)|*.*"
+        };
+        if (dialog.ShowDialog(this) != true) return;
+
+        await RunBusyAsync("Importing profile...", async () =>
+        {
+            var profile = await _profileStore.ImportAsync(dialog.FileName);
+            await RefreshProfilesAsync();
+            ProfileNameBox.Text = profile.Name;
+            _diagnostics.Add($"Profile imported: {profile.Name}.");
+            StatusText = $"Imported profile '{profile.Name}'.";
+        });
+    }
+
+    private async void ExportProfile_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectedProfile is null)
+        {
+            MessageBox.Show("Select a saved profile first.", "Export profile");
+            return;
+        }
+
+        var dialog = new SaveFileDialog
+        {
+            Title = "Export ArmorX profile",
+            FileName = SelectedProfile.Name + ".json",
+            DefaultExt = ".json",
+            Filter = "ArmorX profile (*.json)|*.json"
+        };
+        if (dialog.ShowDialog(this) != true) return;
+
+        await RunBusyAsync("Exporting profile...", async () =>
+        {
+            await _profileStore.ExportAsync(SelectedProfile.Name, dialog.FileName);
+            _diagnostics.Add($"Profile exported: {SelectedProfile.Name}.");
+            StatusText = $"Exported '{SelectedProfile.Name}'.";
+        });
+    }
+
+    private async void DuplicateProfile_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectedProfile is null)
+        {
+            MessageBox.Show("Select a saved profile first.", "Duplicate profile");
+            return;
+        }
+
+        var newName = ProfileNameBox.Text.Trim();
+        if (string.IsNullOrWhiteSpace(newName) || string.Equals(newName, SelectedProfile.Name, StringComparison.OrdinalIgnoreCase))
+            newName = SelectedProfile.Name + " Copy";
+
+        var finalName = newName;
+        await RunBusyAsync("Duplicating profile...", async () =>
+        {
+            await _profileStore.DuplicateAsync(SelectedProfile.Name, finalName);
+            await RefreshProfilesAsync();
+            ProfileNameBox.Text = finalName;
+            _diagnostics.Add($"Profile duplicated as {finalName}.");
+            StatusText = $"Duplicated profile as '{finalName}'.";
+        });
+    }
+
+    private async void RenameProfile_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectedProfile is null)
+        {
+            MessageBox.Show("Select a saved profile first.", "Rename profile");
+            return;
+        }
+
+        var newName = ProfileNameBox.Text.Trim();
+        if (string.IsNullOrWhiteSpace(newName))
+        {
+            MessageBox.Show("Enter the new name in the Name box first.", "Rename profile");
+            return;
+        }
+
+        var oldName = SelectedProfile.Name;
+        await RunBusyAsync("Renaming profile...", async () =>
+        {
+            await _profileStore.RenameAsync(oldName, newName);
+            await RefreshProfilesAsync();
+            _diagnostics.Add($"Profile renamed: {oldName} -> {newName}.");
+            StatusText = $"Renamed '{oldName}' to '{newName}'.";
+        });
+    }
+
+    private async void DeleteProfile_Click(object sender, RoutedEventArgs e)
+    {
+        if (SelectedProfile is null)
+        {
+            MessageBox.Show("Select a saved profile first.", "Delete profile");
+            return;
+        }
+
+        var name = SelectedProfile.Name;
+        if (MessageBox.Show($"Delete local profile '{name}'?", "Delete profile",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+            return;
+
+        await RunBusyAsync("Deleting profile...", async () =>
+        {
+            await _profileStore.DeleteAsync(name);
+            SelectedProfile = null;
+            await RefreshProfilesAsync();
+            _diagnostics.Add($"Profile deleted: {name}.");
+            StatusText = $"Deleted local profile '{name}'.";
+        });
+    }
+
+    private void OpenProject_Click(object sender, RoutedEventArgs e) =>
+        Process.Start(new ProcessStartInfo("https://github.com/feshinkof-boop/armorx-toolkit") { UseShellExecute = true });
+
+    private void OpenBackupsFolder_Click(object sender, RoutedEventArgs e)
+    {
+        Directory.CreateDirectory(_backupStore.DirectoryPath);
+        Process.Start(new ProcessStartInfo("explorer.exe", _backupStore.DirectoryPath) { UseShellExecute = true });
+    }
+
+    private async void ExportDiagnostics_Click(object sender, RoutedEventArgs e)
+    {
+        var dialog = new SaveFileDialog
+        {
+            Title = "Export ArmorX Windows diagnostics",
+            FileName = $"ArmorX-Windows-Diagnostics-{DateTime.Now:yyyyMMdd-HHmmss}.txt",
+            DefaultExt = ".txt",
+            Filter = "Text file (*.txt)|*.txt"
+        };
+        if (dialog.ShowDialog(this) != true) return;
+
+        await RunBusyAsync("Exporting diagnostics...", async () =>
+        {
+            await _diagnostics.ExportAsync(dialog.FileName, ModelText, FirmwareText, ConnectionHeadline, SafetyText);
+            StatusText = "End-user diagnostic report exported.";
         });
     }
 
@@ -578,6 +731,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         try { await action(); }
         catch (Exception ex)
         {
+            _diagnostics.Add($"Operation error: {ex.GetType().Name}: {ex.Message}");
             StatusText = "Error: " + ex.Message;
             MessageBox.Show(ex.Message, "ArmorX Windows", MessageBoxButton.OK, MessageBoxImage.Error);
         }

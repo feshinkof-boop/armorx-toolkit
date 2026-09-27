@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ArmorX-Windows")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("0.2.1.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.2.1+09c88d7a86fea06af637ba67c8fe69254df01ab3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("0.2.1+82e88363a887cde8aa58b878e63cfb763b911a21")]
 [assembly: System.Reflection.AssemblyProductAttribute("ArmorX-Windows")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ArmorX-Windows")]
 [assembly: System.Reflection.AssemblyVersionAttribute("0.2.1.0")]

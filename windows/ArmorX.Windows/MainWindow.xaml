@@ -190,6 +190,7 @@
                             <TextBlock Text="Profiles are stored only on this PC." Foreground="{StaticResource TextSecondary}" Margin="0,3,0,12"/>
                             <TextBlock Text="Name" FontWeight="SemiBold"/><TextBox x:Name="ProfileNameBox" Text="My ArmorX Profile"/>
                             <Button Style="{StaticResource PrimaryButton}" Margin="0,10,0,8" Content="Save current profile" Click="SaveProfile_Click"/>
+                            <Button Style="{StaticResource SecondaryButton}" Margin="0,0,0,8" Content="Import profile..." Click="ImportProfile_Click"/>
                             <Button Style="{StaticResource SecondaryButton}" Margin="0,0,0,8" Content="Refresh profiles" Click="RefreshProfiles_Click"/>
                             <Button Style="{StaticResource SecondaryButton}" Margin="0" Content="Open profiles folder" Click="OpenProfilesFolder_Click"/>
                         </StackPanel>
@@ -197,14 +198,51 @@
                     <Border Grid.Column="2" Style="{StaticResource Card}">
                         <Grid>
                             <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
-                            <StackPanel><TextBlock Text="Saved profiles" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="Loading a profile changes the editor only. It does not write the controller until you click Apply &amp; Verify." Foreground="{StaticResource TextSecondary}" Margin="0,3,0,12" TextWrapping="Wrap"/></StackPanel>
+                            <StackPanel><TextBlock Text="Saved profiles" FontSize="18" FontWeight="SemiBold"/><TextBlock Text="Loading a profile changes the editor only. On Apply &amp; Verify, only supported public fields are merged onto a fresh device read so unknown/reserved bytes stay with the controller." Foreground="{StaticResource TextSecondary}" Margin="0,3,0,12" TextWrapping="Wrap"/></StackPanel>
                             <ListBox Grid.Row="1" ItemsSource="{Binding Profiles}" SelectedItem="{Binding SelectedProfile}" BorderBrush="{StaticResource BorderBrushSoft}">
                                 <ListBox.ItemTemplate><DataTemplate><Border Padding="10"><StackPanel><TextBlock FontWeight="SemiBold" Text="{Binding Name}"/><TextBlock FontSize="12" Foreground="{StaticResource TextSecondary}"><Run Text="Saved: "/><Run Text="{Binding SavedUtc}"/><Run Text="    Model: "/><Run Text="{Binding DeviceModel}"/><Run Text="    Firmware: "/><Run Text="{Binding Firmware}"/></TextBlock></StackPanel></Border></DataTemplate></ListBox.ItemTemplate>
                             </ListBox>
-                            <Button Grid.Row="2" Style="{StaticResource PrimaryButton}" Margin="0,12,0,0" Content="Load selected into editor" Click="LoadProfile_Click"/>
+                            <StackPanel Grid.Row="2" Margin="0,12,0,0">
+                                <Button Style="{StaticResource PrimaryButton}" Margin="0,0,0,8" Content="Load selected into editor" Click="LoadProfile_Click"/>
+                                <WrapPanel>
+                                    <Button Style="{StaticResource SecondaryButton}" Margin="0,0,8,8" Content="Export selected..." Click="ExportProfile_Click"/>
+                                    <Button Style="{StaticResource SecondaryButton}" Margin="0,0,8,8" Content="Duplicate as name above" Click="DuplicateProfile_Click"/>
+                                    <Button Style="{StaticResource SecondaryButton}" Margin="0,0,8,8" Content="Rename to name above" Click="RenameProfile_Click"/>
+                                    <Button Style="{StaticResource DangerButton}" Margin="0,0,0,8" Content="Delete selected" Click="DeleteProfile_Click"/>
+                                </WrapPanel>
+                            </StackPanel>
                         </Grid>
                     </Border>
                 </Grid>
+            </TabItem>
+
+            <TabItem Header="About">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <Grid Margin="0,14,0,0">
+                        <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="14"/><ColumnDefinition/></Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" Style="{StaticResource Card}" VerticalAlignment="Top">
+                            <StackPanel>
+                                <TextBlock Text="ArmorX Windows" FontSize="20" FontWeight="SemiBold"/>
+                                <TextBlock Text="Public configurator · v0.2.1" Foreground="{StaticResource TextSecondary}" Margin="0,3,0,16"/>
+                                <TextBlock Text="A community-built BLE configurator for BIGBIG WON ARMOR-X Pro. Stable public features are kept separate from the internal research/capture application." TextWrapping="Wrap"/>
+                                <Button Style="{StaticResource PrimaryButton}" Margin="0,18,0,8" Content="Open project on GitHub" Click="OpenProject_Click"/>
+                                <Button Style="{StaticResource SecondaryButton}" Margin="0,0,0,8" Content="Export diagnostics..." Click="ExportDiagnostics_Click"/>
+                                <Button Style="{StaticResource SecondaryButton}" Margin="0" Content="Open automatic backups folder" Click="OpenBackupsFolder_Click"/>
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2" Style="{StaticResource Card}" VerticalAlignment="Top">
+                            <StackPanel>
+                                <TextBlock Text="Compatibility" FontSize="20" FontWeight="SemiBold"/>
+                                <TextBlock Text="Current device" Foreground="{StaticResource TextSecondary}" Margin="0,14,0,3"/>
+                                <TextBlock FontWeight="SemiBold"><Run Text="Model: "/><Run Text="{Binding ModelText}"/><Run Text="    Firmware: "/><Run Text="{Binding FirmwareText}"/></TextBlock>
+                                <TextBlock Text="Validated reference hardware" Foreground="{StaticResource TextSecondary}" Margin="0,14,0,3"/>
+                                <TextBlock Text="ARMOR-X Pro · ZJ-XT · firmware 2741" FontWeight="SemiBold"/>
+                                <TextBlock Text="The app preserves unknown/reserved configuration bytes, automatically backs up the current 144-byte image before writes, and verifies writes with a complete read-back." TextWrapping="Wrap" Margin="0,14,0,0"/>
+                                <TextBlock Text="Diagnostic exports are end-user reports only: they exclude BLE addresses, raw packets, research captures, and configuration contents." TextWrapping="Wrap" Foreground="{StaticResource TextSecondary}" Margin="0,14,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </ScrollViewer>
             </TabItem>
         </TabControl>
 
