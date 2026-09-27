@@ -1,0 +1,167 @@
+[
+ {
+  "service": "00001800-0000-1000-8000-00805f9b34fb",
+  "description": "Generic Access Profile",
+  "characteristics": [
+   {
+    "uuid": "00002a04-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 6
+   },
+   {
+    "uuid": "00002a00-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 2
+   },
+   {
+    "uuid": "00002a01-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 4
+   }
+  ]
+ },
+ {
+  "service": "00000000-0000-1000-8000-00805f9b34fb",
+  "description": "Vendor specific",
+  "characteristics": [
+   {
+    "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read",
+     "notify"
+    ],
+    "handle": 118
+   },
+   {
+    "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "write-without-response",
+     "write"
+    ],
+    "handle": 116
+   }
+  ]
+ },
+ {
+  "service": "0000180f-0000-1000-8000-00805f9b34fb",
+  "description": "Battery Service",
+  "characteristics": [
+   {
+    "uuid": "00002a19-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read",
+     "notify"
+    ],
+    "handle": 32
+   }
+  ]
+ },
+ {
+  "service": "0000180a-0000-1000-8000-00805f9b34fb",
+  "description": "Device Information",
+  "characteristics": [
+   {
+    "uuid": "00002a26-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 21
+   },
+   {
+    "uuid": "00002a24-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 15
+   },
+   {
+    "uuid": "00002a25-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 17
+   },
+   {
+    "uuid": "00002a29-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 13
+   },
+   {
+    "uuid": "00002a23-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 25
+   },
+   {
+    "uuid": "00002a27-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 19
+   },
+   {
+    "uuid": "00002a28-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 23
+   },
+   {
+    "uuid": "00002a50-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 29
+   },
+   {
+    "uuid": "00002a2a-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "read"
+    ],
+    "handle": 27
+   }
+  ]
+ },
+ {
+  "service": "0000ae00-0000-1000-8000-00805f9b34fb",
+  "description": "Vendor specific",
+  "characteristics": [
+   {
+    "uuid": "0000ae02-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "notify"
+    ],
+    "handle": 131
+   },
+   {
+    "uuid": "0000ae01-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "write-without-response"
+    ],
+    "handle": 129
+   }
+  ]
+ },
+ {
+  "service": "00001801-0000-1000-8000-00805f9b34fb",
+  "description": "Generic Attribute Profile",
+  "characteristics": [
+   {
+    "uuid": "00002a05-0000-1000-8000-00805f9b34fb",
+    "properties": [
+     "indicate"
+    ],
+    "handle": 9
+   }
+  ]
+ }
+]

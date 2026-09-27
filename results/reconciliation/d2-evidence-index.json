@@ -922,5 +922,77 @@
   "function": "",
   "snippet_file": "",
   "notes": "classification CASE 6"
+ },
+ {
+  "id": "D2-LIVE-HARNESS-001",
+  "build": "live",
+  "category": "CONN",
+  "claim": "harness link: role Central, peer address type Public, connection interval 7.50 ms, peripheral latency 0, supervision timeout 2000 ms",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-*/harness-session/raw/btmon-live.txt",
+  "address": "",
+  "function": "BlueZ/bleak link",
+  "snippet_file": "harness-session/harness-hci-summary.json",
+  "notes": ""
+ },
+ {
+  "id": "D2-LIVE-HARNESS-002",
+  "build": "live",
+  "category": "SEC",
+  "claim": "harness link is unbonded and unencrypted: zero pairing/SMP/encryption events in the capture (the D2-U-008 condition, measured for our side only)",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-*/harness-session/raw/btmon-live.txt",
+  "address": "",
+  "function": "",
+  "snippet_file": "harness-session/harness-hci-summary.json",
+  "notes": "official side NOT_CAPTURED"
+ },
+ {
+  "id": "D2-LIVE-HARNESS-003",
+  "build": "live",
+  "category": "ATT",
+  "claim": "ATT MTU negotiated 64 (server 64 / client 517); CCCD at handle 0x0078 = 0100; FFE1 0x0075, FFE2 0x0077",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-*/harness-session/harness-gatt-sequence.json",
+  "address": "0x0075/0x0077/0x0078",
+  "function": "",
+  "snippet_file": "",
+  "notes": ""
+ },
+ {
+  "id": "D2-LIVE-HARNESS-004",
+  "build": "live",
+  "category": "TX",
+  "claim": "control sequence with timestamps: 0B a5040bb4@25.012 -> a5050b30e5@25.033; D2 OFF@27.017; D2 ENABLE a505d2017d@28.521 as ATT Write Command (0x52); 10 s idle; D2 OFF@38.531; Disconnect Complete@42.147",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-*/harness-session/harness-gatt-sequence.json",
+  "address": "0x0075",
+  "function": "",
+  "snippet_file": "",
+  "notes": ""
+ },
+ {
+  "id": "D2-LIVE-HARNESS-005",
+  "build": "live",
+  "category": "RX",
+  "claim": "0 valid A5 12 02 frames during the 10 s idle window; only the 0B reply and 3 D2 echoes (4 notifications)",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-*/harness-session/harness-timeline.csv",
+  "address": "",
+  "function": "",
+  "snippet_file": "",
+  "notes": "reproduces the historical silence on the current code path"
+ },
+ {
+  "id": "D2-LIVE-OFF-001",
+  "build": "live",
+  "category": "BLOCK",
+  "claim": "official-app session not captured: no ADB transport (adb devices empty; 5555/37000/40001 refused; no mDNS service; no USB device) after one acknowledged operator dialog",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-*/android-prestate.txt",
+  "address": "",
+  "function": "",
+  "snippet_file": "",
+  "notes": "ANDROID_HCI_CAPTURE_UNAVAILABLE - verdict PARTIAL"
  }
 ]

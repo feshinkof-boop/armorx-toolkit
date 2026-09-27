@@ -1,0 +1,44 @@
+{
+ "total_notifications": 4,
+ "by_kind": {
+  "wrong_length_5": 1,
+  "d2_echo": 3
+ },
+ "valid_status_frames": 0,
+ "frames": [
+  {
+   "t": 20.62,
+   "hex": "a5050b30e5",
+   "kind": "wrong_length_5",
+   "mask": null,
+   "keys": null
+  },
+  {
+   "t": 22.636,
+   "hex": "a505d2007c",
+   "kind": "d2_echo",
+   "mask": null,
+   "keys": null
+  },
+  {
+   "t": 24.13,
+   "hex": "a505d2017d",
+   "kind": "d2_echo",
+   "mask": null,
+   "keys": null
+  },
+  {
+   "t": 34.14,
+   "hex": "a505d2007c",
+   "kind": "d2_echo",
+   "mask": null,
+   "keys": null
+  }
+ ],
+ "case": "C0",
+ "identity": {
+  "2a24": "5a4a2d5854",
+  "2a26": "32373431",
+  "2a19": "3a"
+ }
+}

@@ -1,0 +1,193 @@
+{
+ "connection_events": 0,
+ "first_conn_event": null,
+ "after_connect_s": null,
+ "d2_enable": {
+  "dir": "TX",
+  "t": 28.520716,
+  "opcode": "Write Command",
+  "handle": "0x0075",
+  "uuid": "",
+  "value": "a505d2017d",
+  "layer": "ATT",
+  "att_code": "0x52",
+  "classification": "D2_ENABLE"
+ },
+ "d2_disable": {
+  "dir": "TX",
+  "t": 27.01686,
+  "opcode": "Write Command",
+  "handle": "0x0075",
+  "uuid": "",
+  "value": "a505d2007c",
+  "layer": "ATT",
+  "att_code": "0x52",
+  "classification": "D2_DISABLE"
+ },
+ "d2_enable_to_disable_s": -1.503855999999999,
+ "cccd_events": [
+  {
+   "dir": "TX",
+   "t": 24.891714,
+   "opcode": "Write Request",
+   "handle": "0x0021",
+   "uuid": "",
+   "value": "0100",
+   "layer": "ATT",
+   "att_code": "0x12",
+   "classification": "CCCD_WRITE"
+  },
+  {
+   "dir": "TX",
+   "t": 24.985714,
+   "opcode": "Write Request",
+   "handle": "0x0077",
+   "uuid": "",
+   "value": "0100",
+   "layer": "ATT",
+   "att_code": "0x12",
+   "classification": "CCCD_WRITE"
+  },
+  {
+   "dir": "TX",
+   "t": 39.534718,
+   "opcode": "Write Request",
+   "handle": "0x0077",
+   "uuid": "",
+   "value": "0000",
+   "layer": "ATT",
+   "att_code": "0x12",
+   "classification": "CCCD_WRITE"
+  }
+ ],
+ "cccd_first_s_after_connect": null,
+ "button_frames": 0,
+ "button_frame_kinds": {
+  "LINK_PARAMS": 1,
+  "Exchange MTU Request": 1,
+  "Exchange MTU Response": 1,
+  "Read By Type Request": 1,
+  "Error Response": 2,
+  "Read By Group Type Request": 4,
+  "OTHER": 3,
+  "Read By Group Type Response": 3,
+  "WRITE_OTHER": 5,
+  "Read Request": 8,
+  "Read Response": 8,
+  "CCCD_WRITE": 3,
+  "CTRL_QUERY_0B": 1,
+  "CTRL_REPLY_0B": 1,
+  "D2_DISABLE": 2,
+  "D2_ECHO": 3,
+  "D2_ENABLE": 1
+ },
+ "writes_before_d2": [
+  {
+   "dir": "TX",
+   "t": 24.730118,
+   "opcode": "Write Request",
+   "handle": "0x000a",
+   "uuid": "",
+   "value": "0200",
+   "layer": "ATT",
+   "att_code": "0x12",
+   "classification": "WRITE_OTHER"
+  },
+  {
+   "dir": "RX",
+   "t": 24.754715,
+   "opcode": "Write Response",
+   "handle": null,
+   "uuid": null,
+   "value": "",
+   "layer": "ATT",
+   "att_code": "0x13",
+   "classification": "WRITE_OTHER"
+  },
+  {
+   "dir": "TX",
+   "t": 24.891714,
+   "opcode": "Write Request",
+   "handle": "0x0021",
+   "uuid": "",
+   "value": "0100",
+   "layer": "ATT",
+   "att_code": "0x12",
+   "classification": "CCCD_WRITE"
+  },
+  {
+   "dir": "RX",
+   "t": 24.911714,
+   "opcode": "Write Response",
+   "handle": null,
+   "uuid": null,
+   "value": "",
+   "layer": "ATT",
+   "att_code": "0x13",
+   "classification": "WRITE_OTHER"
+  },
+  {
+   "dir": "TX",
+   "t": 24.985714,
+   "opcode": "Write Request",
+   "handle": "0x0077",
+   "uuid": "",
+   "value": "0100",
+   "layer": "ATT",
+   "att_code": "0x12",
+   "classification": "CCCD_WRITE"
+  },
+  {
+   "dir": "RX",
+   "t": 25.009714,
+   "opcode": "Write Response",
+   "handle": null,
+   "uuid": null,
+   "value": "",
+   "layer": "ATT",
+   "att_code": "0x13",
+   "classification": "WRITE_OTHER"
+  },
+  {
+   "dir": "TX",
+   "t": 25.012666,
+   "opcode": "Write Command",
+   "handle": "0x0075",
+   "uuid": "",
+   "value": "a5040bb4",
+   "layer": "ATT",
+   "att_code": "0x52",
+   "classification": "CTRL_QUERY_0B"
+  },
+  {
+   "dir": "TX",
+   "t": 27.01686,
+   "opcode": "Write Command",
+   "handle": "0x0075",
+   "uuid": "",
+   "value": "a505d2007c",
+   "layer": "ATT",
+   "att_code": "0x52",
+   "classification": "D2_DISABLE"
+  }
+ ],
+ "counts": {
+  "LINK_PARAMS": 1,
+  "Exchange MTU Request": 1,
+  "Exchange MTU Response": 1,
+  "Read By Type Request": 1,
+  "Error Response": 2,
+  "Read By Group Type Request": 4,
+  "OTHER": 3,
+  "Read By Group Type Response": 3,
+  "WRITE_OTHER": 5,
+  "Read Request": 8,
+  "Read Response": 8,
+  "CCCD_WRITE": 3,
+  "CTRL_QUERY_0B": 1,
+  "CTRL_REPLY_0B": 1,
+  "D2_DISABLE": 2,
+  "D2_ECHO": 3,
+  "D2_ENABLE": 1
+ }
+}

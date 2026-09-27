@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_android_setup",
+ "title": "ArmorX Android Capture",
+ "response": "done",
+ "clicked_at": "2026-09-27T19:09:22-04:00",
+ "gui": "kdialog",
+ "pid": 229425
+}

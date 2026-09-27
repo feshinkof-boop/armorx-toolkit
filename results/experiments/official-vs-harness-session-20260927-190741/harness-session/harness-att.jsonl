@@ -1,0 +1,48 @@
+{"dir": "LINK", "t": 24.581308, "layer": "HCI", "opcode": "LE_LINK_PARAMETERS", "value": "", "classification": "LINK_PARAMS", "link": {"supervision_timeout": 2000, "connection_interval": 7.5, "mtu_seen": [517, 64], "peripheral_latency": 0}}
+{"dir": "TX", "t": 24.581308, "opcode": "Exchange MTU Request", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x02", "classification": "Exchange MTU Request"}
+{"dir": "RX", "t": 24.60372, "opcode": "Exchange MTU Response", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x03", "classification": "Exchange MTU Response"}
+{"dir": "TX", "t": 24.604809, "opcode": "Read By Type Request", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x08", "classification": "Read By Type Request"}
+{"dir": "RX", "t": 24.627715, "opcode": "Error Response", "handle": "0x0001", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x01", "classification": "Error Response"}
+{"dir": "TX", "t": 24.628812, "opcode": "Read By Group Type Request", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x10", "classification": "Read By Group Type Request"}
+{"dir": "RX", "t": 24.648715, "opcode": null, "handle": null, "uuid": null, "value": "", "layer": "ATT", "classification": "OTHER"}
+{"dir": "RX", "t": 24.648717, "opcode": "Read By Group Type Response", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x11", "classification": "Read By Group Type Response"}
+{"dir": "TX", "t": 24.649811, "opcode": "Read By Group Type Request", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x10", "classification": "Read By Group Type Request"}
+{"dir": "RX", "t": 24.671714, "opcode": "Read By Group Type Response", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x11", "classification": "Read By Group Type Response"}
+{"dir": "TX", "t": 24.672808, "opcode": "Read By Group Type Request", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x10", "classification": "Read By Group Type Request"}
+{"dir": "RX", "t": 24.693714, "opcode": "Read By Group Type Response", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x11", "classification": "Read By Group Type Response"}
+{"dir": "TX", "t": 24.694171, "opcode": "Read By Group Type Request", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x10", "classification": "Read By Group Type Request"}
+{"dir": "RX", "t": 24.717715, "opcode": "Error Response", "handle": "0x0086", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x01", "classification": "Error Response"}
+{"dir": "TX", "t": 24.730118, "opcode": "Write Request", "handle": "0x000a", "uuid": "", "value": "0200", "layer": "ATT", "att_code": "0x12", "classification": "WRITE_OTHER"}
+{"dir": "RX", "t": 24.754715, "opcode": "Write Response", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x13", "classification": "WRITE_OTHER"}
+{"dir": "TX", "t": 24.75584, "opcode": "Read Request", "handle": "0x0003", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0a", "classification": "Read Request"}
+{"dir": "RX", "t": 24.776715, "opcode": "Read Response", "handle": "0x0003", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0b", "classification": "Read Response"}
+{"dir": "TX", "t": 24.77794, "opcode": "Read Request", "handle": "0x0005", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0a", "classification": "Read Request"}
+{"dir": "RX", "t": 24.798716, "opcode": "Read Response", "handle": "0x0005", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0b", "classification": "Read Response"}
+{"dir": "TX", "t": 24.798879, "opcode": "Read Request", "handle": "0x0007", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0a", "classification": "Read Request"}
+{"dir": "RX", "t": 24.82272, "opcode": "Read Response", "handle": "0x0007", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0b", "classification": "Read Response"}
+{"dir": "TX", "t": 24.823033, "opcode": "Read Request", "handle": "0x001e", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0a", "classification": "Read Request"}
+{"dir": "RX", "t": 24.844714, "opcode": "Read Response", "handle": "0x001e", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0b", "classification": "Read Response"}
+{"dir": "TX", "t": 24.844795, "opcode": "Read Request", "handle": "0x0021", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0a", "classification": "Read Request"}
+{"dir": "RX", "t": 24.866716, "opcode": "Read Response", "handle": "0x0021", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0b", "classification": "Read Response"}
+{"dir": "TX", "t": 24.866755, "opcode": "Read Request", "handle": "0x0010", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0a", "classification": "Read Request"}
+{"dir": "RX", "t": 24.889714, "opcode": "Read Response", "handle": "0x0010", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0b", "classification": "Read Response"}
+{"dir": "TX", "t": 24.891714, "opcode": "Write Request", "handle": "0x0021", "uuid": "", "value": "0100", "layer": "ATT", "att_code": "0x12", "classification": "CCCD_WRITE"}
+{"dir": "RX", "t": 24.911714, "opcode": "Write Response", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x13", "classification": "WRITE_OTHER"}
+{"dir": "RX", "t": 24.911716, "opcode": null, "handle": null, "uuid": null, "value": "", "layer": "ATT", "classification": "OTHER"}
+{"dir": "TX", "t": 24.912738, "opcode": null, "handle": null, "uuid": null, "value": "", "layer": "ATT", "classification": "OTHER"}
+{"dir": "TX", "t": 24.923713, "opcode": "Read Request", "handle": "0x0016", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0a", "classification": "Read Request"}
+{"dir": "RX", "t": 24.949715, "opcode": "Read Response", "handle": "0x0016", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0b", "classification": "Read Response"}
+{"dir": "TX", "t": 24.954939, "opcode": "Read Request", "handle": "0x0021", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0a", "classification": "Read Request"}
+{"dir": "RX", "t": 24.978714, "opcode": "Read Response", "handle": "0x0021", "uuid": "", "value": "", "layer": "ATT", "att_code": "0x0b", "classification": "Read Response"}
+{"dir": "TX", "t": 24.985714, "opcode": "Write Request", "handle": "0x0077", "uuid": "", "value": "0100", "layer": "ATT", "att_code": "0x12", "classification": "CCCD_WRITE"}
+{"dir": "RX", "t": 25.009714, "opcode": "Write Response", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x13", "classification": "WRITE_OTHER"}
+{"dir": "TX", "t": 25.012666, "opcode": "Write Command", "handle": "0x0075", "uuid": "", "value": "a5040bb4", "layer": "ATT", "att_code": "0x52", "classification": "CTRL_QUERY_0B"}
+{"dir": "RX", "t": 25.032717, "opcode": "Handle Value Notification", "handle": "0x0077", "uuid": "", "value": "a5050b30e5", "layer": "ATT", "att_code": "0x1b", "classification": "CTRL_REPLY_0B"}
+{"dir": "TX", "t": 27.01686, "opcode": "Write Command", "handle": "0x0075", "uuid": "", "value": "a505d2007c", "layer": "ATT", "att_code": "0x52", "classification": "D2_DISABLE"}
+{"dir": "RX", "t": 27.048724, "opcode": "Handle Value Notification", "handle": "0x0077", "uuid": "", "value": "a505d2007c", "layer": "ATT", "att_code": "0x1b", "classification": "D2_ECHO"}
+{"dir": "TX", "t": 28.520716, "opcode": "Write Command", "handle": "0x0075", "uuid": "", "value": "a505d2017d", "layer": "ATT", "att_code": "0x52", "classification": "D2_ENABLE"}
+{"dir": "RX", "t": 28.542716, "opcode": "Handle Value Notification", "handle": "0x0077", "uuid": "", "value": "a505d2017d", "layer": "ATT", "att_code": "0x1b", "classification": "D2_ECHO"}
+{"dir": "TX", "t": 38.531185, "opcode": "Write Command", "handle": "0x0075", "uuid": "", "value": "a505d2007c", "layer": "ATT", "att_code": "0x52", "classification": "D2_DISABLE"}
+{"dir": "RX", "t": 38.55372, "opcode": "Handle Value Notification", "handle": "0x0077", "uuid": "", "value": "a505d2007c", "layer": "ATT", "att_code": "0x1b", "classification": "D2_ECHO"}
+{"dir": "TX", "t": 39.534718, "opcode": "Write Request", "handle": "0x0077", "uuid": "", "value": "0000", "layer": "ATT", "att_code": "0x12", "classification": "CCCD_WRITE"}
+{"dir": "RX", "t": 39.559715, "opcode": "Write Response", "handle": null, "uuid": null, "value": "", "layer": "ATT", "att_code": "0x13", "classification": "WRITE_OTHER"}

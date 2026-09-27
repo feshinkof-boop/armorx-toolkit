@@ -1,0 +1,1066 @@
+Bluetooth monitor ver 5.85
+= Note: Linux version 7.0.0-34-generic (x86_64)                        0.351516
+= Note: Bluetooth subsystem version 2.22                               0.351518
+= New Index: E8:4E:06:8A:F2:00 (Primary,USB,hci1)               [hci1] 0.351518
+= Open Index: E8:4E:06:8A:F2:00                                 [hci1] 0.351518
+= Index Info: E8:4E:06:8.. (Realtek Semiconductor Corporation)  [hci1] 0.351519
+= New Index: 4C:82:A9:93:53:0C (Primary,USB,hci0)               [hci0] 0.351519
+= Open Index: 4C:82:A9:93:53:0C                                 [hci0] 0.351519
+= Index Info: 4C:82:A9:93:53:0C (Qualcomm)                      [hci0] 0.351520
+@ MGMT Open: bluetoothd (privileged) version 1.23             {0x0001} 0.351521
+@ MGMT Command: Start Service Disco.. (0x003a) plen 4  {0x0001} [hci1] 4.432707
+        Address type: 0x06
+          LE Public
+          LE Random
+        RSSI: invalid (0x7f)
+        UUIDs: 0
+< HCI Command: LE Set Random Address (0x08|0x0005) plen 6    #1 [hci1] 4.433739
+        Address: 1A:DE:6C:A9:DF:90 (Non-Resolvable)
+> HCI Event: Command Complete (0x0e) plen 4                  #2 [hci1] 4.434632
+      LE Set Random Address (0x08|0x0005) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Parameters (0x08|0x000b) plen 7   #3 [hci1] 4.436665
+        Type: Active (0x01)
+        Interval: 11.250 msec (0x0012)
+        Window: 11.250 msec (0x0012)
+        Own address type: Random (0x01)
+        Filter policy: Accept all advertisement (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                  #4 [hci1] 4.437629
+      LE Set Scan Parameters (0x08|0x000b) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2       #5 [hci1] 4.439713
+        Scanning: Enabled (0x01)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                  #6 [hci1] 4.440630
+      LE Set Scan Enable (0x08|0x000c) ncmd 2
+        Status: Success (0x00)
+@ MGMT Event: Discovering (0x0013) plen 2              {0x0001} [hci1] 4.440688
+        Address type: 0x06
+          LE Public
+          LE Random
+        Discovery: Enabled (0x01)
+@ MGMT Event: Command Complete (0x0001) plen 4         {0x0001} [hci1] 4.440714
+      Start Service Discovery (0x003a) plen 1
+        Status: Success (0x00)
+        Address type: 0x06
+          LE Public
+          LE Random
+> HCI Event: LE Meta Event (0x3e) plen 53                    #7 [hci1] 4.481632
+      LE Advertising Report (0x02)
+        Num reports: 2
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Data length: 12
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: not assigned (65534)
+          Data[5]: 5a4a2d5854
+        RSSI: -86 dBm (0xaa)
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 45:68:FF:CB:7C:71 (Resolvable)
+        Data length: 19
+        Flags: 0x1a
+          LE General Discoverable Mode
+          Simultaneous LE and BR/EDR (Controller)
+          Simultaneous LE and BR/EDR (Host)
+        TX power: 12 dBm
+        Company: Apple, Inc. (76)
+          Type: Unknown (16)
+          Data[7]: 301fdc0926f328
+        RSSI: -92 dBm (0xa4)
+@ MGMT Event: Device Found (0x0012) plen 26            {0x0001} [hci1] 4.481666
+        LE Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        RSSI: -86 dBm (0xaa)
+        Flags: 0x00000000
+        Data length: 12
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: not assigned (65534)
+          Data[5]: 5a4a2d5854
+> HCI Event: LE Meta Event (0x3e) plen 20                    #8 [hci1] 4.637672
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Non connectable undirected - ADV_NONCONN_IND (0x03)
+        Address type: Random (0x01)
+        Address: F2:00:35:23:33:5E (Static)
+        Data length: 8
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[2]: 0001
+        RSSI: -92 dBm (0xa4)
+@ MGMT Event: Device Found (0x0012) plen 33            {0x0001} [hci1] 4.637691
+        LE Address: 45:68:FF:CB:7C:71 (Resolvable)
+        RSSI: -92 dBm (0xa4)
+        Flags: 0x00000000
+        Data length: 19
+        Flags: 0x1a
+          LE General Discoverable Mode
+          Simultaneous LE and BR/EDR (Controller)
+          Simultaneous LE and BR/EDR (Host)
+        TX power: 12 dBm
+        Company: Apple, Inc. (76)
+          Type: Unknown (16)
+          Data[7]: 301fdc0926f328
+@ MGMT Event: Device Found (0x0012) plen 22            {0x0001} [hci1] 4.637694
+        LE Address: F2:00:35:23:33:5E (Static)
+        RSSI: -92 dBm (0xa4)
+        Flags: 0x00000004
+          Not Connectable
+        Data length: 8
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[2]: 0001
+> HCI Event: LE Meta Event (0x3e) plen 31                    #9 [hci1] 4.926666
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Non connectable undirected - ADV_NONCONN_IND (0x03)
+        Address type: Public (0x00)
+        Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        Data length: 19
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: Xiaomi Inc. (911)
+          Data[12]: 0a10420c01dc9758777041ec
+        RSSI: -80 dBm (0xb0)
+@ MGMT Event: Device Found (0x0012) plen 33            {0x0001} [hci1] 4.926727
+        LE Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        RSSI: -80 dBm (0xb0)
+        Flags: 0x00000004
+          Not Connectable
+        Data length: 19
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: Xiaomi Inc. (911)
+          Data[12]: 0a10420c01dc9758777041ec
+> HCI Event: LE Meta Event (0x3e) plen 39                   #10 [hci1] 5.110624
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 2B:ED:4F:8F:9A:09 (Non-Resolvable)
+        Data length: 27
+        Flags: 0x02
+          LE General Discoverable Mode
+        Service Data: Unknown (0xfcf1)
+          Data[20]: 049caf0d5e13638674d4456f983bb36eea4fb8b3
+        RSSI: -92 dBm (0xa4)
+> HCI Event: LE Meta Event (0x3e) plen 32                   #11 [hci1] 5.137616
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: DC:23:4F:80:DD:EE (OUI DC-23-4F)
+        Data length: 20
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (partial): 1 entry
+          Unknown (0xa201)
+        Service Data: Unknown (0xa201)
+          Data[9]: 0016aef15ae1f7221a
+        RSSI: -78 dBm (0xb2)
+@ MGMT Event: Device Found (0x0012) plen 41            {0x0001} [hci1] 5.137645
+        LE Address: 2B:ED:4F:8F:9A:09 (Non-Resolvable)
+        RSSI: -92 dBm (0xa4)
+        Flags: 0x00000000
+        Data length: 27
+        Flags: 0x02
+          LE General Discoverable Mode
+        Service Data: Unknown (0xfcf1)
+          Data[20]: 049caf0d5e13638674d4456f983bb36eea4fb8b3
+> HCI Event: LE Meta Event (0x3e) plen 38                   #12 [hci1] 5.268617
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 3E:F4:21:B2:DE:4C (Non-Resolvable)
+        Data length: 26
+        Flags: 0x02
+          LE General Discoverable Mode
+        Service Data: Unknown (0xfcf1)
+          Data[19]: 04fd6ac05ab5fc92f3fe7319b6642242f360ea
+        RSSI: -92 dBm (0xa4)
+@ MGMT Event: Device Found (0x0012) plen 34            {0x0001} [hci1] 5.268652
+        LE Address: DC:23:4F:80:DD:EE (OUI DC-23-4F)
+        RSSI: -78 dBm (0xb2)
+        Flags: 0x00000000
+        Data length: 20
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        16-bit Service UUIDs (partial): 1 entry
+          Unknown (0xa201)
+        Service Data: Unknown (0xa201)
+          Data[9]: 0016aef15ae1f7221a
+> HCI Event: LE Meta Event (0x3e) plen 20                   #13 [hci1] 7.551555
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Non connectable undirected - ADV_NONCONN_IND (0x03)
+        Address type: Random (0x01)
+        Address: D4:8A:25:66:2C:59 (Static)
+        Data length: 8
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[2]: 0000
+        RSSI: -94 dBm (0xa2)
+@ MGMT Event: Device Found (0x0012) plen 40            {0x0001} [hci1] 7.551732
+        LE Address: 3E:F4:21:B2:DE:4C (Non-Resolvable)
+        RSSI: -92 dBm (0xa4)
+        Flags: 0x00000000
+        Data length: 26
+        Flags: 0x02
+          LE General Discoverable Mode
+        Service Data: Unknown (0xfcf1)
+          Data[19]: 04fd6ac05ab5fc92f3fe7319b6642242f360ea
+@ MGMT Event: Device Found (0x0012) plen 22            {0x0001} [hci1] 7.551738
+        LE Address: D4:8A:25:66:2C:59 (Static)
+        RSSI: -94 dBm (0xa2)
+        Flags: 0x00000004
+          Not Connectable
+        Data length: 8
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[2]: 0000
+> HCI Event: LE Meta Event (0x3e) plen 29                   #14 [hci1] 7.629551
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 66:F0:00:DA:32:2B (Resolvable)
+        Data length: 17
+        Flags: 0x1a
+          LE General Discoverable Mode
+          Simultaneous LE and BR/EDR (Controller)
+          Simultaneous LE and BR/EDR (Host)
+        TX power: 8 dBm
+        Company: Apple, Inc. (76)
+          Type: Unknown (16)
+          Data[5]: 3e189d8b26
+        RSSI: -94 dBm (0xa2)
+> HCI Event: LE Meta Event (0x3e) plen 43                  #15 [hci1] 12.093476
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 49:7A:92:CC:ED:66 (Resolvable)
+        Data length: 31
+        Flags: 0x02
+          LE General Discoverable Mode
+        16-bit Service UUIDs (complete): 1 entry
+          Samsung Electronics Co., Ltd. (0xfd69)
+        Service Data: Samsung Electronics Co., Ltd. (0xfd69)
+          Data[20]: 107160479cf4799484c1301d1a56001e5b7d8231
+        RSSI: -90 dBm (0xa6)
+@ MGMT Event: Device Found (0x0012) plen 31           {0x0001} [hci1] 12.093503
+        LE Address: 66:F0:00:DA:32:2B (Resolvable)
+        RSSI: -94 dBm (0xa2)
+        Flags: 0x00000000
+        Data length: 17
+        Flags: 0x1a
+          LE General Discoverable Mode
+          Simultaneous LE and BR/EDR (Controller)
+          Simultaneous LE and BR/EDR (Host)
+        TX power: 8 dBm
+        Company: Apple, Inc. (76)
+          Type: Unknown (16)
+          Data[5]: 3e189d8b26
+> HCI Event: LE Meta Event (0x3e) plen 43                  #16 [hci1] 13.931390
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Non connectable undirected - ADV_NONCONN_IND (0x03)
+        Address type: Random (0x01)
+        Address: E4:61:D1:D3:02:43 (Static)
+        Data length: 31
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[25]: 00687e519e6c3cf5094dd1e3eb51bb6b14f9d9162f6c500100
+        RSSI: -96 dBm (0xa0)
+@ MGMT Event: Device Found (0x0012) plen 45           {0x0001} [hci1] 13.931881
+        LE Address: 49:7A:92:CC:ED:66 (Resolvable)
+        RSSI: -90 dBm (0xa6)
+        Flags: 0x00000000
+        Data length: 31
+        Flags: 0x02
+          LE General Discoverable Mode
+        16-bit Service UUIDs (complete): 1 entry
+          Samsung Electronics Co., Ltd. (0xfd69)
+        Service Data: Samsung Electronics Co., Ltd. (0xfd69)
+          Data[20]: 107160479cf4799484c1301d1a56001e5b7d8231
+@ MGMT Event: Device Found (0x0012) plen 45           {0x0001} [hci1] 13.931888
+        LE Address: E4:61:D1:D3:02:43 (Static)
+        RSSI: -96 dBm (0xa0)
+        Flags: 0x00000004
+          Not Connectable
+        Data length: 31
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[25]: 00687e519e6c3cf5094dd1e3eb51bb6b14f9d9162f6c500100
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci1] 14.711724
+        Address type: 0x06
+          LE Public
+          LE Random
+        Discovery: Disabled (0x00)
+@ MGMT Command: Start Service Disc.. (0x003a) plen 4  {0x0001} [hci1] 14.711840
+        Address type: 0x06
+          LE Public
+          LE Random
+        RSSI: invalid (0x7f)
+        UUIDs: 0
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2     #17 [hci1] 14.712715
+        Scanning: Disabled (0x00)
+        Filter duplicates: Disabled (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                #18 [hci1] 14.714364
+      LE Set Scan Enable (0x08|0x000c) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Random Address (0x08|0x0005) plen 6  #19 [hci1] 14.715321
+        Address: 0A:E5:05:A2:D9:E4 (Non-Resolvable)
+> HCI Event: Command Complete (0x0e) plen 4                #20 [hci1] 14.716359
+      LE Set Random Address (0x08|0x0005) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Paramet.. (0x08|0x000b) plen 7  #21 [hci1] 14.717713
+        Type: Active (0x01)
+        Interval: 11.250 msec (0x0012)
+        Window: 11.250 msec (0x0012)
+        Own address type: Random (0x01)
+        Filter policy: Accept all advertisement (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                #22 [hci1] 14.719357
+      LE Set Scan Parameters (0x08|0x000b) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2     #23 [hci1] 14.720712
+        Scanning: Enabled (0x01)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                #24 [hci1] 14.722358
+      LE Set Scan Enable (0x08|0x000c) ncmd 2
+        Status: Success (0x00)
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci1] 14.722367
+        Address type: 0x06
+          LE Public
+          LE Random
+        Discovery: Enabled (0x01)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci1] 14.722714
+      Start Service Discovery (0x003a) plen 1
+        Status: Success (0x00)
+        Address type: 0x06
+          LE Public
+          LE Random
+> HCI Event: LE Meta Event (0x3e) plen 31                  #25 [hci1] 14.736361
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Non connectable undirected - ADV_NONCONN_IND (0x03)
+        Address type: Public (0x00)
+        Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        Data length: 19
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: Xiaomi Inc. (911)
+          Data[12]: 0a10420c01dc9758777041ec
+        RSSI: -80 dBm (0xb0)
+@ MGMT Event: Device Found (0x0012) plen 33           {0x0001} [hci1] 14.736723
+        LE Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        RSSI: -80 dBm (0xb0)
+        Flags: 0x00000004
+          Not Connectable
+        Data length: 19
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: Xiaomi Inc. (911)
+          Data[12]: 0a10420c01dc9758777041ec
+> HCI Event: LE Meta Event (0x3e) plen 24                  #26 [hci1] 14.918363
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Data length: 12
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: not assigned (65534)
+          Data[5]: 5a4a2d5854
+        RSSI: -86 dBm (0xaa)
+> HCI Event: LE Meta Event (0x3e) plen 38                  #27 [hci1] 15.864340
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 3E:F4:21:B2:DE:4C (Non-Resolvable)
+        Data length: 26
+        Flags: 0x02
+          LE General Discoverable Mode
+        Service Data: Unknown (0xfcf1)
+          Data[19]: 04fd6ac05ab5fc92f3fe7319b6642242f360ea
+        RSSI: -92 dBm (0xa4)
+@ MGMT Event: Device Found (0x0012) plen 26           {0x0001} [hci1] 15.864730
+        LE Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        RSSI: -86 dBm (0xaa)
+        Flags: 0x00000000
+        Data length: 12
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: not assigned (65534)
+          Data[5]: 5a4a2d5854
+> HCI Event: LE Meta Event (0x3e) plen 42                  #28 [hci1] 15.996335
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: DC:23:4F:80:DD:EE (OUI DC-23-4F)
+        Data length: 30
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: Apple, Inc. (76)
+          Type: iBeacon (2)
+          UUID: 39333062-6162-6566-6335-366164697575
+          Version: 0.0
+          TX power: -50 dB
+        RSSI: -84 dBm (0xac)
+@ MGMT Event: Device Found (0x0012) plen 40           {0x0001} [hci1] 15.996729
+        LE Address: 3E:F4:21:B2:DE:4C (Non-Resolvable)
+        RSSI: -92 dBm (0xa4)
+        Flags: 0x00000000
+        Data length: 26
+        Flags: 0x02
+          LE General Discoverable Mode
+        Service Data: Unknown (0xfcf1)
+          Data[19]: 04fd6ac05ab5fc92f3fe7319b6642242f360ea
+> HCI Event: LE Meta Event (0x3e) plen 39                  #29 [hci1] 16.258330
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 2B:ED:4F:8F:9A:09 (Non-Resolvable)
+        Data length: 27
+        Flags: 0x02
+          LE General Discoverable Mode
+        Service Data: Unknown (0xfcf1)
+          Data[20]: 049caf0d5e13638674d4456f983bb36eea4fb8b3
+        RSSI: -90 dBm (0xa6)
+@ MGMT Event: Device Found (0x0012) plen 44           {0x0001} [hci1] 16.258364
+        LE Address: DC:23:4F:80:DD:EE (OUI DC-23-4F)
+        RSSI: -84 dBm (0xac)
+        Flags: 0x00000000
+        Data length: 30
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: Apple, Inc. (76)
+          Type: iBeacon (2)
+          UUID: 39333062-6162-6566-6335-366164697575
+          Version: 0.0
+          TX power: -50 dB
+> HCI Event: LE Meta Event (0x3e) plen 31                  #30 [hci1] 16.888314
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 45:68:FF:CB:7C:71 (Resolvable)
+        Data length: 19
+        Flags: 0x1a
+          LE General Discoverable Mode
+          Simultaneous LE and BR/EDR (Controller)
+          Simultaneous LE and BR/EDR (Host)
+        TX power: 12 dBm
+        Company: Apple, Inc. (76)
+          Type: Unknown (16)
+          Data[7]: 301fdc0926f328
+        RSSI: -90 dBm (0xa6)
+@ MGMT Event: Device Found (0x0012) plen 41           {0x0001} [hci1] 16.888352
+        LE Address: 2B:ED:4F:8F:9A:09 (Non-Resolvable)
+        RSSI: -90 dBm (0xa6)
+        Flags: 0x00000000
+        Data length: 27
+        Flags: 0x02
+          LE General Discoverable Mode
+        Service Data: Unknown (0xfcf1)
+          Data[20]: 049caf0d5e13638674d4456f983bb36eea4fb8b3
+> HCI Event: LE Meta Event (0x3e) plen 43                  #31 [hci1] 19.933235
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Non connectable undirected - ADV_NONCONN_IND (0x03)
+        Address type: Random (0x01)
+        Address: E4:61:D1:D3:02:43 (Static)
+        Data length: 31
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[25]: 00687e519e6c3cf5094dd1e3eb51bb6b14f9d9162f6c500100
+        RSSI: -88 dBm (0xa8)
+@ MGMT Event: Device Found (0x0012) plen 33           {0x0001} [hci1] 19.933272
+        LE Address: 45:68:FF:CB:7C:71 (Resolvable)
+        RSSI: -90 dBm (0xa6)
+        Flags: 0x00000000
+        Data length: 19
+        Flags: 0x1a
+          LE General Discoverable Mode
+          Simultaneous LE and BR/EDR (Controller)
+          Simultaneous LE and BR/EDR (Host)
+        TX power: 12 dBm
+        Company: Apple, Inc. (76)
+          Type: Unknown (16)
+          Data[7]: 301fdc0926f328
+@ MGMT Event: Device Found (0x0012) plen 45           {0x0001} [hci1] 19.933280
+        LE Address: E4:61:D1:D3:02:43 (Static)
+        RSSI: -88 dBm (0xa8)
+        Flags: 0x00000004
+          Not Connectable
+        Data length: 31
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[25]: 00687e519e6c3cf5094dd1e3eb51bb6b14f9d9162f6c500100
+> HCI Event: LE Meta Event (0x3e) plen 12                  #32 [hci1] 20.351217
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Scan response - SCAN_RSP (0x04)
+        Address type: Random (0x01)
+        Address: 55:72:B7:19:42:DF (Resolvable)
+        Data length: 0
+        RSSI: -96 dBm (0xa0)
+@ MGMT Event: Device Found (0x0012) plen 14           {0x0001} [hci1] 20.351246
+        LE Address: 55:72:B7:19:42:DF (Resolvable)
+        RSSI: -96 dBm (0xa0)
+        Flags: 0x00000020
+          Scan Response
+        Data length: 0
+> HCI Event: LE Meta Event (0x3e) plen 20                  #33 [hci1] 23.581135
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Non connectable undirected - ADV_NONCONN_IND (0x03)
+        Address type: Random (0x01)
+        Address: D4:8A:25:66:2C:59 (Static)
+        Data length: 8
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[2]: 0000
+        RSSI: -92 dBm (0xa4)
+@ MGMT Event: Device Found (0x0012) plen 22           {0x0001} [hci1] 23.581171
+        LE Address: D4:8A:25:66:2C:59 (Static)
+        RSSI: -92 dBm (0xa4)
+        Flags: 0x00000004
+          Not Connectable
+        Data length: 8
+        Company: Apple, Inc. (76)
+          Type: Unknown (18)
+          Data[2]: 0000
+> HCI Event: LE Meta Event (0x3e) plen 29                  #34 [hci1] 24.132123
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Random (0x01)
+        Address: 66:F0:00:DA:32:2B (Resolvable)
+        Data length: 17
+        Flags: 0x1a
+          LE General Discoverable Mode
+          Simultaneous LE and BR/EDR (Controller)
+          Simultaneous LE and BR/EDR (Host)
+        TX power: 8 dBm
+        Company: Apple, Inc. (76)
+          Type: Unknown (16)
+          Data[5]: 3e189d8b26
+        RSSI: -92 dBm (0xa4)
+@ MGMT Command: Stop Discovery (0x0024) plen 1        {0x0001} [hci1] 24.443829
+        Address type: 0x06
+          LE Public
+          LE Random
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2     #35 [hci1] 24.443884
+        Scanning: Disabled (0x00)
+        Filter duplicates: Disabled (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                #36 [hci1] 24.445108
+      LE Set Scan Enable (0x08|0x000c) ncmd 2
+        Status: Success (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci1] 24.445139
+      Stop Discovery (0x0024) plen 1
+        Status: Success (0x00)
+        Address type: 0x06
+          LE Public
+          LE Random
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci1] 24.445144
+        Address type: 0x06
+          LE Public
+          LE Random
+        Discovery: Disabled (0x00)
+< HCI Command: LE Add Device To Ac.. (0x08|0x0011) plen 7  #37 [hci1] 24.462522
+        Address type: Public (0x00)
+        Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+> HCI Event: Command Complete (0x0e) plen 4                #38 [hci1] 24.464104
+      LE Add Device To Accept List (0x08|0x0011) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Paramet.. (0x08|0x000b) plen 7  #39 [hci1] 24.464124
+        Type: Passive (0x00)
+        Interval: 60.000 msec (0x0060)
+        Window: 60.000 msec (0x0060)
+        Own address type: Public (0x00)
+        Filter policy: Ignore not in accept list (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                #40 [hci1] 24.465099
+      LE Set Scan Parameters (0x08|0x000b) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2     #41 [hci1] 24.465108
+        Scanning: Enabled (0x01)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                #42 [hci1] 24.466100
+      LE Set Scan Enable (0x08|0x000c) ncmd 2
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 24                  #43 [hci1] 24.529153
+      LE Advertising Report (0x02)
+        Num reports: 1
+        Event type: Connectable undirected - ADV_IND (0x00)
+        Address type: Public (0x00)
+        Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Data length: 12
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: not assigned (65534)
+          Data[5]: 5a4a2d5854
+        RSSI: -80 dBm (0xb0)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2     #44 [hci1] 24.529260
+        Scanning: Disabled (0x00)
+        Filter duplicates: Disabled (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                #45 [hci1] 24.531099
+      LE Set Scan Enable (0x08|0x000c) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Create Connection (0x08|0x000d) plen 25  #46 [hci1] 24.531250
+        Scan interval: 60.000 msec (0x0060)
+        Scan window: 60.000 msec (0x0060)
+        Filter policy: Accept list is not used (0x00)
+        Peer address type: Public (0x00)
+        Peer address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Own address type: Public (0x00)
+        Min connection interval: 7.50 msec (0x0006)
+        Max connection interval: 7.50 msec (0x0006)
+        Connection latency: 0 (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 0.000 msec (0x0000)
+        Max connection length: 0.000 msec (0x0000)
+> HCI Event: Command Status (0x0f) plen 4                  #47 [hci1] 24.533099
+      LE Create Connection (0x08|0x000d) ncmd 2
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 19                  #48 [hci1] 24.561105
+      LE Connection Complete (0x01)
+        Status: Success (0x00)
+        Handle: 16
+        Role: Central (0x00)
+        Peer address type: Public (0x00)
+        Peer address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Connection interval: 7.50 msec (0x0006)
+        Connection latency: 0 (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+        Central clock accuracy: 0x00
+@ MGMT Event: Device Connected (0x000b) plen 25       {0x0001} [hci1] 24.561126
+        LE Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Flags: 0x00000008
+          Connection Locally Initiated
+        Data length: 12
+        Flags: 0x06
+          LE General Discoverable Mode
+          BR/EDR Not Supported
+        Company: not assigned (65534)
+          Data[5]: 5a4a2d5854
+< HCI Command: LE Read Remote Used.. (0x08|0x0016) plen 2  #49 [hci1] 24.565743
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+> HCI Event: Command Status (0x0f) plen 4                  #50 [hci1] 24.567102
+      LE Read Remote Used Features (0x08|0x0016) ncmd 2
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 12                  #51 [hci1] 24.581101
+      LE Read Remote Used Features (0x04)
+        Status: Success (0x00)
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Features[0/0][8]: 0000000000000000
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                 #52 [hci1] 24.581308
+      ATT: Exchange MTU Request (0x02) len 2
+        Client RX MTU: 517
+> HCI Event: Number of Completed Packets (0x13) plen 5     #53 [hci1] 24.588097
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #52: len 7 (9 Kb/s)
+        Latency: 6 msec (6-6 msec ~6 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 7                 #54 [hci1] 24.603720
+      ATT: Exchange MTU Response (0x03) len 2
+        Server RX MTU: 64
+< ACL Data TX: Handle 16 flags 0x00 dlen 11                #55 [hci1] 24.604809
+      ATT: Read By Type Request (0x08) len 6
+        Handle range: 0x0001-0xffff
+        Attribute type: Server Supported Features (0x2b3a)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #56 [hci1] 24.611098
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #55: len 11 (14 Kb/s)
+        Latency: 6 msec (6-6 msec ~6 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 9                 #57 [hci1] 24.627715
+      ATT: Error Response (0x01) len 4
+        Read By Type Request (0x08)
+        Handle: 0x0001
+        Error: Attribute Not Found (0x0a)
+< ACL Data TX: Handle 16 flags 0x00 dlen 11                #58 [hci1] 24.628812
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0001-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #59 [hci1] 24.633097
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #58: len 11 (22 Kb/s)
+        Latency: 4 msec (4-6 msec ~5 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 27                #60 [hci1] 24.648715
+> ACL Data RX: Handle 16 flags 0x01 dlen 3                 #61 [hci1] 24.648717
+      ATT: Read By Group Type Response (0x11) len 25
+        Attribute data length: 6
+        Attribute group list: 4 entries
+        Handle range: 0x0001-0x0007
+        UUID: Generic Access Profile (0x1800)
+        Handle range: 0x0008-0x000b
+        UUID: Generic Attribute Profile (0x1801)
+        Handle range: 0x000c-0x001e
+        UUID: Device Information (0x180a)
+        Handle range: 0x001f-0x0022
+        UUID: Battery Service (0x180f)
+< ACL Data TX: Handle 16 flags 0x00 dlen 11                #62 [hci1] 24.649811
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0023-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #63 [hci1] 24.656096
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #62: len 11 (14 Kb/s)
+        Latency: 6 msec (4-6 msec ~5 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 26                #64 [hci1] 24.671714
+      ATT: Read By Group Type Response (0x11) len 21
+        Attribute data length: 20
+        Attribute group list: 1 entry
+        Handle range: 0x0073-0x0078
+        UUID: Unknown (00000000-0000-1000-8000-00805f9b34fb)
+< ACL Data TX: Handle 16 flags 0x00 dlen 11                #65 [hci1] 24.672808
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0079-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #66 [hci1] 24.678097
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #65: len 11 (17 Kb/s)
+        Latency: 5 msec (4-6 msec ~5 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 12                #67 [hci1] 24.693714
+      ATT: Read By Group Type Response (0x11) len 7
+        Attribute data length: 6
+        Attribute group list: 1 entry
+        Handle range: 0x0080-0x0085
+        UUID: Unknown (0xae00)
+< ACL Data TX: Handle 16 flags 0x00 dlen 11                #68 [hci1] 24.694171
+      ATT: Read By Group Type Request (0x10) len 6
+        Handle range: 0x0086-0xffff
+        Attribute group type: Primary Service (0x2800)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #69 [hci1] 24.701095
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #68: len 11 (14 Kb/s)
+        Latency: 6 msec (4-6 msec ~6 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 9                 #70 [hci1] 24.717715
+      ATT: Error Response (0x01) len 4
+        Read By Group Type Request (0x10)
+        Handle: 0x0086
+        Error: Attribute Not Found (0x0a)
+< ACL Data TX: Handle 16 flags 0x00 dlen 9                 #71 [hci1] 24.730118
+      ATT: Write Request (0x12) len 4
+        Handle: 0x000b Type: Client Characteristic Configuration (0x2902)
+        Value Handle: 0x000a Type: Service Changed (0x2a05)
+          Data[2]: 0200
+            Indication (0x02)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #72 [hci1] 24.738103
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #71: len 9 (10 Kb/s)
+        Latency: 7 msec (4-7 msec ~7 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 5                 #73 [hci1] 24.754715
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                 #74 [hci1] 24.755840
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0003 Type: Device Name (0x2a00)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #75 [hci1] 24.761095
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #74: len 7 (11 Kb/s)
+        Latency: 5 msec (4-7 msec ~6 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 19                #76 [hci1] 24.776715
+      ATT: Read Response (0x0b) len 14
+        Value[14]: 41524d4f522d582050726f5f3131
+        Handle: 0x0003 Type: Device Name (0x2a00)
+        Value[14]: 41524d4f522d582050726f5f3131
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                 #77 [hci1] 24.777940
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0005 Type: Appearance (0x2a01)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #78 [hci1] 24.783138
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #77: len 7 (11 Kb/s)
+        Latency: 5 msec (4-7 msec ~5 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 7                 #79 [hci1] 24.798716
+      ATT: Read Response (0x0b) len 2
+        Value[2]: c103
+        Handle: 0x0005 Type: Appearance (0x2a01)
+        Value[2]: c103
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                 #80 [hci1] 24.798879
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0007 Type: Peripheral Preferred Connection Parameters (0x2a04)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #81 [hci1] 24.806137
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #80: len 7 (8 Kb/s)
+        Latency: 7 msec (4-7 msec ~6 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 13                #82 [hci1] 24.822720
+      ATT: Read Response (0x0b) len 8
+        Value[8]: 060006000000c800
+        Handle: 0x0007 Type: Peripheral Preferred Connection Parameters (0x2a04)
+        Value[8]: 060006000000c800
+@ MGMT Command: Load Connection P.. (0x0035) plen 17  {0x0001} [hci1] 24.822825
+        Parameters: 1
+        LE Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Min connection interval: 6
+        Max connection interval: 6
+        Connection latency: 0 (0x0000)
+        Supervision timeout: 200
+@ MGMT Event: Command Complete (0x0001) plen 3        {0x0001} [hci1] 24.822828
+      Load Connection Parameters (0x0035) plen 0
+        Status: Success (0x00)
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                 #83 [hci1] 24.823033
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x001e Type: PnP ID (0x2a50)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #84 [hci1] 24.828141
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #83: len 7 (11 Kb/s)
+        Latency: 5 msec (4-7 msec ~5 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 12                #85 [hci1] 24.844714
+      ATT: Read Response (0x0b) len 7
+        Value[7]: 02172740002300
+        Handle: 0x001e Type: PnP ID (0x2a50)
+        Value[7]: 02172740002300
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                 #86 [hci1] 24.844795
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0021 Type: Battery Level (0x2a19)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #87 [hci1] 24.851139
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #86: len 7 (9 Kb/s)
+        Latency: 6 msec (4-7 msec ~6 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 6                 #88 [hci1] 24.866716
+      ATT: Read Response (0x0b) len 1
+        Value[1]: 3a
+        Handle: 0x0021 Type: Battery Level (0x2a19)
+        Value[1]: 3a
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                 #89 [hci1] 24.866755
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0010 Type: Model Number String (0x2a24)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #90 [hci1] 24.873094
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #89: len 7 (9 Kb/s)
+        Latency: 6 msec (4-7 msec ~6 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 10                #91 [hci1] 24.889714
+      ATT: Read Response (0x0b) len 5
+        Value[5]: 5a4a2d5854
+        Handle: 0x0010 Type: Model Number String (0x2a24)
+        Value[5]: 5a4a2d5854
+< ACL Data TX: Handle 16 flags 0x00 dlen 9                 #92 [hci1] 24.891714
+      ATT: Write Request (0x12) len 4
+        Handle: 0x0022 Type: Client Characteristic Configuration (0x2902)
+        Value Handle: 0x0021 Type: Battery Level (0x2a19)
+          Data[2]: 0100
+            Notification (0x01)
+> HCI Event: Number of Completed Packets (0x13) plen 5     #93 [hci1] 24.896091
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #92: len 9 (18 Kb/s)
+        Latency: 4 msec (4-7 msec ~5 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 5                 #94 [hci1] 24.911714
+      ATT: Write Response (0x13) len 0
+> ACL Data RX: Handle 16 flags 0x02 dlen 16                #95 [hci1] 24.911716
+      LE L2CAP: Connection Parameter Update Request (0x12) ident 1 len 8
+        Min interval: 6
+        Max interval: 6
+        Peripheral latency: 0
+        Timeout multiplier: 200
+@ MGMT Event: New Connection Para.. (0x001c) plen 16  {0x0001} [hci1] 24.912732
+        Store hint: Reserved (0x11)
+        LE Address: 01:2D:37:35:6D:66 (OUI 01-2D-37)
+        Min connection interval: 6
+        Max connection interval: 6
+        Connection latency: 0 (0x0000)
+        Supervision timeout: 200
+< ACL Data TX: Handle 16 flags 0x00 dlen 10                #96 [hci1] 24.912738
+      LE L2CAP: Connection Parameter Update Response (0x13) ident 1 len 2
+        Result: Connection Parameters accepted (0x0000)
+< HCI Command: LE Connection Update (0x08|0x0013) plen 14  #97 [hci1] 24.912750
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Min connection interval: 7.50 msec (0x0006)
+        Max connection interval: 7.50 msec (0x0006)
+        Connection latency: 0 (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+        Min connection length: 0.000 msec (0x0000)
+        Max connection length: 0.000 msec (0x0000)
+> HCI Event: Command Status (0x0f) plen 4                  #98 [hci1] 24.914088
+      LE Connection Update (0x08|0x0013) ncmd 2
+        Status: Success (0x00)
+> HCI Event: LE Meta Event (0x3e) plen 10                  #99 [hci1] 24.915089
+      LE Connection Update Complete (0x03)
+        Status: Success (0x00)
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Connection interval: 7.50 msec (0x0006)
+        Connection latency: 0 (0x0000)
+        Supervision timeout: 2000 msec (0x00c8)
+> HCI Event: Number of Completed Packets (0x13) plen 5    #100 [hci1] 24.918088
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #96: len 10 (16 Kb/s)
+        Latency: 5 msec (4-7 msec ~5 msec)
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                #101 [hci1] 24.923713
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0016 Type: Firmware Revision String (0x2a26)
+> HCI Event: Number of Completed Packets (0x13) plen 5    #102 [hci1] 24.933091
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #101: len 7 (6 Kb/s)
+        Latency: 9 msec (4-9 msec ~7 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 9                #103 [hci1] 24.949715
+      ATT: Read Response (0x0b) len 4
+        Value[4]: 32373431
+        Handle: 0x0016 Type: Firmware Revision String (0x2a26)
+        Value[4]: 32373431
+< ACL Data TX: Handle 16 flags 0x00 dlen 7                #104 [hci1] 24.954939
+      ATT: Read Request (0x0a) len 2
+        Handle: 0x0021 Type: Battery Level (0x2a19)
+> HCI Event: Number of Completed Packets (0x13) plen 5    #105 [hci1] 24.963089
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #104: len 7 (7 Kb/s)
+        Latency: 8 msec (4-9 msec ~7 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 6                #106 [hci1] 24.978714
+      ATT: Read Response (0x0b) len 1
+        Value[1]: 3a
+        Handle: 0x0021 Type: Battery Level (0x2a19)
+        Value[1]: 3a
+< ACL Data TX: Handle 16 flags 0x00 dlen 9                #107 [hci1] 24.985714
+      ATT: Write Request (0x12) len 4
+        Handle: 0x0078 Type: Client Characteristic Configuration (0x2902)
+        Value Handle: 0x0077 Type: Unknown (0xffe2)
+          Data[2]: 0100
+            Notification (0x01)
+> HCI Event: Number of Completed Packets (0x13) plen 5    #108 [hci1] 24.993088
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #107: len 9 (10 Kb/s)
+        Latency: 7 msec (4-9 msec ~7 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 5                #109 [hci1] 25.009714
+      ATT: Write Response (0x13) len 0
+< ACL Data TX: Handle 16 flags 0x00 dlen 11               #110 [hci1] 25.012666
+      ATT: Write Command (0x52) len 6
+        Handle: 0x0075 Type: Unknown (0xffe1)
+          Data[4]: a5040bb4
+> HCI Event: Number of Completed Packets (0x13) plen 5    #111 [hci1] 25.016086
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #110: len 11 (29 Kb/s)
+        Latency: 3 msec (3-9 msec ~5 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 12               #112 [hci1] 25.032717
+      ATT: Handle Value Notification (0x1b) len 7
+        Handle: 0x0077 Type: Unknown (0xffe2)
+          Data[5]: a5050b30e5
+< ACL Data TX: Handle 16 flags 0x00 dlen 12               #113 [hci1] 27.016860
+      ATT: Write Command (0x52) len 7
+        Handle: 0x0075 Type: Unknown (0xffe1)
+          Data[5]: a505d2007c
+> HCI Event: Number of Completed Packets (0x13) plen 5    #114 [hci1] 27.033082
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #113: len 12 (6 Kb/s)
+        Latency: 16 msec (3-16 msec ~10 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 12               #115 [hci1] 27.048724
+      ATT: Handle Value Notification (0x1b) len 7
+        Handle: 0x0077 Type: Unknown (0xffe2)
+          Data[5]: a505d2007c
+< ACL Data TX: Handle 16 flags 0x00 dlen 12               #116 [hci1] 28.520716
+      ATT: Write Command (0x52) len 7
+        Handle: 0x0075 Type: Unknown (0xffe1)
+          Data[5]: a505d2017d
+> HCI Event: Number of Completed Packets (0x13) plen 5    #117 [hci1] 28.525999
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #116: len 12 (19 Kb/s)
+        Latency: 5 msec (3-16 msec ~8 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 12               #118 [hci1] 28.542716
+      ATT: Handle Value Notification (0x1b) len 7
+        Handle: 0x0077 Type: Unknown (0xffe2)
+          Data[5]: a505d2017d
+< ACL Data TX: Handle 16 flags 0x00 dlen 12               #119 [hci1] 38.531185
+      ATT: Write Command (0x52) len 7
+        Handle: 0x0075 Type: Unknown (0xffe1)
+          Data[5]: a505d2007c
+> HCI Event: Number of Completed Packets (0x13) plen 5    #120 [hci1] 38.538734
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #119: len 12 (13 Kb/s)
+        Latency: 7 msec (3-16 msec ~7 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 12               #121 [hci1] 38.553720
+      ATT: Handle Value Notification (0x1b) len 7
+        Handle: 0x0077 Type: Unknown (0xffe2)
+          Data[5]: a505d2007c
+< ACL Data TX: Handle 16 flags 0x00 dlen 9                #122 [hci1] 39.534718
+      ATT: Write Request (0x12) len 4
+        Handle: 0x0078 Type: Client Characteristic Configuration (0x2902)
+        Value Handle: 0x0077 Type: Unknown (0xffe2)
+          Data[2]: 0000
+> HCI Event: Number of Completed Packets (0x13) plen 5    #123 [hci1] 39.543710
+        Num handles: 1
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Count: 1
+        #122: len 9 (9 Kb/s)
+        Latency: 8 msec (3-16 msec ~8 msec)
+> ACL Data RX: Handle 16 flags 0x02 dlen 5                #124 [hci1] 39.559715
+      ATT: Write Response (0x13) len 0
+@ MGMT Command: Disconnect (0x0014) plen 7            {0x0001} [hci1] 42.141885
+        LE Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+< HCI Command: Disconnect (0x01|0x0006) plen 3            #125 [hci1] 42.142688
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Reason: Remote User Terminated Connection (0x13)
+> HCI Event: Command Status (0x0f) plen 4                 #126 [hci1] 42.143641
+      Disconnect (0x01|0x0006) ncmd 2
+        Status: Success (0x00)
+> HCI Event: Disconnect Complete (0x05) plen 4            #127 [hci1] 42.146635
+        Status: Success (0x00)
+        Handle: 16 Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Reason: Connection Terminated By Local Host (0x16)
+@ MGMT Event: Device Disconnected (0x000c) plen 8     {0x0001} [hci1] 42.146726
+        LE Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+        Reason: Connection terminated by local host (0x02)
+@ MGMT Event: Command Complete (0x0001) plen 10       {0x0001} [hci1] 42.164721
+      Disconnect (0x0014) plen 7
+        Status: Success (0x00)
+        LE Address: 2D:37:35:6D:66:11 (OUI 2D-37-35)
+= bluetoothd: No matching connection for device                [hci1] 42.165892

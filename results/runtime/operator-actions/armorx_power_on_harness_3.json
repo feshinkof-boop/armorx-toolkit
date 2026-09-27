@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_power_on_harness_3",
+ "title": "ArmorX Lab",
+ "response": "done",
+ "clicked_at": "2026-09-27T19:19:56-04:00",
+ "gui": "kdialog",
+ "pid": 231385
+}

@@ -1,0 +1,27 @@
+Android precondition state — measured 2026-09-27T19:22:01.785065-04:00
+
+Tailscale peer present:  v2304a  100.115.227.84  (android, kamal.alzahrani1@)
+  tailscale ping -c 2 100.115.227.84 -> pong, 124 ms  (device is reachable on the network)
+
+ADB:
+  adb devices -l                         -> (no devices attached)
+  adb connect 100.115.227.84:5555        -> Connection refused
+  adb connect 100.115.227.84:37000       -> Connection refused
+  adb connect 100.115.227.84:40001       -> Connection refused
+  adb mdns services                      -> (no discovered mdns services)
+  lsusb (phone-like device)              -> none beyond known peripherals
+                                         (SHARKOON keyboard, Foxconn/Hon Hai, Realtek RTL8723BU)
+
+Operator action taken: ONE modal dialog "ArmorX Android Capture" (kdialog, one sound)
+  ack: {"status": "ACK", "action_id": "armorx_android_setup", "response": "done",
+        "clicked_at": "2026-09-27T19:09:22-04:00"}
+  requested: USB cable + enable USB debugging + tap ALLOW + enable Bluetooth HCI snoop log
+
+Result after the acknowledgement: adb still sees no device and no wireless-debug service.
+No root bypass was attempted, no Android security setting was modified, nothing was installed,
+uninstalled or replaced.
+
+Prior Android work in this repo used an EMULATOR (emulator-5554, x86_64), which cannot host a real
+BLE session with the physical unit — so it cannot substitute for this capture.
+
+VERDICT: ANDROID_HCI_CAPTURE_UNAVAILABLE

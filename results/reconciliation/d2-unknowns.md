@@ -80,3 +80,25 @@ What would resolve it: an HCI capture of the phone's session with the unit, diff
 Requires hardware: YES (phone + unit)
 Risk: none (passive capture)
 Priority: HIGH
+
+## Update — official-vs-harness session differential (2026-09-27, PARTIAL)
+
+The official-app session could **not** be captured (`ANDROID_HCI_CAPTURE_UNAVAILABLE`: no ADB
+transport to the phone). Consequences for the two open hypotheses — recorded as **narrowing, not
+resolution**:
+
+- **D2-U-008** (bonding/encryption prerequisite): **UNKNOWN, still open.** The harness link is now
+  *measured* as unbonded and unencrypted (no pairing, no SMP, no encryption events in the HCI
+  capture). The official side is unobservable, so this is neither supported nor refuted.
+- **D2-U-009** (MTU / PHY / connection parameters / link lifetime): **UNKNOWN, partially narrowed.**
+  Harness side measured: role Central, peer address type Public, connection interval **7.50 ms**,
+  peripheral latency **0**, supervision timeout **2000 ms**, ATT MTU negotiated **64**
+  (server 64 / client 517), one `LE Connection Update` at t≈24.9 s. PHY is **not reported** by this
+  adapter's capture, so no PHY comparison is possible from our side alone. Official values:
+  NOT_CAPTURED.
+- **D2-U-007**: unchanged — still UNKNOWN, and explicitly **not** reclassified as a harness
+  divergence, since the official behaviour has never been observed.
+
+New harness-side observation (about our implementation, **not** evidence of a missing precondition):
+`HARNESS_EXTRA_WRITE_D2_PRECLEAR` — the harness sends D2 OFF before the D2 enable; the
+reconstructed official workflow showed no such pre-clear.

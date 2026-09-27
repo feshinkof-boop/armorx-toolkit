@@ -1,0 +1,6 @@
+ANDROID_HCI_CAPTURE_UNAVAILABLE
+
+No btsnoop_hci.* was obtained: ADB had no transport and no vendor
+Bluetooth log location could be reached without the device in hand.
+See ../../android-prestate.txt for the exact
+commands and their output. Nothing was fabricated to fill this directory.

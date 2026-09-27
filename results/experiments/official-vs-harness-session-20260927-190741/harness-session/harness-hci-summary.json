@@ -1,0 +1,41 @@
+{
+ "role": "Central",
+ "peer_address_type": "Public",
+ "connection_interval_ms": 7.5,
+ "peripheral_latency": 0,
+ "supervision_timeout_ms": 2000,
+ "att_mtu_server_rx": 64,
+ "att_mtu_client_rx": 517,
+ "att_mtu_negotiated": 64,
+ "pairing_events": 0,
+ "bonded": false,
+ "encrypted": false,
+ "phy_reported": false,
+ "data_length_reported": false,
+ "connection_updates": 2,
+ "disconnect_complete": true,
+ "att_ops": {
+  "Write Command": 4,
+  "Write Request": 4,
+  "Write Response": 4,
+  "Handle Value Notification": 4,
+  "Read Request": 8,
+  "Read Response": 8,
+  "Read By Type Request": 1,
+  "Read By Group Type Request": 4,
+  "Exchange MTU Request": 1,
+  "Exchange MTU Response": 1
+ },
+ "d2_enable_att_op": "Write Command (0x52)",
+ "d2_enable_att_code": "0x52",
+ "handles": {
+  "FFE1_write": "0x0075",
+  "FFE2_notify": "0x0077",
+  "FFE2_cccd": "0x0078"
+ },
+ "capture_files": {
+  "binary": "raw/btmon.btsnoop",
+  "decoded": "raw/btmon.txt",
+  "live_text": "raw/btmon-live.txt"
+ }
+}

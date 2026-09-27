@@ -23,3 +23,6 @@
 {"action_id": "armorx_durability_confirm", "event": "acknowledged", "acknowledged_at": "2026-09-27T18:25:07.559901-04:00", "response": "ready", "status": "ACK", "gui_pid": 219099}
 {"event":"acknowledged","action_id":"armorx_power_on_d2diff","acknowledged_at":"2026-09-27T18:47:32-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_power_on_for_case_c","acknowledged_at":"2026-09-27T18:55:13-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_android_setup","acknowledged_at":"2026-09-27T19:09:22-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_power_on_harness_session","acknowledged_at":"2026-09-27T19:11:06-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_power_on_harness_3","acknowledged_at":"2026-09-27T19:19:56-04:00","response":"done","status":"ACK"}

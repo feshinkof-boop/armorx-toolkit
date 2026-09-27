@@ -20,7 +20,7 @@ Usage:
 """
 from __future__ import annotations
 
-import argparse, asyncio, json, pathlib, sys, time
+import argparse, asyncio, json, os, pathlib, sys, time
 from datetime import datetime, timezone
 
 try:
@@ -44,6 +44,24 @@ Q_0B = bytes.fromhex("A5040BB4")
 R_0B = bytes.fromhex("A5050B30E5")
 
 OBSERVE_S = 20.0
+
+def observe_window() -> float:
+    """Observation window in seconds.
+
+    Overridable via the D2_OBSERVE_S environment variable (Phase 10 of the session-differential
+    brief uses 10 s where the differential matrix used 20 s). An env var is used rather than a CLI
+    flag because the value must survive into the asyncio worker regardless of subparser routing.
+    """
+    env = os.environ.get("D2_OBSERVE_S")
+    if env:
+        try:
+            return float(env)
+        except ValueError:
+            pass
+    return _OBSERVE_OVERRIDE if _OBSERVE_OVERRIDE else OBSERVE_S
+
+
+_OBSERVE_OVERRIDE: float | None = None
 BRIEF_S = 7.0
 
 
@@ -231,13 +249,13 @@ async def run_case(args) -> int:
         if case == "C0":                                  # current harness behaviour
             await client.write_gatt_char(FFE1, D2_ON, response=False)
             rec.log("TX", FFE1, D2_ON, label="D2 enable", write_mode="without_response")
-            rec.mark("observe_start", f"{OBSERVE_S}s")
-            await asyncio.sleep(OBSERVE_S)
+            rec.mark("observe_start", f"{observe_window()}s")
+            await asyncio.sleep(observe_window())
         elif case == "A":                                 # write WITH response
             await client.write_gatt_char(FFE1, D2_ON, response=True)
             rec.log("TX", FFE1, D2_ON, label="D2 enable", write_mode="with_response")
-            rec.mark("observe_start", f"{OBSERVE_S}s")
-            await asyncio.sleep(OBSERVE_S)
+            rec.mark("observe_start", f"{observe_window()}s")
+            await asyncio.sleep(observe_window())
         elif case == "B":                                 # explicit CCCD renewal after enable
             await client.write_gatt_char(FFE1, D2_ON, response=False)
             rec.log("TX", FFE1, D2_ON, label="D2 enable", write_mode="without_response")
@@ -250,7 +268,7 @@ async def run_case(args) -> int:
                 rec.mark("cccd_resubscribe_done")
             except Exception as exc:
                 rec.mark("cccd_renew_error", str(exc))
-            await asyncio.sleep(OBSERVE_S)
+            await asyncio.sleep(observe_window())
         elif case == "C":                                 # same-connection re-enable
             await client.write_gatt_char(FFE1, D2_ON, response=False)
             rec.log("TX", FFE1, D2_ON, label="D2 enable (1st)", write_mode="without_response")
@@ -260,8 +278,8 @@ async def run_case(args) -> int:
             await asyncio.sleep(1.0)
             await client.write_gatt_char(FFE1, D2_ON, response=False)
             rec.log("TX", FFE1, D2_ON, label="D2 enable (re-enable)", write_mode="without_response")
-            rec.mark("observe_start", f"{OBSERVE_S}s (after re-enable)")
-            await asyncio.sleep(OBSERVE_S)
+            rec.mark("observe_start", f"{observe_window()}s (after re-enable)")
+            await asyncio.sleep(observe_window())
         else:
             print(f"unknown case {case}")
             return 2
@@ -316,6 +334,9 @@ def main() -> int:
         if name == "variant":
             p.add_argument("--case", required=True, choices=["C0", "A", "B", "C"])
     args = ap.parse_args()
+    global _OBSERVE_OVERRIDE
+    if getattr(args, "observe", None):
+        _OBSERVE_OVERRIDE = args.observe
     if args.cmd == "scan":
         return asyncio.run(cmd_scan(args))
     if args.cmd == "preflight":

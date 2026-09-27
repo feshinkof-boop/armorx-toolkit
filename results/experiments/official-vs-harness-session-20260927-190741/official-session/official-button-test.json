@@ -1,0 +1,6 @@
+{
+ "performed": false,
+ "reason": "no official session capture and no ADB transport; the physical A-button test was never requested because it would have had nothing to be measured against",
+ "official_idle_a5_12_02_count": null,
+ "official_a_button_result": null
+}

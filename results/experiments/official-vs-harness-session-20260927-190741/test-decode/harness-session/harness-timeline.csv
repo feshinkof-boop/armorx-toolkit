@@ -1,0 +1,165 @@
+t_epoch,delta_from_connect,dir,layer,opcode,handle,uuid,length,value,classification
+121.545714,0.000,TX,ATT,Exchange MTU Request,,,0,,Exchange MTU Request
+121.640721,0.095,RX,ATT,Exchange MTU Response,,,0,,Exchange MTU Response
+121.642804,0.097,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+121.730767,0.185,RX,ATT,Error Response,0x0001,,0,,Error Response
+121.730915,0.185,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+121.820718,0.275,RX,ATT,,,,0,,OTHER
+121.820721,0.275,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+121.823715,0.278,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+121.956715,0.411,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+121.959525,0.414,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+122.045717,0.500,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+122.045802,0.500,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+122.136718,0.591,RX,ATT,Error Response,0x0086,,0,,Error Response
+122.138814,0.593,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+122.228715,0.683,RX,ATT,Error Response,0x0001,,0,,Error Response
+122.229849,0.684,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+122.315719,0.770,RX,ATT,Error Response,0x0001,,0,,Error Response
+122.316819,0.771,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+122.407714,0.862,RX,ATT,,,,0,,OTHER
+122.407717,0.862,RX,ATT,,,,0,,OTHER
+122.407717,0.862,RX,ATT,Read By Type Response,0x0014,,0,,Read By Type Response
+122.408833,0.863,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+122.541723,0.996,RX,ATT,,,,0,,OTHER
+122.541729,0.996,RX,ATT,Read By Type Response,0x0021,,0,,Read By Type Response
+122.541836,0.996,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+122.630716,1.085,RX,ATT,,,,0,,OTHER
+122.630719,1.085,RX,ATT,Read By Type Response,0x0077,,0,,Read By Type Response
+122.630869,1.085,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+122.721716,1.176,RX,ATT,Read By Type Response,0x0084,,0,,Read By Type Response
+122.724714,1.179,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+122.810716,1.265,RX,ATT,Error Response,0x0084,,0,,Error Response
+122.811325,1.266,TX,ATT,Write Request,0x000a,,2,0200,WRITE_OTHER
+122.900718,1.355,RX,ATT,Write Response,,,0,,WRITE_OTHER
+122.900808,1.355,TX,ATT,Read Request,0x0003,,0,,Read Request
+123.036714,1.491,RX,ATT,Read Response,0x0003,,0,,Read Response
+123.038386,1.493,TX,ATT,Read Request,0x0005,,0,,Read Request
+123.126717,1.581,RX,ATT,Read Response,0x0005,,0,,Read Response
+123.127788,1.582,TX,ATT,Read Request,0x0007,,0,,Read Request
+123.215718,1.670,RX,ATT,Read Response,0x0007,,0,,Read Response
+123.215839,1.670,TX,ATT,Read Request,0x001e,,0,,Read Request
+123.306713,1.761,RX,ATT,Read Response,0x001e,,0,,Read Response
+123.308715,1.763,TX,ATT,Read Request,0x0021,,0,,Read Request
+123.396716,1.851,RX,ATT,Read Response,0x0021,,0,,Read Response
+123.396856,1.851,TX,ATT,Read Request,0x0010,,0,,Read Request
+123.486718,1.941,RX,ATT,Read Response,0x0010,,0,,Read Response
+123.486842,1.941,TX,ATT,Write Request,0x0021,,2,0100,CCCD_WRITE
+123.575719,2.030,RX,ATT,Write Response,,,0,,WRITE_OTHER
+123.575723,2.030,RX,ATT,,,,0,,OTHER
+123.576741,2.031,TX,ATT,,,,0,,OTHER
+123.590714,2.045,TX,ATT,Read Request,0x0016,,0,,Read Request
+123.665716,2.120,RX,ATT,Read Response,0x0016,,0,,Read Response
+123.670839,2.125,TX,ATT,Read Request,0x0021,,0,,Read Request
+123.717719,2.172,RX,ATT,Read Response,0x0021,,0,,Read Response
+123.723792,2.178,TX,ATT,Write Request,0x0077,0000ffe2-0000-1000-8000-00805f9b34fb,2,0100,CCCD_WRITE
+123.748716,2.203,RX,ATT,Write Response,,,0,,WRITE_OTHER
+123.752827,2.207,TX,ATT,Write Command,0x0075,0000ffe1-0000-1000-8000-00805f9b34fb,4,a5040bb4,CTRL_QUERY_0B
+123.771715,2.226,RX,ATT,Handle Value Notification,0x0077,0000ffe2-0000-1000-8000-00805f9b34fb,5,a5050b30e5,CTRL_REPLY_0B
+125.757721,4.212,TX,ATT,Write Command,0x0075,0000ffe1-0000-1000-8000-00805f9b34fb,5,a505d2007c,D2_DISABLE
+125.781719,4.236,RX,ATT,Handle Value Notification,0x0077,0000ffe2-0000-1000-8000-00805f9b34fb,5,a505d2007c,D2_DISABLE
+127.262716,5.717,TX,ATT,Write Request,0x0075,0000ffe1-0000-1000-8000-00805f9b34fb,5,a505d2017d,D2_ENABLE
+127.280716,5.735,RX,ATT,Write Response,,,0,,WRITE_OTHER
+127.280719,5.735,RX,ATT,Handle Value Notification,0x0077,0000ffe2-0000-1000-8000-00805f9b34fb,5,a505d2017d,D2_ENABLE
+147.285190,25.739,TX,ATT,Write Command,0x0075,0000ffe1-0000-1000-8000-00805f9b34fb,5,a505d2007c,D2_DISABLE
+147.306718,25.761,RX,ATT,Handle Value Notification,0x0077,0000ffe2-0000-1000-8000-00805f9b34fb,5,a505d2007c,D2_DISABLE
+148.290463,26.745,TX,ATT,Write Request,0x0077,0000ffe2-0000-1000-8000-00805f9b34fb,2,0000,CCCD_WRITE
+148.310715,26.765,RX,ATT,Write Response,,,5,5a4a2d5854,WRITE_OTHER
+438.551227,317.006,TX,ATT,Exchange MTU Request,,,0,,Exchange MTU Request
+438.574715,317.029,RX,ATT,Exchange MTU Response,,,0,,Exchange MTU Response
+438.574813,317.029,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+438.596715,317.051,RX,ATT,Error Response,0x0001,,0,,Error Response
+438.596881,317.051,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+438.619718,317.074,RX,ATT,,,,0,,OTHER
+438.619721,317.074,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+438.620067,317.074,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+438.641727,317.096,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+438.641874,317.096,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+438.663737,317.118,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+438.663872,317.118,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+438.687716,317.142,RX,ATT,Error Response,0x0086,,0,,Error Response
+438.705513,317.160,TX,ATT,Write Request,0x000a,,2,0200,WRITE_OTHER
+438.723716,317.178,RX,ATT,Write Response,,,0,,WRITE_OTHER
+438.724831,317.179,TX,ATT,Read Request,0x0003,,0,,Read Request
+438.747718,317.202,RX,ATT,Read Response,0x0003,,0,,Read Response
+438.748967,317.203,TX,ATT,Read Request,0x0005,,0,,Read Request
+438.768716,317.223,RX,ATT,Read Response,0x0005,,0,,Read Response
+438.769187,317.223,TX,ATT,Read Request,0x0007,,0,,Read Request
+438.791722,317.246,RX,ATT,Read Response,0x0007,,0,,Read Response
+438.791892,317.246,TX,ATT,Read Request,0x001e,,0,,Read Request
+438.814715,317.269,RX,ATT,Read Response,0x001e,,0,,Read Response
+438.815043,317.269,TX,ATT,Read Request,0x0021,,0,,Read Request
+438.836881,317.291,RX,ATT,Read Response,0x0021,,0,,Read Response
+438.837075,317.291,TX,ATT,Read Request,0x0010,,0,,Read Request
+438.858716,317.313,RX,ATT,Read Response,0x0010,,0,,Read Response
+438.859335,317.314,TX,ATT,Write Request,0x0021,,2,0100,CCCD_WRITE
+438.881714,317.336,RX,ATT,Write Response,,,0,,WRITE_OTHER
+438.881718,317.336,RX,ATT,,,,0,,OTHER
+438.882738,317.337,TX,ATT,,,,0,,OTHER
+438.887717,317.342,TX,ATT,Read Request,0x0016,,0,,Read Request
+438.911716,317.366,RX,ATT,Read Response,0x0016,,0,,Read Response
+438.912486,317.367,TX,ATT,Read Request,0x0021,,0,,Read Request
+438.933717,317.388,RX,ATT,Read Response,0x0021,,0,,Read Response
+438.935035,317.389,TX,ATT,Write Request,0x0077,,2,0100,CCCD_WRITE
+438.956714,317.411,RX,ATT,Write Response,,,0,,WRITE_OTHER
+438.957666,317.412,TX,ATT,Write Command,0x0075,,4,a5040bb4,CTRL_QUERY_0B
+438.978716,317.433,RX,ATT,Handle Value Notification,0x0077,,5,a5050b30e5,CTRL_REPLY_0B
+440.962716,319.417,TX,ATT,Write Command,0x0075,,5,a505d2007c,D2_DISABLE
+440.981716,319.436,RX,ATT,Handle Value Notification,0x0077,,5,a505d2007c,D2_DISABLE
+442.464716,320.919,TX,ATT,Write Command,0x0075,,5,a505d2017d,D2_ENABLE
+442.488715,320.943,RX,ATT,Handle Value Notification,0x0077,,5,a505d2017d,D2_ENABLE
+449.469493,327.924,TX,ATT,Write Command,0x0075,,5,a505d2007c,D2_DISABLE
+449.493715,327.948,RX,ATT,Handle Value Notification,0x0077,,5,a505d2007c,D2_DISABLE
+450.472717,328.927,TX,ATT,Write Command,0x0075,,5,a505d2017d,D2_ENABLE
+450.492716,328.947,RX,ATT,Handle Value Notification,0x0077,,5,a505d2017d,D2_ENABLE
+470.478716,348.933,TX,ATT,Write Command,0x0075,,5,a505d2007c,D2_DISABLE
+470.501717,348.956,RX,ATT,Handle Value Notification,0x0077,,5,a505d2007c,D2_DISABLE
+471.479406,349.934,TX,ATT,Write Request,0x0077,,2,0000,CCCD_WRITE
+471.500979,349.955,RX,ATT,Write Response,,,5,5a4a2d5854,WRITE_OTHER
+567.845715,446.300,TX,ATT,Exchange MTU Request,,,0,,Exchange MTU Request
+567.863715,446.318,RX,ATT,Exchange MTU Response,,,0,,Exchange MTU Response
+567.864792,446.319,TX,ATT,Read By Type Request,,,0,,Read By Type Request
+567.886715,446.341,RX,ATT,Error Response,0x0001,,0,,Error Response
+567.886849,446.341,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+567.909714,446.364,RX,ATT,,,,0,,OTHER
+567.909715,446.364,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+567.910818,446.365,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+567.932714,446.387,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+567.933655,446.388,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+567.954713,446.409,RX,ATT,Read By Group Type Response,,,0,,Read By Group Type Response
+567.955810,446.410,TX,ATT,Read By Group Type Request,,,0,,Read By Group Type Request
+567.977714,446.432,RX,ATT,Error Response,0x0086,,0,,Error Response
+567.993716,446.448,TX,ATT,Write Request,0x000a,,2,0200,WRITE_OTHER
+568.014717,446.469,RX,ATT,Write Response,,,0,,WRITE_OTHER
+568.015827,446.470,TX,ATT,Read Request,0x0003,,0,,Read Request
+568.037714,446.492,RX,ATT,Read Response,0x0003,,0,,Read Response
+568.038769,446.493,TX,ATT,Read Request,0x0005,,0,,Read Request
+568.058718,446.513,RX,ATT,Read Response,0x0005,,0,,Read Response
+568.058782,446.513,TX,ATT,Read Request,0x0007,,0,,Read Request
+568.081776,446.536,RX,ATT,Read Response,0x0007,,0,,Read Response
+568.083443,446.538,TX,ATT,Read Request,0x001e,,0,,Read Request
+568.103716,446.558,RX,ATT,Read Response,0x001e,,0,,Read Response
+568.103927,446.558,TX,ATT,Read Request,0x0021,,0,,Read Request
+568.126715,446.581,RX,ATT,Read Response,0x0021,,0,,Read Response
+568.126858,446.581,TX,ATT,Read Request,0x0010,,0,,Read Request
+568.149717,446.604,RX,ATT,Read Response,0x0010,,0,,Read Response
+568.152714,446.607,TX,ATT,Write Request,0x0021,,2,0100,CCCD_WRITE
+568.172714,446.627,RX,ATT,Write Response,,,0,,WRITE_OTHER
+568.172716,446.627,RX,ATT,,,,0,,OTHER
+568.173731,446.628,TX,ATT,,,,0,,OTHER
+568.183713,446.638,TX,ATT,Read Request,0x0016,,0,,Read Request
+568.201718,446.656,RX,ATT,Read Response,0x0016,,0,,Read Response
+568.206714,446.661,TX,ATT,Read Request,0x0021,,0,,Read Request
+568.232716,446.687,RX,ATT,Read Response,0x0021,,0,,Read Response
+568.238714,446.693,TX,ATT,Write Request,0x0077,,2,0100,CCCD_WRITE
+568.262714,446.717,RX,ATT,Write Response,,,0,,WRITE_OTHER
+568.266892,446.721,TX,ATT,Write Command,0x0075,,4,a5040bb4,CTRL_QUERY_0B
+568.291715,446.746,RX,ATT,Handle Value Notification,0x0077,,5,a5050b30e5,CTRL_REPLY_0B
+570.271716,448.726,TX,ATT,Write Command,0x0075,,5,a505d2007c,D2_DISABLE
+570.293720,448.748,RX,ATT,Handle Value Notification,0x0077,,5,a505d2007c,D2_DISABLE
+571.774169,450.228,TX,ATT,Write Command,0x0075,,5,a505d2017d,D2_ENABLE
+571.793719,450.248,RX,ATT,Handle Value Notification,0x0077,,5,a505d2017d,D2_ENABLE
+591.778718,470.233,TX,ATT,Write Command,0x0075,,5,a505d2007c,D2_DISABLE
+591.796716,470.251,RX,ATT,Handle Value Notification,0x0077,,5,a505d2007c,D2_DISABLE
+592.778351,471.233,TX,ATT,Write Request,0x0077,,2,0000,CCCD_WRITE
+592.816716,471.271,RX,ATT,Write Response,,,0,,WRITE_OTHER
