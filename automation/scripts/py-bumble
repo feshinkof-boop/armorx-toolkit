@@ -1,0 +1,13 @@
+#!/bin/sh
+# py-bumble -- a Python interpreter that can `import bumble` AND has
+# socket.AF_BLUETOOTH. Used as $BUMBLE_PY by the radio tooling.
+#
+# Why this exists: the lab venv `.venv-bumble` is built on Hermes' bundled
+# CPython, which is compiled without Bluetooth socket support. The distro
+# interpreter /usr/bin/python3.14 has AF_BLUETOOTH=31 / BTPROTO_HCI=1 and is the
+# same 3.14 ABI, so it can use the venv's site-packages through PYTHONPATH.
+# This shim keeps that pairing in one place and works under `sudo -n env ...`
+# (it sets PYTHONPATH itself, so it survives the root re-exec).
+set -eu
+SITE="${ARMORX_BUMBLE_SITE:-/home/salamanka/armorx-lab/.venv-bumble/lib/python3.14/site-packages}"
+exec env PYTHONPATH="$SITE" PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.14 "$@"

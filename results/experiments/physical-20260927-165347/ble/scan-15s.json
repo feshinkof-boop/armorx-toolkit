@@ -1,0 +1,9 @@
+{
+ "scan_ts": "2026-09-27T16:55:07.358578-04:00",
+ "devices_seen": 0,
+ "armorx_like": [],
+ "devices": [],
+ "conclusion": "ARMOR-X Pro NOT ADVERTISING (0 ARMOR-X-like advertisements)",
+ "classification": "WAITING_FOR_DEVICE",
+ "evidence_label": "PROVEN LIVE (absence over a 15 s active scan)"
+}
