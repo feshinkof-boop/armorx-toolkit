@@ -356,8 +356,6 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         await RunBusyAsync("Preparing safe write...", async () =>
         {
             var current = await _session.ReadConfigAsync();
-            var backupPath = await _backupStore.SaveAsync(current, _session.Model, _session.Firmware, "pre-write");
-
             var editorDesired = Config.BuildForWrite();
             var writeConfig = ConfigDiff.MergeEditorChanges(current, _deviceBaseline, editorDesired);
             var changes = ConfigDiff.Compare(current, writeConfig);
@@ -365,14 +363,14 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             if (changes.Count == 0)
             {
                 _deviceBaseline = current.ToArray();
-                SafetyText = $"No pending changes · backup saved: {Path.GetFileName(backupPath)}";
+                SafetyText = "No pending semantic changes · no write or backup was needed.";
                 StatusText = "Nothing to write.";
                 return;
             }
 
             var prompt = ConfigDiff.FormatSummary(changes) +
                          Environment.NewLine + Environment.NewLine +
-                         $"A full 144-byte backup was saved first:{Environment.NewLine}{backupPath}" +
+                         "Before writing, the complete current 144-byte device image will be backed up automatically." +
                          Environment.NewLine + Environment.NewLine +
                          "Apply these changes, persist them, and verify all 144 bytes by reading the device back?";
 
@@ -380,11 +378,12 @@ public partial class MainWindow : Window, INotifyPropertyChanged
                 MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (answer != MessageBoxResult.Yes)
             {
-                SafetyText = $"Write cancelled · backup saved: {Path.GetFileName(backupPath)}";
+                SafetyText = $"{changes.Count} pending semantic byte change(s) · device unchanged.";
                 StatusText = "Write cancelled. Device unchanged.";
                 return;
             }
 
+            var backupPath = await _backupStore.SaveAsync(current, _session.Model, _session.Firmware, "pre-write");
             StatusText = "Applying settings and verifying...";
             var result = await _session.WriteAndVerifyAsync(writeConfig);
             LoadDeviceConfig(result.ReadBackConfig);
