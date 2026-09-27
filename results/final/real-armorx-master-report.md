@@ -138,3 +138,33 @@ read**, and must never report success from the readback alone.
 
 The finding does **not** explain the D2 status-stream silence: after the durable restore, D2 still
 streamed nothing (5 variants tested). That remains UNKNOWN.
+
+---
+
+## Verification vocabulary (authoritative)
+
+```text
+STAGED_OK
+
+D7 write
+→ immediate D6 readback equals target
+
+does NOT prove flash durability.
+```
+
+```text
+DURABLE_OK
+
+D7 write
+→ immediate D6 readback
+→ idle / settle period
+→ power cycle
+→ D6 equals expected SHA256
+```
+
+Current durable baseline:
+
+`bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`
+
+Previous no-op D7 and Emergency Restore evidence is **retained and reclassified as staging
+evidence** — it was never a durability proof, and nothing is deleted.

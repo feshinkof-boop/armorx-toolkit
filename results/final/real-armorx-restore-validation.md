@@ -71,3 +71,33 @@ Corrected wording for anything above:
 
 The unit's final state *is* durable (`bdef9c61…`, survives a power cycle), but that was earned at
 the end of the pass, not by the readback that this document describes.
+
+---
+
+## Verification vocabulary (authoritative)
+
+```text
+STAGED_OK
+
+D7 write
+→ immediate D6 readback equals target
+
+does NOT prove flash durability.
+```
+
+```text
+DURABLE_OK
+
+D7 write
+→ immediate D6 readback
+→ idle / settle period
+→ power cycle
+→ D6 equals expected SHA256
+```
+
+Current durable baseline:
+
+`bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`
+
+Previous no-op D7 and Emergency Restore evidence is **retained and reclassified as staging
+evidence** — it was never a durability proof, and nothing is deleted.
