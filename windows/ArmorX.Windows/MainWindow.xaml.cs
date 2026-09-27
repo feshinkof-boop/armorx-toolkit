@@ -330,7 +330,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         }
 
         var desired = Config.BuildForWrite();
-        var changes = ConfigDiff.Compare(_deviceBaseline, desired.ToArray());
+        var changes = ConfigDiff.CompareEditable(_deviceBaseline, desired.ToArray());
         MessageBox.Show(ConfigDiff.FormatSummary(changes), "Pending configuration changes",
             MessageBoxButton.OK, changes.Count == 0 ? MessageBoxImage.Information : MessageBoxImage.Question);
     }
