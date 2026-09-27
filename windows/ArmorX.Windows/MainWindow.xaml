@@ -15,10 +15,10 @@
             <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
             <StackPanel>
                 <TextBlock Text="ArmorX Windows" FontSize="30" FontWeight="Bold"/>
-                <TextBlock Text="Public configurator · v0.2.0" Foreground="{StaticResource TextSecondary}" Margin="0,3,0,0"/>
+                <TextBlock Text="Public configurator · v0.2.1" Foreground="{StaticResource TextSecondary}" Margin="0,3,0,0"/>
             </StackPanel>
             <Border Grid.Column="1" Background="{StaticResource Surface}" BorderBrush="{StaticResource BorderBrushSoft}" BorderThickness="1" CornerRadius="10" Padding="12,7" VerticalAlignment="Center">
-                <TextBlock Text="Safe full-image write · read-back verified" Foreground="{StaticResource TextSecondary}"/>
+                <TextBlock Text="Auto-backup · exact diff · read-back verified" Foreground="{StaticResource TextSecondary}"/>
             </Border>
         </Grid>
 
@@ -48,8 +48,10 @@
 
                 <StackPanel Grid.Column="1" Margin="26,0,0,0" VerticalAlignment="Center" MinWidth="245">
                     <Button Style="{StaticResource PrimaryButton}" Margin="0,0,0,10" Content="Connect / Recover" Click="ConnectRecover_Click"/>
-                    <Button Style="{StaticResource SecondaryButton}" Margin="0,0,0,10" Content="Read from device" Click="ReadConfig_Click"/>
-                    <Button Style="{StaticResource PrimaryButton}" Margin="0,0,0,10" Background="{StaticResource Success}" BorderBrush="{StaticResource Success}" Content="Apply &amp; Verify" Click="WriteVerify_Click"/>
+                    <Button Style="{StaticResource SecondaryButton}" Margin="0,0,0,8" Content="Read from device" Click="ReadConfig_Click"/>
+                    <Button Style="{StaticResource SecondaryButton}" Margin="0,0,0,8" Content="Review pending changes" Click="ReviewChanges_Click"/>
+                    <Button Style="{StaticResource PrimaryButton}" Margin="0,0,0,8" Background="{StaticResource Success}" BorderBrush="{StaticResource Success}" Content="Apply &amp; Verify" Click="WriteVerify_Click"/>
+                    <Button Style="{StaticResource SecondaryButton}" Margin="0,0,0,8" Content="Restore last backup" Click="RestoreLastBackup_Click"/>
                     <Button Style="{StaticResource DangerButton}" Margin="0" Content="Disconnect" Click="Disconnect_Click"/>
                 </StackPanel>
             </Grid>
@@ -207,7 +209,14 @@
         </TabControl>
 
         <Border Grid.Row="3" Background="{StaticResource Surface}" BorderBrush="{StaticResource BorderBrushSoft}" BorderThickness="1" CornerRadius="10" Padding="12,9">
-            <Grid><Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions><TextBlock Text="{Binding StatusText}"/><TextBlock Grid.Column="1" Foreground="{StaticResource TextSecondary}" Text="Unknown config bytes are preserved from the device image."/></Grid>
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="{Binding StatusText}"/>
+                    <TextBlock Text="{Binding SafetyText}" Foreground="{StaticResource TextSecondary}" FontSize="11" Margin="0,2,0,0"/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Foreground="{StaticResource TextSecondary}" VerticalAlignment="Center" Text="Unknown config bytes are preserved from the device image."/>
+            </Grid>
         </Border>
     </Grid>
 </Window>

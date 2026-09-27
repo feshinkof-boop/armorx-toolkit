@@ -15,6 +15,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
 {
     private readonly ArmorXBleTransport _transport = new();
     private readonly ProfileStore _profileStore = new();
+    private readonly BackupStore _backupStore = new();
     private readonly SemaphoreSlim _connectGate = new(1, 1);
     private ArmorXDeviceSession? _session;
     private EditableArmorXConfig? _config;
@@ -25,6 +26,8 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     private string _modelText = "-";
     private string _firmwareText = "-";
     private string _batteryText = "-";
+    private string _safetyText = "No device baseline loaded.";
+    private byte[]? _deviceBaseline;
     private bool _busy;
     private bool _manualDisconnect;
     private bool _connectionOperation;
@@ -41,13 +44,26 @@ public partial class MainWindow : Window, INotifyPropertyChanged
     public string ProfileDirectory => _profileStore.DirectoryPath;
 
     public ArmorXProfile? SelectedProfile { get => _selectedProfile; set => Set(ref _selectedProfile, value); }
-    public EditableArmorXConfig? Config { get => _config; private set => Set(ref _config, value); }
+    public EditableArmorXConfig? Config
+    {
+        get => _config;
+        private set
+        {
+            if (ReferenceEquals(_config, value)) return;
+            if (_config is not null) _config.Changed -= Config_Changed;
+            _config = value;
+            if (_config is not null) _config.Changed += Config_Changed;
+            OnPropertyChanged();
+            UpdateDirtyState();
+        }
+    }
     public string ConnectionHeadline { get => _connectionHeadline; private set => Set(ref _connectionHeadline, value); }
     public string ConnectionDetail { get => _connectionDetail; private set => Set(ref _connectionDetail, value); }
     public string StatusText { get => _statusText; private set => Set(ref _statusText, value); }
     public string ModelText { get => _modelText; private set => Set(ref _modelText, value); }
     public string FirmwareText { get => _firmwareText; private set => Set(ref _firmwareText, value); }
     public string BatteryText { get => _batteryText; private set => Set(ref _batteryText, value); }
+    public string SafetyText { get => _safetyText; private set => Set(ref _safetyText, value); }
 
     public MainWindow()
     {
@@ -230,7 +246,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             StatusText = "Connected. Reading configuration...";
 
             var config = await session.ReadConfigAsync(cancellationToken);
-            Config = new EditableArmorXConfig(config);
+            LoadDeviceConfig(config);
             StatusText = config.CrcValid
                 ? $"Configuration loaded and verified · CRC 0x{config.StoredCrc:X4}."
                 : $"Configuration loaded · CRC mismatch (stored 0x{config.StoredCrc:X4}).";
@@ -299,38 +315,154 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         await RunBusyAsync("Reading configuration...", async () =>
         {
             var config = await _session.ReadConfigAsync();
-            Config = new EditableArmorXConfig(config);
+            LoadDeviceConfig(config);
             StatusText = $"Configuration refreshed · CRC {(config.CrcValid ? "valid" : "invalid")} 0x{config.StoredCrc:X4}.";
         });
     }
 
-    private async void WriteVerify_Click(object sender, RoutedEventArgs e)
+    private void ReviewChanges_Click(object sender, RoutedEventArgs e)
     {
-        if (_session is null || Config is null)
+        if (Config is null || _deviceBaseline is null)
         {
-            MessageBox.Show("Connect and read a configuration first. ArmorX Windows writes from the controller's own image so unknown bytes are preserved.", "ArmorX Windows", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Read a configuration from the ARMOR-X Pro first.", "Review changes",
+                MessageBoxButton.OK, MessageBoxImage.Information);
             return;
         }
 
-        var answer = MessageBox.Show(
-            "Apply these settings to the ARMOR-X Pro, save them to the device, then read back all 144 bytes to verify the result?",
-            "Apply & Verify", MessageBoxButton.YesNo, MessageBoxImage.Question);
-        if (answer != MessageBoxResult.Yes) return;
+        var desired = Config.BuildForWrite();
+        var changes = ConfigDiff.Compare(_deviceBaseline, desired.ToArray());
+        MessageBox.Show(ConfigDiff.FormatSummary(changes), "Pending configuration changes",
+            MessageBoxButton.OK, changes.Count == 0 ? MessageBoxImage.Information : MessageBoxImage.Question);
+    }
 
-        await RunBusyAsync("Applying settings and verifying...", async () =>
+    private async void WriteVerify_Click(object sender, RoutedEventArgs e)
+    {
+        if (_session is null || Config is null || _deviceBaseline is null)
         {
-            var writeConfig = Config.BuildForWrite();
-            var result = await _session.WriteAndVerifyAsync(writeConfig);
-            Config = new EditableArmorXConfig(result.ReadBackConfig);
-            if (!result.ExactMatch)
+            MessageBox.Show("Connect and read a configuration first. ArmorX Windows writes from the controller's own image so unknown bytes are preserved.",
+                "ArmorX Windows", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        await RunBusyAsync("Preparing safe write...", async () =>
+        {
+            var current = await _session.ReadConfigAsync();
+            var backupPath = await _backupStore.SaveAsync(current, _session.Model, _session.Firmware, "pre-write");
+
+            var editorDesired = Config.BuildForWrite();
+            var writeConfig = ConfigDiff.MergeEditorChanges(current, _deviceBaseline, editorDesired);
+            var changes = ConfigDiff.Compare(current, writeConfig);
+
+            if (changes.Count == 0)
             {
-                StatusText = $"Verification failed · {result.MismatchOffsets.Count} byte(s) differ.";
-                MessageBox.Show("The device read-back did not exactly match the requested configuration. The actual device image is now loaded into the editor.", "ArmorX Windows", MessageBoxButton.OK, MessageBoxImage.Warning);
+                _deviceBaseline = current.ToArray();
+                SafetyText = $"No pending changes · backup saved: {Path.GetFileName(backupPath)}";
+                StatusText = "Nothing to write.";
                 return;
             }
 
+            var prompt = ConfigDiff.FormatSummary(changes) +
+                         Environment.NewLine + Environment.NewLine +
+                         $"A full 144-byte backup was saved first:{Environment.NewLine}{backupPath}" +
+                         Environment.NewLine + Environment.NewLine +
+                         "Apply these changes, persist them, and verify all 144 bytes by reading the device back?";
+
+            var answer = MessageBox.Show(prompt, "Review · Apply & Verify",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (answer != MessageBoxResult.Yes)
+            {
+                SafetyText = $"Write cancelled · backup saved: {Path.GetFileName(backupPath)}";
+                StatusText = "Write cancelled. Device unchanged.";
+                return;
+            }
+
+            StatusText = "Applying settings and verifying...";
+            var result = await _session.WriteAndVerifyAsync(writeConfig);
+            LoadDeviceConfig(result.ReadBackConfig);
+
+            if (!result.ExactMatch)
+            {
+                StatusText = $"Verification failed · {result.MismatchOffsets.Count} byte(s) differ.";
+                SafetyText = $"Pre-write backup available: {Path.GetFileName(backupPath)}";
+                MessageBox.Show(
+                    "The device read-back did not exactly match the requested configuration. The actual device image is now loaded into the editor. Use Restore last backup if needed.",
+                    "ArmorX Windows", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            SafetyText = $"Verified · pre-write backup: {Path.GetFileName(backupPath)}";
             StatusText = $"Saved and verified · CRC 0x{result.ReadBackConfig.StoredCrc:X4}.";
-            MessageBox.Show("Settings saved successfully. The complete 144-byte read-back matches.", "ArmorX Windows", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(
+                "Settings saved successfully. The complete 144-byte read-back matches. A pre-write backup was kept automatically.",
+                "ArmorX Windows", MessageBoxButton.OK, MessageBoxImage.Information);
+        });
+    }
+
+    private async void RestoreLastBackup_Click(object sender, RoutedEventArgs e)
+    {
+        if (_session is null)
+        {
+            MessageBox.Show("Connect the ARMOR-X Pro first.", "Restore last backup",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        await RunBusyAsync("Preparing backup restore...", async () =>
+        {
+            var targetBackup = await _backupStore.LoadLatestAsync();
+            if (targetBackup is null)
+            {
+                MessageBox.Show("No automatic backup is available yet.", "Restore last backup",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                StatusText = "No backup available.";
+                return;
+            }
+
+            var target = new ArmorXConfig144(targetBackup.GetConfigBytes());
+            var current = await _session.ReadConfigAsync();
+            var changes = ConfigDiff.Compare(current, target);
+
+            if (changes.Count == 0)
+            {
+                LoadDeviceConfig(current);
+                StatusText = "The latest backup already matches the device.";
+                return;
+            }
+
+            var prompt = ConfigDiff.FormatSummary(changes) +
+                         Environment.NewLine + Environment.NewLine +
+                         $"Backup date: {targetBackup.SavedUtc.LocalDateTime:G}" +
+                         Environment.NewLine +
+                         $"Backup reason: {targetBackup.Reason}" +
+                         Environment.NewLine + Environment.NewLine +
+                         "Restore this complete backed-up image and verify it by reading all 144 bytes back?";
+
+            var answer = MessageBox.Show(prompt, "Restore last backup",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (answer != MessageBoxResult.Yes)
+            {
+                StatusText = "Restore cancelled. Device unchanged.";
+                return;
+            }
+
+            var undoPath = await _backupStore.SaveAsync(current, _session.Model, _session.Firmware, "pre-restore");
+            StatusText = "Restoring backup and verifying...";
+            var result = await _session.WriteAndVerifyAsync(target);
+            LoadDeviceConfig(result.ReadBackConfig);
+
+            if (!result.ExactMatch)
+            {
+                SafetyText = $"Restore verification failed · previous state backed up: {Path.GetFileName(undoPath)}";
+                StatusText = $"Restore verification failed · {result.MismatchOffsets.Count} byte(s) differ.";
+                MessageBox.Show("Restore did not verify exactly. The actual device image is loaded in the editor.",
+                    "Restore last backup", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            SafetyText = $"Backup restored and verified · undo backup: {Path.GetFileName(undoPath)}";
+            StatusText = $"Backup restored and verified · CRC 0x{result.ReadBackConfig.StoredCrc:X4}.";
+            MessageBox.Show("Backup restored successfully and all 144 read-back bytes match.",
+                "Restore last backup", MessageBoxButton.OK, MessageBoxImage.Information);
         });
     }
 
@@ -383,6 +515,37 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             Profiles.Clear();
             foreach (var profile in profiles) Profiles.Add(profile);
         });
+    }
+
+    private void LoadDeviceConfig(ArmorXConfig144 config)
+    {
+        _deviceBaseline = config.ToArray();
+        Config = new EditableArmorXConfig(config);
+        UpdateDirtyState();
+    }
+
+    private void Config_Changed(object? sender, EventArgs e) => UpdateDirtyState();
+
+    private void UpdateDirtyState()
+    {
+        if (Config is null || _deviceBaseline is null)
+        {
+            SafetyText = "No device baseline loaded.";
+            return;
+        }
+
+        try
+        {
+            var desired = Config.BuildForWrite();
+            var changes = ConfigDiff.Compare(_deviceBaseline, desired.ToArray());
+            SafetyText = changes.Count == 0
+                ? "No pending semantic changes · automatic backup runs before every write."
+                : $"{changes.Count} pending semantic byte change(s) · review before Apply & Verify.";
+        }
+        catch
+        {
+            SafetyText = "Pending-change state unavailable.";
+        }
     }
 
     private bool TryLoadRememberedAddress(out ulong address)

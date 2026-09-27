@@ -35,6 +35,21 @@ public partial class App : Application
                 if (!config.CrcValid) throw new InvalidOperationException("CRC self-test failed.");
                 if (!EditableArmorXConfig.ProvenMappingTargets.Any(x => x.Id == 12 && x.Name.Contains("Guide", StringComparison.OrdinalIgnoreCase)))
                     throw new InvalidOperationException("Guide mapping self-test failed.");
+                var before = new ArmorXConfig144(config.ToArray());
+                var editedBytes = config.ToArray();
+                editedBytes[135] = 1;
+                var edited = new ArmorXConfig144(editedBytes);
+                edited.RecalculateCrc();
+                var diff = ConfigDiff.Compare(before, edited);
+                if (diff.Count != 1 || diff[0].Offset != 135)
+                    throw new InvalidOperationException("Config diff self-test failed.");
+                var currentBytes = before.ToArray();
+                currentBytes[100] = 0x5A;
+                var current = new ArmorXConfig144(currentBytes);
+                current.RecalculateCrc();
+                var merged = ConfigDiff.MergeEditorChanges(current, before.ToArray(), edited);
+                if (merged.GetByte(100) != 0x5A || merged.GetByte(135) != 1 || !merged.CrcValid)
+                    throw new InvalidOperationException("Safe merge self-test failed.");
                 Shutdown(0);
             }
             catch

@@ -11,14 +11,16 @@ public sealed record MappingTarget(int Id, string Name)
 public sealed class ByteFieldViewModel : ObservableObject
 {
     private readonly ArmorXConfig144 _config;
+    private readonly Action _changed;
     public string Label { get; }
     public int Offset { get; }
 
-    public ByteFieldViewModel(string label, int offset, ArmorXConfig144 config)
+    public ByteFieldViewModel(string label, int offset, ArmorXConfig144 config, Action changed)
     {
         Label = label;
         Offset = offset;
         _config = config;
+        _changed = changed;
     }
 
     public int Value
@@ -30,6 +32,7 @@ public sealed class ByteFieldViewModel : ObservableObject
             if (_config.GetByte(Offset) == clamped) return;
             _config.SetByte(Offset, clamped);
             RaisePropertyChanged();
+            _changed();
         }
     }
 }
@@ -37,6 +40,7 @@ public sealed class ByteFieldViewModel : ObservableObject
 public sealed class EditableArmorXConfig : ObservableObject
 {
     private readonly ArmorXConfig144 _config;
+    public event EventHandler? Changed;
 
     public EditableArmorXConfig(ArmorXConfig144 config)
     {
@@ -68,7 +72,8 @@ public sealed class EditableArmorXConfig : ObservableObject
     public ObservableCollection<ByteFieldViewModel> GyroCurve2 { get; }
 
     private ObservableCollection<ByteFieldViewModel> MakeCurve(int start, string prefix) =>
-        new(Enumerable.Range(0, 6).Select(i => new ByteFieldViewModel($"{prefix}{i + 1}", start + i, _config)));
+        new(Enumerable.Range(0, 6).Select(i =>
+            new ByteFieldViewModel($"{prefix}{i + 1}", start + i, _config, NotifyChanged)));
 
     private int B(int offset) => _config.GetByte(offset);
     private void B(int offset, int value, string property)
@@ -77,8 +82,14 @@ public sealed class EditableArmorXConfig : ObservableObject
         if (_config.GetByte(offset) == value) return;
         _config.SetByte(offset, value);
         RaisePropertyChanged(property);
+        NotifyChanged();
+    }
+
+    private void NotifyChanged()
+    {
         RaisePropertyChanged(nameof(RawHex));
         RaisePropertyChanged(nameof(CrcStatus));
+        Changed?.Invoke(this, EventArgs.Empty);
     }
 
     public int MotorSpeedIdx { get => B(4); set => B(4, value, nameof(MotorSpeedIdx)); }
@@ -106,19 +117,38 @@ public sealed class EditableArmorXConfig : ObservableObject
     public uint SensorRightKeyBit
     {
         get => _config.GetUInt32Be(40);
-        set { if (_config.GetUInt32Be(40) == value) return; _config.SetUInt32Be(40, value); RaisePropertyChanged(); RaisePropertyChanged(nameof(RawHex)); }
+        set
+        {
+            if (_config.GetUInt32Be(40) == value) return;
+            _config.SetUInt32Be(40, value);
+            RaisePropertyChanged();
+            NotifyChanged();
+        }
     }
+
     public uint SensorSwitch
     {
         get => _config.GetUInt32Be(69);
-        set { if (_config.GetUInt32Be(69) == value) return; _config.SetUInt32Be(69, value); RaisePropertyChanged(); RaisePropertyChanged(nameof(RawHex)); }
+        set
+        {
+            if (_config.GetUInt32Be(69) == value) return;
+            _config.SetUInt32Be(69, value);
+            RaisePropertyChanged();
+            NotifyChanged();
+        }
     }
 
     public int TurboSpeedIdx { get => B(80); set => B(80, value, nameof(TurboSpeedIdx)); }
     public uint TurboKey
     {
         get => _config.GetUInt32Be(81);
-        set { if (_config.GetUInt32Be(81) == value) return; _config.SetUInt32Be(81, value); RaisePropertyChanged(); RaisePropertyChanged(nameof(RawHex)); }
+        set
+        {
+            if (_config.GetUInt32Be(81) == value) return;
+            _config.SetUInt32Be(81, value);
+            RaisePropertyChanged();
+            NotifyChanged();
+        }
     }
 
     public int M1TargetId { get => _config.GetMapTarget(23); set => SetMap(23, value, nameof(M1TargetId)); }
@@ -131,10 +161,12 @@ public sealed class EditableArmorXConfig : ObservableObject
         if (_config.GetMapTarget(source) == value) return;
         _config.SetMapTarget(source, value);
         RaisePropertyChanged(property);
-        RaisePropertyChanged(nameof(RawHex));
+        NotifyChanged();
     }
 
-    public string CrcStatus => _config.CrcValid ? $"Valid 0x{_config.StoredCrc:X4}" : $"Edited / will recalc (stored 0x{_config.StoredCrc:X4}, calc 0x{_config.CalculatedCrc:X4})";
+    public string CrcStatus => _config.CrcValid
+        ? $"Valid 0x{_config.StoredCrc:X4}"
+        : $"Edited / will recalc (stored 0x{_config.StoredCrc:X4}, calc 0x{_config.CalculatedCrc:X4})";
     public string RawHex => _config.ToHex();
 
     public ArmorXConfig144 BuildForWrite()
