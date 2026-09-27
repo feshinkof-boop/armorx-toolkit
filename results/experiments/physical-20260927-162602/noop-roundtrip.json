@@ -1,0 +1,11 @@
+{
+ "baseline_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "readback_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "byte_for_byte_equal": true,
+ "lengths": {
+  "baseline": 144,
+  "readback": 144
+ },
+ "crc_valid_readback": true,
+ "differences": []
+}

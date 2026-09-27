@@ -97,21 +97,23 @@ class VirtualArmorXTransport:
 
 
 class BumbleTransport:
-    """Real central built on Bumble.
+    """Real central built on Bumble, driven synchronously.
 
-    Usage once the lab adapter is isolated and powered (see automation/radio/use-bumble.sh):
-        t = BumbleTransport(transport="hci-socket", address="<bdaddr>",
-                            service="00000000-0000-1000-8000-00805f9b34fb",
-                            write_char="0000ffe1-...", notify_char="0000ffe2-...")
-    The transport is resolved from the saved radio identity, never from hci0/hci1 names.
+    The BLE stack is asyncio; this class runs one event loop in a daemon thread and exposes the
+    blocking contract the harness (`write` / `read`) already assumes, so no harness code changes
+    when hardware arrives.
+
+    Verified on the real ARMOR-X Pro (2026-09-27): the lab adapter is resolved by USB path + BDADDR
+    (never by hci index), Bumble owns the kernel HCI socket (`hci-socket:<index>`), and the target is
+    found by the advertised name prefix unless an address is given.
     """
 
-    def __init__(self, transport: str = "hci-socket", address: Optional[str] = None,
+    def __init__(self, transport: str = "hci-socket:1", address: Optional[str] = None,
                  service: str = "00000000-0000-1000-8000-00805f9b34fb",
                  write_char: str = "0000ffe1-0000-1000-8000-00805f9b34fb",
                  notify_char: str = "0000ffe2-0000-1000-8000-00805f9b34fb",
                  device_name_prefix: str = "ARMOR-X Pro_",
-                 scan_timeout: float = 10.0) -> None:
+                 scan_timeout: float = 15.0, local_address: str = "F0:0A:A5:00:00:09") -> None:
         try:
             import bumble  # noqa: F401
         except Exception as exc:  # pragma: no cover - host dependent
@@ -126,28 +128,152 @@ class BumbleTransport:
         self.notify_char = notify_char
         self.device_name_prefix = device_name_prefix
         self.scan_timeout = scan_timeout
+        self.local_address = local_address
         self._inbox: "queue.Queue[bytes]" = queue.Queue()
         self._device = None
+        self._peer = None
         self._connected = False
+        self._loop = None
+        self._thread = None
+        self._transport_ctx = None
+        self._chars: dict = {}
+        self.events: list = []
 
-    # The concrete Bumble calls are filled in on hardware bring-up; this skeleton only fixes the
-    # contract so the harness and its logs do not change when the radio arrives.
+    # -- internals --------------------------------------------------------------
+    def _run(self, coro, timeout: float = 60.0):
+        import asyncio
+        return asyncio.run_coroutine_threadsafe(coro, self._loop).result(timeout)
+
     def device_present(self) -> bool:
         return self._connected
 
-    def connect(self) -> None:  # pragma: no cover - hardware path
-        raise NotImplementedError(
-            "BumbleTransport.connect is implemented during hardware bring-up "
-            "(radio-isolation + use-bumble.sh must pass first).")
+    async def _aconnect(self) -> None:
+        import asyncio as _a
 
-    def write(self, frame: bytes) -> None:  # pragma: no cover - hardware path
-        raise NotImplementedError("BumbleTransport.write awaits hardware bring-up")
+        from bumble.core import AdvertisingData
+        from bumble.device import Device, Peer
+        from bumble.transport import open_transport
 
-    def read(self, timeout: float) -> Optional[bytes]:  # pragma: no cover - hardware path
+        def adv_name(adv) -> str:
+            for ad_type in (AdvertisingData.COMPLETE_LOCAL_NAME,
+                            AdvertisingData.SHORTENED_LOCAL_NAME):
+                value = adv.data.get(ad_type, raw=True)
+                if value:
+                    return bytes(value).decode("utf-8", "replace")
+            return ""
+
+        self._transport_ctx = await open_transport(self.transport_spec)
+        hci_source, hci_sink = await self._transport_ctx.__aenter__()
+        device = Device.with_hci("armorx-harness", self.local_address, hci_source, hci_sink)
+        await device.power_on()
+        self._device = device
+        found: dict = {}
+
+        def on_adv(adv):
+            name = adv_name(adv)
+            if name and name.startswith(self.device_name_prefix):
+                found[str(adv.address)] = name
+
+        device.on(Device.EVENT_ADVERTISEMENT, on_adv)
+        await device.start_scanning()
+        deadline = self._loop.time() + self.scan_timeout
+        while self._loop.time() < deadline and not found:
+            await _a.sleep(0.25)
+        await device.stop_scanning()
+        target = self.address or (next(iter(found)) if found else None)
+        if not target:
+            raise RuntimeError("no device advertising prefix %r within %.1fs"
+                               % (self.device_name_prefix, self.scan_timeout))
+        connection = await device.connect(target)
+        peer = Peer(connection)
+        self._peer = peer
         try:
-            return self._inbox.get(timeout=timeout)
+            await peer.request_mtu(247)
+        except Exception:
+            pass
+        services = await peer.discover_services()
+        for service in services:
+            try:
+                await peer.discover_characteristics(service=service)
+            except Exception:
+                continue
+            for ch in service.characteristics:
+                self._chars[self._norm(str(ch.uuid))] = ch
+
+        write_ch = self._chars.get(self._norm(self.write_char))
+        notify_ch = self._chars.get(self._norm(self.notify_char))
+        if write_ch is None or notify_ch is None:
+            raise RuntimeError("FFE1/FFE2 not found on %s (have %s)"
+                               % (target, sorted(self._chars)))
+        self._write_ch = write_ch
+        self._notify_ch = notify_ch
+
+        def on_notify(value):
+            self._inbox.put(bytes(value))
+
+        await notify_ch.subscribe(on_notify)
+        self._connected = True
+        self.events.append({"event": "connected", "address": target,
+                            "att_mtu": getattr(connection, "att_mtu", None)})
+
+    @staticmethod
+    def _norm(uuid_str: str) -> str:
+        text = uuid_str.lower()
+        if text.startswith("uuid-16:"):
+            short = text.split(":", 1)[1].strip().split(" ", 1)[0]
+            return "0000%s-0000-1000-8000-00805f9b34fb" % short
+        if len(text) == 4:
+            return "0000%s-0000-1000-8000-00805f9b34fb" % text
+        return text
+
+    async def _awrite(self, frame: bytes) -> None:
+        await self._write_ch.write_value(frame, with_response=False)
+        self.events.append({"event": "tx", "raw": frame.hex()})
+
+    async def _aclose(self) -> None:
+        try:
+            if self._transport_ctx is not None:
+                await self._transport_ctx.__aexit__(None, None, None)
+        except Exception:
+            pass
+        self._connected = False
+
+    # -- blocking contract ------------------------------------------------------
+    def connect(self) -> None:
+        import asyncio
+        import threading
+        self._loop = asyncio.new_event_loop()
+        self._thread = threading.Thread(target=self._loop.run_forever, daemon=True)
+        self._thread.start()
+        self._run(self._aconnect())
+
+    def write(self, frame: bytes) -> None:
+        self._run(self._awrite(frame), timeout=20.0)
+
+    def read(self, timeout: float) -> Optional[bytes]:
+        try:
+            value = self._inbox.get(timeout=timeout)
+            self.events.append({"event": "rx", "raw": value.hex()})
+            return value
         except queue.Empty:
             return None
 
+    def read_fragments(self, fragments: int, timeout: float = 3.0) -> list:
+        """Collect up to *fragments* notifications, stopping early on a timeout."""
+        out: list = []
+        while len(out) < fragments:
+            value = self.read(timeout)
+            if value is None:
+                break
+            out.append(value)
+        return out
+
     def close(self) -> None:
+        try:
+            if self._loop is not None:
+                self._run(self._aclose(), timeout=15.0)
+        except Exception:
+            pass
+        if self._loop is not None:
+            self._loop.call_soon_threadsafe(self._loop.stop)
         self._connected = False

@@ -77,7 +77,20 @@ def main() -> int:
                     help="fragment payload size = subpackageLength()-5 (15/43/67); default 15")
     ap.add_argument("--dry-run", action="store_true", help="print frames only")
     ap.add_argument("--i-have-read-the-readme", action="store_true")
+    ap.add_argument("--transport", default="hci-socket:1",
+                    help="Bumble transport spec (default hci-socket:1, resolved by BDADDR)")
+    ap.add_argument("--address", default=None,
+                    help="target BLE address; default = advertised name prefix match")
+    ap.add_argument("--follow-up", choices=["0e", "none"], default="none",
+                    help="post-write command: '0e' (what the Android app sends after a config "
+                         "write) or 'none'")
+    ap.add_argument("--d6-fragments", type=int, default=10,
+                    help="D6 replies are fragmented on real hardware (144 bytes = 10 fragments)")
+    # use-bumble.sh appends the transport spec positionally; accept it that way too.
+    ap.add_argument("transport_pos", nargs="?", default=None)
     args = ap.parse_args()
+    if args.transport_pos:
+        args.transport = args.transport_pos
 
     image, manifest, path, mpath = load_baseline(args.baseline)
     problems = validate(image, manifest, path)
@@ -92,7 +105,7 @@ def main() -> int:
     print("frames        : %d D7 fragment(s) of %d bytes + commit" % (len(frags), args.chunk))
     for f in frags:
         print("   %s" % f.hex(" ").upper())
-    print("   %s" % commit.hex(" ").upper())
+    print("   %s" % (commit.hex(" ").upper() if commit else "(no commit frame for D7)"))
     print("verify with   : %s (D6 re-read, compare sha256)" % verify.hex(" ").upper())
 
     if problems:
@@ -110,20 +123,44 @@ def main() -> int:
     from armorx_lab.transport import BumbleTransport       # imported late on purpose
     from armorx_lab.device import Session, State
 
-    tr = BumbleTransport()
+    tr = BumbleTransport(transport=args.transport, address=args.address)
     tr.connect()
     s = Session(logdir=os.path.join(HERE, "logs"), device_serial=manifest["device_serial"],
                 transport=tr, app_version=manifest.get("app_version", "unknown"))
     s.transition(State.RESTORING, "validated baseline restore")
     for f in frags:
         s.send(f, expect_reply=False, label="restore D7 fragment")
-    s.send(commit, expect_reply=False, label="restore commit")
-    s.send(F.KNOWN_FRAMES["write_step"][0], label="restore follow-up 0E")
-    reply = s.send(verify, label="restore verify D6")
-    if reply is None:
+    if commit is not None:
+        s.send(commit, expect_reply=False, label="restore commit")
+    if args.follow_up == "0e":
+        s.send(F.KNOWN_FRAMES["write_step"][0], label="restore follow-up 0E")
+    # the ack (A5 05 D7 00 81) arrives before the verification read
+    ack = tr.read(3.0)
+    print("D7 ack       : %s" % (ack.hex(" ").upper() if ack else "NONE"))
+
+    s.send(verify, expect_reply=False, label="restore verify D6")
+    # real hardware answers D6 with N fragments; reassemble before comparing.
+    seen = []
+    while len(seen) < args.d6_fragments:
+        chunk = tr.read(3.0)
+        if chunk is None:
+            break
+        seen.append(chunk)
+    if not seen:
         s.close(State.FAILED, "no reply to verification read")
         return 3
-    image2 = F.parse_frame(reply).payload
+    pieces = []
+    for chunk in seen:
+        parsed = F.parse_frame(chunk)
+        if parsed is None or parsed.opcode < 0:
+            continue
+        payload = bytes(parsed.payload)
+        # A4 fragments carry the 1-based ordinal at payload[0]; A5 short frames do not.
+        if parsed.header == 0xA4 and payload:
+            payload = payload[1:]
+        pieces.append(payload)
+    image2 = b"".join(pieces)
+    print("verify frames: %d, reassembled %d bytes" % (len(seen), len(image2)))
     sha2 = hashlib.sha256(image2).hexdigest()
     if sha2 == manifest["sha256"]:
         s.close(State.COMPLETE, "restore verified")

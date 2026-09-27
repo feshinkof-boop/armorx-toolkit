@@ -1,0 +1,9 @@
+{
+ "action_id": "test_alert",
+ "requested_at": "2026-09-27T16:38:29-04:00",
+ "acknowledged_at": "2026-09-27T16:38:38-04:00",
+ "user_response": "test ok",
+ "research_state": "ALERT_MECHANISM_TEST (pre-experiment gate, section G)",
+ "outcome": "PASS - desktop popup (notify-send id 46) and audible alert (paplay on all sinks) confirmed by the operator",
+ "result": "physical-action alert system VALIDATED; physical research may proceed"
+}

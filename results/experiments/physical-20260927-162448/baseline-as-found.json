@@ -1,0 +1,59 @@
+{
+ "length": 144,
+ "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "crc_valid": true,
+ "declared_length": "0090",
+ "stored_crc": "2c40",
+ "fragments": [
+  {
+   "index": 1,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 2,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 3,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 4,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 5,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 6,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 7,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 8,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 9,
+   "len": 20,
+   "checksum_ok": true
+  },
+  {
+   "index": 10,
+   "len": 14,
+   "checksum_ok": true
+  }
+ ]
+}

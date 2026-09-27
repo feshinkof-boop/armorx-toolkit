@@ -1,0 +1,20 @@
+{
+ "device_serial": "ZJ-XT_2741_2D-37-35-6D-66-11",
+ "device": {
+  "name": "ARMOR-X Pro",
+  "model_mark": "ZJ-XT",
+  "firmware": "2741",
+  "ble_address": "2D:37:35:6D:66:11"
+ },
+ "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "length": 144,
+ "declared_length": 144,
+ "crc_ok": true,
+ "declared_matches": true,
+ "source": "REAL device D6 read, physical-20260927-162448 (PROVEN LIVE)",
+ "session_dir": "results/experiments/physical-20260927-162448",
+ "restore_verified": true,
+ "roundtrip_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "gate_evidence": "noop-d7 phase on the real unit: 10 D7 fragments (A4 14 D7 01..09 + A4 0E D7 0A) -> device ack A5 05 D7 00 81 -> D6 readback byte-for-byte identical (results/experiments/physical-20260927-162448/noop-roundtrip.json, byte_for_byte_equal=true)",
+ "timestamp": "2026-09-27T16:31:00-04:00"
+}

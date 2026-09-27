@@ -1,0 +1,126 @@
+{
+ "F6:CD:19:25:0A:C8": {
+  "address": "F6:CD:19:25:0A:C8",
+  "address_type": "1",
+  "name": "",
+  "rssi": -86,
+  "data_bytes": "07ff4c0012020001",
+  "is_scan_response": false,
+  "is_connectable": false,
+  "service_uuids": [],
+  "manufacturer_data": "4c0012020001",
+  "is_armorx": false
+ },
+ "4B:8E:72:BD:8D:2E": {
+  "address": "4B:8E:72:BD:8D:2E",
+  "address_type": "1",
+  "name": "",
+  "rssi": -90,
+  "data_bytes": "",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [],
+  "manufacturer_data": "4c001007331f56d8a9ae08",
+  "is_armorx": false
+ },
+ "66:97:DA:B8:B7:17": {
+  "address": "66:97:DA:B8:B7:17",
+  "address_type": "1",
+  "name": "",
+  "rssi": -90,
+  "data_bytes": "",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [
+   "UUID-16:FD69"
+  ],
+  "manufacturer_data": null,
+  "is_armorx": false
+ },
+ "DC:97:58:77:70:42/P": {
+  "address": "DC:97:58:77:70:42/P",
+  "address_type": "0",
+  "name": "",
+  "rssi": -86,
+  "data_bytes": "0201060fff8f030a10420c01dc9758777041ec",
+  "is_scan_response": false,
+  "is_connectable": false,
+  "service_uuids": [],
+  "manufacturer_data": "8f030a10420c01dc9758777041ec",
+  "is_armorx": false
+ },
+ "79:2E:A6:D8:54:5B": {
+  "address": "79:2E:A6:D8:54:5B",
+  "address_type": "1",
+  "name": "",
+  "rssi": -86,
+  "data_bytes": "",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [],
+  "manufacturer_data": "4c0010053318290d10",
+  "is_armorx": false
+ },
+ "1E:06:6B:5A:D3:11": {
+  "address": "1E:06:6B:5A:D3:11",
+  "address_type": "1",
+  "name": "",
+  "rssi": -92,
+  "data_bytes": "1e16f3fe4a172350424e451132de6e05f78368cb74802e35ff9bddef16d587",
+  "is_scan_response": false,
+  "is_connectable": false,
+  "service_uuids": [],
+  "manufacturer_data": null,
+  "is_armorx": false
+ },
+ "DC:23:4F:80:DD:EE/P": {
+  "address": "DC:23:4F:80:DD:EE/P",
+  "address_type": "0",
+  "name": "TY",
+  "rssi": -76,
+  "data_bytes": "0309545919ffd0078003000001003c4c656bc6d4d6635c750cd1ae6f7ef5",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [],
+  "manufacturer_data": "4c0002157575696461363563666562616230333900000000ce",
+  "is_armorx": false
+ },
+ "CE:00:A5:12:3D:43": {
+  "address": "CE:00:A5:12:3D:43",
+  "address_type": "1",
+  "name": "",
+  "rssi": -82,
+  "data_bytes": "07ff4c0012020003",
+  "is_scan_response": false,
+  "is_connectable": false,
+  "service_uuids": [],
+  "manufacturer_data": "4c0012020003",
+  "is_armorx": false
+ },
+ "45:2F:01:39:AA:4B": {
+  "address": "45:2F:01:39:AA:4B",
+  "address_type": "1",
+  "name": "",
+  "rssi": -94,
+  "data_bytes": "",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [
+   "UUID-16:FD69"
+  ],
+  "manufacturer_data": null,
+  "is_armorx": false
+ },
+ "25:71:C3:6F:FF:A6": {
+  "address": "25:71:C3:6F:FF:A6",
+  "address_type": "1",
+  "name": "",
+  "rssi": -96,
+  "data_bytes": "",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [],
+  "manufacturer_data": null,
+  "is_armorx": false
+ }
+}

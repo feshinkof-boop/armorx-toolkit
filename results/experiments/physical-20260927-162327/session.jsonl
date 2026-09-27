@@ -1,0 +1,5 @@
+{"ts": "2026-09-27T20:23:27.357+00:00", "event": "state", "state": "SESSION_START", "meta": {"lab_branch": "research/physical-armorx-live-2026-09-27", "lab_head": "ae91d4cf8779b40c78cb854d686161eb477dbdae", "toolkit_branch": "research/d4-smi-protocol-reconciliation", "toolkit_head": "9ce3997c97ead26e05589cdae3749a6c90704e84", "start": "2026-09-27T20:23:27.357+00:00", "phase": "scan", "transport": "hci-socket:1", "kernel": "7.0.0-34-generic", "hostname": "salamanka-systemproductname", "target": {"name_prefix": "ARMOR-X Pro_", "address": null}}}
+{"ts": "2026-09-27T20:23:27.456+00:00", "event": "transport_open", "transport": "hci-socket:1"}
+{"ts": "2026-09-27T20:23:27.456+00:00", "event": "state", "state": "WAITING_FOR_DEVICE", "seconds": 20.0}
+{"ts": "2026-09-27T20:23:47.465+00:00", "event": "scan_result", "devices": {}, "counts": {}}
+{"ts": "2026-09-27T20:23:47.465+00:00", "event": "state", "state": "SESSION_END"}

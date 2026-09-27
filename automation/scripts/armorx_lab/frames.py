@@ -184,14 +184,25 @@ def set_motion_dpi(value: int) -> bytes:
     return build_ab(0x05, 0x25, bytes([value & 0xFF, (value >> 8) & 0xFF]))
 
 
-def fragment_config(opcode: int, payload: bytes, chunk: int) -> Tuple[List[bytes], bytes]:
+def fragment_config(opcode: int, payload: bytes, chunk: int
+                    ) -> Tuple[List[bytes], Optional[bytes]]:
     """Split `payload` into A4 fragments of `chunk` bytes and return (frames, commit_frame).
 
-    The chunk size for a given device is subpackageLength()-5 (15 / 43 / 67 for subpkg 20 / 48 / 72)
-    and is STRONG EVIDENCE, not proven for ARMOR-X Pro - see unresolved.md and live-test-plan.md T2.
+    The chunk size for a given device is subpackageLength()-5 (15 / 43 / 67 for subpkg 20 / 48 / 72).
+    **Settled live on the real ARMOR-X Pro (2026-09-27):** every fragment carries the 1-based
+    ordinal byte at frame offset 3, so a full fragment is `A4 | (chunk+5) | opcode | idx | chunk |
+    sum8` (20 bytes for chunk 15) - the real device's own D6 fragments look like
+    `A4 14 D6 01 ...` and it accepted `A4 14 D7 01 ...`, acked `A5 05 D7 00 81` and read back
+    byte-identical. The earlier ordinal-less 19-byte form was wrong.
+
+    The commit frame is only meaningful for the 0xD8 macro opcode (the 5-byte
+    `A4 05 D8 <nfrags+1> <sum8>`); a D7 config write needs no commit frame - the real device acks
+    the last fragment directly.
     """
-    frames = [build_frag(opcode, payload[i:i + chunk]) for i in range(0, len(payload), chunk)]
-    return frames, build_d8_terminator(len(frames))
+    frames = [build_frag(opcode, payload[i:i + chunk], index=i // chunk + 1)
+              for i in range(0, len(payload), chunk)]
+    commit = build_d8_terminator(len(frames)) if opcode == 0xD8 else None
+    return frames, commit
 
 
 def _selfcheck() -> None:

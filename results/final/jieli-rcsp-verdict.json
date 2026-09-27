@@ -1,0 +1,403 @@
+{
+ "title": "JieLi / RCSP fingerprint verdict (Phase S) \u2014 CORRECTED",
+ "date": "2026-09-27",
+ "pass": "research/physical-armorx-live-2026-09-27",
+ "supersedes": "earlier draft of this file (same pass) which wrongly claimed the real unit exposes no AE00 service",
+ "method": {
+  "tool": "ripgrep (rg -uu -a -i -o, no-ignore + hidden, binary matches)",
+  "control_rule": "no zero is accepted unless the tree's positive control (moojiang / ffe1) is non-zero",
+  "artifact_filter": "matches inside 0x\u2026 hex literals / instruction addresses are classified NOT EVIDENCE"
+ },
+ "verdict_summary": {
+  "android_app": {
+   "verdict": "ABSENT",
+   "evidence_level": "PROVEN STATIC",
+   "builds": [
+    "2.22.0901",
+    "2.23.0609",
+    "2.24.0919",
+    "4.0.8"
+   ]
+  },
+  "real_armorx_pro": {
+   "verdict": "SECONDARY_SERVICE (PRESENT)",
+   "evidence_level": "PROVEN LIVE"
+  },
+  "real_device_normal_configuration_path": {
+   "verdict": "NOT RCSP \u2014 custom 00000000-\u2026/FFE1/FFE2 A5/A4",
+   "evidence_level": "PROVEN LIVE"
+  },
+  "vendor_windows_updater": {
+   "verdict": "OTA_ONLY",
+   "evidence_level": "PROVEN STATIC",
+   "source": "/home/salamanka/armorx_research/dongle_baseline_v13/artifacts/{DevMgr.dll,BTUpgrade*.dll,NetMgr.dll,WndMgr.dll}"
+  }
+ },
+ "real_device_evidence": {
+  "device_identity": "ZJ-XT_2741_2D-37-35-6D-66-11",
+  "advertised_name": "ARMOR-X Pro_11",
+  "advertisement": {
+   "service_uuids": [],
+   "manufacturer_data": "feff5a4a2d5854  (= company 0xFEFF + ASCII \"ZJ-XT\")"
+  },
+  "discovered_services": [
+   "00001800-0000-1000-8000-00805f9b34fb",
+   "00001801-0000-1000-8000-00805f9b34fb",
+   "0000180a-0000-1000-8000-00805f9b34fb",
+   "0000180f-0000-1000-8000-00805f9b34fb",
+   "00000000-0000-1000-8000-00805f9b34fb",
+   "0000ae00-0000-1000-8000-00805f9b34fb"
+  ],
+  "rcsp_characteristics": [
+   "0000ae01-0000-1000-8000-00805f9b34fb (write)",
+   "0000ae02-0000-1000-8000-00805f9b34fb (notify)"
+  ],
+  "vendor_config_characteristics": [
+   "0000ffe1-0000-1000-8000-00805f9b34fb (write)",
+   "0000ffe2-0000-1000-8000-00805f9b34fb (notify)"
+  ],
+  "sessions": [
+   "physical-20260927-162427",
+   "physical-20260927-162448",
+   "physical-20260927-162545",
+   "physical-20260927-162602",
+   "physical-20260927-162815",
+   "physical-20260927-162846",
+   "physical-20260927-button-test3"
+  ],
+  "source": "results/experiments/<session>/session.jsonl events \"services\" and \"characteristics\" from live peer.discover_services()"
+ },
+ "per_build_verdict": {
+  "2.22.0901": {
+   "verdict": "ABSENT",
+   "evidence_level": "PROVEN STATIC",
+   "control_ok": true,
+   "evidence": "no RCSP/AE00/AE01/AE02/FE DC BA/jieli string in the extracted APK or Blutter tree",
+   "source": "apk/extracted/2.22.0901 + its Blutter asm tree"
+  },
+  "2.23.0609": {
+   "verdict": "ABSENT",
+   "evidence_level": "PROVEN STATIC",
+   "control_ok": true,
+   "evidence": "no RCSP/AE00/AE01/AE02/FE DC BA/jieli string in the extracted APK or Blutter tree",
+   "source": "apk/extracted/2.23.0609 + its Blutter asm tree"
+  },
+  "2.24.0919": {
+   "verdict": "ABSENT",
+   "evidence_level": "PROVEN STATIC",
+   "control_ok": true,
+   "evidence": "no RCSP/AE00/AE01/AE02/FE DC BA/jieli string in the extracted APK or Blutter tree",
+   "source": "apk/extracted/2.24.0919 + its Blutter asm tree"
+  },
+  "4.0.8": {
+   "verdict": "ABSENT",
+   "evidence_level": "PROVEN STATIC",
+   "control_ok": true,
+   "evidence": "no RCSP/AE00/AE01/AE02/FE DC BA/jieli string in the extracted APK or Blutter tree",
+   "source": "apk/extracted/4.0.8 + its Blutter asm tree"
+  }
+ },
+ "scan_counts": {
+  "2.22.0901-apk": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 2,
+   "uboot.boot": 0,
+   "isd_config.ini": 0,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 0,
+   "jl_isd.fw": 0,
+   "ac632": 0,
+   "bd19": 0,
+   "JL_loadUfwData": 0,
+   "AC632N_update": 0,
+   "CONTROL_ffe1": 3,
+   "CONTROL_moojiang": 160
+  },
+  "2.23-apk": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 2,
+   "uboot.boot": 0,
+   "isd_config.ini": 0,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 0,
+   "jl_isd.fw": 0,
+   "ac632": 0,
+   "bd19": 0,
+   "JL_loadUfwData": 0,
+   "AC632N_update": 0,
+   "CONTROL_ffe1": 6,
+   "CONTROL_moojiang": 174
+  },
+  "2.24-apk": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 8,
+   "uboot.boot": 0,
+   "isd_config.ini": 0,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 0,
+   "jl_isd.fw": 0,
+   "ac632": 0,
+   "bd19": 0,
+   "JL_loadUfwData": 0,
+   "AC632N_update": 0,
+   "CONTROL_ffe1": 2,
+   "CONTROL_moojiang": 62
+  },
+  "4.0.8-apk": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 24,
+   "uboot.boot": 0,
+   "isd_config.ini": 0,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 0,
+   "jl_isd.fw": 0,
+   "ac632": 0,
+   "bd19": 0,
+   "JL_loadUfwData": 0,
+   "AC632N_update": 0,
+   "CONTROL_ffe1": 1,
+   "CONTROL_moojiang": 163
+  },
+  "2.22.0901-asm": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 0,
+   "uboot.boot": 0,
+   "isd_config.ini": 0,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 0,
+   "jl_isd.fw": 0,
+   "ac632": 0,
+   "bd19": 0,
+   "JL_loadUfwData": 0,
+   "AC632N_update": 0,
+   "CONTROL_ffe1": 57,
+   "CONTROL_moojiang": 1369
+  },
+  "2.23-asm": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 0,
+   "uboot.boot": 0,
+   "isd_config.ini": 0,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 0,
+   "jl_isd.fw": 0,
+   "ac632": 0,
+   "bd19": 0,
+   "JL_loadUfwData": 0,
+   "AC632N_update": 0,
+   "CONTROL_ffe1": 81,
+   "CONTROL_moojiang": 1432
+  },
+  "2.24-asm": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 0,
+   "uboot.boot": 0,
+   "isd_config.ini": 0,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 0,
+   "jl_isd.fw": 0,
+   "ac632": 6,
+   "bd19": 0,
+   "JL_loadUfwData": 0,
+   "AC632N_update": 0,
+   "CONTROL_ffe1": 80,
+   "CONTROL_moojiang": 2295
+  },
+  "4.0.8-asm": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 0,
+   "uboot.boot": 0,
+   "isd_config.ini": 0,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 0,
+   "jl_isd.fw": 0,
+   "ac632": 7,
+   "bd19": 0,
+   "JL_loadUfwData": 0,
+   "AC632N_update": 0,
+   "CONTROL_ffe1": 121,
+   "CONTROL_moojiang": 5186
+  },
+  "win-updater": {
+   "jieli": 0,
+   "com.jieli": 0,
+   "jl_ota": 0,
+   "jl_bt_ota": 0,
+   "rcsp_word": 0,
+   "AE00_uuid": 0,
+   "AE01_uuid": 0,
+   "AE02_uuid": 0,
+   "AE00_lit": 0,
+   "fedcba": 0,
+   "fe_dc_ba": 0,
+   "uboot.boot": 8,
+   "isd_config.ini": 28,
+   "isd_download": 0,
+   "key_mac": 0,
+   "update.ufw": 12,
+   "jl_isd.fw": 0,
+   "ac632": 10,
+   "bd19": 0,
+   "JL_loadUfwData": 3,
+   "AC632N_update": 2,
+   "CONTROL_ffe1": 3,
+   "CONTROL_moojiang": 0
+  }
+ },
+ "positive_controls": {
+  "moojiang": {
+   "apk-4.0.8-apk": 163,
+   "asm-2.22.0901": 1369,
+   "asm-2.23": 1432,
+   "asm-2.24": 2295,
+   "asm-4.0.8": 5186
+  },
+  "ffe1": {
+   "apk-2.22.0901-apk": 3,
+   "apk-2.23-apk": 6,
+   "apk-2.24-apk": 2,
+   "apk-4.0.8-apk": 1,
+   "asm-2.22.0901-asm": 57,
+   "asm-2.23-asm": 81,
+   "asm-2.24-asm": 80,
+   "asm-4.0.8-asm": 121,
+   "win-updater": 3
+  }
+ },
+ "false_positives": [
+  {
+   "hit": "rcsp",
+   "where": "APK trees, win-updater",
+   "actual_context": "C symbol strcspn",
+   "classification": "NOT EVIDENCE"
+  },
+  {
+   "hit": "FEDCBA",
+   "where": "all APK trees",
+   "actual_context": "base64 alphabet literal 9876543210/.-,+*",
+   "classification": "NOT EVIDENCE"
+  },
+  {
+   "hit": "fe dc ba",
+   "where": "APK assets",
+   "actual_context": "binary GIF/XMP metadata",
+   "classification": "NOT EVIDENCE"
+  },
+  {
+   "hit": "AE00/AE01/AE02",
+   "where": "asm trees",
+   "actual_context": "code addresses / object ids (0xae017c, Obj!XmlAttributeType@b2ae01, 0x6ae02c)",
+   "classification": "NOT EVIDENCE"
+  },
+  {
+   "hit": "key_mac",
+   "where": "4.0.8 asm",
+   "actual_context": "Flutter widget view_key_macro_selector.dart (key_mac inside key_macro)",
+   "classification": "NOT EVIDENCE"
+  },
+  {
+   "hit": "bd19",
+   "where": "asm trees",
+   "actual_context": "ldurb mnemonics / instruction addresses",
+   "classification": "NOT EVIDENCE"
+  },
+  {
+   "hit": "ac632",
+   "where": "2.24 / 4.0.8 asm",
+   "actual_context": "instruction addresses 0xac6320:",
+   "classification": "NOT EVIDENCE"
+  }
+ ],
+ "scan_bugs_found": [
+  "ripgrep honours .gitignore -> extracted APK trees scanned as empty; fixed with -uu",
+  "binary matches print file:match (no line field) -> parser reported false zeros; fixed by parsing the last field"
+ ],
+ "dated_correction": {
+  "old_claim": "real unit advertises 6 services and none of them is AE00 (=> verdict ABSENT everywhere)",
+  "new_evidence": "live discover_services() lists 0000ae00-\u2026 and characteristics 0000ae01/0000ae02 in 7 sessions",
+  "corrected_interpretation": "RCSP is ABSENT in the Android app but PRESENT on the hardware as a secondary service; the draft conflated empty ADVERTISEMENT service_uuids with DISCOVERED GATT services",
+  "affected_versions": "all four Android builds re-verified; device verdict changed",
+  "evidence_level": "app ABSENT = PROVEN STATIC; device AE00/AE01/AE02 = PROVEN LIVE; platform AC6321A/AC632N/BD19 = STRONG EVIDENCE (unchanged)"
+ },
+ "ac6321a_evidence_level": "STRONG EVIDENCE (unchanged \u2014 device exposes an RCSP-capable JieLi stack, but no firmware image was ever available)"
+}

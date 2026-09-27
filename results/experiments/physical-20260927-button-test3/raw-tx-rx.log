@@ -1,0 +1,5 @@
+2026-09-27T20:31:08.071+00:00 TX a5040bb4 0B version
+2026-09-27T20:31:08.131+00:00 RX a5050b30e5 0B version {"raw": "a5050b30e5", "label": "0B version", "kind": "short", "opcode": "0x0B", "frag_index": null, "checksum_ok": true, "declared_length": 5}
+2026-09-27T20:31:08.131+00:00 TX a505d2017d D2 test ON
+2026-09-27T20:31:08.222+00:00 RX a505d2017d D2 test ON {"raw": "a505d2017d", "label": "D2 test ON", "kind": "short", "opcode": "0xD2", "frag_index": null, "checksum_ok": true, "declared_length": 5}
+2026-09-27T20:31:08.222+00:00 RX a505d2017d D2 capture {"raw": "a505d2017d", "label": "D2 capture", "kind": "short", "opcode": "0xD2", "frag_index": null, "checksum_ok": true, "declared_length": 5}

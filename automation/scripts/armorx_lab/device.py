@@ -58,7 +58,9 @@ class Session:
     def __post_init__(self) -> None:
         os.makedirs(self.logdir, exist_ok=True)
         stamp = time.strftime("%Y%m%d-%H%M%S")
-        base = os.path.join(self.logdir, "%s_%s" % (self.device_serial, stamp))
+        # a device identity like "ZJ-XT/2741/2D:37:35:..." must not become a path
+        safe = "".join(c if (c.isalnum() or c in "-_.") else "-" for c in self.device_serial)
+        base = os.path.join(self.logdir, "%s_%s" % (safe, stamp))
         self.jsonl_path = base + ".jsonl"
         self.raw_path = base + ".bin"
         self._raw = open(self.raw_path, "wb")

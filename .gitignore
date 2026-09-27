@@ -23,3 +23,8 @@ frida/tools/**
 # derived Blutter trees are regenerable (see logs/blutter-*.log for the exact command)
 static/blutter/**
 static/jadx/**
+
+# frozen third-party firmware candidates and vendored tools: hashed in
+# results/final/firmware-inventory.json instead of committed (see real-firmware-mode.md)
+firmware/original/**
+tools/vendor/**

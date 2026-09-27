@@ -1,0 +1,15 @@
+{
+ "lab_branch": "research/physical-armorx-live-2026-09-27",
+ "lab_head": "ae91d4cf8779b40c78cb854d686161eb477dbdae",
+ "toolkit_branch": "research/d4-smi-protocol-reconciliation",
+ "toolkit_head": "9ce3997c97ead26e05589cdae3749a6c90704e84",
+ "start": "2026-09-27T20:24:27.734+00:00",
+ "phase": "identity",
+ "transport": "hci-socket:1",
+ "kernel": "7.0.0-34-generic",
+ "hostname": "salamanka-systemproductname",
+ "target": {
+  "name_prefix": "ARMOR-X Pro_",
+  "address": null
+ }
+}

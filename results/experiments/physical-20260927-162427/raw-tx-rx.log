@@ -1,0 +1,2 @@
+2026-09-27T20:24:41.385+00:00 TX a5040bb4 0B version
+2026-09-27T20:24:41.445+00:00 RX a5050b30e5 0B version {"raw": "a5050b30e5", "label": "0B version", "kind": "short", "opcode": "0x0B", "frag_index": null, "checksum_ok": true, "declared_length": 5}

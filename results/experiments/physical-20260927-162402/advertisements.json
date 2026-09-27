@@ -1,0 +1,102 @@
+{
+ "DC:97:58:77:70:42/P": {
+  "address": "DC:97:58:77:70:42/P",
+  "address_type": "0",
+  "name": "",
+  "rssi": -84,
+  "data_bytes": "0201060fff8f030a10420c01dc9758777041ec",
+  "is_scan_response": false,
+  "is_connectable": false,
+  "service_uuids": [],
+  "manufacturer_data": "8f030a10420c01dc9758777041ec",
+  "is_armorx": false
+ },
+ "48:EA:B0:8E:A1:7F": {
+  "address": "48:EA:B0:8E:A1:7F",
+  "address_type": "1",
+  "name": "",
+  "rssi": -94,
+  "data_bytes": "",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [],
+  "manufacturer_data": "4c0010053a1ca4eb32",
+  "is_armorx": false
+ },
+ "2D:37:35:6D:66:11/P": {
+  "address": "2D:37:35:6D:66:11/P",
+  "address_type": "0",
+  "name": "ARMOR-X Pro_11",
+  "rssi": -88,
+  "data_bytes": "0f0941524d4f522d582050726f5f3131",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [],
+  "manufacturer_data": "feff5a4a2d5854",
+  "is_armorx": true
+ },
+ "DC:23:4F:80:DD:EE/P": {
+  "address": "DC:23:4F:80:DD:EE/P",
+  "address_type": "0",
+  "name": "TY",
+  "rssi": -78,
+  "data_bytes": "0309545919ffd0078003000001003c4c656bc6d4d6635c750cd1ae6f7ef5",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [
+   "UUID-16:A201"
+  ],
+  "manufacturer_data": "d0078003000001003c4c656bc6d4d6635c750cd1ae6f7ef5",
+  "is_armorx": false
+ },
+ "49:8A:C9:44:6E:9F": {
+  "address": "49:8A:C9:44:6E:9F",
+  "address_type": "1",
+  "name": "",
+  "rssi": -90,
+  "data_bytes": "",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [
+   "UUID-16:FD69"
+  ],
+  "manufacturer_data": null,
+  "is_armorx": false
+ },
+ "4D:0A:C7:1E:31:C5": {
+  "address": "4D:0A:C7:1E:31:C5",
+  "address_type": "1",
+  "name": "",
+  "rssi": -86,
+  "data_bytes": "",
+  "is_scan_response": true,
+  "is_connectable": true,
+  "service_uuids": [],
+  "manufacturer_data": "4c0010073a1ffc4df26018",
+  "is_armorx": false
+ },
+ "FA:C7:7C:E9:65:DD": {
+  "address": "FA:C7:7C:E9:65:DD",
+  "address_type": "1",
+  "name": "",
+  "rssi": -86,
+  "data_bytes": "07ff4c0012020000",
+  "is_scan_response": false,
+  "is_connectable": false,
+  "service_uuids": [],
+  "manufacturer_data": "4c0012020000",
+  "is_armorx": false
+ },
+ "EA:BC:D7:89:C8:18": {
+  "address": "EA:BC:D7:89:C8:18",
+  "address_type": "1",
+  "name": "",
+  "rssi": -92,
+  "data_bytes": "07ff4c0012020003",
+  "is_scan_response": false,
+  "is_connectable": false,
+  "service_uuids": [],
+  "manufacturer_data": "4c0012020003",
+  "is_armorx": false
+ }
+}

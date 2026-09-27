@@ -1,0 +1,784 @@
+{
+ "length": 144,
+ "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "stored_crc_be": "0x2C40",
+ "declared_length": "0x0090 (144)",
+ "crc_valid": true,
+ "fields": [
+  {
+   "offset": "0-1",
+   "size": 2,
+   "endian": "raw",
+   "field": "header (semantics UNKNOWN)",
+   "raw": "2c 40",
+   "value": "2c 40",
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "offset": "2-3",
+   "size": 2,
+   "endian": "BE",
+   "field": "len = total config length",
+   "raw": "00 90",
+   "value": "00 90",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "4-4",
+   "size": 1,
+   "endian": "byte",
+   "field": "UNKNOWN (global static written)",
+   "raw": "33",
+   "value": 51,
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "offset": "5-5",
+   "size": 1,
+   "endian": "byte",
+   "field": "motorMax",
+   "raw": "ff",
+   "value": 255,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "6-8",
+   "size": 3,
+   "endian": "3 bytes",
+   "field": "UNKNOWN",
+   "raw": "00 00 00",
+   "value": "00 00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "9-9",
+   "size": 1,
+   "endian": "byte",
+   "field": "triggerMode",
+   "raw": "00",
+   "value": 0,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "10-11",
+   "size": 2,
+   "endian": "2 bytes",
+   "field": "triggerLeftDeadzone (center,side)",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "12-13",
+   "size": 2,
+   "endian": "2 bytes",
+   "field": "triggerRightDeadzone",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "14-14",
+   "size": 1,
+   "endian": "byte",
+   "field": "joystickCircleLimit",
+   "raw": "00",
+   "value": 0,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "15-15",
+   "size": 1,
+   "endian": "byte",
+   "field": "stickTurn",
+   "raw": "00",
+   "value": 0,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "16-17",
+   "size": 2,
+   "endian": "2 bytes",
+   "field": "stickLeftDeadzone",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "18-19",
+   "size": 2,
+   "endian": "2 bytes",
+   "field": "stickRightDeadzone",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "20-25",
+   "size": 6,
+   "endian": "3 x Axis2",
+   "field": "stickLeftCurve",
+   "raw": "01 00 1e 1e 46 46",
+   "value": "01 00 1e 1e 46 46",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "26-27",
+   "size": 2,
+   "endian": "2 bytes",
+   "field": "UNKNOWN",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "28-33",
+   "size": 6,
+   "endian": "StickCurve",
+   "field": "stickRightCurve",
+   "raw": "01 00 1e 1e 46 46",
+   "value": "01 00 1e 1e 46 46",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "34-35",
+   "size": 2,
+   "endian": "2 bytes",
+   "field": "UNKNOWN",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "36-36",
+   "size": 1,
+   "endian": "byte",
+   "field": "sensorMode",
+   "raw": "02",
+   "value": 2,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "37-37",
+   "size": 1,
+   "endian": "byte",
+   "field": "sensorDir",
+   "raw": "00",
+   "value": 0,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "38-38",
+   "size": 1,
+   "endian": "byte",
+   "field": "sensorRightKey0",
+   "raw": "02",
+   "value": 2,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "39-39",
+   "size": 1,
+   "endian": "byte",
+   "field": "sensorRightKey1",
+   "raw": "02",
+   "value": 2,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "40-43",
+   "size": 4,
+   "endian": "u32 BE",
+   "field": "sensorRightKeyBit",
+   "raw": "00 00 00 00",
+   "value": 0,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "44-49",
+   "size": 6,
+   "endian": "StickCurve",
+   "field": "sensorRightCurve0",
+   "raw": "00 0a 3c 3c 2a 00",
+   "value": "00 0a 3c 3c 2a 00",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "50-51",
+   "size": 2,
+   "endian": "-",
+   "field": "UNKNOWN",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "52-57",
+   "size": 6,
+   "endian": "StickCurve",
+   "field": "sensorRightCurve1",
+   "raw": "00 0a 3c 3c 2a 00",
+   "value": "00 0a 3c 3c 2a 00",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "58-59",
+   "size": 2,
+   "endian": "-",
+   "field": "UNKNOWN",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "60-65",
+   "size": 6,
+   "endian": "StickCurve",
+   "field": "sensorRightCurve2",
+   "raw": "00 0a 3c 3c 2a 00",
+   "value": "00 0a 3c 3c 2a 00",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "66-67",
+   "size": 2,
+   "endian": "-",
+   "field": "UNKNOWN",
+   "raw": "00 00",
+   "value": "00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "68-68",
+   "size": 1,
+   "endian": "byte",
+   "field": "sensorMin",
+   "raw": "00",
+   "value": 0,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "69-72",
+   "size": 4,
+   "endian": "u32 BE",
+   "field": "sensorSwitch",
+   "raw": "00 00 00 00",
+   "value": 0,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "73-75",
+   "size": 3,
+   "endian": "-",
+   "field": "UNKNOWN",
+   "raw": "00 00 00",
+   "value": "00 00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "76-76",
+   "size": 1,
+   "endian": "byte",
+   "field": "UNKNOWN (global static written) - turboSpeedIdx (name unproven)",
+   "raw": "00",
+   "value": 0,
+   "evidence": "STRONG EVIDENCE"
+  },
+  {
+   "offset": "77-80",
+   "size": 4,
+   "endian": "u32 BE",
+   "field": "turboKey",
+   "raw": "00 00 00 00",
+   "value": 0,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "offset": "81-93",
+   "size": 13,
+   "endian": "-",
+   "field": "UNKNOWN for 0x90 (written only in the 0xF0 branch)",
+   "raw": "00 00 00 00 00 00 00 00 00 00 00 00 00",
+   "value": "00 00 00 00 00 00 00 00 00 00 00 00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "94-111",
+   "size": 18,
+   "endian": "-",
+   "field": "UNKNOWN",
+   "raw": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+   "value": "00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "offset": "112-143",
+   "size": 32,
+   "endian": "1 byte/key",
+   "field": "mapKeys[32]",
+   "raw": "00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 01 0d 19 1a 1b 1c 1d 1e 1f",
+   "value": "00 01 02 03 04 05 06 07 08 09 0a 0b 0c 0d 0e 0f 10 11 12 13 14 15 16 01 0d 19 1a 1b 1c 1d 1e 1f",
+   "evidence": "STRONG EVIDENCE",
+   "keys": [
+    {
+     "source_id": 0,
+     "source_label": "A",
+     "target_id": 0,
+     "absolute_offset": 112,
+     "raw_byte": "0x00"
+    },
+    {
+     "source_id": 1,
+     "source_label": "B",
+     "target_id": 1,
+     "absolute_offset": 113,
+     "raw_byte": "0x01"
+    },
+    {
+     "source_id": 2,
+     "source_label": "Empty",
+     "target_id": 2,
+     "absolute_offset": 114,
+     "raw_byte": "0x02"
+    },
+    {
+     "source_id": 3,
+     "source_label": "X",
+     "target_id": 3,
+     "absolute_offset": 115,
+     "raw_byte": "0x03"
+    },
+    {
+     "source_id": 4,
+     "source_label": "Y",
+     "target_id": 4,
+     "absolute_offset": 116,
+     "raw_byte": "0x04"
+    },
+    {
+     "source_id": 5,
+     "source_label": "UNKNOWN",
+     "target_id": 5,
+     "absolute_offset": 117,
+     "raw_byte": "0x05"
+    },
+    {
+     "source_id": 6,
+     "source_label": "LB",
+     "target_id": 6,
+     "absolute_offset": 118,
+     "raw_byte": "0x06"
+    },
+    {
+     "source_id": 7,
+     "source_label": "RB",
+     "target_id": 7,
+     "absolute_offset": 119,
+     "raw_byte": "0x07"
+    },
+    {
+     "source_id": 8,
+     "source_label": "LT",
+     "target_id": 8,
+     "absolute_offset": 120,
+     "raw_byte": "0x08"
+    },
+    {
+     "source_id": 9,
+     "source_label": "RT",
+     "target_id": 9,
+     "absolute_offset": 121,
+     "raw_byte": "0x09"
+    },
+    {
+     "source_id": 10,
+     "source_label": "View",
+     "target_id": 10,
+     "absolute_offset": 122,
+     "raw_byte": "0x0A"
+    },
+    {
+     "source_id": 11,
+     "source_label": "Menu",
+     "target_id": 11,
+     "absolute_offset": 123,
+     "raw_byte": "0x0B"
+    },
+    {
+     "source_id": 12,
+     "source_label": "UNKNOWN",
+     "target_id": 12,
+     "absolute_offset": 124,
+     "raw_byte": "0x0C"
+    },
+    {
+     "source_id": 13,
+     "source_label": "L3",
+     "target_id": 13,
+     "absolute_offset": 125,
+     "raw_byte": "0x0D"
+    },
+    {
+     "source_id": 14,
+     "source_label": "R3",
+     "target_id": 14,
+     "absolute_offset": 126,
+     "raw_byte": "0x0E"
+    },
+    {
+     "source_id": 15,
+     "source_label": "Capture",
+     "target_id": 15,
+     "absolute_offset": 127,
+     "raw_byte": "0x0F"
+    },
+    {
+     "source_id": 16,
+     "source_label": "D-pad Up",
+     "target_id": 16,
+     "absolute_offset": 128,
+     "raw_byte": "0x10"
+    },
+    {
+     "source_id": 17,
+     "source_label": "D-pad Down",
+     "target_id": 17,
+     "absolute_offset": 129,
+     "raw_byte": "0x11"
+    },
+    {
+     "source_id": 18,
+     "source_label": "D-pad Left",
+     "target_id": 18,
+     "absolute_offset": 130,
+     "raw_byte": "0x12"
+    },
+    {
+     "source_id": 19,
+     "source_label": "D-pad Right",
+     "target_id": 19,
+     "absolute_offset": 131,
+     "raw_byte": "0x13"
+    },
+    {
+     "source_id": 20,
+     "source_label": "UNKNOWN",
+     "target_id": 20,
+     "absolute_offset": 132,
+     "raw_byte": "0x14"
+    },
+    {
+     "source_id": 21,
+     "source_label": "UNKNOWN",
+     "target_id": 21,
+     "absolute_offset": 133,
+     "raw_byte": "0x15"
+    },
+    {
+     "source_id": 22,
+     "source_label": "UNKNOWN",
+     "target_id": 22,
+     "absolute_offset": 134,
+     "raw_byte": "0x16"
+    },
+    {
+     "source_id": 23,
+     "source_label": "UNKNOWN",
+     "target_id": 1,
+     "absolute_offset": 135,
+     "raw_byte": "0x01"
+    },
+    {
+     "source_id": 24,
+     "source_label": "UNKNOWN",
+     "target_id": 13,
+     "absolute_offset": 136,
+     "raw_byte": "0x0D"
+    },
+    {
+     "source_id": 25,
+     "source_label": "UNKNOWN",
+     "target_id": 25,
+     "absolute_offset": 137,
+     "raw_byte": "0x19"
+    },
+    {
+     "source_id": 26,
+     "source_label": "UNKNOWN",
+     "target_id": 26,
+     "absolute_offset": 138,
+     "raw_byte": "0x1A"
+    },
+    {
+     "source_id": 27,
+     "source_label": "M5",
+     "target_id": 27,
+     "absolute_offset": 139,
+     "raw_byte": "0x1B"
+    },
+    {
+     "source_id": 28,
+     "source_label": "M6",
+     "target_id": 28,
+     "absolute_offset": 140,
+     "raw_byte": "0x1C"
+    },
+    {
+     "source_id": 29,
+     "source_label": "M7",
+     "target_id": 29,
+     "absolute_offset": 141,
+     "raw_byte": "0x1D"
+    },
+    {
+     "source_id": 30,
+     "source_label": "UNKNOWN",
+     "target_id": 30,
+     "absolute_offset": 142,
+     "raw_byte": "0x1E"
+    },
+    {
+     "source_id": 31,
+     "source_label": "UNKNOWN",
+     "target_id": 31,
+     "absolute_offset": 143,
+     "raw_byte": "0x1F"
+    }
+   ],
+   "identity_mapping": false,
+   "source_15_offset_127": {
+    "source_id": 15,
+    "source_label": "Capture",
+    "target_id": 15,
+    "absolute_offset": 127,
+    "raw_byte": "0x0F"
+   }
+  }
+ ],
+ "map_keys": [
+  {
+   "source_id": 0,
+   "source_label": "A",
+   "target_id": 0,
+   "absolute_offset": 112,
+   "raw_byte": "0x00"
+  },
+  {
+   "source_id": 1,
+   "source_label": "B",
+   "target_id": 1,
+   "absolute_offset": 113,
+   "raw_byte": "0x01"
+  },
+  {
+   "source_id": 2,
+   "source_label": "Empty",
+   "target_id": 2,
+   "absolute_offset": 114,
+   "raw_byte": "0x02"
+  },
+  {
+   "source_id": 3,
+   "source_label": "X",
+   "target_id": 3,
+   "absolute_offset": 115,
+   "raw_byte": "0x03"
+  },
+  {
+   "source_id": 4,
+   "source_label": "Y",
+   "target_id": 4,
+   "absolute_offset": 116,
+   "raw_byte": "0x04"
+  },
+  {
+   "source_id": 5,
+   "source_label": "UNKNOWN",
+   "target_id": 5,
+   "absolute_offset": 117,
+   "raw_byte": "0x05"
+  },
+  {
+   "source_id": 6,
+   "source_label": "LB",
+   "target_id": 6,
+   "absolute_offset": 118,
+   "raw_byte": "0x06"
+  },
+  {
+   "source_id": 7,
+   "source_label": "RB",
+   "target_id": 7,
+   "absolute_offset": 119,
+   "raw_byte": "0x07"
+  },
+  {
+   "source_id": 8,
+   "source_label": "LT",
+   "target_id": 8,
+   "absolute_offset": 120,
+   "raw_byte": "0x08"
+  },
+  {
+   "source_id": 9,
+   "source_label": "RT",
+   "target_id": 9,
+   "absolute_offset": 121,
+   "raw_byte": "0x09"
+  },
+  {
+   "source_id": 10,
+   "source_label": "View",
+   "target_id": 10,
+   "absolute_offset": 122,
+   "raw_byte": "0x0A"
+  },
+  {
+   "source_id": 11,
+   "source_label": "Menu",
+   "target_id": 11,
+   "absolute_offset": 123,
+   "raw_byte": "0x0B"
+  },
+  {
+   "source_id": 12,
+   "source_label": "UNKNOWN",
+   "target_id": 12,
+   "absolute_offset": 124,
+   "raw_byte": "0x0C"
+  },
+  {
+   "source_id": 13,
+   "source_label": "L3",
+   "target_id": 13,
+   "absolute_offset": 125,
+   "raw_byte": "0x0D"
+  },
+  {
+   "source_id": 14,
+   "source_label": "R3",
+   "target_id": 14,
+   "absolute_offset": 126,
+   "raw_byte": "0x0E"
+  },
+  {
+   "source_id": 15,
+   "source_label": "Capture",
+   "target_id": 15,
+   "absolute_offset": 127,
+   "raw_byte": "0x0F"
+  },
+  {
+   "source_id": 16,
+   "source_label": "D-pad Up",
+   "target_id": 16,
+   "absolute_offset": 128,
+   "raw_byte": "0x10"
+  },
+  {
+   "source_id": 17,
+   "source_label": "D-pad Down",
+   "target_id": 17,
+   "absolute_offset": 129,
+   "raw_byte": "0x11"
+  },
+  {
+   "source_id": 18,
+   "source_label": "D-pad Left",
+   "target_id": 18,
+   "absolute_offset": 130,
+   "raw_byte": "0x12"
+  },
+  {
+   "source_id": 19,
+   "source_label": "D-pad Right",
+   "target_id": 19,
+   "absolute_offset": 131,
+   "raw_byte": "0x13"
+  },
+  {
+   "source_id": 20,
+   "source_label": "UNKNOWN",
+   "target_id": 20,
+   "absolute_offset": 132,
+   "raw_byte": "0x14"
+  },
+  {
+   "source_id": 21,
+   "source_label": "UNKNOWN",
+   "target_id": 21,
+   "absolute_offset": 133,
+   "raw_byte": "0x15"
+  },
+  {
+   "source_id": 22,
+   "source_label": "UNKNOWN",
+   "target_id": 22,
+   "absolute_offset": 134,
+   "raw_byte": "0x16"
+  },
+  {
+   "source_id": 23,
+   "source_label": "UNKNOWN",
+   "target_id": 1,
+   "absolute_offset": 135,
+   "raw_byte": "0x01"
+  },
+  {
+   "source_id": 24,
+   "source_label": "UNKNOWN",
+   "target_id": 13,
+   "absolute_offset": 136,
+   "raw_byte": "0x0D"
+  },
+  {
+   "source_id": 25,
+   "source_label": "UNKNOWN",
+   "target_id": 25,
+   "absolute_offset": 137,
+   "raw_byte": "0x19"
+  },
+  {
+   "source_id": 26,
+   "source_label": "UNKNOWN",
+   "target_id": 26,
+   "absolute_offset": 138,
+   "raw_byte": "0x1A"
+  },
+  {
+   "source_id": 27,
+   "source_label": "M5",
+   "target_id": 27,
+   "absolute_offset": 139,
+   "raw_byte": "0x1B"
+  },
+  {
+   "source_id": 28,
+   "source_label": "M6",
+   "target_id": 28,
+   "absolute_offset": 140,
+   "raw_byte": "0x1C"
+  },
+  {
+   "source_id": 29,
+   "source_label": "M7",
+   "target_id": 29,
+   "absolute_offset": 141,
+   "raw_byte": "0x1D"
+  },
+  {
+   "source_id": 30,
+   "source_label": "UNKNOWN",
+   "target_id": 30,
+   "absolute_offset": 142,
+   "raw_byte": "0x1E"
+  },
+  {
+   "source_id": 31,
+   "source_label": "UNKNOWN",
+   "target_id": 31,
+   "absolute_offset": 143,
+   "raw_byte": "0x1F"
+  }
+ ]
+}

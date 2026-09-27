@@ -1,0 +1,5 @@
+2026-09-27T20:28:27.305+00:00 TX a5040bb4 0B version
+2026-09-27T20:28:27.364+00:00 RX a5050b30e5 0B version {"raw": "a5050b30e5", "label": "0B version", "kind": "short", "opcode": "0x0B", "frag_index": null, "checksum_ok": true, "declared_length": 5}
+2026-09-27T20:28:27.364+00:00 TX a505fc8026 FC 80 DPI query
+2026-09-27T20:28:27.423+00:00 RX a505fffca5 FC 80 DPI query {"raw": "a505fffca5", "label": "FC 80 DPI query", "kind": "short", "opcode": "0xFF", "frag_index": null, "checksum_ok": true, "declared_length": 5}
+2026-09-27T20:28:27.424+00:00 TX ab050525da AB 05 05 25 motion query
