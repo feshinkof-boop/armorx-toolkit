@@ -523,7 +523,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             var profile = await _profileStore.ImportAsync(dialog.FileName);
             await RefreshProfilesAsync();
             ProfileNameBox.Text = profile.Name;
-            _diagnostics.Add($"Profile imported: {profile.Name}.");
+            _diagnostics.Add("Profile imported.");
             StatusText = $"Imported profile '{profile.Name}'.";
         });
     }
@@ -548,7 +548,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         await RunBusyAsync("Exporting profile...", async () =>
         {
             await _profileStore.ExportAsync(SelectedProfile.Name, dialog.FileName);
-            _diagnostics.Add($"Profile exported: {SelectedProfile.Name}.");
+            _diagnostics.Add("Profile exported.");
             StatusText = $"Exported '{SelectedProfile.Name}'.";
         });
     }
@@ -571,7 +571,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             await _profileStore.DuplicateAsync(SelectedProfile.Name, finalName);
             await RefreshProfilesAsync();
             ProfileNameBox.Text = finalName;
-            _diagnostics.Add($"Profile duplicated as {finalName}.");
+            _diagnostics.Add("Profile duplicated.");
             StatusText = $"Duplicated profile as '{finalName}'.";
         });
     }
@@ -596,7 +596,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         {
             await _profileStore.RenameAsync(oldName, newName);
             await RefreshProfilesAsync();
-            _diagnostics.Add($"Profile renamed: {oldName} -> {newName}.");
+            _diagnostics.Add("Profile renamed.");
             StatusText = $"Renamed '{oldName}' to '{newName}'.";
         });
     }
@@ -619,7 +619,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
             await _profileStore.DeleteAsync(name);
             SelectedProfile = null;
             await RefreshProfilesAsync();
-            _diagnostics.Add($"Profile deleted: {name}.");
+            _diagnostics.Add("Profile deleted.");
             StatusText = $"Deleted local profile '{name}'.";
         });
     }
@@ -730,7 +730,7 @@ public partial class MainWindow : Window, INotifyPropertyChanged
         try { await action(); }
         catch (Exception ex)
         {
-            _diagnostics.Add($"Operation error: {ex.GetType().Name}: {ex.Message}");
+            _diagnostics.Add($"Operation error: {ex.GetType().Name}.");
             StatusText = "Error: " + ex.Message;
             MessageBox.Show(ex.Message, "ArmorX Windows", MessageBoxButton.OK, MessageBoxImage.Error);
         }
