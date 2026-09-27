@@ -12,3 +12,7 @@ htmlcov/
 .env
 .DS_Store
 *.log
+
+# .NET build outputs
+**/bin/
+**/obj/
