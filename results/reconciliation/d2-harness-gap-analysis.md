@@ -26,15 +26,29 @@
 3. Whether the unit reports input only when its console link is active — CONTRADICTED live: the
    operator confirmed there is no console at all, yet one run streamed 3295 frames.
 
+## LIVE differential (this experiment) — hypotheses tested and refuted
+
+| hypothesis | test | result |
+|---|---|---|
+| A: ATT write-with-response vs write-without-response | variant A, ATT-verified `Write Request (0x12)` + `Write Response (0x13)` | **REFUTED** — echo only, 0 valid frames |
+| B: notification / CCCD subscription state | variant B, explicit unsubscribe `0000` → resubscribe `0100` after the enable | **REFUTED** — 0 valid frames |
+| C: same-connection re-enable / state transition | variant C, enable → disable → re-enable on one link | **REFUTED** — 0 valid frames |
+| D: harness orchestration as a class | C0 reproduced by both Bumble and BlueZ/Bleak paths | **NOT REFUTED** — both silent; a stack artifact is unlikely but orchestration as a class is untested |
+| config/flash state | earlier durable-baseline restore, then D2 | **REFUTED** (see d2-mode-state-finding.md) |
+
+Evidence: `results/experiments/{d2live}/verdict.md`, `raw/tshark-att.txt`.
+
 ## Missing behavior ranked by evidence
 
-A. Write type of the D2 enable (UNKNOWN; the only unmodelled protocol-level difference).
+A. ~~Write type of the D2 enable~~ — tested live (variant A), no effect. Removed as a candidate.
+A'. Connection/session-level differences from the official app (bonding/encryption, connection
+    parameters, MTU, link lifetime) — the new leading target; untested.
 B. CCCD re-arm after the enable (INFERRED, contradicted by 4.0.8).
 C. Nothing else: every other candidate is PROVEN STATIC-absent.
 
 ## Most likely root cause
 
-**UNKNOWN.** Static reconstruction eliminated every command-level candidate; the remaining
+**UNKNOWN** (unchanged after the live differential). Static reconstruction eliminated every command-level candidate; the remaining
 explanations are device-side or transport-level, and the reconstructed official sequence is
 byte-for-byte our sequence.
 

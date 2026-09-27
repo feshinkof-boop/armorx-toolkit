@@ -1,0 +1,11 @@
+{
+ "performed": false,
+ "reason": "No variant produced valid A5 12 02 streaming, so the brief's rule forbids requesting a button press.",
+ "requirement": ">=5 valid status frames, incl. >=1 while no button interaction was requested",
+ "observed": {
+  "C0-harness-control": 0,
+  "A-write-with-response": 0,
+  "B-cccd-renewal": 0,
+  "C-reenable": 0
+ }
+}

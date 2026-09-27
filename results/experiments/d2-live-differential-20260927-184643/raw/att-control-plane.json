@@ -1,0 +1,282 @@
+[
+ {
+  "dir": "TX",
+  "t": 123.752827,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a5040bb4",
+  "code": "0x52",
+  "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb"
+ },
+ {
+  "dir": "RX",
+  "t": 123.771715,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a5050b30e5",
+  "code": "0x1b",
+  "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb"
+ },
+ {
+  "dir": "TX",
+  "t": 125.757721,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x52",
+  "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb"
+ },
+ {
+  "dir": "RX",
+  "t": 125.781719,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x1b",
+  "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb"
+ },
+ {
+  "dir": "TX",
+  "t": 127.262716,
+  "op": "Write Request",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2017d",
+  "code": "0x12",
+  "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb"
+ },
+ {
+  "dir": "RX",
+  "t": 127.280719,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2017d",
+  "code": "0x1b",
+  "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb"
+ },
+ {
+  "dir": "TX",
+  "t": 147.28519,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x52",
+  "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb"
+ },
+ {
+  "dir": "RX",
+  "t": 147.306718,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x1b",
+  "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb"
+ },
+ {
+  "dir": "TX",
+  "t": 438.957666,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a5040bb4",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 438.978716,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a5050b30e5",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 440.962716,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 440.981716,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 442.464716,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2017d",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 442.488715,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2017d",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 449.469493,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 449.493715,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 450.472717,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2017d",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 450.492716,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2017d",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 470.478716,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 470.501717,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 568.266892,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a5040bb4",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 568.291715,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a5050b30e5",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 570.271716,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 570.29372,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 571.774169,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2017d",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 571.793719,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2017d",
+  "code": "0x1b",
+  "uuid": ""
+ },
+ {
+  "dir": "TX",
+  "t": 591.778718,
+  "op": "Write Command",
+  "handle": "0x0075",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x52",
+  "uuid": ""
+ },
+ {
+  "dir": "RX",
+  "t": 591.796716,
+  "op": "Handle Value Notification",
+  "handle": "0x0077",
+  "type": null,
+  "data": "a505d2007c",
+  "code": "0x1b",
+  "uuid": ""
+ }
+]

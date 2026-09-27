@@ -1,0 +1,23 @@
+[
+ {
+  "window": "A (write-with-response)",
+  "t_rel_start": 123.7,
+  "t_rel_end": 147.3,
+  "d2_enable_att_op": "Write Request (0x12)",
+  "observed": "enable -> echo only, no stream"
+ },
+ {
+  "window": "C (same-connection re-enable)",
+  "t_rel_start": 438.9,
+  "t_rel_end": 470.5,
+  "d2_enable_att_op": "Write Command (0x52) x2",
+  "observed": "both enables -> echo only, no stream"
+ },
+ {
+  "window": "C0 re-run (harness control)",
+  "t_rel_start": 568.2,
+  "t_rel_end": 591.8,
+  "d2_enable_att_op": "Write Command (0x52)",
+  "observed": "enable -> echo only, no stream"
+ }
+]

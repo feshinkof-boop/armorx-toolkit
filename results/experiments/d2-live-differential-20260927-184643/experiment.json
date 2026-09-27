@@ -1,0 +1,89 @@
+{
+ "schema_version": 1,
+ "generated_at": "2026-09-27T18:59:54.987764-04:00",
+ "session_dir": "results/experiments/d2-live-differential-20260927-184643",
+ "device": {
+  "address": "2D:37:35:6D:66:11",
+  "advertised_name_observed": "ARMOR-X Pro_11",
+  "manufacturer_data": "5a4a2d5854 (ZJ-XT)",
+  "service_uuids_in_adv": [],
+  "identity": {
+   "2a24": "5a4a2d5854",
+   "2a26": "32373431",
+   "2a19": "3d"
+  }
+ },
+ "control_channel": {
+  "query": "a5040bb4",
+  "reply": "a5050b30e5",
+  "ok": true
+ },
+ "operator_actions": [
+  "armorx_power_on_d2diff (kdialog 18:47:32)",
+  "armorx_power_on_for_case_c (kdialog 18:55:13)"
+ ],
+ "cases": {
+  "C0-harness-control": {
+   "valid_status_frames": 0,
+   "total_notifications": 4,
+   "by_kind": {
+    "wrong_length_5": 1,
+    "d2_echo": 3
+   }
+  },
+  "A-write-with-response": {
+   "valid_status_frames": 0,
+   "total_notifications": 4,
+   "by_kind": {
+    "wrong_length_5": 1,
+    "d2_echo": 3
+   }
+  },
+  "B-cccd-renewal": {
+   "valid_status_frames": 0,
+   "total_notifications": 3,
+   "by_kind": {
+    "wrong_length_5": 1,
+    "d2_echo": 2
+   }
+  },
+  "C-reenable": {
+   "valid_status_frames": 0,
+   "total_notifications": 6,
+   "by_kind": {
+    "wrong_length_5": 1,
+    "d2_echo": 5
+   }
+  }
+ },
+ "att_windows": [
+  {
+   "window": "A (write-with-response)",
+   "t_rel_start": 123.7,
+   "t_rel_end": 147.3,
+   "d2_enable_att_op": "Write Request (0x12)",
+   "observed": "enable -> echo only, no stream"
+  },
+  {
+   "window": "C (same-connection re-enable)",
+   "t_rel_start": 438.9,
+   "t_rel_end": 470.5,
+   "d2_enable_att_op": "Write Command (0x52) x2",
+   "observed": "both enables -> echo only, no stream"
+  },
+  {
+   "window": "C0 re-run (harness control)",
+   "t_rel_start": 568.2,
+   "t_rel_end": 591.8,
+   "d2_enable_att_op": "Write Command (0x52)",
+   "observed": "enable -> echo only, no stream"
+  }
+ ],
+ "success_criterion": ">=5 valid A5 12 02 frames in 20 s, incl. >=1 with no button interaction requested",
+ "classification": "CASE 6 - none succeed",
+ "verdict": "D2-U-007 REMAINS UNKNOWN - PROTOCOL-LEVEL CANDIDATES TESTED HERE DID NOT EXPLAIN THE SILENCE",
+ "final_d6_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "config_baseline_match": true,
+ "durability": "baseline remains DURABLE_OK; this readback is integrity-only",
+ "physical_a_validation": "not performed (no streaming) - forbidden by the success rule"
+}

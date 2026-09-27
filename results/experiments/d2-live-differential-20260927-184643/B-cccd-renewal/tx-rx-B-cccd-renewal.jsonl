@@ -1,0 +1,7 @@
+{"case": "B", "ts_utc": "2026-09-27T22:51:45.294767+00:00", "monotonic_s": 31.97, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a5040bb4", "label": "0B sanity", "write_mode": "without_response"}
+{"case": "B", "ts_utc": "2026-09-27T22:51:45.309364+00:00", "monotonic_s": 31.984, "dir": "RX", "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb", "hex": "a5050b30e5", "label": "notify", "kind": "wrong_length_5"}
+{"case": "B", "ts_utc": "2026-09-27T22:51:47.298470+00:00", "monotonic_s": 33.973, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a505d2007c", "label": "D2 disable (pre)", "write_mode": "without_response"}
+{"case": "B", "ts_utc": "2026-09-27T22:51:47.313436+00:00", "monotonic_s": 33.988, "dir": "RX", "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb", "hex": "a505d2007c", "label": "notify", "kind": "d2_echo"}
+{"case": "B", "ts_utc": "2026-09-27T22:51:48.803314+00:00", "monotonic_s": 35.478, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a505d2017d", "label": "D2 enable", "write_mode": "without_response"}
+{"case": "B", "ts_utc": "2026-09-27T22:52:09.835073+00:00", "monotonic_s": 56.51, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a505d2007c", "label": "D2 disable (post)", "write_mode": "without_response"}
+{"case": "B", "ts_utc": "2026-09-27T22:52:09.851762+00:00", "monotonic_s": 56.527, "dir": "RX", "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb", "hex": "a505d2007c", "label": "notify", "kind": "d2_echo"}

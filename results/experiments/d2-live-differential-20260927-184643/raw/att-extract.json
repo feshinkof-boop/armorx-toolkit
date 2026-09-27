@@ -1,0 +1,592 @@
+[
+ {
+  "pkt": 41,
+  "dir": "TX",
+  "t_rel": 121.545714,
+  "op": "Exchange MTU Request",
+  "code": "0x02",
+  "handle": null,
+  "kind": "Exchange MTU Request",
+  "data": null
+ },
+ {
+  "pkt": 43,
+  "dir": "RX",
+  "t_rel": 121.640721,
+  "op": "Exchange MTU Response",
+  "code": "0x03",
+  "handle": null,
+  "kind": "Exchange MTU Response",
+  "data": null
+ },
+ {
+  "pkt": 44,
+  "dir": "TX",
+  "t_rel": 121.642804,
+  "op": "Read By Type Request",
+  "code": "0x08",
+  "handle": null,
+  "kind": "Read By Type Request",
+  "data": null
+ },
+ {
+  "pkt": 46,
+  "dir": "RX",
+  "t_rel": 121.730767,
+  "op": "Error Response",
+  "code": "0x01",
+  "handle": "0x0001",
+  "kind": "Error Response",
+  "data": null
+ },
+ {
+  "pkt": 47,
+  "dir": "TX",
+  "t_rel": 121.730915,
+  "op": "Read By Group Type Request",
+  "code": "0x10",
+  "handle": null,
+  "kind": "Read By Group Type Request",
+  "data": null
+ },
+ {
+  "pkt": 50,
+  "dir": "RX",
+  "t_rel": 121.820721,
+  "op": "Read By Group Type Response",
+  "code": "0x11",
+  "handle": null,
+  "kind": "Read By Group Type Response",
+  "data": null
+ },
+ {
+  "pkt": 51,
+  "dir": "TX",
+  "t_rel": 121.823715,
+  "op": "Read By Group Type Request",
+  "code": "0x10",
+  "handle": null,
+  "kind": "Read By Group Type Request",
+  "data": null
+ },
+ {
+  "pkt": 53,
+  "dir": "RX",
+  "t_rel": 121.956715,
+  "op": "Read By Group Type Response",
+  "code": "0x11",
+  "handle": null,
+  "kind": "Read By Group Type Response",
+  "data": null
+ },
+ {
+  "pkt": 54,
+  "dir": "TX",
+  "t_rel": 121.959525,
+  "op": "Read By Group Type Request",
+  "code": "0x10",
+  "handle": null,
+  "kind": "Read By Group Type Request",
+  "data": null
+ },
+ {
+  "pkt": 56,
+  "dir": "RX",
+  "t_rel": 122.045717,
+  "op": "Read By Group Type Response",
+  "code": "0x11",
+  "handle": null,
+  "kind": "Read By Group Type Response",
+  "data": null
+ },
+ {
+  "pkt": 57,
+  "dir": "TX",
+  "t_rel": 122.045802,
+  "op": "Read By Group Type Request",
+  "code": "0x10",
+  "handle": null,
+  "kind": "Read By Group Type Request",
+  "data": null
+ },
+ {
+  "pkt": 59,
+  "dir": "RX",
+  "t_rel": 122.136718,
+  "op": "Error Response",
+  "code": "0x01",
+  "handle": "0x0086",
+  "kind": "Error Response",
+  "data": null
+ },
+ {
+  "pkt": 60,
+  "dir": "TX",
+  "t_rel": 122.138814,
+  "op": "Read By Group Type Request",
+  "code": "0x10",
+  "handle": null,
+  "kind": "Read By Group Type Request",
+  "data": null
+ },
+ {
+  "pkt": 62,
+  "dir": "RX",
+  "t_rel": 122.228715,
+  "op": "Error Response",
+  "code": "0x01",
+  "handle": "0x0001",
+  "kind": "Error Response",
+  "data": null
+ },
+ {
+  "pkt": 63,
+  "dir": "TX",
+  "t_rel": 122.229849,
+  "op": "Read By Type Request",
+  "code": "0x08",
+  "handle": null,
+  "kind": "Read By Type Request",
+  "data": null
+ },
+ {
+  "pkt": 65,
+  "dir": "RX",
+  "t_rel": 122.315719,
+  "op": "Error Response",
+  "code": "0x01",
+  "handle": "0x0001",
+  "kind": "Error Response",
+  "data": null
+ },
+ {
+  "pkt": 66,
+  "dir": "TX",
+  "t_rel": 122.316819,
+  "op": "Read By Type Request",
+  "code": "0x08",
+  "handle": null,
+  "kind": "Read By Type Request",
+  "data": null
+ },
+ {
+  "pkt": 70,
+  "dir": "RX",
+  "t_rel": 122.407717,
+  "op": "Read By Type Response",
+  "code": "0x09",
+  "handle": "0x0014",
+  "kind": "Read By Type Response",
+  "data": null
+ },
+ {
+  "pkt": 71,
+  "dir": "TX",
+  "t_rel": 122.408833,
+  "op": "Read By Type Request",
+  "code": "0x08",
+  "handle": null,
+  "kind": "Read By Type Request",
+  "data": null
+ },
+ {
+  "pkt": 74,
+  "dir": "RX",
+  "t_rel": 122.541729,
+  "op": "Read By Type Response",
+  "code": "0x09",
+  "handle": "0x0021",
+  "kind": "Read By Type Response",
+  "data": null
+ },
+ {
+  "pkt": 75,
+  "dir": "TX",
+  "t_rel": 122.541836,
+  "op": "Read By Type Request",
+  "code": "0x08",
+  "handle": null,
+  "kind": "Read By Type Request",
+  "data": null
+ },
+ {
+  "pkt": 78,
+  "dir": "RX",
+  "t_rel": 122.630719,
+  "op": "Read By Type Response",
+  "code": "0x09",
+  "handle": "0x0077",
+  "kind": "Read By Type Response",
+  "data": null
+ },
+ {
+  "pkt": 79,
+  "dir": "TX",
+  "t_rel": 122.630869,
+  "op": "Read By Type Request",
+  "code": "0x08",
+  "handle": null,
+  "kind": "Read By Type Request",
+  "data": null
+ },
+ {
+  "pkt": 81,
+  "dir": "RX",
+  "t_rel": 122.721716,
+  "op": "Read By Type Response",
+  "code": "0x09",
+  "handle": "0x0084",
+  "kind": "Read By Type Response",
+  "data": null
+ },
+ {
+  "pkt": 82,
+  "dir": "TX",
+  "t_rel": 122.724714,
+  "op": "Read By Type Request",
+  "code": "0x08",
+  "handle": null,
+  "kind": "Read By Type Request",
+  "data": null
+ },
+ {
+  "pkt": 84,
+  "dir": "RX",
+  "t_rel": 122.810716,
+  "op": "Error Response",
+  "code": "0x01",
+  "handle": "0x0084",
+  "kind": "Error Response",
+  "data": null
+ },
+ {
+  "pkt": 85,
+  "dir": "TX",
+  "t_rel": 122.811325,
+  "op": "Write Request",
+  "code": "0x12",
+  "handle": "0x000a",
+  "kind": "Write Request",
+  "data": "0200"
+ },
+ {
+  "pkt": 87,
+  "dir": "RX",
+  "t_rel": 122.900718,
+  "op": "Write Response",
+  "code": "0x13",
+  "handle": null,
+  "kind": "Write Response",
+  "data": null
+ },
+ {
+  "pkt": 88,
+  "dir": "TX",
+  "t_rel": 122.900808,
+  "op": "Read Request",
+  "code": "0x0a",
+  "handle": "0x0003",
+  "kind": "Read Request",
+  "data": null
+ },
+ {
+  "pkt": 90,
+  "dir": "RX",
+  "t_rel": 123.036714,
+  "op": "Read Response",
+  "code": "0x0b",
+  "handle": "0x0003",
+  "kind": "Read Response",
+  "data": null
+ },
+ {
+  "pkt": 91,
+  "dir": "TX",
+  "t_rel": 123.038386,
+  "op": "Read Request",
+  "code": "0x0a",
+  "handle": "0x0005",
+  "kind": "Read Request",
+  "data": null
+ },
+ {
+  "pkt": 93,
+  "dir": "RX",
+  "t_rel": 123.126717,
+  "op": "Read Response",
+  "code": "0x0b",
+  "handle": "0x0005",
+  "kind": "Read Response",
+  "data": null
+ },
+ {
+  "pkt": 94,
+  "dir": "TX",
+  "t_rel": 123.127788,
+  "op": "Read Request",
+  "code": "0x0a",
+  "handle": "0x0007",
+  "kind": "Read Request",
+  "data": null
+ },
+ {
+  "pkt": 96,
+  "dir": "RX",
+  "t_rel": 123.215718,
+  "op": "Read Response",
+  "code": "0x0b",
+  "handle": "0x0007",
+  "kind": "Read Response",
+  "data": null
+ },
+ {
+  "pkt": 98,
+  "dir": "TX",
+  "t_rel": 123.215839,
+  "op": "Read Request",
+  "code": "0x0a",
+  "handle": "0x001e",
+  "kind": "Read Request",
+  "data": null
+ },
+ {
+  "pkt": 101,
+  "dir": "RX",
+  "t_rel": 123.306713,
+  "op": "Read Response",
+  "code": "0x0b",
+  "handle": "0x001e",
+  "kind": "Read Response",
+  "data": null
+ },
+ {
+  "pkt": 102,
+  "dir": "TX",
+  "t_rel": 123.308715,
+  "op": "Read Request",
+  "code": "0x0a",
+  "handle": "0x0021",
+  "kind": "Read Request",
+  "data": null
+ },
+ {
+  "pkt": 104,
+  "dir": "RX",
+  "t_rel": 123.396716,
+  "op": "Read Response",
+  "code": "0x0b",
+  "handle": "0x0021",
+  "kind": "Read Response",
+  "data": null
+ },
+ {
+  "pkt": 105,
+  "dir": "TX",
+  "t_rel": 123.396856,
+  "op": "Read Request",
+  "code": "0x0a",
+  "handle": "0x0010",
+  "kind": "Read Request",
+  "data": null
+ },
+ {
+  "pkt": 107,
+  "dir": "RX",
+  "t_rel": 123.486718,
+  "op": "Read Response",
+  "code": "0x0b",
+  "handle": "0x0010",
+  "kind": "Read Response",
+  "data": null
+ },
+ {
+  "pkt": 108,
+  "dir": "TX",
+  "t_rel": 123.486842,
+  "op": "Write Request",
+  "code": "0x12",
+  "handle": "0x0021",
+  "kind": "Write Request",
+  "data": "0100"
+ },
+ {
+  "pkt": 110,
+  "dir": "RX",
+  "t_rel": 123.575719,
+  "op": "Write Response",
+  "code": "0x13",
+  "handle": null,
+  "kind": "Write Response",
+  "data": null
+ },
+ {
+  "pkt": 115,
+  "dir": "TX",
+  "t_rel": 123.590714,
+  "op": "Read Request",
+  "code": "0x0a",
+  "handle": "0x0016",
+  "kind": "Read Request",
+  "data": null
+ },
+ {
+  "pkt": 118,
+  "dir": "RX",
+  "t_rel": 123.665716,
+  "op": "Read Response",
+  "code": "0x0b",
+  "handle": "0x0016",
+  "kind": "Read Response",
+  "data": null
+ },
+ {
+  "pkt": 119,
+  "dir": "TX",
+  "t_rel": 123.670839,
+  "op": "Read Request",
+  "code": "0x0a",
+  "handle": "0x0021",
+  "kind": "Read Request",
+  "data": null
+ },
+ {
+  "pkt": 122,
+  "dir": "RX",
+  "t_rel": 123.717719,
+  "op": "Read Response",
+  "code": "0x0b",
+  "handle": "0x0021",
+  "kind": "Read Response",
+  "data": null
+ },
+ {
+  "pkt": 123,
+  "dir": "TX",
+  "t_rel": 123.723792,
+  "op": "Write Request",
+  "code": "0x12",
+  "handle": "0x0077",
+  "kind": "Write Request",
+  "data": "0100"
+ },
+ {
+  "pkt": 125,
+  "dir": "RX",
+  "t_rel": 123.748716,
+  "op": "Write Response",
+  "code": "0x13",
+  "handle": null,
+  "kind": "Write Response",
+  "data": null
+ },
+ {
+  "pkt": 126,
+  "dir": "TX",
+  "t_rel": 123.752827,
+  "op": "Write Command",
+  "code": "0x52",
+  "handle": "0x0075",
+  "kind": "FFE1 write",
+  "data": "a5040bb4"
+ },
+ {
+  "pkt": 128,
+  "dir": "RX",
+  "t_rel": 123.771715,
+  "op": "Handle Value Notification",
+  "code": "0x1b",
+  "handle": "0x0077",
+  "kind": "FFE2 notify",
+  "data": "a5050b30e5"
+ },
+ {
+  "pkt": 129,
+  "dir": "TX",
+  "t_rel": 125.757721,
+  "op": "Write Command",
+  "code": "0x52",
+  "handle": "0x0075",
+  "kind": "FFE1 write",
+  "data": "a505d2007c"
+ },
+ {
+  "pkt": 131,
+  "dir": "RX",
+  "t_rel": 125.781719,
+  "op": "Handle Value Notification",
+  "code": "0x1b",
+  "handle": "0x0077",
+  "kind": "FFE2 notify",
+  "data": "a505d2007c"
+ },
+ {
+  "pkt": 132,
+  "dir": "TX",
+  "t_rel": 127.262716,
+  "op": "Write Request",
+  "code": "0x12",
+  "handle": "0x0075",
+  "kind": "FFE1 write",
+  "data": "a505d2017d"
+ },
+ {
+  "pkt": 134,
+  "dir": "RX",
+  "t_rel": 127.280716,
+  "op": "Write Response",
+  "code": "0x13",
+  "handle": null,
+  "kind": "Write Response",
+  "data": null
+ },
+ {
+  "pkt": 135,
+  "dir": "RX",
+  "t_rel": 127.280719,
+  "op": "Handle Value Notification",
+  "code": "0x1b",
+  "handle": "0x0077",
+  "kind": "FFE2 notify",
+  "data": "a505d2017d"
+ },
+ {
+  "pkt": 136,
+  "dir": "TX",
+  "t_rel": 147.28519,
+  "op": "Write Command",
+  "code": "0x52",
+  "handle": "0x0075",
+  "kind": "FFE1 write",
+  "data": "a505d2007c"
+ },
+ {
+  "pkt": 138,
+  "dir": "RX",
+  "t_rel": 147.306718,
+  "op": "Handle Value Notification",
+  "code": "0x1b",
+  "handle": "0x0077",
+  "kind": "FFE2 notify",
+  "data": "a505d2007c"
+ },
+ {
+  "pkt": 139,
+  "dir": "TX",
+  "t_rel": 148.290463,
+  "op": "Write Request",
+  "code": "0x12",
+  "handle": "0x0077",
+  "kind": "Write Request",
+  "data": "0000"
+ },
+ {
+  "pkt": 141,
+  "dir": "RX",
+  "t_rel": 148.310715,
+  "op": "Write Response",
+  "code": "0x13",
+  "handle": null,
+  "kind": "Write Response",
+  "data": "0418af0c625aead4dd0d109cb93529b9cfcf31"
+ }
+]

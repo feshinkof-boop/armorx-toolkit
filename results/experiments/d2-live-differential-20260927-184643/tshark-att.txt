@@ -1,0 +1,45 @@
+# ATT-level evidence
+
+## tshark attempt (honest record)
+
+`tshark -r raw/btmon.btsnoop -Y btatt` returned **no frames** for this capture (capinfos: 231+
+packets, encapsulation "Bluetooth Linux Monitor"). TShark 4.6.4 did not decode the btatt layer
+here, so it is **not** the ATT evidence source. The mature tool `btmon -r <capture>` (the same tool
+that recorded it) decodes ATT operations, handles and values, and was used instead.
+
+## Decoded control-plane events (btmon -r, full capture)
+
+```text
+t= 123.753 TX Write Command              FFE1 write data=a5040bb4
+t= 123.772 RX Handle Value Notification  notify     data=a5050b30e5
+t= 125.758 TX Write Command              FFE1 write data=a505d2007c
+t= 125.782 RX Handle Value Notification  notify     data=a505d2007c
+t= 127.263 TX Write Request              FFE1 write data=a505d2017d   <-- VARIANT A enable (WITH RESPONSE)
+t= 127.281 RX Handle Value Notification  notify     data=a505d2017d   <-- echo only
+t= 147.285 TX Write Command              FFE1 write data=a505d2007c
+t= 147.307 RX Handle Value Notification  notify     data=a505d2007c
+t= 438.958 TX Write Command              FFE1 write data=a5040bb4
+t= 440.963 TX Write Command              FFE1 write data=a505d2007c
+t= 442.465 TX Write Command              FFE1 write data=a505d2017d   <-- VARIANT C enable #1
+t= 449.469 TX Write Command              FFE1 write data=a505d2007c   <-- VARIANT C disable
+t= 450.473 TX Write Command              FFE1 write data=a505d2017d   <-- VARIANT C re-enable
+t= 470.479 TX Write Command              FFE1 write data=a505d2007c
+t= 568.267 TX Write Command              FFE1 write data=a5040bb4
+t= 570.272 TX Write Command              FFE1 write data=a505d2007c
+t= 571.774 TX Write Command              FFE1 write data=a505d2017d   <-- C0 re-run enable (no response)
+t= 591.779 TX Write Command              FFE1 write data=a505d2007c
+```
+
+Handles: FFE1 control write `0x0075`, FFE2 notify `0x0077`, FFE2 CCCD `0x0078`.
+CCCD writes present in the capture: `0100` / `0000` / `0100` sequences - i.e. variant B's renewal
+really happened at ATT level, though individual pairs cannot be attributed to one case from the
+capture alone; B's attribution rests on its harness timeline
+(`B-cccd-renewal/timeline-B-cccd-renewal.csv`: cccd_renew_start 35.478 s, unsubscribe_done
+35.480 s, resubscribe_done 36.500 s).
+
+## Coverage limitation (stated, not hidden)
+
+The btsnoop contains **three** of the five run windows (A, C, C0 re-run). The first C0 window and
+variant B's window are absent from the capture although btmon was running. Only A, C and C0
+therefore have independent ATT confirmation; C0's semantics are proven by the re-run window.
+No conclusion here depends on the missing windows.

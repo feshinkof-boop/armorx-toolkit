@@ -21,3 +21,5 @@
 {"action_id": "armorx_idle_persist_check", "event": "acknowledged", "acknowledged_at": "2026-09-27T18:24:34.689871-04:00", "response": "ready", "status": "ACK", "gui_pid": 218761}
 {"action_id": "armorx_durability_confirm", "event": "requested", "requested_at": "2026-09-27T18:24:48-04:00", "title": "ARMOR-X DURABILITY CONFIRM", "message": "Power the ARMOR-X OFF, wait 5 seconds, power it ON again. Then click READY.", "buttons": ["READY=ready", "CANCEL=cancel"], "gui_pid": 219013}
 {"action_id": "armorx_durability_confirm", "event": "acknowledged", "acknowledged_at": "2026-09-27T18:25:07.559901-04:00", "response": "ready", "status": "ACK", "gui_pid": 219099}
+{"event":"acknowledged","action_id":"armorx_power_on_d2diff","acknowledged_at":"2026-09-27T18:47:32-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_power_on_for_case_c","acknowledged_at":"2026-09-27T18:55:13-04:00","response":"done","status":"ACK"}

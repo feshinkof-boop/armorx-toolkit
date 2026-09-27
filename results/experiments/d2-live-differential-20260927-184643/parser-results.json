@@ -1,0 +1,55 @@
+{
+ "contract": {
+  "length": 18,
+  "header": "0xA5",
+  "opcode_offset": 2,
+  "opcode": "0x02",
+  "mask": "big-endian u32 at [3..6]",
+  "checksum": "sum8 of [0..16] vs [17]",
+  "echo_rejected_because": "5-byte frame carrying opcode 0xD2, not 0x02"
+ },
+ "per_case": {
+  "C0-harness-control": {
+   "total_notifications": 4,
+   "by_kind": {
+    "wrong_length_5": 1,
+    "d2_echo": 3
+   },
+   "valid_status_frames": 0
+  },
+  "A-write-with-response": {
+   "total_notifications": 4,
+   "by_kind": {
+    "wrong_length_5": 1,
+    "d2_echo": 3
+   },
+   "valid_status_frames": 0
+  },
+  "B-cccd-renewal": {
+   "total_notifications": 3,
+   "by_kind": {
+    "wrong_length_5": 1,
+    "d2_echo": 2
+   },
+   "valid_status_frames": 0
+  },
+  "C-reenable": {
+   "total_notifications": 6,
+   "by_kind": {
+    "wrong_length_5": 1,
+    "d2_echo": 5
+   },
+   "valid_status_frames": 0
+  }
+ },
+ "rejected_candidates": [
+  {
+   "kind": "d2_echo",
+   "why": "5-byte A5 05 D2 .. transaction echo - fails the 18-byte/0x02 contract"
+  },
+  {
+   "kind": "wrong_length_5",
+   "why": "the 0B control reply (A5 05 0B 30 E5) - valid for 0B, not a button frame"
+  }
+ ]
+}

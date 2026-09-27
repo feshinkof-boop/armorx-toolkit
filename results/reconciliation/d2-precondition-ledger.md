@@ -17,6 +17,10 @@
 | delay/timer | NO | NO | NO | NO | PROVEN STATIC | NO |
 | additional start command | NO | NO | NO | NO | PROVEN STATIC | NO |
 | UI state flag | NO | NO | NO | NO | PROVEN STATIC | NO |
-| **write type (response vs no-response)** | UNKNOWN (no-response proven in 2.22/2.23 path) | write-without-response (PROVEN STATIC) | UNKNOWN | UNKNOWN | 2.23: BleDeviceInteractor::writeCharacterisiticWithoutResponse @0x4d0eb4 | POSSIBLY - the one untested difference |
+| **write type (response vs no-response)** | **NO - live-tested** (variant A, ATT-verified `Write Request 0x12` + `Write Response 0x13`): echo only, 0 frames | write-without-response (PROVEN STATIC) | UNKNOWN (4.0.8) / write-without-response (PROVEN STATIC, 2.22/2.23) | `raw/tshark-att.txt`; @0x4d0eb4 | **NO (refuted)** |
+| **CCCD renewal after the D2 enable** | **NO - live-tested** (variant B): 0 frames | NO | NO | `raw/att-control-plane.json` | **NO (refuted)** |
+| **same-connection re-enable** | **NO - live-tested** (variant C): 0 frames | NO | NO | `raw/tshark-att.txt` | **NO (refuted)** |
+| bonding / encryption state before input reporting | UNKNOWN | UNKNOWN | UNKNOWN | not tested; every run so far has been unbonded | POSSIBLY (new leading candidate) |
+| connection parameters (interval / latency / timeout / MTU / link lifetime) | UNKNOWN | UNKNOWN | UNKNOWN | not compared against the official app | POSSIBLY (new leading candidate) |
 
 Final column vocabulary: YES / NO / POSSIBLY / UNKNOWN.

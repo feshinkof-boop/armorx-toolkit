@@ -1,0 +1,8 @@
+2026-09-27T22:55:36.220530+00:00 scan result
+address=2D:37:35:6D:66:11
+name=ARMOR-X Pro_11
+rssi=-75
+local_name=ARMOR-X Pro_11
+manufacturer_data={65534: '5a4a2d5854'}
+service_uuids=[]
+tx_power=None

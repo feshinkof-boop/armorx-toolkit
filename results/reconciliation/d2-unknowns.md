@@ -3,11 +3,11 @@
 UNKNOWN ID: D2-U-001
 Question: Which write type does the 4.0.8 app use for the D2 enable?
 Why unresolved: The 4.0.8 call site goes through a stored async callback; the write type is not encoded there
-Evidence already checked: D2 enable call site 0xacf8cc -> 0xabaef4; the 2.22/2.23 path (write-without-response)
-What would resolve it: A live variant test, or decoding the callback target in 4.0.8
-Requires hardware: YES
-Risk: low (toggle only)
-Priority: HIGH
+Evidence already checked: D2 enable call site 0xacf8cc -> 0xabaef4; the 2.22/2.23 path (write-without-response); LIVE differential variant A (Write Request 0x12) - refuted as an explanation of the silence
+What would resolve it: decoding the callback target in 4.0.8 (static) - NOTE: no longer HIGH priority, because the write type demonstrably does not change device behaviour
+Requires hardware: NO (static)
+Risk: none
+Priority: LOW (informational)
 
 UNKNOWN ID: D2-U-002
 Question: What is the 0x24 comparison in the 2.24 analysisData?
@@ -62,3 +62,21 @@ What would resolve it: device-side or firmware evidence (or a fw dump)
 Requires hardware: YES
 Risk: UNKNOWN
 Priority: CRITICAL
+
+UNKNOWN ID: D2-U-008
+Question: Does the device require a bonded/encrypted link before it will report input in test mode?
+Why unresolved: every harness run to date, including all four differential variants, used an unbonded, unencrypted link
+Evidence already checked: static reconstruction (no bonding logic found in the app's D2 path); all live captures
+What would resolve it: capture the official app's link against this unit and check whether bonding/encryption is established; then repeat variant C0 on a bonded link
+Requires hardware: YES
+Risk: low (pairing only; no configuration write)
+Priority: HIGH
+
+UNKNOWN ID: D2-U-009
+Question: Do the official app's connection parameters (interval, latency, supervision timeout, MTU, link lifetime) differ from the harness's?
+Why unresolved: not yet compared; no side-by-side session capture of app-vs-harness on the same unit
+Evidence already checked: our own sessions show an MTU exchange and a stable link
+What would resolve it: an HCI capture of the phone's session with the unit, diffed against ours
+Requires hardware: YES (phone + unit)
+Risk: none (passive capture)
+Priority: HIGH

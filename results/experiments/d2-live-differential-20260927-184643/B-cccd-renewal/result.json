@@ -1,0 +1,37 @@
+{
+ "total_notifications": 3,
+ "by_kind": {
+  "wrong_length_5": 1,
+  "d2_echo": 2
+ },
+ "valid_status_frames": 0,
+ "frames": [
+  {
+   "t": 31.984,
+   "hex": "a5050b30e5",
+   "kind": "wrong_length_5",
+   "mask": null,
+   "keys": null
+  },
+  {
+   "t": 33.988,
+   "hex": "a505d2007c",
+   "kind": "d2_echo",
+   "mask": null,
+   "keys": null
+  },
+  {
+   "t": 56.527,
+   "hex": "a505d2007c",
+   "kind": "d2_echo",
+   "mask": null,
+   "keys": null
+  }
+ ],
+ "case": "B",
+ "identity": {
+  "2a24": "5a4a2d5854",
+  "2a26": "32373431",
+  "2a19": "3c"
+ }
+}

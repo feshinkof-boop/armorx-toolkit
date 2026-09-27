@@ -874,5 +874,53 @@
   "function": "",
   "snippet_file": "",
   "notes": "cross-version"
+ },
+ {
+  "id": "D2-LIVE-TX-001",
+  "build": "live",
+  "category": "TX",
+  "claim": "D2 enable written as ATT Write Request (0x12) with Write Response (0x13) in variant A; device answered with the echo only",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/d2-live-differential-*/raw/tshark-att.txt",
+  "address": "handle 0x0075",
+  "function": "bleak write_char(response=True)",
+  "snippet_file": "raw/att-control-plane.json",
+  "notes": "t=127.263"
+ },
+ {
+  "id": "D2-LIVE-RX-001",
+  "build": "live",
+  "category": "RX",
+  "claim": "0 valid A5 12 02 frames in any of the four 20 s windows; only D2 echoes and the 0B reply observed",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/d2-live-differential-*/parser-results.json",
+  "address": "",
+  "function": "",
+  "snippet_file": "",
+  "notes": "C0 4 notif, A 4, B 3, C 6"
+ },
+ {
+  "id": "D2-LIVE-PRE-001",
+  "build": "live",
+  "category": "PRE",
+  "claim": "CCCD renewal after the enable (variant B) does not start the stream",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/d2-live-differential-*/B-cccd-renewal/timeline-B-cccd-renewal.csv",
+  "address": "handle 0x0078",
+  "function": "stop_notify/start_notify",
+  "snippet_file": "raw/att-control-plane.json",
+  "notes": "0000/0100 visible in ATT capture"
+ },
+ {
+  "id": "D2-XVER-003",
+  "build": "all",
+  "category": "XVER",
+  "claim": "the live differential confirms the static conclusion: no protocol-level candidate explains the D2 silence",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/d2-live-differential-*/verdict.md",
+  "address": "",
+  "function": "",
+  "snippet_file": "",
+  "notes": "classification CASE 6"
  }
 ]
