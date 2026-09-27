@@ -1,0 +1,18 @@
+{
+ "ts": "2026-09-27T17:06:17.251737-04:00",
+ "phase": "Part 24 - no-op D7 restore validation (HARD WRITE GATE)",
+ "baseline": {
+  "path": "/home/salamanka/armorx-lab/results/experiments/physical-20260927-165347/baseline-as-found.bin",
+  "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "length": 144,
+  "declared_length": "0x0090",
+  "crc_valid": true
+ },
+ "identical_binary_written": true,
+ "d7_ack": "a505d70081",
+ "d6_readback_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "byte_for_byte_equal": true,
+ "RESTORE_NOOP_VALIDATED": true,
+ "evidence_label": "PROVEN LIVE",
+ "session_dir": "results/experiments/physical-20260927-170455-noop-d7"
+}

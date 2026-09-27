@@ -1,0 +1,53 @@
+{
+ "device_serial": "ZJ-XT_2741_2D-37-35-6D-66-11",
+ "device": {
+  "name": "ARMOR-X Pro",
+  "model_mark": "ZJ-XT",
+  "firmware": "2741",
+  "ble_address": "2D:37:35:6D:66:11",
+  "advertised_name": "ARMOR-X Pro_11",
+  "adv_manufacturer_data": "feff5a4a2d5854",
+  "adv_name_bytes": "0f0941524d4f522d582050726f5f3131"
+ },
+ "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "length": 144,
+ "declared_length": 144,
+ "crc_ok": true,
+ "declared_matches": true,
+ "crc": {
+  "algorithm": "CRC-16/MODBUS",
+  "poly": "0xA001",
+  "init": "0xFFFF",
+  "over": "bytes 2..end",
+  "stored_be_at": "bytes 0..1",
+  "stored": "0x2c40",
+  "computed": "0x2c40",
+  "valid": true
+ },
+ "identity_read_live": {
+  "2a24_raw": "5a4a2d5854",
+  "2a24_ascii": "ZJ-XT",
+  "2a26_raw": "32373431",
+  "2a26_ascii": "2741",
+  "2a19_battery_raw": "44",
+  "2a19_battery_percent": 68,
+  "service_count": 6,
+  "characteristic_count": 18
+ },
+ "source": "REAL device D6 read, physical-20260927-165347 (PROVEN LIVE)",
+ "session_dir": "results/experiments/physical-20260927-165347",
+ "fragments": 10,
+ "restore_verified": true,
+ "roundtrip_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "restore_evidence": {
+  "noop_d7_session": "results/experiments/physical-20260927-170455-noop-d7",
+  "d7_ack": "a505d70081",
+  "d6_readback_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "byte_for_byte_equal": true,
+  "baseline_reproduced_twice": [
+   "results/experiments/physical-20260927-162448 (16:24 local)",
+   "results/experiments/physical-20260927-165347 (17:04 local)"
+  ]
+ },
+ "evidence_label": "PROVEN LIVE"
+}

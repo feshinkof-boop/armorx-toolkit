@@ -77,6 +77,9 @@ def main() -> int:
                     help="fragment payload size = subpackageLength()-5 (15/43/67); default 15")
     ap.add_argument("--dry-run", action="store_true", help="print frames only")
     ap.add_argument("--i-have-read-the-readme", action="store_true")
+    ap.add_argument("--allow-identity-mismatch", action="store_true",
+                    help="DANGEROUS: allow writing a baseline whose manifest model/firmware "
+                         "does not match the live 2A24/2A26 read")
     ap.add_argument("--transport", default="hci-socket:1",
                     help="Bumble transport spec (default hci-socket:1, resolved by BDADDR)")
     ap.add_argument("--address", default=None,
@@ -125,6 +128,22 @@ def main() -> int:
 
     tr = BumbleTransport(transport=args.transport, address=args.address)
     tr.connect()
+    # --- identity gate (Part 25): bind this restore to the physical unit ------
+    ident = tr.read_identity()
+    live_mark = ident.get("2a24", {}).get("ascii") or ""
+    live_fw = ident.get("2a26", {}).get("ascii") or ""
+    exp_mark = (manifest.get("device") or {}).get("model_mark", "")
+    exp_fw = (manifest.get("device") or {}).get("firmware", "")
+    ident_ok = (live_mark == exp_mark) and (live_fw == exp_fw)
+    print("identity      : 2A24=%r 2A26=%r 2A19=%s (raw %s)" %
+          (live_mark, live_fw, ident.get("2a19", {}).get("raw_hex"),
+           ident.get("2a24", {}).get("raw_hex")))
+    print("identity gate : manifest expects %r/%r -> %s" %
+          (exp_mark, exp_fw, "MATCH" if ident_ok else "MISMATCH"))
+    if not ident_ok and not args.allow_identity_mismatch:
+        print("\nREFUSING TO WRITE: this baseline was captured from a different "
+              "model/firmware than the unit now connected.")
+        return 2
     s = Session(logdir=os.path.join(HERE, "logs"), device_serial=manifest["device_serial"],
                 transport=tr, app_version=manifest.get("app_version", "unknown"))
     s.transition(State.RESTORING, "validated baseline restore")

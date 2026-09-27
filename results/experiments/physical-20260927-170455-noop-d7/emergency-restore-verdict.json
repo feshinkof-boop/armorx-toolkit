@@ -1,0 +1,23 @@
+{
+ "ts": "2026-09-27T17:06:17.251737-04:00",
+ "phase": "Part 25 - emergency restore physical validation (controlled no-op)",
+ "tool": "automation/scripts/emergency-restore/emergency-restore.py",
+ "baseline": "baselines/device/ZJ-XT_2741_2D-37-35-6D-66-11/20260927-170400-baseline-as-found.bin",
+ "binding": {
+  "2a24_live": "ZJ-XT",
+  "2a26_live": "2741",
+  "2a19_live": "0x44 (68%)",
+  "manifest_expects": {
+   "model_mark": "ZJ-XT",
+   "firmware": "2741"
+  },
+  "identity_gate": "MATCH (new gate added this pass; refuses on mismatch)",
+  "config_length": 144,
+  "baseline_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
+ },
+ "frames": "10 x A4 14 D7 <ord> <15 B payload> <sum8> (no commit frame for D7)",
+ "d7_ack": "A5 05 D7 00 81",
+ "post_restore_d6_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "EMERGENCY_RESTORE_REAL_DEVICE": "VERIFIED",
+ "evidence_label": "PROVEN LIVE"
+}

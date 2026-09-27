@@ -1,0 +1,21 @@
+2026-09-27T21:03:45.257+00:00 TX a5040bb4 0B version
+2026-09-27T21:03:45.316+00:00 RX a5050b30e5 0B version {"raw": "a5050b30e5", "label": "0B version", "kind": "short", "opcode": "0x0B", "frag_index": null, "checksum_ok": true, "declared_length": 5}
+2026-09-27T21:04:00.313+00:00 TX a5040bb4 0B version
+2026-09-27T21:04:00.373+00:00 RX a5050b30e5 0B version {"raw": "a5050b30e5", "label": "0B version", "kind": "short", "opcode": "0x0B", "frag_index": null, "checksum_ok": true, "declared_length": 5}
+2026-09-27T21:04:00.374+00:00 TX a50cef0000000000000000a0 EF device uuid
+2026-09-27T21:04:00.433+00:00 RX a50cefbb921542f21f55802a EF device uuid {"raw": "a50cefbb921542f21f55802a", "label": "EF device uuid", "kind": "short", "opcode": "0xEF", "frag_index": null, "checksum_ok": true, "declared_length": 12}
+2026-09-27T21:04:00.433+00:00 TX a504d47d D4 input model
+2026-09-27T21:04:00.493+00:00 RX a507d411010092 D4 input model {"raw": "a507d411010092", "label": "D4 input model", "kind": "short", "opcode": "0xD4", "frag_index": null, "checksum_ok": true, "declared_length": 7}
+2026-09-27T21:04:00.493+00:00 TX a504e28b E2 firmware read
+2026-09-27T21:04:00.552+00:00 RX a510e22741025a4a2d5854000000007e E2 firmware read {"raw": "a510e22741025a4a2d5854000000007e", "label": "E2 firmware read", "kind": "short", "opcode": "0xE2", "frag_index": null, "checksum_ok": true, "declared_length": 16}
+2026-09-27T21:04:00.552+00:00 TX a504d67f D6 config read
+2026-09-27T21:04:00.613+00:00 RX a414d6012c40009033ff000000000000000000bd D6 config read {"raw": "a414d6012c40009033ff000000000000000000bd", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 1, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.642+00:00 RX a414d602000000000001001e1e4646000001005a D6 config read {"raw": "a414d602000000000001001e1e4646000001005a", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 2, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.643+00:00 RX a414d6031e1e464600000200020200000000005f D6 config read {"raw": "a414d6031e1e464600000200020200000000005f", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 3, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.657+00:00 RX a414d6040a3c3c2a000000000a3c3c2a000000ea D6 config read {"raw": "a414d6040a3c3c2a000000000a3c3c2a000000ea", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 4, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.678+00:00 RX a414d605000a3c3c2a000000000000000000003f D6 config read {"raw": "a414d605000a3c3c2a000000000000000000003f", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 5, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.693+00:00 RX a414d60600000000000000000000000000000094 D6 config read {"raw": "a414d60600000000000000000000000000000094", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 6, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.693+00:00 RX a414d60700000000000000000000000000000095 D6 config read {"raw": "a414d60700000000000000000000000000000095", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 7, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.723+00:00 RX a414d608000000000000000001020304050607b2 D6 config read {"raw": "a414d608000000000000000001020304050607b2", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 8, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.724+00:00 RX a414d60908090a0b0c0d0e0f1011121314151678 D6 config read {"raw": "a414d60908090a0b0c0d0e0f1011121314151678", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 9, "checksum_ok": true, "declared_length": 20}
+2026-09-27T21:04:00.753+00:00 RX a40ed60a010d191a1b1c1d1e1f64 D6 config read {"raw": "a40ed60a010d191a1b1c1d1e1f64", "label": "D6 config read", "kind": "fragment", "opcode": "0xD6", "frag_index": 10, "checksum_ok": true, "declared_length": 14}

@@ -10,3 +10,8 @@ Terminated                 sleep 2
 2026-09-27T16:55:13-04:00 alert running: supervisor=192550 action=power_on_armorx
 Terminated                 sleep 2
 2026-09-27T16:55:26-04:00 alert stopped (stopped=1)
+2026-09-27T17:03:03-04:00 alert start: [power_on_armorx_2] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:03:03-04:00 alert start: [power_on_armorx_2] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:03:07-04:00 alert running: supervisor=194910 action=power_on_armorx_2
+Terminated                 sleep 2
+2026-09-27T17:03:29-04:00 alert stopped (stopped=0)

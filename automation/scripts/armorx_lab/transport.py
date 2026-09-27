@@ -230,6 +230,32 @@ class BumbleTransport:
         await self._write_ch.write_value(frame, with_response=False)
         self.events.append({"event": "tx", "raw": frame.hex()})
 
+    async def _aread_uuid(self, uuid_short: str):
+        ch = self._chars.get(self._norm(uuid_short))
+        if ch is None:
+            return None
+        try:
+            return bytes(await self._peer.gatt_client.read_value(ch))
+        except Exception:
+            return None
+
+    def read_identity(self) -> dict:
+        """Read the device identity characteristics raw: 2A24, 2A26, 2A19.
+
+        Used to bind a restore/experiment to the physical unit it was captured
+        from: a baseline from a different model/firmware must never be written.
+        """
+        out: dict = {}
+        for key in ("2a24", "2a26", "2a19"):
+            value = self._run(self._aread_uuid(key), timeout=20.0)
+            out[key] = {
+                "raw_hex": value.hex() if value else None,
+                "ascii": value.decode("latin-1") if value else None,
+                "length": len(value) if value else 0,
+            }
+        self.events.append({"event": "identity_read", **out})
+        return out
+
     async def _aclose(self) -> None:
         try:
             if self._transport_ctx is not None:

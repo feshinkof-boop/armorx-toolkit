@@ -1,9 +1,20 @@
 {
- "research_state": "DEVICE_VISIBLE_PENDING_SCAN",
+ "research_state": "RESTORED_AND_VERIFIED",
  "pending_action_id": null,
  "pending_message": "Power on the ARMOR-X Pro now, then reply DONE in Hermes.",
- "requested_at": "2026-09-27T16:55:07.389617-04:00",
+ "requested_at": "2026-09-27T17:03:00.777755-04:00",
  "alert_system": "VALIDATED (operator confirmed ALERT TEST OK 2026-09-27)",
- "last_acknowledged_action": "power_on_armorx",
- "acknowledged_at": "2026-09-27T16:55:24-04:00"
+ "last_acknowledged_action": "power_on_armorx_2",
+ "acknowledged_at": "2026-09-27T17:03:32.106674-04:00",
+ "RESTORE_NOOP_VALIDATED": true,
+ "EMERGENCY_RESTORE_REAL_DEVICE": "VERIFIED",
+ "identity": {
+  "2A24": "ZJ-XT",
+  "2A26": "2741",
+  "ble_address": "2D:37:35:6D:66:11",
+  "adv_name": "ARMOR-X Pro_11",
+  "mfg": "feff 5a4a2d5854"
+ },
+ "baseline_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "updated_at": "2026-09-27T17:06:17.251737-04:00"
 }
