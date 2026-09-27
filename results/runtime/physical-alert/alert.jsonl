@@ -33,3 +33,5 @@ If not, reply: NO POPUP / NO SOUND / NOTHING -- Hermes will troubleshoot and ret
 {"ts":"2026-09-27T16:55:15-04:00","event":"popup_dismissed_replaying","raise_number":1}
 {"ts":"2026-09-27T16:55:15-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
 {"ts":"2026-09-27T16:55:17-04:00","event":"popup_raised","backend":"kdialog","raise_number":2}
+{"ts":"2026-09-27T16:55:24-04:00","event":"sound_loop_stop","iterations":1}
+{"ts":"2026-09-27T16:55:26-04:00","event":"alert_stopped","action_id":"power_on_armorx","loop_stopped":1}

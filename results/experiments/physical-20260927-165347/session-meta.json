@@ -1,9 +1,9 @@
 {
  "lab_branch": "research/physical-armorx-live-2026-09-27",
- "lab_head": "a4fd86edffcfb98365a8d198ddb599697a426d91",
+ "lab_head": "3e24bd87fedaf64660627b1f21ae5df9bce84170",
  "toolkit_branch": "research/physical-armorx-live-2026-09-27",
  "toolkit_head": "156368d9eb7b00eb5071577387d686020376b305",
- "start": "2026-09-27T20:54:42.740+00:00",
+ "start": "2026-09-27T21:02:25.673+00:00",
  "phase": "scan",
  "transport": "hci-socket:1",
  "kernel": "7.0.0-34-generic",

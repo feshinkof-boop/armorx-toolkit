@@ -1,0 +1,102 @@
+{
+ "scan_ts": "2026-09-27T17:03:00.731946-04:00",
+ "scan_window_seconds": 25,
+ "devices_seen": 13,
+ "armorx_present": false,
+ "devices": [
+  {
+   "address": "DC:97:58:77:70:42/P",
+   "name": "",
+   "rssi": -88,
+   "manufacturer_data": "8f030a10420c01dc9758777041ec",
+   "is_armorx": false
+  },
+  {
+   "address": "DC:23:4F:80:DD:EE/P",
+   "name": "TY",
+   "rssi": -74,
+   "manufacturer_data": "4c0002157575696461363563666562616230333900000000ce",
+   "is_armorx": false
+  },
+  {
+   "address": "50:AD:8F:E8:DF:8B",
+   "name": "",
+   "rssi": -84,
+   "manufacturer_data": "4c001007321f5b4e701978",
+   "is_armorx": false
+  },
+  {
+   "address": "13:2F:F4:CA:91:97",
+   "name": "",
+   "rssi": -94,
+   "manufacturer_data": null,
+   "is_armorx": false
+  },
+  {
+   "address": "26:C9:F7:8B:96:8D",
+   "name": "",
+   "rssi": -90,
+   "manufacturer_data": null,
+   "is_armorx": false
+  },
+  {
+   "address": "60:7D:2C:B9:C8:52",
+   "name": "",
+   "rssi": -90,
+   "manufacturer_data": null,
+   "is_armorx": false
+  },
+  {
+   "address": "48:E0:6C:3B:37:5E",
+   "name": "",
+   "rssi": -90,
+   "manufacturer_data": "4c0010053a1c11b8bf",
+   "is_armorx": false
+  },
+  {
+   "address": "BC:57:29:0F:4F:35/P",
+   "name": "",
+   "rssi": -96,
+   "manufacturer_data": null,
+   "is_armorx": false
+  },
+  {
+   "address": "E1:2E:BD:46:6E:31",
+   "name": "",
+   "rssi": -88,
+   "manufacturer_data": "4c0012020000",
+   "is_armorx": false
+  },
+  {
+   "address": "CA:E7:DD:91:BF:B2",
+   "name": "",
+   "rssi": -88,
+   "manufacturer_data": "4c0012020002",
+   "is_armorx": false
+  },
+  {
+   "address": "04:C1:D8:2C:13:D5/P",
+   "name": "",
+   "rssi": -96,
+   "manufacturer_data": null,
+   "is_armorx": false
+  },
+  {
+   "address": "6F:72:9C:8A:65:CE",
+   "name": "",
+   "rssi": -92,
+   "manufacturer_data": "4c001007311b5ea0798d48",
+   "is_armorx": false
+  },
+  {
+   "address": "59:BB:AE:D1:7F:3D",
+   "name": "",
+   "rssi": -90,
+   "manufacturer_data": null,
+   "is_armorx": false
+  }
+ ],
+ "classification": "WAITING_FOR_DEVICE",
+ "interpretation": "ARMOR-X Pro absent after the 16:55-16:57 live pass; consistent with its automatic power-off timer. NOT a protocol rejection.",
+ "evidence_label": "PROVEN LIVE (absence, 25 s scan, 13 unrelated devices still seen)"
+}
