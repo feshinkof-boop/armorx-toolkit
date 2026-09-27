@@ -1,0 +1,88 @@
+<Window x:Class="ArmorX.Windows.Research.D8ResearchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ArmorX D8 Macro Discovery Research"
+        Width="1080" Height="760" MinWidth="900" MinHeight="650"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+            <StackPanel>
+                <TextBlock Text="D8 Macro Discovery" FontSize="30" FontWeight="Bold"/>
+                <TextBlock Text="RESEARCH BUILD · v0.3.0-research.1 · direct BLE"
+                           Foreground="{StaticResource TextSecondary}" Margin="0,4,0,0"/>
+            </StackPanel>
+            <Border Grid.Column="1" Background="{StaticResource Surface}" BorderBrush="{StaticResource BorderBrushSoft}"
+                    BorderThickness="1" CornerRadius="10" Padding="12,8" VerticalAlignment="Center">
+                <StackPanel>
+                    <TextBlock Text="D8 WRITE LOCKED" FontWeight="Bold" HorizontalAlignment="Center"/>
+                    <TextBlock Text="No guessed macro payload is transmitted." Foreground="{StaticResource TextSecondary}" FontSize="11"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="1" Style="{StaticResource Card}">
+            <Grid>
+                <Grid.ColumnDefinitions><ColumnDefinition/><ColumnDefinition Width="260"/></Grid.ColumnDefinitions>
+                <StackPanel>
+                    <TextBlock Text="One-click discovery run" FontSize="21" FontWeight="SemiBold"/>
+                    <TextBlock Margin="0,6,0,0" Foreground="{StaticResource TextSecondary}" TextWrapping="Wrap">
+                        Attach ARMOR-X Pro to the Xbox controller, unplug the USB dongle, close the official BIGBIG WON app,
+                        turn ARMOR-X Pro on, then press RUN D8 DISCOVERY. The app connects, saves a D6 baseline, repeats the
+                        recovered read-only D5/GetMacroList probe, records BLE evidence, checks repeatability, waits for passive
+                        traffic, and produces one ZIP bundle. D8 writes remain disabled until their payload structure is proven.
+                    </TextBlock>
+                    <TextBlock x:Name="ConnectionText" Margin="0,14,0,0" FontWeight="SemiBold" Text="Not connected"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="22,0,0,0" VerticalAlignment="Center">
+                    <Button x:Name="RunButton" Style="{StaticResource PrimaryButton}" Margin="0,0,0,8"
+                            Content="RUN D8 DISCOVERY" Click="Run_Click"/>
+                    <Button x:Name="AbortButton" Style="{StaticResource DangerButton}" Margin="0,0,0,8"
+                            Content="Abort run" IsEnabled="False" Click="Abort_Click"/>
+                    <Button Style="{StaticResource SecondaryButton}" Content="Import D8 capture" Click="ImportCapture_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="2" Margin="0,14,0,14">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="1.15*"/><ColumnDefinition Width="14"/><ColumnDefinition/></Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Style="{StaticResource Card}">
+                <StackPanel>
+                    <TextBlock Text="WHAT YOU NEED TO DO" Foreground="{StaticResource TextSecondary}" FontSize="11" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="ActionText" Margin="0,8,0,16" FontSize="22" FontWeight="SemiBold"
+                               TextWrapping="Wrap" Text="Prepare the hardware, then press RUN D8 DISCOVERY."/>
+                    <ProgressBar x:Name="RunProgress" Height="8" Minimum="0" Maximum="100" Value="0"/>
+                    <TextBlock x:Name="ProgressText" Margin="0,8,0,0" Foreground="{StaticResource TextSecondary}" Text="Idle"/>
+                    <Separator Margin="0,18,0,14"/>
+                    <TextBlock Text="Evidence output" FontWeight="SemiBold"/>
+                    <TextBlock x:Name="OutputText" Margin="0,6,0,0" TextWrapping="Wrap"
+                               Foreground="{StaticResource TextSecondary}"
+                               Text="A completed run writes a timestamped evidence folder and ZIP to your Desktop."/>
+                </StackPanel>
+            </Border>
+
+            <Border Grid.Column="2" Style="{StaticResource Card}">
+                <Grid>
+                    <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+                    <TextBlock Text="Live evidence log" FontSize="18" FontWeight="SemiBold"/>
+                    <TextBox x:Name="LogBox" Grid.Row="1" Margin="0,12,0,0" IsReadOnly="True"
+                             VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                             TextWrapping="NoWrap" FontFamily="Consolas" FontSize="11"/>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="3" Background="{StaticResource SurfaceAlt}" CornerRadius="10" Padding="12">
+            <TextBlock x:Name="FooterText" TextWrapping="Wrap"
+                       Text="Safety gate: this build may transmit proven initialization/config-read frames and the recovered D5 macro-list read request. It contains no production path that transmits opcode D8."/>
+        </Border>
+    </Grid>
+</Window>
