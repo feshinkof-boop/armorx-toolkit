@@ -13,8 +13,9 @@ Everything in this report is about that unit. Virtual-peripheral results are lab
 - Resume check: read-only D6 on the real unit found a **leftover ID-15 mutant** (not the
   baseline) — an interrupted write. It was frozen as evidence, shown to be byte-for-byte our own
   experiment (`diff {0,1,127}`), then restored and re-verified on a fresh connection.
-  Current D6 SHA: **`bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`**
-  (identical to the original baseline → **baseline intact**).
+  Current D6 SHA: **`bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`**,
+  verified **persistent across a power cycle** at the end of the pass (see §14, which also
+  withdraws an earlier, invalid durability claim based on readback alone).
 
 ## 2. Operator interaction (new model, validated)
 
@@ -122,3 +123,18 @@ concrete test first: with the unit freshly powered and being actively used, re-p
 button), then re-run the 23 resolved buttons to upgrade them from single-press to two-press
 evidence. Rationale: the map underpins every later write experiment (macros, lighting, ID 15
 confirmation), and RT is the one button whose silence is currently unexplained.
+
+## 14. Durability finding (added after the earlier sections were written)
+
+**A `D7` config write is staging-only until it settles.** Readback (`D6`) faithfully reflects the
+working copy, but a power cycle reloads the previously persisted image. The write became durable
+only after a ~12–19 minute idle window before power-off; a hard power cycle then still read the
+intended image. Full chain: `real-config-durability.md`.
+
+This **withdraws** the durability interpretation of `restore_verified: true`, of the no-op `D7`
+gate, and of this report's own earlier "baseline intact" wording (now replaced above). Later
+persistent work (D8/DPI/lighting) must use the sequence **write → readback → settle → power cycle →
+read**, and must never report success from the readback alone.
+
+The finding does **not** explain the D2 status-stream silence: after the durable restore, D2 still
+streamed nothing (5 variants tested). That remains UNKNOWN.

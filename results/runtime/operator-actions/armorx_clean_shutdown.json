@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_clean_shutdown",
+ "response": "ready",
+ "clicked_at": "2026-09-27T18:11:42.509106-04:00",
+ "pid": 217574,
+ "title": "ARMOR-X CLEAN SHUTDOWN TEST",
+ "gui": "PySide6"
+}

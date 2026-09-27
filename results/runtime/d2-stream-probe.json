@@ -1,21 +1,29 @@
 {
  "A_plain_on": {
-  "frames": 0,
-  "first": []
- },
- "B_off_then_on": {
-  "frames": 0,
-  "first": []
- },
- "C_on_twice": {
   "frames": 1,
   "first": [
    "a505d2017d"
   ]
  },
- "D_0b_then_on": {
-  "frames": 1,
+ "B_off_then_on": {
+  "frames": 2,
   "first": [
+   "a505d2017d",
+   "a505d2017d"
+  ]
+ },
+ "C_on_twice": {
+  "frames": 3,
+  "first": [
+   "a505d2017d",
+   "a505d2017d",
+   "a505d2017d"
+  ]
+ },
+ "D_0b_then_on": {
+  "frames": 2,
+  "first": [
+   "a505d2017d",
    "a505d2017d"
   ]
  },
@@ -26,7 +34,7 @@
  "identity": {
   "2a24": "ZJ-XT",
   "2a26": "2741",
-  "2a19": "@"
+  "2a19": ">"
  },
  "verdict": "NO_STREAM_IN_ANY_VARIANT"
 }

@@ -1,10 +1,10 @@
 {
  "lab_branch": "research/physical-armorx-live-2026-09-27",
- "lab_head": "9aa1aa7531cb076b2e50a03117131d0af23fbb64",
+ "lab_head": "84263f816384513df5b88a9b2d8e89aa39f7af62",
  "toolkit_branch": "research/physical-armorx-live-2026-09-27",
  "toolkit_head": "156368d9eb7b00eb5071577387d686020376b305",
- "start": "2026-09-27T22:08:07.838+00:00",
- "phase": "readonly",
+ "start": "2026-09-27T22:08:39.515+00:00",
+ "phase": "query-dpi",
  "transport": "hci-socket:1",
  "kernel": "7.0.0-34-generic",
  "hostname": "salamanka-systemproductname",

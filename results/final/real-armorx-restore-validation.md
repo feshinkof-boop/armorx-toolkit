@@ -50,3 +50,24 @@ that was confirmed by a fresh connection's read, not by the write's own return v
 - operator actions involved: `armorx_power_required_restore` (READY click) and, earlier,
   `armorx_powercycle` — both acknowledged by GUI click, recorded in
   `results/runtime/operator-actions.jsonl`
+
+---
+
+## CORRECTION (later in the same pass) — durability claim WITHDRAWN
+
+This document's verification chain is a **staging** proof: a `D6` readback matches the written
+image. It is **not** a durability proof, and the durability statement it implies was **wrong**.
+
+A hard power cycle later showed the unit reloading a previously persisted image (the ID-15 mutant)
+even though the readback had matched the intended baseline. A write only became persistent after a
+**settle/idle window** of roughly 12–19 minutes before power-off, verified by a further read after
+a power cycle. See `real-config-durability.md` for the six-step experiment chain.
+
+Corrected wording for anything above:
+
+- "restore verified" → **staged-verified by readback**;
+- "byte-for-byte equal" → true of the staging copy at that moment;
+- "restore_verified: true" → **withdrawn as a durability claim**.
+
+The unit's final state *is* durable (`bdef9c61…`, survives a power cycle), but that was earned at
+the end of the pass, not by the readback that this document describes.
