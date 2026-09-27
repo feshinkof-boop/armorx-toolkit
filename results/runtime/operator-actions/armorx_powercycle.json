@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_powercycle",
+ "response": "ready",
+ "clicked_at": "2026-09-27T17:51:53.718571-04:00",
+ "pid": 212881,
+ "title": "ARMOR-X POWER CYCLE",
+ "gui": "PySide6"
+}

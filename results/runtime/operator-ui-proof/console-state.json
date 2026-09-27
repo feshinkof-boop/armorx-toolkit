@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_console_state",
+ "response": "no_console",
+ "clicked_at": "2026-09-27T18:01:05.092276-04:00",
+ "pid": 214191,
+ "title": "ARMOR-X CONSOLE STATE",
+ "gui": "PySide6"
+}

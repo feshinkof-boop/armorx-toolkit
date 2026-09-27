@@ -1,0 +1,14 @@
+bringing hci1 DOWN so Bumble can open the kernel HCI socket (btusb stays bound)
+use-bumble.sh: running Bumble with transport hci-socket:1
+use-bumble.sh: command: /home/salamanka/armorx-lab/automation/scripts/py-bumble ble/real-device/armorx_real.py --session-dir results/experiments/physical-20260927-174445-buttons --seconds 600 --transport hci-socket:1 d2 hci-socket:1 
+[session] results/experiments/physical-20260927-174445-buttons
+[gatt] services=6 characteristics=18
+[gatt] 2A24_model 34fb len=5 raw=5a4a2d5854 ascii='ZJ-XT'
+[gatt] 2A26_firmware 34fb len=4 raw=32373431 ascii='2741'
+[gatt] 2A19_battery 34fb len=1 raw=41 ascii='A'
+[tx] 0B version             a5040bb4
+[rx] 0B version             a5050b30e5
+[tx] D2 test ON             a505d2017d
+[rx] D2 test ON             a505d2017d
+[d2] test mode ON -- press buttons now
+[d2] a505d2017d

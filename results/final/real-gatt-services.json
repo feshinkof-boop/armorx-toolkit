@@ -1,0 +1,188 @@
+{
+ "device": {
+  "advertised_name": "ARMOR-X Pro_11",
+  "ble_address": "2D:37:35:6D:66:11",
+  "model_mark": "ZJ-XT",
+  "firmware": "2741"
+ },
+ "source": {
+  "capture": "bumble GATT discovery + reads (live 2026-09-27)",
+  "session": "results/experiments/physical-20260927-174445-buttons",
+  "evidence": "PROVEN LIVE"
+ },
+ "services": [
+  {
+   "uuid": "00001800-0000-1000-8000-00805f9b34fb",
+   "name": "1800 Generic Access",
+   "characteristics": [
+    {
+     "uuid": "00002a00",
+     "uuid_16": "00002a00",
+     "name": "Device Name",
+     "member_of": "00001800-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "00002a01",
+     "uuid_16": "00002a01",
+     "name": "Appearance",
+     "member_of": "00001800-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "00002a04",
+     "uuid_16": "00002a04",
+     "name": "Peripheral Preferred Conn Params",
+     "member_of": "00001800-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    }
+   ]
+  },
+  {
+   "uuid": "00001801-0000-1000-8000-00805f9b34fb",
+   "name": "1801 Generic Attribute",
+   "characteristics": [
+    {
+     "uuid": "00002a05",
+     "uuid_16": "00002a05",
+     "name": "Service Changed",
+     "member_of": "00001801-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    }
+   ]
+  },
+  {
+   "uuid": "0000180a-0000-1000-8000-00805f9b34fb",
+   "name": "180A Device Information",
+   "characteristics": [
+    {
+     "uuid": "00002a23",
+     "uuid_16": "00002a23",
+     "name": "System ID",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "00002a24",
+     "uuid_16": "00002a24",
+     "name": "Model Number String",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": {
+      "raw": "5a4a2d5854",
+      "ascii": "ZJ-XT"
+     }
+    },
+    {
+     "uuid": "00002a25",
+     "uuid_16": "00002a25",
+     "name": "Serial Number String",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "00002a26",
+     "uuid_16": "00002a26",
+     "name": "Firmware Revision String",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": {
+      "raw": "32373431",
+      "ascii": "2741"
+     }
+    },
+    {
+     "uuid": "00002a27",
+     "uuid_16": "00002a27",
+     "name": "Hardware Revision String",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "00002a28",
+     "uuid_16": "00002a28",
+     "name": "Software Revision String",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "00002a29",
+     "uuid_16": "00002a29",
+     "name": "Manufacturer Name String",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "00002a2a",
+     "uuid_16": "00002a2a",
+     "name": "IEEE 11073-20601 Regulatory Cert",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "00002a50",
+     "uuid_16": "00002a50",
+     "name": "PnP ID",
+     "member_of": "0000180a-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    }
+   ]
+  },
+  {
+   "uuid": "0000180f-0000-1000-8000-00805f9b34fb",
+   "name": "180F Battery Service",
+   "characteristics": [
+    {
+     "uuid": "00002a19",
+     "uuid_16": "00002a19",
+     "name": "Battery Level",
+     "member_of": "0000180f-0000-1000-8000-00805f9b34fb",
+     "live_value": {
+      "raw": "41",
+      "value": 65,
+      "unit": "%"
+     }
+    }
+   ]
+  },
+  {
+   "uuid": "00000000-0000-1000-8000-00805f9b34fb",
+   "name": "0000 vendor/config service (FFE1 write, FFE2 notify/read)",
+   "characteristics": [
+    {
+     "uuid": "0000ffe1",
+     "uuid_16": "0000ffe1",
+     "name": "ArmorX config write",
+     "member_of": "00000000-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "0000ffe2",
+     "uuid_16": "0000ffe2",
+     "name": "ArmorX config notify/read",
+     "member_of": "00000000-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    }
+   ]
+  },
+  {
+   "uuid": "0000ae00-0000-1000-8000-00805f9b34fb",
+   "name": "AE00 JieLi RCSP-compatible service",
+   "characteristics": [
+    {
+     "uuid": "0000ae01",
+     "uuid_16": "0000ae01",
+     "name": "JieLi RCSP write",
+     "member_of": "0000ae00-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    },
+    {
+     "uuid": "0000ae02",
+     "uuid_16": "0000ae02",
+     "name": "JieLi RCSP notify/indicate",
+     "member_of": "0000ae00-0000-1000-8000-00805f9b34fb",
+     "live_value": null
+    }
+   ]
+  }
+ ],
+ "note": "properties (read/write/notify) are recorded where the live session bound them; the primary config channel is FFE1 write + FFE2 notify; AE00/AE01/AE02 is a JieLi RCSP-compatible service PRESENCE (PROVEN LIVE) whose app usage is NOT PROVEN."
+}

@@ -39,6 +39,7 @@ sys.path.insert(0, str(LAB / "ble" / "virtual-armorx"))
 
 import armorx_protocol as proto  # noqa: E402
 from armorx_lab.transport import BumbleTransport  # noqa: E402
+from armorx_lab import frames as F  # noqa: E402  (frames.Frame carries .header)
 
 F_0B = bytes.fromhex("A5040BB4")
 F_D6 = bytes.fromhex("A504D67F")
@@ -75,22 +76,32 @@ def diff(a: bytes, b: bytes) -> dict:
 
 
 def read_d6(tr: BumbleTransport, fragments: int) -> bytes:
+    """D6 replies arrive as N A4 fragments; each carries a 1-based ordinal at
+    payload[0]. Same rule as emergency-restore.py, which was validated on this
+    exact device (F.parse_frame exposes .header, proto.parse_frame does not)."""
     tr.write(F_D6)
-    pieces, seen = [], []
+    seen = []
     while len(seen) < fragments:
         chunk = tr.read(3.0)
         if chunk is None:
             break
         seen.append(chunk)
-        parsed = proto.parse_frame(chunk)
+    pieces = []
+    for chunk in seen:
+        parsed = F.parse_frame(chunk)
         if parsed is None or parsed.opcode < 0:
             continue
-        payload = bytes(parsed.data)
+        payload = bytes(parsed.payload)
         if parsed.header == 0xA4 and payload:
             payload = payload[1:]
         pieces.append(payload)
-    print(f"  D6 frames: {len(seen)}, reassembled {sum(len(p) for p in pieces)} bytes")
-    return b"".join(pieces)
+    image = b"".join(pieces)
+    if len(image) > 4:
+        declared = int.from_bytes(image[2:4], "big")
+        if 0 < declared <= len(image):
+            image = image[:declared]
+    print(f"  D6 frames: {len(seen)}, reassembled {len(b''.join(pieces))} -> {len(image)} bytes")
+    return image
 
 
 def write_image(tr: BumbleTransport, image: bytes, label: str) -> list[str]:
@@ -106,6 +117,31 @@ def write_image(tr: BumbleTransport, image: bytes, label: str) -> list[str]:
     return responses
 
 
+def probe(tr, baseline: bytes, mutant: bytes, b_sha: str, m_sha: str, args, outdir) -> int:
+    """Read-only: report which image the device is actually holding right now."""
+    tr.connect()
+    ident = tr.read_identity()
+    mark = ident.get("2a24", {}).get("ascii") or ""
+    fw = ident.get("2a26", {}).get("ascii") or ""
+    image = read_d6(tr, args.d6_fragments)
+    tr.close()
+    sha = hashlib.sha256(image).hexdigest()
+    if sha == b_sha:
+        verdict = "BASELINE_LIVE"
+    elif sha == m_sha:
+        verdict = "MUTANT_LIVE"
+    else:
+        verdict = "NEITHER (unexpected image)"
+    report = {"mode": "probe", "identity": {"2a24": mark, "2a26": fw},
+              "readback_length": len(image), "readback_sha256": sha,
+              "baseline_sha256": b_sha, "mutant_sha256": m_sha,
+              "verdict": verdict, "ts": time.time()}
+    (outdir / "probe-readback.bin").write_bytes(image)
+    (outdir / "id15-probe-result.json").write_text(json.dumps(report, indent=1))
+    print(json.dumps(report, indent=1))
+    return 0 if verdict != "NEITHER (unexpected image)" else 4
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--baseline", required=True)
@@ -117,6 +153,8 @@ def main() -> int:
     ap.add_argument("--outdir", default=None)
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--restore", action="store_true")
+    ap.add_argument("--probe", action="store_true",
+                    help="read D6 only: report which image (baseline or mutant) is live")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--clear-d2-mode", action="store_true",
                     help="send the D2 test-mode OFF frame before writing")
@@ -150,6 +188,9 @@ def main() -> int:
             {"problems": problems, "diff": d, "baseline_sha256": b_sha}, indent=1))
         return 2
 
+    if args.probe:
+        return probe(tr_dummy := BumbleTransport(transport=args.transport, address=args.address),
+                     baseline, mutant, b_sha, m_sha, args, outdir)
     frames = proto.build_fragment_sequence(0xD7, mutant if args.write else baseline)
     print(f"D7 frames: {len(frames)}")
     if args.dry_run:
