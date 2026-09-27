@@ -1,4 +1,5 @@
 name: Validate public Windows v0.2.1
+# validates safety + profile UX
 
 on:
   push:
