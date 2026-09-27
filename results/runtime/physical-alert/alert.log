@@ -15,3 +15,33 @@ Terminated                 sleep 2
 2026-09-27T17:03:07-04:00 alert running: supervisor=194910 action=power_on_armorx_2
 Terminated                 sleep 2
 2026-09-27T17:03:29-04:00 alert stopped (stopped=0)
+2026-09-27T17:07:44-04:00 alert start: [d2_window_prepare] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:07:44-04:00 alert start: [d2_window_prepare] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:07:47-04:00 alert running: supervisor=197050 action=d2_window_prepare
+2026-09-27T17:08:44-04:00 alert stopped (stopped=1)
+2026-09-27T17:09:19-04:00 alert start: [press_group_A] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:09:19-04:00 alert start: [press_group_A] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:09:23-04:00 alert running: supervisor=198017 action=press_group_A
+2026-09-27T17:10:18-04:00 alert stopped (stopped=1)
+2026-09-27T17:10:46-04:00 alert start: [press_group_B] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:10:46-04:00 alert start: [press_group_B] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:10:49-04:00 alert running: supervisor=198791 action=press_group_B
+2026-09-27T17:11:36-04:00 alert stopped (stopped=1)
+2026-09-27T17:11:50-04:00 alert start: [press_group_C] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:11:50-04:00 alert start: [press_group_C] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:11:53-04:00 alert running: supervisor=199530 action=press_group_C
+2026-09-27T17:12:16-04:00 alert stopped (stopped=1)
+2026-09-27T17:12:30-04:00 alert stopped (stopped=0)
+2026-09-27T17:12:32-04:00 alert stopped (stopped=0)
+2026-09-27T17:12:34-04:00 alert start: [press_group_D] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:12:34-04:00 alert start: [press_group_D] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:12:38-04:00 alert running: supervisor=200138 action=press_group_D
+2026-09-27T17:13:11-04:00 alert stopped (stopped=1)
+2026-09-27T17:13:22-04:00 alert start: [press_group_E] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:13:22-04:00 alert start: [press_group_E] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:13:26-04:00 alert running: supervisor=200730 action=press_group_E
+2026-09-27T17:14:29-04:00 alert stopped (stopped=1)
+2026-09-27T17:14:46-04:00 alert start: [press_group_F] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:14:46-04:00 alert start: [press_group_F] popup=kdialog sound=pw-play file=/home/salamanka/armorx-lab/automation/armorx-alert.wav every 20s
+2026-09-27T17:14:50-04:00 alert running: supervisor=201459 action=press_group_F
+2026-09-27T17:15:40-04:00 alert stopped (stopped=1)

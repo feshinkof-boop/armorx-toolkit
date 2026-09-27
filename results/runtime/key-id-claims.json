@@ -1,0 +1,35 @@
+{
+ "note": "Every claim below is VERIFIED against the D2 capture: the group window must contain a frame whose key mask has EXACTLY that bit set. A claim that cannot be verified is rejected, never softened. 'static' = the label the static analysis had for that id.",
+ "claims": [
+  {"group": "press_group_A", "button": "A",  "id": 0,  "static": "A"},
+  {"group": "press_group_A", "button": "B",  "id": 1,  "static": "B"},
+  {"group": "press_group_A", "button": "X",  "id": 3,  "static": "X"},
+  {"group": "press_group_A", "button": "Y",  "id": 4,  "static": "Y"},
+  {"group": "press_group_B", "button": "LB", "id": 6,  "static": "LB"},
+  {"group": "press_group_B", "button": "RB", "id": 7,  "static": "RB"},
+  {"group": "press_group_B", "button": "LT", "id": 8,  "static": "LT"},
+  {"group": "press_group_C", "button": "View/Select", "id": 10, "static": "View"},
+  {"group": "press_group_C", "button": "Menu/Start", "id": 11, "static": "Menu"},
+  {"group": "press_group_C", "button": "L3", "id": 13, "static": "L3"},
+  {"group": "press_group_C", "button": "R3", "id": 14, "static": "R3"},
+  {"group": "press_group_D", "button": "D-pad Up",    "id": 16, "static": "D-pad Up"},
+  {"group": "press_group_D", "button": "D-pad Down",  "id": 17, "static": "D-pad Down"},
+  {"group": "press_group_D", "button": "D-pad Left",  "id": 18, "static": "D-pad Left"},
+  {"group": "press_group_D", "button": "D-pad Right", "id": 19, "static": "D-pad Right"},
+  {"group": "press_group_E", "button": "Capture/Share", "id": 15, "static": "Capture"},
+  {"group": "press_group_E", "button": "Guide/Xbox", "id": 12, "static": "UNKNOWN (was)"},
+  {"group": "press_group_E", "button": "M1", "id": 23, "static": "UNKNOWN (was)"},
+  {"group": "press_group_E", "button": "M2", "id": 24, "static": "UNKNOWN (was)"},
+  {"group": "press_group_E", "button": "M3", "id": 25, "static": "UNKNOWN (was)"},
+  {"group": "press_group_E", "button": "M4", "id": 26, "static": "UNKNOWN (was)"},
+  {"group": "press_group_F", "button": "M5", "id": 27, "static": "M5"},
+  {"group": "press_group_F", "button": "M6", "id": 28, "static": "M6"},
+  {"group": "press_group_F", "button": "M7", "id": 29, "static": "M7"},
+  {"group": "press_group_F", "button": "extra button (as pressed by the operator)", "id": 30, "static": "UNKNOWN (was)"},
+  {"group": "press_group_F", "button": "UNATTRIBUTED - one frame with id 20 appeared in this window; it cannot be tied to RT with confidence", "id": 20, "static": "UNKNOWN (was)"}
+ ],
+ "unresolved_by_request": {
+  "RT": "requested in press_group_B, press_group_D, press_group_E and press_group_F; no frame ever carried id 9, and the RT analog byte [16] never went non-zero. Three dedicated retries failed, so the digital id of RT stays UNKNOWN.",
+  "ids_2_5_9_21_22_31": "no physical button produced these bits in this capture"
+ }
+}

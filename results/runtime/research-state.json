@@ -1,8 +1,8 @@
 {
- "research_state": "RESTORED_AND_VERIFIED",
- "pending_action_id": null,
- "pending_message": "Power on the ARMOR-X Pro now, then reply DONE in Hermes.",
- "requested_at": "2026-09-27T17:03:00.777755-04:00",
+ "research_state": "WAITING_FOR_PHYSICAL_ACTION",
+ "pending_action_id": "press_group_F",
+ "pending_message": "Mop-up, ONE AT A TIME ~4 s apart: 1) RT - squeeze it slowly and firmly to the end stop, hold 2 seconds   2) M5   3) M6   4) M7   (skip any M button your unit does not have). If you have any other button I have not asked about yet (e.g. a Turbo or profile button), press it last. Then reply DONE in Hermes.",
+ "requested_at": "2026-09-27T17:14:44.208096-04:00",
  "alert_system": "VALIDATED (operator confirmed ALERT TEST OK 2026-09-27)",
  "last_acknowledged_action": "power_on_armorx_2",
  "acknowledged_at": "2026-09-27T17:03:32.106674-04:00",

@@ -52,3 +52,82 @@ If not, reply: NO POPUP / NO SOUND / NOTHING -- Hermes will troubleshoot and ret
 {"ts":"2026-09-27T17:03:23-04:00","event":"popup_raised","backend":"kdialog","raise_number":6}
 {"ts":"2026-09-27T17:03:24-04:00","event":"sound_loop_stop","iterations":1}
 {"ts":"2026-09-27T17:03:29-04:00","event":"alert_stopped","action_id":"power_on_armorx_2","loop_stopped":0}
+{"ts":"2026-09-27T17:07:43-04:00","event":"alert_requested","action_id":"d2_window_prepare","message":"Power ON the ARMOR-X Pro now. Then KEEP IT AWAKE (tap any face button once every ~30 s) until I say the button test is finished. Reply DONE in Hermes.","interval":20}
+{"ts":"2026-09-27T17:07:44-04:00","event":"alert_start","action_id":"d2_window_prepare","popup_backend":"kdialog","sound_player":"pw-play","sound_file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"supervisor_pid":197050}
+{"ts":"2026-09-27T17:07:44-04:00","event":"popup_raised","backend":"kdialog","raise_number":1}
+{"ts":"2026-09-27T17:07:44-04:00","event":"sound_loop_start","player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"pid":197144}
+{"ts":"2026-09-27T17:07:50-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:08:03-04:00","event":"popup_dismissed_replaying","raise_number":1}
+{"ts":"2026-09-27T17:08:05-04:00","event":"popup_raised","backend":"kdialog","raise_number":2}
+{"ts":"2026-09-27T17:08:12-04:00","event":"popup_dismissed_replaying","raise_number":2}
+{"ts":"2026-09-27T17:08:14-04:00","event":"popup_raised","backend":"kdialog","raise_number":3}
+{"ts":"2026-09-27T17:08:15-04:00","event":"sound_played","iteration":2,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:08:17-04:00","event":"popup_dismissed_replaying","raise_number":3}
+{"ts":"2026-09-27T17:08:19-04:00","event":"popup_raised","backend":"kdialog","raise_number":4}
+{"ts":"2026-09-27T17:08:21-04:00","event":"popup_dismissed_replaying","raise_number":4}
+{"ts":"2026-09-27T17:08:23-04:00","event":"popup_raised","backend":"kdialog","raise_number":5}
+{"ts":"2026-09-27T17:08:25-04:00","event":"popup_dismissed_replaying","raise_number":5}
+{"ts":"2026-09-27T17:08:27-04:00","event":"popup_raised","backend":"kdialog","raise_number":6}
+{"ts":"2026-09-27T17:08:41-04:00","event":"sound_played","iteration":3,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:08:42-04:00","event":"sound_loop_stop","iterations":3}
+{"ts":"2026-09-27T17:08:44-04:00","event":"alert_stopped","action_id":"d2_window_prepare","loop_stopped":1}
+{"ts":"2026-09-27T17:09:19-04:00","event":"alert_requested","action_id":"press_group_A","message":"Press ONE AT A TIME, about 4 seconds apart, in THIS order: 1) A   2) B   3) X   4) Y. Press and release each once. Then reply DONE in Hermes.","interval":20}
+{"ts":"2026-09-27T17:09:19-04:00","event":"alert_start","action_id":"press_group_A","popup_backend":"kdialog","sound_player":"pw-play","sound_file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"supervisor_pid":198017}
+{"ts":"2026-09-27T17:09:19-04:00","event":"popup_raised","backend":"kdialog","raise_number":1}
+{"ts":"2026-09-27T17:09:19-04:00","event":"sound_loop_start","player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"pid":198111}
+{"ts":"2026-09-27T17:09:25-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:09:51-04:00","event":"sound_played","iteration":2,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:10:05-04:00","event":"popup_dismissed_replaying","raise_number":1}
+{"ts":"2026-09-27T17:10:07-04:00","event":"popup_raised","backend":"kdialog","raise_number":2}
+{"ts":"2026-09-27T17:10:15-04:00","event":"popup_dismissed_replaying","raise_number":2}
+{"ts":"2026-09-27T17:10:15-04:00","event":"sound_played","iteration":3,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:10:16-04:00","event":"sound_loop_stop","iterations":3}
+{"ts":"2026-09-27T17:10:18-04:00","event":"alert_stopped","action_id":"press_group_A","loop_stopped":1}
+{"ts":"2026-09-27T17:10:45-04:00","event":"alert_requested","action_id":"press_group_B","message":"Press ONE AT A TIME, about 4 seconds apart, in THIS order: 1) LB   2) RB   3) LT   4) RT. Press and release each once. Then reply DONE in Hermes.","interval":20}
+{"ts":"2026-09-27T17:10:46-04:00","event":"alert_start","action_id":"press_group_B","popup_backend":"kdialog","sound_player":"pw-play","sound_file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"supervisor_pid":198791}
+{"ts":"2026-09-27T17:10:46-04:00","event":"popup_raised","backend":"kdialog","raise_number":1}
+{"ts":"2026-09-27T17:10:46-04:00","event":"sound_loop_start","player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"pid":198885}
+{"ts":"2026-09-27T17:10:51-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:11:11-04:00","event":"popup_dismissed_replaying","raise_number":1}
+{"ts":"2026-09-27T17:11:13-04:00","event":"popup_raised","backend":"kdialog","raise_number":2}
+{"ts":"2026-09-27T17:11:17-04:00","event":"sound_played","iteration":2,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:11:22-04:00","event":"popup_dismissed_replaying","raise_number":2}
+{"ts":"2026-09-27T17:11:24-04:00","event":"popup_raised","backend":"kdialog","raise_number":3}
+{"ts":"2026-09-27T17:11:35-04:00","event":"sound_loop_stop","iterations":2}
+{"ts":"2026-09-27T17:11:36-04:00","event":"alert_stopped","action_id":"press_group_B","loop_stopped":1}
+{"ts":"2026-09-27T17:11:49-04:00","event":"alert_requested","action_id":"press_group_C","message":"Press ONE AT A TIME, about 4 seconds apart, in THIS order: 1) View/Select   2) Menu/Start   3) L3 (stick click)   4) R3 (stick click). Press and release each once. Then reply DONE in Hermes.","interval":20}
+{"ts":"2026-09-27T17:11:50-04:00","event":"alert_start","action_id":"press_group_C","popup_backend":"kdialog","sound_player":"pw-play","sound_file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"supervisor_pid":199530}
+{"ts":"2026-09-27T17:11:50-04:00","event":"popup_raised","backend":"kdialog","raise_number":1}
+{"ts":"2026-09-27T17:11:50-04:00","event":"sound_loop_start","player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"pid":199624}
+{"ts":"2026-09-27T17:11:55-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:12:15-04:00","event":"sound_loop_stop","iterations":1}
+{"ts":"2026-09-27T17:12:16-04:00","event":"alert_stopped","action_id":"press_group_C","loop_stopped":1}
+{"ts":"2026-09-27T17:12:34-04:00","event":"alert_requested","action_id":"press_group_D","message":"Press ONE AT A TIME, about 4 seconds apart, in THIS order: 1) RT (pull fully)   2) D-pad Up   3) D-pad Down   4) D-pad Left   5) D-pad Right. Press and release each once. Then reply DONE in Hermes.","interval":20}
+{"ts":"2026-09-27T17:12:34-04:00","event":"alert_start","action_id":"press_group_D","popup_backend":"kdialog","sound_player":"pw-play","sound_file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"supervisor_pid":200138}
+{"ts":"2026-09-27T17:12:34-04:00","event":"sound_loop_start","player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"pid":200232}
+{"ts":"2026-09-27T17:12:34-04:00","event":"popup_raised","backend":"kdialog","raise_number":1}
+{"ts":"2026-09-27T17:12:40-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:13:06-04:00","event":"sound_played","iteration":2,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:13:08-04:00","event":"popup_dismissed_replaying","raise_number":1}
+{"ts":"2026-09-27T17:13:09-04:00","event":"sound_loop_stop","iterations":2}
+{"ts":"2026-09-27T17:13:10-04:00","event":"alert_stopped","action_id":"press_group_D","loop_stopped":1}
+{"ts":"2026-09-27T17:13:22-04:00","event":"alert_requested","action_id":"press_group_E","message":"Press ONE AT A TIME, about 4 seconds apart, in THIS order: 1) RT pulled FULLY to the end stop, hold 1s, release   2) Capture/Share   3) Xbox/Guide button (centre)   4) EACH rear/extra M button you have, in order M1, M2, M3, M4, M5, M6, M7 (skip any that do not exist). Then reply DONE in Hermes.","interval":20}
+{"ts":"2026-09-27T17:13:22-04:00","event":"alert_start","action_id":"press_group_E","popup_backend":"kdialog","sound_player":"pw-play","sound_file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"supervisor_pid":200730}
+{"ts":"2026-09-27T17:13:22-04:00","event":"popup_raised","backend":"kdialog","raise_number":1}
+{"ts":"2026-09-27T17:13:22-04:00","event":"sound_loop_start","player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"pid":200824}
+{"ts":"2026-09-27T17:13:28-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:13:54-04:00","event":"sound_played","iteration":2,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:14:19-04:00","event":"popup_dismissed_replaying","raise_number":1}
+{"ts":"2026-09-27T17:14:20-04:00","event":"sound_played","iteration":3,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:14:21-04:00","event":"popup_raised","backend":"kdialog","raise_number":2}
+{"ts":"2026-09-27T17:14:28-04:00","event":"sound_loop_stop","iterations":3}
+{"ts":"2026-09-27T17:14:29-04:00","event":"alert_stopped","action_id":"press_group_E","loop_stopped":1}
+{"ts":"2026-09-27T17:14:46-04:00","event":"alert_requested","action_id":"press_group_F","message":"Mop-up, ONE AT A TIME ~4 s apart: 1) RT - squeeze it slowly and firmly to the end stop, hold 2 seconds   2) M5   3) M6   4) M7   (skip any M button your unit does not have). If you have any other button I have not asked about yet (e.g. a Turbo or profile button), press it last. Then reply DONE in Hermes.","interval":20}
+{"ts":"2026-09-27T17:14:46-04:00","event":"alert_start","action_id":"press_group_F","popup_backend":"kdialog","sound_player":"pw-play","sound_file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"supervisor_pid":201459}
+{"ts":"2026-09-27T17:14:46-04:00","event":"popup_raised","backend":"kdialog","raise_number":1}
+{"ts":"2026-09-27T17:14:46-04:00","event":"sound_loop_start","player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav","interval":20,"pid":201553}
+{"ts":"2026-09-27T17:14:52-04:00","event":"sound_played","iteration":1,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:15:18-04:00","event":"sound_played","iteration":2,"player":"pw-play","file":"/home/salamanka/armorx-lab/automation/armorx-alert.wav"}
+{"ts":"2026-09-27T17:15:37-04:00","event":"popup_dismissed_replaying","raise_number":1}
+{"ts":"2026-09-27T17:15:38-04:00","event":"sound_loop_stop","iterations":2}
+{"ts":"2026-09-27T17:15:40-04:00","event":"alert_stopped","action_id":"press_group_F","loop_stopped":1}

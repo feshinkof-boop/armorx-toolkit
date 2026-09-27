@@ -1,0 +1,1506 @@
+{
+ "device": {
+  "model": "ZJ-XT",
+  "firmware": "2741",
+  "ble_address": "2D:37:35:6D:66:11",
+  "advertised_name": "ARMOR-X Pro_11"
+ },
+ "capture": {
+  "session_jsonl": "/home/salamanka/armorx-lab/results/experiments/physical-20260927-170844-d2/session.jsonl",
+  "frames": 3295,
+  "modal_idle_frame": "a5120200000000fc54fcec040dfb04000001"
+ },
+ "frame_layout": {
+  "opcode": "0x02",
+  "length": 18,
+  "key_mask_bytes": "[3][4][5][6] -> ids 24-31 / 16-23 / 8-15 / 0-7 (bit == source id)",
+  "lt_analog_byte": "[15] (0x83 -> 0xFF on a full pull)",
+  "rt_analog_byte": "[16]",
+  "analog_axis_bytes": "[7]-[14] semantics UNKNOWN",
+  "checksum_byte": "[17] sum8"
+ },
+ "method": "explicit claims verified against the capture (single-bit mask inside the group's request window); positional pairing is deliberately NOT used",
+ "verified_map": {
+  "0": {
+   "group": "press_group_A",
+   "button": "A",
+   "id": 0,
+   "static": "A",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 14,
+   "first_evidence": {
+    "ts": "2026-09-27T17:09:50.843000-04:00",
+    "raw": "a5120200000001fc280224fdc9fe2e0000f6",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 1,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:09:51.052000-04:00",
+    "raw": "a5120200000001fc280224fdc9fe2e0000f6",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 1,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:09:23-04:00",
+    "to": "2026-09-27T17:10:15-04:00"
+   }
+  },
+  "1": {
+   "group": "press_group_A",
+   "button": "B",
+   "id": 1,
+   "static": "B",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 13,
+   "first_evidence": {
+    "ts": "2026-09-27T17:09:53.888000-04:00",
+    "raw": "a5120200000002fc280224fdc9fe2e0000f7",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 2,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:09:54.082000-04:00",
+    "raw": "a5120200000002fc280224fdc9fe2e0000f7",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 2,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:09:23-04:00",
+    "to": "2026-09-27T17:10:15-04:00"
+   }
+  },
+  "3": {
+   "group": "press_group_A",
+   "button": "X",
+   "id": 3,
+   "static": "X",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 14,
+   "first_evidence": {
+    "ts": "2026-09-27T17:09:58.178000-04:00",
+    "raw": "a5120200000008fc280224fdc9fe2e0000fd",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 8,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:09:58.387000-04:00",
+    "raw": "a5120200000008fc280224fdc9fe2e0000fd",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 8,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:09:23-04:00",
+    "to": "2026-09-27T17:10:15-04:00"
+   }
+  },
+  "4": {
+   "group": "press_group_A",
+   "button": "Y",
+   "id": 4,
+   "static": "Y",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 14,
+   "first_evidence": {
+    "ts": "2026-09-27T17:10:02.513000-04:00",
+    "raw": "a5120200000010fc280224fdc9fb4c000020",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 16,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:10:02.722000-04:00",
+    "raw": "a5120200000010fc280224fdc9fb4c000020",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 16,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:09:23-04:00",
+    "to": "2026-09-27T17:10:15-04:00"
+   }
+  },
+  "6": {
+   "group": "press_group_B",
+   "button": "LB",
+   "id": 6,
+   "static": "LB",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 38,
+   "first_evidence": {
+    "ts": "2026-09-27T17:11:00.969000-04:00",
+    "raw": "a5120200000040fc460224fdc9fbb20000d4",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 64,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:11:34.443000-04:00",
+    "raw": "a5120200000040fc460247fdc9fbb20000f7",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 64,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": true
+   },
+   "window": {
+    "from": "2026-09-27T17:10:49-04:00",
+    "to": "2026-09-27T17:11:34-04:00"
+   }
+  },
+  "7": {
+   "group": "press_group_B",
+   "button": "RB",
+   "id": 7,
+   "static": "RB",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 35,
+   "first_evidence": {
+    "ts": "2026-09-27T17:11:01.988000-04:00",
+    "raw": "a5120200000080fc460224fdc9fbb2000014",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 128,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:11:35.544000-04:00",
+    "raw": "a5120200000080fc460247fdc9fbb2000037",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 0,
+     "b6": 128,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": true
+   },
+   "window": {
+    "from": "2026-09-27T17:10:49-04:00",
+    "to": "2026-09-27T17:11:34-04:00"
+   }
+  },
+  "8": {
+   "group": "press_group_B",
+   "button": "LT",
+   "id": 8,
+   "static": "LT",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 13,
+   "first_evidence": {
+    "ts": "2026-09-27T17:11:36.573000-04:00",
+    "raw": "a5120200000100fc460247fdc9fbb283003b",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 1,
+     "b6": 0,
+     "lt_analog": 131,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": true
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:11:36.761000-04:00",
+    "raw": "a5120200000100fc460247fdc9fbb2ff00b7",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 1,
+     "b6": 0,
+     "lt_analog": 255,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": true
+   },
+   "window": {
+    "from": "2026-09-27T17:10:49-04:00",
+    "to": "2026-09-27T17:11:34-04:00"
+   }
+  },
+  "10": {
+   "group": "press_group_C",
+   "button": "View/Select",
+   "id": 10,
+   "static": "View",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 29,
+   "first_evidence": {
+    "ts": "2026-09-27T17:11:58.241000-04:00",
+    "raw": "a5120200000400fc460247fc8c009a00006a",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 4,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:11:58.697000-04:00",
+    "raw": "a5120200000400fc460247fc8cfbf30000be",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 4,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:11:53-04:00",
+    "to": "2026-09-27T17:12:27-04:00"
+   }
+  },
+  "11": {
+   "group": "press_group_C",
+   "button": "Menu/Start",
+   "id": 11,
+   "static": "Menu",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 22,
+   "first_evidence": {
+    "ts": "2026-09-27T17:11:59.770000-04:00",
+    "raw": "a5120200000800fc460247fc8cfbf30000c2",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 8,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:12:00.114000-04:00",
+    "raw": "a5120200000800fc460247fc8cfbf30000c2",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 8,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:11:53-04:00",
+    "to": "2026-09-27T17:12:27-04:00"
+   }
+  },
+  "12": {
+   "group": "press_group_E",
+   "button": "Guide/Xbox",
+   "id": 12,
+   "static": "UNKNOWN (was)",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 26,
+   "first_evidence": {
+    "ts": "2026-09-27T17:13:48.678000-04:00",
+    "raw": "a5120200001000fc54fcec040dfb04000011",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 16,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:13:49.069000-04:00",
+    "raw": "a5120200001000fc54fcec040dfb04000011",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 16,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:13:26-04:00",
+    "to": "2026-09-27T17:14:27-04:00"
+   }
+  },
+  "13": {
+   "group": "press_group_C",
+   "button": "L3",
+   "id": 13,
+   "static": "L3",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 14,
+   "first_evidence": {
+    "ts": "2026-09-27T17:12:01.652000-04:00",
+    "raw": "a512020000200024cee83afc8cfbf3000063",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 32,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:12:01.855000-04:00",
+    "raw": "a51202000020001359fa7bfc8cfbf3000030",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 32,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:11:53-04:00",
+    "to": "2026-09-27T17:12:27-04:00"
+   }
+  },
+  "14": {
+   "group": "press_group_C",
+   "button": "R3",
+   "id": 14,
+   "static": "R3",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 18,
+   "first_evidence": {
+    "ts": "2026-09-27T17:12:03.386000-04:00",
+    "raw": "a5120200004000fc54fc7b02db040b0000ac",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 64,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:12:03.665000-04:00",
+    "raw": "a5120200004000fc54fc7b0d4002ac0000bb",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 64,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:11:53-04:00",
+    "to": "2026-09-27T17:12:27-04:00"
+   }
+  },
+  "15": {
+   "group": "press_group_E",
+   "button": "Capture/Share",
+   "id": 15,
+   "static": "Capture",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 28,
+   "first_evidence": {
+    "ts": "2026-09-27T17:13:43.579000-04:00",
+    "raw": "a5120200008000fc54fcec040dfb04000081",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 128,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:13:43.999000-04:00",
+    "raw": "a5120200008000fc54fcec040dfb04000081",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 0,
+     "b5": 128,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:13:26-04:00",
+    "to": "2026-09-27T17:14:27-04:00"
+   }
+  },
+  "16": {
+   "group": "press_group_D",
+   "button": "D-pad Up",
+   "id": 16,
+   "static": "D-pad Up",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 24,
+   "first_evidence": {
+    "ts": "2026-09-27T17:12:48.784000-04:00",
+    "raw": "a5120200010000fc54fc37040dfb0400004d",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 1,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:12:49.129000-04:00",
+    "raw": "a5120200010000fc54fc37040dfb0400004d",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 1,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:12:38-04:00",
+    "to": "2026-09-27T17:13:08-04:00"
+   }
+  },
+  "17": {
+   "group": "press_group_D",
+   "button": "D-pad Down",
+   "id": 17,
+   "static": "D-pad Down",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 24,
+   "first_evidence": {
+    "ts": "2026-09-27T17:12:51.993000-04:00",
+    "raw": "a5120200020000fc54fc37040dfb0400004e",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 2,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:12:52.353000-04:00",
+    "raw": "a5120200020000fc54fc37040dfb0400004e",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 2,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:12:38-04:00",
+    "to": "2026-09-27T17:13:08-04:00"
+   }
+  },
+  "18": {
+   "group": "press_group_D",
+   "button": "D-pad Left",
+   "id": 18,
+   "static": "D-pad Left",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 19,
+   "first_evidence": {
+    "ts": "2026-09-27T17:12:55.332000-04:00",
+    "raw": "a5120200040000fc54fc37040dfb04000050",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 4,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:12:55.609000-04:00",
+    "raw": "a5120200040000fc54fc37040dfb04000050",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 4,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:12:38-04:00",
+    "to": "2026-09-27T17:13:08-04:00"
+   }
+  },
+  "19": {
+   "group": "press_group_D",
+   "button": "D-pad Right",
+   "id": 19,
+   "static": "D-pad Right",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 18,
+   "first_evidence": {
+    "ts": "2026-09-27T17:12:58.422000-04:00",
+    "raw": "a5120200080000fc54fc37040dfb04000054",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 8,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:12:58.705000-04:00",
+    "raw": "a5120200080000fc54fc37040dfb04000054",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 8,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:12:38-04:00",
+    "to": "2026-09-27T17:13:08-04:00"
+   }
+  },
+  "20": {
+   "group": "press_group_F",
+   "button": "UNATTRIBUTED - one frame with id 20 appeared in this window; it cannot be tied to RT with confidence",
+   "id": 20,
+   "static": "UNKNOWN (was)",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 19,
+   "first_evidence": {
+    "ts": "2026-09-27T17:15:18.395000-04:00",
+    "raw": "a5120200100000fc54fcec040dfb04000011",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 16,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:15:18.680000-04:00",
+    "raw": "a5120200100000fc54fcec040dfb04000011",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 16,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:14:50-04:00",
+    "to": "2026-09-27T17:15:38-04:00"
+   }
+  },
+  "23": {
+   "group": "press_group_E",
+   "button": "M1",
+   "id": 23,
+   "static": "UNKNOWN (was)",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 22,
+   "first_evidence": {
+    "ts": "2026-09-27T17:14:03.130000-04:00",
+    "raw": "a5120200800000fc54fcec040dfb04000081",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 128,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:14:03.468000-04:00",
+    "raw": "a5120200800000fc54fcec040dfb04000081",
+    "mask_bytes": {
+     "b3": 0,
+     "b4": 128,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:13:26-04:00",
+    "to": "2026-09-27T17:14:27-04:00"
+   }
+  },
+  "24": {
+   "group": "press_group_E",
+   "button": "M2",
+   "id": 24,
+   "static": "UNKNOWN (was)",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 28,
+   "first_evidence": {
+    "ts": "2026-09-27T17:14:04.788000-04:00",
+    "raw": "a5120201000000fc54fcec040dfb04000002",
+    "mask_bytes": {
+     "b3": 1,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:14:05.224000-04:00",
+    "raw": "a5120201000000fc54fcec040dfb04000002",
+    "mask_bytes": {
+     "b3": 1,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:13:26-04:00",
+    "to": "2026-09-27T17:14:27-04:00"
+   }
+  },
+  "25": {
+   "group": "press_group_E",
+   "button": "M3",
+   "id": 25,
+   "static": "UNKNOWN (was)",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 24,
+   "first_evidence": {
+    "ts": "2026-09-27T17:14:06.875000-04:00",
+    "raw": "a5120202000000fc54fcec040dfb04000003",
+    "mask_bytes": {
+     "b3": 2,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:14:07.249000-04:00",
+    "raw": "a5120202000000fc54fcec040dfb04000003",
+    "mask_bytes": {
+     "b3": 2,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:13:26-04:00",
+    "to": "2026-09-27T17:14:27-04:00"
+   }
+  },
+  "26": {
+   "group": "press_group_E",
+   "button": "M4",
+   "id": 26,
+   "static": "UNKNOWN (was)",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 21,
+   "first_evidence": {
+    "ts": "2026-09-27T17:14:08.667000-04:00",
+    "raw": "a5120204000000fc54fcec040dfb04000005",
+    "mask_bytes": {
+     "b3": 4,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:14:08.973000-04:00",
+    "raw": "a5120204000000fc54fcec040dfb04000005",
+    "mask_bytes": {
+     "b3": 4,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:13:26-04:00",
+    "to": "2026-09-27T17:14:27-04:00"
+   }
+  },
+  "27": {
+   "group": "press_group_F",
+   "button": "M5",
+   "id": 27,
+   "static": "M5",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 19,
+   "first_evidence": {
+    "ts": "2026-09-27T17:15:19.939000-04:00",
+    "raw": "a5120208000000fc54fcec040dfb04000009",
+    "mask_bytes": {
+     "b3": 8,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:15:20.232000-04:00",
+    "raw": "a5120208000000fc54fcec040dfb04000009",
+    "mask_bytes": {
+     "b3": 8,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:14:50-04:00",
+    "to": "2026-09-27T17:15:38-04:00"
+   }
+  },
+  "28": {
+   "group": "press_group_F",
+   "button": "M6",
+   "id": 28,
+   "static": "M6",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 17,
+   "first_evidence": {
+    "ts": "2026-09-27T17:15:21.636000-04:00",
+    "raw": "a5120210000000fc54fcec040dfb04000011",
+    "mask_bytes": {
+     "b3": 16,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:15:21.890000-04:00",
+    "raw": "a5120210000000fc54fcec040dfb04000011",
+    "mask_bytes": {
+     "b3": 16,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:14:50-04:00",
+    "to": "2026-09-27T17:15:38-04:00"
+   }
+  },
+  "29": {
+   "group": "press_group_F",
+   "button": "M7",
+   "id": 29,
+   "static": "M7",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 24,
+   "first_evidence": {
+    "ts": "2026-09-27T17:15:23.118000-04:00",
+    "raw": "a5120220000000fc54fcec040dfb04000021",
+    "mask_bytes": {
+     "b3": 32,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:15:23.494000-04:00",
+    "raw": "a5120220000000fc54fcec040dfb04000021",
+    "mask_bytes": {
+     "b3": 32,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:14:50-04:00",
+    "to": "2026-09-27T17:15:38-04:00"
+   }
+  },
+  "30": {
+   "group": "press_group_F",
+   "button": "extra button (as pressed by the operator)",
+   "id": 30,
+   "static": "UNKNOWN (was)",
+   "evidence": "PROVEN LIVE",
+   "corroborating_frames": 13,
+   "first_evidence": {
+    "ts": "2026-09-27T17:15:24.854000-04:00",
+    "raw": "a5120240000000fc54fcec040dfb04000041",
+    "mask_bytes": {
+     "b3": 64,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "last_evidence": {
+    "ts": "2026-09-27T17:15:25.047000-04:00",
+    "raw": "a5120240000000fc54fcec040dfb04000041",
+    "mask_bytes": {
+     "b3": 64,
+     "b4": 0,
+     "b5": 0,
+     "b6": 0,
+     "lt_analog": 0,
+     "rt_analog": 0
+    },
+    "after_recorded_reply": false
+   },
+   "window": {
+    "from": "2026-09-27T17:14:50-04:00",
+    "to": "2026-09-27T17:15:38-04:00"
+   }
+  }
+ },
+ "rejected_claims": [],
+ "grace_window_seconds": 20,
+ "unresolved": {
+  "RT": "requested in press_group_B, press_group_D, press_group_E and press_group_F; no frame ever carried id 9, and the RT analog byte [16] never went non-zero. Three dedicated retries failed, so the digital id of RT stays UNKNOWN.",
+  "ids_2_5_9_21_22_31": "no physical button produced these bits in this capture"
+ },
+ "group_observations": [
+  {
+   "group": "press_group_B",
+   "requested": [
+    "LB",
+    "RB",
+    "LT",
+    "RT"
+   ],
+   "distinct_single_bit_events": [
+    {
+     "ids": [
+      6
+     ],
+     "ts": "2026-09-27T17:11:00.969000-04:00",
+     "repeats": 20,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 0,
+      "b6": 64,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      7
+     ],
+     "ts": "2026-09-27T17:11:01.988000-04:00",
+     "repeats": 18,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 0,
+      "b6": 128,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    }
+   ]
+  },
+  {
+   "group": "press_group_C",
+   "requested": [
+    "View",
+    "Menu",
+    "L3",
+    "R3"
+   ],
+   "distinct_single_bit_events": [
+    {
+     "ids": [
+      10
+     ],
+     "ts": "2026-09-27T17:11:58.241000-04:00",
+     "repeats": 29,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 4,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      11
+     ],
+     "ts": "2026-09-27T17:11:59.770000-04:00",
+     "repeats": 22,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 8,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      13
+     ],
+     "ts": "2026-09-27T17:12:01.652000-04:00",
+     "repeats": 14,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 32,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      14
+     ],
+     "ts": "2026-09-27T17:12:03.386000-04:00",
+     "repeats": 18,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 64,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    }
+   ]
+  },
+  {
+   "group": "press_group_D",
+   "requested": [
+    "RT",
+    "D-pad Up",
+    "D-pad Down",
+    "D-pad Left",
+    "D-pad Right"
+   ],
+   "distinct_single_bit_events": [
+    {
+     "ids": [
+      16
+     ],
+     "ts": "2026-09-27T17:12:48.784000-04:00",
+     "repeats": 24,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 1,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      17
+     ],
+     "ts": "2026-09-27T17:12:51.993000-04:00",
+     "repeats": 24,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 2,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      18
+     ],
+     "ts": "2026-09-27T17:12:55.332000-04:00",
+     "repeats": 19,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 4,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      19
+     ],
+     "ts": "2026-09-27T17:12:58.422000-04:00",
+     "repeats": 18,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 8,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    }
+   ]
+  },
+  {
+   "group": "press_group_E",
+   "requested": [
+    "RT",
+    "Capture",
+    "Guide",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7"
+   ],
+   "distinct_single_bit_events": [
+    {
+     "ids": [
+      15
+     ],
+     "ts": "2026-09-27T17:13:43.579000-04:00",
+     "repeats": 28,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 128,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      12
+     ],
+     "ts": "2026-09-27T17:13:48.678000-04:00",
+     "repeats": 26,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 16,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      23
+     ],
+     "ts": "2026-09-27T17:14:03.130000-04:00",
+     "repeats": 22,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 128,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      24
+     ],
+     "ts": "2026-09-27T17:14:04.788000-04:00",
+     "repeats": 28,
+     "mask_bytes": {
+      "b3": 1,
+      "b4": 0,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      25
+     ],
+     "ts": "2026-09-27T17:14:06.875000-04:00",
+     "repeats": 24,
+     "mask_bytes": {
+      "b3": 2,
+      "b4": 0,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      26
+     ],
+     "ts": "2026-09-27T17:14:08.667000-04:00",
+     "repeats": 21,
+     "mask_bytes": {
+      "b3": 4,
+      "b4": 0,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    }
+   ]
+  },
+  {
+   "group": "press_group_F",
+   "requested": [
+    "RT",
+    "M5",
+    "M6",
+    "M7",
+    "other"
+   ],
+   "distinct_single_bit_events": [
+    {
+     "ids": [
+      20
+     ],
+     "ts": "2026-09-27T17:15:18.395000-04:00",
+     "repeats": 19,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 16,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      27
+     ],
+     "ts": "2026-09-27T17:15:19.939000-04:00",
+     "repeats": 19,
+     "mask_bytes": {
+      "b3": 8,
+      "b4": 0,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      28
+     ],
+     "ts": "2026-09-27T17:15:21.636000-04:00",
+     "repeats": 17,
+     "mask_bytes": {
+      "b3": 16,
+      "b4": 0,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      29
+     ],
+     "ts": "2026-09-27T17:15:23.118000-04:00",
+     "repeats": 24,
+     "mask_bytes": {
+      "b3": 32,
+      "b4": 0,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      30
+     ],
+     "ts": "2026-09-27T17:15:24.854000-04:00",
+     "repeats": 13,
+     "mask_bytes": {
+      "b3": 64,
+      "b4": 0,
+      "b5": 0,
+      "b6": 0,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    }
+   ]
+  },
+  {
+   "group": "press_group_A",
+   "requested": [
+    "A",
+    "B",
+    "X",
+    "Y"
+   ],
+   "distinct_single_bit_events": [
+    {
+     "ids": [
+      0
+     ],
+     "ts": "2026-09-27T17:09:50.843000-04:00",
+     "repeats": 14,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 0,
+      "b6": 1,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      1
+     ],
+     "ts": "2026-09-27T17:09:53.888000-04:00",
+     "repeats": 13,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 0,
+      "b6": 2,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      3
+     ],
+     "ts": "2026-09-27T17:09:58.178000-04:00",
+     "repeats": 14,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 0,
+      "b6": 8,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    },
+    {
+     "ids": [
+      4
+     ],
+     "ts": "2026-09-27T17:10:02.513000-04:00",
+     "repeats": 14,
+     "mask_bytes": {
+      "b3": 0,
+      "b4": 0,
+      "b5": 0,
+      "b6": 16,
+      "lt_analog": 0,
+      "rt_analog": 0
+     }
+    }
+   ]
+  }
+ ],
+ "resolved_ids": [
+  0,
+  1,
+  3,
+  4,
+  6,
+  7,
+  8,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  23,
+  24,
+  25,
+  26,
+  27,
+  28,
+  29,
+  30
+ ],
+ "still_unknown_ids": [
+  2,
+  5,
+  9,
+  21,
+  22,
+  31
+ ]
+}
