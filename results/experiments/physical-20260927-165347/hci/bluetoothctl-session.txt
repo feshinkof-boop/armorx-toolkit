@@ -1,0 +1,131 @@
+Waiting to connect to bluetoothd...[0;94m[bluetoothctl]> [0m                                                                                       [[0;92mNEW[0m] Media /org/bluez/hci1 
+[0;94m[bluetoothctl]> [0m                                                                               	SupportedUUIDs: 0000110a-0000-1000-8000-00805f9b34fb
+[0;94m[bluetoothctl]> [0m                                                                               	SupportedUUIDs: 0000110b-0000-1000-8000-00805f9b34fb
+[0;94m[bluetoothctl]> [0m                                                                               [[0;92mNEW[0m] Media /org/bluez/hci0 
+[0;94m[bluetoothctl]> [0m                                                                               	SupportedUUIDs: 0000110a-0000-1000-8000-00805f9b34fb
+[0;94m[bluetoothctl]> [0m                                                                               	SupportedUUIDs: 0000110b-0000-1000-8000-00805f9b34fb
+[0;94m[bluetoothctl]> [0m                                                                               Agent registered
+[0;94m[bluetoothctl]> [0mscan on
+[0;94m[bluetoothctl]> [0m                                                                               SetDiscoveryFilter success
+[0;94m[bluetoothctl]> [0m                                                                               Discovery started
+[0;94m[bluetoothctl]> [0m                                                                               [[0;93mCHG[0m] Controller E8:4E:06:8A:F2:00 Discovering: yes
+[0;94m[bluetoothctl]> [0m                                                                               [[0;92mNEW[0m] Device DC:97:58:77:70:42 MiTV-MOOQ1
+[0;94m[bluetoothctl]> [0mscan off
+[0;94m[bluetoothctl]> [0m                                                                               Discovery stopped
+[0;94m[bluetoothctl]> [0m                                                                               [[0;93mCHG[0m] Device DC:97:58:77:70:42 RSSI is nil
+[0;94m[bluetoothctl]> [0m                                                                               [[0;93mCHG[0m] Controller E8:4E:06:8A:F2:00 Discovering: no
+[0;94m[bluetoothctl]> [0mconnect 2D:37:35:6D:66:11
+Device 2D:37:35:6D:66:11 not available
+[0;94m[bluetoothctl]> [0minfo 2D:37:35:6D:66:11
+Device 2D:37:35:6D:66:11 not available
+DeviceSet 2D:37:35:6D:66:11 not available
+[0;94m[bluetoothctl]> [0mmenu gatt
+[1;39mMenu gatt:[0m
+[1;39mAvailable commands:[0m
+[1;39m-------------------[0m
+[1;39mlist-attributes [dev/local]                       [0mList attributes
+[1;39mselect-attribute <attribute/UUID/local> [attribute/UUID] [0mSelect attribute
+[1;39mattribute-info [attribute/UUID]                   [0mSelect attribute
+[1;39mread [offset]                                     [0mRead attribute value
+[1;39mwrite <data=xx xx ...> [offset] [type]            [0mWrite attribute value
+[1;39macquire-write                                     [0mAcquire Write file descriptor
+[1;39mrelease-write                                     [0mRelease Write file descriptor
+[1;39macquire-notify                                    [0mAcquire Notify file descriptor
+[1;39mrelease-notify                                    [0mRelease Notify file descriptor
+[1;39mnotify <on/off>                                   [0mNotify attribute value
+[1;39mclone [dev/attribute/UUID]                        [0mClone a device or attribute
+[1;39mregister-application [UUID ...]                   [0mRegister profile to connect
+[1;39munregister-application                            [0mUnregister profile
+[1;39mregister-service <UUID> [handle]                  [0mRegister application service.
+[1;39munregister-service <UUID/object>                  [0mUnregister application service
+[1;39mregister-includes <UUID> [handle]                 [0mRegister as Included service in.
+[1;39munregister-includes <Service-UUID> <Inc-UUID>     [0mUnregister Included service.
+[1;39mregister-characteristic <UUID> <Flags=read,write,notify...> [handle] [0mRegister application characteristic
+[1;39munregister-characteristic <UUID/object>           [0mUnregister application characteristic
+[1;39mregister-descriptor <UUID> <Flags=read,write...> [handle] [0mRegister application descriptor
+[1;39munregister-descriptor <UUID/object>               [0mUnregister application descriptor
+[1;39mback                                              [0mReturn to main menu
+[1;39mversion                                           [0mDisplay version
+[1;39mquit                                              [0mQuit program
+[1;39mexit                                              [0mQuit program
+[1;39mhelp                                              [0mDisplay help about this program
+[1;39mexport                                            [0mPrint environment variables
+[1;39mscript <filename>                                 [0mRun script
+[0;94m[bluetoothctl]> [0mlist-attributes
+Missing device address argument
+[0;94m[bluetoothctl]> [0mselect-attribute 00002a24-0000-1000-8000-00805f9b34fb
+No device connected
+[0;94m[bluetoothctl]> [0mread
+No attribute selected
+[0;94m[bluetoothctl]> [0mselect-attribute 00002a26-0000-1000-8000-00805f9b34fb
+No device connected
+[0;94m[bluetoothctl]> [0mread
+No attribute selected
+[0;94m[bluetoothctl]> [0mselect-attribute 00002a19-0000-1000-8000-00805f9b34fb
+No device connected
+[0;94m[bluetoothctl]> [0mread
+No attribute selected
+[0;94m[bluetoothctl]> [0mselect-attribute 0000ffe1-0000-1000-8000-00805f9b34fb
+No device connected
+[0;94m[bluetoothctl]> [0mwrite 0xa5 0x04 0x0b 0xb4
+No attribute selected
+[0;94m[bluetoothctl]> [0mselect-attribute 0000ffe2-0000-1000-8000-00805f9b34fb
+No device connected
+[0;94m[bluetoothctl]> [0mnotify on
+No attribute selected
+[0;94m[bluetoothctl]> [0m                                                                               [[0;91mDEL[0m] Device DC:97:58:77:70:42 MiTV-MOOQ1
+[0;94m[bluetoothctl]> [0m                                                                               [[0;93mCHG[0m] Controller 4C:82:A9:93:53:0C Discovering: no
+[0;94m[bluetoothctl]> [0mback
+[1;39mMenu main:[0m
+[1;39mAvailable commands:[0m
+[1;39m-------------------[0m
+[0;94madvertise                                         [0mAdvertise Options Submenu
+[0;94mmonitor                                           [0mAdvertisement Monitor Options Submenu
+[0;94mscan                                              [0mScan Options Submenu
+[0;94mgatt                                              [0mGeneric Attribute Submenu
+[0;94madmin                                             [0mAdmin Policy Submenu
+[0;94mplayer                                            [0mMedia Player Submenu
+[0;94mendpoint                                          [0mMedia Endpoint Submenu
+[0;94mtransport                                         [0mMedia Transport Submenu
+[0;94mmgmt                                              [0mManagement Submenu
+[0;94mmonitor                                           [0mAdvertisement Monitor Submenu
+[0;94massistant                                         [0mMedia Assistant Submenu
+[0;94mhci                                               [0mHCI Submenu
+[1;39mlist                                              [0mList available controllers
+[1;39mshow [ctrl]                                       [0mController information
+[1;39mselect <ctrl>                                     [0mSelect default controller
+[1;39mdevices [Paired/Bonded/Trusted/Connected]         [0mList available devices, with an optional property as the filter
+[1;39msystem-alias <name>                               [0mSet controller alias
+[1;39mreset-alias                                       [0mReset controller alias
+[1;39mpower <on/off>                                    [0mSet controller power
+[1;39mpairable <on/off>                                 [0mSet controller pairable mode
+[1;39mdiscoverable <on/off>                             [0mSet controller discoverable mode
+[1;39mdiscoverable-timeout [value]                      [0mSet discoverable timeout
+[1;39magent <on/off/auto/capability>                    [0mEnable/disable agent with given capability
+[1;39mdefault-agent                                     [0mSet agent as the default one
+[1;39madvertise <on/off/type>                           [0mEnable/disable advertising with given type
+[1;39mset-alias <alias>                                 [0mSet device alias
+[1;39mscan <on/off/bredr/le>                            [0mScan for devices
+[1;39minfo [dev/set]                                    [0mDevice/Set information
+[1;39mpair [dev]                                        [0mPair with device
+[1;39mcancel-pairing [dev]                              [0mCancel pairing with device
+[1;39mtrust [dev]                                       [0mTrust device
+[1;39muntrust [dev]                                     [0mUntrust device
+[1;39mblock [dev]                                       [0mBlock device
+[1;39munblock [dev]                                     [0mUnblock device
+[1;39mremove <dev>                                      [0mRemove device
+[1;39mconnect <dev> [uuid]                              [0mConnect a device and all its profiles or optionally connect a single profile only
+[1;39mdisconnect [dev] [uuid]                           [0mDisconnect a device or optionally disconnect a single profile only
+[1;39mwake [dev] [on/off]                               [0mGet/Set wake support
+[1;39mbearer <dev> [last-seen/bredr/le]                 [0mGet/Set preferred bearer
+[1;39mmenu <name>                                       [0mSelect submenu
+[1;39mversion                                           [0mDisplay version
+[1;39mquit                                              [0mQuit program
+[1;39mexit                                              [0mQuit program
+[1;39mhelp                                              [0mDisplay help about this program
+[1;39mexport                                            [0mPrint environment variables
+[1;39mscript <filename>                                 [0mRun script
+[0;94m[bluetoothctl]> [0mdisconnect 2D:37:35:6D:66:11
+Device 2D:37:35:6D:66:11 not available
+[0;94m[bluetoothctl]> [0mquit
+[0;94m[bluetoothctl]> [0m                           

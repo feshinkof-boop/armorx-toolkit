@@ -1,0 +1,20 @@
+{
+ "ts": "2026-09-27T17:07:41.658368-04:00",
+ "attempt": "path B (BlueZ + btmon)",
+ "adapter": {
+  "hci": "hci1",
+  "bdaddr": "E8:4E:06:8A:F2:00",
+  "stack": "kernel/BlueZ 5.85"
+ },
+ "artifacts": {
+  "btmon_text": "hci/bluez-pass.txt",
+  "btsnoop": "hci/bluez-pass.btsnoop",
+  "bluetoothctl": "hci/bluetoothctl-session.txt"
+ },
+ "btmon_lines": 451,
+ "btsnoop_bytes": 4092,
+ "result": "NO ARMOR-X ADVERTISEMENT SEEN at HCI level either (BlueZ discovered only MiTV-MOOQ1). The unit had already reached its automatic power-off state.",
+ "classification": "DEVICE_SLEEP_OR_LINK_LOSS (absence, not a protocol rejection)",
+ "follow_up": "path B will be re-run inside the next device-awake window, together with the D2 capture",
+ "evidence_label": "PROVEN LIVE (absence); path B capture plumbing itself PROVEN LIVE (btmon recorded this adapter's HCI)"
+}

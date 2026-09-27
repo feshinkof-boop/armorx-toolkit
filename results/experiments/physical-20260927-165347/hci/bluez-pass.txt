@@ -1,0 +1,451 @@
+Bluetooth monitor ver 5.85
+btmon[196788]: = Note: Linux version 7.0.0-34-generic (x86_64)         0.718876
+btmon[196788]: = Note: Bluetooth subsystem version 2.22                0.718878
+= New Index: E8:4E:06:8A:F2:00 (Primary,USB,hci1)               [hci1] 0.718878
+= Open Index: E8:4E:06:8A:F2:00                                 [hci1] 0.718879
+= Index Info: E8:4E:06:8.. (Realtek Semiconductor Corporation)  [hci1] 0.718879
+= New Index: 4C:82:A9:93:53:0C (Primary,USB,hci0)               [hci0] 0.718880
+= Open Index: 4C:82:A9:93:53:0C                                 [hci0] 0.718880
+= Index Info: 4C:82:A9:93:53:0C (Qualcomm)                      [hci0] 0.718880
+bluetoothd[1049]: @ MGMT Open: b.. (privileged) version 1.23  {0x0001} 0.718881
+bluetoothctl[196792]: @ MGMT Open: bluetoothctl version 1.23  {0x0002} 2.726055
+bluetoothd[1049]: @ MGMT Command: S.. (0x0023) plen 1  {0x0001} [hci1] 2.728743
+        Address type: 0x07
+          BR/EDR
+          LE Public
+          LE Random
+< HCI Command: LE Set Random Address (0x08|0x0005) plen 6    #1 [hci1] 2.728767
+        Address: 17:2C:3B:20:91:4B (Non-Resolvable)
+> HCI Event: Command Complete (0x0e) plen 4                  #2 [hci1] 2.729715
+      LE Set Random Address (0x08|0x0005) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Parameters (0x08|0x000b) plen 7   #3 [hci1] 2.729798
+        Type: Active (0x01)
+        Interval: 22.500 msec (0x0024)
+        Window: 11.250 msec (0x0012)
+        Own address type: Random (0x01)
+        Filter policy: Accept all advertisement (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                  #4 [hci1] 2.730708
+      LE Set Scan Parameters (0x08|0x000b) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2       #5 [hci1] 2.730772
+        Scanning: Enabled (0x01)
+        Filter duplicates: Enabled (0x01)
+> HCI Event: Command Complete (0x0e) plen 4                  #6 [hci1] 2.731708
+      LE Set Scan Enable (0x08|0x000c) ncmd 2
+        Status: Success (0x00)
+@ MGMT Event: Discovering (0x0013) plen 2              {0x0001} [hci1] 2.731758
+        Address type: 0x07
+          BR/EDR
+          LE Public
+          LE Random
+        Discovery: Enabled (0x01)
+< HCI Command: Inquiry (0x01|0x0001) plen 5                  #7 [hci1] 2.731878
+        Access code: 0x9e8b33 (General Inquiry)
+        Length: 10.24s (0x08)
+        Num responses: 0
+> HCI Event: Command Status (0x0f) plen 4                    #8 [hci1] 2.732763
+      Inquiry (0x01|0x0001) ncmd 2
+        Status: Success (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4         {0x0001} [hci1] 2.732816
+      Start Discovery (0x0023) plen 1
+        Status: Success (0x00)
+        Address type: 0x07
+          BR/EDR
+          LE Public
+          LE Random
+> HCI Event: Extended Inquiry Result (0x2f) plen 255         #9 [hci1] 8.333574
+        Num responses: 1
+        Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        Page scan repetition mode: R1 (0x01)
+        Page period mode: P0 (0x00)
+        Class: 0x28043c
+          Major class: Audio/Video (headset, speaker, stereo, video, vcr)
+          Minor class: Video Display and Loudspeaker
+          Capturing (Scanner, Microphone)
+          Audio (Speaker, Microphone, Headset)
+        Clock offset: 0x7eb8
+        RSSI: -78 dBm (0xb2)
+        Name (complete): MiTV-MOOQ1
+        16-bit Service UUIDs (complete): 4 entries
+          Audio Source (0x110a)
+          A/V Remote Control Target (0x110c)
+          A/V Remote Control (0x110e)
+          PnP Information (0x1200)
+        128-bit Service UUIDs (complete): 8 entries
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00                                ......          
+@ MGMT Event: Device Found (0x0012) plen 173           {0x0001} [hci1] 8.333730
+        BR/EDR Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        RSSI: -78 dBm (0xb2)
+        Flags: 0x00000000
+        Data length: 159
+        Name (complete): MiTV-MOOQ1
+        16-bit Service UUIDs (complete): 4 entries
+          Audio Source (0x110a)
+          A/V Remote Control Target (0x110c)
+          A/V Remote Control (0x110e)
+          PnP Information (0x1200)
+        128-bit Service UUIDs (complete): 8 entries
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+        Class: 0x28043c
+          Major class: Audio/Video (headset, speaker, stereo, video, vcr)
+          Minor class: Video Display and Loudspeaker
+          Capturing (Scanner, Microphone)
+          Audio (Speaker, Microphone, Headset)
+> HCI Event: Inquiry Complete (0x01) plen 1                 #1 [hci0] 10.485527
+        Status: Success (0x00)
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 10.485732
+        Address type: 0x01
+          BR/EDR
+        Discovery: Disabled (0x00)
+bluetoothd[1049]: @ MGMT Command:... (0x003a) plen 4  {0x0001} [hci0] 10.485810
+        Address type: 0x01
+          BR/EDR
+        RSSI: invalid (0x7f)
+        UUIDs: 0
+< HCI Command: Inquiry (0x01|0x0001) plen 5                 #2 [hci0] 10.486717
+        Access code: 0x9e8b33 (General Inquiry)
+        Length: 10.24s (0x08)
+        Num responses: 0
+> HCI Event: Command Status (0x0f) plen 4                   #3 [hci0] 10.487515
+      Inquiry (0x01|0x0001) ncmd 1
+        Status: Success (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci0] 10.488715
+      Start Service Discovery (0x003a) plen 1
+        Status: Success (0x00)
+        Address type: 0x01
+          BR/EDR
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 10.488723
+        Address type: 0x01
+          BR/EDR
+        Discovery: Enabled (0x01)
+> HCI Event: Extended Inquiry Result (0x2f) plen 255        #4 [hci0] 10.521519
+        Num responses: 1
+        Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        Page scan repetition mode: R1 (0x01)
+        Page period mode: P0 (0x00)
+        Class: 0x28043c
+          Major class: Audio/Video (headset, speaker, stereo, video, vcr)
+          Minor class: Video Display and Loudspeaker
+          Capturing (Scanner, Microphone)
+          Audio (Speaker, Microphone, Headset)
+        Clock offset: 0x2215
+        RSSI: -64 dBm (0xc0)
+        Name (complete): MiTV-MOOQ1
+        16-bit Service UUIDs (complete): 4 entries
+          Audio Source (0x110a)
+          A/V Remote Control Target (0x110c)
+          A/V Remote Control (0x110e)
+          PnP Information (0x1200)
+        128-bit Service UUIDs (complete): 8 entries
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00                                ......          
+@ MGMT Event: Device Found (0x0012) plen 173          {0x0001} [hci0] 10.521533
+        BR/EDR Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        RSSI: -64 dBm (0xc0)
+        Flags: 0x00000000
+        Data length: 159
+        Name (complete): MiTV-MOOQ1
+        16-bit Service UUIDs (complete): 4 entries
+          Audio Source (0x110a)
+          A/V Remote Control Target (0x110c)
+          A/V Remote Control (0x110e)
+          PnP Information (0x1200)
+        128-bit Service UUIDs (complete): 8 entries
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+        Class: 0x28043c
+          Major class: Audio/Video (headset, speaker, stereo, video, vcr)
+          Minor class: Video Display and Loudspeaker
+          Capturing (Scanner, Microphone)
+          Audio (Speaker, Microphone, Headset)
+bluetoothd[1049]: @ MGMT Command:... (0x0024) plen 1  {0x0001} [hci1] 10.714925
+        Address type: 0x07
+          BR/EDR
+          LE Public
+          LE Random
+< HCI Command: Inquiry Cancel (0x01|0x0002) plen 0         #10 [hci1] 10.715718
+> HCI Event: Command Complete (0x0e) plen 4                #11 [hci1] 10.718508
+      Inquiry Cancel (0x01|0x0002) ncmd 2
+        Status: Success (0x00)
+< HCI Command: LE Set Scan Enable (0x08|0x000c) plen 2     #12 [hci1] 10.719730
+        Scanning: Disabled (0x00)
+        Filter duplicates: Disabled (0x00)
+> HCI Event: Command Complete (0x0e) plen 4                #13 [hci1] 10.721501
+      LE Set Scan Enable (0x08|0x000c) ncmd 2
+        Status: Success (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci1] 10.721715
+      Stop Discovery (0x0024) plen 1
+        Status: Success (0x00)
+        Address type: 0x07
+          BR/EDR
+          LE Public
+          LE Random
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci1] 10.721730
+        Address type: 0x07
+          BR/EDR
+          LE Public
+          LE Random
+        Discovery: Disabled (0x00)
+> HCI Event: Inquiry Complete (0x01) plen 1                 #5 [hci0] 20.728258
+        Status: Success (0x00)
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 20.728730
+        Address type: 0x01
+          BR/EDR
+        Discovery: Disabled (0x00)
+bluetoothd[1049]: @ MGMT Command:... (0x003a) plen 4  {0x0001} [hci0] 20.728813
+        Address type: 0x01
+          BR/EDR
+        RSSI: invalid (0x7f)
+        UUIDs: 0
+< HCI Command: Inquiry (0x01|0x0001) plen 5                 #6 [hci0] 20.729718
+        Access code: 0x9e8b33 (General Inquiry)
+        Length: 10.24s (0x08)
+        Num responses: 0
+> HCI Event: Command Status (0x0f) plen 4                   #7 [hci0] 20.731253
+      Inquiry (0x01|0x0001) ncmd 1
+        Status: Success (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci0] 20.731715
+      Start Service Discovery (0x003a) plen 1
+        Status: Success (0x00)
+        Address type: 0x01
+          BR/EDR
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 20.731718
+        Address type: 0x01
+          BR/EDR
+        Discovery: Enabled (0x01)
+> HCI Event: Extended Inquiry Result (0x2f) plen 255        #8 [hci0] 20.871251
+        Num responses: 1
+        Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        Page scan repetition mode: R1 (0x01)
+        Page period mode: P0 (0x00)
+        Class: 0x28043c
+          Major class: Audio/Video (headset, speaker, stereo, video, vcr)
+          Minor class: Video Display and Loudspeaker
+          Capturing (Scanner, Microphone)
+          Audio (Speaker, Microphone, Headset)
+        Clock offset: 0x2215
+        RSSI: -71 dBm (0xb9)
+        Name (complete): MiTV-MOOQ1
+        16-bit Service UUIDs (complete): 4 entries
+          Audio Source (0x110a)
+          A/V Remote Control Target (0x110c)
+          A/V Remote Control (0x110e)
+          PnP Information (0x1200)
+        128-bit Service UUIDs (complete): 8 entries
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00                                ......          
+@ MGMT Event: Device Found (0x0012) plen 173          {0x0001} [hci0] 20.871269
+        BR/EDR Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        RSSI: -71 dBm (0xb9)
+        Flags: 0x00000000
+        Data length: 159
+        Name (complete): MiTV-MOOQ1
+        16-bit Service UUIDs (complete): 4 entries
+          Audio Source (0x110a)
+          A/V Remote Control Target (0x110c)
+          A/V Remote Control (0x110e)
+          PnP Information (0x1200)
+        128-bit Service UUIDs (complete): 8 entries
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+        Class: 0x28043c
+          Major class: Audio/Video (headset, speaker, stereo, video, vcr)
+          Minor class: Video Display and Loudspeaker
+          Capturing (Scanner, Microphone)
+          Audio (Speaker, Microphone, Headset)
+> HCI Event: Inquiry Complete (0x01) plen 1                 #9 [hci0] 30.971990
+        Status: Success (0x00)
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 30.972732
+        Address type: 0x01
+          BR/EDR
+        Discovery: Disabled (0x00)
+bluetoothd[1049]: @ MGMT Command:... (0x003a) plen 4  {0x0001} [hci0] 30.972813
+        Address type: 0x01
+          BR/EDR
+        RSSI: invalid (0x7f)
+        UUIDs: 0
+< HCI Command: Inquiry (0x01|0x0001) plen 5                #10 [hci0] 30.973833
+        Access code: 0x9e8b33 (General Inquiry)
+        Length: 10.24s (0x08)
+        Num responses: 0
+> HCI Event: Command Status (0x0f) plen 4                  #11 [hci0] 30.974979
+      Inquiry (0x01|0x0001) ncmd 1
+        Status: Success (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci0] 30.975740
+      Start Service Discovery (0x003a) plen 1
+        Status: Success (0x00)
+        Address type: 0x01
+          BR/EDR
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 30.975754
+        Address type: 0x01
+          BR/EDR
+        Discovery: Enabled (0x01)
+> HCI Event: Extended Inquiry Result (0x2f) plen 255       #12 [hci0] 38.091797
+        Num responses: 1
+        Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        Page scan repetition mode: R1 (0x01)
+        Page period mode: P0 (0x00)
+        Class: 0x28043c
+          Major class: Audio/Video (headset, speaker, stereo, video, vcr)
+          Minor class: Video Display and Loudspeaker
+          Capturing (Scanner, Microphone)
+          Audio (Speaker, Microphone, Headset)
+        Clock offset: 0x2215
+        RSSI: -75 dBm (0xb5)
+        Name (complete): MiTV-MOOQ1
+        16-bit Service UUIDs (complete): 4 entries
+          Audio Source (0x110a)
+          A/V Remote Control Target (0x110c)
+          A/V Remote Control (0x110e)
+          PnP Information (0x1200)
+        128-bit Service UUIDs (complete): 8 entries
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        00 00 00 00 00 00                                ......          
+@ MGMT Event: Device Found (0x0012) plen 173          {0x0001} [hci0] 38.091827
+        BR/EDR Address: DC:97:58:77:70:42 (Sichuan AI-Link Technology Co., Ltd.)
+        RSSI: -75 dBm (0xb5)
+        Flags: 0x00000000
+        Data length: 159
+        Name (complete): MiTV-MOOQ1
+        16-bit Service UUIDs (complete): 4 entries
+          Audio Source (0x110a)
+          A/V Remote Control Target (0x110c)
+          A/V Remote Control (0x110e)
+          PnP Information (0x1200)
+        128-bit Service UUIDs (complete): 8 entries
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+          Vendor specific
+        Class: 0x28043c
+          Major class: Audio/Video (headset, speaker, stereo, video, vcr)
+          Minor class: Video Display and Loudspeaker
+          Capturing (Scanner, Microphone)
+          Audio (Speaker, Microphone, Headset)
+bluetoothd[1049]: @ MGMT Command:... (0x0024) plen 1  {0x0001} [hci0] 40.140950
+        Address type: 0x01
+          BR/EDR
+< HCI Command: Inquiry Cancel (0x01|0x0002) plen 0         #13 [hci0] 40.141716
+> HCI Event: Command Complete (0x0e) plen 4                #14 [hci0] 40.142739
+      Inquiry Cancel (0x01|0x0002) ncmd 1
+        Status: Success (0x00)
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 40.143721
+        Address type: 0x01
+          BR/EDR
+        Discovery: Disabled (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci0] 40.144715
+      Stop Discovery (0x0024) plen 1
+        Status: Success (0x00)
+        Address type: 0x01
+          BR/EDR
+bluetoothd[1049]: @ MGMT Command:... (0x003a) plen 4  {0x0001} [hci0] 40.145793
+        Address type: 0x01
+          BR/EDR
+        RSSI: invalid (0x7f)
+        UUIDs: 0
+< HCI Command: Inquiry (0x01|0x0001) plen 5                #15 [hci0] 40.147062
+        Access code: 0x9e8b33 (General Inquiry)
+        Length: 10.24s (0x08)
+        Num responses: 0
+> HCI Event: Command Status (0x0f) plen 4                  #16 [hci0] 40.147735
+      Inquiry (0x01|0x0001) ncmd 1
+        Status: Success (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci0] 40.148714
+      Start Service Discovery (0x003a) plen 1
+        Status: Success (0x00)
+        Address type: 0x01
+          BR/EDR
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 40.148720
+        Address type: 0x01
+          BR/EDR
+        Discovery: Enabled (0x01)
+bluetoothd[1049]: @ MGMT Command:... (0x0024) plen 1  {0x0001} [hci0] 40.149747
+        Address type: 0x01
+          BR/EDR
+< HCI Command: Inquiry Cancel (0x01|0x0002) plen 0         #17 [hci0] 40.151714
+> HCI Event: Command Complete (0x0e) plen 4                #18 [hci0] 40.152734
+      Inquiry Cancel (0x01|0x0002) ncmd 1
+        Status: Success (0x00)
+@ MGMT Event: Discovering (0x0013) plen 2             {0x0001} [hci0] 40.153718
+        Address type: 0x01
+          BR/EDR
+        Discovery: Disabled (0x00)
+@ MGMT Event: Command Complete (0x0001) plen 4        {0x0001} [hci0] 40.154724
+      Stop Discovery (0x0024) plen 1
+        Status: Success (0x00)
+        Address type: 0x01
+          BR/EDR
+bluetoothctl[196792]: @ MGMT Close: bluetoothctl             {0x0002} 45.776078
