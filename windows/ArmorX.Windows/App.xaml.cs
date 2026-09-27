@@ -1,5 +1,7 @@
 using System.Windows;
 using ArmorX.Windows.Config;
+using ArmorX.Windows.Protocol;
+using ArmorX.Windows.Research;
 
 namespace ArmorX.Windows;
 
@@ -11,8 +13,9 @@ public partial class App : Application
         {
             try
             {
-                var window = new MainWindow();
-                window.Measure(new Size(1200, 860));
+                var window = new D8ResearchWindow();
+                window.Measure(new Size(1080, 760));
+                window.Arrange(new Rect(0, 0, 1080, 760));
                 window.Close();
                 Shutdown(0);
             }
@@ -33,23 +36,27 @@ public partial class App : Application
                 var config = new ArmorXConfig144(bytes);
                 config.RecalculateCrc();
                 if (!config.CrcValid) throw new InvalidOperationException("CRC self-test failed.");
-                if (!EditableArmorXConfig.ProvenMappingTargets.Any(x => x.Id == 12 && x.Name.Contains("Guide", StringComparison.OrdinalIgnoreCase)))
-                    throw new InvalidOperationException("Guide mapping self-test failed.");
-                var before = new ArmorXConfig144(config.ToArray());
-                var editedBytes = config.ToArray();
-                editedBytes[135] = 1;
-                var edited = new ArmorXConfig144(editedBytes);
-                edited.RecalculateCrc();
-                var diff = ConfigDiff.Compare(before, edited);
-                if (diff.Count != 1 || diff[0].Offset != 135)
-                    throw new InvalidOperationException("Config diff self-test failed.");
-                var currentBytes = before.ToArray();
-                currentBytes[100] = 0x5A;
-                var current = new ArmorXConfig144(currentBytes);
-                current.RecalculateCrc();
-                var merged = ConfigDiff.MergeEditorChanges(current, before.ToArray(), edited);
-                if (merged.GetByte(100) != 0x5A || merged.GetByte(135) != 1 || !merged.CrcValid)
-                    throw new InvalidOperationException("Safe merge self-test failed.");
+
+                if (Convert.ToHexString(ArmorXFrames.GetMacroList) != "A504D57E")
+                    throw new InvalidOperationException("D5/GetMacroList frame self-test failed.");
+
+                var synthetic = Enumerable.Range(0, 37).Select(i => (byte)(i + 1)).ToArray();
+                var frames = ArmorXFrames.FragmentLong(ArmorXFrames.OpWriteMacro, synthetic).ToArray();
+                var analysis = D8CaptureAnalyzer.AnalyzePackets(frames, "synthetic-self-test");
+                if (analysis.Transfers.Count != 1 ||
+                    analysis.Transfers[0].PayloadLength != synthetic.Length ||
+                    !Convert.FromHexString(analysis.Transfers[0].PayloadHex).SequenceEqual(synthetic))
+                    throw new InvalidOperationException("D8 analyzer reassembly self-test failed.");
+
+                var modified = synthetic.ToArray();
+                modified[5] ^= 0x55;
+                var modifiedAnalysis = D8CaptureAnalyzer.AnalyzePackets(
+                    ArmorXFrames.FragmentLong(ArmorXFrames.OpWriteMacro, modified),
+                    "synthetic-diff-self-test");
+                var diff = D8CaptureAnalyzer.Compare(analysis.Transfers[0], modifiedAnalysis.Transfers[0]);
+                if (diff.ChangedSharedOffsets.Count != 1 || diff.ChangedSharedOffsets[0].Offset != 5)
+                    throw new InvalidOperationException("D8 analyzer diff self-test failed.");
+
                 Shutdown(0);
             }
             catch
@@ -61,19 +68,19 @@ public partial class App : Application
 
         DispatcherUnhandledException += (_, args) =>
         {
-            MessageBox.Show(args.Exception.ToString(), "ArmorX Windows - unexpected error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(args.Exception.ToString(), "ArmorX D8 Research - unexpected error", MessageBoxButton.OK, MessageBoxImage.Error);
             args.Handled = true;
         };
 
         try
         {
-            var window = new MainWindow();
+            var window = new D8ResearchWindow();
             MainWindow = window;
             window.Show();
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.ToString(), "ArmorX Windows - startup error", MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(ex.ToString(), "ArmorX D8 Research - startup error", MessageBoxButton.OK, MessageBoxImage.Error);
             Shutdown(2);
         }
     }
