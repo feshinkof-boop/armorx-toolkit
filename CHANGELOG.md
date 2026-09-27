@@ -4,6 +4,37 @@ All notable project changes are documented here.
 
 ## Unreleased
 
+## 0.2.1 — 2026-09-27
+
+Public Windows safety and reliability release.
+
+### Windows public app
+
+- Added automatic full 144-byte pre-write backups before configuration writes.
+- Added exact pending-change review with byte offsets and before/after values.
+- Added clear dirty/pending-change state in the public UI.
+- Added one-click restore of the latest backup with full read-back verification.
+- Restore now creates a pre-restore backup first, making restoration reversible.
+- Before writing, the app re-reads the controller and merges only edited semantic bytes onto the fresh device image so unrelated/reserved bytes remain preserved.
+- Kept D7 full-image write, persistence, and complete 144-byte read-back verification as the required successful write path.
+- Added a tested per-user Windows installer alongside the portable single-file EXE and folder-build fallback.
+- Kept Research Lab, Research Autopilot, raw BLE capture, D2/AE experiments, unknown-ID sweeps, and evidence-bundle tooling out of the public app.
+
+### Validation
+
+- Promoted directly from the validated Final RC artifact built from commit `5133de9612e83613dd8741f9f61f51910c2ee77f`.
+- Public self-test passed.
+- WPF/XAML UI smoke test passed.
+- Silent installer test passed.
+- Installed-app self-test passed.
+- Silent uninstaller test passed.
+- Published release tag `v0.2.1` points exactly to the frozen validated commit.
+
+### Compatibility
+
+- Directly validated hardware baseline remains ARMOR-X Pro / ZJ-XT, firmware 2741.
+- Other firmware versions remain not yet independently validated.
+
 ## 0.2.0 — 2026-09-26
 
 Second public release of **ArmorX Toolkit**.
