@@ -89,10 +89,12 @@ devRainbow3/devGale2 to the gate.
   imported 4.0.8 vector rejected); `harness_selftest.py` → **ALL CHECKS PASSED**; JSON sweep → 54/54 valid
   before the pass, re-run after. Format-confusion between the old and modern D8 serializers is now
   mechanically prevented, as required.
-* **29. Git:** lab branch **`research/d4-smi-protocol-reconciliation`** (commit recorded in the closing
-  message); toolkit `research/mygt-4.0.8` still `dbe2ce7`, `research/ble-lab-multiversion` `6f0acd5`,
-  `research/mygt-2.22.0901` `5524f54`. Patch + bundle produced; **AUTH_BLOCKED** for push. No force
-  pushes, no rewrites.
+* **29. Git:** lab branch **`research/d4-smi-protocol-reconciliation`** @ **`c669cd9`** (static pass
+  `a0752e5`, live-verification follow-up `c669cd9`); toolkit branch of the same name @ **`7d0b181`**
+  (dated doc corrections `c2d70fd`, live results `7d0b181`). Untouched: `research/mygt-4.0.8`
+  = `dbe2ce7`, `research/ble-lab-multiversion` = `6f0acd5`, `research/mygt-2.22.0901` = `5524f54`.
+  Patch + bundle produced; **AUTH_BLOCKED** for push (no GitHub SSH key / `gh`). No force pushes, no
+  branch rewrites; every doc change is an append.
 
 ## 30. Remaining UNKNOWN
 
