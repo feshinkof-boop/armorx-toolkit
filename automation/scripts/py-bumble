@@ -10,4 +10,4 @@
 # (it sets PYTHONPATH itself, so it survives the root re-exec).
 set -eu
 SITE="${ARMORX_BUMBLE_SITE:-/home/salamanka/armorx-lab/.venv-bumble/lib/python3.14/site-packages}"
-exec env PYTHONPATH="$SITE" PYTHONDONTWRITEBYTECODE=1 /usr/bin/python3.14 "$@"
+exec env PYTHONPATH="$SITE" PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 /usr/bin/python3.14 "$@"

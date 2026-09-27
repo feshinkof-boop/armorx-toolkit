@@ -275,7 +275,27 @@ async def run(args) -> int:
             return 2
 
         session.state("CONNECTING", address=target)
-        connection = await device.connect(target)
+        # Bounded, retried connect: Bumble's connect() has no timeout of its own and a
+        # hung connect must never look like "the device rejected us".
+        connection = None
+        for attempt in range(1, args.connect_attempts + 1):
+            try:
+                connection = await asyncio.wait_for(
+                    device.connect(target), timeout=args.connect_timeout)
+                session.event("connected_attempt", attempt=attempt, ok=True)
+                break
+            except Exception as exc:  # noqa: BLE001
+                session.event("connect_attempt_failed", attempt=attempt, error=repr(exc))
+                print(f"[conn] attempt {attempt}/{args.connect_attempts} failed: {exc!r}")
+                connection = None
+                await asyncio.sleep(2)
+        if connection is None:
+            session.state("DEVICE_SLEEP_OR_LINK_LOSS",
+                          reason=f"connect failed {args.connect_attempts}x within "
+                                 f"{args.connect_timeout}s each")
+            print("[conn] no connection -- DEVICE_SLEEP_OR_LINK_LOSS (advertisement seen, link not established)")
+            session.close()
+            return 3
         peer = Peer(connection)
         session.state("DEVICE_AWAKE", address=target)
         await peer.request_mtu(args.mtu)
@@ -518,6 +538,9 @@ def main() -> int:
                     help="advertisement scan window (kept separate from --seconds so a long "
                          "capture window cannot turn into a long scan)")
     ap.add_argument("--mtu", type=int, default=247)
+    ap.add_argument("--connect-timeout", type=float, default=20.0,
+                    help="per-attempt connect timeout (Bumble itself has none)")
+    ap.add_argument("--connect-attempts", type=int, default=3)
     ap.add_argument("--reply-timeout", type=float, default=3.0)
     ap.add_argument("--e2-timeout", type=float, default=5.0)
     ap.add_argument("--d6-timeout", type=float, default=3.0)
