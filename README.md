@@ -49,13 +49,14 @@ The project focuses on:
 | Config safety | Unknown/reserved bytes preserved when patching |
 | Community | Read-oriented config-list and share-code client |
 | CLI | Unified `armorx` command |
+| Windows GUI | Public Windows 10/11 x64 BLE configurator |
 | Research | PROVEN / STRONG EVIDENCE / UNKNOWN evidence levels |
 | Quality | Pytest suite + GitHub Actions |
 
 <!-- WINDOWS_GUI_PREVIEW_START -->
 ## Windows GUI preview
 
-ArmorX Toolkit v0.2.0 also includes a public Windows 10/11 x64 configurator for ARMOR-X Pro over BLE. It provides normal end-user configuration only; the internal research/capture application and Research Autopilot are separate and are not part of the public GUI.
+ArmorX Toolkit v0.2.0 includes a public Windows 10/11 x64 configurator for ARMOR-X Pro over BLE. **[Download ArmorX-Windows-v0.2.0.exe](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.0/ArmorX-Windows-v0.2.0.exe)**. It provides normal end-user configuration only; the internal research/capture application and Research Autopilot are separate and are not part of the public GUI.
 
 | Connected + stick settings | Trigger settings |
 | --- | --- |
@@ -166,10 +167,14 @@ Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Installation
 
-> **Public release scope:** v0.2.0 is the installable Python toolkit/CLI. The internal Windows research/capture application, Autopilot workflows, raw BLE recorder, guided hardware experiments, and researcher-only diagnostics are **not** part of this public release.
+> **Public release scope:** v0.2.0 ships both the Python toolkit/CLI and the public Windows configurator. The internal Windows research/capture application, Autopilot workflows, raw BLE recorder, guided hardware experiments, and researcher-only diagnostics are **not** part of this public release.
 
 
-### Stable v0.2.0
+### Windows 10/11 x64
+
+[Download the public Windows configurator](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.0/ArmorX-Windows-v0.2.0.exe), turn on ARMOR-X Pro, and choose **Connect / Recover**. The app reads the controller's own 144-byte configuration image, preserves unknown bytes, and verifies a write by reading all 144 bytes back.
+
+### Python toolkit v0.2.0
 
 ```bash
 python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.2.0

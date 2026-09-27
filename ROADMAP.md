@@ -23,6 +23,17 @@ ArmorX Toolkit is intentionally evidence-driven. Items move from research to sta
 - [ ] Add import/export helpers for community-shared configs
 - [x] Add a public Windows desktop GUI
 
+## Public Windows v0.2.1
+
+- [ ] Automatic pre-write backup of the current device image
+- [ ] Review exact byte-level config changes before writing
+- [ ] One-click restore of the latest backup with write/read-back verification
+- [ ] Clear dirty/pending-changes state
+- [ ] Profile rename, duplicate, delete, import, and export
+- [ ] Exportable end-user diagnostic log without research/capture controls
+- [ ] About/compatibility page with app, model, firmware, and project information
+- [ ] Windows installer/package after portable-build validation
+
 ## Protocol research
 
 - [ ] Capture the proven `A5 04 E2 8B` identification response with a read-only DevMgr-matched probe across the controlled ARMORX Pro/dongle physical states
