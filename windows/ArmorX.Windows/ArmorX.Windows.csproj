@@ -6,12 +6,12 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <AssemblyName>ArmorX-Windows</AssemblyName>
+    <AssemblyName>ArmorX-D8-Research</AssemblyName>
     <RootNamespace>ArmorX.Windows</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>0.2.1</Version>
-    <AssemblyVersion>0.2.1.0</AssemblyVersion>
-    <FileVersion>0.2.1.0</FileVersion>
-    <InformationalVersion>0.2.1</InformationalVersion>
+    <Version>0.3.0-research.1</Version>
+    <AssemblyVersion>0.3.0.0</AssemblyVersion>
+    <FileVersion>0.3.0.1</FileVersion>
+    <InformationalVersion>0.3.0-research.1</InformationalVersion>
   </PropertyGroup>
 </Project>
