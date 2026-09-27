@@ -1,0 +1,502 @@
+{
+ "pattern_legend": {
+  "service_uuid_ae00": [
+   "ae00",
+   "AE00",
+   "0000ae00"
+  ],
+  "service_uuid_ae01": [
+   "ae01",
+   "AE01",
+   "0000ae01"
+  ],
+  "service_uuid_ae02": [
+   "ae02",
+   "AE02",
+   "0000ae02"
+  ],
+  "rcsp_marker_fedcba": [
+   "\u00fe\u00dc\u00ba",
+   "FEDCBA",
+   "fe dc ba"
+  ],
+  "jieli_ns": [
+   "com/jieli",
+   "com.jieli",
+   "jieli"
+  ],
+  "jl_bt_ota": [
+   "jl_bt_ota",
+   "JL_OTA",
+   "JL_bt_ota",
+   "JLOta",
+   "jl_ota"
+  ],
+  "rcsp_word": [
+   "RCSP",
+   "rcsp"
+  ],
+  "auth": [
+   "authkey",
+   "AUTHKEY",
+   "procode",
+   "PROCODE",
+   "JL_AUTH"
+  ],
+  "update_artefacts": [
+   "update.ufw",
+   "jl_isd.fw",
+   "isd_download",
+   ".ufw"
+  ],
+  "armorx_channel": [
+   "ffe1",
+   "FFE1",
+   "ffe2",
+   "FFE2"
+  ],
+  "bd19_ac632": [
+   "BD19",
+   "bd19",
+   "AC632",
+   "ac632",
+   "AC632N"
+  ],
+  "rcsp_ops": [
+   "JL_OP",
+   "cmdGetDeviceInfo",
+   "RCSP_CMD",
+   "rcspCommand"
+  ]
+ },
+ "per_apk_summary": {
+  "BIGBIG_WON.apk": {
+   "rcsp_service_uuids": false,
+   "jieli_namespace": false,
+   "rcsp_word": false,
+   "armorx_channel_ffe": false,
+   "pattern_names_hit": [
+    "rcsp_marker_fedcba"
+   ],
+   "entries_scanned": 573
+  },
+  "BIGBIG_WON_2.22.0901.apk": {
+   "rcsp_service_uuids": false,
+   "jieli_namespace": false,
+   "rcsp_word": true,
+   "armorx_channel_ffe": true,
+   "pattern_names_hit": [
+    "armorx_channel",
+    "rcsp_marker_fedcba",
+    "rcsp_word"
+   ],
+   "entries_scanned": 41
+  },
+  "base.apk": {
+   "rcsp_service_uuids": false,
+   "jieli_namespace": false,
+   "rcsp_word": true,
+   "armorx_channel_ffe": true,
+   "pattern_names_hit": [
+    "armorx_channel",
+    "rcsp_marker_fedcba",
+    "rcsp_word"
+   ],
+   "entries_scanned": 47
+  }
+ },
+ "details": [
+  {
+   "apk": "/home/salamanka/Downloads/BIGBIG_WON.apk",
+   "size": 32854837,
+   "hits": {
+    "rcsp_marker_fedcba": [
+     {
+      "entry": "assets/flutter_assets/assets/gif_banji.gif",
+      "needle": "FEDCBA",
+      "offset": 1780,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/gif_san_dian.gif",
+      "needle": "FEDCBA",
+      "offset": 1024,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/gif_tuoluoyi.gif",
+      "needle": "FEDCBA",
+      "offset": 1780,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/gif_yaogan.gif",
+      "needle": "FEDCBA",
+      "offset": 1780,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/images_new/y_axis.gif",
+      "needle": "FEDCBA",
+      "offset": 1779,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/images_new/z_axis.gif",
+      "needle": "FEDCBA",
+      "offset": 1779,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     }
+    ]
+   },
+   "entries_scanned": 573
+  },
+  {
+   "apk": "/home/salamanka/Downloads/BIGBIG_WON_2.22.0901.apk",
+   "size": 27608134,
+   "hits": {
+    "rcsp_marker_fedcba": [
+     {
+      "entry": "lib/x86_64/libflutter.so",
+      "needle": "\u00fe\u00dc\u00ba",
+      "offset": 873560,
+      "context": "\u0002\u0080\u0000\u0080\u0006\u0080\u0004\u0080\n\u0080\b\u0080\u000e\u0080\f\u0080\u0001#Eg\u0089\u00ab\u00cd\u00ef\u00fe\u00dc\u00ba\u0098vT2\u0010,\u0000\u0000\u0000\b\u0000\u0000\u0000\u0018\u0000\u0000\u0000\b\u0000\u0000\u0000\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff"
+     },
+     {
+      "entry": "lib/x86_64/libflutter.so",
+      "needle": "FEDCBA",
+      "offset": 1678265,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libflutter.so",
+      "needle": "\u00fe\u00dc\u00ba",
+      "offset": 1745952,
+      "context": "\u00f0A\u00b8\u00f7_\u00bf\u001e\u00b0\u00bd\u00e8\u00f0\u0081\u0000\u00bf\u0000\u00bf\u0001#Eg\u0089\u00ab\u00cd\u00ef\u00fe\u00dc\u00ba\u0098vT2\u0010\u00f0\u00e1\u00d2\u00c3\u00c9B\u00ee\u00ff\u00a3\u00e8\u00f9\u00ff\u00f0\u00b5\u00a7\u00b0(N~D\u0006\u00f1\u0010\u0004 F\u00cc\u00f7!\u00feui"
+     },
+     {
+      "entry": "lib/arm64-v8a/libflutter.so",
+      "needle": "\u00fe\u00dc\u00ba",
+      "offset": 872536,
+      "context": "Y\u0080\u0000\u0000\b\u0019\u0000\u0000h\u0083\u0000\u0000\t\u0000\u0000\u0000\u0001#Eg\u0089\u00ab\u00cd\u00ef\u00fe\u00dc\u00ba\u0098vT2\u0010,\u0000\u0000\u0000\b\u0000\u0000\u0000\u0018\u0000\u0000\u0000\b\u0000\u0000\u0000\u0010\u0000\u0000\u0000\u0006\u0014\u0000\u0000\u0000\u0000\u0000\u0000\b\u0019\u0000\u0000"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "\u00fe\u00dc\u00ba",
+      "offset": 7138233,
+      "context": "YYYH\u008bM\u00f8\u00ba\u0001#Eg\u0089Q\u0017\u00ba\u0089\u00ab\u00cd\u00ef\u0089Q\u001b\u00ba\u00fe\u00dc\u00ba\u0098\u0089Q\u001f\u00bavT2\u0010\u0089Q#I\u008b\u0086\u00c8\u0000\u0000\u0000H\u0089\u00ec]\u00c3A\u00ff\u00968\u0002\u0000\u0000\u00e9r\u00ff\u00ff\u00ffU"
+     }
+    ],
+    "rcsp_word": [
+     {
+      "entry": "lib/x86_64/libflutter.so",
+      "needle": "RCSP",
+      "offset": 19306,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000mkdir\u0000printf\u0000sinh\u0000cosh\u0000tanh\u0000asinh\u0000"
+     },
+     {
+      "entry": "lib/x86_64/libflutter.so",
+      "needle": "rcsp",
+      "offset": 19306,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000mkdir\u0000printf\u0000sinh\u0000cosh\u0000tanh\u0000asinh\u0000"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libflutter.so",
+      "needle": "RCSP",
+      "offset": 14294,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000mkdir\u0000printf\u0000fileno\u0000pread\u0000__androi"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libflutter.so",
+      "needle": "rcsp",
+      "offset": 14294,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000mkdir\u0000printf\u0000fileno\u0000pread\u0000__androi"
+     },
+     {
+      "entry": "lib/arm64-v8a/libflutter.so",
+      "needle": "RCSP",
+      "offset": 19196,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000mkdir\u0000printf\u0000sinh\u0000cosh\u0000tanh\u0000asinh\u0000"
+     },
+     {
+      "entry": "lib/arm64-v8a/libflutter.so",
+      "needle": "rcsp",
+      "offset": 19196,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000mkdir\u0000printf\u0000sinh\u0000cosh\u0000tanh\u0000asinh\u0000"
+     }
+    ],
+    "armorx_channel": [
+     {
+      "entry": "lib/armeabi-v7a/libapp.so",
+      "needle": "ffe1",
+      "offset": 3823512,
+      "context": "nput\u0000\u0000\u0000\u00008\u0006Z\u0000H\u0000\u0000\u0000\u00e6\u00ddw\f0000FFE1-0000-1000-8000-00805F9B34FB8\u0002[\u0000\u0002\u0000\u0000\u0000"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libapp.so",
+      "needle": "FFE1",
+      "offset": 3823512,
+      "context": "nput\u0000\u0000\u0000\u00008\u0006Z\u0000H\u0000\u0000\u0000\u00e6\u00ddw\f0000FFE1-0000-1000-8000-00805F9B34FB8\u0002[\u0000\u0002\u0000\u0000\u0000"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libapp.so",
+      "needle": "ffe2",
+      "offset": 2789504,
+      "context": "245748\u0000\u00008\u0006Z\u0000H\u0000\u0000\u0000.!\u00cc|0000FFE2-0000-1000-8000-00805F9B34FB8\u0005Z\u0000*\u0000\u0000\u0000"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libapp.so",
+      "needle": "FFE2",
+      "offset": 2789504,
+      "context": "245748\u0000\u00008\u0006Z\u0000H\u0000\u0000\u0000.!\u00cc|0000FFE2-0000-1000-8000-00805F9B34FB8\u0005Z\u0000*\u0000\u0000\u0000"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "ffe1",
+      "offset": 835841,
+      "context": " \u0000\u00b4\u00cc1\u00c1\u0010\u00ac\u0001\u00ac\u0090setInput\u00c80000FFE1-0000-1000-8000-00805F9B34FB\u0083u\u0003\u009b\u0088\n\u00b8\n"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "FFE1",
+      "offset": 835841,
+      "context": " \u0000\u00b4\u00cc1\u00c1\u0010\u00ac\u0001\u00ac\u0090setInput\u00c80000FFE1-0000-1000-8000-00805F9B34FB\u0083u\u0003\u009b\u0088\n\u00b8\n"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "ffe2",
+      "offset": 254791,
+      "context": "tChanged@1379245748\u00c80000FFE2-0000-1000-8000-00805F9B34FB\u00aaPlatfor"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "FFE2",
+      "offset": 254791,
+      "context": "tChanged@1379245748\u00c80000FFE2-0000-1000-8000-00805F9B34FB\u00aaPlatfor"
+     },
+     {
+      "entry": "lib/arm64-v8a/libapp.so",
+      "needle": "ffe1",
+      "offset": 835818,
+      "context": " \u0000\u00b4\u00cc1\u00c1\u0010\u00ac\u0001\u00ac\u0090setInput\u00c80000FFE1-0000-1000-8000-00805F9B34FB\u0083u\u0003\u009b\u0088\n\u00b8\n"
+     },
+     {
+      "entry": "lib/arm64-v8a/libapp.so",
+      "needle": "FFE1",
+      "offset": 835818,
+      "context": " \u0000\u00b4\u00cc1\u00c1\u0010\u00ac\u0001\u00ac\u0090setInput\u00c80000FFE1-0000-1000-8000-00805F9B34FB\u0083u\u0003\u009b\u0088\n\u00b8\n"
+     },
+     {
+      "entry": "lib/arm64-v8a/libapp.so",
+      "needle": "ffe2",
+      "offset": 254766,
+      "context": "tChanged@1379245748\u00c80000FFE2-0000-1000-8000-00805F9B34FB\u00aaPlatfor"
+     },
+     {
+      "entry": "lib/arm64-v8a/libapp.so",
+      "needle": "FFE2",
+      "offset": 254766,
+      "context": "tChanged@1379245748\u00c80000FFE2-0000-1000-8000-00805F9B34FB\u00aaPlatfor"
+     }
+    ]
+   },
+   "entries_scanned": 41
+  },
+  {
+   "apk": "/home/salamanka/armorx-re/mygt408/apks/base.apk",
+   "size": 32854837,
+   "hits": {
+    "rcsp_marker_fedcba": [
+     {
+      "entry": "assets/flutter_assets/assets/gif_banji.gif",
+      "needle": "FEDCBA",
+      "offset": 1780,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/gif_san_dian.gif",
+      "needle": "FEDCBA",
+      "offset": 1024,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/gif_tuoluoyi.gif",
+      "needle": "FEDCBA",
+      "offset": 1780,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/gif_yaogan.gif",
+      "needle": "FEDCBA",
+      "offset": 1780,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/images_new/y_axis.gif",
+      "needle": "FEDCBA",
+      "offset": 1779,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     },
+     {
+      "entry": "assets/flutter_assets/assets/images_new/z_axis.gif",
+      "needle": "FEDCBA",
+      "offset": 1779,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     }
+    ]
+   },
+   "entries_scanned": 573
+  },
+  {
+   "apk": "/home/salamanka/armorx/base_apk/base.apk",
+   "size": 35958605,
+   "hits": {
+    "armorx_channel": [
+     {
+      "entry": "lib/arm64-v8a/libapp.so",
+      "needle": "ffe1",
+      "offset": 693820,
+      "context": "tes@1738411212\u0090enforced\u0088ffe1\u00ccget:_minPreferredTrackHeight@462231"
+     },
+     {
+      "entry": "lib/arm64-v8a/libapp.so",
+      "needle": "FFE1",
+      "offset": 693820,
+      "context": "tes@1738411212\u0090enforced\u0088ffe1\u00ccget:_minPreferredTrackHeight@462231"
+     },
+     {
+      "entry": "lib/arm64-v8a/libapp.so",
+      "needle": "ffe2",
+      "offset": 260121,
+      "context": "cyrillic\u0094Kmonospace\u00c80000FFE2-0000-1000-8000-00805F9B34FB\u00aaPlatfor"
+     },
+     {
+      "entry": "lib/arm64-v8a/libapp.so",
+      "needle": "FFE2",
+      "offset": 260121,
+      "context": "cyrillic\u0094Kmonospace\u00c80000FFE2-0000-1000-8000-00805F9B34FB\u00aaPlatfor"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libapp.so",
+      "needle": "ffe1",
+      "offset": 3304316,
+      "context": "enforced\u0000\u0000\u0000\u00002\u00d2\u0005\u0000\u0018O\u00d9w\b\u0000\u0000\u0000ffe12\u00d7\u0005\u0000\u001cOaML\u0000\u0000\u0000get:_minPreferredTrackHe"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libapp.so",
+      "needle": "FFE1",
+      "offset": 3304316,
+      "context": "enforced\u0000\u0000\u0000\u00002\u00d2\u0005\u0000\u0018O\u00d9w\b\u0000\u0000\u0000ffe12\u00d7\u0005\u0000\u001cOaML\u0000\u0000\u0000get:_minPreferredTrackHe"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libapp.so",
+      "needle": "ffe2",
+      "offset": 2548368,
+      "context": "ospace\u0000\u00002\u00d6\u0005\u0000.!\u00cc|H\u0000\u0000\u00000000FFE2-0000-1000-8000-00805F9B34FB2\u00d5\u0005\u0000@!j4"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libapp.so",
+      "needle": "FFE2",
+      "offset": 2548368,
+      "context": "ospace\u0000\u00002\u00d6\u0005\u0000.!\u00cc|H\u0000\u0000\u00000000FFE2-0000-1000-8000-00805F9B34FB2\u00d5\u0005\u0000@!j4"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "ffe1",
+      "offset": 693794,
+      "context": "tes@1738411212\u0090enforced\u0088ffe1\u00ccget:_minPreferredTrackHeight@462231"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "FFE1",
+      "offset": 693794,
+      "context": "tes@1738411212\u0090enforced\u0088ffe1\u00ccget:_minPreferredTrackHeight@462231"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "ffe2",
+      "offset": 260162,
+      "context": "cyrillic\u0094Kmonospace\u00c80000FFE2-0000-1000-8000-00805F9B34FB\u00aaPlatfor"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "FFE2",
+      "offset": 260162,
+      "context": "cyrillic\u0094Kmonospace\u00c80000FFE2-0000-1000-8000-00805F9B34FB\u00aaPlatfor"
+     }
+    ],
+    "rcsp_marker_fedcba": [
+     {
+      "entry": "lib/arm64-v8a/libflutter.so",
+      "needle": "\u00fe\u00dc\u00ba",
+      "offset": 921176,
+      "context": "Y\u0080\u0000\u0000\b\u0019\u0000\u0000h\u0083\u0000\u0000\t\u0000\u0000\u0000\u0001#Eg\u0089\u00ab\u00cd\u00ef\u00fe\u00dc\u00ba\u0098vT2\u0010\u0010\u0000\u0000\u0000\u0006\u0014\u0000\u0000\u0000\u0000\u0000\u0000\b\u0019\u0000\u0000,\u0000\u0000\u0000\b\u0000\u0000\u0000\u0018\u0000\u0000\u0000\b\u0000\u0000\u0000"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libflutter.so",
+      "needle": "\u00fe\u00dc\u00ba",
+      "offset": 1899368,
+      "context": "\u00bd\u00e8\u00f0A\u00b5\u00f7\u00fb\u00bc\u001e\u00b0\u00bd\u00e8\u00f0\u0081\u0000\u00bf\u0001#Eg\u0089\u00ab\u00cd\u00ef\u00fe\u00dc\u00ba\u0098vT2\u0010\u00f0\u00e1\u00d2\u00c3c'\u00ec\u00ff\u00d5\u008b\u00f9\u00ff\u00f0\u00b5\u00a7\u00b0'N~D\u0006\u00f1$\u0004 F\u00cc\u00f7\u00de\u00f8\u00b5j"
+     },
+     {
+      "entry": "lib/x86_64/libapp.so",
+      "needle": "\u00fe\u00dc\u00ba",
+      "offset": 7264289,
+      "context": "YYYH\u008bM\u00f8\u00ba\u0001#Eg\u0089Q\u0017\u00ba\u0089\u00ab\u00cd\u00ef\u0089Q\u001b\u00ba\u00fe\u00dc\u00ba\u0098\u0089Q\u001f\u00bavT2\u0010\u0089Q#I\u008b\u0086\u00d0\u0000\u0000\u0000H\u0089\u00ec]\u00c3A\u00ff\u0096\u0088\u0002\u0000\u0000\u00e9r\u00ff\u00ff\u00ffU"
+     },
+     {
+      "entry": "lib/x86_64/libflutter.so",
+      "needle": "\u00fe\u00dc\u00ba",
+      "offset": 923832,
+      "context": "\u00f0\u0080\u0080\u0080\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0001#Eg\u0089\u00ab\u00cd\u00ef\u00fe\u00dc\u00ba\u0098vT2\u0010\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ff\u0000\u00ffo\u0012\u0083:o\u0012\u0083:\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000"
+     },
+     {
+      "entry": "lib/x86_64/libflutter.so",
+      "needle": "FEDCBA",
+      "offset": 1672809,
+      "context": "~}|{zyxwvutsrqponmlkjihgfedcba`_^]\\[ZYXWVUTSRQPONMLKJIHGFEDCBA@?"
+     }
+    ],
+    "rcsp_word": [
+     {
+      "entry": "lib/arm64-v8a/libflutter.so",
+      "needle": "RCSP",
+      "offset": 18954,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000time\u0000gmtime_r\u0000perror\u0000sinh\u0000cosh\u0000tan"
+     },
+     {
+      "entry": "lib/arm64-v8a/libflutter.so",
+      "needle": "rcsp",
+      "offset": 18954,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000time\u0000gmtime_r\u0000perror\u0000sinh\u0000cosh\u0000tan"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libflutter.so",
+      "needle": "RCSP",
+      "offset": 13955,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000time\u0000gmtime_r\u0000perror\u0000fileno\u0000pread\u0000"
+     },
+     {
+      "entry": "lib/armeabi-v7a/libflutter.so",
+      "needle": "rcsp",
+      "offset": 13955,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000time\u0000gmtime_r\u0000perror\u0000fileno\u0000pread\u0000"
+     },
+     {
+      "entry": "lib/x86_64/libflutter.so",
+      "needle": "RCSP",
+      "offset": 19032,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000time\u0000gmtime_r\u0000perror\u0000sinh\u0000cosh\u0000tan"
+     },
+     {
+      "entry": "lib/x86_64/libflutter.so",
+      "needle": "rcsp",
+      "offset": 19032,
+      "context": "anf\u0000nextafterf\u0000strspn\u0000strcspn\u0000time\u0000gmtime_r\u0000perror\u0000sinh\u0000cosh\u0000tan"
+     }
+    ]
+   },
+   "entries_scanned": 47
+  }
+ ]
+}

@@ -202,3 +202,34 @@ EVIDENCE LEVEL Android-side ABSENT: PROVEN STATIC (control-verified).
   firmware answers RCSP `FE DC BA` auth/procode frames is **UNKNOWN** — and testing it would mean
   speaking a vendor upgrade protocol to the device, which this pass deliberately did not do.
 - Whether `E2` (`A5 04 E2 8B`) is the *equivalent* of an RCSP firmware-read is **UNKNOWN**.
+
+---
+
+## 9. Independent re-confirmation (later in the same pass) — APPEND-ONLY
+
+Re-ran the app-side question with a **different method** from §2/§3, to make sure the earlier
+verdict was not an artifact of the earlier tooling:
+
+- Tool: `automation/scripts/apk-rcsp-scan.py` — reads the APK **zip containers directly**
+  (`.dex`, `.so`, `.xml`, `.json`, `.arsc`, `assets/*`), so it cannot be affected by the
+  `.gitignore`/ripgrep trap recorded in §4, and it does not depend on extracted trees.
+- Corpus: `BIGBIG_WON.apk`, `BIGBIG_WON_2.22.0901.apk`, `armorx-re/mygt408/apks/base.apk`,
+  `armorx/base_apk/base.apk`. Output: `results/final/jieli-rcsp-app-scan.json`.
+- Result: `ae00`/`ae01`/`ae02` (in any representation) **absent**; `com.jieli` / `com/jieli`
+  **absent**; `jl_bt_ota` / `JL_OTA` / `JLOta` **absent**; `authkey` / `procode` / `JL_AUTH`
+  **absent**; `update.ufw` / `jl_isd.fw` / `isd_download` **absent**; `BD19` / `AC632`
+  **absent**; `FFE1` / `FFE2` **present** (the app's own configuration channel).
+- The only `rcsp` / `FE DC BA` hits were checked in context and are identical in nature to the
+  §5 false-positive appendix: `rcsp` inside `strcspn` in the zlib ASCII table of
+  `libflutter.so`, and `FE DC BA` as the tail of the `01 23 45 67 89 ab cd ef fe dc ba 98 76 54
+  32 10` compiler constant table.
+
+**Verdict unchanged:** RCSP ABSENT in the Android app (PROVEN STATIC), PRESENT on the real
+device as a secondary service (PROVEN LIVE), OTA_ONLY in the vendor PC toolchain. The device's
+configuration protocol remains A5/A4 over FFE1/FFE2.
+
+Vendored tool provenance re-checked this pass: `tools/vendor/AC632Nuke` @
+`6f179f2b0ae5b3d6bc9885ec4f3d7cb82d0bdee9`, `tools/vendor/jl-misctools` @
+`0a5b12db0ef38f3042acffbe2452730a37fd2405`. Neither was executed; `jl-uboot-tool` remains
+deliberately uninstalled (§3 of `tools/TOOL_INVENTORY.md`).
+
