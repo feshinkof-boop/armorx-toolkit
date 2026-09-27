@@ -1,0 +1,323 @@
+{
+  "opcode": "0xD4",
+  "generated": "2026-09-27",
+  "generated_by": "Hermes subagent (armorx-lab reconciliation task, PART A)",
+  "smi_rule": "Dart Smis are tagged: an immediate #0xN used as a Dart object (list element, == operand, index argument) is 2*V, so the Dart value V = immediate/2. `cmp xN,#imm` after LoadInt32Instr is a RAW comparison and is NEVER halved. Every constant below records whether it was halved.",
+  "receive_index_rule": "Index arguments to operator[] in these dispatchers are Dart objects (tagged), so `mov x16,#4` selects list index 2. This was proven against the already-decoded 0xEF parser (writes/reads indices 3..10 with a raw loop counter) and the 0x0B parser (reads index 3), and against the A4 fragment index (arg 6 -> index 3, which is where an A4 fragment index lives).",
+  "semantics_conclusion": {
+    "label": "STRONG EVIDENCE",
+    "summary": "0xD4 is a read whose reply carries a *gamepad/pad mode* byte at whole-frame index 3 and an *onboard mode* (板载mode) byte at whole-frame index 4. The function names differ (getOnBoardConfig in 2.22.0901 and 2.24.0919, getInputModel in 2.23.0609 and 4.0.8) but the reply layout and the field that is updated are the same.",
+    "decisive_evidence": "2.24.0919 rainbow_tab_config_1s.dart @0x8a9824 prints the string literal \"板载mode = \" interpolated with data[4] inside the branch that is reached only when data[2] == 0xD4 (cmp x1,#0xd4 at 0x8a9824 is immediately preceded by the range test cmp x1,#0xd4;b.gt at 0x8a9738). 4.0.8 rainbow_tab_config_1s.dart @0x826ecc prints the same literal from the same branch shape.",
+    "candidates": {
+      "active onboard slot": "CONTRADICTED - the byte is used raw (stored to a field) or compared to a small constant; no bank/slot arithmetic anywhere on it.",
+      "input mode": "SUPPORTED - this is exactly what it is (板载mode / 手柄模式).",
+      "config bank": "CONTRADICTED - no bank-selection arithmetic on the value.",
+      "profile number": "UNKNOWN - no profile lookup found on the value.",
+      "device mode": "SUPPORTED - the literal names it a mode (板载mode = onboard mode)."
+    }
+  },
+  "reply_format": {
+    "family": "A5 short frame",
+    "layout": "A5 | total_len(0x06) | 0xD4 | gamepad_mode | onboard_mode | checksum",
+    "offsets": { "index0": "0xA5 header", "index1": "0x06 total length", "index2": "0xD4 opcode", "index3": "gamepad mode (手柄模式)", "index4": "onboard mode (板载mode)", "index5": "checksum = (sum of bytes 0..4) & 0xFF" },
+    "total_len": 6,
+    "total_len_evidence": "PROVEN STATIC for the length-byte convention (0x0B reply A5 05 0B 30 E5 = 5 bytes; 0xEF reply A5 0C EF ... = 12 bytes; 0xD7 ack A5 05 D7 00 81 = 5 bytes). The 6-byte minimum is INFERRED from the parsers reading both index 3 and index 4 while a checksum must follow them, so the exact real total length is UNKNOWN (>= 6).",
+    "checksum": "sum of all frame bytes except the last, & 0xFF",
+    "checksum_evidence": "PROVEN STATIC - 2.22 getCheckSum @0x79c368 (units/gamepadset.dart:87), 2.23 getCheckSum @0x761954, 2.24 getCheckSum @0x78c360 (define.dart), 4.0.8 BluetoothModel::getCheckSum @0x80fbbc (loop accumulates then and w1,w0,#0xff at 0x80fc80).",
+    "value_domain": "UNKNOWN (see open_questions)",
+    "test_vectors": [
+      { "gamepad_mode": "0x00", "onboard_mode": "0x00", "bytes": "A5 06 D4 00 00 7F", "checksum": "0x7F" },
+      { "gamepad_mode": "0x06", "onboard_mode": "0x03", "bytes": "A5 06 D4 06 03 88", "checksum": "0x88" },
+      { "gamepad_mode": "0x06", "onboard_mode": "0x00", "bytes": "A5 06 D4 06 00 85", "checksum": "0x85" },
+      { "gamepad_mode": "0x01", "onboard_mode": "0x01", "bytes": "A5 06 D4 01 01 81", "checksum": "0x81" }
+    ]
+  },
+  "versions": {
+    "2.22.0901": {
+      "dart": "2.17.5",
+      "blutter_tree": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out",
+      "function_name": "getOnBoardConfig",
+      "sender": {
+        "label": "PROVEN STATIC",
+        "function": "_ArmorXProConfigWidgetState::getOnBoardConfig closure",
+        "address": "0x89adac",
+        "outer_method": "_ArmorXProConfigWidgetState::getOnBoardConfig @0x89ac50",
+        "file": "asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+        "frame_bytes": "A5 04 D4 7D",
+        "frame_derivation": [
+          "0x89ae04 AllocateArray(size #8 = Dart 4 elements) - halved, Smi",
+          "idx0: 0x89ae0c mov x17,#0x14a -> 330/2 = 0xA5 (halved)",
+          "idx1: 0x89ae14 mov x17,#8 -> 4 (halved)",
+          "idx2: 0x89ae1c mov x17,#0x1a8 -> 424/2 = 0xD4 (halved)",
+          "idx3: 0x89ae24 mov x17,#0 = placeholder (raw 0, NOT halved: it is a data byte)",
+          "0x89ae60 bl getCheckSum @0x79c368; 0x89aeac ArrayStore list[3] = (0xA5+0x04+0xD4+0x00)&0xFF = 0x7D"
+        ],
+        "caller": "_ArmorXProConfigWidgetState::queryConfigListResponse @0x8a83f4 (0x8a8adc subscribeCharacteristic -> 0x8a8aec getOnBoardConfig -> setState)",
+        "device_guard": "none observed (page is the ARMOR-X Pro config page)",
+        "firmware_guard": "none observed",
+        "startup_path": "config-page data-load path (after the config-list HTTP response + notify subscribe); not app launch"
+      },
+      "receivers": [
+        {
+          "label": "PROVEN STATIC",
+          "function": "_ArmorXProConfigWidgetState::subscribeCharacteristic stream-listener closure",
+          "address": "0x89b438",
+          "registered_at": "0x89b344 (stream.listen closure)",
+          "file": "asm/moojiang/widgets/armor-x_pro/armorx_pro_config_config.dart",
+          "dispatch": [
+            "0x89b48c cmp x1,#0xa4 (raw) -> A4 family gate -> 0x89b4b4 compare 428 (Smi -> 0xD6)",
+            "0x89bc00 cmp x1,#0xa5 (raw) -> A5 family gate; else branch to end 0x89bd68",
+            "opcode = data[2] (arg 4, halved) at 0x89bc08-0x89bc28",
+            "0x89bc2c compare opcode == 28 (Smi -> 14 = 0x0E)",
+            "0x89bc94 compare opcode == 424 (Smi -> 212 = 0xD4)",
+            "0x89bd00 compare opcode == 430 (Smi -> 215 = 0xD7)"
+          ],
+          "d4_branch": "0x89bcac-0x89bcfc",
+          "extraction": "data[4] (0x89bccc r16=#8, halved -> index 4) via GDT[cid_x0 - 0xfcb] operator[]; 0x89bce8 LoadInt32Instr -> raw byte",
+          "length_assumption": "none (no length/bounds check on the frame; index 4 simply must exist)",
+          "endianness": "single byte, no endianness",
+          "enum_bitfield": "none - stored raw",
+          "object_updated": "obj.field_1f where obj = (closure-context[0]).field_b.field_1b, at 0x89bcf8 StoreField r0->field_1f = r1",
+          "follow_up_command": "none",
+          "notes": ["no print/debug string", "no checksum verification observed in this dispatcher"]
+        }
+      ]
+    },
+    "2.23.0609": {
+      "dart": "2.19.6",
+      "blutter_tree": "/home/salamanka/armorx/re/blutter_out",
+      "function_name": "getInputModel",
+      "sender": {
+        "label": "PROVEN STATIC",
+        "function": "_RainbowMoreWidget::getInputModel",
+        "address": "0x8afa98",
+        "file": "asm/moojiang/widgets/rainbow/rainbow_more.dart",
+        "frame_bytes": "A5 04 D4 7D",
+        "frame_derivation": [
+          "0x8afad4 AllocateArray(size #8 = Dart 4) - halved",
+          "idx0: 0x8afadc mov x17,#0x14a -> 0xA5 (halved)",
+          "idx1: 0x8afae4 mov x17,#8 -> 0x04 (halved)",
+          "idx2: 0x8afaec mov x17,#0x1a8 -> 0xD4 (halved)",
+          "idx3: 0x8afaf4 stur wzr = 0 placeholder (raw)",
+          "0x8afb1c bl getCheckSum @0x761954; 0x8afb68 ArrayStore list[3] = 0x7D"
+        ],
+        "caller": "_RainbowMoreWidget::initState @0x8af430 (0x8af464 subscribeCharacteristic -> Future.delayed(...).then(closure @0x8afa4c) @0x8afa78 -> getInputModel)",
+        "device_guard": "none observed",
+        "firmware_guard": "none observed",
+        "startup_path": "Rainbow More page initState"
+      },
+      "receivers": [
+        {
+          "label": "PROVEN STATIC",
+          "function": "_RainbowMoreWidget::subscribeCharacteristic stream-listener closure",
+          "address": "0x8af5e8",
+          "registered_at": "0x8af558",
+          "file": "asm/moojiang/widgets/rainbow/rainbow_more.dart",
+          "dispatch": [
+            "0x8af63c cmp x1,#0xa5 (raw) - A5 gate",
+            "opcode = data[2] (0x8af650 r16=#4 -> index 2, halved)",
+            "0x8af67c cmp w1,#0x76 (Smi class-id test on the element)",
+            "0x8af688 cmp x1,#0xd4 (raw) ; b.gt -> 0x8af7a8",
+            "0x8af690 cmp w0,#0x1a8 (Smi -> 0xD4)"
+          ],
+          "d4_branch": "0x8af698-0x8af7a4",
+          "extraction": "data[3] (0x8af6cc and 0x8af744 r16=#6, halved -> index 3); LoadInt32Instr on the second read",
+          "length_assumption": "none",
+          "endianness": "single byte",
+          "enum_bitfield": "cmp x1,#6 (raw 6) -> boolean",
+          "object_updated": "obj.field_1f = (data[3] == 6) at 0x8af77c (obj = (closure-context[0]).field_f)",
+          "follow_up_command": "_RainbowMoreWidget::getDpi @0x8af8ec if the boolean is true (0x8af79c)",
+          "notes": ["prints \"手柄模式->\" + data[3] (0x8af6b4 / _interpolate / print)"]
+        },
+        {
+          "label": "PROVEN STATIC",
+          "function": "_RainbowTabConfig1sWidgetState::subscribeCharacteristic stream-listener closure",
+          "address": "0x808be4",
+          "file": "asm/moojiang/widgets/rainbow/rainbow_tab_config_1s.dart",
+          "dispatch": [
+            "0x80971c cmp x1,#0xa5 (raw) - A5 gate",
+            "opcode = data[2] (0x809730 r16=#4 -> index 2, halved)",
+            "0x809768 cmp x1,#0xd4 (raw);0x809770 cmp x1,#0xe (raw); 0x8097cc cmp x1,#0xd4 (raw);b.lt -> D4 branch = [0xD4,0xD6)"
+          ],
+          "d4_branch": "0x8097cc-0x809820",
+          "extraction": "data[4] (0x8097f0 r16=#8, halved -> index 4)",
+          "length_assumption": "none",
+          "endianness": "single byte",
+          "enum_bitfield": "none - stored raw",
+          "object_updated": "obj.field_1f = data[4] at 0x80981c",
+          "follow_up_command": "none",
+          "notes": []
+        }
+      ]
+    },
+    "2.24.0919": {
+      "dart": "3.2.3",
+      "blutter_tree": "/home/salamanka/armorx/re/v224/blutter_out",
+      "function_name": "getOnBoardConfig",
+      "sender": {
+        "label": "PROVEN STATIC",
+        "function": "_RainbowTabConfig1sWidgetState::getOnBoardConfig",
+        "address": "0x91b988",
+        "file": "asm/moojiang/widgets/rainbow/rainbow_tab_config_1s.dart",
+        "frame_bytes": "A5 04 D4 7D",
+        "frame_derivation": [
+          "0x91b9c4 AllocateArray(size #8 = Dart 4) - halved",
+          "idx0: 0x91b9cc mov x17,#0x14a -> 0xA5 (halved)",
+          "idx1: 0x91b9d4 mov x17,#8 -> 0x04 (halved)",
+          "idx2: 0x91b9dc mov x17,#0x1a8 -> 0xD4 (halved)",
+          "idx3: 0x91b9e4 stur wzr = 0 placeholder (raw)",
+          "0x91ba0c bl getCheckSum @0x78c360 (define.dart); 0x91ba54 ArrayStore list[3] = 0x7D"
+        ],
+        "caller": "_RainbowTabConfig1sWidgetState closures @0x91bfe4 (0x91c030 getOnBoardConfig -> 0x91c050 getDeviceConfig, i.e. D4 then D6) and _RainbowMoreWidget closure @0x91b8e0 (0x91b92c)",
+        "device_guard": "none observed in the immediate callers",
+        "firmware_guard": "none observed",
+        "startup_path": "1s config page load path, immediately before the D6 config read"
+      },
+      "receivers": [
+        {
+          "label": "PROVEN STATIC",
+          "function": "_RainbowMoreWidget::subscribeCharacteristic stream-listener closure",
+          "address": "0x91a320",
+          "file": "asm/moojiang/widgets/rainbow/rainbow_more.dart",
+          "dispatch": [
+            "0x91a464 cmp w0,#0x14a (Smi -> 0xA5) - A5 gate",
+            "opcode = data[2] (0x91a478 r16=#4 -> index 2, halved)",
+            "0x91a4a0 cmp x1,#0xd4 (raw)",
+            "0x91a528 cmp x1,#0xd4 (raw);b.lt -> D4..0xF5 branch"
+          ],
+          "d4_branch": "0x91a520-0x91a618",
+          "extraction": "data[3] (0x91a55c and 0x91a5c8 r16=#6, halved -> index 3)",
+          "length_assumption": "none",
+          "endianness": "single byte",
+          "enum_bitfield": "cmp w0,#0xc (Smi -> 6) at 0x91a5e0 -> boolean",
+          "object_updated": "obj.field_1b = (data[3] == 6) at 0x91a5f4",
+          "follow_up_command": "_RainbowMoreWidget::getDpi @0x91b090 when the boolean is true (0x91a614)",
+          "notes": ["prints \"手柄模式->\" + data[3] at 0x91a544"]
+        },
+        {
+          "label": "PROVEN STATIC",
+          "function": "_RainbowTabConfig1sWidgetState::subscribeCharacteristic stream-listener closure",
+          "address": "0x8a91d0",
+          "file": "asm/moojiang/widgets/rainbow/rainbow_tab_config_1s.dart",
+          "dispatch": [
+            "0x8a9704 cmp w0,#0x14a (Smi -> 0xA5) - A5 gate",
+            "opcode = data[2] (0x8a9718 r16=#4 -> index 2, halved)",
+            "0x8a9738 cmp x1,#0xd4 (raw);b.gt",
+            "0x8a9740 cmp x1,#0xe (raw);b.gt -> 0x8a9820",
+            "0x8a9824 cmp x1,#0xd4 (raw);b.lt -> exactly 0xD4"
+          ],
+          "d4_branch": "0x8a9820-0x8a98f4",
+          "extraction": "data[4] (0x8a985c and 0x8a98c8 r16=#8, halved -> index 4)",
+          "length_assumption": "none",
+          "endianness": "single byte",
+          "enum_bitfield": "none - stored raw",
+          "object_updated": "obj.field_1f = data[4] at 0x8a98f0",
+          "follow_up_command": "none",
+          "notes": ["prints the string literal \"板载mode = \" + data[4] at 0x8a9844 - the decisive onboard-mode naming evidence"]
+        }
+      ]
+    },
+    "4.0.8": {
+      "dart": "3.12.2",
+      "blutter_tree": "/home/salamanka/armorx-re/mygt408/blutter_out",
+      "function_name": "getInputModel",
+      "sender": {
+        "label": "PROVEN STATIC",
+        "function": "BluetoothModel::getInputModel",
+        "address": "0xa84258",
+        "file": "asm/moojiang/units/ble/bluetooth_mode.dart",
+        "frame_bytes": "A5 04 D4 7D",
+        "frame_derivation": [
+          "0xa84288 AllocateArray(size #8 = Dart 4) - halved",
+          "idx0: 0xa84290 mov x16,#0x14a -> 0xA5 (halved)",
+          "idx1: 0xa84298 mov x16,#8 -> 0x04 (halved)",
+          "idx2: 0xa842a0 mov x16,#0x1a8 -> 0xD4 (halved)",
+          "idx3: 0xa842a8 stur wzr = 0 placeholder (raw)",
+          "0xa842d4 bl BluetoothModel::getCheckSum @0x80fbbc; 0xa84318 ArrayStore list[3] = 0x7D",
+          "0xa84340 bl BluetoothModel::write @0x80dd28"
+        ],
+        "caller": "_RainbowMoreWidget closure @0xace4b0 (0xace58c) and _RainbowDeviceConfig1sState closure @0xa84160 (0xa841dc)",
+        "device_guard": "rainbow_more caller: curDevice must be one of devRainbow2Pro (Device@b2ee81), devRainbow3 (Device@b2edc1), devGale2 (Device@b2ede1) - 0xace50c..0xace538 (b.ne -> 0xace618 skips). devArmorX is Device@b2eec1 and is NOT in that set. rainbow_tab_config_1s caller: none observed",
+        "firmware_guard": "none observed",
+        "startup_path": "page-init/polling path (Future.delayed loop in both callers)"
+      },
+      "receivers": [
+        {
+          "label": "PROVEN STATIC",
+          "function": "_RainbowMoreWidget::subscribeCharacteristic stream-listener closure",
+          "address": "0x8b5724",
+          "file": "asm/moojiang/widgets/rainbow/rainbow_more.dart",
+          "dispatch": [
+            "0x8b3bd4 cmp x1,#0xd4 (raw)",
+            "0x8b3bdc cmp x1,#0x1a (raw);0x8b3be4 cmp w0,#0x34 (Smi -> 0x1A)",
+            "0x8b3c84 cmp x1,#0xd4 (raw);b.lt -> D4..0xE1 branch"
+          ],
+          "d4_branch": "0x8b3c84-0x8b3dd8",
+          "extraction": "data[3] (0x8b3cc0 and 0x8b3d2c r16=#6 -> index 3, halved) AND data[4] (0x8b3d74 r16=#8 -> index 4, halved)",
+          "length_assumption": "none",
+          "endianness": "single byte each",
+          "enum_bitfield": "data[3] cmp w0,#0xc (Smi -> 6); data[4] cmp w0,#6 (Smi -> 3)",
+          "object_updated": "obj.field_1b = (data[3]==6) at 0x8b3d54; obj.field_1f = (data[4]==3) at 0x8b3d9c",
+          "follow_up_command": "BluetoothModel::getDpi when data[3]==6 (0x8b3dd4 region)",
+          "notes": ["prints \"手柄模式->\" + data[3] at 0x8b3ca8", "EXTENDED vs 2.24: also reads index 4"]
+        },
+        {
+          "label": "PROVEN STATIC",
+          "function": "_RainbowDeviceConfig1sState::subscribeCharacteristic stream-listener closure",
+          "address": "0x8266a4",
+          "file": "asm/moojiang/widgets/rainbow/rainbow_tab_config_1s.dart",
+          "dispatch": [
+            "0x826d84 cmp x1,#0xd4 (raw);b.gt -> A4/D7 path 0x826f78",
+            "0x826d8c cmp x1,#0xe (raw);b.gt -> 0x826ec8",
+            "0x826ecc cmp x1,#0xd4 (raw);b.lt -> exactly 0xD4"
+          ],
+          "d4_branch": "0x826ecc-0x826f74",
+          "extraction": "data[4] (0x826f00 and 0x826f5c r16=#8, halved -> index 4)",
+          "length_assumption": "none",
+          "endianness": "single byte",
+          "enum_bitfield": "none observed",
+          "object_updated": "none observed - the second read at 0x826f5c is followed only by a branch back to 0x827020 (no StoreField emitted)",
+          "follow_up_command": "none",
+          "notes": ["prints the string literal \"板载mode = \" + data[4] at 0x826ee8"]
+        }
+      ]
+    }
+  },
+  "comparison_table": [
+    { "item": "request frame bytes", "2.22.0901": "A5 04 D4 7D", "2.23.0609": "A5 04 D4 7D", "2.24.0919": "A5 04 D4 7D", "4.0.8": "A5 04 D4 7D", "class": "UNCHANGED" },
+    { "item": "sender function name", "2.22.0901": "getOnBoardConfig", "2.23.0609": "getInputModel", "2.24.0919": "getOnBoardConfig", "4.0.8": "getInputModel", "class": "RENAMED" },
+    { "item": "sender owner class", "2.22.0901": "_ArmorXProConfigWidgetState (widget)", "2.23.0609": "_RainbowMoreWidget (widget)", "2.24.0919": "_RainbowTabConfig1sWidgetState (widget)", "4.0.8": "BluetoothModel (BLE model)", "class": "RENAMED" },
+    { "item": "checksum function", "2.22.0901": "units/gamepadset.dart::getCheckSum @0x79c368", "2.23.0609": "units/gamepadset.dart::getCheckSum @0x761954", "2.24.0919": "define.dart::getCheckSum @0x78c360", "4.0.8": "BluetoothModel::getCheckSum @0x80fbbc", "class": "RENAMED" },
+    { "item": "checksum algorithm", "2.22.0901": "sum&0xFF", "2.23.0609": "sum&0xFF", "2.24.0919": "sum&0xFF", "4.0.8": "sum&0xFF", "class": "UNCHANGED" },
+    { "item": "dispatch compare of opcode", "2.22.0901": "==424 (Smi->0xD4) @0x89bc94", "2.23.0609": "cmp w0,#0x1a8 @0x8af690 and range [0xD4,0xD6) @0x8097cc", "2.24.0919": "range [0xD4,0xD6) @0x8a9824 and [0xD4,0xF5) @0x91a528", "4.0.8": "range [0xD4,0xD6) @0x826ecc and [0xD4,0xE1) @0x8b3c84", "class": "EXTENDED" },
+    { "item": "reply read of index 4 (onboard mode)", "2.22.0901": "yes (0x89bccc arg 8)", "2.23.0609": "yes (0x8097f0 arg 8)", "2.24.0919": "yes (0x8a985c arg 8)", "4.0.8": "yes (0x826f00 arg 8 and 0x8b3d74 arg 8)", "class": "UNCHANGED" },
+    { "item": "reply read of index 3 (gamepad mode)", "2.22.0901": "absent", "2.23.0609": "yes, ==6 -> getDpi (0x8af6cc)", "2.24.0919": "yes, ==6 -> getDpi (0x91a55c)", "4.0.8": "yes, ==6 -> getDpi (0x8b3cc0)", "class": "EXTENDED" },
+    { "item": "\"手柄模式->\" debug print", "2.22.0901": "absent", "2.23.0609": "present", "2.24.0919": "present", "4.0.8": "present", "class": "EXTENDED" },
+    { "item": "\"板载mode = \" debug print", "2.22.0901": "absent", "2.23.0609": "absent", "2.24.0919": "present", "4.0.8": "present", "class": "EXTENDED" },
+    { "item": "object field updated", "2.22.0901": "field_1f = data[4] raw", "2.23.0609": "field_1f = (data[3]==6); field_1f = data[4] raw (two widgets)", "2.24.0919": "field_1b = (data[3]==6); field_1f = data[4] raw", "4.0.8": "field_1b = (data[3]==6); field_1f = data[4] raw or (data[4]==3)", "class": "EXTENDED" },
+    { "item": "follow-up command", "2.22.0901": "none", "2.23.0609": "getDpi when data[3]==6", "2.24.0919": "getDpi when data[3]==6", "4.0.8": "getDpi when data[3]==6", "class": "EXTENDED" },
+    { "item": "device guard on the sender call site", "2.22.0901": "none observed", "2.23.0609": "none observed", "2.24.0919": "none observed", "4.0.8": "curDevice in {devRainbow2Pro, devRainbow3, devGale2} (rainbow_more path only)", "class": "EXTENDED" },
+    { "item": "firmware guard", "2.22.0901": "none observed", "2.23.0609": "none observed", "2.24.0919": "none observed", "4.0.8": "none observed", "class": "UNCHANGED" },
+    { "item": "sender transport call", "2.22.0901": "writeDevice (gamepadset.dart)", "2.23.0609": "writeDevice (gamepadset.dart)", "2.24.0919": "writeDevice (define/gamepadset)", "4.0.8": "BluetoothModel::write", "class": "RENAMED" },
+    { "item": "value domain of index 3 / index 4", "2.22.0901": "UNKNOWN", "2.23.0609": "UNKNOWN", "2.24.0919": "UNKNOWN", "4.0.8": "UNKNOWN", "class": "UNKNOWN" },
+    { "item": "exact real reply total length", "2.22.0901": "UNKNOWN (>=6)", "2.23.0609": "UNKNOWN (>=6)", "2.24.0919": "UNKNOWN (>=6)", "4.0.8": "UNKNOWN (>=6)", "class": "UNKNOWN" },
+    { "item": "any D4 element removed", "2.22.0901": "n/a", "2.23.0609": "n/a", "2.24.0919": "n/a", "4.0.8": "n/a", "class": "REMOVED (none - no remover found)" }
+  ],
+  "open_questions": [
+    "Value domain of the frame-index-3 byte (手柄模式/gamepad mode): only the value 6 is proven to be distinguished (it gates a getDpi follow-up). No enum, no name table, and no write path that sets it was found in any of the four trees.",
+    "Value domain of the frame-index-4 byte (板载mode/onboard mode): printed and stored raw, but never compared to anything except the single constant 3 in 4.0.8's rainbow_more. No enumeration found.",
+    "Exact real reply total length: parsers only touch whole-frame indices 3 and 4, so the minimum is 6 bytes (index 5 must be the checksum); whether the device sends more payload bytes is UNKNOWN - no length assertion or length read was found in the four D4 branches.",
+    "Whether byte index 3 is genuine payload or a sub-code: parsers treat it as the gamepad mode and compare it to 6, but no reply builder exists to confirm it from the device side.",
+    "Whether the app verifies the inbound checksum of a D4 reply: no checksum verification was observed in any of the traced dispatchers."
+  ],
+  "search_evidence": {
+    "smi_census_used": "grep -rn '#0x1a8' asm/moojiang/ (all four trees) filtered to mov/cmp immediates, halved to Dart 0xD4; grep -rn 'cmp w[0-9]*, #0x1a8' and 'cmp x[0-9]*, #0xd4' for the Dart-2.19+/3.x dispatcher idioms",
+    "string_census_used": "grep -rln '板载' / '手柄模式' / 'InputModel' asm/moojiang/ (all four trees); the string literals locate the D4 branches that the numeric census alone misses",
+    "negative_results": [
+      "no '#0x1a8' immediate exists outside the four builder functions and generated/intl string tables in 2.23.0609 and 2.24.0919",
+      "no 'cmp w*, #0x1a8' exists at all in 2.24.0919 and 4.0.8 (they use the raw 'cmp x*, #0xd4' range-test idiom)",
+      "no D4 reply bytes appear in any imported research capture (baselines/imported-research/captures, /pcap are PCAPdroid HTTP captures, not BLE)",
+      "baseline command-index.json lists 0xD4 with \"dispatchers\": [] (4.0.8) - that entry is incomplete; the receivers above are the correction"
+    ]
+  }
+}

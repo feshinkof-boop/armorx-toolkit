@@ -140,10 +140,10 @@
    "4.0.8": "CRC-16/MODBUS over bytes 2..end; six images (240/335/456/484/508) self-validate -> device-wide rule, not a 144-byte special case"
   },
   "E2 readFirmware": {
-   "2.22.0901": "{\"opcode\": \"0xE2\", \"family\": \"A5\", \"status\": \"ABSENT\", \"role\": \"(4.0.8: readFirmware)\", \"frame\": null, \"builder\": nul...",
-   "2.23.0609": "UNKNOWN",
-   "2.24.0919": "UNKNOWN",
-   "4.0.8": "readFirmware - A5 04 E2 8B (@0x8b6860)  <-- PRESENT (absent in 2.23/2.24)"
+   "2.22.0901": "{\"verdict\": \"ABSENT\", \"evidence\": \"prior pass: results/static/2.22.0901/e2-verdict.md (Smi #0x1c4 only in syncfusion/...",
+   "2.23.0609": "{\"verdict\": \"ABSENT\", \"evidence\": \"rg '#0x1c4' asm/: 28 hits, 8 in asm/moojiang all in generated/intl/*; 0 outside in...",
+   "2.24.0919": "{\"verdict\": \"ABSENT\", \"evidence\": \"rg '#0x1c4' asm/: 29 hits, 9 in asm/moojiang all in generated/intl/*; 0 outside in...",
+   "4.0.8": "{\"verdict\": \"PRESENT_SEND\", \"evidence\": \"A5 04 E2 8B builder @0x8b6860; E2 branch in ARMOR-X Pro response dispatcher ..."
   },
   "0x0B / 0x0E": {
    "2.22.0901": "{\"opcode\": \"0x0B\", \"family\": \"A5\", \"status\": \"PRESENT\", \"role\": \"read (firmware/MCU version query)\", \"frame\": \"A5 04 ...",
@@ -157,11 +157,11 @@
    "2.24.0919": "getDeviceConfig - A5 04 D6 (@0x8a8798, @0x91433c)",
    "4.0.8": "getDeviceConfig - A5 04 D6 7F (@0x80dbfc)"
   },
-  "D4 / D2": {
-   "2.22.0901": "{\"opcode\": \"0xD4\", \"family\": \"A5\", \"status\": \"PRESENT\", \"role\": \"read (on-board config / input model)\", \"frame\": \"A5 ...",
-   "2.23.0609": "getInputModel - A5 04 D4 7D (@0x8afa98 rainbow_more)",
-   "2.24.0919": "getOnBoardConfig - A5 04 D4 (@0x91b988)",
-   "4.0.8": "getInputModel - A5 04 D4 7D (@0xa84258)"
+  "D4 request/reply/semantics": {
+   "2.22.0901": "{\"function_name\": \"getOnBoardConfig\", \"sender\": {\"label\": \"PROVEN STATIC\", \"function\": \"_ArmorXProConfigWidgetState::...",
+   "2.23.0609": "{\"function_name\": \"getInputModel\", \"sender\": {\"label\": \"PROVEN STATIC\", \"function\": \"_RainbowMoreWidget::getInputMode...",
+   "2.24.0919": "{\"function_name\": \"getOnBoardConfig\", \"sender\": {\"label\": \"PROVEN STATIC\", \"function\": \"_RainbowTabConfig1sWidgetStat...",
+   "4.0.8": "{\"function_name\": \"getInputModel\", \"sender\": {\"label\": \"PROVEN STATIC\", \"function\": \"BluetoothModel::getInputModel\", ..."
   },
   "0x70 lighting": {
    "2.22.0901": "{\"opcode\": \"0x70\", \"family\": \"A5\", \"status\": \"PRESENT\", \"role\": \"send (lighting configuration)\", \"frame\": \"A5 ?? 70 0...",
@@ -169,23 +169,41 @@
    "2.24.0919": "UNKNOWN",
    "4.0.8": "lighting config R3 - A5 04 70 (writeApplyLightR3Common @0x844824), A5 10 70 ... over A4 (writeLightConfigR3 @0x844e04), main writeLightConfig @0x84938c"
   },
-  "D8 macro": {
-   "2.22.0901": "{\"opcode\": \"0xD8\", \"family\": \"A4\", \"status\": \"PRESENT\", \"role\": \"write macro / macro protocol (indexed fragmentation)...",
-   "2.23.0609": "macro write - A4/D8 fragments (@0x797fa0 writeMacroConfig)",
-   "2.24.0919": "UNKNOWN",
-   "4.0.8": "macro (A4/D8)"
+  "D8 macro format": {
+   "2.22.0901": "{\"format_family\": \"OLD (GamepadDefMap 7-byte records)\", \"record_size\": 7, \"payload_length\": \"N = 10 + 7*nsteps\", \"chu...",
+   "2.23.0609": "{\"format_family\": \"OLD (GamepadDefMap 7-byte records)\", \"record_size\": 7, \"payload_length\": \"N = 10 + 7*n\", \"chunk_ru...",
+   "2.24.0919": "{\"format_family\": \"MODERN (TranscribeFrame 10-byte frames)\", \"record_size\": 10, \"payload_length\": \"N = 10 + 10*n\", \"c...",
+   "4.0.8": "{\"format_family\": \"MODERN (TranscribeFrame 10-byte frames)\", \"record_size\": 10, \"payload_length\": \"N = 10 + 10*n\", \"c..."
+  },
+  "D8 commit frame": {
+   "2.22.0901": "{\"bytes\": \"A4 05 D8 <nfrags+1> <csum>\", \"length_byte\": \"0x05\", \"asm\": \"0x79eb7c mov x17,#0xa (=Dart 5); 0x79ebf4 (=D8...",
+   "2.23.0609": "{\"bytes\": \"A4 05 D8 <nfrags+1> <csum>\", \"length_byte\": \"0x05\", \"asm\": \"0x798744 mov x17,#0xa (=Dart 5); 0x7987a0 (=D8...",
+   "2.24.0919": "{\"bytes\": \"A4 05 D8 <nfrags+1> <csum>\", \"length_byte\": \"0x05\", \"asm\": \"0x800060 (#0x148=A4); 0x80012c mov x17,#0xa (=...",
+   "4.0.8": "{\"bytes\": \"A4 05 D8 <nfrags+1> <csum>\", \"length_byte\": \"0x05\", \"asm\": \"0x85aaf8 mov x16,#0x148 (=A4); 0x85aba8 mov x1..."
+  },
+  "D8 readback": {
+   "2.22.0901": "{\"generic_a4_reassembler\": {\"site\": \"widgets/general/configs_config.dart:3108 closure @0x8a6a04\", \"also\": \"widgets/ar...",
+   "2.23.0609": "{\"d8_readback\": {\"status\": \"ABSENT\", \"reason\": \"no 0xD8/0x1b0 comparison in widgets/\", \"label\": \"PROVEN STATIC negati...",
+   "2.24.0919": "{\"generic_a4_reassembler\": {\"site\": \"widgets/general/configs_config.dart @0x912d30 cmp #0x148 / @0x912d58 cmp #0x1ac\"...",
+   "4.0.8": "{\"generic_a4_reassembler\": {\"site\": \"widgets/general/configs_config.dart @0xac1de8 cmp #0x148 / @0xac1e10 cmp #0x1ac\"..."
+  },
+  "DPI timeline": {
+   "2.22.0901": "UNKNOWN",
+   "2.23.0609": "[\"FC\"]",
+   "2.24.0919": "[\"FC\", \"F6\"]",
+   "4.0.8": "[\"FC\", \"F6\", \"AB\"]"
   },
   "FC / F6 DPI": {
-   "2.22.0901": "{\"opcode\": \"0xFC\", \"family\": \"A5\", \"status\": \"ABSENT\", \"role\": \"(4.0.8: DPI / transcribe)\", \"frame\": null, \"builder\":...",
-   "2.23.0609": "DPI write - A5 05 FC <dpi&0x0F> <cks> (@0x7fdee4 writeDpiConfig)",
-   "2.24.0919": "legacy DPI - A5 05 F6 00 A0 (@0x894000 writeDpiConfig fallback branch)",
-   "4.0.8": "DPI write - A5 05 FC <dpi&0x0F> <cks> (@0x946750)"
+   "2.22.0901": "{\"verdict\": \"ABSENT\", \"evidence\": null, \"source\": \"results/reconciliation/e2-ab-summary.json\"}",
+   "2.23.0609": "{\"verdict\": \"PRESENT_SEND\", \"evidence\": null, \"source\": \"results/reconciliation/e2-ab-summary.json\"}",
+   "2.24.0919": "{\"verdict\": \"PRESENT_SEND\", \"evidence\": null, \"source\": \"results/reconciliation/e2-ab-summary.json\"}",
+   "4.0.8": "{\"verdict\": \"PRESENT_SEND\", \"evidence\": null, \"source\": \"results/reconciliation/e2-ab-summary.json\"}"
   },
-  "AB motion DPI": {
-   "2.22.0901": "NOT PRESENT in 2.22",
-   "2.23.0609": "UNKNOWN",
-   "2.24.0919": "UNKNOWN",
-   "4.0.8": "motion/gyro frames - header 0xAB (writeMotionDpiConfig @0x946158 AB 07 05 25 <lo> <hi> <cks>; getMotionList/getMotionDpi)"
+  "AB family": {
+   "2.22.0901": "{\"verdict\": \"ABSENT\", \"evidence\": \"no #0x156 immediate anywhere; motion/gyro block travels inside the 144-byte config...",
+   "2.23.0609": "{\"verdict\": \"ABSENT\", \"evidence\": \"rg '#0x156' asm/: 38 hits, 8 in asm/moojiang all generated/intl/*; 0 outside intl;...",
+   "2.24.0919": "{\"verdict\": \"ABSENT\", \"evidence\": \"rg '#0x156' asm/: 35 hits, 9 in asm/moojiang all generated/intl/*; 0 outside intl;...",
+   "4.0.8": "{\"verdict\": \"PRESENT_SEND\", \"evidence\": \"writeMotionDpiConfig @0x946158 builds AB 07 05 25 <u16 LE> <cks>; also appea..."
   },
   "lighting": {
    "2.22.0901": "UNKNOWN",
@@ -216,6 +234,18 @@
    "2.23.0609": "{\"summary\": \"key_remap_t.dart::gamePadKeyName map; label inventory verified from libapp.so strings + asm: A-Z, L3/R3/...",
    "2.24.0919": "{\"summary\": \"label inventory grew versus 2.23: adds Capture, Tab/Esc/Enter/End/F1-F12, arrow names. Still no Menu, no...",
    "4.0.8": "{\"summary\": \"mapKeys occupies config bytes 112..143 (32 slots). Independent re-extraction of key_remap_t.dart::gamePa..."
+  },
+  "key mask rule": {
+   "2.22.0901": "{\"rule\": \"bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-p...",
+   "2.23.0609": "{\"rule\": \"bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-p...",
+   "2.24.0919": "{\"rule\": \"bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-p...",
+   "4.0.8": "{\"rule\": \"bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-p..."
+  },
+  "Smi corrections": {
+   "2.22.0901": "[{\"id\": \"K1\", \"claim\": \"keyCapture = 0x10000 and 'bit index = key id + 1'\", \"original\": \"The static key-mask getters ...",
+   "2.23.0609": "[{\"id\": \"K1\", \"claim\": \"keyCapture = 0x10000 and 'bit index = key id + 1'\", \"original\": \"The static key-mask getters ...",
+   "2.24.0919": "[{\"id\": \"K1\", \"claim\": \"keyCapture = 0x10000 and 'bit index = key id + 1'\", \"original\": \"The static key-mask getters ...",
+   "4.0.8": "[{\"id\": \"K1\", \"claim\": \"keyCapture = 0x10000 and 'bit index = key id + 1'\", \"original\": \"The static key-mask getters ..."
   },
   "BLE UUID table": {
    "2.22.0901": "[{\"uuid\": \"00000000-0000-1000-8000-00805f9b34fb\", \"role\": \"vendor service (all-zero service UUID)\", \"evidence\": \"PROV...",

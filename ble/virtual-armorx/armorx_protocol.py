@@ -84,7 +84,7 @@ OPCODES: dict[int, dict[str, str]] = {
     0xAB: {"name": "UNKNOWN", "evidence": "command-index.md 0xAB"},
     0xD2: {"name": "testModeSwitch", "evidence": "command-index.md 0xD2"},
     0xD3: {"name": "getMaxSize", "evidence": "command-index.md 0xD3"},
-    0xD4: {"name": "getInputModel", "evidence": "command-index.md 0xD4"},
+    0xD4: {"name": "getInputModel", "evidence": "command-index.md 0xD4; reconciliation/d4-reconstruction.md"},
     0xD6: {"name": "getDeviceConfig", "evidence": "command-index.md 0xD6"},
     0xD7: {"name": "writeDeviceConfig", "evidence": "command-index.md 0xD7"},
     0xD8: {"name": "macro device protocol", "evidence": "d8-macro.md"},
@@ -314,6 +314,133 @@ def config_crc_valid(image: bytes) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# 0xD4 -- "input model" / "onboard config" exchange
+#
+# FOUR-BUILD RECONSTRUCTION (results/reconciliation/d4-reconstruction.md|json):
+#
+#   request   A5 04 D4 7D      identical in 2.22.0901, 2.23.0609, 2.24.0919, 4.0.8
+#   reply     A5 06 D4 <gamepad_mode> <onboard_mode> <checksum>
+#
+# The frame STRUCTURE below is evidence-backed; the payload VALUE DOMAIN is not.
+#
+# PROVEN STATIC (whole-frame indices, 0-based):
+#   index 0  0xA5 header        - every D4 dispatch tests data[0] == 0xA5
+#   index 1  total length       - equals the total frame length (0x0B/0xEF/D7 replies)
+#   index 2  0xD4 opcode
+#   index 3  gamepad mode       - "手柄模式"; printed at 2.23 0x8af6b4 / 2.24 0x91a544 /
+#                                 4.0.8 0x8b3ca8 and compared == 6 (Smi 0xc) which gates a
+#                                 getDpi() follow-up. See the D4 receivers in the report.
+#   index 4  onboard mode       - "板载mode"; printed at 2.24 0x8a9844 / 4.0.8 0x826ee8 and
+#                                 stored raw into a field at 2.22 0x89bcf8, 2.23 0x80981c,
+#                                 2.24 0x8a98f0.
+#   index 5  checksum           - (sum of bytes 0..4) & 0xFF
+#
+# INFERRED: the total length is the 6-byte MINIMUM that lets indices 3 and 4 exist with a
+# checksum after them; no D4 branch reads index >= 5 or asserts a length, so more payload
+# bytes (and a different length byte) are possible on real hardware.
+#
+# UNKNOWN / CHOSEN: the value domain of the two payload bytes. No enum, name table or write
+# path that sets them was found in any of the four builds. The peripheral therefore takes
+# them as *chosen device state* (CLI options), exactly like --device-uuid / --zkm-version;
+# the defaults carry no research authority and are documented as such.
+# ---------------------------------------------------------------------------
+
+D4_REQUEST = bytes.fromhex("A504D47D")
+D4_OPCODE = 0xD4
+D4_GAMEPAD_MODE_INDEX = 3
+D4_ONBOARD_MODE_INDEX = 4
+D4_CHECKSUM_INDEX = 5
+D4_REPLY_TOTAL_LEN = 6
+D4_REQUEST_EVIDENCE = (
+    "PROVEN STATIC / byte-exact in all four builds: 2.22.0901 "
+    "_ArmorXProConfigWidgetState::getOnBoardConfig @0x89adac; 2.23.0609 "
+    "_RainbowMoreWidget::getInputModel @0x8afa98; 2.24.0919 "
+    "_RainbowTabConfig1sWidgetState::getOnBoardConfig @0x91b988; 4.0.8 "
+    "BluetoothModel::getInputModel @0xa84258. Smi immediates halved: #0x14a->0xA5, "
+    "#8->0x04, #0x1a8->0xD4; checksum 0x7D = (0xA5+0x04+0xD4)&0xFF via getCheckSum."
+)
+D4_REPLY_EVIDENCE = (
+    "STRUCTURE PROVEN STATIC (receivers): 2.22 0x89bcac reads index 4 (arg #8, halved) -> "
+    "field_1f; 2.23 0x8af690 reads index 3 (arg #6) == 6 -> getDpi, 0x8097cc reads index 4; "
+    "2.24 0x91a528 reads index 3 == 6 -> getDpi, 0x8a9824 prints \"板载mode = \" + index 4; "
+    "4.0.8 0x8b3c84 reads index 3 (==6) and index 4 (==3), 0x826ecc prints \"板载mode = \" + "
+    "index 4. VALUE DOMAIN UNKNOWN - payload bytes are chosen device state."
+)
+
+
+@dataclass
+class D4Reply:
+    """Structured decode of a 0xD4 reply frame (parser-side view)."""
+
+    raw: bytes
+    valid: bool
+    gamepad_mode: int | None
+    onboard_mode: int | None
+    checksum_ok: bool
+    errors: list[str] = field(default_factory=list)
+
+    def as_dict(self) -> dict:
+        return {
+            "raw": self.raw.hex(),
+            "valid": self.valid,
+            "gamepad_mode": self.gamepad_mode,
+            "gamepad_mode_hex": None if self.gamepad_mode is None else f"0x{self.gamepad_mode:02X}",
+            "onboard_mode": self.onboard_mode,
+            "onboard_mode_hex": None if self.onboard_mode is None else f"0x{self.onboard_mode:02X}",
+            "gamepad_mode_index": D4_GAMEPAD_MODE_INDEX,
+            "onboard_mode_index": D4_ONBOARD_MODE_INDEX,
+            "checksum_ok": self.checksum_ok,
+            "errors": self.errors,
+        }
+
+
+def build_d4_reply(gamepad_mode: int, onboard_mode: int) -> bytes:
+    """Build the evidence-backed 0xD4 reply frame.
+
+    `A5 06 D4 <gamepad_mode> <onboard_mode> <checksum>`; the two payload bytes are
+    whole-frame indices 3 and 4 (see the module comment above). The values are chosen
+    device state, not research constants.
+    """
+    for name, value in (("gamepad_mode", gamepad_mode), ("onboard_mode", onboard_mode)):
+        if not 0 <= value <= 0xFF:
+            raise ValueError(f"{name} must be one byte (0..255), got {value!r}")
+    return build_frame(D4_OPCODE, bytes([gamepad_mode & 0xFF, onboard_mode & 0xFF]))
+
+
+def parse_d4_reply(raw: bytes) -> D4Reply:
+    """Structured decode of a 0xD4 reply: pull index 3 and index 4 out of the raw frame."""
+    errors: list[str] = []
+    raw = bytes(raw)
+    if len(raw) < D4_REPLY_TOTAL_LEN:
+        errors.append(
+            f"truncated: {len(raw)} bytes < {D4_REPLY_TOTAL_LEN} "
+            f"(indices {D4_GAMEPAD_MODE_INDEX} and {D4_ONBOARD_MODE_INDEX} must exist)"
+        )
+        return D4Reply(raw, False, None, None, False, errors)
+    if raw[0] != FRAME_SHORT:
+        errors.append(f"bad header 0x{raw[0]:02X} (expected 0xA5)")
+    if raw[2] != D4_OPCODE:
+        errors.append(f"bad opcode 0x{raw[2]:02X} (expected 0xD4)")
+    if raw[1] != len(raw):
+        errors.append(f"length byte {raw[1]} != frame length {len(raw)}")
+    checksum_ok = frame_checksum(raw[:-1]) == raw[-1]
+    if not checksum_ok:
+        errors.append(
+            f"checksum mismatch: stored 0x{raw[-1]:02X}, "
+            f"computed 0x{frame_checksum(raw[:-1]):02X}"
+        )
+    valid = not errors
+    return D4Reply(
+        raw=raw,
+        valid=valid,
+        gamepad_mode=raw[D4_GAMEPAD_MODE_INDEX],
+        onboard_mode=raw[D4_ONBOARD_MODE_INDEX],
+        checksum_ok=checksum_ok,
+        errors=errors,
+    )
+
+
+# ---------------------------------------------------------------------------
 # Evidence table: which replies the research actually supports
 # ---------------------------------------------------------------------------
 
@@ -356,6 +483,15 @@ REPLY_TABLE: dict[int, ReplySpec] = {
         "EVIDENCE-BACKED",
         "device echoes the 5-byte frame verbatim (A5 05 0E 00 B8)",
         "docs/android-protocol.md:230",
+    ),
+    0xD4: ReplySpec(
+        0xD4,
+        "EVIDENCE-BACKED",
+        "A5 06 D4 <gamepad_mode> <onboard_mode> <sum>  -- STRUCTURE PROVEN STATIC, "
+        "payload VALUE DOMAIN UNKNOWN (values are chosen device state, see "
+        "results/reconciliation/d4-reconstruction.md)",
+        "d4-reconstruction.md §6; receivers 2.22 0x89bcac, 2.23 0x8af690+0x8097cc, "
+        "2.24 0x91a528+0x8a9824, 4.0.8 0x8b3c84+0x826ecc",
     ),
     0x04: ReplySpec(
         0x04, "UNKNOWN",

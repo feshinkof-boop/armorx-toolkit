@@ -22,6 +22,7 @@ import armorx_protocol as proto  # noqa: E402
 BYTE_EXACT_REQUESTS = [
     ("A5 04 0B B4", 0x0B, "getZKMVer"),
     ("A5 0C EF 00 00 00 00 00 00 00 00 A0", 0xEF, "getDeviceUUID"),
+    ("A5 04 D4 7D", 0xD4, "getInputModel"),
     ("A5 04 D6 7F", 0xD6, "getDeviceConfig"),
     ("A5 04 E4 8D", 0xE4, "getMTU"),
     ("A5 04 E2 8B", 0xE2, "readFirmware"),
@@ -116,9 +117,98 @@ def test_d8_terminator_parses():
 
 def test_reply_table_marks_only_evidence_backed():
     backed = {op for op, spec in proto.REPLY_TABLE.items() if spec.status == "EVIDENCE-BACKED"}
-    assert backed == {0x0B, 0xEF, 0xD6, 0xD7, 0x0E}
+    assert backed == {0x0B, 0xEF, 0xD4, 0xD6, 0xD7, 0x0E}
     for op in (0xE4, 0xE2, 0x04):
         assert proto.reply_status(op).status == "UNKNOWN"
+
+
+# ---------------------------------------------------------------------------
+# 0xD4 -- "input model" / "onboard config"
+#
+# The request frame is byte-exact in all four builds; the reply STRUCTURE is
+# evidence-backed (whole-frame indices 3 and 4, A5 length byte = total, checksum
+# = sum & 0xFF). The VALUE DOMAIN of the two payload bytes is UNKNOWN, so the
+# tests pin the layout and the arithmetic -- never a claimed device value.
+# Evidence: results/reconciliation/d4-reconstruction.md|json
+# ---------------------------------------------------------------------------
+
+D4_REQUEST = bytes.fromhex("A504D47D")
+
+
+def test_d4_request_is_byte_exact_in_all_four_builds():
+    assert proto.D4_REQUEST == D4_REQUEST
+    frame = proto.parse_frame(D4_REQUEST)
+    assert frame is not None
+    assert frame.kind == "short"
+    assert frame.opcode == 0xD4
+    assert frame.length == 4 == len(D4_REQUEST)
+    assert frame.checksum_ok
+    # checksum derivation: (0xA5 + 0x04 + 0xD4) & 0xFF == 0x7D
+    assert proto.frame_checksum(D4_REQUEST[:3]) == 0x7D
+
+
+def test_d4_reply_layout_and_checksum_are_evidence_backed():
+    reply = proto.build_d4_reply(0x06, 0x03)
+    assert reply.hex() == "a506d4060388"
+    assert reply[0] == proto.FRAME_SHORT          # index 0 header
+    assert reply[1] == len(reply) == 6            # index 1 length byte == total
+    assert reply[2] == 0xD4                       # index 2 opcode
+    assert reply[proto.D4_GAMEPAD_MODE_INDEX] == 0x06   # index 3 gamepad mode
+    assert reply[proto.D4_ONBOARD_MODE_INDEX] == 0x03   # index 4 onboard mode
+    assert proto.frame_checksum(reply[:-1]) == reply[-1]  # index 5 checksum
+
+
+@pytest.mark.parametrize(
+    "gamepad,onboard,hexstr",
+    [
+        (0x00, 0x00, "a506d400007f"),
+        (0x06, 0x03, "a506d4060388"),
+        (0x06, 0x00, "a506d4060085"),
+        (0x01, 0x01, "a506d4010181"),
+    ],
+)
+def test_d4_reply_test_vectors(gamepad, onboard, hexstr):
+    assert proto.build_d4_reply(gamepad, onboard).hex() == hexstr
+    decoded = proto.parse_d4_reply(bytes.fromhex(hexstr))
+    assert decoded.valid and decoded.checksum_ok
+    assert decoded.gamepad_mode == gamepad
+    assert decoded.onboard_mode == onboard
+
+
+def test_d4_reply_structured_parser_extracts_indices_3_and_4():
+    decoded = proto.parse_d4_reply(proto.build_d4_reply(0x07, 0x02))
+    assert decoded.as_dict()["gamepad_mode_index"] == 3
+    assert decoded.as_dict()["onboard_mode_index"] == 4
+    assert decoded.gamepad_mode == 0x07
+    assert decoded.onboard_mode == 0x02
+    assert decoded.errors == []
+
+
+def test_d4_reply_bad_checksum_is_rejected():
+    bad = bytes.fromhex("a506d4000000")           # correct bytes, checksum 0x7F -> 0x00
+    decoded = proto.parse_d4_reply(bad)
+    assert decoded.valid is False
+    assert decoded.checksum_ok is False
+    assert any("checksum" in e for e in decoded.errors)
+
+
+def test_d4_reply_truncated_is_rejected():
+    truncated = bytes.fromhex("a506d4")           # indices 3 and 4 missing
+    decoded = proto.parse_d4_reply(truncated)
+    assert decoded.valid is False
+    assert decoded.gamepad_mode is None and decoded.onboard_mode is None
+    assert any("truncated" in e for e in decoded.errors)
+    # a 5-byte frame still has no room for both payload bytes + checksum
+    assert proto.parse_d4_reply(bytes.fromhex("a506d40000")).valid is False
+
+
+def test_d4_reply_rejects_bad_opcode_and_out_of_range_values():
+    wrong_op = bytes([0xA5, 0x06, 0xD6, 0x00, 0x00])
+    decoded = proto.parse_d4_reply(wrong_op + bytes([proto.frame_checksum(wrong_op)]))
+    assert decoded.valid is False
+    assert any("opcode" in e for e in decoded.errors)
+    with pytest.raises(ValueError):
+        proto.build_d4_reply(0x100, 0x00)
 
 
 def test_unknown_commands_never_have_reply_bytes():

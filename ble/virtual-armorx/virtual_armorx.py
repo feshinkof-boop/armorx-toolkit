@@ -143,6 +143,11 @@ class ArmorXPeripheral:
             raise ValueError(f"config image must be 144 bytes, got {len(self.config)}")
         # pending A4 reassembly buffers, keyed by opcode
         self._frags: dict[int, dict[int, bytes]] = {}
+        # 0xD4 reply payload bytes. PROVEN STATIC layout (whole-frame indices 3 and 4 of the
+        # A5 06 D4 <gamepad_mode> <onboard_mode> <sum> frame); the VALUE DOMAIN is UNKNOWN, so
+        # these are chosen device state (CLI), exactly like --device-uuid / --zkm-version.
+        self.d4_gamepad_mode = args.d4_gamepad_mode & 0xFF
+        self.d4_onboard_mode = args.d4_onboard_mode & 0xFF
         self.ffe2: Characteristic | None = None
         self.unknown_logged: dict[int, int] = {}
 
@@ -269,6 +274,35 @@ class ArmorXPeripheral:
                 )
         elif op == 0x0E:
             await self._send(connection, frame.raw, "echo", "0E echoed verbatim")
+        elif op == 0xD4:
+            # STRUCTURE evidence-backed; payload VALUES are chosen device state
+            # (see results/reconciliation/d4-reconstruction.md §6).
+            reply = proto.build_d4_reply(self.d4_gamepad_mode, self.d4_onboard_mode)
+            parsed = proto.parse_d4_reply(reply).as_dict()
+            self.logs.jsonl(
+                "d4_reply",
+                request=frame.raw.hex(),
+                reply=reply.hex(),
+                gamepad_mode=parsed["gamepad_mode"],
+                onboard_mode=parsed["onboard_mode"],
+                checksum_ok=parsed["checksum_ok"],
+                layout={
+                    "index3": "gamepad_mode (手柄模式)",
+                    "index4": "onboard_mode (板载mode)",
+                    "index5": "checksum = sum(bytes 0..4) & 0xFF",
+                },
+                note=(
+                    "D4 reply structure PROVEN STATIC (2.22 0x89bcac / 2.23 0x8af690+0x8097cc / "
+                    "2.24 0x91a528+0x8a9824 / 4.0.8 0x8b3c84+0x826ecc); payload VALUE DOMAIN "
+                    "UNKNOWN, bytes are chosen device state"
+                ),
+            )
+            await self._send(
+                connection,
+                reply,
+                "input_model",
+                "D4 input-model reply A5 06 D4 <gamepad_mode> <onboard_mode> <sum>",
+            )
         else:
             await self._unknown(connection, frame, "no evidence-backed short reply")
 
@@ -534,6 +568,26 @@ def parse_args(argv=None):
     parser.add_argument("--battery-level", type=int, default=100)
     parser.add_argument("--config-file", default=None, help="override 144-byte config image")
     parser.add_argument("--ignore-config-crc", action="store_true")
+    parser.add_argument(
+        "--d4-gamepad-mode",
+        type=lambda v: int(v, 0),
+        default=0x00,
+        help=(
+            "0xD4 reply whole-frame index 3 = gamepad mode (手柄模式). Default 0x00 is a CHOSEN "
+            "value, not a researched constant: the frame layout is proven but the value domain "
+            "is UNKNOWN (only 6 is known to gate a getDpi follow-up). See "
+            "results/reconciliation/d4-reconstruction.md"
+        ),
+    )
+    parser.add_argument(
+        "--d4-onboard-mode",
+        type=lambda v: int(v, 0),
+        default=0x00,
+        help=(
+            "0xD4 reply whole-frame index 4 = onboard mode (板载mode). Default 0x00 is a CHOSEN "
+            "value, not a researched constant (value domain UNKNOWN)"
+        ),
+    )
     parser.add_argument("--app-version", default="4.0.8", help="app version under test")
     parser.add_argument(
         "--log-dir",
@@ -559,6 +613,8 @@ def main(argv=None) -> int:
             "firmware_revision": args.firmware_revision,
             "zkm_version": hex(args.zkm_version),
             "device_uuid": args.device_uuid,
+            "d4_gamepad_mode": hex(args.d4_gamepad_mode & 0xFF),
+            "d4_onboard_mode": hex(args.d4_onboard_mode & 0xFF),
             "config_bytes": 144,
         },
     )

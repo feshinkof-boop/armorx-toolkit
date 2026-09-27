@@ -288,6 +288,29 @@ async def run(args) -> int:
         )
         log("reply", raw=reply.hex() if reply else None, label="D7")
 
+        # 4b) input model / onboard config  A5 04 D4 7D
+        #     -> A5 06 D4 <gamepad_mode> <onboard_mode> <sum>
+        # Frame structure is PROVEN STATIC; the two payload bytes are chosen device
+        # state (peripheral --d4-gamepad-mode / --d4-onboard-mode).
+        while not queue.empty():
+            queue.get_nowait()
+        await send(proto.D4_REQUEST, label="D4 request")
+        reply = await _wait_for_notification(queue, args.reply_timeout)
+        expected = proto.build_d4_reply(args.expect_d4_gamepad_mode, args.expect_d4_onboard_mode)
+        results.add(
+            "reply_D4_input_model",
+            reply == expected,
+            f"got {reply.hex() if reply else None}, expected {expected.hex()}",
+        )
+        decoded = proto.parse_d4_reply(reply) if reply else None
+        log(
+            "reply",
+            label="D4",
+            raw=reply.hex() if reply else None,
+            gamepad_mode=decoded.gamepad_mode if decoded else None,
+            onboard_mode=decoded.onboard_mode if decoded else None,
+        )
+
         # 5) UNKNOWN-by-design: MTU query and firmware read must produce no bytes
         for label, frame in (
             ("E4_MTU", "A504E48D"),
@@ -326,6 +349,8 @@ def parse_args(argv=None):
     p.add_argument("--unknown-timeout", type=float, default=1.0)
     p.add_argument("--expect-zkm", type=lambda v: int(v, 0), default=0x30)
     p.add_argument("--expect-device-uuid", default="0001020304050607")
+    p.add_argument("--expect-d4-gamepad-mode", type=lambda v: int(v, 0), default=0x00)
+    p.add_argument("--expect-d4-onboard-mode", type=lambda v: int(v, 0), default=0x00)
     p.add_argument("--app-version", default="4.0.8")
     p.add_argument("--log-dir", default=None)
     p.add_argument("--session-id", default=None)

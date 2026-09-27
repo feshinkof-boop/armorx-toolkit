@@ -1,0 +1,133 @@
+{
+  "schema": "armorx-lab/d8-version-test-vectors/1",
+  "generated": "2026-09-27",
+  "note": "All vectors DERIVED from static reconstruction. No capture, no hardware. Framing is identical across versions: A4|len|D8|ordinal|seg|csum and A4|05|D8|nfrags+1|csum. Only the payload differs.",
+  "conventions": {
+    "crc": "CRC-16/MODBUS init 0xFFFF poly 0xA001 over payload[2:], stored BE",
+    "fragment_checksum": "sum(frame bytes before trailing byte)&0xFF",
+    "length_byte": "segLen+5 (== total frame length)",
+    "commit_length_byte": "0x05",
+    "commit_count": "nfrags+1"
+  },
+  "vectors": [
+    {
+      "version": "2.22.0901",
+      "format_family": "OLD 7-byte GamepadDefMap records",
+      "chunk": 15,
+      "derived_from": "static asm reconstruction (see d8-taxonomy.md); CRC recomputed in Python - DERIVED, NOT CAPTURED",
+      "encode_vector": {
+        "case": "1 step, 100 ms, key-bit0; runKey=46 (PROVEN default); repeatTime=200 (PROVEN default); isRepeat=0; att.type=0",
+        "step_record": "80 00 0C 00 00 00 01",
+        "header_bytes": "11 FB 00 11 00 2E 2E 00 00 C8",
+        "payload_len": 17,
+        "payload_hex": "11 FB 00 11 00 2E 2E 00 00 C8 80 00 0C 00 00 00 01",
+        "fragment_count": 2,
+        "wire_frames_hex": [
+          "A4 14 D8 01 11 FB 00 11 00 2E 2E 00 00 C8 80 00 0C 00 00 5E",
+          "A4 07 D8 02 00 01 86"
+        ]
+      },
+      "commit_frame_vector": {
+        "nfrags": 2,
+        "frame_hex": "A4 05 D8 03 84",
+        "length_byte": "0x05",
+        "opcode": "0xD8",
+        "count_byte": "0x03",
+        "checksum": "0x84",
+        "derived_from": "A4|05|D8|nfrags+1|csum per writeMacroConfig terminator"
+      }
+    },
+    {
+      "version": "2.23.0609",
+      "format_family": "OLD 7-byte GamepadDefMap records",
+      "chunk": 15,
+      "derived_from": "static asm reconstruction (see d8-taxonomy.md); CRC recomputed in Python - DERIVED, NOT CAPTURED",
+      "encode_vector": {
+        "case": "2 steps 200/400 ms, keys bit0/bit1; runKey=46; repeatTime=200",
+        "records": "80 00 19 00 00 00 01 | 80 00 32 00 00 00 02",
+        "header_bytes": "29 24 00 18 00 2E 2E 00 00 C8",
+        "payload_len": 24,
+        "payload_hex": "29 24 00 18 00 2E 2E 00 00 C8 80 00 19 00 00 00 01 80 00 32 00 00 00 02",
+        "fragment_count": 2,
+        "wire_frames_hex": [
+          "A4 14 D8 01 29 24 00 18 00 2E 2E 00 00 C8 80 00 19 00 00 B3",
+          "A4 0E D8 02 00 01 80 00 32 00 00 00 02 41"
+        ]
+      },
+      "commit_frame_vector": {
+        "nfrags": 2,
+        "frame_hex": "A4 05 D8 03 84",
+        "length_byte": "0x05",
+        "opcode": "0xD8",
+        "count_byte": "0x03",
+        "checksum": "0x84",
+        "derived_from": "A4|05|D8|nfrags+1|csum per writeMacroConfig terminator"
+      }
+    },
+    {
+      "version": "2.24.0919",
+      "format_family": "MODERN 10-byte TranscribeFrame",
+      "chunk": 15,
+      "derived_from": "static asm reconstruction (see d8-taxonomy.md); CRC recomputed in Python - DERIVED, NOT CAPTURED",
+      "encode_vector": {
+        "case": "step 500 ms key-id 1, then gap frame 100 ms (interval); runKey=23 (M1 per toolkit table, STRONG EVIDENCE); isRepeat=0; chunk via subpackageLength()-5 = 15 (subpkg 20)",
+        "frames": "E0 03 00 00 00 02 00 00 00 00 | C0 00 00 00 00 00 00 00 00 00",
+        "header_bytes": "97 58 00 1E 00 17 17 00 00 00",
+        "payload_len": 30,
+        "payload_hex": "97 58 00 1E 00 17 17 00 00 00 E0 03 00 00 00 02 00 00 00 00 C0 00 00 00 00 00 00 00 00 00",
+        "fragment_count": 2,
+        "wire_frames_hex": [
+          "A4 14 D8 01 97 58 00 1E 00 17 17 00 00 00 E0 03 00 00 00 AF",
+          "A4 14 D8 02 02 00 00 00 00 C0 00 00 00 00 00 00 00 00 00 54"
+        ]
+      },
+      "commit_frame_vector": {
+        "nfrags": 2,
+        "frame_hex": "A4 05 D8 03 84",
+        "length_byte": "0x05",
+        "opcode": "0xD8",
+        "count_byte": "0x03",
+        "checksum": "0x84",
+        "derived_from": "A4|05|D8|nfrags+1|csum per writeMacroConfig terminator"
+      }
+    },
+    {
+      "version": "4.0.8",
+      "format_family": "MODERN 10-byte TranscribeFrame",
+      "chunk": 15,
+      "derived_from": "static asm reconstruction (see d8-taxonomy.md); CRC recomputed in Python - DERIVED, NOT CAPTURED",
+      "encode_vector": {
+        "case": "single step, duration 32760 ms (12-bit max t8=0xFFF), key-id 24; runKey=23; shows byte0/byte1 nibble split",
+        "frame": "F0 FF 01 00 00 00 00 00 00 00",
+        "header_bytes": "02 FF 00 14 00 17 17 00 00 00",
+        "payload_len": 20,
+        "payload_hex": "02 FF 00 14 00 17 17 00 00 00 F0 FF 01 00 00 00 00 00 00 00",
+        "fragment_count": 2,
+        "wire_frames_hex": [
+          "A4 14 D8 01 02 FF 00 14 00 17 17 00 00 00 F0 FF 01 00 00 C4",
+          "A4 0A D8 02 00 00 00 00 00 88"
+        ]
+      },
+      "commit_frame_vector": {
+        "nfrags": 2,
+        "frame_hex": "A4 05 D8 03 84",
+        "length_byte": "0x05",
+        "opcode": "0xD8",
+        "count_byte": "0x03",
+        "checksum": "0x84",
+        "derived_from": "A4|05|D8|nfrags+1|csum per writeMacroConfig terminator"
+      }
+    }
+  ],
+  "chunk_variants": [
+    {
+      "note": "same 4.0.8 payload but subpackageLength()==72 -> chunk 67 -> ONE fragment",
+      "payload_hex": "9F 17 00 14 00 17 17 00 00 00 E0 03 00 00 00 02 00 00 00 00",
+      "chunk": 67,
+      "frames": [
+        "A4 19 D8 01 9F 17 00 14 00 17 17 00 00 00 E0 03 00 00 00 02 00 00 00 00 73"
+      ],
+      "commit": "A4 05 D8 02 83"
+    }
+  ]
+}

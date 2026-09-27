@@ -1,0 +1,71 @@
+{
+  "generated": "2026-09-27",
+  "pass": "C1-C3+E reconciliation: E2 / AB-family / FC-F6",
+  "evidence_labels": ["PROVEN STATIC", "STRONG EVIDENCE", "INFERRED", "UNKNOWN", "CONTRADICTED"],
+  "verdict_vocabulary": ["PRESENT_SEND", "PRESENT_REPLY", "PRESENT_UNUSED", "ABSENT", "UNKNOWN"],
+  "trees": {
+    "2.22.0901": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out",
+    "2.23.0609": "/home/salamanka/armorx/re/blutter_out",
+    "2.24.0919": "/home/salamanka/armorx/re/v224/blutter_out",
+    "4.0.8": "/home/salamanka/armorx-re/mygt408/blutter_out"
+  },
+  "note": "Verdicts replace the UNKNOWN cells in results/version-diff/2.22-vs-2.23-vs-2.24-vs-4.0.8.json. ABSENT backed by exhaustive negative search; see results/reconciliation/e2-ab-2.23-2.24.md for the verbatim search list.",
+  "opcodes": {
+    "E2": {
+      "family": "A5",
+      "role_4.0.8": "readFirmware - firmware/GetMode read",
+      "frame_4.0.8": "A5 04 E2 8B",
+      "builder_4.0.8": "BluetoothModel::readFirmware @0x8b6860 (units/ble/bluetooth_mode.dart)",
+      "checksum_note": "0x8B is derived: (0xA5+0x04+0xE2)&0xFF = 395&0xFF = 0x8B; not an independent constant",
+      "per_version": {
+        "2.22.0901": {"verdict": "ABSENT", "label": "PROVEN STATIC", "evidence": "prior pass: results/static/2.22.0901/e2-verdict.md (Smi #0x1c4 only in syncfusion/intl; no builder, no dispatcher compare)"},
+        "2.23.0609": {"verdict": "ABSENT", "label": "PROVEN STATIC", "evidence": "rg '#0x1c4' asm/: 28 hits, 8 in asm/moojiang all in generated/intl/*; 0 outside intl; mov #0xe2 0 outside intl; cmp #0xe2 0; pp.txt 226=0 and 452=0; no missing-firmware builder; getZKMVer emits 0x0B not E2"},
+        "2.24.0919": {"verdict": "ABSENT", "label": "PROVEN STATIC", "evidence": "rg '#0x1c4' asm/: 29 hits, 9 in asm/moojiang all in generated/intl/*; 0 outside intl; mov #0xe2 0 outside intl; cmp #0xe2 0; pp.txt 226=0 and 452=0; A5 04 E2 byte scan of libapp.so and classes.dex = 0"},
+        "4.0.8": {"verdict": "PRESENT_SEND", "label": "PROVEN STATIC", "evidence": "A5 04 E2 8B builder @0x8b6860; E2 branch in ARMOR-X Pro response dispatcher @0x8b6b3c (old-vs-mygt-4.0.8.md)"}
+      },
+      "misleading_name_check": "getZKMVer (0x0B, A5 04 0B B4) is the firmware-version query in 2.22/2.23/2.24; E2 is never aliased to 0x0B. The string 'firmwareVer=' (2.23 rainbow_root.dart:2150) is a UI label, not a builder."
+    },
+    "AB": {
+      "family": "AB (motion/gyro)",
+      "role_4.0.8": "motion/gyro DPI",
+      "frame_4.0.8": "AB 07 05 25 <u16 LE lo> <u16 LE hi> <cks> (7 bytes)",
+      "builder_4.0.8": "writeMotionDpiConfig @0x946158 (units/gamepadset.dart)",
+      "readers_4.0.8": ["getMotionList @0xace94c", "getMotionDpi @0xacea60"],
+      "reply_filter_4.0.8": "cmp w0,#0x156 @rainbow_more.dart:0x8b482c",
+      "per_version": {
+        "2.22.0901": {"verdict": "ABSENT", "label": "PROVEN STATIC", "evidence": "no #0x156 immediate anywhere; motion/gyro block travels inside the 144-byte config (results/static/2.22.0901/command-index.md sec 1)"},
+        "2.23.0609": {"verdict": "ABSENT", "label": "PROVEN STATIC", "evidence": "rg '#0x156' asm/: 38 hits, 8 in asm/moojiang all generated/intl/*; 0 outside intl; mov #0xab 0 whole tree; cmp #0xab/#0x156 moojiang 0; pp 342=0 (171 is a LogicalKeyboardKey map key); no getMotion*/writeMotionDpiConfig symbols; config_motion.dart writes via ::writeDeviceConfig (A4/0xD7)"},
+        "2.24.0919": {"verdict": "ABSENT", "label": "PROVEN STATIC", "evidence": "rg '#0x156' asm/: 35 hits, 9 in asm/moojiang all generated/intl/*; 0 outside intl; mov #0xab only in syncfusion color.dart (third party); cmp #0xab/#0x156 moojiang 0; pp 342=0; AB 07 05 25 byte scan = 0; no motion-DPI symbols"},
+        "4.0.8": {"verdict": "PRESENT_SEND", "label": "PROVEN STATIC", "evidence": "writeMotionDpiConfig @0x946158 builds AB 07 05 25 <u16 LE> <cks>; also appears as a response filter cmp w0,#0x156"}
+      },
+      "naming_note": "2.23/2.24 contain motion/gyro/sensor/aim naming (sensorMode/sensorDir/SensorCurve/config_motion*.dart) but every write path is config-resident (writeDeviceConfig A4/0xD7); no AB frame builder."
+    },
+    "FC": {
+      "family": "A5",
+      "role": "DPI write (normal)",
+      "per_version": {
+        "2.22.0901": {"verdict": "ABSENT", "label": "PROVEN STATIC"},
+        "2.23.0609": {"verdict": "PRESENT_SEND", "label": "PROVEN STATIC", "frame": "A5 05 FC <dpi&0x0F> <cks>", "builder": "writeDpiConfig @0x7fdee4", "gate": "none (unconditional)"},
+        "2.24.0919": {"verdict": "PRESENT_SEND", "label": "PROVEN STATIC", "frame": "A5 05 FC <dpi&0x0F> <cks> (default)", "builder": "writeDpiConfig @0x894000"},
+        "4.0.8": {"verdict": "PRESENT_SEND", "label": "PROVEN STATIC", "frame": "A5 05 FC <dpi&0x0F> <cks> (default)", "builder": "writeDpiConfig @0x946750"}
+      }
+    },
+    "F6": {
+      "family": "A5",
+      "role": "legacy DPI write (substitutes FC opcode slot)",
+      "threshold": {"value": "0x35", "decimal": 53, "direction": "F6 when zkmVersion >= 0x35; FC when < 0x35", "comparison": "cmp x1,#0x35 ; b.lt <skip F6 store>", "smi_note": "operand is untagged (LoadInt32Instr / sbfx x1,x0,#1,#0x1f) so the immediate is the plain 0x35, not the tagged 0x6a; both encode 53"},
+      "per_version": {
+        "2.22.0901": {"verdict": "ABSENT", "label": "PROVEN STATIC"},
+        "2.23.0609": {"verdict": "ABSENT", "label": "PROVEN STATIC", "evidence": "0 mov #0x1ec hits in asm/moojiang; writeDpiConfig @0x7fdee4 has no device/version branch"},
+        "2.24.0919": {"verdict": "PRESENT_SEND", "label": "PROVEN STATIC", "builder": "writeDpiConfig @0x894000 (F6 store @0x894100)", "version_static": "0x102c (zkmVersion, set from 0B reply)", "device_gate": ["devRainbow2Pro(3)", "devC2SL(5)"], "device_objects": ["Obj!Device@9ef941", "Obj!Device@9ef981"], "frame": "A5 05 F6 <dpi&0x0F> <cks>"},
+        "4.0.8": {"verdict": "PRESENT_SEND", "label": "PROVEN STATIC", "builder": "writeDpiConfig @0x946750 (F6 store @0x946850)", "version_static": "0xb6c", "device_gate": ["devRainbow2Pro(3)", "devRainbow3(4)", "devGale2(0xb)", "devC2SL(7)"], "device_objects": ["Obj!Device@b2ee81", "Obj!Device@b2edc1", "Obj!Device@b2ede1", "Obj!Device@b2eee1"]}
+      }
+    }
+  },
+  "opcode_presence_timeline": {
+    "2.22.0901": [],
+    "2.23.0609": ["FC"],
+    "2.24.0919": ["FC", "F6"],
+    "4.0.8": ["FC", "F6", "AB"]
+  }
+}

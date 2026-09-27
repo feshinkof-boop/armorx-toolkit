@@ -152,3 +152,102 @@ $ awk 'NR>=477 && NR<=580 && (/mov  *x0, #0x/ || /cmp  *x2, #/ || /b\./ || /ret/
   new-format payload (the imported note was used as-is and is *not* re-verified here).
 * The device-id → `subpackageLength()` value mapping (branch ranges were read for 4.0.8's shape but
   not translated into a device-name table).
+---
+
+## 2026-09-27 correction (Parts C4–C6 pass) — commit byte, ordinal byte, dispatcher offsets
+
+This pass re-read all four trees at instruction level (`writeMacroConfig` bodies, `subpackageLength`
+bodies, the A4 reassemblers). Four statements above are now contradicted. Full evidence in
+`results/reconciliation/d8-taxonomy.md`; machine-readable in `d8-taxonomy.json`; regression-tested
+by `tests/test_d8_versions.py` (21 tests, all passing). Nothing here was hardware-verified.
+
+### C-1 — the D8 commit/terminator length byte is `0x05`, not `0x0A` (ALL versions)
+* **Old claim:** row 92 "terminator / commit … 4.0.8 'commit byte 0x0A' (imported note)"; §"Not
+  done" implied the 4.0.8 note was used as-is.
+* **New evidence:** 4.0.8 `0x85aba8: mov x16, #0xa` (Blutter annotation `r16 = 10`) stores into the
+  *same* `List<int>` (TypeArguments `<int>` @0x85a750) that stores the literal bytes `0xA4` as
+  `0x85a748: mov x16, #0x148` and `0xD8` as `0x85a8f8: mov x16, #0x1b0`. Both of those immediates are
+  exactly `2 × byte`, so this list holds **tagged Smis** and `#0xa` = `2 × 5` → Dart int **5** →
+  wire byte **`0x05`**. Same at 2.24 `0x80012c: mov x17, #0xa` (siblings `0x800060 #0x148`,
+  `0x800188 #0x1b0`) and at 2.22 `0x79eb7c: mov x17, #0xa` (already correctly read as 5 in this doc).
+  The commit frame carries an empty segment, so the length byte is `segLen + 5` at `segLen = 0` = 5 —
+  the compiler constant-folded it; 2.22 emits the computed form. Sibling-immediate evidence +
+  arithmetic form the two required anchors.
+* **Corrected interpretation:** commit frame is `A4 05 D8 <nfrags+1> <csum>` in **every** version.
+  The "0x0A" was a raw-immediate misread (the very failure mode flagged by the project-wide audit).
+  It lives in `baselines/imported-research/d8-macro.md` §3.3 → `d8-test-vectors.json`
+  (`"A4 0A D8 03 89"`) → this doc's line 92. The toolkit helper
+  `automation/scripts/armorx_lab/frames.py::build_d8_terminator()` also encodes `A4 0A D8 …` and is
+  wrong (left uncommitted per task rules).
+  A **genuine** on-wire `0x0A` exists only as the *ordinal of the 10th fragment* of a 144-byte `D6`
+  readback (`A4 0E D6 0A …`, live anchor) — different field, direction and opcode family.
+* **Affected versions:** 2.22, 2.23, 2.24, 4.0.8.
+
+### C-2 — the fragment ordinal byte at frame offset 3 exists in the modern format too
+* **Old claim:** `baselines/imported-research/d8-macro.md` §3.3 — "data fragments themselves carry
+  **no** index/ordinal byte"; this doc's row 91 (ordinal "UNKNOWN" for 2.24/4.0.8).
+* **New evidence:** 4.0.8 `writeMacroConfig` appends, in order, `0xA4` (@0x85a748),
+  `payload+5` (@0x85a820 `sub` → @0x85a824 `add #5` → BoxInt64 @0x85a87c), `0xD8` (@0x85a8f8) and
+  **`i+1`** (@0x85a7e8 `add x9,x6,#1` → `[fp,-0x50]` → BoxInt64 @0x85a938). 2.24 is identical
+  (@0x7ffc54 / @0x7ffd34 / @0x7ffe34 / @0x7ffcf4+0x7ffe88). The `len == payload + 5` arithmetic only
+  closes with the ordinal present (3 header + 1 ordinal + payload + 1 csum). Same in 2.22
+  (@0x79e658/0x79e65c, @0x79e778, @0x79e7a8+0x79e814) and 2.23 (@0x79823c, @0x79833c, @0x798310+0x798394).
+* **Corrected interpretation:** the A4 fragmentation framing is **identical across all four
+  versions** — `A4 | (segLen+5) | D8 | (i+1) | seg | csum`, length byte == total frame length, plus
+  `A4 05 D8 <nfrags+1> <csum>`. Old (2.22/2.23) and modern (2.24/4.0.8) differ **only inside the D8
+  payload** (7-byte `GamepadDefMap` records vs 10-byte `TranscribeFrame` frames), in header byte 4
+  (`GamepadAtt.type` vs the constant `0x00`), and in the chunk source (literal 15 vs
+  `subpackageLength()-5`). The imported 19-byte "no-ordinal" 4.0.8 wire frames are wrong; correct
+  frames are 20 bytes for a full chunk.
+* **Affected versions:** 2.24, 4.0.8 (and confirms 2.22/2.23).
+
+### C-3 — the 2.22/2.24/4.0.8 A4 reassembler indices are tagged: opcode at byte 2, ordinal at byte 3
+* **Old claim:** `results/static/2.22.0901/d8-macro.md` §2 — "`data[4] == 0xD6`", "`data[6] == 2`",
+  `sublist(4, 38)`; this doc's row 107 ("`data[4]=opcode`, `data[6]=ordinal`").
+* **New evidence:** in 4.0.8 `widgets/general/configs_config.dart` the accessor immediates
+  `0xac1e4c mov x16,#12` and `0xac1e80 mov x16,#14` feed `lsl x2,x1,#8` / `orr` to build an adjacent
+  big-endian 16-bit value → they address **bytes 6 and 7**, i.e. Dart indices 6 and 7 (12/2, 14/2).
+  Likewise `frame_config_macros.dart::parsingData` uses `#30`/`#32` for the adjacent **bytes 15/16**.
+  So the index argument is a tagged Smi and the opcode access `#4` is **byte 2**, the dispatch/ordinal
+  access `#6` is **byte 3** — exactly the live-anchor layout `A4 14 D6 <ordinal> …`.
+  Note the `replaceRange` offset ladder in 2.22 (`#0xf`, `#0x2d` …) contains **odd** immediates,
+  which cannot be tagged, so the reassembly **stride stays 15 bytes** (`0,15,30,45,60,75`) — the
+  stride claim above is unaffected.
+* **Corrected interpretation:** opcode byte 2, ordinal/dispatch byte 3, 15-byte output strides in
+  2.22/2.23 and `subpackageLength()-5` strides in 2.24/4.0.8 (4.0.8 `0xac1eec`/`0xac1ef0`).
+* **Affected versions:** 2.22 (`d8-macro.md` §2), 2.24, 4.0.8; 2.23 unread on this point.
+
+### C-4 — `"最大步数"` is printed by the caller, not inside `parsingData`
+* **Old claim:** `baselines/imported-research/d8-macro.md` §5.2 — the `parsingData` routine "prints
+  `最大步数$steps`".
+* **New evidence:** the print is at 4.0.8 `0xac3568` / 2.24 `0x915bf4`, in the notification closure
+  that **calls** `parsingData` (4.0.8 `0xac35ac`). Inside `parsingData` the reads are
+  `list[3]` vs `field_23 - 2` (limit check @0xac3620-0xac3638) and a **little-endian u16 at bytes
+  15–16 × 8 ms** (`0xac3744-0xac375c`) stamped into the last frame's `time` (`0xac377c`), then
+  `changeTranscribeFrameToDefMacro` (@0xac37a4). The `/10 → steps ≤ 256` formula in the old doc was
+  not reproduced here (CONTRADICTED as a description of this routine; the offsets 15/16 are PROVEN,
+  their meaning PARTIAL).
+* **Affected versions:** 2.24, 4.0.8.
+
+### C-5 — D8 receive/readback status, per version (new, replaces the UNKNOWN cells)
+* 2.22.0901 / 2.23.0609: generic A4/D6 reassembler PRESENT (2.22 `configs_config.dart:3108` closure
+  @0x8a6a04; 2.23 `parsingData` @0x8098cc) but **D8 macro readback ABSENT** — no `0xD8`/`216`
+  comparison exists anywhere under `widgets/` (recursive grep empty in both trees). Macro state comes
+  from the server JSON (`MacroRow.fromJson`). The literal `216` in 2.22 is a `GamepadParam30`
+  `sublist(70,216)` bound, not an opcode test.
+* 2.24.0919 / 4.0.8: **PRESENT / PARTIAL**. Notification closure tests `list[2]` against
+  `0xFC` (2.24 `0x915a68` / 4.0.8 `0xac33e0`, → exit), `0xD8` (2.24 `0x915a90` / 4.0.8 `0xac3408` →
+  `"写入结果"` + `printHex`) and a third opcode `0xD3` (2.24 `0x915ad8` / 4.0.8 `0xac3448` → reads
+  `list[7]`, `list[8]`). Chain: notification → `parsingData` (2.24 0x915c38 / 4.0.8 0xac35ac) →
+  `TranscribeFrame.fromConfigData` (2.24 0x80163c / 4.0.8 0x85e32c) →
+  `changeTranscribeFrameToDefMacro`. Readback offsets read: byte 2 (opcode), byte 3 (compare vs
+  `field_23-2`), bytes **15–16** (u16 LE ×8 ms). No dedicated "read macro" command exists in any
+  version — the macro readback rides the D6 config blob (2.22/2.23: no macro fields, so effectively
+  none) or the D8/D3 notification.
+
+### Still open after this pass
+* 2.23's fragment ordinal value is STRONG EVIDENCE only (2.22/2.24/4.0.8 PROVEN).
+* 2.24 vs 4.0.8 `subpackageLength()` device-id branches are **not** identical (2.24 has no `9/10`
+  arms); the ARMOR-X Pro's `field_7` id is still UNKNOWN statically — the chunk in use is observable
+  at runtime from the app's `包数->N` log line.
+* `repeatTime` unit (ms assumed): UNKNOWN in all four.

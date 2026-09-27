@@ -61,3 +61,50 @@ send any of them in this pass:
 * The only protocol incompatibility that actually **broke** the app was not an opcode at
   all: it was the **characteristic payload length of 2A26** (2.22's parser throws
   `RangeError` on a 2-byte value; `2741` (4 bytes) works). See `dynamic-run.md` §5.
+
+---
+
+## E. 0xD4 status change — 2026-09-27 (four-build reconstruction)
+
+`0xD4` is no longer UNKNOWN-by-design. The receive/parser side was reconstructed from the
+Blutter disassembly of all four builds; the full trace lives in
+`results/reconciliation/d4-reconstruction.md` (+ `.json`).
+
+| version | D4 sender (builder) | D4 receiver evidence | frame the peripheral now answers |
+|---|---|---|---|
+| 2.22.0901 | `getOnBoardConfig` closure `@0x89adac` | `0x89bcac` reads whole-frame index 4 (arg `#8`, halved) → `field_1f` | `A5 04 D4 7D` → `A5 06 D4 <gamepad_mode> <onboard_mode> <sum>` |
+| 2.23.0609 | `getInputModel` `@0x8afa98` | `0x8af690` reads index 3 == 6 → `getDpi()`; `0x8097cc` reads index 4 | same request, same reply |
+| 2.24.0919 | `getOnBoardConfig` `@0x91b988` | `0x91a528` index 3 == 6 → `getDpi()`; `0x8a9824` prints `"板载mode = "` + index 4 | same request, same reply |
+| 4.0.8 | `BluetoothModel::getInputModel` `@0xa84258` | `0x8b3c84` reads index 3 (**and** index 4 == 3); `0x826ecc` prints `"板载mode = "` + index 4 | same request, same reply |
+
+**What changed in the peripheral**
+
+* `armorx_central_client.py` / `selftest.py` now exercise `A5 04 D4 7D` and assert the reply
+  (selftest `reply_D4_input_model`).
+* `armorx_protocol.py`: `D4_REQUEST`, `build_d4_reply()`, `parse_d4_reply()` (structured:
+  `gamepad_mode`, `onboard_mode`, indices, `checksum_ok`), `REPLY_TABLE[0xD4]` =
+  EVIDENCE-BACKED (structure).
+* `virtual_armorx.py`: the `0xD4` branch logs a structured `d4_reply` event and notifies
+  the frame; raw TX/RX logging unchanged. New options `--d4-gamepad-mode` /
+  `--d4-onboard-mode`.
+* Unit tests added for: the byte-exact request, the reply layout/checksum, four test
+  vectors, a bad checksum, a truncated reply, and a wrong opcode. `pytest` 29 passed;
+  `selftest.py` 12/12 + 15/15 passed.
+
+**What is still NOT proven (and therefore not fabricated)**
+
+The reply **structure** is proven; the **value domain of the two payload bytes is
+UNKNOWN**. Byte 3 (`手柄模式`/gamepad mode) is only known to be distinguished at value `6`
+(it gates a `getDpi()` follow-up); byte 4 (`板载mode`/onboard mode) is never compared to
+anything except the constant `3` in 4.0.8's rainbow_more. The peripheral therefore sends
+CLI-chosen values (defaults `0x00`/`0x00`), documented as chosen device state in the same
+way as `--device-uuid` / `--zkm-version` — **no device value is claimed as researched**.
+The exact real reply total length (≥ 6 proven) is likewise still UNKNOWN, as is whether the
+app verifies an inbound D4 checksum.
+
+**Effect on the 2.22.0901 live outcome recorded above (§B):** the app previously continued
+to `0xD6` with no reply and tolerated it. A reply now exists, but because its payload
+values are chosen rather than device-authentic, §B's conclusion stands for 2.22.0901 until
+a run with `--d4-gamepad-mode 0x06` (or a captured real frame) is done. No live run was
+performed in this pass (static + peripheral edits only); no real hardware was touched.
+

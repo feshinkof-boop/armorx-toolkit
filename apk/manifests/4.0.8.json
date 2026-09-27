@@ -417,5 +417,538 @@
   "Dart namespace still package:moojiang/"
  ],
  "manifest_version": 1,
- "generated_from": "local originals under /home/salamanka/armorx-lab/apk/original/ (no download)"
+ "generated_from": "local originals under /home/salamanka/armorx-lab/apk/original/ (no download)",
+ "reconciliation": {
+  "d8": {
+   "source": "results/reconciliation/d8-taxonomy.json",
+   "data": {
+    "dart": "3.12.2",
+    "format_family": "MODERN (TranscribeFrame 10-byte frames)",
+    "record_size": 10,
+    "payload_length": "N = 10 + 10*n",
+    "payload_length_proof": "applicationFrameMacro @0x85c8c0: 0x85cf5c mov x16,#0xa; 0x85cf60 mul; 0x85cf64 add x4,x0,#0xa",
+    "header": [
+     {
+      "off": 0,
+      "width": 2,
+      "field": "crc16",
+      "endian": "BE",
+      "asm": "0x85d4bc/0x85d594/0x85d5b4"
+     },
+     {
+      "off": 2,
+      "width": 2,
+      "field": "length N",
+      "endian": "BE",
+      "asm": "0x85d200/0x85d224"
+     },
+     {
+      "off": 4,
+      "width": 1,
+      "field": "0x00 constant",
+      "asm": "0x85d238"
+     },
+     {
+      "off": 5,
+      "width": 1,
+      "field": "trigger key",
+      "asm": "0x85d254"
+     },
+     {
+      "off": 6,
+      "width": 1,
+      "field": "runKey (0->5)",
+      "asm": "0x85d314/0x85d2d0"
+     },
+     {
+      "off": 7,
+      "width": 1,
+      "field": "isRepeat",
+      "asm": "0x85d3a4"
+     },
+     {
+      "off": 8,
+      "width": 2,
+      "field": "repeatTime",
+      "endian": "BE",
+      "asm": "0x85d3f4/0x85d410"
+     }
+    ],
+    "step_frame": {
+     "layout": "same 10-byte TranscribeFrame as 2.24 (byte-identical)",
+     "asm": "toFrameCmd @0x85e5xx; replaceRange(10+10i,20+10i) @0x85d480"
+    },
+    "chunk": {
+     "source": "subpackageLength()-5",
+     "values": [
+      15,
+      43,
+      67
+     ],
+     "asm": "writeMacroConfig @0x85a670: 0x85a6f0 bl 0x819190; 0x85a6f4 sub x1,x0,#5 (used as float divisor 0x85a704); 0x85a72c/0x85a730 sub x3,x0,#5",
+     "label": "PROVEN STATIC + anchored live (20-byte D6 frames)"
+    },
+    "subpackageLength": {
+     "present": true,
+     "addr": "0x819190",
+     "file": "define.dart:316",
+     "returns": [
+      20,
+      72,
+      48
+     ],
+     "asm": "0x819238 mov x0,#0x14; 0x819264 #0x48; 0x819274 #0x30",
+     "device_id_branches": "id 1,2,3,7..10 -> 20; id 4..7 -> 72; else -> 48"
+    },
+    "fragment_build": {
+     "A4": "0x85a748 mov x16,#0x148",
+     "len=payload+5": "0x85a820 sub x1,x10,x8; 0x85a824 add x10,x1,#5; boxed 0x85a87c",
+     "D8": "0x85a8f8 mov x16,#0x1b0",
+     "ordinal=i+1": "0x85a7e8 add x9,x6,#1 stored [fp,-0x50]; boxed+stored 0x85a938",
+     "label": "PROVEN STATIC"
+    },
+    "commit_frame": {
+     "bytes": "A4 05 D8 <nfrags+1> <csum>",
+     "length_byte": "0x05",
+     "asm": "0x85aaf8 mov x16,#0x148 (=A4); 0x85aba8 mov x16,#0xa (=Dart 5); 0x85abf0 (=D8); 0x85abf8 add x5,x2,#1; appended 0x85ac3c"
+    },
+    "literal_0x0a_byte_in_fragmentation": false,
+    "receive": {
+     "generic_a4_reassembler": {
+      "site": "widgets/general/configs_config.dart @0xac1de8 cmp #0x148 / @0xac1e10 cmp #0x1ac",
+      "adjacent_byte_proof": "0xac1e4c imm #12 -> byte 6 ; 0xac1e80 imm #14 -> byte 7 (indices are tagged Smis)",
+      "replaceRange": "0xac1fc4/0xac208c",
+      "stride": "subpackageLength()-5 @0xac1eec/0xac1ef0",
+      "label": "PROVEN STATIC"
+     },
+     "d8_readback": {
+      "status": "PRESENT_PARTIAL",
+      "handler": "frame_config_macros.dart closure 0xac33e0(#0x1f8=0xFC) / 0xac3408(#0x1b0=0xD8 -> \u5199\u5165\u7ed3\u679c @0xac3410 + printHex @0xac3420) / 0xac3448(#0x1a6=0xD3 -> list[7],list[8])",
+      "parsingData": "0xac35ac",
+      "fromConfigData": "TranscribeFrame.fromConfigData @0x85e32c",
+      "maxSteps_print": "0xac3568 (in caller, not in parsingData)"
+     },
+     "readback_offsets": {
+      "opcode": 2,
+      "compare": 3,
+      "u16_le_pair": [
+       15,
+       16
+      ],
+      "u16_use": "val = LE(data[15],data[16]); val <<= 3 (x8 ms) -> last frame field_1b",
+      "asm": "0xac3744-0xac375c, 0xac377c"
+     }
+    }
+   }
+  },
+  "d4": {
+   "source": "results/reconciliation/d4-reconstruction.json",
+   "data": {
+    "dart": "3.12.2",
+    "blutter_tree": "/home/salamanka/armorx-re/mygt408/blutter_out",
+    "function_name": "getInputModel",
+    "sender": {
+     "label": "PROVEN STATIC",
+     "function": "BluetoothModel::getInputModel",
+     "address": "0xa84258",
+     "file": "asm/moojiang/units/ble/bluetooth_mode.dart",
+     "frame_bytes": "A5 04 D4 7D",
+     "frame_derivation": [
+      "0xa84288 AllocateArray(size #8 = Dart 4) - halved",
+      "idx0: 0xa84290 mov x16,#0x14a -> 0xA5 (halved)",
+      "idx1: 0xa84298 mov x16,#8 -> 0x04 (halved)",
+      "idx2: 0xa842a0 mov x16,#0x1a8 -> 0xD4 (halved)",
+      "idx3: 0xa842a8 stur wzr = 0 placeholder (raw)",
+      "0xa842d4 bl BluetoothModel::getCheckSum @0x80fbbc; 0xa84318 ArrayStore list[3] = 0x7D",
+      "0xa84340 bl BluetoothModel::write @0x80dd28"
+     ],
+     "caller": "_RainbowMoreWidget closure @0xace4b0 (0xace58c) and _RainbowDeviceConfig1sState closure @0xa84160 (0xa841dc)",
+     "device_guard": "rainbow_more caller: curDevice must be one of devRainbow2Pro (Device@b2ee81), devRainbow3 (Device@b2edc1), devGale2 (Device@b2ede1) - 0xace50c..0xace538 (b.ne -> 0xace618 skips). devArmorX is Device@b2eec1 and is NOT in that set. rainbow_tab_config_1s caller: none observed",
+     "firmware_guard": "none observed",
+     "startup_path": "page-init/polling path (Future.delayed loop in both callers)"
+    },
+    "receivers": [
+     {
+      "label": "PROVEN STATIC",
+      "function": "_RainbowMoreWidget::subscribeCharacteristic stream-listener closure",
+      "address": "0x8b5724",
+      "file": "asm/moojiang/widgets/rainbow/rainbow_more.dart",
+      "dispatch": [
+       "0x8b3bd4 cmp x1,#0xd4 (raw)",
+       "0x8b3bdc cmp x1,#0x1a (raw);0x8b3be4 cmp w0,#0x34 (Smi -> 0x1A)",
+       "0x8b3c84 cmp x1,#0xd4 (raw);b.lt -> D4..0xE1 branch"
+      ],
+      "d4_branch": "0x8b3c84-0x8b3dd8",
+      "extraction": "data[3] (0x8b3cc0 and 0x8b3d2c r16=#6 -> index 3, halved) AND data[4] (0x8b3d74 r16=#8 -> index 4, halved)",
+      "length_assumption": "none",
+      "endianness": "single byte each",
+      "enum_bitfield": "data[3] cmp w0,#0xc (Smi -> 6); data[4] cmp w0,#6 (Smi -> 3)",
+      "object_updated": "obj.field_1b = (data[3]==6) at 0x8b3d54; obj.field_1f = (data[4]==3) at 0x8b3d9c",
+      "follow_up_command": "BluetoothModel::getDpi when data[3]==6 (0x8b3dd4 region)",
+      "notes": [
+       "prints \"\u624b\u67c4\u6a21\u5f0f->\" + data[3] at 0x8b3ca8",
+       "EXTENDED vs 2.24: also reads index 4"
+      ]
+     },
+     {
+      "label": "PROVEN STATIC",
+      "function": "_RainbowDeviceConfig1sState::subscribeCharacteristic stream-listener closure",
+      "address": "0x8266a4",
+      "file": "asm/moojiang/widgets/rainbow/rainbow_tab_config_1s.dart",
+      "dispatch": [
+       "0x826d84 cmp x1,#0xd4 (raw);b.gt -> A4/D7 path 0x826f78",
+       "0x826d8c cmp x1,#0xe (raw);b.gt -> 0x826ec8",
+       "0x826ecc cmp x1,#0xd4 (raw);b.lt -> exactly 0xD4"
+      ],
+      "d4_branch": "0x826ecc-0x826f74",
+      "extraction": "data[4] (0x826f00 and 0x826f5c r16=#8, halved -> index 4)",
+      "length_assumption": "none",
+      "endianness": "single byte",
+      "enum_bitfield": "none observed",
+      "object_updated": "none observed - the second read at 0x826f5c is followed only by a branch back to 0x827020 (no StoreField emitted)",
+      "follow_up_command": "none",
+      "notes": [
+       "prints the string literal \"\u677f\u8f7dmode = \" + data[4] at 0x826ee8"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "e2": {
+  "verdict": "PRESENT_SEND",
+  "evidence": "A5 04 E2 8B builder @0x8b6860; E2 branch in ARMOR-X Pro response dispatcher @0x8b6b3c (old-vs-mygt-4.0.8.md)",
+  "source": "results/reconciliation/e2-ab-summary.json"
+ },
+ "ab_family": {
+  "verdict": "PRESENT_SEND",
+  "evidence": "writeMotionDpiConfig @0x946158 builds AB 07 05 25 <u16 LE> <cks>; also appears as a response filter cmp w0,#0x156",
+  "source": "results/reconciliation/e2-ab-summary.json"
+ },
+ "fc": {
+  "verdict": "PRESENT_SEND",
+  "evidence": null,
+  "source": "results/reconciliation/e2-ab-summary.json"
+ },
+ "f6": {
+  "verdict": "PRESENT_SEND",
+  "evidence": null,
+  "source": "results/reconciliation/e2-ab-summary.json"
+ },
+ "dpi_timeline": [
+  "FC",
+  "F6",
+  "AB"
+ ],
+ "d8_format": {
+  "format_family": "MODERN (TranscribeFrame 10-byte frames)",
+  "record_size": 10,
+  "payload_length": "N = 10 + 10*n",
+  "chunk_rule": {
+   "source": "subpackageLength()-5",
+   "values": [
+    15,
+    43,
+    67
+   ],
+   "asm": "writeMacroConfig @0x85a670: 0x85a6f0 bl 0x819190; 0x85a6f4 sub x1,x0,#5 (used as float divisor 0x85a704); 0x85a72c/0x85a730 sub x3,x0,#5",
+   "label": "PROVEN STATIC + anchored live (20-byte D6 frames)"
+  },
+  "defaults": null,
+  "source": "results/reconciliation/d8-taxonomy.json"
+ },
+ "d8_commit_frame": {
+  "bytes": "A4 05 D8 <nfrags+1> <csum>",
+  "length_byte": "0x05",
+  "asm": "0x85aaf8 mov x16,#0x148 (=A4); 0x85aba8 mov x16,#0xa (=Dart 5); 0x85abf0 (=D8); 0x85abf8 add x5,x2,#1; appended 0x85ac3c"
+ },
+ "d8_readback": {
+  "generic_a4_reassembler": {
+   "site": "widgets/general/configs_config.dart @0xac1de8 cmp #0x148 / @0xac1e10 cmp #0x1ac",
+   "adjacent_byte_proof": "0xac1e4c imm #12 -> byte 6 ; 0xac1e80 imm #14 -> byte 7 (indices are tagged Smis)",
+   "replaceRange": "0xac1fc4/0xac208c",
+   "stride": "subpackageLength()-5 @0xac1eec/0xac1ef0",
+   "label": "PROVEN STATIC"
+  },
+  "d8_readback": {
+   "status": "PRESENT_PARTIAL",
+   "handler": "frame_config_macros.dart closure 0xac33e0(#0x1f8=0xFC) / 0xac3408(#0x1b0=0xD8 -> \u5199\u5165\u7ed3\u679c @0xac3410 + printHex @0xac3420) / 0xac3448(#0x1a6=0xD3 -> list[7],list[8])",
+   "parsingData": "0xac35ac",
+   "fromConfigData": "TranscribeFrame.fromConfigData @0x85e32c",
+   "maxSteps_print": "0xac3568 (in caller, not in parsingData)"
+  },
+  "readback_offsets": {
+   "opcode": 2,
+   "compare": 3,
+   "u16_le_pair": [
+    15,
+    16
+   ],
+   "u16_use": "val = LE(data[15],data[16]); val <<= 3 (x8 ms) -> last frame field_1b",
+   "asm": "0xac3744-0xac375c, 0xac377c"
+  }
+ },
+ "d8_zero_x0a": {
+  "verdict": "0x0A is NOT a valid D8 commit byte in any version; correct byte is 0x05",
+  "label": "CONTRADICTED (all versions)",
+  "origin": {
+   "doc": "baselines/imported-research/d8-macro.md (from research/mygt-4.0.8/d8-macro.md) section 3.3",
+   "instruction": "4.0.8 0x85aba8 mov x16,#0xa; 2.24 0x80012c mov x17,#0xa",
+   "error": "raw immediate (10) read as the wire byte 0x0A instead of halved to Dart 5",
+   "proof": "same List<int> stores 0xA4 as #0x148 and 0xD8 as #0x1b0 (exactly 2x), so #0xa stores Dart 5; commit carries an empty segment so length byte = segLen+5 = 5"
+  },
+  "genuine_0x0a_on_wire": "ordinal of the 10th fragment of the live 144-byte D6 readback (A4 0E D6 0A ...) - different field/direction/opcode family",
+  "toolkit_note": "automation/scripts/armorx_lab/frames.py::build_d8_terminator encodes 'A4 0A D8' - wrong; left uncommitted per task rules"
+ },
+ "d4_request": "A5 04 D4 7D",
+ "d4_semantics": {
+  "function_name": "getInputModel",
+  "sender": {
+   "label": "PROVEN STATIC",
+   "function": "BluetoothModel::getInputModel",
+   "address": "0xa84258",
+   "file": "asm/moojiang/units/ble/bluetooth_mode.dart",
+   "frame_bytes": "A5 04 D4 7D",
+   "frame_derivation": [
+    "0xa84288 AllocateArray(size #8 = Dart 4) - halved",
+    "idx0: 0xa84290 mov x16,#0x14a -> 0xA5 (halved)",
+    "idx1: 0xa84298 mov x16,#8 -> 0x04 (halved)",
+    "idx2: 0xa842a0 mov x16,#0x1a8 -> 0xD4 (halved)",
+    "idx3: 0xa842a8 stur wzr = 0 placeholder (raw)",
+    "0xa842d4 bl BluetoothModel::getCheckSum @0x80fbbc; 0xa84318 ArrayStore list[3] = 0x7D",
+    "0xa84340 bl BluetoothModel::write @0x80dd28"
+   ],
+   "caller": "_RainbowMoreWidget closure @0xace4b0 (0xace58c) and _RainbowDeviceConfig1sState closure @0xa84160 (0xa841dc)",
+   "device_guard": "rainbow_more caller: curDevice must be one of devRainbow2Pro (Device@b2ee81), devRainbow3 (Device@b2edc1), devGale2 (Device@b2ede1) - 0xace50c..0xace538 (b.ne -> 0xace618 skips). devArmorX is Device@b2eec1 and is NOT in that set. rainbow_tab_config_1s caller: none observed",
+   "firmware_guard": "none observed",
+   "startup_path": "page-init/polling path (Future.delayed loop in both callers)"
+  },
+  "receiver": null,
+  "source": "results/reconciliation/d4-reconstruction.json"
+ },
+ "d4_reply": {
+  "family": "A5 short frame",
+  "layout": "A5 | total_len(0x06) | 0xD4 | gamepad_mode | onboard_mode | checksum",
+  "offsets": {
+   "index0": "0xA5 header",
+   "index1": "0x06 total length",
+   "index2": "0xD4 opcode",
+   "index3": "gamepad mode (\u624b\u67c4\u6a21\u5f0f)",
+   "index4": "onboard mode (\u677f\u8f7dmode)",
+   "index5": "checksum = (sum of bytes 0..4) & 0xFF"
+  },
+  "total_len": 6,
+  "total_len_evidence": "PROVEN STATIC for the length-byte convention (0x0B reply A5 05 0B 30 E5 = 5 bytes; 0xEF reply A5 0C EF ... = 12 bytes; 0xD7 ack A5 05 D7 00 81 = 5 bytes). The 6-byte minimum is INFERRED from the parsers reading both index 3 and index 4 while a checksum must follow them, so the exact real total length is UNKNOWN (>= 6).",
+  "checksum": "sum of all frame bytes except the last, & 0xFF",
+  "checksum_evidence": "PROVEN STATIC - 2.22 getCheckSum @0x79c368 (units/gamepadset.dart:87), 2.23 getCheckSum @0x761954, 2.24 getCheckSum @0x78c360 (define.dart), 4.0.8 BluetoothModel::getCheckSum @0x80fbbc (loop accumulates then and w1,w0,#0xff at 0x80fc80).",
+  "value_domain": "UNKNOWN (see open_questions)",
+  "test_vectors": [
+   {
+    "gamepad_mode": "0x00",
+    "onboard_mode": "0x00",
+    "bytes": "A5 06 D4 00 00 7F",
+    "checksum": "0x7F"
+   },
+   {
+    "gamepad_mode": "0x06",
+    "onboard_mode": "0x03",
+    "bytes": "A5 06 D4 06 03 88",
+    "checksum": "0x88"
+   },
+   {
+    "gamepad_mode": "0x06",
+    "onboard_mode": "0x00",
+    "bytes": "A5 06 D4 06 00 85",
+    "checksum": "0x85"
+   },
+   {
+    "gamepad_mode": "0x01",
+    "onboard_mode": "0x01",
+    "bytes": "A5 06 D4 01 01 81",
+    "checksum": "0x81"
+   }
+  ]
+ },
+ "d4_conclusion": {
+  "label": "STRONG EVIDENCE",
+  "summary": "0xD4 is a read whose reply carries a *gamepad/pad mode* byte at whole-frame index 3 and an *onboard mode* (\u677f\u8f7dmode) byte at whole-frame index 4. The function names differ (getOnBoardConfig in 2.22.0901 and 2.24.0919, getInputModel in 2.23.0609 and 4.0.8) but the reply layout and the field that is updated are the same.",
+  "decisive_evidence": "2.24.0919 rainbow_tab_config_1s.dart @0x8a9824 prints the string literal \"\u677f\u8f7dmode = \" interpolated with data[4] inside the branch that is reached only when data[2] == 0xD4 (cmp x1,#0xd4 at 0x8a9824 is immediately preceded by the range test cmp x1,#0xd4;b.gt at 0x8a9738). 4.0.8 rainbow_tab_config_1s.dart @0x826ecc prints the same literal from the same branch shape.",
+  "candidates": {
+   "active onboard slot": "CONTRADICTED - the byte is used raw (stored to a field) or compared to a small constant; no bank/slot arithmetic anywhere on it.",
+   "input mode": "SUPPORTED - this is exactly what it is (\u677f\u8f7dmode / \u624b\u67c4\u6a21\u5f0f).",
+   "config bank": "CONTRADICTED - no bank-selection arithmetic on the value.",
+   "profile number": "UNKNOWN - no profile lookup found on the value.",
+   "device mode": "SUPPORTED - the literal names it a mode (\u677f\u8f7dmode = onboard mode)."
+  }
+ },
+ "smi_corrections": [
+  {
+   "id": "K1",
+   "claim": "keyCapture = 0x10000 and 'bit index = key id + 1'",
+   "original": "The static key-mask getters return the literal instruction immediate; keyCapture=0x10000, keyUp=0x20000, keyL1=0x80, so bit = id+1 (Capture id 15 -> bit 16).",
+   "corrected_value": "bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-pad up), keyM1=0x800000 (bit 23), keyM6=0x10000000 (bit 28).",
+   "evidence": [
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/define.dart",
+     "address": "0x94cb70",
+     "instruction": "mov x0, #0x10000  (Blutter annotates r0 = 65536)",
+     "version": "4.0.8 / 3.12.2"
+    },
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/define.dart",
+     "address": "0x94cba8",
+     "instruction": "mov x0, #0x20000  (keyUp)",
+     "version": "4.0.8"
+    },
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/define.dart",
+     "address": "0x94cbc8",
+     "instruction": "mov x0, #0x80     (keyL1)",
+     "version": "4.0.8"
+    },
+    {
+     "file": "/home/salamanka/armorx/re/v224/blutter_out/asm/moojiang/define.dart",
+     "address": "0x7c42ac",
+     "instruction": "mov x0, #0x10000  (keyCapture)",
+     "version": "2.24.0919 / 3.2.3"
+    },
+    {
+     "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x7a91c4",
+     "instruction": "mov x0, #0x80     (keyL1)",
+     "version": "2.22.0901 / 2.17.5"
+    },
+    {
+     "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x7ad700",
+     "instruction": "mov x0, #0x80     (keyL1)",
+     "version": "2.23.0609 / 2.19.6"
+    }
+   ],
+   "anchors": [
+    "24-getter set closes gaplessly onto ids 0..26+28 only when halved (unhalved collides: 0x80 would duplicate RB, keyY 0x20 would be bit 5 = no key)",
+    "2.22 pp.txt:27316 [pp+0x28950] List<int>(32) [0x1,0x2,...,0x80000000] = [1<<i], printed already-decoded",
+    "4.0.8 key_remap_t.dart:635 @0x92d69c map literal raw-30 -> \"Capture\" with sbfiz #1 boxing => id 15 == keyCapture bit after halving",
+    "4.0.8 key_remap_t.dart:37 @0x92cfc8 switch case 0xf (=15) on the real int id"
+   ],
+   "label": "PROVEN STATIC"
+  },
+  {
+   "id": "L3",
+   "claim": "writeLightConfig per-zone colour-mode index sequence is 2,4,6",
+   "original": "2,4,6 read as the raw immediates",
+   "corrected_value": "1, 2, 3",
+   "evidence": [
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x849824",
+     "instruction": "mov x16, #2 (StoreField r4->field_f, List<int> element)",
+     "version": "4.0.8"
+    },
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x849888",
+     "instruction": "mov x16, #4",
+     "version": "4.0.8"
+    },
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x8498ec",
+     "instruction": "mov x16, #6",
+     "version": "4.0.8"
+    },
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x84987c",
+     "instruction": "growable append: LoadField r3 = r0->field_f ; add x4,x3,x1,lsl #2 ; stur w16,[x4,#0xf]",
+     "version": "4.0.8"
+    }
+   ],
+   "anchors": [
+    "Smi-encoded growable length proves List<int> (not typed data)",
+    "values fold onto the app's 4 named light modes as ordinals 1..3"
+   ],
+   "label": "replace the '2,4,6' note with '1,2,3'"
+  },
+  {
+   "id": "D1",
+   "claim": "The D8 commit/terminator frame is A4 0A D8 <nfrags+1> <csum>",
+   "original": "second byte = 0x0A, a constant that is not a computed length",
+   "corrected_value": "A4 05 D8 <nfrags+1> <csum> (5 bytes; length byte == total frame bytes, so no special case is needed)",
+   "evidence": [
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x85aba8",
+     "instruction": "mov x16, #0xa ; StoreField r4->field_f (List<int> element)",
+     "version": "4.0.8"
+    },
+    {
+     "file": "/home/salamanka/armorx/re/v224/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x80012c",
+     "instruction": "mov x17, #0xa ; same store form",
+     "version": "2.24"
+    },
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x85aaf8",
+     "instruction": "mov x16, #0x148 -> 0xA4 in the SAME list",
+     "version": "4.0.8"
+    },
+    {
+     "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+     "address": "0x85abf0",
+     "instruction": "mov x16, #0x1b0 -> 0xD8 in the SAME list",
+     "version": "4.0.8"
+    }
+   ],
+   "anchors": [
+    "sibling immediates in the same List<int> only make sense halved (0x148->0xA4, 0x1b0->0xD8)",
+    "live/deduced wire frame A4 05 D8 <nfrags+1> <csum>",
+    "2.22's independent terminator immediate r17 = 10 at 0x79eb7c was already read as Dart 5"
+   ],
+   "label": "Change the terminator byte to 0x05 in d8-macro.md, the executive report, the virtual-peripheral parser and the lab harness; delete the 0x0A special case and use the general 'length byte = total frame' rule; remove the open question."
+  }
+ ],
+ "key_mask_rule": {
+  "rule": "bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-pad up), keyM1=0x800000 (bit 23), keyM6=0x10000000 (bit 28).",
+  "evidence": [
+   {
+    "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/define.dart",
+    "address": "0x94cb70",
+    "instruction": "mov x0, #0x10000  (Blutter annotates r0 = 65536)",
+    "version": "4.0.8 / 3.12.2"
+   },
+   {
+    "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/define.dart",
+    "address": "0x94cba8",
+    "instruction": "mov x0, #0x20000  (keyUp)",
+    "version": "4.0.8"
+   },
+   {
+    "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/define.dart",
+    "address": "0x94cbc8",
+    "instruction": "mov x0, #0x80     (keyL1)",
+    "version": "4.0.8"
+   },
+   {
+    "file": "/home/salamanka/armorx/re/v224/blutter_out/asm/moojiang/define.dart",
+    "address": "0x7c42ac",
+    "instruction": "mov x0, #0x10000  (keyCapture)",
+    "version": "2.24.0919 / 3.2.3"
+   },
+   {
+    "file": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "address": "0x7a91c4",
+    "instruction": "mov x0, #0x80     (keyL1)",
+    "version": "2.22.0901 / 2.17.5"
+   },
+   {
+    "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/units/gamepadset.dart",
+    "address": "0x7ad700",
+    "instruction": "mov x0, #0x80     (keyL1)",
+    "version": "2.23.0609 / 2.19.6"
+   }
+  ],
+  "source": "results/reconciliation/smi-audit.json"
+ }
 }

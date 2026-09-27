@@ -1,0 +1,134 @@
+{
+  "schema": "armorx-lab/d8-taxonomy/1",
+  "generated": "2026-09-27",
+  "method": "static (Blutter Dart-AOT asm read); no APK modification, no device, no radio",
+  "smi_rule": "immediate used as a Dart-level int value is tagged (Dart value = imm/2); immediate used in unboxed arithmetic is the true value; odd immediates cannot be Smis",
+  "framing_shared_all_versions": {
+    "data_fragment": "A4 | (segLen+5) | D8 | (i+1) | seg | csum   (total = segLen+5)",
+    "commit_frame": "A4 | 05 | D8 | (nfrags+1) | csum              (total = 5)",
+    "ordinal_byte_present": true,
+    "length_byte_equals_total_frame_length": true,
+    "checksum": "sum(all preceding bytes) & 0xFF",
+    "label": "PROVEN STATIC"
+  },
+  "versions": {
+    "2.22.0901": {
+      "dart": "2.17.5",
+      "format_family": "OLD (GamepadDefMap 7-byte records)",
+      "record_size": 7,
+      "payload_length": "N = 10 + 7*nsteps",
+      "payload_length_proof": "0x7a6234 mov x16,#7 ; 0x7a6238 mul ; 0x7a623c add x1,x0,#0xa (applicationMacro)",
+      "header": [
+        {"off": 0, "width": 2, "field": "crc16", "endian": "BE", "note": "CRC-16/MODBUS init 0xFFFF poly 0xA001 over bytes[2:]", "asm": "0x79cf10/0x79cf84/0x79d008/0x79d028"},
+        {"off": 2, "width": 2, "field": "length", "endian": "BE", "asm": "0x79c960/0x79c994"},
+        {"off": 4, "width": 1, "field": "GamepadAtt.type", "asm": "0x79d078"},
+        {"off": 5, "width": 1, "field": "runKey (GamepadAtt.setting)", "asm": "0x79d088"},
+        {"off": 6, "width": 1, "field": "runKey|5 (GamepadAtt.key, 0->5)", "asm": "0x79d098, 0x79ca70"},
+        {"off": 7, "width": 1, "field": "isRepeat (GamepadAtt.att)", "asm": "0x79d0a8"},
+        {"off": 8, "width": 2, "field": "repeatTime (GamepadAtt.d)", "endian": "BE", "asm": "0x79d0b8"}
+      ],
+      "step_record": {"type": "0x80", "time": "u16 BE = duration_ms/8", "key": "u32 BE bitmask/stick-word", "asm": "0x79cc24,0x79cca4,0x79cd2c,0x79cd60,0x79cdbc,0x79ce18,0x79ce78"},
+      "chunk": {"value": 15, "source": "hard-coded literal", "asm": "0x79e300 fmov d1,#15.0 ; 0x79e50c/0x79e54c mov x16,#0xf;mul ; 0x79ea88 sdiv #15", "label": "PROVEN STATIC"},
+      "subpackageLength": {"present": false, "asm": "recursive grep empty", "label": "PROVEN STATIC negative"},
+      "commit_frame": {"bytes": "A4 05 D8 <nfrags+1> <csum>", "length_byte": "0x05", "asm": "0x79eb7c mov x17,#0xa (=Dart 5); 0x79ebf4 (=D8); 0x79ec08/0x79ec24 (nfrags+1)"},
+      "literal_0x0a_byte_in_fragmentation": false,
+      "defaults": {"runKey": 46, "runKey_name": "M1", "repeatTime": 200, "asm": "0x92aabc, 0x92ab20"},
+      "receive": {
+        "generic_a4_reassembler": {"site": "widgets/general/configs_config.dart:3108 closure @0x8a6a04", "also": "widgets/armor-x_pro/armorx_pro_config_config.dart @0x89b48c", "opcode_byte": 2, "dispatch_byte": 3, "stride": 15, "offsets": [0,15,30,45,60,75], "label": "PROVEN STATIC"},
+        "d8_readback": {"status": "ABSENT", "reason": "no 0xD8/216 comparison in widgets/ (grep empty); macros come from server JSON (MacroRow.fromJson)", "label": "PROVEN STATIC negative"},
+        "generic_parsers": {"GamepadParam": "sublist 11/16/32/34/36/38/43->102 @0x79dbfc", "GamepadParam30": "sublist 16/24/34/70->216 @0x79fb00"}
+      }
+    },
+    "2.23.0609": {
+      "dart": "2.19.6",
+      "format_family": "OLD (GamepadDefMap 7-byte records)",
+      "record_size": 7,
+      "payload_length": "N = 10 + 7*n",
+      "payload_length_proof": "changeGamepadDef @0x798b04: mov x1,#7 @0x798d68; CRC init 65535 @0x7995a8, poly 40961 @0x79961c; pp.txt:53715-53727 field names",
+      "chunk": {"value": 15, "source": "hard-coded literal", "asm": "0x7980fc fmov d1,#15.0", "label": "PROVEN STATIC"},
+      "subpackageLength": {"present": false, "label": "PROVEN STATIC negative"},
+      "commit_frame": {"bytes": "A4 05 D8 <nfrags+1> <csum>", "length_byte": "0x05", "asm": "0x798744 mov x17,#0xa (=Dart 5); 0x7987a0 (=D8); 0x7987a8 (nfrags+1)"},
+      "literal_0x0a_byte_in_fragmentation": false,
+      "write_fn": "writeMacroConfig @0x797fa0",
+      "receive": {"d8_readback": {"status": "ABSENT", "reason": "no 0xD8/0x1b0 comparison in widgets/", "label": "PROVEN STATIC negative"}, "generic_parsingData": "@0x8098cc (rainbow_tab_config_1s.dart)"},
+      "note": "structurally identical to 2.22; ordinal store is STRONG EVIDENCE (not fully traced)"
+    },
+    "2.24.0919": {
+      "dart": "3.2.3",
+      "format_family": "MODERN (TranscribeFrame 10-byte frames)",
+      "record_size": 10,
+      "payload_length": "N = 10 + 10*n",
+      "header": [
+        {"off": 0, "width": 2, "field": "crc16", "endian": "BE"},
+        {"off": 2, "width": 2, "field": "length N", "endian": "BE"},
+        {"off": 4, "width": 1, "field": "0x00 constant"},
+        {"off": 5, "width": 1, "field": "trigger key = int.parse(runKey)"},
+        {"off": 6, "width": 1, "field": "runKey (0->5)"},
+        {"off": 7, "width": 1, "field": "isRepeat"},
+        {"off": 8, "width": 2, "field": "repeatTime", "endian": "BE"}
+      ],
+      "step_frame": {"layout": "[((t8&0xF)<<4), (t8>>4)&0xFF, key>>24, key>>16, key>>8, key, stk>>24, stk>>16, stk>>8, stk]", "t8": "time_ms ~/ 8 (12-bit, max 32760 ms)", "asm": "toFrameCmd @0x800524; _keyByte @0x800b20; _stickByte @0x80091c"},
+      "chunk": {"source": "subpackageLength()-5", "values": [15,43,67], "asm": "writeMacroConfig @0x7ffb5c: 0x7ffbfc bl 0x7b9064; sub x1,x0,#5", "label": "PROVEN STATIC"},
+      "subpackageLength": {"present": true, "addr": "0x7b9064", "file": "define.dart:477", "returns": [20,72,48], "asm": "0x7b9124 mov x0,#0x14 (=20); 0x7b90ec #0x48 (=72); 0x7b9134 #0x30 (=48)"},
+      "commit_frame": {"bytes": "A4 05 D8 <nfrags+1> <csum>", "length_byte": "0x05", "asm": "0x800060 (#0x148=A4); 0x80012c mov x17,#0xa (=Dart 5); 0x800188 (=D8); 0x800190 (nfrags+1)"},
+      "literal_0x0a_byte_in_fragmentation": false,
+      "receive": {
+        "generic_a4_reassembler": {"site": "widgets/general/configs_config.dart @0x912d30 cmp #0x148 / @0x912d58 cmp #0x1ac", "replaceRange": "0x912f18/0x912ff8", "sublist": "0x9131f0", "stride": "subpackageLength()-5", "label": "PROVEN STATIC"},
+        "d8_readback": {"status": "PRESENT_PARTIAL", "handler": "frame_config_macros.dart notification closure 0x915a68(#0x1f8=0xFC) / 0x915a90(#0x1b0=0xD8 -> 写入结果 @0x915a98 + printHex @0x915ab0) / 0x915ad8(#0x1a6=0xD3 -> list[7],list[8])", "parsingData": "0x915c38", "fromConfigData": "TranscribeFrame.fromConfigData @0x80163c"},
+        "readback_offsets": {"opcode": 2, "ordinal_or_compare": 3, "u16_le_pair": [15,16]}
+      }
+    },
+    "4.0.8": {
+      "dart": "3.12.2",
+      "format_family": "MODERN (TranscribeFrame 10-byte frames)",
+      "record_size": 10,
+      "payload_length": "N = 10 + 10*n",
+      "payload_length_proof": "applicationFrameMacro @0x85c8c0: 0x85cf5c mov x16,#0xa; 0x85cf60 mul; 0x85cf64 add x4,x0,#0xa",
+      "header": [
+        {"off": 0, "width": 2, "field": "crc16", "endian": "BE", "asm": "0x85d4bc/0x85d594/0x85d5b4"},
+        {"off": 2, "width": 2, "field": "length N", "endian": "BE", "asm": "0x85d200/0x85d224"},
+        {"off": 4, "width": 1, "field": "0x00 constant", "asm": "0x85d238"},
+        {"off": 5, "width": 1, "field": "trigger key", "asm": "0x85d254"},
+        {"off": 6, "width": 1, "field": "runKey (0->5)", "asm": "0x85d314/0x85d2d0"},
+        {"off": 7, "width": 1, "field": "isRepeat", "asm": "0x85d3a4"},
+        {"off": 8, "width": 2, "field": "repeatTime", "endian": "BE", "asm": "0x85d3f4/0x85d410"}
+      ],
+      "step_frame": {"layout": "same 10-byte TranscribeFrame as 2.24 (byte-identical)", "asm": "toFrameCmd @0x85e5xx; replaceRange(10+10i,20+10i) @0x85d480"},
+      "chunk": {"source": "subpackageLength()-5", "values": [15,43,67], "asm": "writeMacroConfig @0x85a670: 0x85a6f0 bl 0x819190; 0x85a6f4 sub x1,x0,#5 (used as float divisor 0x85a704); 0x85a72c/0x85a730 sub x3,x0,#5", "label": "PROVEN STATIC + anchored live (20-byte D6 frames)"},
+      "subpackageLength": {"present": true, "addr": "0x819190", "file": "define.dart:316", "returns": [20,72,48], "asm": "0x819238 mov x0,#0x14; 0x819264 #0x48; 0x819274 #0x30", "device_id_branches": "id 1,2,3,7..10 -> 20; id 4..7 -> 72; else -> 48"},
+      "fragment_build": {"A4": "0x85a748 mov x16,#0x148", "len=payload+5": "0x85a820 sub x1,x10,x8; 0x85a824 add x10,x1,#5; boxed 0x85a87c", "D8": "0x85a8f8 mov x16,#0x1b0", "ordinal=i+1": "0x85a7e8 add x9,x6,#1 stored [fp,-0x50]; boxed+stored 0x85a938", "label": "PROVEN STATIC"},
+      "commit_frame": {"bytes": "A4 05 D8 <nfrags+1> <csum>", "length_byte": "0x05", "asm": "0x85aaf8 mov x16,#0x148 (=A4); 0x85aba8 mov x16,#0xa (=Dart 5); 0x85abf0 (=D8); 0x85abf8 add x5,x2,#1; appended 0x85ac3c"},
+      "literal_0x0a_byte_in_fragmentation": false,
+      "receive": {
+        "generic_a4_reassembler": {"site": "widgets/general/configs_config.dart @0xac1de8 cmp #0x148 / @0xac1e10 cmp #0x1ac", "adjacent_byte_proof": "0xac1e4c imm #12 -> byte 6 ; 0xac1e80 imm #14 -> byte 7 (indices are tagged Smis)", "replaceRange": "0xac1fc4/0xac208c", "stride": "subpackageLength()-5 @0xac1eec/0xac1ef0", "label": "PROVEN STATIC"},
+        "d8_readback": {"status": "PRESENT_PARTIAL", "handler": "frame_config_macros.dart closure 0xac33e0(#0x1f8=0xFC) / 0xac3408(#0x1b0=0xD8 -> 写入结果 @0xac3410 + printHex @0xac3420) / 0xac3448(#0x1a6=0xD3 -> list[7],list[8])", "parsingData": "0xac35ac", "fromConfigData": "TranscribeFrame.fromConfigData @0x85e32c", "maxSteps_print": "0xac3568 (in caller, not in parsingData)"},
+        "readback_offsets": {"opcode": 2, "compare": 3, "u16_le_pair": [15,16], "u16_use": "val = LE(data[15],data[16]); val <<= 3 (x8 ms) -> last frame field_1b", "asm": "0xac3744-0xac375c, 0xac377c"}
+      }
+    }
+  },
+  "zero_x0a_question": {
+    "verdict": "0x0A is NOT a valid D8 commit byte in any version; correct byte is 0x05",
+    "label": "CONTRADICTED (all versions)",
+    "origin": {
+      "doc": "baselines/imported-research/d8-macro.md (from research/mygt-4.0.8/d8-macro.md) section 3.3",
+      "instruction": "4.0.8 0x85aba8 mov x16,#0xa; 2.24 0x80012c mov x17,#0xa",
+      "error": "raw immediate (10) read as the wire byte 0x0A instead of halved to Dart 5",
+      "proof": "same List<int> stores 0xA4 as #0x148 and 0xD8 as #0x1b0 (exactly 2x), so #0xa stores Dart 5; commit carries an empty segment so length byte = segLen+5 = 5"
+    },
+    "genuine_0x0a_on_wire": "ordinal of the 10th fragment of the live 144-byte D6 readback (A4 0E D6 0A ...) - different field/direction/opcode family",
+    "toolkit_note": "automation/scripts/armorx_lab/frames.py::build_d8_terminator encodes 'A4 0A D8' - wrong; left uncommitted per task rules"
+  },
+  "corrections_issued": [
+    "commit byte is 0x05 not 0x0A (all four versions)",
+    "fragment ordinal byte at frame offset 3 exists in 2.24 and 4.0.8 too (imported doc said none)",
+    "2.22/2.24/4.0.8 reassembler indices are tagged (opcode at byte 2, ordinal at byte 3), not literal data[4]/data[6]",
+    "'最大步数' print is in the caller (4.0.8 0xac3568) not inside parsingData",
+    "4.0.8 header byte 4 is a constant 0x00 while 2.22's is GamepadAtt.type (widths match, semantics differ)"
+  ],
+  "open_items": [
+    "2.23 fragment ordinal value i+1 is STRONG EVIDENCE only",
+    "2.24 vs 4.0.8 subpackageLength device-id branches not identical (9/10 arms only in 4.0.8); ARMOR-X Pro field_7 id UNKNOWN",
+    "repeatTime unit UNKNOWN in all versions",
+    "meaning of field_23 / the u16 at bytes 15-16 is PARTIAL (offsets proven)"
+  ]
+}

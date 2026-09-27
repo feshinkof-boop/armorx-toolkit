@@ -146,8 +146,26 @@ Implemented replies (see `results/final/virtual-armorx-status.md` for citations)
 | `A5 04 0B B4` | `A5 05 0B <VV> <sum>` | EVIDENCE-BACKED |
 | `A5 0C EF 00×8 A0` | `A5 0C EF <8 uuid bytes> <sum>` | EVIDENCE-BACKED |
 | `A5 04 D6 7F` | ten `A4/D6` fragments → 144-byte config, valid CRC-16/MODBUS | EVIDENCE-BACKED |
+| `A5 04 D4 7D` | `A5 06 D4 <gamepad_mode> <onboard_mode> <sum>` | STRUCTURE EVIDENCE-BACKED, values CHOSEN |
 | `A4…D7` + 144-byte image | `A5 05 D7 00 81` | EVIDENCE-BACKED |
 | `A5 05 0E 00 B8` | echoed verbatim | EVIDENCE-BACKED |
+
+`0xD4` (`getInputModel`, a.k.a. `getOnBoardConfig` in 2.22.0901/2.24.0919): all four
+builds send the byte-identical request `A5 04 D4 7D`, and the receiver side proves the
+reply is an `A5` short frame with a *gamepad mode* byte at whole-frame index 3
+(`手柄模式`, compared `== 6` which gates a `getDpi()` follow-up) and an *onboard mode*
+byte at whole-frame index 4 (`板载mode`). The **frame structure and checksum are proven**
+(`results/reconciliation/d4-reconstruction.md|json`); the **value domain of the two
+payload bytes is UNKNOWN**, so they are *chosen device state*, exactly like
+`--device-uuid` / `--zkm-version`:
+
+```
+--d4-gamepad-mode  0x00   # reply index 3 (default 0x00 is CHOSEN, not researched)
+--d4-onboard-mode  0x00   # reply index 4 (default 0x00 is CHOSEN, not researched)
+```
+
+Each request logs a `d4_reply` event with structured parser output (both payload bytes,
+their indices, `checksum_ok`) plus the normal raw `reply_out` line.
 
 Every other opcode (including `E4` MTU query, `E2` firmware read and `04`
 battery) is logged as `command_unknown` with `reply_bytes_sent: 0` — **no bytes
