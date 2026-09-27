@@ -25,13 +25,13 @@ ArmorX Toolkit is intentionally evidence-driven. Items move from research to sta
 
 ## Public Windows v0.2.1
 
-- [ ] Automatic pre-write backup of the current device image
-- [ ] Review exact byte-level config changes before writing
-- [ ] One-click restore of the latest backup with write/read-back verification
-- [ ] Clear dirty/pending-changes state
-- [ ] Profile rename, duplicate, delete, import, and export
-- [ ] Exportable end-user diagnostic log without research/capture controls
-- [ ] About/compatibility page with app, model, firmware, and project information
+- [x] Automatic pre-write backup of the current device image
+- [x] Review exact byte-level config changes before writing
+- [x] One-click restore of the latest backup with write/read-back verification
+- [x] Clear dirty/pending-changes state
+- [x] Profile rename, duplicate, delete, import, and export
+- [x] Exportable end-user diagnostic log without research/capture controls
+- [x] About/compatibility page with app, model, firmware, and project information
 - [ ] Windows installer/package after portable-build validation
 
 ## Protocol research
