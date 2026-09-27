@@ -138,7 +138,7 @@ def test_live_e2_reply_carries_firmware_and_model_strings():
         payload = payload_of(proto.parse_frame(bytes.fromhex(entry["raw"])))
         assert payload[0] == 0x27 and payload[1] == 0x41, "firmware BCD bytes"
         assert f"{payload[0]:02X}{payload[1]:02X}" == "2741"
-        assert payload[2:7] == b"\x02ZJ-XT"
+        assert payload[2:8] == b"\x02ZJ-XT"
         assert b"2741" not in payload, "firmware must not appear as ASCII"
 
 
