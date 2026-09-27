@@ -1,7 +1,0 @@
-D:\a\armorx-toolkit\armorx-toolkit\artifacts\ArmorX-Windows.pdb
-D:\a\armorx-toolkit\armorx-toolkit\artifacts\D3DCompiler_47_cor3.dll
-D:\a\armorx-toolkit\armorx-toolkit\artifacts\PenImc_cor3.dll
-D:\a\armorx-toolkit\armorx-toolkit\artifacts\PresentationNative_cor3.dll
-D:\a\armorx-toolkit\armorx-toolkit\artifacts\vcruntime140_cor3.dll
-D:\a\armorx-toolkit\armorx-toolkit\artifacts\wpfgfx_cor3.dll
-D:\a\armorx-toolkit\armorx-toolkit\artifacts\ArmorX-Windows.exe
