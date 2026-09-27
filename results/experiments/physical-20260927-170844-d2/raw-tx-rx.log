@@ -3295,3 +3295,4 @@
 2026-09-27T21:15:26.223+00:00 RX a5120200000000fc54fcec040dfb04000001 D2 capture {"raw": "a5120200000000fc54fcec040dfb04000001", "label": "D2 capture", "kind": "short", "opcode": "0x02", "frag_index": null, "checksum_ok": true, "declared_length": 18}
 2026-09-27T21:15:26.239+00:00 RX a5120200000000fc54fcec040dfb04000001 D2 capture {"raw": "a5120200000000fc54fcec040dfb04000001", "label": "D2 capture", "kind": "short", "opcode": "0x02", "frag_index": null, "checksum_ok": true, "declared_length": 18}
 2026-09-27T21:15:26.255+00:00 RX a5120200000000fc54fcec040dfb04000001 D2 capture {"raw": "a5120200000000fc54fcec040dfb04000001", "label": "D2 capture", "kind": "short", "opcode": "0x02", "frag_index": null, "checksum_ok": true, "declared_length": 18}
+2026-09-27T21:23:57.835+00:00 TX a505d2007c D2 test OFF

@@ -3310,3 +3310,6 @@
 {"ts": "2026-09-27T21:15:26.223+00:00", "event": "rx", "raw": "a5120200000000fc54fcec040dfb04000001", "label": "D2 capture", "kind": "short", "opcode": "0x02", "frag_index": null, "checksum_ok": true, "declared_length": 18}
 {"ts": "2026-09-27T21:15:26.239+00:00", "event": "rx", "raw": "a5120200000000fc54fcec040dfb04000001", "label": "D2 capture", "kind": "short", "opcode": "0x02", "frag_index": null, "checksum_ok": true, "declared_length": 18}
 {"ts": "2026-09-27T21:15:26.255+00:00", "event": "rx", "raw": "a5120200000000fc54fcec040dfb04000001", "label": "D2 capture", "kind": "short", "opcode": "0x02", "frag_index": null, "checksum_ok": true, "declared_length": 18}
+{"ts": "2026-09-27T21:23:57.835+00:00", "event": "tx", "raw": "a505d2007c", "label": "D2 test OFF"}
+{"ts": "2026-09-27T21:24:00.837+00:00", "event": "state", "state": "DEVICE_SLEEP_OR_LINK_LOSS", "waiting_for": "D2 test OFF"}
+{"ts": "2026-09-27T21:24:00.837+00:00", "event": "state", "state": "SESSION_END"}

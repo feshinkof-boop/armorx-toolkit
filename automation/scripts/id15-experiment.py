@@ -42,6 +42,7 @@ from armorx_lab.transport import BumbleTransport  # noqa: E402
 
 F_0B = bytes.fromhex("A5040BB4")
 F_D6 = bytes.fromhex("A504D67F")
+F_D2_OFF = bytes.fromhex("A505D2007C")   # live-verified D2 test-mode OFF frame
 ID15_OFFSET = 127
 NIL_MAPPING = 0x02
 EXPECTED_DIFF = {0, 1, ID15_OFFSET}
@@ -117,6 +118,8 @@ def main() -> int:
     ap.add_argument("--write", action="store_true")
     ap.add_argument("--restore", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--clear-d2-mode", action="store_true",
+                    help="send the D2 test-mode OFF frame before writing")
     ap.add_argument("--confirm-operator-test", action="store_true",
                     help="the operator observation test is the purpose of this write")
     ap.add_argument("transport_pos", nargs="?", default=None)
@@ -169,6 +172,21 @@ def main() -> int:
 
     tr.write(F_0B)
     print("0B:", (tr.read(3.0) or b"").hex())
+
+    # D2 test mode may still be latched: the capture's final D2-OFF frame went
+    # unacknowledged when its link dropped. Probe by counting unsolicited 0x02
+    # status frames while nothing is pressed, then clear it explicitly.
+    if args.clear_d2_mode:
+        # The D2 capture's final OFF frame went unacknowledged when its link died,
+        # so D2 test mode may still be latched. Sending it again is idempotent and
+        # harmless; the operator presses keys for real this time, so the device must
+        # be in normal mode for the behaviour test to mean anything.
+        tr.write(F_D2_OFF)
+        ack = tr.read(3.0)
+        print("D2 OFF:", (ack or b"").hex() or "NO REPLY")
+        (outdir / "d2-clear.json").write_text(json.dumps(
+            {"d2_off_frame": F_D2_OFF.hex(), "d2_off_ack": (ack or b"").hex(),
+             "ack_ok": ack is not None, "ts": time.time()}, indent=1))
 
     target = mutant if args.write else baseline
     label = "ID15 mutant" if args.write else "baseline restore"
