@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-09-27T14:03:06+00:00",
+  "generated_by": "automation/radio/capture-radio-baseline.sh",
+  "host": {
+    "dmi_chassis_type": "3",
+    "dmi_product": "System Product Name",
+    "kernel": "7.0.0-34-generic"
+  },
+  "identity_binding": {
+    "anchors": [
+      "usb_port_path",
+      "usb_vid_pid",
+      "bluetooth.bdaddr",
+      "wifi.mac"
+    ],
+    "derived_only_never_anchors": [
+      "wifi.ifnames (e.g. wlan1)",
+      "bluetooth.hci_name (e.g. hci1)"
+    ],
+    "rule": "Bind identity to the physical USB path plus the MAC/controller address. Interface names (wlan*, wlx*, hciN) and HCI indices are NOT stable across re-plugs and are recorded for information only; all tooling re-derives them from the anchors on every run."
+  },
+  "physical_anchor": {
+    "usb_bus": 1,
+    "usb_port_path": "1-8",
+    "usb_device_sysfs": "/sys/bus/usb/devices/1-8",
+    "usb_device_realpath": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8",
+    "usb_vid_pid": "0bda:b720",
+    "usb_vid": "0bda",
+    "usb_pid": "b720",
+    "usb_bcd_device": "0200",
+    "usb_serial": "00e04c000001",
+    "usb_product": "802.11n WLAN Adapter",
+    "usb_manufacturer": "Realtek",
+    "usb_busnum": "1",
+    "usb_devnum": "5",
+    "usb_interfaces": {
+      "1-8:1.0": {
+        "sysfs": "/sys/bus/usb/devices/1-8:1.0",
+        "realpath": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0",
+        "bInterfaceClass": "e0",
+        "bInterfaceSubClass": "01",
+        "bInterfaceProtocol": "01",
+        "driver": "btusb"
+      },
+      "1-8:1.1": {
+        "sysfs": "/sys/bus/usb/devices/1-8:1.1",
+        "realpath": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.1",
+        "bInterfaceClass": "e0",
+        "bInterfaceSubClass": "01",
+        "bInterfaceProtocol": "01",
+        "driver": "btusb"
+      },
+      "1-8:1.2": {
+        "sysfs": "/sys/bus/usb/devices/1-8:1.2",
+        "realpath": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.2",
+        "bInterfaceClass": "ff",
+        "bInterfaceSubClass": "ff",
+        "bInterfaceProtocol": "ff",
+        "driver": "rtl8xxxu"
+      }
+    },
+    "udev_id_serial": "Realtek_802.11n_WLAN_Adapter_00e04c000001",
+    "udev_id_path": "pci-0000:00:14.0-usb-0:8"
+  },
+  "live_capture": {
+    "status": "PRESENT",
+    "captured_at_utc": "2026-09-27T14:03:06+00:00",
+    "wifi": {
+      "driver": "rtl8xxxu",
+      "ifnames": [
+        "wlxe84e068af1ff"
+      ],
+      "mac": "e8:4e:06:8a:f1:ff",
+      "usb_interface": "1-8:1.2",
+      "usb_interface_sysfs": "/sys/bus/usb/devices/1-8:1.2",
+      "usb_interface_realpath": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.2",
+      "netdev_sysfs": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.2/net/wlxe84e068af1ff",
+      "operstate": "down",
+      "all_netdevs_on_this_usb_device": [
+        {
+          "ifname": "wlxe84e068af1ff",
+          "mac": "e8:4e:06:8a:f1:ff",
+          "operstate": "down",
+          "usb_interface": "1-8:1.2",
+          "usb_interface_realpath": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.2",
+          "driver": "rtl8xxxu",
+          "netdev_realpath": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.2/net/wlxe84e068af1ff"
+        }
+      ],
+      "networkmanager": {
+        "managed": "no",
+        "state": "10 (unmanaged)",
+        "connection": ""
+      }
+    },
+    "bluetooth": {
+      "hci_name": "hci1",
+      "bdaddr": "E8:4E:06:8A:F2:00",
+      "kernel_driver": "btusb",
+      "usb_interfaces": [
+        "1-8:1.0",
+        "1-8:1.1"
+      ],
+      "usb_interface": "1-8:1.0",
+      "usb_interface_realpath": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0",
+      "sysfs": "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0/bluetooth/hci1",
+      "hci_version": "4.0",
+      "manufacturer": "Realtek Semiconductor Corporation (93)",
+      "hci_revision": "0xe2f",
+      "lmp_subversion": "0x9f73",
+      "rfkill_index": "6",
+      "hciconfig_state": "UP RUNNING"
+    }
+  },
+  "expected_identity_until_insertion": {
+    "note": "SUPERSEDED_BY_LIVE_CAPTURE -- the adapter was physically present when this file was generated, so these values mirror live_capture and are kept only as the expected identity for the next insertion. If the adapter is absent on a later run, these are what discovery will match against.",
+    "usb_port_path": "1-8",
+    "usb_vid_pid": "0bda:b720",
+    "wifi": {
+      "driver": "rtl8xxxu",
+      "ifnames": [
+        "wlxe84e068af1ff"
+      ],
+      "mac": "e8:4e:06:8a:f1:ff",
+      "usb_interfaces": [
+        "1-8:1.2"
+      ]
+    },
+    "bluetooth": {
+      "driver": "btusb",
+      "usb_interfaces": [
+        "1-8:1.0",
+        "1-8:1.1"
+      ],
+      "bdaddr": "E8:4E:06:8A:F2:00",
+      "firmware": "rtl_bt/rtl8723b_fw.bin (+ rtl8723b_config.bin)"
+    }
+  },
+  "missing_artifact_fields": [],
+  "primary_network_reference": {
+    "interface": "wlp3s0",
+    "note": "see primary-network-baseline.txt; must never be disturbed"
+  },
+  "attachment_history": {
+    "source": "dmesg",
+    "collected_at": "2026-09-27T14:03:06+00:00",
+    "filter": [
+      "rtl",
+      "8723",
+      "Bluetooth: hci",
+      "btusb",
+      "rtl8xxxu",
+      "b720",
+      "1-8"
+    ],
+    "note": "Historical evidence of the combo adapter's attachment. The first enumeration shows 'RTL: download fw command failed (-19)' followed by a re-enumeration in which the firmware loaded successfully ('RTL: fw version ...'), so -19 is an initial-attach artefact, not a hard failure.",
+    "lines": [
+      "[ 6673.491283] usb 1-8: New USB device strings: Mfr=1, Product=2, SerialNumber=3",
+      "[ 6673.491285] usb 1-8: Product: 802.11n WLAN Adapter",
+      "[ 6673.491287] usb 1-8: Manufacturer: Realtek",
+      "[ 6673.491288] usb 1-8: SerialNumber: 00e04c000001",
+      "[ 6673.499043] Bluetooth: hci1: RTL: examining hci_ver=06 hci_rev=000b lmp_ver=06 lmp_subver=8723",
+      "[ 6673.500037] Bluetooth: hci1: RTL: rom_version status=0 version=1",
+      "[ 6673.501036] Bluetooth: hci1: RTL: btrtl_initialize: key id 0",
+      "[ 6673.501038] Bluetooth: hci1: RTL: loading rtl_bt/rtl8723b_fw.bin",
+      "[ 6673.506679] Bluetooth: hci1: RTL: loading rtl_bt/rtl8723b_config.bin",
+      "[ 6673.507043] Bluetooth: hci1: RTL: cfg_sz 64, total sz 22560",
+      "[ 6673.542455] usb 1-8: This Realtek USB WiFi dongle (0x0bda:0xb720) is untested!",
+      "[ 6673.542462] usb 1-8: Please report results to Jes.Sorensen@gmail.com",
+      "[ 6673.593300] usb 1-8: Dumping efuse for RTL8723BU (0x200 bytes):",
+      "[ 6673.593326] usb 1-8: RTL8723BU rev E (SMIC) romver 0, 1T1R, TX queues 3, WiFi=1, BT=1, GPS=0, HI PA=0",
+      "[ 6673.593327] usb 1-8: RTL8723BU MAC: e8:4e:06:8a:f1:ff",
+      "[ 6673.593329] usb 1-8: rtl8xxxu: Loading firmware rtlwifi/rtl8723bu_nic.bin",
+      "[ 6673.593636] usb 1-8: Firmware revision 35.0 (signature 0x5301)",
+      "[ 6673.607823] usb 1-8: USB disconnect, device number 4",
+      "[ 6673.608834] rtl8xxxu 1-8:1.2: probe with driver rtl8xxxu failed with error -11",
+      "[ 6673.608881] usbcore: registered new interface driver rtl8xxxu",
+      "[ 6673.611816] Bluetooth: hci1: RTL: download fw command failed (-19)",
+      "[ 6673.844832] usb 1-8: new high-speed USB device number 5 using xhci_hcd",
+      "[ 6673.972324] usb 1-8: New USB device found, idVendor=0bda, idProduct=b720, bcdDevice= 2.00",
+      "[ 6673.972331] usb 1-8: New USB device strings: Mfr=1, Product=2, SerialNumber=3",
+      "[ 6673.972333] usb 1-8: Product: 802.11n WLAN Adapter",
+      "[ 6673.972335] usb 1-8: Manufacturer: Realtek",
+      "[ 6673.972337] usb 1-8: SerialNumber: 00e04c000001",
+      "[ 6673.977965] usb 1-8: This Realtek USB WiFi dongle (0x0bda:0xb720) is untested!",
+      "[ 6673.977969] usb 1-8: Please report results to Jes.Sorensen@gmail.com",
+      "[ 6673.978825] Bluetooth: hci1: unexpected event for opcode 0xfc20",
+      "[ 6673.984176] Bluetooth: hci1: RTL: examining hci_ver=06 hci_rev=0e2f lmp_ver=06 lmp_subver=9f73",
+      "[ 6674.025874] usb 1-8: Dumping efuse for RTL8723BU (0x200 bytes):",
+      "[ 6674.025923] usb 1-8: RTL8723BU rev E (SMIC) romver 0, 1T1R, TX queues 3, WiFi=1, BT=1, GPS=0, HI PA=0",
+      "[ 6674.025925] usb 1-8: RTL8723BU MAC: e8:4e:06:8a:f1:ff",
+      "[ 6674.025928] usb 1-8: rtl8xxxu: Loading firmware rtlwifi/rtl8723bu_nic.bin",
+      "[ 6674.026088] usb 1-8: Firmware revision 35.0 (signature 0x5301)",
+      "[ 6674.332834] Bluetooth: hci1: RTL: examining hci_ver=06 hci_rev=000b lmp_ver=06 lmp_subver=8723",
+      "[ 6674.336833] Bluetooth: hci1: RTL: rom_version status=0 version=1",
+      "[ 6674.340833] Bluetooth: hci1: RTL: btrtl_initialize: key id 0",
+      "[ 6674.340835] Bluetooth: hci1: RTL: loading rtl_bt/rtl8723b_fw.bin",
+      "[ 6674.341017] Bluetooth: hci1: RTL: loading rtl_bt/rtl8723b_config.bin",
+      "[ 6674.341051] Bluetooth: hci1: RTL: cfg_sz 64, total sz 22560",
+      "[ 6674.783839] rtl8xxxu 1-8:1.2 wlxe84e068af1ff: renamed from wlan0",
+      "[ 6674.793725] usb 1-8: Unhandled C2H event 15 seq 01",
+      "[ 6674.794751] usb 1-8: Unhandled C2H event 15 seq 03",
+      "[ 6674.795070] usb 1-8: Unhandled C2H event 15 seq 04",
+      "[ 6674.814851] Bluetooth: hci1: RTL: fw version 0x0e2f9f73",
+      "[ 6692.153686] usb 1-8: rtl8xxxu_bss_info_changed: HT supported",
+      "[ 6726.612813] usb 1-8: rtl8xxxu_bss_info_changed: HT supported",
+      "[ 6750.845675] usb 1-8: rtl8xxxu_bss_info_changed: HT supported",
+      "[ 6765.568525] usb 1-8: rtl8xxxu_bss_info_changed: HT supported",
+      "[ 6814.202748] usb 1-8: rtl8xxxu_bss_info_changed: HT supported",
+      "[ 6816.551554] usb 1-8: rtl8xxxu_bss_info_changed: HT supported",
+      "[ 7278.024037] Bluetooth: hci1: RTL: examining hci_ver=06 hci_rev=0e2f lmp_ver=06 lmp_subver=9f73",
+      "[ 7278.368062] Bluetooth: hci1: RTL: examining hci_ver=06 hci_rev=000b lmp_ver=06 lmp_subver=8723",
+      "[ 7278.369068] Bluetooth: hci1: RTL: rom_version status=0 version=1",
+      "[ 7278.370044] Bluetooth: hci1: RTL: btrtl_initialize: key id 0",
+      "[ 7278.370047] Bluetooth: hci1: RTL: loading rtl_bt/rtl8723b_fw.bin",
+      "[ 7278.371453] Bluetooth: hci1: RTL: loading rtl_bt/rtl8723b_config.bin",
+      "[ 7278.371673] Bluetooth: hci1: RTL: cfg_sz 64, total sz 22560",
+      "[ 7278.813037] Bluetooth: hci1: RTL: fw version 0x0e2f9f73",
+      "[ 7291.870703] usb 1-8: disconnecting",
+      "[ 7291.870710] usb 1-8: Device still attached, trying to reset",
+      "[ 7291.989309] usb 1-8: reset high-speed USB device number 5 using xhci_hcd",
+      "[ 7292.117044] Bluetooth: hci1: RTL: examining hci_ver=06 hci_rev=0e2f lmp_ver=06 lmp_subver=9f73",
+      "[ 7292.461047] Bluetooth: hci1: RTL: examining hci_ver=06 hci_rev=000b lmp_ver=06 lmp_subver=8723",
+      "[ 7292.462040] Bluetooth: hci1: RTL: rom_version status=0 version=1",
+      "[ 7292.463041] Bluetooth: hci1: RTL: btrtl_initialize: key id 0",
+      "[ 7292.463044] Bluetooth: hci1: RTL: loading rtl_bt/rtl8723b_fw.bin",
+      "[ 7292.463254] Bluetooth: hci1: RTL: loading rtl_bt/rtl8723b_config.bin",
+      "[ 7292.463288] Bluetooth: hci1: RTL: cfg_sz 64, total sz 22560",
+      "[ 7292.682421] usb 1-8: This Realtek USB WiFi dongle (0x0bda:0xb720) is untested!",
+      "[ 7292.682428] usb 1-8: Please report results to Jes.Sorensen@gmail.com",
+      "[ 7292.738643] usb 1-8: Dumping efuse for RTL8723BU (0x200 bytes):",
+      "[ 7292.738684] usb 1-8: RTL8723BU rev E (SMIC) romver 0, 1T1R, TX queues 3, WiFi=1, BT=1, GPS=0, HI PA=0",
+      "[ 7292.738686] usb 1-8: RTL8723BU MAC: e8:4e:06:8a:f1:ff",
+      "[ 7292.738688] usb 1-8: rtl8xxxu: Loading firmware rtlwifi/rtl8723bu_nic.bin",
+      "[ 7292.739453] usb 1-8: Firmware revision 35.0 (signature 0x5301)",
+      "[ 7292.986027] Bluetooth: hci1: RTL: fw version 0x0e2f9f73",
+      "[ 7293.516759] rtl8xxxu 1-8:1.2 wlxe84e068af1ff: renamed from wlan0"
+    ]
+  },
+  "builtin_bluetooth_reference": {
+    "usb_path": "1-6",
+    "usb_vid_pid": "0489:e10d",
+    "note": "machine built-in Bluetooth (Foxconn/Hon Hai) -- NEVER to be unbound/disabled",
+    "hci_name": "hci0",
+    "bdaddr": "4C:82:A9:93:53:0C"
+  }
+}

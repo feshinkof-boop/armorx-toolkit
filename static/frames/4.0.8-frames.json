@@ -1,0 +1,571 @@
+[
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+  "class": "::",
+  "function": "static _ writeBriCompConfig(/* No info */) async )",
+  "addr": "0x943c50",
+  "calls": [
+   "::getCheckSum",
+   "ListBase::last=",
+   "::ReadContext.read",
+   "BluetoothModel::write",
+   "::writeDevice"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 165,
+    "opcode": 248,
+    "data": [
+     248,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 58,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/gamepadset.dart",
+  "class": "::",
+  "function": "static _ writeDpiConfig(/* No info */) async )",
+  "addr": "0x946750",
+  "calls": [
+   "::getCheckSum",
+   "::ReadContext.read",
+   "BluetoothModel::write",
+   "::printHex",
+   "::writeDevice"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 246,
+    "data": [
+     0
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 160,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getDeviceConfig(/* No info */) async )",
+  "addr": "0x80dbfc",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 214,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 127,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getBriCompConfig(/* No info */) async )",
+  "addr": "0x8b4c24",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 248,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 161,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getStepLength(/* No info */) async )",
+  "addr": "0x8b4d30",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 247,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 160,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getMTU(/* No info */) async )",
+  "addr": "0x8b60f0",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 228,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 141,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getZKMVer(/* No info */) async )",
+  "addr": "0x8b61fc",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 11,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 180,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getBattery(/* No info */) async )",
+  "addr": "0x8b672c",
+  "calls": [
+   "::print",
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 4,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 173,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ readFirmware(/* No info */) async )",
+  "addr": "0x8b6860",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 226,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 139,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getInputModel(/* No info */) async )",
+  "addr": "0xa84258",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 212,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 125,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getConnectModel(/* No info */) async )",
+  "addr": "0xabd35c",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 225,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 138,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/units/ble/bluetooth_mode.dart",
+  "class": "BluetoothModel",
+  "function": "_ getChargingLightEffect(/* No info */) async )",
+  "addr": "0xace808",
+  "calls": [
+   "BluetoothModel::getCheckSum",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 221,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 134,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "_ getZKMVer(/* No info */) async )",
+  "addr": "0x8b6ce4",
+  "calls": [
+   "::getCheckSum",
+   "::ReadContext.read",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 11,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 180,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/widgets/rainbow/rainbow3_tab_light.dart",
+  "class": "_RainbowLightConfigWidgetStateR3",
+  "function": "_ setLightEnable(/* No info */) )",
+  "addr": "0x848ae0",
+  "calls": [
+   "::ReadContext.read",
+   "Fluttertoast::showToast",
+   "State::setState",
+   "::getCheckSum",
+   "_GrowableList::_growToNextCapacity",
+   "::ReadContext.read",
+   "BluetoothModel::write",
+   "State::setState"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 115,
+    "data": [
+     0
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 29,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/widgets/rainbow/rainbow3_tab_light.dart",
+  "class": "_RainbowLightConfigWidgetStateR3",
+  "function": "_ getLightEnableState(/* No info */) )",
+  "addr": "0xa848e0",
+  "calls": [
+   "::print",
+   "::getCheckSum",
+   "_GrowableList::_growToNextCapacity",
+   "::ReadContext.read",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 115,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 28,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/widgets/rainbow/rainbow3_tab_light.dart",
+  "class": "_RainbowLightConfigWidgetStateR3",
+  "function": "_ getLogoColorConfig(/* No info */) async )",
+  "addr": "0xa84a40",
+  "calls": [
+   "::getCheckSum",
+   "::ReadContext.read",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 245,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 158,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/widgets/rainbow/rainbow_preset_light_config.dart",
+  "class": "_RainbowPresetLightConfigState",
+  "function": "_ setLightEnabled(/* No info */) )",
+  "addr": "0x9f4e74",
+  "calls": [
+   "::getCheckSum",
+   "_GrowableList::_growToNextCapacity",
+   "::ReadContext.read",
+   "BluetoothModel::write",
+   "State::setState"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 115,
+    "data": [
+     1
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 30,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang/widgets/general/frame_config_macros.dart",
+  "class": "_FrameMacrosConfigWidgetState",
+  "function": "_ getMaxSize(/* No info */) async )",
+  "addr": "0xac313c",
+  "calls": [
+   "::getCheckSum",
+   "_GrowableList::_growToNextCapacity",
+   "::ReadContext.read",
+   "BluetoothModel::write"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 211,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 124,
+    "checksum_ok": true
+   }
+  ]
+ }
+]

@@ -1,0 +1,4 @@
+{"message": {"type": "send", "payload": {"kind": "armorx-net", "api": "hooks-ready", "ts": "2026-09-27T14:09:57.089Z"}}}
+{"message": {"type": "send", "payload": {"api": "hooks-ready", "ts": "2026-09-27T14:09:57.190Z", "kind": "armorx-bt"}}}
+{"message": {"type": "send", "payload": {"api": "entry-ready", "entry": "2.23", "ble_lib": "flutter_reactive_ble", "ts": "2026-09-27T14:09:57.197Z", "kind": "armorx-bt"}}}
+{"message": {"type": "send", "payload": {"api": "connect", "fd": 127, "peer": {"family": "AF_INET", "ip": "47.116.43.253", "port": 8080}, "ret": -1, "ts": "2026-09-27T14:09:58.634Z", "kind": "armorx-net"}}}

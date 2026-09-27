@@ -1,0 +1,175 @@
+armorx-lab -- PRIMARY NETWORK BASELINE
+generated_utc: 2026-09-27T14:03:06+00:00
+generated_by : automation/radio/capture-radio-baseline.sh
+host         : System Product Name | kernel 7.0.0-34-generic
+primary_if   : wlp3s0  (internal Qualcomm ath12k PCIe Wi-Fi; must never be disturbed)
+
+NOTE: this file is an observation record. The checkable, canonical form is
+      check-primary-network.sh --snapshot (see the last section).
+
+==============================================================================
+$ ip addr
+# ip addr   [exit 0]
+------------------------------------------------------------------------------
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp2s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000
+    link/ether e8:9c:25:6d:73:b8 brd ff:ff:ff:ff:ff:ff
+    altname enxe89c256d73b8
+3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 4c:82:a9:93:53:0b brd ff:ff:ff:ff:ff:ff
+    altname wlx4c82a993530b
+    inet 192.168.0.45/24 brd 192.168.0.255 scope global noprefixroute wlp3s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::91c9:68e5:477d:c9fb/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+5: tailscale0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1280 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none 
+    inet 100.109.237.83/32 scope global tailscale0
+       valid_lft forever preferred_lft forever
+    inet6 fd7a:115c:a1e0::692e:ed54/128 scope global 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::af43:c801:77ac:6c61/64 scope link stable-privacy proto kernel_ll 
+       valid_lft forever preferred_lft forever
+7: wlxe84e068af1ff: <BROADCAST,MULTICAST> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether e8:4e:06:8a:f1:ff brd ff:ff:ff:ff:ff:ff
+
+==============================================================================
+$ ip -br addr
+# ip -br addr   [exit 0]
+------------------------------------------------------------------------------
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp2s0           DOWN           
+wlp3s0           UP             192.168.0.45/24 fe80::91c9:68e5:477d:c9fb/64 
+tailscale0       UNKNOWN        100.109.237.83/32 fd7a:115c:a1e0::692e:ed54/128 fe80::af43:c801:77ac:6c61/64 
+wlxe84e068af1ff  DOWN           
+
+==============================================================================
+$ ip route
+# ip route   [exit 0]
+------------------------------------------------------------------------------
+default via 192.168.0.1 dev wlp3s0 proto dhcp src 192.168.0.45 metric 600 
+192.168.0.0/24 dev wlp3s0 proto kernel scope link src 192.168.0.45 metric 600 
+
+==============================================================================
+$ ip route show default
+# ip route show default   [exit 0]
+------------------------------------------------------------------------------
+default via 192.168.0.1 dev wlp3s0 proto dhcp src 192.168.0.45 metric 600 
+
+==============================================================================
+$ sh -c ip route | awk '/^default/{print $3}'
+# sh -c ip route | awk '/^default/{print $3}'   [exit 0]
+------------------------------------------------------------------------------
+192.168.0.1
+
+==============================================================================
+$ iw dev wlp3s0 link
+# iw dev wlp3s0 link   [exit 0]
+------------------------------------------------------------------------------
+Connected to ca:62:8b:74:4e:2c (on wlp3s0)
+	SSID: K&M New
+	freq: 5200.0
+	RX: 700864758 bytes (3747947 packets)
+	TX: 1333303575 bytes (1296365 packets)
+	signal: -60 dBm
+	rx bitrate: 432.3 MBit/s 160MHz HE-MCS 4 HE-NSS 1 HE-GI 0 HE-DCM 0
+	tx bitrate: 288.2 MBit/s 80MHz HE-MCS 3 HE-NSS 2 HE-GI 0 HE-DCM 0
+	bss flags: short-slot-time
+	dtim period: 1
+	beacon int: 100
+
+==============================================================================
+$ nmcli general status
+# nmcli general status   [exit 0]
+------------------------------------------------------------------------------
+STATE      CONNECTIVITY  WIFI-HW  WIFI     WWAN-HW  WWAN     METERED      
+connected  full          enabled  enabled  missing  enabled  no (guessed) 
+
+==============================================================================
+$ nmcli device status
+# nmcli device status   [exit 0]
+------------------------------------------------------------------------------
+DEVICE           TYPE      STATE                   CONNECTION 
+wlp3s0           wifi      connected               K&M New    
+tailscale0       tun       connected (externally)  tailscale0 
+lo               loopback  connected (externally)  lo         
+p2p-dev-wlp3s0   wifi-p2p  disconnected            --         
+enp2s0           ethernet  unavailable             --         
+wlxe84e068af1ff  wifi      unmanaged               --         
+
+==============================================================================
+$ rfkill list
+# rfkill list   [exit 0]
+------------------------------------------------------------------------------
+0: hci0: Bluetooth
+	Soft blocked: no
+	Hard blocked: no
+1: phy0: Wireless LAN
+	Soft blocked: no
+	Hard blocked: no
+6: hci1: Bluetooth
+	Soft blocked: no
+	Hard blocked: no
+7: phy3: Wireless LAN
+	Soft blocked: no
+	Hard blocked: no
+
+==============================================================================
+$ lsusb
+# lsusb   [exit 0]
+------------------------------------------------------------------------------
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 1ea7:0066 SHARKOON Technologies GmbH [Mediatrack Edge Mini Keyboard]
+Bus 001 Device 003: ID 0489:e10d Foxconn / Hon Hai 
+Bus 001 Device 005: ID 0bda:b720 Realtek Semiconductor Corp. RTL8723BU 802.11b/g/n WLAN Adapter
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+
+==============================================================================
+$ lsusb -t
+# lsusb -t   [exit 0]
+------------------------------------------------------------------------------
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/16p, 480M
+    |__ Port 003: Dev 002, If 0, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 003: Dev 002, If 1, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 006: Dev 003, If 0, Class=Wireless, Driver=btusb, 12M
+    |__ Port 006: Dev 003, If 1, Class=Wireless, Driver=btusb, 12M
+    |__ Port 008: Dev 005, If 0, Class=Wireless, Driver=btusb, 480M
+    |__ Port 008: Dev 005, If 1, Class=Wireless, Driver=btusb, 480M
+    |__ Port 008: Dev 005, If 2, Class=Vendor Specific Class, Driver=rtl8xxxu, 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/4p, 20000M/x2
+
+==============================================================================
+$ ls -la /sys/class/bluetooth
+# ls -la /sys/class/bluetooth   [exit 0]
+------------------------------------------------------------------------------
+total 0
+drwxr-xr-x  2 root root 0 Sep 27 10:02 .
+drwxr-xr-x 81 root root 0 Sep 27 09:53 ..
+lrwxrwxrwx  1 root root 0 Sep 27 08:00 hci0 -> ../../devices/pci0000:00/0000:00:14.0/usb1/1-6/1-6:1.0/bluetooth/hci0
+lrwxrwxrwx  1 root root 0 Sep 27 10:02 hci1 -> ../../devices/pci0000:00/0000:00:14.0/usb1/1-8/1-8:1.0/bluetooth/hci1
+
+==============================================================================
+$ check-primary-network.sh --snapshot   [exit 0]
+------------------------------------------------------------------------------
+iface.name=wlp3s0
+iface.mac=4c:82:a9:93:53:0b
+iface.mtu=1500
+iface.operstate=up
+iface.addr4=192.168.0.45/24
+iface.addr6=fe80::91c9:68e5:477d:c9fb/64
+wifi.associated=yes
+wifi.ssid=K&M New
+wifi.bssid=ca:62:8b:74:4e:2c
+wifi.freq=5200.0
+route.default.dev=wlp3s0
+route.default.gw=192.168.0.1
+route.default.metric=600
+route.default.src=192.168.0.45
+nm.general.state=connected
+nm.device.state=100
+nm.device.connection=K&M New

@@ -1,0 +1,17 @@
+iface.name=wlp3s0
+iface.mac=4c:82:a9:93:53:0b
+iface.mtu=1500
+iface.operstate=up
+iface.addr4=192.168.0.45/24
+iface.addr6=fe80::91c9:68e5:477d:c9fb/64
+wifi.associated=yes
+wifi.ssid=K&M New
+wifi.bssid=ca:62:8b:74:4e:2c
+wifi.freq=5200.0
+route.default.dev=wlp3s0
+route.default.gw=192.168.0.1
+route.default.metric=600
+route.default.src=192.168.0.45
+nm.general.state=connected
+nm.device.state=100
+nm.device.connection=K&M New

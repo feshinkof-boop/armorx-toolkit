@@ -1,0 +1,31 @@
+=== TOOLCHAIN ===
+Android Debug Bridge version 1.0.41
+Version 37.0.1-15733141
+Android emulator version 37.1.11.0 (build_id 15917651) (CL:N/A)
+openjdk version "25.0.4.1" 2026-08-18
+16.7.19
+bumble 0.0.235
+=== DEVICES ===
+List of devices attached
+emulator-5554	device
+
+=== ABI (api33) ===
+x86_64
+=== ABI (api30, if running) ===
+adb: device 'emulator-5556' not found
+=== packages installed (api33) ===
+package:com.moojiang.bigbigwon
+=== df ===
+/dev/nvme1n1p2  916G   95G  775G  11% /
+=== btsnoop log dir on guest (not enabled by default) ===
+total 12
+-rw-rw-rw- 1 bluetooth bluetooth 11240 2026-09-27 10:02 btsnooz_hci.log
+total 8
+-rw-rw---- 1 bluetooth bluetooth 342 2026-09-27 09:58 bt_config.bak
+-rw-rw---- 1 bluetooth bluetooth 342 2026-09-27 09:58 bt_config.conf
+=== bt snoop property ===
+
+=== netsim ports ===
+LISTEN 0      128                      127.0.0.1:6402       0.0.0.0:*    users:(("netsimd",pid=32640,fd=22))        
+LISTEN 0      4096            [::ffff:127.0.0.1]:35335            *:*    users:(("netsimd",pid=32640,fd=20))        
+LISTEN 0      4096                         [::1]:35335         [::]:*    users:(("netsimd",pid=32640,fd=19))        

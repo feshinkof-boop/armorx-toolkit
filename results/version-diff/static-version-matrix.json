@@ -1,0 +1,308 @@
+{
+ "version": 1,
+ "generated": "from the three local originals; every row carries file+offset evidence and an evidence label",
+ "builds": [
+  "2.23",
+  "2.24",
+  "4.0.8"
+ ],
+ "rows": [
+  {
+   "field": "original filename",
+   "2.23": "base.apk",
+   "2.24": "BIGBIGWON-2.24.0919.apk",
+   "4.0.8": "BIGBIGWON-4.0.8.apkm (+ base.apk)",
+   "class": "behaviour changed",
+   "evidence": "file listing",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "sha256",
+   "2.23": "7ed18b77\u2026c892",
+   "2.24": "0bae884b\u2026f305",
+   "4.0.8": "474f6609\u20263abf",
+   "class": "unchanged",
+   "evidence": "sha256sum of the untouched originals",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "package name",
+   "2.23": "com.moojiang.bigbigwon",
+   "2.24": "com.moojiang.bigbigwon",
+   "4.0.8": "com.moojiang.bigbigwon.mygt",
+   "class": "renamed-restructured",
+   "evidence": "AndroidManifest.xml package= (2.23 base.apk offset 0xb54 chunk; 4.0.8 base split)",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "versionName / versionCode",
+   "2.23": "2.23.0609 / 12",
+   "2.24": "2.24.0919 / 24",
+   "4.0.8": "4.0.8 / 409",
+   "class": "expanded",
+   "evidence": "manifest attrs",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "signing certificate",
+   "2.23": "CN=moojiang (release key) 5472\u202678C",
+   "2.24": "CN=Android Debug 44C3\u2026541",
+   "4.0.8": "Google App Signing F745\u2026B62",
+   "class": "behaviour changed",
+   "evidence": "v1 CERT.RSA (2.23/2.24) and v2/v3 signing block (4.0.8)",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "minSdk",
+   "2.23": 21,
+   "2.24": 21,
+   "4.0.8": 24,
+   "class": "behaviour changed",
+   "evidence": "uses-sdk minSdkVersion",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "targetSdk",
+   "2.23": 32,
+   "2.24": 34,
+   "4.0.8": 36,
+   "class": "expanded",
+   "evidence": "uses-sdk targetSdkVersion",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "ABI set",
+   "2.23": "arm64-v8a, armeabi-v7a, x86_64",
+   "2.24": "arm64-v8a",
+   "4.0.8": "arm64-v8a (ABI split)",
+   "class": "removed",
+   "evidence": "lib/ entries per APK",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "split-APK structure",
+   "2.23": "none (fat APK)",
+   "2.24": "none",
+   "4.0.8": "APKM: base + config.arm64_v8a + config.en + config.ar + config.xxhdpi",
+   "class": "expanded",
+   "evidence": "APKM listing + each split's AndroidManifest split=/splitTypes= attrs",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "Dart runtime",
+   "2.23": "2.19.6",
+   "2.24": "3.2.3",
+   "4.0.8": "3.12.2",
+   "class": "expanded",
+   "evidence": "libflutter.so version banner string",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "Flutter framework",
+   "2.23": "3.7.x",
+   "2.24": "3.16.x",
+   "4.0.8": "UNKNOWN",
+   "class": "unknown",
+   "evidence": "not stored in the bundle; 4.0.8 in particular has no version string",
+   "label": "INFERRED"
+  },
+  {
+   "field": "BLE library",
+   "2.23": "flutter_reactive_ble",
+   "2.24": "flutter_reactive_ble",
+   "4.0.8": "flutter_blue_plus",
+   "class": "behaviour changed",
+   "evidence": "libapp.so string pool package paths",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "server host",
+   "2.23": "m.bigbigwon.com:8080",
+   "2.24": "m.bigbigwon.com:8080",
+   "4.0.8": "m.bigbigwon.com:8080",
+   "class": "unchanged",
+   "evidence": "libapp.so string pool",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "server endpoints",
+   "2.23": "15 (\u2026queryDefaultConfig, setConfig)",
+   "2.24": "16 (+queryGameList)",
+   "4.0.8": "14 (-queryDefaultConfig, -queryGameList)",
+   "class": "removed",
+   "evidence": "string pool /dev/* literals",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "ARMOR-X Pro device enum",
+   "2.23": 6,
+   "2.24": 8,
+   "4.0.8": 10,
+   "class": "renamed-restructured",
+   "evidence": "objs.txt Obj!Device@90e4a1 / @9ef961 / @b2eec1 off_8",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "device enum size",
+   "2.23": 7,
+   "2.24": 9,
+   "4.0.8": 13,
+   "class": "expanded",
+   "evidence": "objs.txt enum object count",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "vendor service / FFE1 / FFE2",
+   "2.23": "00000000-\u2026 / FFE1 write / FFE2 notify",
+   "2.24": "same",
+   "4.0.8": "same (+180A,180F,2A24,2A26,2A19,2902,F530-F532)",
+   "class": "expanded",
+   "evidence": "libapp.so UUID literals",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "config families (bytes)",
+   "2.23": "88/144/240 (4 templates)",
+   "2.24": "88/144/240/280/484 (8 templates)",
+   "4.0.8": "88/144/240/280/335/456/484/508 (12 templates)",
+   "class": "expanded",
+   "evidence": "pp.txt default-config string literals, declared length == total length",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "ARMOR-X Pro config length",
+   "2.23": 144,
+   "2.24": 144,
+   "4.0.8": "144 (or 240 - negotiated via defaultConfig)",
+   "class": "behaviour changed",
+   "evidence": "bc536085 template present in all three; 4.0.8 defaultConfig branches 0x90->144, 0xF0->240",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "config CRC rule",
+   "2.23": "CRC-16/MODBUS over 2..end",
+   "2.24": "same (3 images self-validate)",
+   "4.0.8": "same (6 images self-validate)",
+   "class": "expanded",
+   "evidence": "recomputed CRC == stored CRC on the embedded images",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "config length static field",
+   "2.23": "0xfd4",
+   "2.24": "0x102c",
+   "4.0.8": "0xb6c",
+   "class": "renamed-restructured",
+   "evidence": "StoreStaticField in the 0B reply handler",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "opcode inventory (proven builders)",
+   "2.23": "0B,0E,EF,D2,D4,D6,D7,D8,FC,FF (+A4/A5)",
+   "2.24": "+D3,E1,E4,F6,F7,F8,F5,0D",
+   "4.0.8": "+E2,DD,70,73,04,AB(05/25,05/26),1A,1B",
+   "class": "expanded",
+   "evidence": "frame-builder census + byte-exact reconstruction over each asm tree",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "E2 readFirmware",
+   "2.23": "absent",
+   "2.24": "absent",
+   "4.0.8": "A5 04 E2 8B (@0x8b6860)",
+   "class": "expanded",
+   "evidence": "no builder/parser constructs 0xE2 in 2.23/2.24; 4.0.8 readFirmware builds it",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "D6 read / D7 write",
+   "2.23": "A5 04 D6 7F / A4 fragments, hard-coded 15-byte chunk",
+   "2.24": "same / chunk = subpackageLength()-5 (=15 for ARMOR-X Pro)",
+   "4.0.8": "same / chunk = subpackageLength()-5 (=15)",
+   "class": "behaviour changed",
+   "evidence": "writeDeviceConfig bodies; subpackageLength switch in define.dart",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "D8 macro",
+   "2.23": "present: A4/D8 fragmentation (writeMacroConfig @0x797fa0); no transcribe_frame.dart",
+   "2.24": "present + frame recording (transcribe_frame.dart, frame_config_macros.dart new)",
+   "4.0.8": "present, payload reconstructed byte-exact (10+10N, CRC-16, 8 ms granularity)",
+   "class": "expanded",
+   "evidence": "writeMacroConfig bodies / d8-macro reconstruction",
+   "label": "PROVEN STATIC (2.24/4.0.8); payload layout UNKNOWN for 2.23"
+  },
+  {
+   "field": "FC/F6 DPI",
+   "2.23": "A5 05 FC <sel&0x0F>, no F6 branch, no device gate",
+   "2.24": "FC default; F6 for {devRainbow2Pro, devC2SL} when static 0x102c >= 0x35",
+   "4.0.8": "FC default; F6 for {devRainbow2Pro, devRainbow3, devGale2, devC2SL} when static 0xb6c >= 0x35; motion DPI = AB 07 05 25 <u16 LE>",
+   "class": "expanded",
+   "evidence": "writeDpiConfig bodies; `cmp x1,#0x35; b.lt <skip F6 store>`",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "lighting",
+   "2.23": "writeLightConfig -> A5 + A4/FF",
+   "2.24": "same (+0D writeLogoColorConfig)",
+   "4.0.8": "A5 04 70 / A5 10 70 R3, main writeLightConfig FF+05+3F, additional DD/F8/73/F5",
+   "class": "expanded",
+   "evidence": "light config builder census",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "turbo",
+   "2.23": "config-resident (GamepadParam30.turboKey @0x54)",
+   "2.24": "config-resident (@0x5c)",
+   "4.0.8": "config-resident, byte 80 = speed idx, bytes 81..84 = turboKey u32 BE",
+   "class": "unchanged",
+   "evidence": "turboKey field + hex-parse serialisation; 4.0.8 offsets proven byte-exact",
+   "label": "PROVEN STATIC (4.0.8); byte offsets UNKNOWN for 2.23/2.24"
+  },
+  {
+   "field": "key-ID table",
+   "2.23": "labels up to M4; no Capture/Menu/M5-M7",
+   "2.24": "+Capture, keyboard labels",
+   "4.0.8": "+Menu, M5/M6/M7; full 0..49 id table (re-verified)",
+   "class": "expanded",
+   "evidence": "key_remap_t.dart::gamePadKeyName + string pool",
+   "label": "PROVEN STATIC (4.0.8); label sets only (numeric binding UNKNOWN) for 2.23/2.24"
+  },
+  {
+   "field": "device enum id 5 label (2.24)",
+   "2.23": "devBLITZ_LITE",
+   "2.24": "devC2SL (NOT 'Blitz2')",
+   "4.0.8": "devMSY (different namespace position)",
+   "class": "behaviour changed",
+   "evidence": "objs.txt @9ef981",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "queryDefaultConfig / queryGameList endpoints",
+   "2.23": "both present",
+   "2.24": "both present",
+   "4.0.8": "both removed",
+   "class": "removed",
+   "evidence": "string pool /dev/* literals",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "transcribe / frame_config_macros modules",
+   "2.23": "absent",
+   "2.24": "present",
+   "4.0.8": "present",
+   "class": "expanded",
+   "evidence": "asm/moojiang/units/transcribe_frame.dart, widgets/general/frame_config_macros.dart",
+   "label": "PROVEN STATIC"
+  },
+  {
+   "field": "280/484 serializer modules",
+   "2.23": "absent",
+   "2.24": "present (gamepadset280/484, base_gamepadset)",
+   "4.0.8": "present",
+   "class": "expanded",
+   "evidence": "asm/moojiang/units listing",
+   "label": "PROVEN STATIC"
+  }
+ ]
+}

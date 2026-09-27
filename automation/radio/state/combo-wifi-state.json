@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "written_utc": "2026-09-27T14:03:25+00:00",
+  "purpose": "combo-adapter Wi-Fi isolation (phase 3) -- consumed by restore-combo-wifi.sh",
+  "wifi_ifname": "wlxe84e068af1ff",
+  "wifi_mac": "e8:4e:06:8a:f1:ff",
+  "usb_interface": "1-8:1.2",
+  "usb_driver": "rtl8xxxu",
+  "actions_applied": [
+    "nm-managed-no",
+    "link-down"
+  ],
+  "previous_operstate": "down",
+  "primary_snapshot_before": "/home/salamanka/armorx-lab/automation/radio/state/primary-before-combo-wifi-disable.txt"
+}

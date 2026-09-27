@@ -1,0 +1,196 @@
+{
+  "collected": "2026-09-27T09:57:28.580630-04:00",
+  "host": "salamanka-systemproductname",
+  "collected_by": "armorx-lab phase1",
+  "path_used": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/salamanka/.local/bin (venv bin prepended for frida/bumble: /home/salamanka/armorx-lab/ble/bumble/venv/bin)",
+  "missing": [
+    "Android emulator",
+    "javac",
+    "Ghidra",
+    "frida-server",
+    "wireshark (CLI)",
+    "sqlite3"
+  ],
+  "tools": [
+    {
+      "name": "adb",
+      "path": "/usr/bin/adb",
+      "version": "Android Debug Bridge version 1.0.41",
+      "source": "apt: adb 1:34.0.5-12build1"
+    },
+    {
+      "name": "Android SDK (ANDROID_HOME / sdkmanager)",
+      "path": "/home/salamanka/Android/Sdk/cmdline-tools/latest/bin/sdkmanager",
+      "version": "1.0.16406183 (Android CLI)",
+      "note": "ANDROID_HOME=/home/salamanka/Android/Sdk"
+    },
+    {
+      "name": "Android emulator",
+      "path": null,
+      "version": "MISSING"
+    },
+    {
+      "name": "java",
+      "path": "/usr/bin/java",
+      "version": "openjdk version \"25.0.4.1\" 2026-08-18",
+      "source": "apt: default-jre-headless 2:1.25-77"
+    },
+    {
+      "name": "javac",
+      "path": null,
+      "version": "MISSING",
+      "note": "not installed (only default-jre-headless installed; JDK not in Phase-1 scope)"
+    },
+    {
+      "name": "python3",
+      "path": "/usr/bin/python3.14",
+      "version": "Python 3.14.4"
+    },
+    {
+      "name": "pip",
+      "path": "/usr/bin/python3 -m pip",
+      "version": "pip 25.1.1 from /usr/lib/python3/dist-packages/pip (python 3.14)"
+    },
+    {
+      "name": "git",
+      "path": "/usr/bin/git",
+      "version": "git version 2.53.0"
+    },
+    {
+      "name": "jadx",
+      "path": "/usr/local/bin/jadx",
+      "version": "1.5.6",
+      "note": "installed manually from GitHub release (not in Ubuntu 26.04 apt)",
+      "source": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip -> /opt/jadx"
+    },
+    {
+      "name": "apktool",
+      "path": "/usr/bin/apktool",
+      "version": "2.7.0-dirty",
+      "source": "apt: apktool 2.7.0+dfsg-7.1ubuntu1"
+    },
+    {
+      "name": "Ghidra",
+      "path": null,
+      "version": "MISSING",
+      "note": "not installed; not in Phase-1 install list"
+    },
+    {
+      "name": "Blutter",
+      "path": "/home/salamanka/armorx/re/blutter/blutter.py",
+      "version": "4a60ac6 2026-08-18 22:33:58 +0700",
+      "note": "pre-existing checkout; dartvm builds: blutter_dartvm2.19.6_android_arm64\nblutter_dartvm3.12.2_android_arm64\nblutter_dartvm3.2.3_android_arm64"
+    },
+    {
+      "name": "readelf",
+      "path": "/usr/bin/readelf",
+      "version": "GNU readelf (GNU Binutils for Ubuntu) 2.46",
+      "source": "GNU binutils GNU readelf (GNU Binutils for Ubuntu) 2.46"
+    },
+    {
+      "name": "objdump",
+      "path": "/usr/bin/objdump",
+      "version": "GNU objdump (GNU Binutils for Ubuntu) 2.46",
+      "source": "GNU binutils GNU readelf (GNU Binutils for Ubuntu) 2.46"
+    },
+    {
+      "name": "nm",
+      "path": "/usr/bin/nm",
+      "version": "GNU nm (GNU Binutils for Ubuntu) 2.46",
+      "source": "GNU binutils GNU readelf (GNU Binutils for Ubuntu) 2.46"
+    },
+    {
+      "name": "strings",
+      "path": "/usr/bin/strings",
+      "version": "GNU strings (GNU Binutils for Ubuntu) 2.46",
+      "source": "GNU binutils GNU readelf (GNU Binutils for Ubuntu) 2.46"
+    },
+    {
+      "name": "frida",
+      "path": "/home/salamanka/armorx-lab/ble/bumble/venv/bin/frida",
+      "version": "17.19.0",
+      "source": "pip (venv): frida-tools 14.10.4 / frida 17.19.0"
+    },
+    {
+      "name": "frida-server",
+      "path": null,
+      "version": "MISSING",
+      "note": "not present locally; must be pushed to target device per-arch"
+    },
+    {
+      "name": "Bumble (bumble)",
+      "path": "/home/salamanka/armorx-lab/ble/bumble/venv/bin/bumble-console",
+      "version": "0.0.218",
+      "note": "venv /home/salamanka/armorx-lab/ble/bumble/venv; no 'python -m bumble' entrypoint, use bumble-* CLIs or import bumble",
+      "source": "pip (venv): bumble 0.0.218"
+    },
+    {
+      "name": "BlueZ (bluetoothd)",
+      "path": "/usr/sbin/bluetoothd",
+      "version": "5.85",
+      "source": "apt: bluez 5.85-4ubuntu0.2"
+    },
+    {
+      "name": "btmgmt",
+      "path": "/usr/bin/btmgmt",
+      "version": "btmgmt: 5.85"
+    },
+    {
+      "name": "bluetoothctl",
+      "path": "/usr/bin/bluetoothctl",
+      "version": "Version: 5.85-4ubuntu0.2",
+      "source": "bluez 5.85"
+    },
+    {
+      "name": "btmon",
+      "path": "/usr/bin/btmon",
+      "version": "5.85"
+    },
+    {
+      "name": "tshark",
+      "path": "/usr/bin/tshark",
+      "version": "TShark (Wireshark) 4.6.4.",
+      "source": "apt: tshark 4.6.4-1"
+    },
+    {
+      "name": "dumpcap",
+      "path": "/usr/bin/dumpcap",
+      "version": "Dumpcap (Wireshark) 4.6.4.",
+      "note": "wireshark-common installed with setuid=false (noninteractive debconf)"
+    },
+    {
+      "name": "wireshark (CLI)",
+      "path": null,
+      "version": "MISSING",
+      "note": "wireshark GUI not installed; libwireshark19 + wireshark-common present"
+    },
+    {
+      "name": "mitmproxy",
+      "path": "/usr/bin/mitmproxy",
+      "version": "Mitmproxy: 8.1.1",
+      "source": "apt: mitmproxy 8.1.1-4"
+    },
+    {
+      "name": "pipx",
+      "path": "/usr/bin/pipx",
+      "version": "1.8.0",
+      "source": "apt: pipx 1.8.0-1"
+    },
+    {
+      "name": "openssl",
+      "path": "/usr/bin/openssl",
+      "version": "OpenSSL 3.5.5 27 Jan 2026 (Library: OpenSSL 3.5.5 27 Jan 2026)"
+    },
+    {
+      "name": "unzip",
+      "path": "/usr/bin/unzip",
+      "version": "UnZip 6.00 of 20 April 2009, by Debian. Original by Info-ZIP."
+    },
+    {
+      "name": "sqlite3",
+      "path": null,
+      "version": "MISSING",
+      "note": "CLI not installed; libsqlite3-0 3.46.1-9ubuntu0.3 present (binary lib). Not in Phase-1 install list."
+    }
+  ]
+}

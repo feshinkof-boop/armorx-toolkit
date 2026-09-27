@@ -1,0 +1,286 @@
+{
+ "build_key": "2.24",
+ "label": "2.24.0919",
+ "original_filename": "BIGBIGWON-2.24.0919.apk",
+ "original_path": "/home/salamanka/armorx-lab/apk/original/2.24/BIGBIGWON-2.24.0919.apk",
+ "size_bytes": 16087829,
+ "sha256": "0bae884badc004991e638b0e62a0a6afc07256a5deabd8bb833f0bb36638f305",
+ "sha1": "0a19b09d6a2c6feeb62f8946a9986589979f3c76",
+ "package": "com.moojiang.bigbigwon",
+ "versionName": "2.24.0919",
+ "versionCode": 24,
+ "app_label": "BIGBIG WON",
+ "min_sdk": 21,
+ "target_sdk": 34,
+ "compile_sdk": 34,
+ "abi_set": [
+  "arm64-v8a"
+ ],
+ "split_structure": null,
+ "split_structure_note": "single APK, arm64-v8a only (armeabi-v7a/x86_64 dropped versus 2.23)",
+ "signing_certificate": {
+  "subject": "C=US, O=Android, CN=Android Debug",
+  "issuer": "C=US, O=Android, CN=Android Debug",
+  "serial": "0DCA795A",
+  "validity": "2024-08-12 -> 2051-12-29",
+  "sha256_fingerprint": "44:C3:BB:8C:7E:A3:5B:3B:B1:1C:BF:A3:C2:F5:87:92:40:DF:2E:49:E3:98:16:B4:43:7B:98:56:FB:B2:95:41",
+  "sha1_fingerprint": "E9:4E:3A:FA:40:A5:4E:CE:E4:EE:F8:3F:58:03:93:50:7F:CD:20:5A",
+  "v1_signature_file": "META-INF/CERT.RSA",
+  "note": "ANDROID DEBUG key - this build is developer-signed, not the release 'moojiang' key used by 2.23",
+  "evidence": "PROVEN STATIC - pyaxmlparser/androguard get_certificates on the untouched APK"
+ },
+ "dart_version": "3.2.3 (stable) (Tue Dec 5 17:58:33 2023 +0000) on \"android_arm64\"",
+ "dart_evidence": "PROVEN STATIC - libflutter.so strings",
+ "flutter_engine_hash": "f71c76320d35b65f1164dbaa6d95fe09",
+ "flutter_engine_evidence": "PROVEN STATIC - libapp.so snapshot header (magic f5f5dcdc @0x200)",
+ "flutter_version": "3.16.x",
+ "flutter_version_evidence": "INFERRED - inferred from Dart 3.2.3",
+ "ble_library": "flutter_reactive_ble",
+ "ble_library_evidence": "PROVEN STATIC - libapp.so strings: package:flutter_reactive_ble/**, package:reactive_ble_mobile/**",
+ "server_hosts": {
+  "api": "http://m.bigbigwon.com:8080",
+  "oss": [
+   "https://bigbig-won-cn.oss-cn-shanghai.aliyuncs.com",
+   "https://bigbigwon-jp.oss-ap-northeast-1.aliyuncs.com",
+   "https://bigwon-germany.oss-eu-central-1.aliyuncs.com",
+   "https://bigwon-us.oss-us-west-1.aliyuncs.com"
+  ],
+  "www": [
+   "https://www.bigbigwon.com",
+   "https://www.bigbigwon.cn"
+  ],
+  "evidence": "PROVEN STATIC - libapp.so string pool (same API host in all three builds)"
+ },
+ "server_endpoints": [
+  "/dev/register",
+  "/dev/userLogin",
+  "/dev/queryConfigList",
+  "/dev/addConfig",
+  "/dev/changeConfig",
+  "/dev/renameConfig",
+  "/dev/delConfig",
+  "/dev/shareConfig",
+  "/dev/importShareConfig",
+  "/dev/queryMacroList",
+  "/dev/addMacro",
+  "/dev/changeMacro",
+  "/dev/delMacro",
+  "/dev/queryDefaultConfig",
+  "/dev/setConfig",
+  "/dev/queryGameList NEW"
+ ],
+ "device_enum": [
+  {
+   "id": 0,
+   "name": "devNone"
+  },
+  {
+   "id": 1,
+   "name": "devRainbow"
+  },
+  {
+   "id": 2,
+   "name": "devRainbowS"
+  },
+  {
+   "id": 3,
+   "name": "devRainbow2Pro"
+  },
+  {
+   "id": 4,
+   "name": "devRainbow2Lite"
+  },
+  {
+   "id": 5,
+   "name": "devC2SL"
+  },
+  {
+   "id": 6,
+   "name": "devBLITZ_ULT"
+  },
+  {
+   "id": 7,
+   "name": "devCHOCO"
+  },
+  {
+   "id": 8,
+   "name": "devArmorX"
+  }
+ ],
+ "armorx_enum_value": 8,
+ "device_enum_evidence": "PROVEN STATIC - objs.txt enum objects (Obj!Device@<addr> off_8: int(N), off_10: \"devX\")",
+ "device_enum_correction": "the label for id 5 is devC2SL, not 'Blitz2' as an earlier research note claimed (objs.txt @9ef981)",
+ "ble_uuid_table": [
+  {
+   "uuid": "00000000-0000-1000-8000-00805f9b34fb",
+   "role": "vendor service (matches by UUID equality; the vendor really advertises the all-zero service)",
+   "evidence": "PROVEN STATIC - libapp.so string pool"
+  },
+  {
+   "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb",
+   "role": "FFE1 - command write characteristic (write-without-response)",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb",
+   "role": "FFE2 - notify/read characteristic (CCCD 01 00)",
+   "evidence": "PROVEN STATIC"
+  }
+ ],
+ "ffe1_ffe2_usage": "unchanged from 2.23; 180A/180F/2A24/2A26/2A19 literals ARE present as strings in this build",
+ "config_sizes": [
+  88,
+  144,
+  240,
+  280,
+  484
+ ],
+ "config_templates": [
+  {
+   "len": 88,
+   "pp_off": "0x4b510",
+   "sha256_prefix": "9eaea1d6a42c49a4",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0xC800"
+  },
+  {
+   "len": 144,
+   "pp_off": "0x4b518",
+   "sha256_prefix": "1fa5afe2401d17c2",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x848A",
+   "family": "Rainbow-family default"
+  },
+  {
+   "len": 144,
+   "pp_off": "0x4b540",
+   "sha256_prefix": "bc536085f138a2ed",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x7F67",
+   "family": "ARMOR-X Pro"
+  },
+  {
+   "len": 240,
+   "pp_off": "0x4b528",
+   "sha256_prefix": "a2dabf5bec6afe49",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x6AC7"
+  },
+  {
+   "len": 240,
+   "pp_off": "0x4b530",
+   "sha256_prefix": "96dd901075496924",
+   "stored_crc": "0x1605",
+   "recomputed_crc": "0xBC3A",
+   "crc_self_valid": false,
+   "note": "carried over from 2.23; its stored CRC no longer validates - recorded negative"
+  },
+  {
+   "len": 240,
+   "pp_off": "0x4b548",
+   "sha256_prefix": "47c992112178bc82",
+   "stored_crc": "0x198B",
+   "recomputed_crc": "0x198B",
+   "crc_self_valid": true
+  },
+  {
+   "len": 280,
+   "pp_off": "0x4b520",
+   "sha256_prefix": "8f318f88caedb66b",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x878D"
+  },
+  {
+   "len": 484,
+   "pp_off": "0x4b538",
+   "sha256_prefix": "a61757a34cbdc20f",
+   "stored_crc": "0xD0A4",
+   "recomputed_crc": "0xD0A4",
+   "crc_self_valid": true
+  }
+ ],
+ "config_evidence": "PROVEN STATIC - pp.txt string literals",
+ "config_crc": "CRC-16/MODBUS over bytes 2..end (same rule; three images of this build self-validate)",
+ "config_length_rule": "checkConfigLength unchanged; derived length static moved 0xfd8 -> 0x102c. Router (rainbow_tab_config_1s @0x8aa014): 0x58/0x90/0xF0 legacy, 0x118 -> ConfigsMain280Widget, else ConfigsMain484Widget.",
+ "opcode_inventory": {
+  "byte_exact_proven_this_pass": {
+   "0B": "getZKMVer - A5 04 0B B4 (@0x78c208, @0x8975d4)",
+   "D2": "testModeSwitch - A5 05 D2 01 (@0x91e380)",
+   "D3": "getMaxSize - A5 04 D3 7C (@0x9157c0 frame_config_macros)",
+   "D4": "getOnBoardConfig - A5 04 D4 (@0x91b988)",
+   "D6": "getDeviceConfig - A5 04 D6 (@0x8a8798, @0x91433c)",
+   "E1": "getConnectModel - A5 04 E1 8A (@0x91b7a8)",
+   "E4": "getMTU - A5 04 E4 8D (@0x897724)",
+   "F5": "getLogoColorConfig - A5 04 F5 (@0x91cc24)",
+   "F6": "legacy DPI - A5 05 F6 00 A0 (@0x894000 writeDpiConfig fallback branch)",
+   "F7": "getStepLength - A5 04 F7 A0 (@0x91af58)",
+   "F8": "getBriCompConfig - A5 04 F8 (@0x91ae20)"
+  },
+  "also_present": [
+   "A5",
+   "A4",
+   "0E (A5 05 0E 00 B8)",
+   "D7 (A4/D7)",
+   "D8 (A4/D8 macro)",
+   "EF (A5 0C EF 00*8 A0)",
+   "FC (DPI)",
+   "FF (lighting)",
+   "0D (writeLogoColorConfig - rainbow_tab_light)"
+  ],
+  "absent_no_builder_constructs_it": [
+   "E2",
+   "AB",
+   "25",
+   "26",
+   "DD",
+   "70(as opcode)",
+   "73",
+   "04"
+  ],
+  "absence_evidence": "builder census over asm/moojiang filtered to A5/A4/AB-containing functions"
+ },
+ "d6_d7_handling": {
+  "D6_read": "A5 04 D6 7F; fragment reassembly in configs_mian (V280/V484), configs_config, configs_config_only_c1, rainbow_tab_config_1s",
+  "D7_write": "A4 fragments; chunk = subpackageLength() - 5 where subpackageLength (define.dart @0x7b9064) = 20 for devArmorX (=> 15) and 48/72 for other devices (=> 43/67); 1-based index; A4 length = chunk+5; ack A5 05 D7 00 81",
+  "fragment_chunk_armorx": 15,
+  "fragment_chunk_evidence": "PROVEN STATIC - subpackageLength switch: devNone 48, devRainbow 20, devRainbowS 20, devRainbow2Pro 20, devRainbow2Lite 48, devC2SL 72, devBLITZ_ULT 48, devCHOCO 20, devArmorX 20"
+ },
+ "d8_macro": {
+  "present": true,
+  "implementation": "writeMacroConfig @0x7ffb5c -> A4/D8 fragmentation; transcribe_frame.dart and frame_config_macros.dart are NEW in this build (frame recording/replay); startTranscribe/stopTranscribe send 0B and FC",
+  "payload_reconstruction": "the 4.0.8 pass records the 2.24 twin of TranscribeFrame.toFrameCmd at 0x800524 and _keyByte at 0x800b20 - same encoder as 4.0.8",
+  "evidence": "PROVEN STATIC for presence/opcodes; STRONG EVIDENCE for the payload layout (same encoder shape)"
+ },
+ "fc_f6_dpi": {
+  "implementation": "A5 05 FC <dpi&0x0F> <cks> by default; for curDevice in {devRainbow2Pro(3), devC2SL(5)} the builder overwrites element 2 with #0x1ec = 0xF6 when the zkmVersion static (0x102c, set from the 0B reply) is >= 0x35, and keeps FC when it is < 0x35 (writeDpiConfig @0x894000)",
+  "payload": "4-bit selector (and w,x,#0xf)",
+  "note": "an earlier note phrased this as 'fw < 0x35 -> F6'; the assembly at 0x8940f4 reads `cmp x1,#0x35; b.lt <skip F6 store>`, i.e. F6 is used when the version is >= 0x35",
+  "evidence": "PROVEN STATIC"
+ },
+ "e2_presence": {
+  "present": false,
+  "note": "no builder or parser constructs 0xE2 in 2.24",
+  "evidence": "PROVEN STATIC (absence)"
+ },
+ "lighting": {
+  "implementation": "writeLightConfig @0x88a5dc emits A5 + A4 frames with opcode FF; startTranscribe also uses FF",
+  "evidence": "PROVEN STATIC (opcode/presence)"
+ },
+ "turbo": {
+  "implementation": "config-resident: GamepadParam30.turboKey (String hex, field offset 0x5c) + turboSpeedIdx; serialised via the hex-parse -> parameter index path (same shape as 4.0.8's proven idx 77..80 = bytes 81..84)",
+  "byte_offsets": "UNKNOWN for 2.24 - not re-derived byte-exact in this pass",
+  "evidence": "PROVEN STATIC for the field's existence/type/offset; STRONG EVIDENCE for config residency"
+ },
+ "key_id_table": {
+  "summary": "label inventory grew versus 2.23: adds Capture, Tab/Esc/Enter/End/F1-F12, arrow names. Still no Menu, no M5/M6/M7.",
+  "id_binding": "UNKNOWN - numeric binding not re-derived in this pass",
+  "evidence": "PROVEN STATIC for label set; UNKNOWN for the full numeric table"
+ },
+ "notable": [
+  "dev-signed with the ANDROID DEBUG key",
+  "first build with 280/484 config families and transcribe (macro recording)",
+  "arm64-v8a only"
+ ],
+ "manifest_version": 1,
+ "generated_from": "local originals under /home/salamanka/armorx-lab/apk/original/ (no download)"
+}

@@ -1,0 +1,325 @@
+ARMORX-LAB HOST BASELINE
+collected: 2026-09-27T09:57:28.580630-04:00
+hostname: salamanka-systemproductname
+
+========================================================================
+OS / KERNEL / ARCH
+========================================================================
+
+$ cat /etc/os-release
+# os-release
+PRETTY_NAME="Ubuntu 26.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="26.04"
+VERSION="26.04.1 LTS (Resolute Raccoon)"
+VERSION_CODENAME=resolute
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=resolute
+LOGO=ubuntu-logo
+
+$ uname -a
+# uname
+Linux salamanka-systemproductname 7.0.0-34-generic #34-Ubuntu SMP PREEMPT_DYNAMIC Wed Sep  2 14:29:37 UTC 2026 x86_64 GNU/Linux
+
+$ lsb_release -a 2>/dev/null || true
+# lsb
+Distributor ID:	Ubuntu
+Description:	Ubuntu 26.04.1 LTS
+Release:	26.04
+Codename:	resolute
+
+========================================================================
+CPU
+========================================================================
+
+$ grep -m1 'model name' /proc/cpuinfo
+# model
+model name	: 12th Gen Intel(R) Core(TM) i5-12400F
+
+$ nproc
+# logical CPUs
+12
+
+$ lscpu | grep -E 'Model name|Architecture|CPU\(s\)|Thread|Core|Socket|MHz' 
+# lscpu summary
+Architecture:                            x86_64
+CPU(s):                                  12
+On-line CPU(s) list:                     0-11
+Model name:                              12th Gen Intel(R) Core(TM) i5-12400F
+Thread(s) per core:                      2
+Core(s) per socket:                      6
+Socket(s):                               1
+CPU(s) scaling MHz:                      90%
+CPU max MHz:                             4400.0000
+CPU min MHz:                             800.0000
+NUMA node0 CPU(s):                       0-11
+
+========================================================================
+MEMORY
+========================================================================
+
+$ free -h
+# free -h
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       8.4Gi       465Mi       352Mi       6.9Gi       7.0Gi
+Swap:           15Gi          0B        15Gi
+
+$ grep -E '^MemTotal|^SwapTotal' /proc/meminfo
+# MemTotal
+MemTotal:       16176484 kB
+SwapTotal:      16777212 kB
+
+========================================================================
+DISK
+========================================================================
+
+$ df -h / /home /var 2>/dev/null
+# df -h / /home /var
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme1n1p2  916G   89G  781G  11% /
+/dev/nvme1n1p2  916G   89G  781G  11% /
+/dev/nvme1n1p2  916G   89G  781G  11% /
+
+$ lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINT 2>/dev/null
+# lsblk
+NAME          SIZE TYPE FSTYPE   MOUNTPOINT
+loop0        66.8M loop squashfs /snap/core24/2124
+loop1        91.7M loop squashfs /snap/gtk-common-themes/1535
+loop2       222.1M loop squashfs /snap/thunderbird/1274
+loop3       614.5M loop squashfs /snap/gnome-46-2404/164
+loop4         264K loop squashfs /snap/gtk-theme-breeze/8
+loop5       103.2M loop squashfs /snap/telegram-desktop/7150
+loop6        13.2M loop squashfs /snap/icon-theme-breeze/5
+loop7       260.3M loop squashfs /snap/firefox/8763
+loop8         402M loop squashfs /snap/mesa-2404/1839
+loop9        50.1M loop squashfs /snap/snapd/27710
+loop10          4K loop squashfs /snap/bare/5
+loop11       66.8M loop squashfs /snap/core24/1643
+loop12      261.3M loop squashfs /snap/firefox/8929
+loop13      615.3M loop squashfs /snap/gnome-46-2404/168
+loop14       50.3M loop squashfs /snap/snapd/27738
+loop15      222.1M loop squashfs /snap/thunderbird/1259
+nvme0n1     953.9G disk          
+├─nvme0n1p1   100M part vfat     
+├─nvme0n1p2    16M part          
+├─nvme0n1p3 952.9G part ntfs     
+└─nvme0n1p4   873M part ntfs     
+nvme1n1     931.5G disk          
+├─nvme1n1p1   300M part vfat     /boot/efi
+└─nvme1n1p2 931.2G part ext4     /
+
+========================================================================
+NETWORK INTERFACES
+========================================================================
+
+$ ip -br addr
+# ip -br addr
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp2s0           DOWN           
+wlp3s0           UP             192.168.0.45/24 fe80::91c9:68e5:477d:c9fb/64 
+tailscale0       UNKNOWN        100.109.237.83/32 fd7a:115c:a1e0::692e:ed54/128 fe80::af43:c801:77ac:6c61/64 
+wlxe84e068af1ff  DOWN
+
+$ ip addr
+# ip addr (full)
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp2s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN group default qlen 1000
+    link/ether e8:9c:25:6d:73:b8 brd ff:ff:ff:ff:ff:ff
+    altname enxe89c256d73b8
+3: wlp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether 4c:82:a9:93:53:0b brd ff:ff:ff:ff:ff:ff
+    altname wlx4c82a993530b
+    inet 192.168.0.45/24 brd 192.168.0.255 scope global noprefixroute wlp3s0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::91c9:68e5:477d:c9fb/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+5: tailscale0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1280 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none 
+    inet 100.109.237.83/32 scope global tailscale0
+       valid_lft forever preferred_lft forever
+    inet6 fd7a:115c:a1e0::692e:ed54/128 scope global 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::af43:c801:77ac:6c61/64 scope link stable-privacy proto kernel_ll 
+       valid_lft forever preferred_lft forever
+6: wlxe84e068af1ff: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether e8:4e:06:8a:f1:ff brd ff:ff:ff:ff:ff:ff
+
+$ ip route
+# ip route
+default via 192.168.0.1 dev wlp3s0 proto dhcp src 192.168.0.45 metric 600 
+192.168.0.0/24 dev wlp3s0 proto kernel scope link src 192.168.0.45 metric 600
+
+$ ip route show default
+# default gateway
+default via 192.168.0.1 dev wlp3s0 proto dhcp src 192.168.0.45 metric 600
+
+$ ip -br link
+# ip -br link
+lo               UNKNOWN        00:00:00:00:00:00 <LOOPBACK,UP,LOWER_UP> 
+enp2s0           DOWN           e8:9c:25:6d:73:b8 <NO-CARRIER,BROADCAST,MULTICAST,UP> 
+wlp3s0           UP             4c:82:a9:93:53:0b <BROADCAST,MULTICAST,UP,LOWER_UP> 
+tailscale0       UNKNOWN        <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> 
+wlxe84e068af1ff  DOWN           e8:4e:06:8a:f1:ff <NO-CARRIER,BROADCAST,MULTICAST,UP>
+
+========================================================================
+PRIMARY WIFI wlp3s0 ASSOCIATION (read-only)
+========================================================================
+
+$ iw dev wlp3s0 link
+# iw dev wlp3s0 link
+Connected to ca:62:8b:74:4e:2c (on wlp3s0)
+	SSID: K&M New
+	freq: 5200.0
+	RX: 3267926611 bytes (2555307 packets)
+	TX: 1230398581 bytes (1143955 packets)
+	signal: -60 dBm
+	rx bitrate: 432.3 MBit/s 160MHz HE-MCS 4 HE-NSS 1 HE-GI 0 HE-DCM 0
+	tx bitrate: 576.4 MBit/s 160MHz HE-MCS 3 HE-NSS 2 HE-GI 0 HE-DCM 0
+	bss flags: short-slot-time
+	dtim period: 1
+	beacon int: 100
+
+$ nmcli -t -f DEVICE,TYPE,STATE,CONNECTION device status 2>/dev/null | grep wlp3s0 || true
+# nmcli device status wlp3s0
+wlp3s0:wifi:connected:K&M New
+p2p-dev-wlp3s0:wifi-p2p:disconnected:
+
+$ iw dev
+# iw dev
+phy#2
+	Interface wlxe84e068af1ff
+		ifindex 6
+		wdev 0x200000001
+		addr e8:4e:06:8a:f1:ff
+		type managed
+		txpower 20.00 dBm
+		multicast TXQ:
+			qsz-byt	qsz-pkt	flows	drops	marks	overlmt	hashcol	tx-bytes	tx-packets
+			0	0	0	0	0	0	0	0		0
+phy#0
+	Unnamed/non-netdev interface
+		wdev 0x2
+		addr 4c:82:a9:93:53:0b
+		type P2P-device
+	Interface wlp3s0
+		ifindex 3
+		wdev 0x1
+		addr 4c:82:a9:93:53:0b
+		ssid K&M New
+		type managed
+		channel 40 (5200 MHz), width: 160 MHz, center1: 5250 MHz
+		txpower 1.00 dBm
+		multicast TXQ:
+			qsz-byt	qsz-pkt	flows	drops	marks	overlmt	hashcol	tx-bytes	tx-packets
+			0	0	0	0	0	0	0	0		0
+
+========================================================================
+RFKILL
+========================================================================
+
+$ rfkill list
+# rfkill list
+0: hci0: Bluetooth
+	Soft blocked: no
+	Hard blocked: no
+1: phy0: Wireless LAN
+	Soft blocked: no
+	Hard blocked: no
+3: hci1: Bluetooth
+	Soft blocked: no
+	Hard blocked: no
+4: phy2: Wireless LAN
+	Soft blocked: no
+	Hard blocked: no
+
+========================================================================
+BLUETOOTH ADAPTERS (read-only)
+========================================================================
+
+$ bluetoothctl list 2>/dev/null
+# bluetoothctl list
+Controller E8:4E:06:8A:F2:00 salamanka-systemproductname #2 [default]
+Controller 4C:82:A9:93:53:0C salamanka-systemproductname
+
+$ btmgmt -i 0 info 2>/dev/null; btmgmt info 2>/dev/null
+# btmgmt info (hci0)
+<error: Command 'btmgmt -i 0 info 2>/dev/null; btmgmt info 2>/dev/null' timed out after 120 seconds>
+
+$ hciconfig -a 2>/dev/null || true
+# hciconfig
+hci1:	Type: Primary  Bus: USB
+	BD Address: E8:4E:06:8A:F2:00  ACL MTU: 820:8  SCO MTU: 255:16
+	UP RUNNING 
+	RX bytes:1965 acl:0 sco:0 events:155 errors:0
+	TX bytes:26813 acl:0 sco:0 commands:155 errors:0
+	Features: 0xff 0xff 0xff 0xfe 0xdb 0xff 0x7b 0x87
+	Packet type: DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3 
+	Link policy: RSWITCH HOLD SNIFF PARK 
+	Link mode: PERIPHERAL ACCEPT 
+	Name: 'salamanka-systemproductname #2'
+	Class: 0x6c0104
+	Service Classes: Rendering, Capturing, Audio, Telephony
+	Device Class: Computer, Desktop workstation
+	HCI Version: 4.0 (0x6)  Revision: 0xe2f
+	LMP Version: 4.0 (0x6)  Subversion: 0x9f73
+	Manufacturer: Realtek Semiconductor Corporation (93)
+
+hci0:	Type: Primary  Bus: USB
+	BD Address: 4C:82:A9:93:53:0C  ACL MTU: 1024:7  SCO MTU: 240:8
+	UP RUNNING 
+	RX bytes:472470 acl:0 sco:0 events:2944 errors:0
+	TX bytes:11254 acl:0 sco:0 commands:778 errors:0
+	Features: 0xff 0xfe 0x0f 0xfe 0xd8 0x3f 0x7b 0x87
+	Packet type: DM1 DM3 DM5 DH1 DH3 DH5 HV1 HV2 HV3 
+	Link policy: RSWITCH HOLD SNIFF 
+	Link mode: PERIPHERAL ACCEPT 
+	Name: 'salamanka-systemproductname'
+	Class: 0x6c0104
+	Service Classes: Rendering, Capturing, Audio, Telephony
+	Device Class: Computer, Desktop workstation
+	HCI Version: 5.3 (0xc)  Revision: 0x0
+	LMP Version: 5.3 (0xc)  Subversion: 0x8567
+	Manufacturer: Qualcomm (29)
+
+========================================================================
+USB DEVICES
+========================================================================
+
+$ lsusb
+# lsusb
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 1ea7:0066 SHARKOON Technologies GmbH [Mediatrack Edge Mini Keyboard]
+Bus 001 Device 003: ID 0489:e10d Foxconn / Hon Hai 
+Bus 001 Device 005: ID 0bda:b720 Realtek Semiconductor Corp. RTL8723BU 802.11b/g/n WLAN Adapter
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+
+$ lsusb -t
+# lsusb -t
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/16p, 480M
+    |__ Port 003: Dev 002, If 0, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 003: Dev 002, If 1, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 006: Dev 003, If 0, Class=Wireless, Driver=btusb, 12M
+    |__ Port 006: Dev 003, If 1, Class=Wireless, Driver=btusb, 12M
+    |__ Port 008: Dev 005, If 0, Class=Wireless, Driver=btusb, 480M
+    |__ Port 008: Dev 005, If 1, Class=Wireless, Driver=btusb, 480M
+    |__ Port 008: Dev 005, If 2, Class=Vendor Specific Class, Driver=rtl8xxxu, 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/4p, 20000M/x2
+
+========================================================================
+PCI / RADIO HW
+========================================================================
+
+$ lspci 2>/dev/null | grep -iE 'network|bluetooth|wireless|ethernet' || true
+# lspci net/bt
+0000:02:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller (rev 15)
+0000:03:00.0 Network controller: Qualcomm Technologies, Inc WCN785x Wi-Fi 7(802.11be) 320MHz 2x2 [FastConnect 7800] (rev 01)

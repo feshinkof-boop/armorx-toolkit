@@ -1,0 +1,1 @@
+{"message": {"type": "error", "description": "ReferenceError: 'Java' is not defined", "stack": "ReferenceError: 'Java' is not defined\n    at installJavaNetHooks (/script1.js:220)\n    at <eval> (/script1.js:273)", "fileName": "/script1.js", "lineNumber": 220, "columnNumber": 1}}

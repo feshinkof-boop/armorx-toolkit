@@ -1,9 +1,18 @@
-# large binaries are hashed in apk/manifests/ and baselines/imported-research/SHA256SUMS instead
+# large binaries are hashed in apk/manifests/ + baselines/imported-research/SHA256SUMS instead
 apk/original/**
 apk/extracted/**
 baselines/imported-research/**
+!baselines/imported-research/SHA256SUMS
+!baselines/imported-research/INDEX.md
 ble/bumble/venv/**
 **/__pycache__/**
 logs/**
 ble/virtual-armorx/logs/**
 *.bin
+# emulator disk images and downloaded binaries are not source
+avd/research/avd-home/**
+avd/reference/avd-home/**
+**/*.avd/**
+frida/tools/**
+*.img
+*.qcow2

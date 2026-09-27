@@ -1,0 +1,421 @@
+{
+ "build_key": "4.0.8",
+ "label": "4.0.8",
+ "original_filename": "BIGBIGWON-4.0.8.apkm",
+ "original_path": "/home/salamanka/armorx-lab/apk/original/4.0.8/BIGBIGWON-4.0.8.apkm",
+ "companion_original": {
+  "path": "/home/salamanka/armorx-lab/apk/original/4.0.8/base.apk",
+  "note": "byte-identical to the base split inside the APKM",
+  "sha256": "64e0832b1f97d995b40bf994465c277340e96a4f2b6b2fc5ef1eb4e2af9378e2"
+ },
+ "size_bytes": 36492532,
+ "sha256": "474f66094ebbea8b0242257bbb23fc6b1baa7e54c10f13beb2cd4da14ce73abf",
+ "sha1": "6cd397b2b0c9cfa54adbbe3dfc89e19110a3a583",
+ "package": "com.moojiang.bigbigwon.mygt",
+ "versionName": "4.0.8",
+ "versionCode": 409,
+ "app_label": "BIGBIG WON",
+ "min_sdk": 24,
+ "target_sdk": 36,
+ "compile_sdk": 36,
+ "abi_set": [
+  "arm64-v8a"
+ ],
+ "split_structure": {
+  "container": "APKM (zip of splits)",
+  "splits": [
+   {
+    "name": "base.apk",
+    "size": 32854837,
+    "sha256": "64e0832b1f97d995b40bf994465c277340e96a4f2b6b2fc5ef1eb4e2af9378e2",
+    "manifest_attrs": "android:splitTypes=\"\" android:requiredSplitTypes=\"base__abi,base__density\"",
+    "contains": "classes.dex + classes2.dex + classes3.dex, resources.arsc, assets/flutter_assets/**, assets/dexopt/**, NO lib/"
+   },
+   {
+    "name": "config.arm64_v8a.apk",
+    "size": 11027091,
+    "sha256": "2e9805fc20b0ec88b62c5d107f0c1634a27f47469d63c79c90b842f9f15bd1fb",
+    "manifest_attrs": "split=\"config.arm64_v8a\" android:splitTypes=\"base__abi\"",
+    "contains": "lib/arm64-v8a/{libapp.so, libflutter.so, libBugly_Native.so, libdatastore_shared_counter.so}"
+   },
+   {
+    "name": "config.en.apk",
+    "size": 41369,
+    "sha256": "00df4a3b837f2e5c067279e65242917e797fa5fa7e9e58905f93e5373a89b959",
+    "manifest_attrs": "split=\"config.en\" android:splitTypes=\"\""
+   },
+   {
+    "name": "config.ar.apk",
+    "size": 20889,
+    "sha256": "172052b2b749db30c5fbfaae36dcbbb5e7e1e393fdd26ece8ab1fd74b9e6d78e",
+    "manifest_attrs": "split=\"config.ar\" android:splitTypes=\"\""
+   },
+   {
+    "name": "config.xxhdpi.apk",
+    "size": 88260,
+    "sha256": "a1998122b37e9edb5271a048a8a433bfadcd8dbfad09da19ad9891e74e7e74a8",
+    "manifest_attrs": "split=\"config.xxhdpi\" android:splitTypes=\"base__density\""
+   }
+  ],
+  "note": "the base split carries NO native library; the Dart snapshot lives in the ABI split",
+  "evidence": "PROVEN STATIC - unzip listing + androguard on every split's AndroidManifest.xml"
+ },
+ "signing_certificate": {
+  "subject": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+  "issuer": "C=US, ST=California, L=Mountain View, O=Google Inc., OU=Android, CN=Android",
+  "serial": "AC945150B4978B64B1083CA763BF26A0998AF05A",
+  "validity": "2026-01-15 -> 2056-01-15",
+  "sha256_fingerprint": "F7:45:43:34:0E:EE:32:74:63:10:5E:2A:FB:A8:FB:AC:0C:9C:F5:FD:FE:AD:32:FC:9D:F7:12:AB:09:18:7B:62",
+  "sha1_fingerprint": "A0:67:26:85:CF:72:5D:5E:D9:19:28:17:2E:62:FC:0F:68:1F:D0:1B",
+  "v1_signature_file": null,
+  "note": "Google Play App Signing certificate shape; base.apk carries NO v1 signature (v2/v3 block only). config.*.apk splits carry META-INF/BNDLTOOL.RSA (Gradle bundle tool).",
+  "evidence": "PROVEN STATIC - androguard v2/v3 block on base.apk; reproduced independently by the prior 4.0.8 pass"
+ },
+ "dart_version": "3.12.2 (stable) (Tue Jun 9 01:11:39 2026 -0700) on \"android_arm64\"",
+ "dart_evidence": "PROVEN STATIC - libflutter.so strings (of the ABI split)",
+ "flutter_engine_hash": "ace654289f5abc240509fc941453ebc5",
+ "flutter_engine_evidence": "PROVEN STATIC - libapp.so snapshot header (magic f5f5dcdc @0x340; the base split has no libapp.so)",
+ "flutter_version": "UNKNOWN",
+ "flutter_version_evidence": "UNKNOWN - no Flutter framework version string is stored in the bundle; the Dart runtime is 3.12.2",
+ "ble_library": "flutter_blue_plus",
+ "ble_library_evidence": "PROVEN STATIC - libapp.so strings: package:flutter_blue_plus/**, flutter_blue_plus_android/**, flutter_blue_plus_platform_interface/**; zero hits for flutter_reactive_ble",
+ "server_hosts": {
+  "api": "http://m.bigbigwon.com:8080",
+  "oss": [
+   "https://bigbig-won-cn.oss-cn-shanghai.aliyuncs.com",
+   "https://bigbigwon-jp.oss-ap-northeast-1.aliyuncs.com",
+   "https://bigwon-germany.oss-eu-central-1.aliyuncs.com",
+   "https://bigwon-us.oss-us-west-1.aliyuncs.com"
+  ],
+  "www": [
+   "https://www.bigbigwon.com",
+   "https://www.bigbigwon.cn"
+  ],
+  "evidence": "PROVEN STATIC - libapp.so string pool (same API host in all three builds)"
+ },
+ "server_endpoints": [
+  "/dev/register",
+  "/dev/userLogin",
+  "/dev/queryConfigList",
+  "/dev/addConfig",
+  "/dev/changeConfig",
+  "/dev/renameConfig",
+  "/dev/delConfig",
+  "/dev/shareConfig",
+  "/dev/importShareConfig",
+  "/dev/queryMacroList",
+  "/dev/addMacro",
+  "/dev/changeMacro",
+  "/dev/delMacro",
+  "/dev/setConfig",
+  "REMOVED vs 2.24: /dev/queryDefaultConfig, /dev/queryGameList"
+ ],
+ "device_enum": [
+  {
+   "id": 0,
+   "name": "devNone"
+  },
+  {
+   "id": 1,
+   "name": "devRainbow"
+  },
+  {
+   "id": 2,
+   "name": "devRainbowS"
+  },
+  {
+   "id": 3,
+   "name": "devRainbow2Pro"
+  },
+  {
+   "id": 4,
+   "name": "devRainbow3"
+  },
+  {
+   "id": 5,
+   "name": "devMSY"
+  },
+  {
+   "id": 6,
+   "name": "devRainbow2Lite"
+  },
+  {
+   "id": 7,
+   "name": "devC2SL"
+  },
+  {
+   "id": 8,
+   "name": "devBLITZ_ULT"
+  },
+  {
+   "id": 9,
+   "name": "devCHOCO"
+  },
+  {
+   "id": 10,
+   "name": "devArmorX"
+  },
+  {
+   "id": 11,
+   "name": "devGale2"
+  },
+  {
+   "id": 12,
+   "name": "devKeyboardDouJiangV1"
+  }
+ ],
+ "armorx_enum_value": 10,
+ "device_enum_evidence": "PROVEN STATIC - objs.txt enum objects (Obj!Device@<addr> off_8: int(N), off_10: \"devX\")",
+ "ble_uuid_table": [
+  {
+   "uuid": "00000000-0000-1000-8000-00805f9b34fb",
+   "role": "vendor service (matches by UUID equality; the vendor really advertises the all-zero service)",
+   "evidence": "PROVEN STATIC - libapp.so string pool"
+  },
+  {
+   "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb",
+   "role": "FFE1 - command write characteristic (write-without-response)",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb",
+   "role": "FFE2 - notify/read characteristic (CCCD 01 00)",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "0000180a-0000-1000-8000-00805f9b34fb",
+   "role": "180A device information service",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "0000180f-0000-1000-8000-00805f9b34fb",
+   "role": "180F battery service",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "00002a24-0000-1000-8000-00805f9b34fb",
+   "role": "2A24 model number string",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "00002a26-0000-1000-8000-00805f9b34fb",
+   "role": "2A26 firmware revision string",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "00002a19-0000-1000-8000-00805f9b34fb",
+   "role": "2A19 battery level",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "00002902-0000-1000-8000-00805f9b34fb",
+   "role": "2902 client characteristic configuration descriptor",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "0000f530-1212-efde-1523-785feabcd123",
+   "role": "keyboard/doujiang family service",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "0000f531-1212-efde-1523-785feabcd123",
+   "role": "keyboard/doujiang family characteristic",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "uuid": "0000f532-1212-efde-1523-785feabcd123",
+   "role": "keyboard/doujiang family characteristic",
+   "evidence": "PROVEN STATIC"
+  }
+ ],
+ "ffe1_ffe2_usage": "FFE1 write-without-response / FFE2 notify, unchanged; the F5xx keyboard family service/characteristics are new in this build; still no FFE0 and no AE00/AE01/AE02",
+ "config_sizes": [
+  88,
+  144,
+  240,
+  280,
+  335,
+  456,
+  484,
+  508
+ ],
+ "config_templates": [
+  {
+   "len": 88,
+   "pp_off": "0x58700",
+   "sha256_prefix": "9eaea1d6a42c49a4",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0xC800"
+  },
+  {
+   "len": 144,
+   "pp_off": "0x58708",
+   "sha256_prefix": "1fa5afe2401d17c2",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x848A"
+  },
+  {
+   "len": 144,
+   "pp_off": "0x58738",
+   "sha256_prefix": "bc536085f138a2ed",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x7F67",
+   "family": "ARMOR-X Pro"
+  },
+  {
+   "len": 240,
+   "pp_off": "0x58720",
+   "sha256_prefix": "a2dabf5bec6afe49",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x6AC7"
+  },
+  {
+   "len": 240,
+   "pp_off": "0x58728",
+   "sha256_prefix": "96dd901075496924",
+   "stored_crc": "0x1605",
+   "recomputed_crc": "0xBC3A",
+   "crc_self_valid": false
+  },
+  {
+   "len": 240,
+   "pp_off": "0x58740",
+   "sha256_prefix": "47c992112178bc82",
+   "stored_crc": "0x198B",
+   "recomputed_crc": "0x198B",
+   "crc_self_valid": true
+  },
+  {
+   "len": 280,
+   "pp_off": "0x58718",
+   "sha256_prefix": "46cb64522b4831b7",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x0F1B"
+  },
+  {
+   "len": 280,
+   "pp_off": "0x58758",
+   "sha256_prefix": "8f318f88caedb66b",
+   "stored_crc": "0x0000",
+   "recomputed_crc": "0x878D"
+  },
+  {
+   "len": 335,
+   "pp_off": "0x58750",
+   "sha256_prefix": "3d79ec00bc56d7f5",
+   "stored_crc": "0x727F",
+   "recomputed_crc": "0x727F",
+   "crc_self_valid": true
+  },
+  {
+   "len": 456,
+   "pp_off": "0x58748",
+   "sha256_prefix": "1034629b4cf19310",
+   "stored_crc": "0x3E21",
+   "recomputed_crc": "0x3E21",
+   "crc_self_valid": true
+  },
+  {
+   "len": 484,
+   "pp_off": "0x58730",
+   "sha256_prefix": "a61757a34cbdc20f",
+   "stored_crc": "0xD0A4",
+   "recomputed_crc": "0xD0A4",
+   "crc_self_valid": true
+  },
+  {
+   "len": 508,
+   "pp_off": "0x58710",
+   "sha256_prefix": "4da4c0bb2aeb8f88",
+   "stored_crc": "0x3722",
+   "recomputed_crc": "0x3722",
+   "crc_self_valid": true
+  }
+ ],
+ "config_evidence": "PROVEN STATIC - pp.txt string literals (12 unique images)",
+ "config_crc": "CRC-16/MODBUS over bytes 2..end; six images (240/335/456/484/508) self-validate -> device-wide rule, not a 144-byte special case",
+ "config_length_rule": "checkConfigLength @0x82e648 + defaultConfig() branches on the current length for devArmorX (0x90 -> 144, 0xF0 -> 240): the device type alone does not fix the length",
+ "opcode_inventory": {
+  "byte_exact_proven_this_pass": {
+   "0B": "getZKMVer - A5 04 0B B4 (@0x8b61fc bluetooth_mode, @0x8b6ce4 armorx_pro_root)",
+   "D2": "testModeSwitch - A5 05 D2 01 (@0xabaef4)",
+   "D3": "getMaxSize - A5 04 D3 7C (@0xac313c)",
+   "D4": "getInputModel - A5 04 D4 7D (@0xa84258)",
+   "D6": "getDeviceConfig - A5 04 D6 7F (@0x80dbfc)",
+   "DD": "getChargingLightEffect - A5 04 DD 86 (@0xace808)",
+   "E1": "getConnectModel - A5 04 E1 8A (@0xabd35c)",
+   "E2": "readFirmware - A5 04 E2 8B (@0x8b6860)  <-- PRESENT (absent in 2.23/2.24)",
+   "E4": "getMTU - A5 04 E4 8D (@0x8b60f0)",
+   "F5": "getLogoColorConfig - A5 04 F5 9E (@0xa84a40)",
+   "F6": "legacy DPI - A5 05 F6 00 A0 (@0x946750 fallback branch)",
+   "F7": "getStepLength - A5 04 F7 A0 (@0x8b4d30)",
+   "F8": "getBriCompConfig - A5 04 F8 (@0x8b4c24)",
+   "FC": "DPI write - A5 05 FC <dpi&0x0F> <cks> (@0x946750)",
+   "73": "light enable state - A5 05 73 00/01 (@0x848ae0 setLightEnable, @0x9f4e74 setLightEnabled)",
+   "04": "getBattery - A5 04 04 AD (@0x8b672c)"
+  },
+  "from_the_prior_verified_command_index": {
+   "70": "lighting config R3 - A5 04 70 (writeApplyLightR3Common @0x844824), A5 10 70 ... over A4 (writeLightConfigR3 @0x844e04), main writeLightConfig @0x84938c",
+   "AB": "motion/gyro frames - header 0xAB (writeMotionDpiConfig @0x946158 AB 07 05 25 <lo> <hi> <cks>; getMotionList/getMotionDpi)",
+   "25/26": "motion sub-commands under the AB header",
+   "1A": "reset",
+   "1B": "start/stopCalibration",
+   "0E": "writeDevice",
+   "A4/A5": "frame headers",
+   "D7": "writeDeviceConfig (A4/D7)",
+   "D8": "macro (A4/D8)",
+   "EF": "getDeviceUUID",
+   "A9": "doujiang keyboard empty packet"
+  },
+  "absent_no_builder_constructs_it": [
+   "FFE1-family legacy opcodes f6-as-normal-path (kept only as a fw-gated fallback)"
+  ],
+  "absence_evidence": "builder census + the prior byte-exact command index (command-index.json)"
+ },
+ "d6_d7_handling": {
+  "D6_read": "A5 04 D6 7F; reassembly by the generic config page state machines (dispatch on A4/A5/D6/D7/DA in configs_mian V280/V484, configs_config); ARMOR-X Pro root screen does NOT issue D6 itself",
+  "D7_write": "A4 fragments; chunk = subpackageLength() - 5 (define.dart @0x819190); 1-based index; A4 length = chunk+5; ack A5 05 D7 00 81",
+  "fragment_chunk_armorx": 15,
+  "fragment_chunk_evidence": "PROVEN STATIC - subpackageLength returns 48/20/20/... per device; 20 - 5 = 15 for ARMOR-X Pro"
+ },
+ "d8_macro": {
+  "present": true,
+  "implementation": "applicationFrameMacro() @0x85c8c0 builds the whole D8 buffer (header + 10-byte step frames + CRC-16) then writeMacroConfig @0x85a670 does A4/D8 fragmentation + checksum + BLE write + 4 ms inter-frame delay + commit frame; TranscribeFrame.toFrameCmd/_keyByte/_stickByte serialise each step",
+  "payload_layout": "N = 10 + 10 x frames; [0..1] CRC-16/MODBUS over [2..N-1] big-endian; [2..3] length BE; [4]=0; [5]=trigger key; [6]=runKey; [7]=isRepeat; [8..9]=repeatTime BE; then 10-byte step frames: [0]=((ms/8)&0x0F)<<4, [1]=(ms/8)>>4, [2..5]=key bitmask BE, [6..9]=stick pattern BE; 8 ms granularity, 12-bit -> max 32760 ms; chords = multiple bits in one frame; disable = all-zero 10-byte frame; terminator frame A4 0A D8 <nfrags+1> <sum8>",
+  "evidence": "PROVEN STATIC (encode side; readback offsets still unlocated)"
+ },
+ "fc_f6_dpi": {
+  "implementation": "A5 05 FC <dpi&0x0F> <cks> by default; for curDevice in {devRainbow2Pro(3), devRainbow3(4), devGale2(11), devC2SL(7)} the builder overwrites element 2 with #0x1ec = 0xF6 when the version static (0xb6c, set from the 0B reply) is >= 0x35 (writeDpiConfig @0x946750). Motion/gyro DPI is a separate AB 07 05 25 <u16 LE> <cks> frame (writeMotionDpiConfig @0x946158).",
+  "payload": "normal DPI = 4-bit selector; motion DPI = 16-bit little-endian",
+  "evidence": "PROVEN STATIC"
+ },
+ "e2_presence": {
+  "present": true,
+  "implementation": "BluetoothModel::readFirmware @0x8b6860 builds the byte-exact frame A5 04 E2 8B (A5 @0x9467b8-style stores, opcode Smi #0x1c4). No E2 branch found in the ARMOR-X Pro dispatcher closure in this build.",
+  "evidence": "PROVEN STATIC"
+ },
+ "lighting": {
+  "implementation": "writeLightConfig @0x84938c emits A5 control + A4 data frames (opcode FF, sub-command 05, count/mask 3F); writeLightConfigR3 @0x844e04 = A5 10 70 <5 payload>; writeApplyLightR3Common @0x844824 = A5 04 70; LED sets travel as bitmasks via encodeLedIdBit/lightIdsToMask; charging-light effect DD; brightness compensation F8; light enable 73; logo colour F5; R3 colour triple (LightColorRainBow3::toList)",
+  "evidence": "PROVEN STATIC (opcodes/presence)"
+ },
+ "turbo": {
+  "implementation": "config-resident, no per-write turbo frame: config byte 80 = turbo speed index (from global static 0xb60 -> parameter idx 76), bytes 81..84 = turboKey u32 BIG-ENDIAN (GamepadParam30.turboKey, hex string, field offset 0x5c; split MSB-first into parameter indices 77,78,79,80)",
+  "default": "the embedded ARMOR-X Pro 144 image ships bytes 80..84 = 00 00 00 00 00 (turbo off)",
+  "correction": "sendAllTurboKeySpeed and writeTurboClick DO exist in this bundle, but only inside the keyboard/doujiang subsystem (widgets/kb_doujiang/util/hitbox_key_sender_manager.dart @0x9d15e4 / @0x9d52e0). The earlier note 'a grep over the whole asm tree finds neither symbol' is wrong. Neither is used by the gamepad turbo path, so the config-resident model stands.",
+  "evidence": "PROVEN STATIC"
+ },
+ "key_id_table": {
+  "summary": "mapKeys occupies config bytes 112..143 (32 slots). Independent re-extraction of key_remap_t.dart::gamePadKeyName @0x92d69c in this pass reproduced the prior table exactly: 0:A 1:B 3:X 4:Y 6:LB 7:RB 8:LT 9:RT 10:Select 11:Start 13:L3 14:R3 15:Capture 16:up 17:down 18:left 19:right 22:Menu 23:M1 24:M2 25:M3 26:M4 27:M5 28:M6 29:M7; ids 2,5,12,20,21,30,31,32,33 carry no label in the build; macro pseudo-keys 34..49 exist separately",
+  "id_binding": "PROVEN STATIC (re-verified against key-id-table.md)",
+  "evidence": "PROVEN STATIC"
+ },
+ "notable": [
+  "Google Play App Signing certificate",
+  "PairIP-wrapped Java shell (com.pairip.application.Application)",
+  "package id renamed to com.moojiang.bigbigwon.mygt",
+  "arm64-v8a only, split bundle",
+  "Dart namespace still package:moojiang/"
+ ],
+ "manifest_version": 1,
+ "generated_from": "local originals under /home/salamanka/armorx-lab/apk/original/ (no download)"
+}
