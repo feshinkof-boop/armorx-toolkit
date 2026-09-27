@@ -1,0 +1,127 @@
+name: Package ArmorX Windows v0.2.1 Final RC
+
+on:
+  push:
+    branches:
+      - windows/public-v0.2.1
+    paths:
+      - ".github/workflows/package-v0.2.1-final-rc.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build portable and folder packages
+        shell: pwsh
+        run: |
+          dotnet restore .\windows\ArmorX.Windows\ArmorX.Windows.csproj
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false -o .\out\single
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=false -p:DebugType=None -p:DebugSymbols=false -o .\out\folder
+          Copy-Item .\out\single\ArmorX-Windows.exe .\ArmorX-Windows-v0.2.1-RC.exe
+          Compress-Archive -Path .\out\folder\* -DestinationPath .\ArmorX-Windows-v0.2.1-RC-win-x64.zip -Force
+
+      - name: Validate portable executable
+        shell: pwsh
+        run: |
+          $p = Start-Process .\ArmorX-Windows-v0.2.1-RC.exe -ArgumentList '--self-test' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Portable self-test failed: $($p.ExitCode)" }
+          $p = Start-Process .\ArmorX-Windows-v0.2.1-RC.exe -ArgumentList '--ui-smoke' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Portable UI smoke failed: $($p.ExitCode)" }
+
+      - name: Install Inno Setup
+        shell: pwsh
+        run: choco install innosetup --no-progress -y
+
+      - name: Build per-user installer
+        shell: pwsh
+        run: |
+          $source = (Resolve-Path .\out\folder).Path
+          @"
+          [Setup]
+          AppId={{A8B6CF1C-7B43-4E3E-9F3B-16D6A9F6E021}
+          AppName=ArmorX Windows
+          AppVersion=0.2.1
+          AppPublisher=ArmorX Toolkit Community
+          AppPublisherURL=https://github.com/feshinkof-boop/armorx-toolkit
+          AppSupportURL=https://github.com/feshinkof-boop/armorx-toolkit/issues
+          DefaultDirName={localappdata}\Programs\ArmorX Windows
+          DefaultGroupName=ArmorX Windows
+          DisableProgramGroupPage=yes
+          PrivilegesRequired=lowest
+          ArchitecturesAllowed=x64
+          ArchitecturesInstallIn64BitMode=x64
+          OutputDir=$PWD\installer-output
+          OutputBaseFilename=ArmorX-Windows-v0.2.1-RC-Setup
+          Compression=lzma2
+          SolidCompression=yes
+          WizardStyle=modern
+          UninstallDisplayIcon={app}\ArmorX-Windows.exe
+          CloseApplications=yes
+          RestartApplications=no
+
+          [Tasks]
+          Name: "desktopicon"; Description: "Create a desktop shortcut"; GroupDescription: "Additional shortcuts:"; Flags: unchecked
+
+          [Files]
+          Source: "$source\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+
+          [Icons]
+          Name: "{group}\ArmorX Windows"; Filename: "{app}\ArmorX-Windows.exe"
+          Name: "{autodesktop}\ArmorX Windows"; Filename: "{app}\ArmorX-Windows.exe"; Tasks: desktopicon
+          "@ | Set-Content .\ArmorX-Windows-v0.2.1-RC.iss -Encoding utf8
+
+          $programFilesX86 = [Environment]::GetFolderPath([Environment+SpecialFolder]::ProgramFilesX86)
+          $iscc = Join-Path $programFilesX86 "Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { throw "Inno Setup compiler not found: $iscc" }
+          & $iscc .\ArmorX-Windows-v0.2.1-RC.iss
+          if ($LASTEXITCODE -ne 0) { throw "Installer compilation failed." }
+          Copy-Item .\installer-output\ArmorX-Windows-v0.2.1-RC-Setup.exe .\ArmorX-Windows-v0.2.1-RC-Setup.exe
+
+      - name: Smoke-test installer and uninstaller
+        shell: pwsh
+        run: |
+          $testDir = Join-Path $env:LOCALAPPDATA "Programs\ArmorX Windows RC Test"
+          Remove-Item $testDir -Recurse -Force -ErrorAction SilentlyContinue
+          $dirArg = "/DIR=`"$testDir`""
+          $p = Start-Process .\ArmorX-Windows-v0.2.1-RC-Setup.exe -ArgumentList "/VERYSILENT","/SUPPRESSMSGBOXES","/NORESTART",$dirArg -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Silent installer failed: $($p.ExitCode)" }
+          $installed = Join-Path $testDir "ArmorX-Windows.exe"
+          if (-not (Test-Path $installed)) { throw "Installed executable missing." }
+          $p = Start-Process $installed -ArgumentList '--self-test' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Installed app self-test failed: $($p.ExitCode)" }
+          $uninstaller = Join-Path $testDir "unins000.exe"
+          if (-not (Test-Path $uninstaller)) { throw "Uninstaller missing." }
+          $p = Start-Process $uninstaller -ArgumentList "/VERYSILENT","/SUPPRESSMSGBOXES","/NORESTART" -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Uninstaller failed: $($p.ExitCode)" }
+
+      - name: Checksums
+        shell: pwsh
+        run: |
+          $files = @(
+            "ArmorX-Windows-v0.2.1-RC.exe",
+            "ArmorX-Windows-v0.2.1-RC-win-x64.zip",
+            "ArmorX-Windows-v0.2.1-RC-Setup.exe"
+          )
+          $lines = foreach ($file in $files) {
+            $hash = (Get-FileHash $file -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $file"
+          }
+          $lines | Set-Content -Encoding ascii .\ArmorX-Windows-v0.2.1-RC-SHA256SUMS.txt
+          Get-Content .\ArmorX-Windows-v0.2.1-RC-SHA256SUMS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-Windows-v0.2.1-RC
+          path: |
+            ArmorX-Windows-v0.2.1-RC.exe
+            ArmorX-Windows-v0.2.1-RC-win-x64.zip
+            ArmorX-Windows-v0.2.1-RC-Setup.exe
+            ArmorX-Windows-v0.2.1-RC-SHA256SUMS.txt
