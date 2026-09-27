@@ -1,0 +1,26 @@
+name: Clean v0.2.1 branch build outputs
+on:
+  push:
+    branches: [windows/public-v0.2.1]
+    paths:
+      - ".github/workflows/clean-v0.2.1-tree.yml"
+permissions:
+  contents: write
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: windows/public-v0.2.1
+      - name: Remove tracked build outputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -r --ignore-unmatch windows/ArmorX.Windows/bin windows/ArmorX.Windows/obj
+          if ! git diff --cached --quiet; then
+            git commit -m "build: remove tracked .NET outputs"
+            git push origin HEAD:windows/public-v0.2.1
+          fi
