@@ -32,7 +32,7 @@ ArmorX Toolkit is intentionally evidence-driven. Items move from research to sta
 - [x] Profile rename, duplicate, delete, import, and export
 - [x] Exportable end-user diagnostic log without research/capture controls
 - [x] About/compatibility page with app, model, firmware, and project information
-- [ ] Windows installer/package after portable-build validation
+- [x] Windows installer/package after portable-build validation
 
 ## Protocol research
 
