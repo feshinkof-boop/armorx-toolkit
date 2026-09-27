@@ -165,6 +165,10 @@ def main() -> int:
             break
     if not live:
         cap.terminate()
+        try:
+            os.killpg(os.getpgid(cap.pid), signal.SIGKILL)
+        except ProcessLookupError:
+            pass
         print(json.dumps({"verdict": "DEVICE_NOT_STREAMING", "button": args.button,
                           "note": "D2 mode never produced a continuous status stream; "
                                   "the button is not blamed - check power/awake state",
@@ -197,11 +201,19 @@ def main() -> int:
     time.sleep(args.drain)
     t1 = dt.datetime.now().astimezone()
     frames = read_rx(jsonl)
-    cap.send_signal(signal.SIGTERM)
+    # The capture was started with start_new_session=True, so signal its whole process
+    # GROUP: signalling only the bash wrapper leaves the python child holding the HCI
+    # user channel, which then makes every later run fail with "Errno 16 busy".
     try:
-        cap.wait(timeout=20)
-    except subprocess.TimeoutExpired:
-        cap.kill()
+        pgid = os.getpgid(cap.pid)
+        os.killpg(pgid, signal.SIGTERM)
+        try:
+            cap.wait(timeout=20)
+        except subprocess.TimeoutExpired:
+            os.killpg(pgid, signal.SIGKILL)
+            cap.wait(timeout=10)
+    except ProcessLookupError:
+        pass
 
     analysis = analyse(frames, t0, t1)
     analysis.update({
