@@ -1,0 +1,126 @@
+name: Clean v0.2.0 public docs
+
+on:
+  push:
+    branches:
+      - docs/v0.2.0-public-cleanup
+    paths:
+      - ".github/workflows/clean-v0.2.0-public-docs.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  clean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: docs/v0.2.0-public-cleanup
+
+      - name: Normalize README and roadmap
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          readme = Path("README.md")
+          s = readme.read_text(encoding="utf-8")
+
+          if "| Windows GUI | Public Windows 10/11 x64 BLE configurator |" not in s:
+              s = s.replace(
+                  "| CLI | Unified `armorx` command |\n",
+                  "| CLI | Unified `armorx` command |\n| Windows GUI | Public Windows 10/11 x64 BLE configurator |\n",
+                  1,
+              )
+
+          s = s.replace(
+              "ArmorX Toolkit v0.2.0 also includes a public Windows 10/11 x64 configurator for ARMOR-X Pro over BLE.",
+              "ArmorX Toolkit v0.2.0 includes a public Windows 10/11 x64 configurator for ARMOR-X Pro over BLE. **[Download ArmorX-Windows-v0.2.0.exe](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.0/ArmorX-Windows-v0.2.0.exe)**."
+          )
+
+          old_scope = "> **Public release scope:** v0.2.0 is the installable Python toolkit/CLI. The internal Windows research/capture application, Autopilot workflows, raw BLE recorder, guided hardware experiments, and researcher-only diagnostics are **not** part of this public release."
+          new_scope = "> **Public release scope:** v0.2.0 ships both the Python toolkit/CLI and the public Windows configurator. The internal Windows research/capture application, Autopilot workflows, raw BLE recorder, guided hardware experiments, and researcher-only diagnostics are **not** part of this public release."
+          s = s.replace(old_scope, new_scope)
+
+          marker = "### Stable v0.2.0"
+          if "### Windows 10/11 x64" not in s and marker in s:
+              block = """### Windows 10/11 x64
+
+          [Download the public Windows configurator](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.0/ArmorX-Windows-v0.2.0.exe), turn on ARMOR-X Pro, and choose **Connect / Recover**. The app reads the controller's own 144-byte configuration image, preserves unknown bytes, and verifies a write by reading all 144 bytes back.
+
+          ### Python toolkit v0.2.0"""
+              s = s.replace(marker, block, 1)
+
+          readme.write_text(s, encoding="utf-8")
+
+          roadmap = Path("ROADMAP.md")
+          r = roadmap.read_text(encoding="utf-8")
+          if "## Public Windows v0.2.1" not in r:
+              block = """## Public Windows v0.2.1
+
+          - [ ] Automatic pre-write backup of the current device image
+          - [ ] Review exact byte-level config changes before writing
+          - [ ] One-click restore of the latest backup with write/read-back verification
+          - [ ] Clear dirty/pending-changes state
+          - [ ] Profile rename, duplicate, delete, import, and export
+          - [ ] Exportable end-user diagnostic log without research/capture controls
+          - [ ] About/compatibility page with app, model, firmware, and project information
+          - [ ] Windows installer/package after portable-build validation
+
+          """
+              r = r.replace("## Protocol research", block + "## Protocol research", 1)
+          roadmap.write_text(r, encoding="utf-8")
+          PY
+
+      - name: Commit docs to main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md ROADMAP.md
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: align v0.2.0 Windows release and v0.2.1 roadmap"
+            git push origin HEAD:main
+          fi
+
+      - name: Remove duplicate Windows GUI release section and correct scope
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh release view v0.2.0 --json body -q .body > /tmp/body.md
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("/tmp/body.md")
+          s = p.read_text(encoding="utf-8")
+
+          s = s.replace(
+              "v0.2.0 is the public Python toolkit and CLI.",
+              "v0.2.0 ships the public Python toolkit/CLI and the public Windows configurator."
+          )
+
+          gui = """## Windows GUI
+
+          The release assets include the public **ArmorX Windows v0.2.0** configurator for Windows 10/11 x64.
+
+          - `ArmorX-Windows-v0.2.0.exe` — self-contained single-file app
+          - `ArmorX-Windows-v0.2.0-win-x64.zip` — self-contained folder build fallback
+          - `ArmorX-Windows-v0.2.0-source.zip` — public GUI source
+          - `ArmorX-Windows-v0.2.0-SHA256SUMS.txt` — SHA256 checksums
+
+          Public GUI features: Connect/Recover, automatic BLE recovery after device sleep, config read, sticks/triggers/gyro/turbo editing, M1-M4 remapping including live-proven Guide/Xbox ID 12, local profiles, and full write/save/read-back verification.
+
+          The internal research/capture application and Research Autopilot are not included."""
+
+          first = s.find(gui)
+          if first >= 0:
+              second = s.find(gui, first + len(gui))
+              if second >= 0:
+                  s = s[:second].rstrip() + "\n\n" + s[second + len(gui):].lstrip()
+
+          p.write_text(s.rstrip() + "\n", encoding="utf-8")
+          PY
+          gh release edit v0.2.0 --notes-file /tmp/body.md
