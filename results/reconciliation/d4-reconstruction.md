@@ -253,3 +253,48 @@ grep -rn '板载\|手柄模式' --include=*.dart <tree>/asm/moojiang/
 Trees: `static/blutter/2.22.0901/blutter_out`, `/home/salamanka/armorx/re/blutter_out` (2.23.0609),
 `/home/salamanka/armorx/re/v224/blutter_out` (2.24.0919),
 `/home/salamanka/armorx-re/mygt408/blutter_out` (4.0.8).
+
+---
+
+## 9. Live follow-up — 2026-09-27 (unmodified 2.22.0901 on API-33 netsim AVD)
+
+Full report: `results/static/2.22.0901/d4-dynamic-verification.md`. This section records only what
+the **live run adds to or contradicts** in the static reconstruction above.
+
+### Confirmed live
+
+* **Request byte-identical (PROVEN LIVE).** The app wrote `A5 04 D4 7D` — the Frida platform hook
+  shows `setValue FFE1 "a504d47d"` and the peripheral captured `< 0000 A5 04 D4 7D`. §3 was correct.
+* **Reply layout and the index-4 read (PROVEN LIVE).** The peripheral's `A5 06 D4 00 00 7F` reaches
+  the Dart layer (`onCharacteristicChanged arg2=[-91,6,-44,0,0,127]`), is consumed without a Dart
+  exception, and the app then sends `A5 04 D6 7F` (twice) and loads the 144-byte config. It does not
+  repeat D4 and does not disconnect.
+* **§6 "no length assertion" (PROVEN LIVE, sharpened).** §4/§7 said the parser reads index 4 with no
+  bounds check and called the exact real reply length UNKNOWN. A truncated 4-byte reply
+  `A5 04 D4 00` makes the **2.22** parser throw
+  `RangeError (index): Index out of range: index should be less than 4: 4`
+  at `_ArmorXProConfigWidgetState.subscribeCharacteristic.<anonymous closure>`
+  (`armorx_pro_config_config.dart:178`) — i.e. the listener decoded at 0x89b438. This is the live
+  confirmation of the index-4 read and of the missing length guard. (Distinct from the earlier
+  `armorx_pro_root.dart:129` RangeError, which was a **2A26** length problem.) The exception is
+  non-fatal: the app still proceeds to `D6`.
+
+### Settled that the static pass could not
+
+* **§7 item 4 — "does the app validate the inbound checksum?" — ANSWERED: NO (PROVEN LIVE).** A D4
+  reply with a wrong trailing byte (`A5 06 D4 00 00 80`, computed `0x7F`) is **ignored**: no Dart
+  exception, the app still proceeds to `D6`. There is no inbound-D4 checksum validation in 2.22.0901.
+
+### Contradicted / corrected
+
+* Nothing in the static frame reconstruction is contradicted. One wording correction: the live
+  emission order is `D4` then `D6` **back-to-back** (Frida sets `a504d47d` at `.991` and `a504d67f`
+  at `.997`), with the D4 reply arriving at `.009` — the `D6` write is *queued before* the D4 reply is
+  processed. The static note "D4 immediately before D6" holds; the implied serialization (await D4
+  reply, then D6) does **not** — the two writes are pipelined.
+
+### Still UNKNOWN (unchanged)
+
+* Value domain of payload bytes 3 and 4 (0x00/0x00 here are chosen device state).
+* Exact real reply length (≥6 proven; extra bytes never exercised).
+

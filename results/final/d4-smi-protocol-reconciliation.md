@@ -18,7 +18,7 @@ append only.
 | 4 | **Why 2.24 calls it `getOnBoardConfig`:** because that build reads and prints the *onboard* mode field. It is a rename, not a semantic change — the same request, the same two payload bytes. |
 | 5 | **Semantically unchanged across versions: UNCHANGED** (four-version table classifies the wire contract as identical; only naming, the boolean checks the client applies to byte 3, and the follow-up `getDpi()` differ). Active onboard **slot** and **config bank** are **CONTRADICTED** (no slot/bank arithmetic in any reader); "input mode / device mode" is SUPPORTED; "profile number" stays UNKNOWN. |
 | 6 | **Virtual ARMOR-X implementation status: IMPLEMENTED for the request/reply shell.** `armorx_protocol.py` gained the D4 constants, `build_d4_reply`, structured `parse_d4_reply` and `REPLY_TABLE[0xD4]`; `virtual_armorx.py` a 0xD4 branch with structured `d4_reply` logging and `--d4-gamepad-mode/--d4-onboard-mode` flags; `armorx_central_client.py` a D4 step. Default reply `A5 06 D4 00 00 7F`. Test vectors: `A5 06 D4 00 00 7F`, `…06 03 88`, `…06 00 85`, `…01 01 81`. Suite: **pytest 29 passed**, selftest **12/12 peripheral + 15/15 client** (I re-ran the suite myself: 29 passed, and the selftest 12/12). The payload **values** are CLI-chosen device state, documented exactly like `--device-uuid` — no researched value is claimed. |
-| 7 | **2.22 dynamic D4 test result:** *see §39 addendum — dynamic verification run recorded in `results/static/2.22.0901/d4-dynamic-verification.md`.* |
+| 7 | **2.22 dynamic D4 test result: PROVEN LIVE, end-to-end.** Against the unmodified 2.22.0901 APK on the API-33 AVD, with the updated virtual ARMOR-X and the 2.22 Frida hook set including the permission-gate override: the app **sent** `A5 04 D4 7D` (Frida `setValue FFE1 "a504d47d"` **and** the peripheral's raw capture agree byte-for-byte, matching the static reconstruction); the peripheral **answered** `A5 06 D4 00 00 7F` (peripheral `.hex` + structured `d4_reply` log); the app **received** it (Frida `onCharacteristicChanged arg2=[-91,6,-44,0,0,127]`); it **consumed it with no exception** and moved on to `0xD6` (twice) → 144-byte config, **without repeating D4 and without disconnecting**; app-visible state changed (it navigated to the connected ARMOR-X Pro page). logcat: **0** `RangeError`/`getRange`/`armorx_pro_root.dart` and **0** `E/flutter` lines at all in the good run. Both robustness probes also ran (see §30): **bad checksum → ignored**, **truncated → `RangeError (index)` at `armorx_pro_config_config.dart:178`**, non-fatal in both cases. Two independent paths, byte-for-byte agreement; full evidence in `results/static/2.22.0901/d4-dynamic-verification.md`. |
 
 ## 8–13. The Smi audit
 
@@ -97,8 +97,7 @@ devRainbow3/devGale2 to the gate.
 ## 30. Remaining UNKNOWN
 
 The value domain of the two D4 payload bytes (only `6` for byte 3 and `3` for byte 4 are known
-distinguished values); whether the app verifies inbound checksums and reply length (being settled by
-the robustness experiment in the live run); the D8 readback field table's encoding (D11, AMBIGUOUS);
+distinguished values); the D8 readback field table's encoding (D11, AMBIGUOUS);
 the ARMOR-X Pro's `subpackageLength()` device id (statically UNKNOWN, observable at runtime from the
 app's `包数->N` log); the 2.22 reassembler's `replaceRange` offset ladder (mixed tagged/raw rendering,
 flagged rather than overclaimed); DPI selector→value table and DPI reply parser (static-unrecoverable
@@ -142,6 +141,11 @@ observable verdict on whether the corrected frame is accepted.
 
 # D4 — FINAL PROTOCOL CONTRACT
 
+Applied in the lab this pass: `armorx_protocol.py` + `virtual_armorx.py` + `frames.py` no longer
+encode the erroneous `0x0A` commit length byte (now `0x05`, with a legacy-form note so old logs stay
+readable), and the peripheral's `--app-version` no longer defaults to a build it may not be running
+(it mislabelled the 2.22 session logs as "4.0.8").
+
 ```
 REQUEST   A5 04 D4 7D                     (all four builds; checksum = sum of preceding bytes & 0xFF)
 REPLY     A5 06 D4 <gamepad_mode> <onboard_mode> <cks>
@@ -153,9 +157,11 @@ REPLY     A5 06 D4 <gamepad_mode> <onboard_mode> <cks>
            byte 5   checksum      (sum of bytes 0..4 & 0xFF)
 EXAMPLE   A5 06 D4 00 00 7F               (virtual-peripheral default; 0x7F verified by hand)
 FOLLOW-UP 2.23/2.24 readers call getDpi() after a byte-3 value of 6
-STATUS    request PROVEN STATIC + PROVEN LIVE (2.22); reply layout PROVEN STATIC;
-          payload value domain UNKNOWN; whether the app validates the inbound checksum and length
-          is being determined by the live robustness experiment (see the addendum)
+STATUS    request PROVEN STATIC + PROVEN LIVE (2.22, both capture paths agree);
+          reply layout PROVEN STATIC + PROVEN LIVE (2.22 consumed it and continued to D6);
+          checksum NOT validated by the app (bad-checksum reply accepted silently) - PROVEN LIVE;
+          reply length NOT guarded (truncated reply -> RangeError at armorx_pro_config_config.dart:178,
+          non-fatal) - PROVEN LIVE; payload value domain still UNKNOWN
 NOT PROVEN DO NOT USE: any claim that byte 3/4 encode an onboard *slot* or config *bank*
           (CONTRADICTED — no slot/bank arithmetic exists in any reader)
 ```

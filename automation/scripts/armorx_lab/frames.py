@@ -72,8 +72,13 @@ def build_ab(subcmd_group: int, subcmd: int, payload: bytes = b"") -> bytes:
 
 
 def build_d8_terminator(nfrags: int) -> bytes:
-    """A4 0A D8 <nfrags+1> <sum8> - commit frame from the 4.0.8 macro writer (PROVEN STATIC)."""
-    body = bytes([FRAG_HEADER, 0x0A, 0xD8, nfrags + 1])
+    """A4 05 D8 <nfrags+1> <sum8> - commit frame, all four builds (PROVEN STATIC).
+
+    The length byte is 0x05 (empty segment + 5), not 0x0A: the old reading took the
+    tagged Smi `mov x16, #0xa` as a wire byte, but the same List<int> stores 0xA4 as
+    #0x148 and 0xD8 as #0x1b0 (both exactly 2x). See smi-audit.md item D1.
+    """
+    body = bytes([FRAG_HEADER, 0x05, 0xD8, nfrags + 1])
     return body + bytes([checksum(body)])
 
 

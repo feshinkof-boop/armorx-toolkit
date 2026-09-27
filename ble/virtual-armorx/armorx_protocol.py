@@ -179,8 +179,12 @@ def parse_frame(buf: bytes) -> Frame | None:
         A5 | length | opcode | data...            | checksum
         A4 | length | opcode | fragment_index | data... | checksum
     The length byte equals the total frame length for A5 short frames and for
-    A4 data fragments; the D8 terminator (d8-macro.md §3.3) is special-cased
-    because it carries the constant 0x0A instead of a computed length.
+    A4 data fragments, *including* the D8 commit/terminator frame: is length byte
+    is 0x05, which is simply ``segLen + 5`` for an empty segment, so no special
+    case is required. The older 0x0A reading came from treating the tagged Smi
+    ``mov x16, #0xa`` as a wire byte; the same List<int> stores 0xA4 as #0x148 and
+    0xD8 as #0x1b0 (both exactly 2x), so #0xa is Dart 5. See
+    results/reconciliation/smi-audit.md (item D1) and d8-taxonomy.md.
     """
     if len(buf) < 3:
         return None
@@ -204,10 +208,11 @@ def parse_frame(buf: bytes) -> Frame | None:
     payload = buf[3:-1]
     trailing = buf[-1]
 
-    # D8 terminator: A4 0A D8 <nfrags+1> <sum8>  (constant length byte 0x0A)
+    # D8 commit frame: A4 05 D8 <nfrags+1> <sum8>  (length byte 0x05 = empty segment + 5)
     is_d8_terminator = (
-        header == FRAME_FRAG and length == 0x0A and opcode == 0xD8 and len(buf) == 5
+        header == FRAME_FRAG and opcode == 0xD8 and len(buf) == 5
     )
+    legacy_x0a_commit = (header == FRAME_FRAG and length == 0x0A and opcode == 0xD8)
 
     if is_d8_terminator:
         declared_total = len(buf)
@@ -224,7 +229,9 @@ def parse_frame(buf: bytes) -> Frame | None:
     kind = "short" if header == FRAME_SHORT else "fragment"
     if header == FRAME_FRAG:
         if is_d8_terminator:
-            notes.append("D8 terminator frame (constant length byte 0x0A, d8-macro.md)")
+            notes.append("D8 commit frame (length byte 0x05 = empty segment + 5)")
+            if legacy_x0a_commit:
+                notes.append("LEGACY 0x0A commit length byte - superseded reading, see smi-audit.md D1")
         elif payload:
             frag_index = payload[0]
             data = payload[1:]
@@ -405,6 +412,29 @@ def build_d4_reply(gamepad_mode: int, onboard_mode: int) -> bytes:
         if not 0 <= value <= 0xFF:
             raise ValueError(f"{name} must be one byte (0..255), got {value!r}")
     return build_frame(D4_OPCODE, bytes([gamepad_mode & 0xFF, onboard_mode & 0xFF]))
+
+
+def build_d4_reply_variant(mode: str, gamepad_mode: int, onboard_mode: int) -> bytes:
+    """Build a 0xD4 reply, optionally deliberately malformed, for robustness tests.
+
+    These variants exist ONLY to probe what the app does with an invalid reply; they
+    are not evidence about real hardware. Modes:
+
+    * ``normal``        ``A5 06 D4 <g> <o> <sum>``  well-formed (the reconstructed frame)
+    * ``bad-checksum``  ``A5 06 D4 <g> <o> <src>``  same length, last byte is wrong
+    * ``truncated``     ``A5 04 D4 <g>``            declared length 4: whole-frame index 4
+                                                    (onboard mode) AND the checksum are absent
+    """
+    if mode == "normal":
+        return build_d4_reply(gamepad_mode, onboard_mode)
+    if mode == "bad-checksum":
+        good = build_d4_reply(gamepad_mode, onboard_mode)
+        return good[:-1] + bytes([good[-1] ^ 0xFF])
+    if mode == "truncated":
+        # declared total length 4: header, length, opcode, one payload byte.
+        # Instances: indices 3 exists, index 4 (onboard mode) and the checksum do not.
+        return bytes([FRAME_SHORT, 0x04, D4_OPCODE, gamepad_mode & 0xFF])
+    raise ValueError(f"unknown d4 reply mode {mode!r}")
 
 
 def parse_d4_reply(raw: bytes) -> D4Reply:

@@ -277,15 +277,20 @@ class ArmorXPeripheral:
         elif op == 0xD4:
             # STRUCTURE evidence-backed; payload VALUES are chosen device state
             # (see results/reconciliation/d4-reconstruction.md §6).
-            reply = proto.build_d4_reply(self.d4_gamepad_mode, self.d4_onboard_mode)
+            # --d4-reply-mode may deliberately malform the reply for robustness tests.
+            reply = proto.build_d4_reply_variant(
+                self.args.d4_reply_mode, self.d4_gamepad_mode, self.d4_onboard_mode
+            )
             parsed = proto.parse_d4_reply(reply).as_dict()
             self.logs.jsonl(
                 "d4_reply",
                 request=frame.raw.hex(),
                 reply=reply.hex(),
+                reply_mode=self.args.d4_reply_mode,
                 gamepad_mode=parsed["gamepad_mode"],
                 onboard_mode=parsed["onboard_mode"],
                 checksum_ok=parsed["checksum_ok"],
+                parser_errors=parsed["errors"],
                 layout={
                     "index3": "gamepad_mode (手柄模式)",
                     "index4": "onboard_mode (板载mode)",
@@ -308,7 +313,7 @@ class ArmorXPeripheral:
 
     async def _dispatch_fragment(self, connection, frame) -> None:
         op = frame.opcode
-        # D8 terminator: A4 0A D8 <nfrags+1> <sum8>  (d8-macro.md §3.3)
+        # D8 commit frame: A4 05 D8 <nfrags+1> <sum8>  (was misread as 0x0A; smi-audit.md D1)
         if op == 0xD8 and frame.length == 0x0A and len(frame.raw) == 5:
             pending = self._frags.get(0xD8, {})
             self.logs.jsonl(
@@ -588,7 +593,19 @@ def parse_args(argv=None):
             "value, not a researched constant (value domain UNKNOWN)"
         ),
     )
-    parser.add_argument("--app-version", default="4.0.8", help="app version under test")
+    parser.add_argument("--app-version", default="unspecified",
+                        help="app version under test; recorded verbatim in every log line, "
+                             "so leave the default rather than claim a build you are not running")
+    parser.add_argument(
+        "--d4-reply-mode",
+        choices=["normal", "bad-checksum", "truncated"],
+        default="normal",
+        help=(
+            "robustness test: how to build the 0xD4 reply. 'normal' = the reconstructed "
+            "A5 06 D4 <g> <o> <sum>; 'bad-checksum' = same length with a wrong last byte; "
+            "'truncated' = A5 04 D4 <g> (index 4 and checksum absent). Not real-hardware data."
+        ),
+    )
     parser.add_argument(
         "--log-dir",
         default=str(Path(__file__).resolve().parent / "logs"),
@@ -615,6 +632,7 @@ def main(argv=None) -> int:
             "device_uuid": args.device_uuid,
             "d4_gamepad_mode": hex(args.d4_gamepad_mode & 0xFF),
             "d4_onboard_mode": hex(args.d4_onboard_mode & 0xFF),
+            "d4_reply_mode": args.d4_reply_mode,
             "config_bytes": 144,
         },
     )

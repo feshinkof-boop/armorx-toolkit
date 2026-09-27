@@ -103,9 +103,19 @@ def test_d7_ack_bytes():
     assert proto.build_frame(0xD7, bytes([0x00])).hex() == "a505d70081"
 
 
-def test_d8_terminator_parses():
-    # A4 0A D8 <nfrags+1> <sum8>
+def test_d8_terminator_legacy_0x0a_is_flagged():
+    """A commit frame carrying the superseded 0x0A length byte must still parse (so old logs
+    remain readable) but must be labelled as a legacy reading."""
     body = bytes([0xA4, 0x0A, 0xD8, 0x0B])
+    frame = proto.parse_frame(body + bytes([proto.frame_checksum(body)]))
+    assert frame is not None
+    assert any("LEGACY" in n for n in frame.notes), frame.notes
+
+
+def test_d8_terminator_parses():
+    # A4 05 D8 <nfrags+1> <sum8>  (length byte 0x05 = empty segment + 5; the old 0x0A
+    # reading treated the tagged Smi `mov x16, #0xa` as a wire byte - see smi-audit.md D1)
+    body = bytes([0xA4, 0x05, 0xD8, 0x0B])
     terminator = body + bytes([proto.frame_checksum(body)])
     frame = proto.parse_frame(terminator)
     assert frame is not None
