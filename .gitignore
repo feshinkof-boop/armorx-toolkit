@@ -1,0 +1,9 @@
+# large binaries are hashed in apk/manifests/ and baselines/imported-research/SHA256SUMS instead
+apk/original/**
+apk/extracted/**
+baselines/imported-research/**
+ble/bumble/venv/**
+**/__pycache__/**
+logs/**
+ble/virtual-armorx/logs/**
+*.bin

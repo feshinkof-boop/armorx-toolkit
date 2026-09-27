@@ -1,0 +1,129 @@
+{
+ "matrix_version": 1,
+ "created": "2026-09-27",
+ "basis": "research/mygt-4.0.8/live-test-plan.md (canonical) - one variable per experiment",
+ "preconditions": [
+  "known-good baseline captured, hashed and CRC-verified (baselines/device/<serial>/)",
+  "device link present and awake (harness state DEVICE_AWAKE)",
+  "virtual ARMOR-X + frida/btsnoop capture path available for observation"
+ ],
+ "global_safety": {
+  "max_single_write_bytes": 160,
+  "one_variable_per_experiment": true,
+  "restore_after_each": true,
+  "forbidden": ["broad fuzzing", "combined unknown changes", "lighting semantic invention",
+                "write without saved baseline"]
+ },
+ "experiments": [
+  {
+   "id": "L01",
+   "name": "baseline-read-and-identity",
+   "phase": 11,
+   "priority": 1,
+   "variable": "none (read-only)",
+   "requests": ["get_version", "get_device_uuid", "get_device_config", "get_mtu"],
+   "expected": "0B reply carries the MCU/ZKM version; EF reply bytes 3..10 are the devUuid; D6 reply is a 144-byte config whose declared length == 144 and whose CRC-16/MODBUS over bytes 2..end matches the stored big-endian value at 0..1",
+   "proves": "link state + protocol family + baseline integrity",
+   "restore": "n/a (no write)",
+   "evidence_on_success": "PROVEN LIVE",
+   "risk": "none"
+  },
+  {
+   "id": "L02",
+   "name": "e2-firmware-read",
+   "phase": 11,
+   "priority": 2,
+   "variable": "issue A5 04 E2 8B once",
+   "requests": ["read_firmware"],
+   "compare_with": ["gatt_2a26_firmware_revision", "0B reply"],
+   "expected": "reply payload matches or refines the 2A26 firmware string",
+   "proves": "that E2 is the firmware read introduced in 4.0.8 and closes the 0xFC/0xF6 version-guard ambiguity",
+   "restore": "n/a (read-only)",
+   "evidence_on_success": "PROVEN LIVE",
+   "risk": "none"
+  },
+  {
+   "id": "L03",
+   "name": "unknown-keyid-source-confirmation",
+   "phase": 11,
+   "priority": 3,
+   "variable": "exactly one byte: mapKeys[<id>] (config byte 112+<id>) set to 2 (empty); CRC recomputed",
+   "candidates": [15, 5, 20, 21, 30, 31],
+   "requests": ["write config (D7) with single-byte delta"],
+   "expected": "the physical button mapped to that source stops producing its action; all other buttons unchanged",
+   "proves": "the id is a real remappable source (and for id 15, that it is Capture)",
+   "restore": "rewrite the saved baseline image byte-for-byte, then re-read D6 and compare sha256",
+   "evidence_on_success": "PROVEN LIVE",
+   "risk": "low - single reversible byte",
+   "notes": "id 15 first: this is the highest-value single experiment in the whole plan"
+  },
+  {
+   "id": "L04",
+   "name": "dpi-selector-space",
+   "phase": 11,
+   "priority": 4,
+   "variable": "normal DPI selector value",
+   "requests": ["get_dpi", "set_dpi_selector(1)", "get_dpi", "set_dpi_selector(0x11)", "get_dpi"],
+   "expected": "reply/readback changes consistently with the selector; 0x11 is either masked to 0x01 or rejected",
+   "proves": "the 4-bit selector mask and the readback shape",
+   "restore": "set the selector back to the originally read value",
+   "evidence_on_success": "PROVEN LIVE",
+   "risk": "low",
+   "notes": "the DPI *values* behind the selectors are app/server side - read them from the UI, not the device"
+  },
+  {
+   "id": "L05",
+   "name": "motion-dpi-echo",
+   "phase": 11,
+   "priority": 5,
+   "variable": "motion DPI value (u16 little-endian)",
+   "requests": ["get_motion_dpi", "set_motion_dpi(800)", "get_motion_dpi"],
+   "expected": "readback equals the written value, proving width and endianness",
+   "proves": "AB 07 05 25 <u16 LE> encoding",
+   "restore": "write back the value read at the start",
+   "evidence_on_success": "PROVEN LIVE",
+   "risk": "low"
+  },
+  {
+   "id": "L06",
+   "name": "lighting-framing-observation",
+   "phase": 11,
+   "priority": 6,
+   "variable": "one zone colour changed through the app UI (no invented semantics)",
+   "requests": ["capture the frames the app emits (A5 04 70 commit, A4 ... 70 data)"],
+   "expected": "commit frame observed after one or more A4 data frames; LED sets travel as bitmasks",
+   "proves": "the apply/commit split and the LED bitmask usage",
+   "restore": "restore the previous lighting via the app",
+   "evidence_on_success": "PROVEN LIVE for framing only; RGB/effect semantics stay UNKNOWN",
+   "risk": "low"
+  },
+  {
+   "id": "L07",
+   "name": "d8-fragment-length-byte",
+   "phase": 11,
+   "priority": 7,
+   "variable": "D8 fragment framing form (with vs without an ordinal byte) using the all-zero 10-byte disable payload",
+   "requests": ["D8 write of an all-zero 10-byte frame, both framing forms, one at a time"],
+   "expected": "the accepted form produces the write-result notification; the rejected form is ignored or errors",
+   "proves": "the D8 length-byte rule and the fragment chunk size for this device id",
+   "restore": "the macro slot was already empty (disable payload); re-enable from the app if needed",
+   "evidence_on_success": "PROVEN LIVE",
+   "risk": "medium - gated on L01 baseline and on the virtual capture path working",
+   "gate": "do not run before L01 has produced a verified baseline"
+  },
+  {
+   "id": "L08",
+   "name": "d8-repeat-time-unit",
+   "phase": 11,
+   "priority": 8,
+   "variable": "repeatTime (config bytes 8..9 BE) doubled",
+   "requests": ["write a 2-step macro on M1 with repeat enabled at t and at 2t"],
+   "expected": "the observed repeat interval doubles",
+   "proves": "that repeatTime is milliseconds",
+   "restore": "re-write the original macro payload",
+   "evidence_on_success": "PROVEN LIVE",
+   "risk": "medium",
+   "gate": "only after L07 has established the D8 framing"
+  }
+ ]
+}

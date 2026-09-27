@@ -1,0 +1,217 @@
+{
+ "2.23": {
+  "originals": [
+   {
+    "path": "/home/salamanka/armorx-lab/apk/original/2.23/base.apk",
+    "size": 35958605,
+    "sha256": "7ed18b774bf8beab0ff2ff11bc0669f4cacb9baa5cc309bf277752592a2bc892",
+    "sha1": "f5fec9f48ab4ef52d22adf84f5c115970059ef21"
+   }
+  ],
+  "primary_apk": "/home/salamanka/armorx-lab/apk/original/2.23/base.apk",
+  "package": "com.moojiang.bigbigwon",
+  "versionName": "2.23.0609",
+  "versionCode": "12",
+  "app_name": "BIGBIG WON",
+  "minSdk": "21",
+  "targetSdk": "32",
+  "permissions": [
+   "android.permission.BLUETOOTH",
+   "android.permission.BLUETOOTH_ADMIN",
+   "android.permission.BLUETOOTH_ADVERTISE",
+   "android.permission.BLUETOOTH_CONNECT",
+   "android.permission.BLUETOOTH_SCAN",
+   "android.permission.INTERNET"
+  ],
+  "activities": [
+   "com.moojiang.bigbigwon.MainActivity",
+   "io.flutter.plugins.urllauncher.WebViewActivity"
+  ],
+  "services": [],
+  "receivers": [],
+  "providers": [],
+  "cert": {
+   "certs": [
+    {
+     "subject": "Common Name: moojiang, Organizational Unit: moojiang, Organization: moojiang, Locality: sz, State/Province: sz, Country: cn",
+     "issuer": "Common Name: moojiang, Organizational Unit: moojiang, Organization: moojiang, Locality: sz, State/Province: sz, Country: cn",
+     "serial": "5EA0DB29",
+     "not_before": "2022-03-18 05:31:40+00:00",
+     "not_after": "2049-08-03 05:31:40+00:00",
+     "sha1": "343E87938394162FC9AD6CC18F7E671D555AC794",
+     "sha256": "547258CA217A1D2B278039EF8174A418A8B005855E218B4A08E76E00F234C78C"
+    }
+   ],
+   "v1_signature_files": [
+    "META-INF/CERT.RSA"
+   ]
+  },
+  "abis_primary": [
+   "arm64-v8a",
+   "armeabi-v7a",
+   "x86_64"
+  ]
+ },
+ "2.24": {
+  "originals": [
+   {
+    "path": "/home/salamanka/armorx-lab/apk/original/2.24/BIGBIGWON-2.24.0919.apk",
+    "size": 16087829,
+    "sha256": "0bae884badc004991e638b0e62a0a6afc07256a5deabd8bb833f0bb36638f305",
+    "sha1": "0a19b09d6a2c6feeb62f8946a9986589979f3c76"
+   }
+  ],
+  "primary_apk": "/home/salamanka/armorx-lab/apk/original/2.24/BIGBIGWON-2.24.0919.apk",
+  "package": "com.moojiang.bigbigwon",
+  "versionName": "2.24.0919",
+  "versionCode": "24",
+  "app_name": "BIGBIG WON",
+  "minSdk": "21",
+  "targetSdk": "34",
+  "permissions": [
+   "android.permission.BLUETOOTH",
+   "android.permission.BLUETOOTH_ADMIN",
+   "android.permission.BLUETOOTH_ADVERTISE",
+   "android.permission.BLUETOOTH_CONNECT",
+   "android.permission.BLUETOOTH_PRIVILEGED",
+   "android.permission.BLUETOOTH_SCAN",
+   "android.permission.INTERNET",
+   "com.moojiang.bigbigwon.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "activities": [
+   "com.moojiang.bigbigwon.MainActivity",
+   "io.flutter.plugins.urllauncher.WebViewActivity"
+  ],
+  "services": [],
+  "receivers": [],
+  "providers": [],
+  "cert": {
+   "certs": [
+    {
+     "subject": "Common Name: Android Debug, Organization: Android, Country: US",
+     "issuer": "Common Name: Android Debug, Organization: Android, Country: US",
+     "serial": "DCA795A",
+     "not_before": "2024-08-12 00:52:40+00:00",
+     "not_after": "2051-12-29 00:52:40+00:00",
+     "sha1": "E94E3AFA40A54ECEE4EEF83F580393507FCD205A",
+     "sha256": "44C3BB8C7EA35B3BB11CBFA3C2F5879240DF2E49E39816B4437B9856FBB29541"
+    }
+   ],
+   "v1_signature_files": [
+    "META-INF/CERT.RSA"
+   ]
+  },
+  "abis_primary": [
+   "arm64-v8a"
+  ]
+ },
+ "4.0.8": {
+  "originals": [
+   {
+    "path": "/home/salamanka/armorx-lab/apk/original/4.0.8/BIGBIGWON-4.0.8.apkm",
+    "size": 36492532,
+    "sha256": "474f66094ebbea8b0242257bbb23fc6b1baa7e54c10f13beb2cd4da14ce73abf",
+    "sha1": "6cd397b2b0c9cfa54adbbe3dfc89e19110a3a583"
+   },
+   {
+    "path": "/home/salamanka/armorx-lab/apk/original/4.0.8/base.apk",
+    "size": 32854837,
+    "sha256": "64e0832b1f97d995b40bf994465c277340e96a4f2b6b2fc5ef1eb4e2af9378e2",
+    "sha1": "74f22af1c957b0561e2ef9a193e2943a59c9c29a"
+   }
+  ],
+  "primary_apk": "/home/salamanka/armorx-lab/apk/original/4.0.8/base.apk",
+  "package": "com.moojiang.bigbigwon.mygt",
+  "versionName": "4.0.8",
+  "versionCode": "409",
+  "app_name": "BIGBIG WON",
+  "minSdk": "24",
+  "targetSdk": "36",
+  "permissions": [
+   "android.permission.ACCESS_COARSE_LOCATION",
+   "android.permission.ACCESS_FINE_LOCATION",
+   "android.permission.ACCESS_NETWORK_STATE",
+   "android.permission.ACCESS_WIFI_STATE",
+   "android.permission.BLUETOOTH",
+   "android.permission.BLUETOOTH_ADMIN",
+   "android.permission.BLUETOOTH_ADVERTISE",
+   "android.permission.BLUETOOTH_CONNECT",
+   "android.permission.BLUETOOTH_PRIVILEGED",
+   "android.permission.BLUETOOTH_SCAN",
+   "android.permission.FOREGROUND_SERVICE",
+   "android.permission.FOREGROUND_SERVICE_SPECIAL_USE",
+   "android.permission.INTERNET",
+   "android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS",
+   "android.permission.SYSTEM_ALERT_WINDOW",
+   "android.permission.WAKE_LOCK",
+   "com.android.vending.CHECK_LICENSE",
+   "com.moojiang.bigbigwon.mygt.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+  ],
+  "activities": [
+   "com.moojiang.bigbigwon.MainActivity",
+   "io.flutter.plugins.urllauncher.WebViewActivity",
+   "com.pairip.licensecheck.LicenseActivity"
+  ],
+  "services": [
+   "flutter.overlay.window.flutter_overlay_window.OverlayService",
+   "flutter.overlay.window.flutter_overlay_window.FullscreenOverlayService"
+  ],
+  "receivers": [
+   "androidx.profileinstaller.ProfileInstallReceiver"
+  ],
+  "providers": [
+   "androidx.startup.InitializationProvider"
+  ],
+  "cert": {
+   "certs": [
+    {
+     "subject": "Common Name: Android, Organizational Unit: Android, Organization: Google Inc., Locality: Mountain View, State/Province: California, Country: US",
+     "issuer": "Common Name: Android, Organizational Unit: Android, Organization: Google Inc., Locality: Mountain View, State/Province: California, Country: US",
+     "serial": "AC945150B4978B64B1083CA763BF26A0998AF05A",
+     "not_before": "2026-01-15 08:50:36+00:00",
+     "not_after": "2056-01-15 08:50:36+00:00",
+     "sha1": "A0672685CF725D5ED91928172E62FC0F681FD01B",
+     "sha256": "F74543340EEE327463105E2AFBA8FBAC0C9CF5FDFEAD32FC9DF712AB09187B62"
+    }
+   ],
+   "v1_signature_files": []
+  },
+  "abis_primary": [],
+  "splits": [
+   "base.apk",
+   "config.ar.apk",
+   "config.arm64_v8a.apk",
+   "config.en.apk",
+   "config.xxhdpi.apk"
+  ],
+  "split_meta": {
+   "config.en.apk": {
+    "size": 41369,
+    "sha256": "00df4a3b837f2e5c067279e65242917e797fa5fa7e9e58905f93e5373a89b959"
+   },
+   "config.xxhdpi.apk": {
+    "size": 88260,
+    "sha256": "a1998122b37e9edb5271a048a8a433bfadcd8dbfad09da19ad9891e74e7e74a8"
+   },
+   "config.arm64_v8a.apk": {
+    "size": 11027091,
+    "sha256": "2e9805fc20b0ec88b62c5d107f0c1634a27f47469d63c79c90b842f9f15bd1fb"
+   },
+   "base.apk": {
+    "size": 32854837,
+    "sha256": "64e0832b1f97d995b40bf994465c277340e96a4f2b6b2fc5ef1eb4e2af9378e2"
+   },
+   "config.ar.apk": {
+    "size": 20889,
+    "sha256": "172052b2b749db30c5fbfaae36dcbbb5e7e1e393fdd26ece8ab1fd74b9e6d78e"
+   }
+  },
+  "split_markers": {
+   "config.en.apk": "none",
+   "config.xxhdpi.apk": "none",
+   "config.arm64_v8a.apk": "none",
+   "base.apk": "none",
+   "config.ar.apk": "none"
+  }
+ }
+}
