@@ -44,3 +44,17 @@ referenced report; nothing is claimed from intent.
 * The toolkit repo `~/armorx-re/repo` was left untouched on branch `research/mygt-4.0.8` at `dbe2ce7`.
 * APK originals re-hashed after the pass: 2.23 `7ed18b77…c892`, 2.24 `0bae884b…f305`,
   4.0.8 `474f6609…3abf` — unchanged.
+
+## Git / artifact state
+
+* Lab repo: `/home/salamanka/armorx-lab` (own repo), branch `master`, HEAD **a7e08c6**, 94 tracked
+  files; `.git` is 1.1 MB (emulator disks and downloaded binaries are ignored, not committed).
+* Lab bundle: `/home/salamanka/armorx-lab/armorx-lab.bundle` (957 KB, `git bundle verify` → complete history).
+* Toolkit repo `/home/salamanka/armorx-re/repo`: `research/mygt-4.0.8` untouched at **dbe2ce7**;
+  new branch **`research/ble-lab-multiversion`** = `6f0acd5` adds `docs/lab/README.md` +
+  `tools/lab/**` (harness, experiment matrix, radio isolation, emergency restore) — 20 files,
+  +3,041 lines, no release code touched.
+* Push artifacts (GitHub auth still unavailable → **AUTH_BLOCKED**):
+  `/home/salamanka/armorx-lab/ble-lab-multiversion.patch` (140 KB) and
+  `ble-lab-multiversion.bundle` (298 KB, verified). Exact command once credentials exist:
+  `git -C /home/salamanka/armorx-re/repo push -u origin research/ble-lab-multiversion`.

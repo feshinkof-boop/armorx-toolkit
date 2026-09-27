@@ -16,3 +16,6 @@ avd/reference/avd-home/**
 frida/tools/**
 *.img
 *.qcow2
+*.bundle
+*.patch
+.venv-frida/**
