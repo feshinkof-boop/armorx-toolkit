@@ -7,12 +7,15 @@ public static class ArmorXFrames
 
     public const byte OpGetZkmVersion = 0x0B;
     public const byte OpPostWrite = 0x0E;
+    public const byte OpGetMacroList = 0xD5;
     public const byte OpReadConfig = 0xD6;
     public const byte OpWriteConfig = 0xD7;
+    public const byte OpWriteMacro = 0xD8;
     public const byte OpGetDeviceUuid = 0xEF;
 
     public static readonly byte[] GetZkmVersion = BuildShort(OpGetZkmVersion);
     public static readonly byte[] GetDeviceUuid = BuildShort(OpGetDeviceUuid, new byte[8]);
+    public static readonly byte[] GetMacroList = BuildShort(OpGetMacroList);
     public static readonly byte[] ReadConfig = BuildShort(OpReadConfig);
     public static readonly byte[] PostWrite = BuildShort(OpPostWrite, new byte[] { 0x00 });
 
