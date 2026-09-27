@@ -1,0 +1,172 @@
+{
+ "fields": [
+  {
+   "field": "D2 present",
+   "2.22": "YES",
+   "2.23": "YES",
+   "2.24": "YES",
+   "4.0.8": "YES"
+  },
+  {
+   "field": "Entry function",
+   "2.22": "_RainbowTestState::initState",
+   "2.23": "_RainbowTestState::initState",
+   "2.24": "_RainbowTestState::initState",
+   "4.0.8": "_ArmorXProMoreWidgetState::build (\u6309\u952e\u6d4b\u8bd5) -> RainbowTest -> initState"
+  },
+  {
+   "field": "Entry address",
+   "2.22": "0x8e1e94",
+   "2.23": "0x8b0504",
+   "2.24": "0x91cf94",
+   "4.0.8": "0x940684 / 0xacf744 (callback 0xacf874)"
+  },
+  {
+   "field": "Enable frame",
+   "2.22": "A5 05 D2 01 7D",
+   "2.23": "A5 05 D2 01 7D",
+   "2.24": "A5 05 D2 01 7D",
+   "4.0.8": "A5 05 D2 01 7D"
+  },
+  {
+   "field": "Disable frame",
+   "2.22": "A5 05 D2 00 7C",
+   "2.23": "A5 05 D2 00 7C",
+   "2.24": "A5 05 D2 00 7C",
+   "4.0.8": "A5 05 D2 00 7C"
+  },
+  {
+   "field": "Command before D2",
+   "2.22": "none",
+   "2.23": "none",
+   "2.24": "none",
+   "4.0.8": "none"
+  },
+  {
+   "field": "Command after D2",
+   "2.22": "none",
+   "2.23": "none",
+   "2.24": "none",
+   "4.0.8": "none"
+  },
+  {
+   "field": "Required state flag",
+   "2.22": "connectionState==connected (disable only)",
+   "2.23": "connectionState==connected (disable only)",
+   "2.24": "connectionState (disable only)",
+   "4.0.8": "Provider BluetoothModel (disable only)"
+  },
+  {
+   "field": "Device enum gate",
+   "2.22": "none found",
+   "2.23": "none found",
+   "2.24": "none found",
+   "4.0.8": "none found"
+  },
+  {
+   "field": "Firmware gate",
+   "2.22": "none found",
+   "2.23": "none found",
+   "2.24": "none found",
+   "4.0.8": "none found"
+  },
+  {
+   "field": "Controller-presence gate",
+   "2.22": "UNKNOWN",
+   "2.23": "UNKNOWN",
+   "2.24": "UNKNOWN",
+   "4.0.8": "UNKNOWN"
+  },
+  {
+   "field": "FFE2 subscribe before D2",
+   "2.22": "NO (subscribe follows the enable)",
+   "2.23": "NO (subscribe follows the enable)",
+   "2.24": "NO (subscribe follows the enable)",
+   "4.0.8": "YES (armed at connect, before the page enable)"
+  },
+  {
+   "field": "Unsubscribe/re-subscribe",
+   "2.22": "cancel on dispose",
+   "2.23": "cancel on dispose",
+   "2.24": "cancel on dispose",
+   "4.0.8": "Dart listener removed on dispose; no CCCD change"
+  },
+  {
+   "field": "MTU behavior",
+   "2.22": "UNKNOWN (no MTU code on this path)",
+   "2.23": "UNKNOWN",
+   "2.24": "UNKNOWN",
+   "4.0.8": "UNKNOWN"
+  },
+  {
+   "field": "Delay before enable",
+   "2.22": "none",
+   "2.23": "none",
+   "2.24": "none",
+   "4.0.8": "none"
+  },
+  {
+   "field": "Expected RX opcode",
+   "2.22": "not compared (length gate only)",
+   "2.23": "not compared (length gate only)",
+   "2.24": "UNKNOWN (0x24 comparison unsettled)",
+   "4.0.8": "0x02 (frame[2]==2)"
+  },
+  {
+   "field": "Expected RX length",
+   "2.22": "18",
+   "2.23": "18",
+   "2.24": "UNKNOWN (36 or element 0x24)",
+   "4.0.8": "no length gate; mask read needs >=7"
+  },
+  {
+   "field": "Parser function",
+   "2.22": "notify closure @0x8e2430",
+   "2.23": "notify closure @0x8b0654",
+   "2.24": "_RainbowTestState::analysisData",
+   "4.0.8": "_RainbowTestState::analysisData"
+  },
+  {
+   "field": "Parser address",
+   "2.22": "0x8e2408",
+   "2.23": "0x8b0654",
+   "2.24": "0x91d130",
+   "4.0.8": "0xacfa64"
+  },
+  {
+   "field": "Key-ID byte/field",
+   "2.22": "mask bytes [3..6] BE, bit==id",
+   "2.23": "mask bytes [3..6] BE, bit==id",
+   "2.24": "mask bytes [3..6] BE, bit==id",
+   "4.0.8": "mask bytes [3..6] BE, bit==id"
+  },
+  {
+   "field": "Press/release representation",
+   "2.22": "absolute mask, edge vs previous snapshot",
+   "2.23": "absolute mask, edge vs previous snapshot",
+   "2.24": "absolute mask, edge vs previous snapshot",
+   "4.0.8": "absolute mask, edge vs previous snapshot"
+  },
+  {
+   "field": "First event special handling",
+   "2.22": "none found",
+   "2.23": "none found",
+   "2.24": "none found",
+   "4.0.8": "none found (the D2 echo is dropped by the opcode gate)"
+  },
+  {
+   "field": "Exit/cleanup behavior",
+   "2.22": "dispose: cancel subscription, then D2 disable if connected",
+   "2.23": "same",
+   "2.24": "same",
+   "4.0.8": "same (Dart listener + D2 disable)"
+  },
+  {
+   "field": "Confidence",
+   "2.22": "PROVEN STATIC",
+   "2.23": "PROVEN STATIC",
+   "2.24": "STRONG EVIDENCE (one UNKNOWN gate)",
+   "4.0.8": "PROVEN STATIC"
+  }
+ ]
+}

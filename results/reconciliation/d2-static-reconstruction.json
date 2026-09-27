@@ -1,0 +1,493 @@
+{
+ "schema_version": 1,
+ "generated_at": "2026-09-27",
+ "status": "STATIC PASS COMPLETE - ROOT CAUSE UNKNOWN",
+ "research_question": "What does the official app do before, during or after D2 that our real-device harness is missing?",
+ "builds": {
+  "2.22": {
+   "build_id": "com.moojiang.bigbigwon 2.22.0901 (BIGBIG WON app, ARMOR-X Pro family; Dart 2.17.5 AOT, Blutter disassembly)",
+   "dart": "2.x",
+   "aot_tree": "armorx-lab/static/blutter/2.22.0901/blutter_out",
+   "raw_agent_output": "results/reconciliation/raw/2.22-d2-static.json"
+  },
+  "2.23": {
+   "build_id": "2.23.x (BIGBIG WON com.moojiang.bigbigwon, Dart 2.19.6 AOT, blutter dump at /home/salamanka/armorx/re/blutter_out)",
+   "dart": "2.19.6",
+   "aot_tree": "armorx/re/blutter_out",
+   "raw_agent_output": "results/reconciliation/raw/2.23-d2-static.json"
+  },
+  "2.24": {
+   "build_id": null,
+   "dart": "3.2.3",
+   "aot_tree": "armorx/re/v224/blutter_out",
+   "raw_agent_output": "results/reconciliation/raw/2.24-d2-static.json"
+  },
+  "4.0.8": {
+   "build_id": "com.moojiang.bigbigwon 4.0.8 (Dart 3.12.2 AOT, project com.moojiang.bigbigwon.mygt)",
+   "dart": "3.12.2",
+   "aot_tree": "armorx-re/mygt408/blutter_out",
+   "raw_agent_output": "results/reconciliation/raw/4.0.8-d2-static.json"
+  }
+ },
+ "d2_enable": {
+  "frame_hex": "A505D2017D",
+  "grade": "PROVEN STATIC",
+  "builder_4_0_8": {
+   "function": "BluetoothModel::testModeSwitch",
+   "address": "0xabaef4",
+   "constants": [
+    "0x14a",
+    "0xa",
+    "0x1a4",
+    "0x2",
+    "0xfa"
+   ],
+   "note": "tagged Smis, halve to get bytes"
+  },
+  "checksum": "Sum8 of the preceding bytes (hard-coded literal on this path)"
+ },
+ "d2_disable": {
+  "frame_hex": "A505D2007C",
+  "grade": "PROVEN STATIC",
+  "gated_on": "connection state == connected"
+ },
+ "preconditions": [
+  {
+   "candidate": "0B before D2",
+   "present": "NO",
+   "grade": "PROVEN STATIC",
+   "evidence": "no such call on the D2 path in any build; our harness does send it"
+  },
+  {
+   "candidate": "EF/D4/D6 before D2",
+   "present": "NO",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "candidate": "controller present",
+   "present": "UNKNOWN",
+   "grade": "UNKNOWN",
+   "evidence": "no explicit check found; implied by the connection"
+  },
+  {
+   "candidate": "specific gamepad/onboard mode",
+   "present": "NO",
+   "grade": "PROVEN STATIC",
+   "evidence": "nothing reads D4 fields on this path"
+  },
+  {
+   "candidate": "firmware/version threshold",
+   "present": "NO",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "candidate": "device enum branch",
+   "present": "NO",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "candidate": "FFE2 subscription before D2",
+   "present": "YES (4.0.8), NO (2.22/2.23/2.24)",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "candidate": "unsubscribe/re-subscribe around D2",
+   "present": "NO",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "candidate": "MTU negotiation",
+   "present": "NO on this path",
+   "grade": "UNKNOWN overall"
+  },
+  {
+   "candidate": "delay/timer before enable",
+   "present": "NO",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "candidate": "additional start command after D2",
+   "present": "NO",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "candidate": "UI state flag before enable",
+   "present": "NO",
+   "grade": "PROVEN STATIC"
+  }
+ ],
+ "tx_sequence": [
+  {
+   "step": 1,
+   "action": "notify armed on FFE2 (4.0.8: at connect)",
+   "frame_hex_or_unknown": "CCCD write value UNKNOWN",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "step": 2,
+   "action": "D2 enable written to FFE1, not awaited",
+   "frame_hex_or_unknown": "A505D2017D",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "step": 3,
+   "action": "page-level listener established (4.0.8: wraps the connect-time stream)",
+   "frame_hex_or_unknown": null,
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "step": 4,
+   "action": "on exit: cancel listener; if connected, D2 disable",
+   "frame_hex_or_unknown": "A505D2007C",
+   "evidence": "PROVEN STATIC"
+  }
+ ],
+ "rx_sequence": [
+  {
+   "step": 1,
+   "action": "status frames arrive on 0000FFE2",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "step": 2,
+   "action": "parser gate (4.0.8: frame[2]==0x02; 2.22/2.23: length==18)",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "step": 3,
+   "action": "mask extracted from bytes [3..6] big-endian, bit index == key id",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "step": 4,
+   "action": "boolean per key compared with previous snapshot; setState on change",
+   "evidence": "PROVEN STATIC"
+  }
+ ],
+ "subscription_behavior": {
+  "4.0.8": "armed at connect by BluetoothModel; page adds a Dart listener; dispose removes it only",
+  "2.22": "page subscribes after the enable write; dispose cancels then disables",
+  "2.23": "same as 2.22",
+  "2.24": "same as 2.22; stream is a broadcast stream"
+ },
+ "timing": {
+  "enable_awaited": false,
+  "delay_before_enable": "none",
+  "delay_after_enable": "none",
+  "unrelated_duration": "500 ms re-render for the disconnected state"
+ },
+ "parser": {
+  "2.22": {
+   "dispatcher_function": "BluetoothModel::onCharacteristicChanged (4.0.8) / page closure (2.22-2.24)",
+   "dispatcher_address": "0x8e2408",
+   "parser_function": "_RainbowTestState::subscribeCharacteristic -> [closure] void <anonymous closure>(dynamic, List<int>) - parsing is inlined in the same closure; there is no separate parser symbol",
+   "parser_address": "0x8e2430",
+   "characteristic_uuid": "0000FFE2-0000-1000-8000-00805F9B34FB",
+   "expected_opcode": "0x02 (4.0.8 only; 2.22/2.23 gate on length 18; 2.24 UNKNOWN)",
+   "minimum_length": 18,
+   "fields": [
+    {
+     "name": "length",
+     "offset": 1,
+     "width": 1,
+     "meaning": "frame length, gate == 18"
+    },
+    {
+     "name": "key_mask",
+     "offset": 3,
+     "width": 4,
+     "meaning": "big-endian u32, bit index == key id"
+    },
+    {
+     "name": "axes",
+     "offset": 7,
+     "width": 8,
+     "meaning": "four signed int16 BE"
+    },
+    {
+     "name": "lt",
+     "offset": 15,
+     "width": 1,
+     "meaning": "LT analog"
+    },
+    {
+     "name": "rt",
+     "offset": 16,
+     "width": 1,
+     "meaning": "RT analog"
+    },
+    {
+     "name": "trailer",
+     "offset": 17,
+     "width": 1,
+     "meaning": "UNKNOWN (never read)"
+    }
+   ],
+   "state_requirements": [
+    "connection up",
+    "previous snapshot for edge detection"
+   ],
+   "ignored_events": [
+    "the 5-byte D2 echo (dropped by the gate)"
+   ],
+   "error_behavior": [
+    "frames failing the gate take the alternate branch (4.0.8: 0xad0c80, UNKNOWN)"
+   ]
+  },
+  "2.23": {
+   "dispatcher_function": "BluetoothModel::onCharacteristicChanged (4.0.8) / page closure (2.22-2.24)",
+   "dispatcher_address": "0x8b0654",
+   "parser_function": "same closure (inline: 0x8b067c-0x8b1bd0); it is the only 2.23 inbound status/button parser under moojiang/widgets/rainbow/",
+   "parser_address": "0x8b0654",
+   "characteristic_uuid": "0000FFE2-0000-1000-8000-00805F9B34FB",
+   "expected_opcode": "0x02 (4.0.8 only; 2.22/2.23 gate on length 18; 2.24 UNKNOWN)",
+   "minimum_length": 18,
+   "fields": [
+    {
+     "name": "length",
+     "offset": 1,
+     "width": 1,
+     "meaning": "gate == 18"
+    },
+    {
+     "name": "key_mask",
+     "offset": 3,
+     "width": 4,
+     "meaning": "big-endian u32, bit == id"
+    },
+    {
+     "name": "axes",
+     "offset": 7,
+     "width": 8,
+     "meaning": "four signed int16 BE"
+    },
+    {
+     "name": "lt",
+     "offset": 15,
+     "width": 1,
+     "meaning": "LT analog"
+    },
+    {
+     "name": "rt",
+     "offset": 16,
+     "width": 1,
+     "meaning": "RT analog"
+    }
+   ],
+   "state_requirements": [
+    "connection up",
+    "previous snapshot for edge detection"
+   ],
+   "ignored_events": [
+    "the 5-byte D2 echo (dropped by the gate)"
+   ],
+   "error_behavior": [
+    "frames failing the gate take the alternate branch (4.0.8: 0xad0c80, UNKNOWN)"
+   ]
+  },
+  "2.24": {
+   "dispatcher_function": "BluetoothModel::onCharacteristicChanged (4.0.8) / page closure (2.22-2.24)",
+   "dispatcher_address": "0x91d0a4",
+   "parser_function": null,
+   "parser_address": null,
+   "characteristic_uuid": "0000FFE2-0000-1000-8000-00805F9B34FB",
+   "expected_opcode": "0x02 (4.0.8 only; 2.22/2.23 gate on length 18; 2.24 UNKNOWN)",
+   "minimum_length": null,
+   "fields": [
+    {
+     "name": "key_mask",
+     "offset": 3,
+     "width": 4,
+     "meaning": "big-endian u32, bit == id (sublist(3,14) then ByteData bytes 3..6)"
+    }
+   ],
+   "state_requirements": [
+    "connection up",
+    "previous snapshot for edge detection"
+   ],
+   "ignored_events": [
+    "the 5-byte D2 echo (dropped by the gate)"
+   ],
+   "error_behavior": [
+    "frames failing the gate take the alternate branch (4.0.8: 0xad0c80, UNKNOWN)"
+   ]
+  },
+  "4.0.8": {
+   "dispatcher_function": "BluetoothModel::onCharacteristicChanged (4.0.8) / page closure (2.22-2.24)",
+   "dispatcher_address": "0xaca7c4",
+   "parser_function": "_RainbowTestState::analysisData",
+   "parser_address": "0xacfa64",
+   "characteristic_uuid": "0000FFE2-0000-1000-8000-00805F9B34FB",
+   "expected_opcode": "0x02 (4.0.8 only; 2.22/2.23 gate on length 18; 2.24 UNKNOWN)",
+   "minimum_length": null,
+   "fields": [
+    {
+     "name": "opcode",
+     "offset": 2,
+     "width": 1,
+     "meaning": "gate == 0x02"
+    },
+    {
+     "name": "key_mask",
+     "offset": 3,
+     "width": 4,
+     "meaning": "big-endian u32 from sublist(3,7); bit index == key id"
+    }
+   ],
+   "state_requirements": [
+    "connection up",
+    "previous snapshot for edge detection"
+   ],
+   "ignored_events": [
+    "the 5-byte D2 echo (dropped by the gate)"
+   ],
+   "error_behavior": [
+    "frames failing the gate take the alternate branch (4.0.8: 0xad0c80, UNKNOWN)"
+   ]
+  }
+ },
+ "event_format": {
+  "length": 18,
+  "header": "0xA5",
+  "length_byte": "0x12",
+  "opcode": "0x02",
+  "key_mask": "[3..6] big-endian u32",
+  "axes": "[7..14] four signed int16 BE",
+  "lt": "[15]",
+  "rt": "[16]",
+  "trailer": "[17] UNKNOWN",
+  "checksum": "[17] per our live captures; NOT validated by the app"
+ },
+ "press_release": {
+  "model": "absolute mask per notification",
+  "press": "bit set",
+  "release": "bit clear",
+  "event_typing": "none",
+  "debounce": "none",
+  "first_event_special": "no"
+ },
+ "key_id_extraction": {
+  "formula": "(b3<<24)|(b4<<16)|(b5<<8)|b6",
+  "rule": "bit index == key id",
+  "grade": "STRONG EVIDENCE",
+  "absent_boolean_fields_4_0_8": [
+   2,
+   5,
+   12,
+   15,
+   20,
+   21,
+   22
+  ]
+ },
+ "branches": [
+  {
+   "branch": "subpackageLength() frame sizes",
+   "address": "0x819190 (4.0.8)",
+   "relevance": "configuration frames only, not D2",
+   "grade": "PROVEN STATIC"
+  }
+ ],
+ "candidate_missing_requirements": [
+  {
+   "requirement": "D2 enable write type (with vs without response) in the 4.0.8 generation",
+   "grade": "UNKNOWN",
+   "why": "write-without-response is PROVEN STATIC only for 2.22/2.23; our harness uses write-without-response",
+   "testable": "yes, reversible"
+  },
+  {
+   "requirement": "CCCD re-arm after the enable",
+   "grade": "INFERRED",
+   "why": "ordering in 2.22-2.24",
+   "counter": "CONTRADICTED by 4.0.8 (armed before enable)"
+  }
+ ],
+ "rejected_hypotheses": [
+  "hidden start command after D2",
+  "firmware/device-enum gate",
+  "0B/EF/D4/D6 required first",
+  "first event deliberately ignored",
+  "re-subscribe required after enable",
+  "gamepad/onboard mode required",
+  "MTU negotiation required"
+ ],
+ "proposed_real_test": {
+  "doc": "results/experiments/proposed-d2-precondition-test.md",
+  "status": "JUSTIFIED (read-only wrt configuration)",
+  "commands": "0B, D2 enable (write-with-response variant), listen, D2 disable",
+  "prohibited": "D7, D8, DPI write, lighting write, RCSP/OTA, firmware write"
+ },
+ "unknowns": [
+  "Blutter prints raw tagged immediates, yet the sublist bounds at 0xacfad0 (mov x2, #3) and 0xad0370 (mov x2, #7) are odd values that cannot be Smis; whether these are untagged intrinsic arguments or a Blutter print quirk is UNKNOWN. The start index 3 for the mask slice is nevertheless corroborated by the identical sibling parser config_stick_view.dart @0xab9e30.",
+  "Exact key-id labels for ids 2 ('NIL'/key_C) and 5 (a stick-axis bit with no label) were not re-derived in this pass; they come from the earlier static pass (results/static/2.22.0901/key-id-table.md).",
+  "Numeric values of the `static late int` fields keyA/keyB/keyX/keyLThumb (initializers absent from the dump); only their inference from slot order + live key map is available.",
+  "Semantics of frame bytes [15] and [16] (no parsing window in the Button Test listener; the live map labels them LT/RT analog) - UNKNOWN from static parsing.",
+  "The Timer.periodic interval (Duration instance at pp+0x4f000, @0xab8f24) was not evaluated numerically.",
+  "The concrete QualifiedCharacteristic instances bound to the Button Test page (which of FFE1/FFE2 the write closure and the subscription receive) are injected at runtime through RainbowRoot -> RainbowMoreWidget -> RainbowTest (field propagation via provider/context objects); the argument chain could not be resolved statically from this dump, so the per-page UUID binding is UNKNOWN (define.dart naming + the app's logcat make FFE2-for-notify / FFE1-for-write the leading reading).",
+  "The exact semantics, width and meaning of the bytes handled by the later slices in analysisData (pairs around 0xad0364-0xad044c, values stored into state fields 0x10b @0xad047c and 0x113 @0xad04c8) are UNKNOWN; their end indices (18/22/26/30) exceed the 18-byte live frame, so they may belong to a longer frame variant.",
+  "The exact source-level operation behind GDT dispatch +0xd089 (slice extraction): its argument encoding differs from the usual Smi rule for the start value, so slice starts were derived from the RangeError bounds checks instead.",
+  "The firing site and cadence of the global callback list (static THR field_table_values+0xcf0 -> field_53) that invokes the D2-enable closure @0xacf874 with a Duration could not be located in this disassembly; therefore whether the enable callback runs exactly once per connection (or on repeated ticks) is UNKNOWN. The callback body contains no re-entry guard, which makes the question material.",
+  "The key names for the 25 mask bits in this page are not encoded in rainbow_test.dart (the page only stores booleans); mapping id->button name must come from the project's key-id table or live capture, not from this file.",
+  "The no-argument List getter reached through the unresolved dispatch GDT[cid + 0x10fc5] @0xacfa14 and @0xacfbc0 (Blutter could not resolve a selector name anywhere in the tree) is unidentified; consequently the meaning of the 185 (0xB9) constant compared at 0xacfa28 (cmp w0, #0x172) is UNKNOWN. It only gates a debug print.",
+  "Trigger/purpose of the 500 ms delayed setState in build (it is guarded by 'connection state == disconnected'); whether it is a route-teardown refresh or a reconnect refresh is INFERRED only.",
+  "What the device does with D2 outside the app (persistence/permission semantics) - not in the app.",
+  "Whether a rejected D2 write is retried anywhere above the widget (the write helper rethrows; no retry logic found in rainbow_test.dart).",
+  "Whether byte 17 of the status frame is a checksum the parser ignores (the parser never reads it).",
+  "Whether the app ignores the very first notification event on real hardware (no static evidence of any skip).",
+  "Whether the device needs a mode/MTU precondition before accepting D2 (not represented in the app).",
+  "Whether the earliest status frames after D2 ON are lost because the enable write is issued before the notification subscription is established - runtime ordering question, not decidable statically.",
+  "Whether the first dispatch (GDT[cid_x0+0x9fe0], cmp #0xb9) is List.length or an element getter: the stack-argument rendering is ambiguous; either way the value compared at 0x8b06f4 is 18 for this frame.",
+  "Whether the official app sends anything else before/after D2 on its own (e.g. a 0B health query) is UNKNOWN from this page: the Button Test page contains only the two D2 literals; any 0B traffic observed in our harness belongs to the harness, not to this page.",
+  "Whether the real device requires the D2 enable to be re-sent after each notify, and whether the app tolerates a missing D2 acknowledgement, is UNKNOWN (no ack handler for 0xD2 exists; the echo falls into the ignored_events path).",
+  "Whether the status opcode byte[2]=0x02 is required: the 2.23 parser never tests it, so any 18-byte frame is decoded as a status frame (unverified on hardware).",
+  "Why the notify handler prints the whole notification list when its length is not exactly 185 (0xb9) - the constant's meaning is not recoverable from this dump.",
+  "contents/semantics of the alternate analysisData branch at 0x91e23c for frames failing the 0x24 gate (not decoded)",
+  "keyA, keyB, keyX and keyLThumb are 'static late int' fields (offsets 0xc1c, 0xc20, 0xc24, 0xc44); their initialising literals are not emitted in this Blutter dump, so the exact constants for mask bits 0, 1, 3 and the LThumb bit are UNKNOWN here.",
+  "whether the D2 write uses write-with-response or write-without-response",
+  "whether the first notify event is ignored (no skip/first suppression found, but not conclusively ruled out)",
+  "which getter is compared to 0x24 (36) in analysisData - length==36 vs element==0x24 unrecovered",
+  "which getter on data is compared to 0x172 (370) in the notify closure (length or element access) - unrecovered"
+ ],
+ "evidence": [
+  {
+   "claim_id": "D2-VER-PARENT-001",
+   "claim": "D2 enable/disable frames and the analysisData gate re-read from the 4.0.8 binary tree by the parent",
+   "grade": "PROVEN STATIC",
+   "build": "4.0.8",
+   "artifact": "asm/moojiang/units/ble/bluetooth_mode.dart",
+   "function": "BluetoothModel::testModeSwitch",
+   "address": "0xabaef4",
+   "caller": "_RainbowTestState::initState callback",
+   "callee": "FFE1 write",
+   "constants": [
+    "0x14a",
+    "0xa",
+    "0x1a4",
+    "0x2",
+    "0xfa"
+   ],
+   "notes": "parent-verified"
+  },
+  {
+   "claim_id": "D2-VER-PARENT-002",
+   "claim": "parser gate is frame[2]==2",
+   "grade": "PROVEN STATIC",
+   "build": "4.0.8",
+   "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+   "function": "_RainbowTestState::analysisData",
+   "address": "0xacfaac",
+   "caller": "notify listener",
+   "callee": "mask extraction",
+   "constants": [
+    "4 (=Smi 2)"
+   ],
+   "notes": "cmp w0,#4 = tagged Smi, i.e. value 2"
+  }
+ ],
+ "source_artifacts": [
+  "results/reconciliation/raw/2.22-d2-static.json",
+  "results/reconciliation/raw/2.23-d2-static.json",
+  "results/reconciliation/raw/2.24-d2-static.json",
+  "results/reconciliation/raw/4.0.8-d2-static.json"
+ ]
+}

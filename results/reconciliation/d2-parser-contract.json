@@ -1,0 +1,106 @@
+{
+ "build": "4.0.8",
+ "dispatcher": {
+  "function": "BluetoothModel::onCharacteristicChanged",
+  "address": "0xaca7c4",
+  "note": "armed at connect from initGattServices @0xaca690; forwards to a BroadcastStreamController (field_43)"
+ },
+ "d2_parser": {
+  "function": "_RainbowTestState::analysisData",
+  "address": "0xacfa64",
+  "size": "0x1248"
+ },
+ "input": {
+  "characteristic": "0000FFE2-0000-1000-8000-00805F9B34FB",
+  "opcode_offset": 2,
+  "opcode_value": "0x02",
+  "minimum_length": 7,
+  "gate": {
+   "address": "0xacfaac",
+   "instruction": "cmp w0, #4",
+   "meaning": "tagged Smi 4 => value 2",
+   "failure_path": "0xad0c80 (UNKNOWN)"
+  }
+ },
+ "fields": [
+  {
+   "name": "header",
+   "offset": 0,
+   "width": 1,
+   "endianness": "n/a",
+   "meaning": "0xA5 (not validated by the page)",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "name": "length",
+   "offset": 1,
+   "width": 1,
+   "endianness": "n/a",
+   "meaning": "not validated in 4.0.8 (==18 gate exists only in 2.22/2.23)",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "name": "opcode",
+   "offset": 2,
+   "width": 1,
+   "endianness": "n/a",
+   "meaning": "0x02 = button-status",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "name": "key_mask",
+   "offset": 3,
+   "width": 4,
+   "endianness": "big",
+   "meaning": "bit index == key id",
+   "evidence": "PROVEN STATIC"
+  },
+  {
+   "name": "axes",
+   "offset": 7,
+   "width": 8,
+   "endianness": "big (4x int16)",
+   "meaning": "recorded by the analyst; not read in the decoded analysisData path",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "name": "lt",
+   "offset": 15,
+   "width": 1,
+   "endianness": "n/a",
+   "meaning": "UNKNOWN in the app; live capture shows the LT analog here",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "name": "rt",
+   "offset": 16,
+   "width": 1,
+   "endianness": "n/a",
+   "meaning": "UNKNOWN in the app; live capture shows zero for RT",
+   "evidence": "UNKNOWN"
+  },
+  {
+   "name": "trailer",
+   "offset": 17,
+   "width": 1,
+   "endianness": "n/a",
+   "meaning": "UNKNOWN (our captures carry a checksum)",
+   "evidence": "UNKNOWN"
+  }
+ ],
+ "state_requirements": [
+  "connection up",
+  "previous mask snapshot for edge detection"
+ ],
+ "ignored_events": [
+  "the 5-byte D2 echo (frame[2]=0xD2 fails the gate)"
+ ],
+ "error_behavior": [
+  "alternate branch @0xad0c80 for frames failing the opcode gate (not decoded)"
+ ],
+ "unknowns": [
+  "alternate-branch semantics",
+  "CCCD write value",
+  "whether any length check exists inside the mask extraction"
+ ]
+}

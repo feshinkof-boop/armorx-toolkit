@@ -1,0 +1,28 @@
+digraph d2 {
+  rankdir=TB;
+  node [shape=box, fontname="Helvetica"];
+  UI_BUTTON_TEST [label="UI_BUTTON_TEST\n_ArmorXProMoreWidgetState::build ListTile 按键测试\n0x940684"];
+  UI_ROUTE [label="UI_ROUTE\nNavigator.push(MaterialPageRoute -> RainbowTest)\n0x94773c"];
+  PAGE_INIT [label="PAGE_INIT\n_RainbowTestState::initState callback\n0xacf744/0xacf874"];
+  ENABLE [label="ENABLE\nBluetoothModel::testModeSwitch(true) - frame bui\n0xabaef4"];
+  WRITE [label="WRITE\nFFE1 write (write-without-response in 2.22/2.23;\nFFE1"];
+  NOTIFY_ARM [label="NOTIFY_ARM\nBluetoothModel::onCharacteristicChanged (FFE2 ar\n0xaca7c4"];
+  STREAM [label="STREAM\nBroadcastStreamController -> page _BroadcastStre\n0xacf974/0xacf9a4"];
+  PARSER [label="PARSER\n_RainbowTestState::analysisData\n0xacfa64"];
+  GATE [label="GATE\nframe[2]==0x02 gate (cmp w0,#4 = Smi 2)\n0xacfaac"];
+  MASK [label="MASK\nmask = bytes [3..6] big-endian, bit == key id\n0xacfad0-0xacfb88"];
+  STATE [label="STATE\nper-key booleans + setState on change\nstate fields 0x117..0x177"];
+  DISABLE [label="DISABLE\ndispose -> testModeSwitch(false)\n0xadd7e0/0xadd844"];
+  UI_BUTTON_TEST -> UI_ROUTE;
+  UI_ROUTE -> PAGE_INIT;
+  PAGE_INIT -> ENABLE;
+  ENABLE -> WRITE;
+  WRITE -> NOTIFY_ARM [style=dashed, label="device"];
+  NOTIFY_ARM -> STREAM;
+  STREAM -> PARSER;
+  PARSER -> GATE;
+  GATE -> MASK;
+  MASK -> STATE;
+  PAGE_INIT -> DISABLE [style=dotted, label="dispose"];
+  DISABLE -> WRITE;
+}

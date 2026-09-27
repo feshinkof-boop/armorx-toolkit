@@ -1,0 +1,391 @@
+{
+  "build": "com.moojiang.bigbigwon 2.22.0901 (BIGBIG WON app, ARMOR-X Pro family; Dart 2.17.5 AOT, Blutter disassembly)",
+  "d2_present": true,
+  "d2_enable_frame_hex": "A5 05 D2 01 7D",
+  "d2_disable_frame_hex": "A5 05 D2 00 7C",
+  "entry_function": "_RainbowTestState::initState (Button Test page state; page widget RainbowTest built by _RainbowMoreWidget::build -> Navigator.push(MaterialPageRoute) -> Row: _RainbowTestState::initState)",
+  "entry_address": "0x8e1e94",
+  "tx_sequence": [
+    {
+      "step": 1,
+      "action": "initState calls testModeSwitch(); its async body builds the literal list [165,5,210,1,125] (=A5 05 D2 01 7D) and hands it to the page's write closure (= BleDeviceInteractor::writeCharacterisiticWithoutResponse tear-off) - i.e. D2 ENABLE is written (write-without-response) as the first action of the page",
+      "frame_hex_or_unknown": "A5 05 D2 01 7D",
+      "evidence": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart: initState 0x8e1e94 bl #0x8e3a88 (testModeSwitch) at 0x8e1eb0; async body [closure] ':async_op' 0x8e3be4 builds the GrowableArray at 0x8e3c44-0x8e3c90 (literals 330,10,420,2,250 = tagged Smis = 2x byte values); calls the write closure at 0x8e3cf8 (ClosureCall) and awaits it at 0x8e3d28 (_awaitHelper)"
+    },
+    {
+      "step": 2,
+      "action": "initState then calls subscribeCharacteristic(); its async body calls BleDeviceInteractor::subScribeToCharacteristic with the page's QualifiedCharacteristic (logs 'Subscribing to: <char> ') which drives flutter_reactive_ble subscribeToCharacteristic and stores the StreamSubscription in _RainbowTestState.field_10f; the 18-byte stream listener closure is created here",
+      "frame_hex_or_unknown": "UNKNOWN",
+      "evidence": "asm/moojiang/widgets/rainbow/rainbow_test.dart: initState 0x8e1ec0 bl #0x8e2190 (subscribeCharacteristic); subscribeCharacteristic 0x8e2190 + [closure] ':async_op' 0x8e22a8 calls widget.field_1b (= subScribeToCharacteristic tear-off) with widget.field_17; result (StreamSubscription) stored at 'add x16, x1, #0x10f' 0x8e2358; listener = [closure] 0x8e2408 (pp.txt line 56366: AnonymousClosure (0x8e2408) in _RainbowTestState::subscribeCharacteristic 0x8e2190). Interactor side: asm/moojiang/units/ble/ble_device_interactor.dart subScribeToCharacteristic 0x969390, log 'Subscribing to: ' built at 0x9693b0 (pp.txt 48849)"
+    },
+    {
+      "step": 3,
+      "action": "while the Button Test page is open no other command is sent by this page: the only two command literals in the whole file are the D2 enable (0x8e3c44) and the D2 disable (0x8e1f24); no polling, no re-arm, no version query on this page",
+      "frame_hex_or_unknown": "UNKNOWN",
+      "evidence": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart: full-file scan - only two 5-element int-list literals exist in the file (0x8e1f24 and 0x8e3c44) and the only cross-file closures referenced are BleDeviceInteractor writeCharacterisiticWithoutResponse/subScribeToCharacteristic (0x96b9f8/0x96ba1c)"
+    },
+    {
+      "step": 4,
+      "action": "dispose() cancels the subscription (StreamSubscription stored at field_10f) and, only if the connection state is still 'connected', calls testModeSwitch1() which writes the literal [165,5,210,0,124] (=A5 05 D2 00 7C) i.e. D2 DISABLE through the same write closure",
+      "frame_hex_or_unknown": "A5 05 D2 00 7C",
+      "evidence": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart: dispose 0x95a864; field_10f read at 0x95a87c + cancel via GDT[cid_x0-0xfc1] 0x95a8a4; cmp w2, Obj!DeviceConnectionState@8fcb51 at 0x95a8d0 with b.ne skip at 0x95a8dc; testModeSwitch1 0x8e1efc, list literals 330,10,420,0,248 stored at 0x8e1f24-0x8e1f48; closure called at 0x8e1fa0. Enum value: objs.txt DeviceConnectionState@8fcb51 = int(0x1) 'connected'"
+    },
+    {
+      "step": 5,
+      "action": "cross-check only (not static evidence): the independent live harness sends 0B (a5 04 0b b4 -> a5 05 0b 30 e5) then D2 ON a5 05 d2 01 7d and receives the identical 5-byte echo, then 18-byte a5 12 02 .. status frames; the app-side static truth above matches both frame bytes exactly",
+      "frame_hex_or_unknown": "A5 05 D2 01 7D",
+      "evidence": "cross-check artefacts in-repo: results/experiments/physical-20260927-170844-d2/raw-tx-rx.log; results/final/d2-mode-state-finding.md (labelled cross-check, not used as proof of app behaviour)"
+    }
+  ],
+  "preconditions": [
+    {
+      "candidate": "page was opened (Button Test route pushed) so initState ran",
+      "present_yes_no_unknown": "YES",
+      "evidence": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart: _RainbowTestState::initState 0x8e1e94 is the Flutter lifecycle entry; the page is created in /home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_more.dart [closure] 0x92b6c4 (AllocateRainbowTestStub 0x92b714) which is pushed as a MaterialPageRoute from _RainbowMoreWidget::build 0x92b738/0x92b7b8"
+    },
+    {
+      "candidate": "BLE link connected before the enable frame is sent",
+      "present_yes_no_unknown": "UNKNOWN",
+      "evidence": "the enable write is unconditional in initState 0x8e1e94-0x8e1eb4 (no connection-state test around it); the connection state is only tested for the *disable* path in dispose 0x95a8d0"
+    },
+    {
+      "candidate": "notification subscription established BEFORE the enable frame is written",
+      "present_yes_no_unknown": "NO",
+      "evidence": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart: initState issues testModeSwitch() (0x8e1eb0) before subscribeCharacteristic() (0x8e1ec0); both are async and not awaited by initState, so the write and the subscribe are started in that order in the same turn"
+    },
+    {
+      "candidate": "app waits for / consumes a D2 acknowledgement",
+      "present_yes_no_unknown": "NO",
+      "evidence": "testModeSwitch awaits only the BLE write Future (_awaitHelper 0x8e3d28 on the write closure's result); no ack parsing exists - the 5-byte D2 echo is dropped by the listener's length gate 0x8e245c/0x8e2460"
+    },
+    {
+      "candidate": "checksum of received frames is verified before parsing",
+      "present_yes_no_unknown": "NO",
+      "evidence": "the only validations in the stream listener 0x8e2408-0x8e3a80 are 'frame[1] == 18' (0x8e245c) and the per-window byteOffset bounds checks (0x8e24dc, 0x8e324c, 0x8e32cc, 0x8e333c, 0x8e33a8); no byte-sum comparison exists in that closure. The app does compute checksums for TX frames only: asm/moojiang/units/gamepadset.dart ::getCheckSum 0x79c368, ::getCRC 0x3d2664"
+    },
+    {
+      "candidate": "a state gate suppresses the first status event",
+      "present_yes_no_unknown": "NO",
+      "evidence": "no first-event/first-frame flag is read in the listener; initial values are the constructor's false/0 (constructor 0x8e1fcc) and setState fires whenever parsed values differ, so a non-zero first frame is processed"
+    },
+    {
+      "candidate": "D2 disable is only sent when the device is still in state connected",
+      "present_yes_no_unknown": "YES",
+      "evidence": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart: dispose 0x95a8d0 cmp against Obj!DeviceConnectionState@8fcb51 (objs.txt line 20559: int(0x1) 'connected'), b.ne 0x95a8dc skips testModeSwitch1"
+    },
+    {
+      "candidate": "enable and disable use the same write characteristic (FFE1) and the same notify characteristic (FFE2)",
+      "present_yes_no_unknown": "UNKNOWN",
+      "evidence": "both frames go through the same page-level write closure, but the QualifiedCharacteristic objects are injected at runtime by the parent page; the concrete UUID bound to each closure could not be resolved statically from the arguments propagated through RainbowRoot -> RainbowMoreWidget -> RainbowTest"
+    }
+  ],
+  "subscription_behavior": "Single notify subscription per page instance: _RainbowTestState::subscribeCharacteristic (0x8e2190, body 0x8e22a8) calls widget.field_1b (the tear-off of BleDeviceInteractor::subScribeToCharacteristic 0x969390) with widget.field_17 (a QualifiedCharacteristic); the interactor logs 'Subscribing to: <uuid> ' and calls flutter_reactive_ble subscribeToCharacteristic; the returned StreamSubscription is stored in _RainbowTestState.field_10f (0x8e2358). The stream listener closure 0x8e2408 is created inside subscribeCharacteristic (pp.txt 56366) and receives List<int> frames. dispose (0x95a864) cancels the subscription (field_10f, 0x95a87c-0x95a8b4) before it possibly sends D2 OFF. There is no re-subscribe, no per-frame filtering by characteristic, no unsubscribe-on-error. Cross-check: the app's own logcat for this build shows setCharacteristicNotification() on 0000ffe2-... (logs/2.22-logcat-full.txt:456) i.e. the notify source is FFE2 = define.dart::uuidRainbowRead.",
+  "timing": "No delays around D2. enable: written in initState (0x8e1eb0) inside testModeSwitch and awaited (write-Future only, _awaitHelper 0x8e3d28). subscription: started in the same synchronous turn immediately after (0x8e1ec0), also not awaited. disable: written synchronously in dispose (0x95a8e4). Deliberately-timed action found in the page: _RainbowTestState::build 0x9457cc, guarded by _RainbowTestState.field_113 (set false at 0x945840) and by 'connection state == disconnected' (cmp Obj!DeviceConnectionState@8fcb11 at 0x94581c), schedules Future.delayed(Duration(microseconds: 0x7a120 = 500000 = 500 ms)).then(setState) at 0x945844-0x945884 (Duration object: pp.txt line 31532 Obj!Duration@903231 off_8 = 0x7a120). No inter-frame debounce in the listener (every accepted frame is parsed immediately).",
+  "parser": {
+    "dispatcher_function": "_RainbowTestState::subscribeCharacteristic -> [closure] void <anonymous closure>(dynamic, List<int>) (the StreamSubscription listener registered on the notify characteristic)",
+    "dispatcher_address": "0x8e2408",
+    "parser_function": "_RainbowTestState::subscribeCharacteristic -> [closure] void <anonymous closure>(dynamic, List<int>) - parsing is inlined in the same closure; there is no separate parser symbol",
+    "parser_address": "0x8e2430",
+    "characteristic_uuid": "0000FFE2-0000-1000-8000-00805F9B34FB (define.dart::uuidRainbowRead, 0x791c74) - notify source; write commands use 0000FFE1-... (define.dart::uuidRainbowWrite, 0x791cb0). The exact QChar instance handed to the Button Test page is injected by the parent page and could not be resolved statically (see unknowns); the UUID shown is supported by define.dart naming + the app's own logcat setCharacteristicNotification(0000ffe2-...).",
+    "expected_opcode": "0x02 (button/status report) - CONTRADICTED as a gate: this listener never reads or compares frame[2]; its only frame check is frame[1] == 18",
+    "minimum_length": 18,
+    "fields": [
+      {
+        "name": "frame[0]",
+        "offset": 0,
+        "width": 1,
+        "meaning": "header 0xA5 - NOT validated by this listener"
+      },
+      {
+        "name": "frame[1]",
+        "offset": 1,
+        "width": 1,
+        "meaning": "declared frame length 0x12 = 18; validated: cmp x1,#0x12 at 0x8e245c, mismatch -> immediate return"
+      },
+      {
+        "name": "frame[2]",
+        "offset": 2,
+        "width": 1,
+        "meaning": "opcode (0x02 = button/status report per live frames); read by the app? no compare on this byte in this closure -> not gated"
+      },
+      {
+        "name": "key_mask",
+        "offset": "3..6",
+        "width": 4,
+        "meaning": "32-bit key mask, big-endian over bytes [3][4][5][6] (byte[3] = bits 24-31, byte[6] = bits 0-7); built by a 4-byte sublist(3,7) -> Uint8List -> ByteData 32-bit LE load + full byte reversal (0x8e2464-0x8e2564) then int.parse(hex,radix:16); each of 21 keys tested as (mask & keyConst) == keyConst"
+      },
+      {
+        "name": "analog_1",
+        "offset": "7..8",
+        "width": 2,
+        "meaning": "signed 16-bit big-endian value (byte-swapped then sign-extended via 0x7fff/0x8000 trick at 0x8e3278-0x8e32bc); stored in state field_cb (prev field_c3) -> stick axis 1"
+      },
+      {
+        "name": "analog_2",
+        "offset": "9..10",
+        "width": 2,
+        "meaning": "signed 16-bit BE; state field_db (prev field_d3) -> stick axis 2"
+      },
+      {
+        "name": "analog_3",
+        "offset": "11..12",
+        "width": 2,
+        "meaning": "signed 16-bit BE; state field_eb (prev field_e3) -> stick axis 3"
+      },
+      {
+        "name": "analog_4",
+        "offset": "13..14",
+        "width": 2,
+        "meaning": "signed 16-bit BE; state field_fb (prev field_f3) -> stick axis 4"
+      },
+      {
+        "name": "frame[15..16]",
+        "offset": "15..16",
+        "width": 2,
+        "meaning": "NOT read by this listener (no window covers it); live map labels them LT/RT analog"
+      },
+      {
+        "name": "frame[17]",
+        "offset": 17,
+        "width": 1,
+        "meaning": "checksum = (sum of bytes[0..16]) & 0xFF (verified against live frames; NOT validated by this listener)"
+      }
+    ],
+    "state_requirements": "Only the length check plus per-window byteOffset bounds checks. No header/opcode/checksum gate, no 'enabled' flag check inside the listener. UI rebuild gate: setState only when a parsed value differs from the stored previous snapshot (key booleans at 0x8e341c-0x8e3668, analog deltas vs threshold 327.68 at 0x8e37e0-0x8e38b4).",
+    "ignored_events": "Frames whose byte[1] != 0x12 return immediately (0x8e2460 b.ne -> 0x8e3908: mov x0,NULL; ret). This is what discards the 5-byte D2 echo/ack and any other frame type. Conversely, any 18-byte frame with byte[1]==18 arriving on the subscribed characteristic IS parsed as a button status frame (no opcode test).",
+    "error_behavior": "Short/invalid frames that pass the length check but are too short for a window throw RangeError('byteOffset') from the inlined bounds checks (0x8e3918, 0x8e3960, 0x8e39a8, 0x8e39f0 -> AllocateRangeErrorStub 0x3d81d4, RangeError.range 0x3d7960, ThrowStub 0xa747f8). There is no try/catch in the closure and no checksum error handling."
+  },
+  "press_release": "No event typing: the D2 stream is a periodic full-state report (live ~20 Hz), so press and release are just bit set/clear transitions inside the mask. The listener writes the derived boolean per key into _RainbowTestState current-state fields (0x1f,0x27,...,0xbf) and compares each pair against the previous snapshot (0x1b,0x23,...,0xbb); on any change it copies current->previous (0x8e3670-0x8e3760) and calls State::setState (0x8e37d8). Analog values are treated the same way with a |delta| > 327.68 (double) threshold (0x8e380c-0x8e38b4) before the second setState (0x8e3900). No debounce, no edge logging, no separate key-down/key-up frames.",
+  "key_id_extraction": "mask = frame[3]<<24 | frame[4]<<16 | frame[5]<<8 | frame[6] (big-endian over the 4 bytes), then key pressed = (mask & K) == K with K the power-of-two constant from gamepadset.dart. Constants proven statically (getters in /home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang/units/gamepadset.dart): keyY=0x20(bit5) 0x79dfc0, rightStickY=0x40(bit6) 0x7a8f14, keyL1=0x80(bit7) 0x7a91c4, keyR1=0x100(bit8) 0x7a8f1c, keyL2=0x200(bit9) 0x79c874, keyR2=0x400(bit10) 0x7a8f0c, keySelect=0x800(bit11) 0x79c87c, keyStart=0x1000(bit12) 0x7a8ef4, keyRThumb=0x8000(bit15) 0x79c468, keyUp=0x20000(bit17) 0x7a70d0, keyDown=0x40000(bit18) 0x7a5594, keyLeft=0x80000(bit19) 0x7a8eec, keyRight=0x100000(bit20) 0x79c884, keyM1=0x1000000(bit24) 0x7a3fb0, keyM2=0x2000000(bit25) 0x7a8efc, keyM3=0x4000000(bit26) 0x7a8f04, keyM4=0x8000000(bit27) 0x79c88c, keyM6=0x20000000(bit29) 0x7a8ee4; keyA/keyB/keyX/keyLThumb are 'static late int' (field offsets 0xc1c/0xc20/0xc24/0xc44) whose initialising literals are not emitted in this dump (values UNKNOWN; key-id-table.md of the earlier pass gives keyA=1 bit0, keyB=2 bit1, keyX=8 bit3). The 21 keys read by the Button Test listener, in order: keyA,keyB,keyX,keyY,keyL1,keyR1,keyL2,keyR2,keySelect,keyStart,keyLThumb,keyRThumb,keyUp,keyDown,keyLeft,keyRight,keyM1,keyM2,keyM3,keyM4,keyM6.",
+  "branches": [
+    {
+      "addr": "0x8e2430-0x8e2460",
+      "meaning": "frame[1] (=data[i] with tagged-Smi index 2) != 18 -> return (ignore frame)"
+    },
+    {
+      "addr": "0x8e2464-0x8e249c",
+      "meaning": "mask window: sublist(3,7) -> Uint8List.fromList -> 4 bytes"
+    },
+    {
+      "addr": "0x8e24dc-0x8e24e0",
+      "meaning": "if mask window length <= 3 -> RangeError ('byteOffset'), i.e. hard floor of 7 bytes"
+    },
+    {
+      "addr": "0x8e2504-0x8e2584",
+      "meaning": "32-bit LE load of the 4 bytes + 2-stage byte reversal + toRadixString(16) + int.parse(radix:16) = big-endian mask"
+    },
+    {
+      "addr": "0x8e25b8-0x8e2f84",
+      "meaning": "21 x per-key boolean: (mask & keyConst) == keyConst -> store into current-state field"
+    },
+    {
+      "addr": "0x8e2fbc-0x8e3224",
+      "meaning": "4 x analog windows sublist(7,9),(9,11),(11,13),(13,15) -> Int8List.fromList -> ByteData"
+    },
+    {
+      "addr": "0x8e324c/0x8e32cc/0x8e333c/0x8e33a8",
+      "meaning": "per-window bounds check (cmp x,#1 b.le -> RangeError) + 16-bit byte-swap + sign extension -> state fields cb/db/eb/fb"
+    },
+    {
+      "addr": "0x8e341c-0x8e3668",
+      "meaning": "21 pair comparisons current-vs-previous key booleans; any difference -> 0x8e3670"
+    },
+    {
+      "addr": "0x8e3670-0x8e37d8",
+      "meaning": "changes found: copy current->previous for all keys (and analog prev fields) then State::setState"
+    },
+    {
+      "addr": "0x8e37e0-0x8e38b4",
+      "meaning": "no key change: 4 analog |delta| checks against double 327.68; any delta above threshold -> 0x8e38bc (copy prev + setState 0x8e3900)"
+    },
+    {
+      "addr": "0x8e3908",
+      "meaning": "common exit: r0=NULL; return (used both for the ignored-frame path and for 'nothing changed')"
+    },
+    {
+      "addr": "0x8e3d40",
+      "meaning": "testModeSwitch async state-machine resume branch (does not re-send the command)"
+    }
+  ],
+  "evidence": [
+    {
+      "claim": "D2 ENABLE is the hard-coded 5-byte frame A5 05 D2 01 7D, written unconditionally from the Button Test page's initState path",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "_RainbowTestState::testModeSwitch -> [closure] dynamic async_op",
+      "address": "0x8e3be4 (list built 0x8e3c44-0x8e3c90)",
+      "constants": "[330,10,420,2,250] tagged Smis = bytes [165,5,210,1,125] = A5 05 D2 01 7D; checksum 125 == (165+5+210+1) & 0xFF"
+    },
+    {
+      "claim": "D2 DISABLE is the hard-coded 5-byte frame A5 05 D2 00 7C, written from dispose only while connection state == connected",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "_RainbowTestState::testModeSwitch1",
+      "address": "0x8e1efc (list built 0x8e1f24-0x8e1f48)",
+      "constants": "[330,10,420,0,248] tagged Smis = bytes [165,5,210,0,124] = A5 05 D2 00 7C; 124 == (165+5+210+0) & 0xFF"
+    },
+    {
+      "claim": "Smi decoding rule for this dump: printed integer immediates in list-slot stores are tagged Smis = 2x the byte value (lengths, array indices, context sizes are plain)",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart + pp.txt",
+      "function": "testModeSwitch async_op (0x8e3c44) cross-checked with results/static/2.22.0901/key-id-table.md method note",
+      "address": "0x8e3c44 / 0x8e1f24",
+      "constants": "0x14a -> 0xA5, 0x1a4 -> 0xD2, 0xa -> 5, 0x2 -> 1, 0xfa -> 125, 0xf8 -> 124"
+    },
+    {
+      "claim": "Entry point of the workflow is the Button Test page lifecycle: initState (0x8e1e94) calls testModeSwitch() first, subscribeCharacteristic() second",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "_RainbowTestState::initState",
+      "address": "0x8e1eb0, 0x8e1ec0",
+      "constants": "bl #0x8e3a88 then bl #0x8e2190"
+    },
+    {
+      "claim": "The parser/dispatcher is the StreamSubscription listener closure created inside subscribeCharacteristic (no separate parser symbol exists)",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart + pp.txt",
+      "function": "[closure] void <anonymous closure>(dynamic, List<int>)",
+      "address": "0x8e2408 (pp.txt:56366 attributes it to _RainbowTestState::subscribeCharacteristic 0x8e2190)",
+      "constants": "listener length 0x1680=5760 bytes"
+    },
+    {
+      "claim": "Frame gate is 'frame[1] == 18'; anything else is dropped silently",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "listener [closure] 0x8e2408",
+      "address": "0x8e245c cmp x1,#0x12 ; 0x8e2460 b.ne #0x8e3908 (mov x0,NULL; ret)",
+      "constants": "index immediate 2 = tagged Smi => logical index 1"
+    },
+    {
+      "claim": "The listener does NOT validate header byte 0xA5, the opcode byte, or the checksum",
+      "grade": "PROVEN STATIC (exhaustive negative scan of the closure body)",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "listener [closure] 0x8e2408-0x8e3a80",
+      "address": "whole closure - only comparisons present are cmp x1,#0x12 / cmp x2,#3 / cmp x9,#1 (x3)",
+      "constants": "contrast: rainbow_root.dart 0x7a984c checks byte[0]==0xA5 then byte[2]==239; configs_config.dart 0x8a7b24 checks byte[0]==0xA5 then byte[2]==215"
+    },
+    {
+      "claim": "Key-mask window is the 4 bytes frame[3..6]: sublist(3,7) -> Uint8List -> ByteData -> 32-bit value -> 21 per-key boolean tests",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "listener [closure]",
+      "address": "0x8e2468/0x8e2474 (sublist args printed 3 and 14 = tagged 3 and 7), Uint8List.fromList 0x8e249c, 32-bit load 0x8e2520",
+      "constants": "sublist(3,7); window hard floor enforced by cmp x2,#3 -> RangeError 0x8e24dc/0x8e3918"
+    },
+    {
+      "claim": "Mask byte order is big-endian over frame[3][4][5][6] (frame[3]=bits24-31, frame[6]=bits0-7)",
+      "grade": "STRONG EVIDENCE",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "listener [closure] mask decode",
+      "address": "0x8e2520-0x8e2564 (32-bit LE load, then 8/16-bit swizzles: Y = f[3]<<24 | f[4]<<16 | f[5]<<8 | f[6])",
+      "constants": "masks 0xff00ff00/0x00ff00ff/0xffff0000/0xffff; corroborated by gamepadset constants (2^id) and the live byte->id table in results/final/real-key-id-map.md"
+    },
+    {
+      "claim": "21 key booleans are derived per frame from the mask using gamepadset.dart power-of-two constants (bit == key id)",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart + asm/moojiang/units/gamepadset.dart",
+      "function": "listener [closure] (InitLateStaticField sites) + gamepadset getters",
+      "address": "0x8e25b8-0x8e2f84; getters keyY 0x79dfc0, rightStickY 0x7a8f14, keyL1 0x7a91c4, keyR1 0x7a8f1c, keyL2 0x79c874, keyR2 0x7a8f0c, keySelect 0x79c87c, keyStart 0x7a8ef4, keyRThumb 0x79c468, keyUp 0x7a70d0, keyDown 0x7a5594, keyLeft 0x7a8eec, keyRight 0x79c884, keyM1 0x7a3fb0, keyM2 0x7a8efc, keyM3 0x7a8f04, keyM4 0x79c88c, keyM6 0x7a8ee4",
+      "constants": "0x20,0x40,0x80,0x100,0x200,0x400,0x800,0x1000,0x8000,0x20000,0x40000,0x80000,0x100000,0x1000000,0x2000000,0x4000000,0x8000000,0x20000000"
+    },
+    {
+      "claim": "Four 16-bit big-endian signed analog values are parsed from frame[7..8],[9..10],[11..12],[13..14] and stored as prev/current state pairs",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "listener [closure] analog section",
+      "address": "0x8e2fbc-0x8e3408 (Int8List.fromList 0x8e2ff0/0x8e3034/0x8e3078/0x8e30bc; ldrsh + 0x7fff/0x8000 sign trick 0x8e3278-0x8e32bc)",
+      "constants": "state fields cb/db/eb/fb (prev c3/d3/e3/f3); sublist args printed 7/18/9/22/11/26/13/30 = tagged 7,9 / 9,11 / 11,13 / 13,15"
+    },
+    {
+      "claim": "UI rebuild only happens when parsed values differ from the stored snapshot: state fields 0x1f..0xbf current vs 0x1b..0xbb previous for keys, Analog prev/current for sticks",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "listener [closure]",
+      "address": "0x8e341c-0x8e3668 (pair compares), 0x8e3670-0x8e37d8 (copy prev + setState), 0x8e3900 (analog-change setState)",
+      "constants": "State::setState [package:flutter/src/widgets/framework.dart] 0x4d51dc"
+    },
+    {
+      "claim": "Analog change threshold before rebuilding is the double constant 327.68",
+      "grade": "STRONG EVIDENCE",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart (+ pp.txt)",
+      "function": "listener [closure]",
+      "address": "0x8e380c-0x8e38b4",
+      "constants": "IMM double(327.68) from 0x40747ae147ae147b at pp+0x498f0; fcmp/scvtf per axis"
+    },
+    {
+      "claim": "The page schedules one 500 ms delayed setState while the connection state is 'disconnected'",
+      "grade": "STRONG EVIDENCE",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart + pp.txt",
+      "function": "_RainbowTestState::build",
+      "address": "0x945844-0x945884 (Future.delayed + then -> setState), guard cmp Obj!DeviceConnectionState@8fcb11 0x94581c, flag field_113 cleared 0x945840",
+      "constants": "pp.txt line 31532 Obj!Duration@903231 off_8 = 0x7a120 = 500000 microseconds = 500 ms"
+    },
+    {
+      "claim": "Rainbow GATT UUIDs are defined statically: notify/read FFE2, write FFE1, service 00000000-...-00805F9B34FB",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/define.dart",
+      "function": "::uuidRainbowRead / ::uuidRainbowWrite / ::uuidRainbowService",
+      "address": "0x791c74, 0x791cb0, 0x791cec",
+      "constants": "\"0000FFE2-0000-1000-8000-00805F9B34FB\", \"0000FFE1-0000-1000-8000-00805F9B34FB\", \"00000000-0000-1000-8000-00805F9B34FB\" (pp.txt 51800-51802)"
+    },
+    {
+      "claim": "RainbowRoot builds QualifiedCharacteristic objects from those UUIDs (write -> state field_1f, read/notify -> state field_23) at connect time",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_root.dart",
+      "function": "_RainbowWidget::initState",
+      "address": "0x8d84ac; uuids loaded 0x8d854c/0x8d8570/0x8d8608; QChars stored 0x8d85e0 (field_1f) and 0x8d8678 (field_23)",
+      "constants": "QualifiedCharacteristic fields: field_7 = characteristic uuid, field_b = service uuid, field_f = deviceId"
+    },
+    {
+      "claim": "The app's own runtime log for this build enables notifications on FFE2 (i.e. the notify source is the Read characteristic)",
+      "grade": "STRONG EVIDENCE (artifact is the app's logcat, not the static image - used as corroboration only)",
+      "artifact": "logs/2.22-logcat-full.txt",
+      "function": "n/a - Android BtGatt log emitted for the app process",
+      "address": "line 456 (setCharacteristicNotification() - uuid: 0000ffe2-... enable: true); lines 442-443 discovery of ffe1/ffe2",
+      "constants": "0000ffe1 = write, 0000ffe2 = notify"
+    },
+    {
+      "claim": "Both commands leave the app through BleDeviceInteractor::writeCharacterisiticWithoutResponse (write-without-response), which is the closure the page stores in _RainbowTest.field_13",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart + asm/moojiang/units/ble/ble_device_interactor.dart + asm/moojiang/main.dart",
+      "function": "BleDeviceInteractor::writeCharacterisiticWithoutResponse / RainbowTest::build closure",
+      "address": "interactor 0x9699b0 (body closure 0x969b20; log 'Write without response value: ... to ...' 0x969c08), tear-off wired at rainbow_test 0x96b9f8 into widget field_13; interactor field_13 = FlutterReactiveBle::writeCharacteristicWithoutResponse (main.dart 0xa77c74)",
+      "constants": "write closure invoked at 0x8e1fa0 (disable) and 0x8e3cf8 (enable)"
+    },
+    {
+      "claim": "Short frames that pass the length gate throw RangeError('byteOffset') out of the stream callback",
+      "grade": "PROVEN STATIC",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "listener [closure] bounds-check stubs",
+      "address": "0x8e3918, 0x8e3960, 0x8e39a8, 0x8e39f0 (RangeError.range 0x3d7960, ThrowStub 0xa747f8)",
+      "constants": "'byteOffset' string pp+0x6e8"
+    },
+    {
+      "claim": "No unsubscribe/resubscribe, no per-frame characteristic filtering and no error handler in the subscription",
+      "grade": "STRONG EVIDENCE (exhaustive read of subscribeCharacteristic + listener)",
+      "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart",
+      "function": "_RainbowTestState::subscribeCharacteristic / listener closure / dispose",
+      "address": "0x8e2190-0x8e23b4, 0x8e2408-0x8e3a80, dispose 0x95a864-0x95a8b4",
+      "constants": "subscription stored once in field_10f; cancel only in dispose"
+    }
+  ],
+  "unknowns": [
+    "The concrete QualifiedCharacteristic instances bound to the Button Test page (which of FFE1/FFE2 the write closure and the subscription receive) are injected at runtime through RainbowRoot -> RainbowMoreWidget -> RainbowTest (field propagation via provider/context objects); the argument chain could not be resolved statically from this dump, so the per-page UUID binding is UNKNOWN (define.dart naming + the app's logcat make FFE2-for-notify / FFE1-for-write the leading reading).",
+    "keyA, keyB, keyX and keyLThumb are 'static late int' fields (offsets 0xc1c, 0xc20, 0xc24, 0xc44); their initialising literals are not emitted in this Blutter dump, so the exact constants for mask bits 0, 1, 3 and the LThumb bit are UNKNOWN here.",
+    "Whether the official app sends anything else before/after D2 on its own (e.g. a 0B health query) is UNKNOWN from this page: the Button Test page contains only the two D2 literals; any 0B traffic observed in our harness belongs to the harness, not to this page.",
+    "Whether the earliest status frames after D2 ON are lost because the enable write is issued before the notification subscription is established - runtime ordering question, not decidable statically.",
+    "Semantics of frame bytes [15] and [16] (no parsing window in the Button Test listener; the live map labels them LT/RT analog) - UNKNOWN from static parsing.",
+    "Trigger/purpose of the 500 ms delayed setState in build (it is guarded by 'connection state == disconnected'); whether it is a route-teardown refresh or a reconnect refresh is INFERRED only.",
+    "Exact key-id labels for ids 2 ('NIL'/key_C) and 5 (a stick-axis bit with no label) were not re-derived in this pass; they come from the earlier static pass (results/static/2.22.0901/key-id-table.md)."
+  ],
+  "rejected_hypotheses": [
+    "CONTRADICTED: 'the printed frame literals are the frame bytes' (header 0x14A=330, opcode 0x1A4=420). Those values are not bytes and the Smi-halved literals reproduce A5 05 D2 01 7D / A5 05 D2 00 7C byte-for-byte, including the checksum bytes 125/124.",
+    "CONTRADICTED: 'the Button Test parser gates on the opcode byte (0x02)'. The listener contains no comparison against 2; its only frame gate is frame[1]==18. (Other pages do gate on byte[2]: rainbow_root expects 239, configs_config expects 215.)",
+    "CONTRADICTED: 'the app verifies the frame checksum before parsing'. No byte-sum code exists in the listener; getCheckSum/getCRC exist only for TX frames (gamepadset.dart 0x79c368 / 0x3d2664).",
+    "CONTRADICTED: 'the app ignores the first status event after D2 ON'. There is no first-frame flag; state is initialised to false/0 and a first frame carrying any pressed key or non-zero analog triggers setState.",
+    "CONTRADICTED: 'the D2 acknowledgement echo is consumed by the app'. The 5-byte echo cannot pass the frame[1]==18 gate and is dropped at 0x8e2460.",
+    "CONTRADICTED: 'the key mask is little-endian over bytes[3..6] (bit id 0 in byte[3])'. The decode swizzle makes frame[3] the most significant byte, so ids 0-7 sit in frame[6]; this matches the gamepadset constants (e.g. keyL1 = 0x40 = bit 6 = LB) and the live byte->id table.",
+    "CONTRADICTED (for this page): 'the Button Test listener reads an 8-byte key field 3..10 as rainbow_root does'. The Button Test listener reads exactly 4 bytes at 3..6 plus four 2-byte analog windows.",
+    "CONTRADICTED: 'the disable frame is sent unconditionally on leaving the page'. dispose sends it only when the connection state is still 'connected' (Obj!DeviceConnectionState@8fcb51, objs.txt line 20559)."
+  ]
+}

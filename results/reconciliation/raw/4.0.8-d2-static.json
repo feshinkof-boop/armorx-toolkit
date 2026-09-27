@@ -1,0 +1,134 @@
+{
+  "build": "com.moojiang.bigbigwon 4.0.8 (Dart 3.12.2 AOT, project com.moojiang.bigbigwon.mygt)",
+  "d2_present": true,
+  "d2_enable_frame_hex": "A505D2017D",
+  "d2_disable_frame_hex": "A505D2007C",
+  "entry_function": "RainbowTest (lib/moojiang/widgets/rainbow/rainbow_test.dart) reached from _ArmorXProMoreWidgetState::build ListTile 'Button Test' -> Navigator.push(MaterialPageRoute(builder: (ctx) => RainbowTest()))",
+  "entry_address": "0xb08f98",
+  "tx_sequence": [
+    {
+      "step": 1,
+      "action": "Operator taps the 'Button Test' (按键测试) ListTile on the ARMOR-X Pro 'More' page",
+      "frame_hex_or_unknown": null,
+      "evidence": "asm/moojiang/widgets/armor-x_pro/armorx_pro_more.dart line 155 literal \"按键测试\" used for the ListTile title in _ArmorXProMoreWidgetState::build @0x940554; the ListTile onTap closure @0x94773c builds MaterialPageRoute with builder closure 0x947674 and calls NavigatorState::push @0x9477d4"
+    },
+    {
+      "step": 2,
+      "action": "Route builder returns the RainbowTest widget (the same test page object used by rainbow_more.dart)",
+      "frame_hex_or_unknown": null,
+      "evidence": "asm/moojiang/widgets/rainbow/rainbow_more.dart line 10237 '[closure] RainbowTest <anonymous closure>(dynamic, BuildContext)' @0x947674 (referenced from armorx_pro_more.dart:593 entry pp+0x55618)"
+    },
+    {
+      "step": 3,
+      "action": "RainbowTest._RainbowTestState.initState registers an async (Duration) callback into a global callback list; no frame is written here",
+      "frame_hex_or_unknown": null,
+      "evidence": "asm/moojiang/widgets/rainbow/rainbow_test.dart _RainbowTestState::initState @0xacf744; it loads a static (THR::field_table_values + 0xcf0, Blutter 'LoadStaticField(0x678)' @0xacf774), takes field_53 (a growable List) @0xacf784 and appends closure 0xacf874 @0xacf830"
+    },
+    {
+      "step": 4,
+      "action": "The registered callback fires (invoked with a Duration) and calls BluetoothModel::testModeSwitch(true) -> 'cmd:' print then BluetoothModel::write",
+      "frame_hex_or_unknown": "A505D2017D",
+      "evidence": "rainbow_test.dart closure @0xacf874: ReadContext.read<BluetoothModel> @0xacf8c0, r2 = true @0xacf8c8, BluetoothModel::testModeSwitch @0xacf8cc (addr 0xabaef4). testModeSwitch @0xabaef4 builds the 5-element list with Smi immediates 330(0x14a)=0xA5 @0xabaf3c, 10(0xa)=5 @0xabaf44, 420(0x1a4)=0xD2 @0xabaf4c, 2=1 @0xabaf54, 250(0xfa)=0x7D @0xabaf5c, prints 'cmd: ' + list @0xabb008 and calls BluetoothModel::write @0xabb01c"
+    },
+    {
+      "step": 5,
+      "action": "Immediately after the (not awaited) enable write, the page attaches its own listener to the app-level notify broadcast stream (no BLE frame; the GATT notify/CCCD was already armed at connect time)",
+      "frame_hex_or_unknown": null,
+      "evidence": "rainbow_test.dart closure @0xacf874 calls _RainbowTestState::subscribeCharacteristic @0xacf8dc (addr 0xacf8fc); subscribeCharacteristic reads BluetoothModel.field_43 (the broadcast controller, see BluetoothModel::notifyCharacteristicStream @0x826814), wraps it in _BroadcastStream @0xacf974 and listens @0xacf9a4, storing the subscription in state field_1b @0xacf9ac"
+    },
+    {
+      "step": 6,
+      "action": "Page dispose cancels the listener and then sends the D2 disable write",
+      "frame_hex_or_unknown": "A505D2007C",
+      "evidence": "rainbow_test.dart _RainbowTestState::dispose @0xadd7e0: cancels field_1b @0xadd828, then if state field_1f != null sets r2 = false @0xadd840 and calls testModeSwitch @0xadd844 (addr 0xabaef4), which builds 330(0xa5),10(5),420(0xd2),wzr(0),248(0xf8)=0x7C at 0xabaf9c/0xabafa4/0xabafac/0xabafb4/0xabafb8"
+    }
+  ],
+  "preconditions": [
+    {
+      "candidate": "Control characteristic FFE1 (write) has been discovered and stored on BluetoothModel.field_23",
+      "present_yes_no_unknown": "yes",
+      "evidence": "asm/moojiang/units/ble/bluetooth_mode.dart BluetoothModel::initGattServices @0xaca0a8: Guid::str128 compared against \"0000ffe1-0000-1000-8000-00805f9b34fb\" @0xaca208 and, on match, stored into field_23 @0xaca224; BluetoothModel::write @0x80dd28 writes to field_23 via BluetoothCharacteristic::write @0x80ddfc (NullCastError if field_23 == NULL @0x80de0c)"
+    },
+    {
+      "candidate": "Notify characteristic FFE2 is subscribed (setNotifyValue) before the page can receive events",
+      "present_yes_no_unknown": "yes",
+      "evidence": "bluetooth_mode.dart: \"0000ffe2-0000-1000-8000-00805f9b34fb\" @0xaca248 -> field_27 @0xaca268; BluetoothModel::onCharacteristicChanged @0xaca7c4 calls BluetoothCharacteristic::setNotifyValue @0xaca818 and lastValueStream().listen @0xaca850; it is invoked from initGattServices continuation @0xaca690"
+    },
+    {
+      "candidate": "BluetoothModel instance is reachable from the page via Provider (required for the disable gate on dispose)",
+      "present_yes_no_unknown": "yes",
+      "evidence": "_RainbowTestState::didChangeDependencies @0xa54b9c does ReadContext.read<BluetoothModel> @0xa54bd4 and stores it into state field_1f @0xa54bdc; dispose gates testModeSwitch(false) on that field being non-null @0xadd830-0xadd83c"
+    },
+    {
+      "candidate": "Device write queue/GATT init completed before the D2 write (write() awaits a pending future and prints \"等待初始化完成\")",
+      "present_yes_no_unknown": "yes",
+      "evidence": "BluetoothModel::write @0x80dd28: loads field_3f->field_b and tests bit 0x1e @0x80dd78; when unset it prints \"等待初始化完成\" @0x80dd80 and awaits the future @0x80dda8"
+    },
+    {
+      "candidate": "An explicit 'already in button-test mode' state gate before sending D2 enable",
+      "present_yes_no_unknown": "unknown",
+      "evidence": "the callback @0xacf874 contains no flag/null check before testModeSwitch(true) @0xacf8cc; no per-page boolean guard was found, so whether the enclosing callback list is cleared/fired once could not be established (see unknowns)"
+    },
+    {
+      "candidate": "Operator-visible precondition in the UI (e.g. only offered on the ARMOR-X Pro page)",
+      "present_yes_no_unknown": "yes",
+      "evidence": "the entry ListTile exists in armorx_pro_more.dart @0x940738-0x94078c and pushes RainbowTest @0x947674"
+    }
+  ],
+  "subscription_behavior": "Two layers. (1) BLE layer, done at connect time, not by this page: BluetoothModel::onCharacteristicChanged @0xaca7c4 (called from initGattServices @0xaca690 once FFE2 was found in field_27) calls setNotifyValue(FFE2) @0xaca818 and listens to characteristic.lastValueStream() @0xaca850 with closure @0xacb7f8, which filters with an unresolved bool getter @0xacb830 and pushes every List<int> into BluetoothModel.field_43, a _BroadcastStreamController (BroadcastStreamController.add @0xacb870). (2) Page layer: _RainbowTestState::subscribeCharacteristic @0xacf8fc wraps field_43 in a _BroadcastStream @0xacf974 and listens @0xacf9a4 with closure @0xacf9dc, storing the StreamSubscription in state field_1b. No subscription is repeated per frame; the subscription is attached AFTER the D2-enable write is issued, so the very first frames (including the device's D2 echo) are delivered to a listener that already exists.",
+  "timing": "No sleep between the D2-enable write and the listener attach: the callback @0xacf874 calls testModeSwitch(true) without awaiting it (no AwaitStub at 0xacf8cc) and then immediately calls subscribeCharacteristic() @0xacf8dc. Inside testModeSwitch the write is awaited (AwaitStub @0xabb028). The callback itself is not triggered by a fixed delay in this page: it is registered into a global callback list in initState and invoked later with a Duration argument (event-driven). The one concrete delay found in this code path belongs to the parent ARMOR-X Pro page, not to D2: _ArmorXProWidgetState::initState @0xab8dec registers closure 0xab8fb4 which calls subscribeCharacteristic then Future.delayed(Duration 500000 microseconds = 500 ms) @0xab8ff0-0xab9020 before getDeviceUUID; it also starts Timer.periodic @0xab8f2c whose callback @0xab8f6c only calls getBatteryParam. No re-send of D2 and no periodic D2 was found.",
+  "parser": {
+    "dispatcher_function": "BluetoothModel::onCharacteristicChanged (BLE notify -> app broadcast stream) and _RainbowTestState::subscribeCharacteristic + its anonymous closure (per-page dispatcher that calls the parser)",
+    "dispatcher_address": "0xaca7c4 (BLE-level), 0xacf8fc / 0xacf9dc (page-level)",
+    "parser_function": "_RainbowTestState::analysisData",
+    "parser_address": "0xacfa64",
+    "characteristic_uuid": "notify: 0000ffe2-0000-1000-8000-00805f9b34fb; write (used for the D2 frame): 0000ffe1-0000-1000-8000-00805f9b34fb",
+    "expected_opcode": "0x02 (list index 2); gate at 0xacfaac: cmp w0, #4 == 2 after list[2] access @0xacfa98-0xacfaa8, b.ne #0xad0c80 (early return)",
+    "minimum_length": 7,
+    "fields": [
+      {"name": "header", "offset": 0, "width": 1, "meaning": "0xA5 frame start marker; checked as list[0]==0xA5 (cmp w0,#0x14a) by the sibling notify dispatchers, e.g. rainbow_more.dart @0x8b3b98 and armorx_pro_root.dart @0x8b6a5c, and by most config-page dispatchers"},
+      {"name": "length", "offset": 1, "width": 1, "meaning": "total frame length; the sibling button/stick parser _ConfigStickViewState::analysisData checks list[1]==18 (cmp w0,#0x24) at config_stick_view.dart @0xab9e0c before slicing"},
+      {"name": "opcode", "offset": 2, "width": 1, "meaning": "0x02 = key/status notification; _RainbowTestState::analysisData requires list[2]==2 at 0xacfaac"},
+      {"name": "key_mask", "offset": 3, "width": 4, "meaning": "32-bit big-endian key mask; read as sublist(3,7) -> Uint8List.fromList -> ByteBuffer.asByteData @0xacfaec-0xacfb0c then one big-endian uint32 load (byte-reversal sequence 0xacfb48-0xacfb88, BoxInt64Instr @0xacfb8c); bit index == key id"},
+      {"name": "wide_payload", "offset": 7, "width": "UNKNOWN", "meaning": "later slices in the same parser use additional ranges (sibling-consistent literals 14/18/22/26/30 as end and 3/7/9/11/13 as start, lines around 0xad0364-0xad044c -> Int8List.fromList) and values are stored into state fields 0x10b/0x113 via single-element reads @0xad0464-0xad04cc; their semantic meaning is not recoverable from this disassembly"}
+    ],
+    "state_requirements": "The parser is a method of _RainbowTestState; it stores one boolean per key-mask bit into state fields 0x27,0x2f,0x37,0x3f,0x47,0x4f,0x57,0x5f,0x97,0x9f,0x67,0x6f,0x77,0x7f,0x87,0x8f,0xa7,0xaf,0xb7,0xbf,0xc7,0xcf (22 store sites, 0xacfc24-0xad033c) using precomputed mask constants held in state fields 0x117..0x177 (loaded at 0xacfbf4,0xacfc48,0xacfc9c,0xacfcf0,...). Masks are built in the constructor _RainbowTestState @0xb08fe0-0xb09218.",
+    "ignored_events": "Frames whose byte[2] != 0x02 are dropped by the b.ne at 0xacfab0 (no throw, no state change). This includes the device's own D2 acknowledgement echo (A5 05 D2 01 7D / A5 05 D2 00 7C, byte[2]=0xD2). No explicit 'skip the first notification' counter exists in this page: filtering is purely by opcode. Additionally, the page closure @0xacf9dc prints the raw frame with dart:core print @0xacfa34 whenever an unresolved no-argument List getter does not equal 185 (0xB9, cmp w0,#0x172 @0xacfa28); that print does NOT suppress parsing (analysisData is called unconditionally @0xacfa48).",
+    "error_behavior": "No inbound checksum validation was found anywhere in this path (BluetoothModel::getCheckSum @0x80fbbc exists but is not called from write @0x80dd28 nor from testModeSwitch @0xabaef4, and the notification path only forwards bytes). A frame shorter than 7 bytes would raise a RangeError from the sublist/range accesses rather than being rejected gracefully; a wrong opcode returns silently. On the outbound side, BluetoothModel::write @0x80dd28 raises NullCastError if the write characteristic (field_23) or the readiness future (field_3f) is null."
+  },
+  "press_release": "Every notification carries the ABSOLUTE 32-bit key mask, so there is no separate press or release opcode. analysisData recomputes all mask booleans on every frame: each key k is 'pressed' when (mask & Smi(2^k)) == Smi(2^k) (and x2,x1,x3 + cmp x2,x3 @0xacfc0c-0xacfc18) and 'released' when the bit is clear; results are written to the state's per-key boolean fields listed above. The UI therefore updates on mask transitions only; release is inferred from the bit disappearing in a later frame.",
+  "key_id_extraction": "Extract the u32 big-endian value of notify bytes [3][4][5][6] (sublist(3,7) @0xacfad0/0xacfad8, big-endian load sequence @0xacfb48-0xacfb88). The key id is the BIT INDEX inside that 32-bit word: byte[6] = bits 0-7 = ids 0-7, byte[5] = bits 8-15 = ids 8-15, byte[4] = bits 16-23 = ids 16-23, byte[3] = bits 24-31 = ids 24-31 (bit == id, no +1 offset). The parser's mask table is exactly a list of powers of two: Smi immediates 2,4,16,32,128,256,512,1024,2048,4096,16384,32768,131072,262144,524288,1048576,16777216,33554432 stored at state fields 0x117..0x15b (constructor @0xb0912c-0xb091b4) plus Mint constants 0x4000000,0x8000000,0x10000000,0x20000000,0x40000000,0x80000000 at 0x15f..0x177 (Mint values loaded from pool 0x40000000 @0xb0912c region and PP+0x56448 = 0x80000000 @0xb09208) -> after halving the Smis the tested bit indices are 0,1,3,4,6,7,8,9,10,11,13,14,16,17,18,19,23,24,25,26,27,28,29,30,31. Ids 2,5,12,15,20,21,22 have no mask constant in this page's table.",
+  "branches": "1) Entry branch: _ArmorXProMoreWidgetState::build ListTile onTap @0x94773c pushes RainbowTest @0x947674 (shared with rainbow_more.dart). 2) Lifecycle branch: initState @0xacf744 registers the enable callback; dispose @0xadd7e0 cancels the listener and, only when state field_1f (the Provider-resolved BluetoothModel) is non-null @0xadd838, sends the disable frame. 3) Enable/disable branch inside BluetoothModel::testModeSwitch @0xabaef4: 'tbnz w0, #4, #0xabaf88' @0xabaf24 tests the tagged Dart bool (true = NULL+0x20 has bit4 clear -> build enable list at 0xabaf28; false = NULL+0x30 has bit4 set -> jump to 0xabaf88 and build the disable list). 4) Parse branch inside analysisData: opcode gate @0xacfaac (list[2]==2) and, per key, the 25 (mask & value)==mask bit tests that set the boolean fields. 5) Dispatcher branch pattern used by sibling notify handlers (for contrast): rainbow_more.dart @0x8b3b98 list[0]==0xA5, frame_config_macros.dart @0xac33e0/@0xac3408/@0xac3448 list[2]==0xFC/0xD8/0xD3.",
+  "evidence": [
+    {"claim": "D2 enable frame is exactly A5 05 D2 01 7D", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/units/ble/bluetooth_mode.dart", "function": "BluetoothModel::testModeSwitch", "address": "0xabaef4", "constants": "AllocateArray len Smi(5) @0xabaf34; elements Smi 0x14a=0xA5 @0xabaf3c, Smi 0xa=5 @0xabaf44, Smi 0x1a4=0xD2 @0xabaf4c, Smi 2=1 @0xabaf54, Smi 0xfa=0x7D @0xabaf5c"},
+    {"claim": "D2 disable frame is exactly A5 05 D2 00 7C", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/units/ble/bluetooth_mode.dart", "function": "BluetoothModel::testModeSwitch", "address": "0xabaef4", "constants": "elements Smi 0x14a=0xA5 @0xabaf9c, Smi 0xa=5 @0xabafa4, Smi 0x1a4=0xD2 @0xabafac, wzr=0 @0xabafb4, Smi 0xf8=0x7C @0xabafb8"},
+    {"claim": "The D2 frame checksum is a hard-coded literal, not computed at runtime", "grade": "STRONG EVIDENCE", "artifact": "asm/moojiang/units/ble/bluetooth_mode.dart", "function": "BluetoothModel::testModeSwitch / BluetoothModel::write", "address": "0xabaef4 / 0x80dd28", "constants": "last list element is the 0x7D/0x7C literal; _write calls BluetoothCharacteristic::write @0x80ddfc directly and never calls BluetoothModel::getCheckSum @0x80fbbc"},
+    {"claim": "The ARMOR-X Pro 'Button Test' menu entry opens the shared RainbowTest page", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/widgets/armor-x_pro/armorx_pro_more.dart", "function": "_ArmorXProMoreWidgetState::build + closure", "address": "0x940554 / 0x94773c", "constants": "\"按键测试\" @0x940684, \"Button Test\" @0x9406a4, builder closure 0x947674 declared as '[closure] RainbowTest' in rainbow_more.dart"},
+    {"claim": "D2 enable is sent on page initState and D2 disable on dispose", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart", "function": "_RainbowTestState::initState / closure / dispose", "address": "0xacf744, 0xacf874 (testModeSwitch @0xacf8cc), 0xadd7e0 (testModeSwitch @0xadd844)", "constants": "r2 = true @0xacf8c8; r2 = false @0xadd840"},
+    {"claim": "The D2 enable is issued before the page attaches its notify listener", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart", "function": "closure in _RainbowTestState::initState", "address": "0xacf874", "constants": "testModeSwitch @0xacf8cc precedes subscribeCharacteristic @0xacf8dc; no AwaitStub between them"},
+    {"claim": "The notify parser for the button-status frame requires byte[2]==0x02", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart", "function": "_RainbowTestState::analysisData", "address": "0xacfa64 (gate 0xacfaac)", "constants": "r16 = 4 (Smi 2, index) @0xacfa98; cmp w0, #4 (==2) @0xacfaac; b.ne #0xad0c80 @0xacfab0"},
+    {"claim": "The 18-byte status frame layout is A5 | 0x12 | opcode | mask[4] | ... (length byte checked by the sibling parser)", "grade": "STRONG EVIDENCE", "artifact": "asm/moojiang/widgets/configV484/config_stick_view.dart", "function": "_ConfigStickViewState::analysisData", "address": "0xab9dc4 (gate 0xab9e0c)", "constants": "r16 = 2 (Smi 1, index 1) @0xab9df8; cmp w0, #0x24 (==18) @0xab9e0c; then the identical sublist(3,7) + big-endian u32 read at 0xab9e24-0xab9e6c"},
+    {"claim": "Key id == bit index of the big-endian u32 taken from bytes [3][4][5][6] (no +1 offset; mask table is powers of two)", "grade": "STRONG EVIDENCE", "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart", "function": "_RainbowTestState::_RainbowTestState (mask table) and ::analysisData (bit tests)", "address": "0xb08fe0 (stores 0xb0912c-0xb09214) and 0xacfa64 (tests 0xacfc0c-0xad033c)", "constants": "raw Smi immediates 2,4,16,32,128,256,512,1024,2048,4096,16384,32768,131072,262144,524288,1048576,16777216,33554432 -> Dart 1,2,8,16,64,128,256,512,1024,2048,8192,16384,65536,131072,262144,524288,8388608,16777216; plus Mint 0x20000000,0x40000000,0x8000000,0x10000000,0x20000000,0x40000000,0x80000000 -> bits 25-31"},
+    {"claim": "Comparison immediates in this dump are Smi-tagged and must be halved (calibration)", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/widgets/general/frame_config_macros.dart and asm/moojiang/widgets/rainbow/rainbow_test.dart", "function": "_FrameMacrosConfigWidgetState closure / analysisData", "address": "0xac33e0, 0xac3408, 0xac3448 (cmp #0x1f8/#0x1b0/#0x1a6 == 0xFC/0xD8/0xD3) and 0xacfaac (cmp #4 == 2)", "constants": "Smi(x) = 2x"},
+    {"claim": "write characteristic is FFE1 and notify characteristic is FFE2", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/units/ble/bluetooth_mode.dart", "function": "BluetoothModel::initGattServices", "address": "0xaca0a8", "constants": "\"0000ffe1-...\" @0xaca208 -> field_23 @0xaca224; \"0000ffe2-...\" @0xaca248 -> field_27 @0xaca268; \"00002a19-...\" @0xaca28c -> field_2f"},
+    {"claim": "The GATT notify subscription is armed at connect time and feeds an app-level broadcast stream", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/units/ble/bluetooth_mode.dart", "function": "BluetoothModel::onCharacteristicChanged + closure", "address": "0xaca7c4 / 0xacb7f8", "constants": "setNotifyValue @0xaca818, lastValueStream @0xaca82c, listen @0xaca850, _BroadcastStreamController.add @0xacb870 into field_43"},
+    {"claim": "Disable-on-dispose is gated on the Provider-resolved BluetoothModel being non-null", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/widgets/rainbow/rainbow_test.dart", "function": "_RainbowTestState::didChangeDependencies / ::dispose", "address": "0xa54b9c (store 0xa54bdc) / 0xadd7e0 (check 0xadd838)", "constants": "ReadContext.read<BluetoothModel> @0xa54bd4; 'cmp w1, NULL; b.eq #0xadd848' @0xadd838"},
+    {"claim": "After a D2 enable, the parent ARMOR-X Pro page delays 500 ms only before getDeviceUUID, and runs a periodic timer that does not touch D2", "grade": "PROVEN STATIC", "artifact": "asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart", "function": "_ArmorXProWidgetState::initState + closures", "address": "0xab8dec (0xab8fb4, 0xab8f6c)", "constants": "Duration 0xa120 + (7<<16) = 500000 microseconds @0xab8ff0; Timer.periodic @0xab8f2c; timer callback -> getBatteryParam only @0xab8f98"}
+  ],
+  "unknowns": [
+    "The firing site and cadence of the global callback list (static THR field_table_values+0xcf0 -> field_53) that invokes the D2-enable closure @0xacf874 with a Duration could not be located in this disassembly; therefore whether the enable callback runs exactly once per connection (or on repeated ticks) is UNKNOWN. The callback body contains no re-entry guard, which makes the question material.",
+    "The no-argument List getter reached through the unresolved dispatch GDT[cid + 0x10fc5] @0xacfa14 and @0xacfbc0 (Blutter could not resolve a selector name anywhere in the tree) is unidentified; consequently the meaning of the 185 (0xB9) constant compared at 0xacfa28 (cmp w0, #0x172) is UNKNOWN. It only gates a debug print.",
+    "Blutter prints raw tagged immediates, yet the sublist bounds at 0xacfad0 (mov x2, #3) and 0xad0370 (mov x2, #7) are odd values that cannot be Smis; whether these are untagged intrinsic arguments or a Blutter print quirk is UNKNOWN. The start index 3 for the mask slice is nevertheless corroborated by the identical sibling parser config_stick_view.dart @0xab9e30.",
+    "The exact semantics, width and meaning of the bytes handled by the later slices in analysisData (pairs around 0xad0364-0xad044c, values stored into state fields 0x10b @0xad047c and 0x113 @0xad04c8) are UNKNOWN; their end indices (18/22/26/30) exceed the 18-byte live frame, so they may belong to a longer frame variant.",
+    "The Timer.periodic interval (Duration instance at pp+0x4f000, @0xab8f24) was not evaluated numerically.",
+    "Whether the real device requires the D2 enable to be re-sent after each notify, and whether the app tolerates a missing D2 acknowledgement, is UNKNOWN (no ack handler for 0xD2 exists; the echo falls into the ignored_events path).",
+    "The key names for the 25 mask bits in this page are not encoded in rainbow_test.dart (the page only stores booleans); mapping id->button name must come from the project's key-id table or live capture, not from this file."
+  ],
+  "rejected_hypotheses": [
+    "CONTRADICTED: kb_dou_jiang_setting_key_vm.dart @0xb0604c 'mov x16, #0xd2' is the D2 opcode. It is a Smi (Dart value 105) passed to dart:core _Smi::toString @0xb06054 to build a KeyBoardMockBean label; the wire opcode 0xD2 is encoded as Smi 0x1a4 (420) as seen in testModeSwitch @0xabaf4c.",
+    "CONTRADICTED: the D2 frame is produced by a generic sender that appends a computed sum8 checksum. In this path the checksum is a hard-coded literal element (0x7D / 0x7C) and BluetoothModel::getCheckSum @0x80fbbc is never called by write() or testModeSwitch().",
+    "CONTRADICTED: the button-status mask is read as four independent bytes in the parser. The parser reads one 32-bit BIG-ENDIAN word from bytes [3..6] (byte-reversal sequence @0xacfb48-0xacfb88); the 'one byte per 8 ids' description is only the byte decomposition of that same word and must not be re-assembled as a little-endian value.",
+    "CONTRADICTED: the button-status parser is the 2.23/2.24-generation one in a config page. In 4.0.8 the ARMOR-X Pro entry pushes the shared RainbowTest page whose parser is _RainbowTestState::analysisData @0xacfa64.",
+    "REJECTED: that D2 uses a periodic timer in this page. The only Timer.periodic in the ARMOR-X Pro flow is in _ArmorXProWidgetState::initState @0xab8f2c and its callback calls getBatteryParam only; the 500 ms Future.delayed @0xab9020 precedes getDeviceUUID."
+  ]
+}
