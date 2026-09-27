@@ -126,11 +126,11 @@ def test_live_d4_reply_shape():
 
 
 def test_live_e2_reply_carries_firmware_and_model_strings():
-    """Real E2 payload: <fw BCD hi> <fw BCD lo> <name len> <name ascii>.
+    """Real E2 payload: <fw BCD hi> <fw BCD lo> 0x02 "ZJ-XT" 00000000.
 
     The firmware is NOT ASCII: fw 2741 is the two BCD bytes 0x27 0x41, followed by
-    the length byte 0x02 and then the model string. This was established from the
-    live reply, not assumed.
+    a 0x02 byte (semantics UNKNOWN - NOT a name length, the name that follows is 5
+    bytes) and then the model string. Established from the live reply, not assumed.
     """
     entries = VECTORS["replies"].get("opcode_0xE2", [])
     assert entries, "no real E2 reply in the vector set"
@@ -138,8 +138,7 @@ def test_live_e2_reply_carries_firmware_and_model_strings():
         payload = payload_of(proto.parse_frame(bytes.fromhex(entry["raw"])))
         assert payload[0] == 0x27 and payload[1] == 0x41, "firmware BCD bytes"
         assert f"{payload[0]:02X}{payload[1]:02X}" == "2741"
-        name_len = payload[2]
-        assert payload[3:3 + name_len] == b"ZJ-XT"
+        assert payload[2:7] == b"\x02ZJ-XT"
         assert b"2741" not in payload, "firmware must not appear as ASCII"
 
 
