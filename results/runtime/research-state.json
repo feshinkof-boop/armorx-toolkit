@@ -1,0 +1,7 @@
+{
+ "research_state": "WAITING_FOR_PHYSICAL_ACTION",
+ "pending_action_id": "power_on_armorx",
+ "pending_message": "Power on the ARMOR-X Pro now, then reply DONE in Hermes.",
+ "requested_at": "2026-09-27T16:55:07.389617-04:00",
+ "alert_system": "VALIDATED (operator confirmed ALERT TEST OK 2026-09-27)"
+}

@@ -1,9 +1,91 @@
 {
- "scan_ts": "2026-09-27T16:55:07.358578-04:00",
- "devices_seen": 0,
+ "scan_ts": "2026-09-27T16:55:20.504439-04:00",
+ "scan_window_seconds": 15,
+ "adapter": {
+  "hci": "hci1",
+  "bdaddr": "E8:4E:06:8A:F2:00",
+  "usb_path": "1-8",
+  "vid_pid": "0bda:b720"
+ },
+ "devices_seen": 7,
  "armorx_like": [],
- "devices": [],
- "conclusion": "ARMOR-X Pro NOT ADVERTISING (0 ARMOR-X-like advertisements)",
+ "devices": [
+  {
+   "address": "4B:8E:72:BD:8D:2E",
+   "address_type": "1",
+   "name": "",
+   "rssi": -86,
+   "connectable": true,
+   "manufacturer_data": "4c001007331f56d8a9ae08",
+   "service_uuids": [],
+   "is_armorx": false
+  },
+  {
+   "address": "DC:97:58:77:70:42/P",
+   "address_type": "0",
+   "name": "",
+   "rssi": -78,
+   "connectable": false,
+   "manufacturer_data": "8f030a10420c01dc9758777041ec",
+   "service_uuids": [],
+   "is_armorx": false
+  },
+  {
+   "address": "DC:23:4F:80:DD:EE/P",
+   "address_type": "0",
+   "name": "TY",
+   "rssi": -78,
+   "connectable": true,
+   "manufacturer_data": "d0078003000001003c4c656bc6d4d6635c750cd1ae6f7ef5",
+   "service_uuids": [
+    "UUID-16:A201"
+   ],
+   "is_armorx": false
+  },
+  {
+   "address": "0B:FD:A2:5A:13:E0",
+   "address_type": "1",
+   "name": "",
+   "rssi": -94,
+   "connectable": false,
+   "manufacturer_data": null,
+   "service_uuids": [],
+   "is_armorx": false
+  },
+  {
+   "address": "E1:2E:BD:46:6E:31",
+   "address_type": "1",
+   "name": "",
+   "rssi": -86,
+   "connectable": false,
+   "manufacturer_data": "4c0012020000",
+   "service_uuids": [],
+   "is_armorx": false
+  },
+  {
+   "address": "48:E0:6C:3B:37:5E",
+   "address_type": "1",
+   "name": "",
+   "rssi": -96,
+   "connectable": true,
+   "manufacturer_data": "4c0010053a1c11b8bf",
+   "service_uuids": [],
+   "is_armorx": false
+  },
+  {
+   "address": "66:2B:B1:BB:15:76",
+   "address_type": "1",
+   "name": "",
+   "rssi": -92,
+   "connectable": true,
+   "manufacturer_data": null,
+   "service_uuids": [
+    "UUID-16:FD69"
+   ],
+   "is_armorx": false
+  }
+ ],
+ "conclusion": "ARMOR-X Pro NOT ADVERTISING (0 ARMOR-X-like advertisements in a 15 s active scan)",
  "classification": "WAITING_FOR_DEVICE",
- "evidence_label": "PROVEN LIVE (absence over a 15 s active scan)"
+ "evidence_label": "PROVEN LIVE (absence)"
 }

@@ -1,0 +1,11 @@
+{
+ "action_id": "power_on_armorx",
+ "title": "ARMOR-X ACTION REQUIRED",
+ "message": "Power on the ARMOR-X Pro now, then reply DONE in Hermes.",
+ "requested_at": "2026-09-27T16:55:09-04:00",
+ "interval_seconds": 20,
+ "popup_backend": "kdialog",
+ "sound_player": "pw-play",
+ "sound_file": "/home/salamanka/armorx-lab/automation/armorx-alert.wav",
+ "state": "WAITING_FOR_PHYSICAL_ACTION"
+}
