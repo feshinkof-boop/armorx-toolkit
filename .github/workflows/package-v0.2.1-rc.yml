@@ -89,7 +89,9 @@ jobs:
         shell: pwsh
         run: |
           $testDir = Join-Path $env:LOCALAPPDATA "Programs\ArmorX Windows RC Test"
-          $p = Start-Process .\ArmorX-Windows-v0.2.1-RC-Setup.exe -ArgumentList "/VERYSILENT","/SUPPRESSMSGBOXES","/NORESTART","/DIR=$testDir" -PassThru -Wait
+          Remove-Item $testDir -Recurse -Force -ErrorAction SilentlyContinue
+          $dirArg = "/DIR=`"$testDir`""
+          $p = Start-Process .\ArmorX-Windows-v0.2.1-RC-Setup.exe -ArgumentList "/VERYSILENT","/SUPPRESSMSGBOXES","/NORESTART",$dirArg -PassThru -Wait
           if ($p.ExitCode -ne 0) { throw "Silent installer failed: $($p.ExitCode)" }
           $installed = Join-Path $testDir "ArmorX-Windows.exe"
           if (-not (Test-Path $installed)) { throw "Installed executable missing." }
