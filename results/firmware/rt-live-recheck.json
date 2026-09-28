@@ -1,0 +1,13 @@
+{
+ "artifact": "rt-live-recheck",
+ "date": "2026-09-28",
+ "method": "re-inspection of the existing precise capture: for every evdev ABS_RZ sample the nearest type-0x20 frame was listed with ALL nonzero bytes in the 4..19 range",
+ "result": {
+  "bytes_4_to_19": "bytes 8-9 are the ONLY control-correlated bytes in the window (byte 4 is constant 0x21, bytes 10-17 constant stick rest values)",
+  "wire_values": "rising samples read bytes 8-9 as (252,3) = 1020; falling samples read them as absent = 0",
+  "conclusion": "no alternate field matches the evdev ramp better than bytes 8-9, so the discrepancy cannot be explained by a wrong byte pairing"
+ },
+ "status": "UNRESOLVED - the wire appears binary while the input layer ramps",
+ "best_remaining_hypothesis": "within-window timing: frames are ~4 ms apart and xpad emits an ABS event only when the decoded value changes, so a nearest-frame match can pair an evdev sample with the wrong report. Settling it requires matching each individual 4 ms frame to the evdev event that follows it rather than nearest-frame matching.",
+ "not_done": "that frame-to-following-event correlation was not performed in this run"
+}

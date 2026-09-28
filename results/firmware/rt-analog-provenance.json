@@ -1,0 +1,25 @@
+{
+ "artifact": "rt-analog-provenance",
+ "date": "2026-09-28",
+ "status": "PROVEN STATIC for the set/clear of bit 9 around the RT byte; the predicate itself is not reversed",
+ "site": "0x1e0cee2-0x1e0cf00",
+ "code": [
+  "0x1e0cee2  r1 = b[sp+1093] (u)      ; candidate +0x0d, the RT byte",
+  "0x1e0cee6  r0 = 0x1",
+  "0x1e0cee8  call 0x1e0a426             ; returns r0",
+  "0x1e0ceec  b[sp+1093] = r0            ; the RT byte is written back",
+  "0x1e0cef0  r2 = [sp+1080]             ; candidate mask",
+  "0x1e0cef4  r1 = r2 & 0xfffffdff      ; bit 9 cleared",
+  "0x1e0cef8  r4 = r2 | 0x200           ; bit 9 set",
+  "0x1e0cefc  if (r0 != 0x0) goto 0x1e0cf00",
+  "0x1e0cefe  r4 = r1                    ; else bit 9 stays cleared",
+  "0x1e0cf00  [sp+1080] = r4"
+ ],
+ "finding": "This is the earliest creator of mask bit 0x200. The value the analog RT byte (candidate+0x0d) produces through 0x1e0a426 is tested: non-zero sets bit 9 in the candidate mask, zero explicitly clears it via the literal 0xfffffdff. The same call result is written back as the RT byte itself.",
+ "consequence": "Bit 9 is therefore DERIVED from the RT byte and is not copied from the controller report - consistent with the live finding that the Xbox report has no digital RT bit.",
+ "not_proven": [
+  "the inside of 0x1e0a426 - threshold, scaling or pass-through is not established",
+  "the value domain that makes r0 non-zero"
+ ],
+ "next_probe": "reverse 0x1e0a426 (a single small callee) to settle threshold versus scaling"
+}

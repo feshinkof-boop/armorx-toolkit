@@ -1,0 +1,54 @@
+{
+ "artifact": "rt-change-mask-provenance",
+ "date": "2026-09-28",
+ "status": "PROVEN STATIC for the register origins; the semantics of the persistent field are partially proven",
+ "site": "0x1e0cfce",
+ "reaching_definitions": {
+  "r4": [
+   "0x1e0cf44  r4 = [sp+1080]  (candidate mask, candidate+0x00)",
+   "0x1e0cef8  r4 = r2 | 0x200  (same memory, built with bit 9 set)",
+   "0x1e0cefe  r4 = r1  where 0x1e0cef4  r1 = r2 & 0xfffffdff (bit 9 cleared)"
+  ],
+  "r5": [
+   "0x1e0cf48  r5 = [r15 + 0x1d0]  (persistent memory field)"
+  ]
+ },
+ "expression": "r0 = r5 & r4  =  [r15+0x1d0] & candidate_mask([sp+1080])",
+ "correction": "My previous pass called r5 & r4 a CHANGED-bit set. That is wrong: both operands are masks, one persistent and one current, so the expression is an INTERSECTION, not a change. Corrected here.",
+ "gate": "0x1e0cf4c  if ((r5 & r4) == 0) goto 0x1e0d012  - when the intersection is empty the whole synthesis block is skipped, so the digital trigger bytes are only written when a bit is present in BOTH the persistent field and the current mask.",
+ "edge_class": "0x1e0cfc0  r0 = b[r15+0x25]; toggled and stored back at 0x1e0cfca; the toggled value r1 selects the rising arm (0x1e0cfd4) or the falling arm (0x1e0cff2).",
+ "persistent_field_0x1d0": {
+  "readers": [
+   "0x1e0b422",
+   "0x1e0b84e",
+   "0x1e0bed0",
+   "0x1e0beee",
+   "0x1e0bf54",
+   "0x1e0bf6a",
+   "0x1e0cf48"
+  ],
+  "writers": [
+   "0x1e0b4d8  [r15+0x1d0] = r0",
+   "0x1e0b856  [r15+0x1d0] = r5",
+   "0x1e0bedc  [r15+0x1d0] = r4",
+   "0x1e0bf7c  [r15+0x1d0] = r0"
+  ],
+  "semantics": "UNKNOWN - a persistent mask field with seven readers and four writers inside the 0x1e0b400-0x1e0bf80 region. Not named.",
+  "lifetime": "UNKNOWN - persistent (not a stack slot)"
+ },
+ "toggle_byte_r15_0x25": {
+  "readers": [
+   "0x1e0cfc0",
+   "0x1e0cf6e"
+  ],
+  "writer": [
+   "0x1e0cfca"
+  ],
+  "semantics": "edge class selector toggled each pass"
+ },
+ "not_proven": [
+  "what the persistent field at r15+0x1d0 means",
+  "whether 0x1e0a426 is a threshold or a scaling function (see rt-analog-provenance)",
+  "how the candidate mask is composed before this block"
+ ]
+}

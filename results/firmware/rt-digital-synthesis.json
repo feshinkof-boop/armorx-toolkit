@@ -28,5 +28,12 @@
  ],
  "reconciliation": "This explains the live RT observations without contradiction: byte 16 takes 255 exactly when the RT mask bit toggles, and intermediate values (17, 27, 96) when it carries the analogue copy. The 0..255 spread in the W1 capture is the two write paths sharing one byte.",
  "not_proven": "how r4/r5 (the changed-bit set) is formed is not traced, so the RT-only scheduling question is narrowed rather than closed",
- "search": "the only two tests of 0x200 anywhere in the firmware are 0x1e0cfea and 0x1e0d008, both in this block"
+ "search": "the only two tests of 0x200 anywhere in the firmware are 0x1e0cfea and 0x1e0d008, both in this block",
+ "update_2026_09_28_2": {
+  "r4_origin": "candidate mask at [sp+1080]",
+  "r5_origin": "persistent mask field [r15+0x1d0]",
+  "correction": "r5 & r4 is an INTERSECTION of persistent and current masks, not a changed-bit set",
+  "bit_9_creator": "0x1e0cee8 call 0x1e0a426 from the RT byte, then set/clear at 0x1e0cef8/0x1e0cefe",
+  "gate": "0x1e0cf4c skips the block when the intersection is empty"
+ }
 }

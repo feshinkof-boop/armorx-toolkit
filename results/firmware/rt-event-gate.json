@@ -1,0 +1,15 @@
+{
+ "artifact": "rt-event-gate",
+ "date": "2026-09-28",
+ "status": "PARTIALLY PROVEN",
+ "proven": [
+  "bit 9 is set or cleared from the RT byte through 0x1e0a426 at 0x1e0cee8-0x1e0cf00",
+  "the trigger-byte synthesis at 0x1e0cfd4/0x1e0cff2 only runs when ([r15+0x1d0] & candidate_mask) != 0 and the toggle at b[r15+0x25] says so",
+  "the D2 send condition itself is unchanged: state+0x10 != 0 AND the 14-byte memcmp AND the periodic tick gate AND the 100-count repeat loop"
+ ],
+ "unproven": [
+  "whether emission is driven by the mask edge or by the memcmp - the two are not yet ordered against each other by dominance",
+  "the meaning of the persistent field that gates the synthesis"
+ ],
+ "consequence_for_the_rt_question": "The RT-only behaviour now has a concrete candidate explanation that is mechanically supported: the analog path writes candidate+0x0d and the mask bit through 0x1e0a426, while the 0xff writing synthesis is gated on an intersection condition plus a toggle. If the toggle does not advance, the byte keeps its analog value and no edge is produced - so an analog-only change need not produce the edge that the synthesis path produces. This is a CANDIDATE, not a proof."
+}
