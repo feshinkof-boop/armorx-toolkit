@@ -1,0 +1,624 @@
+{
+ "device": {
+  "model": "ZJ-XT",
+  "firmware": "2741",
+  "ble_address": "2D:37:35:6D:66:11",
+  "advertised_name": "ARMOR-X Pro_11"
+ },
+ "sources": {
+  "live_map": "results/experiments/physical-20260927-170844-d2/real-key-id-map.json",
+  "session": "results/experiments/physical-20260927-170844-d2/session.jsonl",
+  "static": "results/version-diff/2.22-vs-2.23-vs-2.24-vs-4.0.8.json"
+ },
+ "mask_rule": "mask_bytes[3..6] big-endian u32; bit index == key id (no +1)",
+ "never_observed": {
+  "2": "no physical button produced this bit in any capture we hold",
+  "5": "no physical button produced this bit in any capture we hold",
+  "9": "RT: requested in press_group_B/D/E/F and three dedicated retries - NEVER appeared",
+  "21": "no physical button produced this bit in any capture we hold",
+  "22": "no physical button produced this bit in any capture we hold",
+  "31": "no physical button produced this bit in any capture we hold",
+  "32": "no physical button produced this bit in any capture we hold",
+  "33": "no physical button produced this bit in any capture we hold"
+ },
+ "static_label_inventories": {
+  "key-ID table": {
+   "2.22.0901": "UNKNOWN",
+   "2.23.0609": "{\"summary\": \"key_remap_t.dart::gamePadKeyName map; label inventory verified from libapp.so strings + asm: A-Z, L3/R3/...",
+   "2.24.0919": "{\"summary\": \"label inventory grew versus 2.23: adds Capture, Tab/Esc/Enter/End/F1-F12, arrow names. Still no Menu, no...",
+   "4.0.8": "{\"summary\": \"mapKeys occupies config bytes 112..143 (32 slots). Independent re-extraction of key_remap_t.dart::gamePa..."
+  },
+  "key mask rule": {
+   "2.22.0901": "{\"rule\": \"bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-p...",
+   "2.23.0609": "{\"rule\": \"bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-p...",
+   "2.24.0919": "{\"rule\": \"bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-p...",
+   "4.0.8": "{\"rule\": \"bit == key id (no +1): keyL1=0x40 (bit 6=LB), keyCapture=0x8000 (bit 15=Capture), keyUp=0x10000 (bit 16=D-p..."
+  }
+ },
+ "static_key_constants": {
+  "keyM4": 27,
+  "keyM3": 26,
+  "keyM2": 25,
+  "keyM1": 24,
+  "keyCapture": 16,
+  "keyStart": 12,
+  "keySelect": 11,
+  "keyRThumb": 15,
+  "keyRight": 20,
+  "keyLeft": 19,
+  "keyDown": 18,
+  "keyUp": 17,
+  "keyR2": 10,
+  "keyR1": 8,
+  "keyL2": 9,
+  "keyL1": 7
+ },
+ "static_constants_by_bit": {
+  "7": [
+   "keyL1"
+  ],
+  "8": [
+   "keyR1"
+  ],
+  "9": [
+   "keyL2"
+  ],
+  "10": [
+   "keyR2"
+  ],
+  "11": [
+   "keySelect"
+  ],
+  "12": [
+   "keyStart"
+  ],
+  "15": [
+   "keyRThumb"
+  ],
+  "16": [
+   "keyCapture"
+  ],
+  "17": [
+   "keyUp"
+  ],
+  "18": [
+   "keyDown"
+  ],
+  "19": [
+   "keyLeft"
+  ],
+  "20": [
+   "keyRight"
+  ],
+  "24": [
+   "keyM1"
+  ],
+  "25": [
+   "keyM2"
+  ],
+  "26": [
+   "keyM3"
+  ],
+  "27": [
+   "keyM4"
+  ]
+ },
+ "name_conflicts": [
+  {
+   "id": 7,
+   "live_name": "RB",
+   "define_dart_names": [
+    "keyL1"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 8,
+   "live_name": "LT",
+   "define_dart_names": [
+    "keyR1"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 10,
+   "live_name": "View/Select",
+   "define_dart_names": [
+    "keyR2"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 11,
+   "live_name": "Menu/Start",
+   "define_dart_names": [
+    "keySelect"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 12,
+   "live_name": "Guide/Xbox",
+   "define_dart_names": [
+    "keyStart"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 15,
+   "live_name": "Capture/Share",
+   "define_dart_names": [
+    "keyRThumb"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 16,
+   "live_name": "D-pad Up",
+   "define_dart_names": [
+    "keyCapture"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 17,
+   "live_name": "D-pad Down",
+   "define_dart_names": [
+    "keyUp"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 18,
+   "live_name": "D-pad Left",
+   "define_dart_names": [
+    "keyDown"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 19,
+   "live_name": "D-pad Right",
+   "define_dart_names": [
+    "keyLeft"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 20,
+   "live_name": "UNATTRIBUTED - one frame with id 20 appeared in this window; it cannot be tied to RT with confidence",
+   "define_dart_names": [
+    "keyRight"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 24,
+   "live_name": "M2",
+   "define_dart_names": [
+    "keyM1"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 25,
+   "live_name": "M3",
+   "define_dart_names": [
+    "keyM2"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 26,
+   "live_name": "M4",
+   "define_dart_names": [
+    "keyM3"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  },
+  {
+   "id": 27,
+   "live_name": "M5",
+   "define_dart_names": [
+    "keyM4"
+   ],
+   "resolution": "define.dart getters are offset +1 from the wire bit; the wire mapping is corroborated by the mask rule in all four builds and by the live frames, so the live name stands for the wire.",
+   "grade": "static_indexing_offset (not a contradiction of the wire naming)"
+  }
+ ],
+ "counts": {
+  "proven_live": 26,
+  "unknown": 8,
+  "unobserved": 0
+ },
+ "rows": [
+  {
+   "id": 0,
+   "static_constant": null,
+   "name": "A",
+   "name_full": "A",
+   "grade": "PROVEN LIVE",
+   "live_frames": 14,
+   "static_label": "A",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_A window (2026-09-27T17:09:23-04:00 .. 2026-09-27T17:10:15-04:00)"
+  },
+  {
+   "id": 1,
+   "static_constant": null,
+   "name": "B",
+   "name_full": "B",
+   "grade": "PROVEN LIVE",
+   "live_frames": 13,
+   "static_label": "B",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_A window (2026-09-27T17:09:23-04:00 .. 2026-09-27T17:10:15-04:00)"
+  },
+  {
+   "id": 2,
+   "static_constant": null,
+   "name": null,
+   "name_full": null,
+   "grade": "UNKNOWN",
+   "live_frames": 0,
+   "static_label": null,
+   "name_confidence": "UNKNOWN",
+   "notes": "no physical button produced this bit in any capture we hold"
+  },
+  {
+   "id": 3,
+   "static_constant": null,
+   "name": "X",
+   "name_full": "X",
+   "grade": "PROVEN LIVE",
+   "live_frames": 14,
+   "static_label": "X",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_A window (2026-09-27T17:09:23-04:00 .. 2026-09-27T17:10:15-04:00)"
+  },
+  {
+   "id": 4,
+   "static_constant": null,
+   "name": "Y",
+   "name_full": "Y",
+   "grade": "PROVEN LIVE",
+   "live_frames": 14,
+   "static_label": "Y",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_A window (2026-09-27T17:09:23-04:00 .. 2026-09-27T17:10:15-04:00)"
+  },
+  {
+   "id": 5,
+   "static_constant": null,
+   "name": null,
+   "name_full": null,
+   "grade": "UNKNOWN",
+   "live_frames": 0,
+   "static_label": null,
+   "name_confidence": "UNKNOWN",
+   "notes": "no physical button produced this bit in any capture we hold"
+  },
+  {
+   "id": 6,
+   "static_constant": null,
+   "name": "LB",
+   "name_full": "LB",
+   "grade": "PROVEN LIVE",
+   "live_frames": 57,
+   "static_label": "LB",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_B window (2026-09-27T17:10:49-04:00 .. 2026-09-27T17:11:34-04:00)"
+  },
+  {
+   "id": 7,
+   "static_constant": "keyL1",
+   "name": "RB",
+   "name_full": "RB",
+   "grade": "PROVEN LIVE",
+   "live_frames": 46,
+   "static_label": "RB",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_B window (2026-09-27T17:10:49-04:00 .. 2026-09-27T17:11:34-04:00)"
+  },
+  {
+   "id": 8,
+   "static_constant": "keyR1",
+   "name": "LT",
+   "name_full": "LT",
+   "grade": "PROVEN LIVE",
+   "live_frames": 13,
+   "static_label": "LT",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_B window (2026-09-27T17:10:49-04:00 .. 2026-09-27T17:11:34-04:00)"
+  },
+  {
+   "id": 9,
+   "static_constant": "keyL2",
+   "name": null,
+   "name_full": null,
+   "grade": "UNKNOWN",
+   "live_frames": 0,
+   "static_label": null,
+   "name_confidence": "UNKNOWN",
+   "notes": "RT: requested in press_group_B/D/E/F and three dedicated retries - NEVER appeared"
+  },
+  {
+   "id": 10,
+   "static_constant": "keyR2",
+   "name": "View/Select",
+   "name_full": "View/Select",
+   "grade": "PROVEN LIVE",
+   "live_frames": 29,
+   "static_label": "View",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_C window (2026-09-27T17:11:53-04:00 .. 2026-09-27T17:12:27-04:00)"
+  },
+  {
+   "id": 11,
+   "static_constant": "keySelect",
+   "name": "Menu/Start",
+   "name_full": "Menu/Start",
+   "grade": "PROVEN LIVE",
+   "live_frames": 44,
+   "static_label": "Menu",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_C window (2026-09-27T17:11:53-04:00 .. 2026-09-27T17:12:27-04:00)"
+  },
+  {
+   "id": 12,
+   "static_constant": "keyStart",
+   "name": "Guide/Xbox",
+   "name_full": "Guide/Xbox",
+   "grade": "PROVEN LIVE",
+   "live_frames": 26,
+   "static_label": "UNKNOWN (was)",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold"
+  },
+  {
+   "id": 13,
+   "static_constant": null,
+   "name": "L3",
+   "name_full": "L3",
+   "grade": "PROVEN LIVE",
+   "live_frames": 14,
+   "static_label": "L3",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_C window (2026-09-27T17:11:53-04:00 .. 2026-09-27T17:12:27-04:00)"
+  },
+  {
+   "id": 14,
+   "static_constant": null,
+   "name": "R3",
+   "name_full": "R3",
+   "grade": "PROVEN LIVE",
+   "live_frames": 18,
+   "static_label": "R3",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_C window (2026-09-27T17:11:53-04:00 .. 2026-09-27T17:12:27-04:00)"
+  },
+  {
+   "id": 15,
+   "static_constant": "keyRThumb",
+   "name": "Capture/Share",
+   "name_full": "Capture/Share",
+   "grade": "PROVEN LIVE",
+   "live_frames": 28,
+   "static_label": "Capture",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00)"
+  },
+  {
+   "id": 16,
+   "static_constant": "keyCapture",
+   "name": "D-pad Up",
+   "name_full": "D-pad Up",
+   "grade": "PROVEN LIVE",
+   "live_frames": 66,
+   "static_label": "D-pad Up",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_D window (2026-09-27T17:12:38-04:00 .. 2026-09-27T17:13:08-04:00)"
+  },
+  {
+   "id": 17,
+   "static_constant": "keyUp",
+   "name": "D-pad Down",
+   "name_full": "D-pad Down",
+   "grade": "PROVEN LIVE",
+   "live_frames": 68,
+   "static_label": "D-pad Down",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_D window (2026-09-27T17:12:38-04:00 .. 2026-09-27T17:13:08-04:00)"
+  },
+  {
+   "id": 18,
+   "static_constant": "keyDown",
+   "name": "D-pad Left",
+   "name_full": "D-pad Left",
+   "grade": "PROVEN LIVE",
+   "live_frames": 72,
+   "static_label": "D-pad Left",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_D window (2026-09-27T17:12:38-04:00 .. 2026-09-27T17:13:08-04:00)"
+  },
+  {
+   "id": 19,
+   "static_constant": "keyLeft",
+   "name": "D-pad Right",
+   "name_full": "D-pad Right",
+   "grade": "PROVEN LIVE",
+   "live_frames": 66,
+   "static_label": "D-pad Right",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_D window (2026-09-27T17:12:38-04:00 .. 2026-09-27T17:13:08-04:00)"
+  },
+  {
+   "id": 20,
+   "static_constant": "keyRight",
+   "name": "UNATTRIBUTED",
+   "name_full": "UNATTRIBUTED - one frame with id 20 appeared in this window; it cannot be tied to RT with confidence",
+   "grade": "PROVEN LIVE",
+   "live_frames": 19,
+   "static_label": "UNKNOWN (was)",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00); no static label found in the builds we hold"
+  },
+  {
+   "id": 21,
+   "static_constant": null,
+   "name": null,
+   "name_full": null,
+   "grade": "UNKNOWN",
+   "live_frames": 0,
+   "static_label": null,
+   "name_confidence": "UNKNOWN",
+   "notes": "no physical button produced this bit in any capture we hold"
+  },
+  {
+   "id": 22,
+   "static_constant": null,
+   "name": null,
+   "name_full": null,
+   "grade": "UNKNOWN",
+   "live_frames": 0,
+   "static_label": null,
+   "name_confidence": "UNKNOWN",
+   "notes": "no physical button produced this bit in any capture we hold"
+  },
+  {
+   "id": 23,
+   "static_constant": null,
+   "name": "M1",
+   "name_full": "M1",
+   "grade": "PROVEN LIVE",
+   "live_frames": 22,
+   "static_label": "UNKNOWN (was)",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold"
+  },
+  {
+   "id": 24,
+   "static_constant": "keyM1",
+   "name": "M2",
+   "name_full": "M2",
+   "grade": "PROVEN LIVE",
+   "live_frames": 28,
+   "static_label": "UNKNOWN (was)",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold"
+  },
+  {
+   "id": 25,
+   "static_constant": "keyM2",
+   "name": "M3",
+   "name_full": "M3",
+   "grade": "PROVEN LIVE",
+   "live_frames": 24,
+   "static_label": "UNKNOWN (was)",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold"
+  },
+  {
+   "id": 26,
+   "static_constant": "keyM3",
+   "name": "M4",
+   "name_full": "M4",
+   "grade": "PROVEN LIVE",
+   "live_frames": 21,
+   "static_label": "UNKNOWN (was)",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold"
+  },
+  {
+   "id": 27,
+   "static_constant": "keyM4",
+   "name": "M5",
+   "name_full": "M5",
+   "grade": "PROVEN LIVE",
+   "live_frames": 19,
+   "static_label": "M5",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00)"
+  },
+  {
+   "id": 28,
+   "static_constant": null,
+   "name": "M6",
+   "name_full": "M6",
+   "grade": "PROVEN LIVE",
+   "live_frames": 17,
+   "static_label": "M6",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00)"
+  },
+  {
+   "id": 29,
+   "static_constant": null,
+   "name": "M7",
+   "name_full": "M7",
+   "grade": "PROVEN LIVE",
+   "live_frames": 24,
+   "static_label": "M7",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00)"
+  },
+  {
+   "id": 30,
+   "static_constant": null,
+   "name": "extra button (as pressed by the operator)",
+   "name_full": "extra button (as pressed by the operator)",
+   "grade": "PROVEN LIVE",
+   "live_frames": 13,
+   "static_label": "UNKNOWN (was)",
+   "name_confidence": "PROVEN LIVE + corroborated by the mask rule in all four builds",
+   "notes": "single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00); no static label found in the builds we hold"
+  },
+  {
+   "id": 31,
+   "static_constant": null,
+   "name": null,
+   "name_full": null,
+   "grade": "UNKNOWN",
+   "live_frames": 0,
+   "static_label": null,
+   "name_confidence": "UNKNOWN",
+   "notes": "no physical button produced this bit in any capture we hold"
+  },
+  {
+   "id": 32,
+   "static_constant": null,
+   "name": null,
+   "name_full": null,
+   "grade": "UNKNOWN",
+   "live_frames": 0,
+   "static_label": null,
+   "name_confidence": "UNKNOWN",
+   "notes": "no physical button produced this bit in any capture we hold"
+  },
+  {
+   "id": 33,
+   "static_constant": null,
+   "name": null,
+   "name_full": null,
+   "grade": "UNKNOWN",
+   "live_frames": 0,
+   "static_label": null,
+   "name_confidence": "UNKNOWN",
+   "notes": "no physical button produced this bit in any capture we hold"
+  }
+ ]
+}
