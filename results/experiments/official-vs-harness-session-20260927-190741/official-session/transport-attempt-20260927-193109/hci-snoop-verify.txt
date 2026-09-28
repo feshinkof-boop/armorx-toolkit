@@ -5,3 +5,25 @@ persist.bluetooth.btsnoopfile =
 settings.global.bluetooth_hci_log = null
 bluetooth enabled:   enabled: true
 btsnoop file: ls: /data/misc/bluetooth/logs/: Permission denied
+
+### RESOLUTION (added after the popup ACK) — snoop logging IS enabled on this device
+
+The three AOSP property names checked above are EMPTY on this vivo/Android 16 build, and the AOSP
+global setting reads null. Do not read that as "snoop disabled": this build keeps the snoop mode
+under a different key.
+
+  persist.sys.bluetooth.btsnooplogmode = full        <-- the operative key on this device
+  settings global bluetooth_hci_log    = 1
+  /data/misc/bluetooth/logs/           = readable only via bugreport (shell: Permission denied)
+
+Positive proof that logging was active, independent of the properties: the bugreports taken after
+this point contain the snoop files themselves, and the session snoop grew in place while the
+official session ran, i.e. it was being written to continuously:
+
+  bt_hci_20260928_023405_d.cfa   858062 bytes at the 2026-09-27 19:40 feasibility bugreport
+                                 3777571 bytes at the 2026-09-27 19:47 session bugreport
+                                 sha256 bbaf10bd337a840ee0316291cd53f442859b55d8ce10c2414973d9c59248ba2f
+  -> a plain BTSnoop v1 (HCI UART) file, decoded directly with tshark (copy to /tmp first: tshark
+     is AppArmor-confined on this host and cannot read paths under /home/salamanka).
+
+Verdict: HCI snoop logging was ENABLED for the whole official-session capture.
