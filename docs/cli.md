@@ -151,3 +151,22 @@ The package modules live under:
 ```text
 src/armorx/
 ```
+
+## v0.3.0 offline groups
+
+```text
+armorx device list [--known-only]
+armorx device inspect <sysfs-path | usb-path | vid:pid>
+armorx device doctor
+
+armorx protocol decode "<hex>" [--stream]
+armorx protocol build --opcode <hex> [--payload <hex>] [--fragment <n>]
+armorx protocol opcodes
+armorx protocol describe-image --image "<144 hex bytes>" [--opcode D7]
+
+armorx gip decode "<hex>"
+armorx gip forms
+```
+
+None of these commands talk to a device. `armorx device doctor` is expected to
+exit 0 on a machine with no hardware and to say so.

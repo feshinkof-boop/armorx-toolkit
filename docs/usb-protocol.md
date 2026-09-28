@@ -365,3 +365,66 @@ required initialization/state remains unresolved.
 
 No write-config, firmware-update, DFU, or destructive command is considered
 documented until independently validated.
+
+## Personality selection and the Xbox operating state
+
+### PROVEN
+
+The same physical port can present two different USB identities, and the
+transition is driven by the unit's power state rather than by the radio link:
+
+```text
+USB connected, unit powered off       413D:2106  Zikway "HID zk"   vendor HID
+power button pressed, cable untouched 045E:0B12  Microsoft "Controller"  Xbox GIP
+```
+
+The transition was captured on one port: two failed descriptor reads, then a
+fresh enumeration as `045E:0B12`, after which the in-tree `xpad` driver bound
+interface 0 and an interrupt IN stream began at roughly 4 ms cadence. The
+reverse transition was also observed when the unit returned to standby.
+
+In the vendor personality the interface was silent: captures showed the probe
+URBs only, and a physical button press produced no payload-bearing frames at
+all. In the Xbox personality the stream is live.
+
+### Xbox GIP input reports
+
+### PROVEN
+
+```text
+type byte  0x20
+prefix     20 00 <sequence> 2C
+forms      32 bytes shortly after enumeration, 48 bytes in steady state
+```
+
+| field | offsets | notes |
+| --- | --- | --- |
+| sequence | 2 | 8-bit, rolls over |
+| A | byte 4 bit 0x10 | differential analysis, two cycles |
+| M1 | byte 4 bit 0x20 | differential analysis, two cycles |
+| M2 | byte 5 bit 0x40 | differential analysis, two cycles |
+| LT | bytes 6-7 | 16-bit little-endian, about 1020 at full press |
+| RT | bytes 8-9 | 16-bit little-endian, about 1020 at full press |
+| left stick | bytes 10-13 | two 16-bit little-endian components |
+| right stick | bytes 14-17 | two 16-bit little-endian components |
+| counters | bytes 40-47 | monotonic 32-bit values; timestamp semantics unknown |
+
+### UNKNOWN
+
+* why the stream moves from 32 to 48 bytes, roughly 46 seconds after
+  enumeration in the capture where the switchover was seen;
+* the semantics of the two 32-bit counters;
+* how the on-wire trigger values relate to the host input layer: a controlled RT
+  sweep produced a smooth ramp at the input layer while the nearest captured
+  frames read full scale and zero. This is recorded as unresolved, not explained.
+* whether the ARMORX forwards the attached controller's serial number or
+  presents a fixed one: the same serial was seen from two different units.
+
+### RT has no digital bit in the Xbox report
+
+### PROVEN
+
+A full RT sweep changed only bytes 8-9 (and the counters). Therefore any digital
+RT state in the ARMORX protocol - mask bit 9, `0x00000200` - is produced by the
+device, not copied from the controller report. Firmware analysis located the
+synthesis, and it is documented in the research tree rather than here.
