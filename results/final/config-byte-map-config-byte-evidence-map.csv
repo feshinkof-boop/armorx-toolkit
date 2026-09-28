@@ -1,0 +1,37 @@
+byte_offset,length,field_name,encoding,evidence_grade,evidence_paths,changed_by,notes
+0-1,2,config_checksum_crc,"CRC-16/MODBUS big-endian (poly 0xA001, init 0xFFFF, over bytes 2..143)",PROVEN STATIC,static/blutter 4.0.8 mygt408 units/gamepadset.dart:20137-20212 (GamepadSet30::toList CRC loop); baselines/device/.../20260927-170400-baseline-as-found.bin,recomputed on any change to bytes>=2 (observed in id15 mutant: 0x2c40->0xbfd4),"Independently reproduced by arithmetic on BOTH real buffers (baseline 0x2c40==0x2c40; mutant 0xbfd4==0xbfd4). Prior docs labelled this 'header, semantics UNKNOWN' - now PROVEN. PROVEN LIVE corroboration."
+2-3,2,config_length,u16 big-endian total length,PROVEN STATIC,"gamepadset.dart:17796-17798 (toList writes len>>8@idx2, len&0xFF@idx3); ctor sublist(0,4) @0x8142a4; live D6 reads 0x0090",-,toList writes len>>8 at list index 2 and len&0xFF at index 3. Live value 0x0090=144 matches the real 144-byte buffer.
+4,1,field_static_0xb5c (toolkit: motorSpeedIdx),"byte, written from a Dart global static",PROVEN STATIC,gamepadset.dart:17928-17940 (toList param idx0 <- LoadStaticField(0xb5c) @0x811ef8); default blob define.dart idx4=51,-,Byte (param index 0 -> config byte 4). Live value 0x33=51 equals the app default blob index 4. App field NAME not provable (no GamepadParam30 field); toolkit name INFERRED.
+5,1,motorMax,byte,PROVEN STATIC,gamepadset.dart:17948-17978 (param idx1 <- pa.field_7); default blob idx5=255; live byte5=0xFF,-,Live 0xFF=255 == default blob index 5. NAME from GamepadParam30.field_7 / toolkit.
+6-8,3,UNKNOWN,3 raw bytes,UNKNOWN,"no writer in toList, no reader in ctor (params 2,3,4)",-,Never written or read in the protocol-0x90 path. Zero in all observed buffers.
+9,1,triggerMode,byte enum,PROVEN STATIC,gamepadset.dart:17996-18002 (param idx5 <- pa.field_f); default idx9=0,-,
+10-11,2,"triggerLeftDeadzone (center,side)",2 bytes (Axis2),PROVEN STATIC,"gamepadset.dart:18012-18049 (param idx6,7 <- pa.field_13.field_7/.field_b)",-,"Device live 0,0 vs default 10,5 (device zeroed these). Offset proven by code, not by value."
+12-13,2,"triggerRightDeadzone (center,side)",2 bytes (Axis2),PROVEN STATIC,"gamepadset.dart:18067-18112 (param idx8,9 <- pa.field_17)",-,"Same as left; device live 0,0."
+14,1,joystickCircleLimit,byte,PROVEN STATIC,gamepadset.dart:18122 (param idx10 <- pa.field_1b),-,
+15,1,stickTurn,byte,PROVEN STATIC,gamepadset.dart:18146 (param idx11 <- pa.field_1f),-,
+16-17,2,"stickLeftDeadzone (center,side)",2 bytes (Axis2),PROVEN STATIC,"gamepadset.dart:18170-18215 (param idx12,13 <- pa.field_23)",-,Default center 15; live 0 (device uses 0). Byte 16/18 mismatch vs default noted.
+18-19,2,"stickRightDeadzone (center,side)",2 bytes (Axis2),PROVEN STATIC,"gamepadset.dart:18225-18270 (param idx14,15 <- pa.field_27)",-,
+20-25,6,stickLeftCurve,"3 x Axis2 (x,y) points",PROVEN STATIC,gamepadset.dart:18280-18373 (param idx16-21 <- pa.field_2b),-,"Live 01 00 1e 1e 46 46 = 1,0,30,30,70,70 == default blob idx20-25. STRONG live corroboration."
+26-27,2,UNKNOWN,2 bytes,UNKNOWN,"params 22,23 unwritten/unread",-,
+28-33,6,stickRightCurve,"3 x Axis2 (x,y) points",PROVEN STATIC,gamepadset.dart:18431-18524 (param idx24-29 <- pa.field_2f),-,Live 01 00 1e 1e 46 46 == default idx28-33.
+34-35,2,UNKNOWN,2 bytes,UNKNOWN,"params 30,31 unwritten/unread",-,
+36,1,sensorMode,byte enum,PROVEN STATIC,gamepadset.dart:18582 (param idx32 <- pa.field_33),-,Live byte36=0x02; default blob idx36=0 (device uses 2).
+37,1,sensorDir,byte enum,PROVEN STATIC,gamepadset.dart:18606 (param idx33 <- pa.field_37),-,
+38,1,sensorRightKey0,byte key code,PROVEN STATIC,gamepadset.dart:18630 (param idx34 <- pa.field_3b); live=2 default=2,-,
+39,1,sensorRightKey1,byte key code,PROVEN STATIC,gamepadset.dart:18654 (param idx35 <- pa.field_3f); live=2 default=2,-,
+40-43,4,sensorRightKeyBit,u32 big-endian (from a hex String field),PROVEN STATIC,"gamepadset.dart:18678-18712 (param idx36-39 <- int.parse(pa.field_43,radix:16)>>24..&0xFF)",-,
+44-49,6,sensorRightCurve0,3 x Axis2,PROVEN STATIC,gamepadset.dart:18843-18936 (param idx40-45 <- pa.field_47),-,"Live 00 0a 3c 3c 2a 00 == default idx44-49 (0,10,60,60,42,0)."
+50-51,2,UNKNOWN,2 bytes,UNKNOWN,"params 46,47 unwritten/unread",-,
+52-57,6,sensorRightCurve1,3 x Axis2,PROVEN STATIC,gamepadset.dart:18994-19087 (param idx48-53 <- pa.field_4b),-,
+58-59,2,UNKNOWN,2 bytes,UNKNOWN,"params 54,55 unwritten/unread",-,
+60-65,6,sensorRightCurve2,3 x Axis2,PROVEN STATIC,gamepadset.dart:19145-19238 (param idx56-61 <- pa.field_4f),-,
+66-67,2,UNKNOWN,2 bytes,UNKNOWN,"params 62,63 unwritten/unread",-,
+68,1,sensorMin,byte,PROVEN STATIC,gamepadset.dart:19296 (param idx64 <- pa.field_53) @0x813044,-,
+69-72,4,sensorSwitch,u32 big-endian (from a hex String field),PROVEN STATIC,"gamepadset.dart:19320-19476 (param idx65-68 <- int.parse(pa.field_57,radix:16)>>24..&0xFF)",-,
+73-75,3,UNKNOWN,3 bytes,UNKNOWN,"params 69,70,71 unwritten/unread",-,
+76-79,4,UNKNOWN,4 bytes,UNKNOWN,"params 72,73,74,75 unwritten/unread",-,Prior doc mislabelled byte 76 as turboSpeedIdx; correct offset is byte 80 (param idx76). Bytes 76-79 have no writer.
+80,1,field_static_0xb60 (toolkit: turboSpeedIdx),"byte, written from a Dart global static",PROVEN STATIC,gamepadset.dart:19490-19494 (param idx76 <- LoadStaticField(0xb60) @0x81325c); toolkit names it turboSpeedIdx,-,Byte (param idx76 -> config byte 80). Name INFERRED (no GamepadParam30 field). Corrects the prior 'byte 76' label.
+81-84,4,turboKey,u32 big-endian (from a hex String field),PROVEN STATIC,"gamepadset.dart:19490-19560 (param idx77,78,79,80 <- int.parse(pa.field_5b,radix:16)); live bytes 81-84 = 00 00 00 00",-,param idx77-80 -> config bytes 81-84. Corrects the prior '77-80' label (off by 4). Confirmed by the parse loop.
+85-93,9,UNKNOWN (0xF0-branch only),9 bytes,UNKNOWN,"written only in the protocol==0xF0 (240-byte) branch, gamepadset.dart:0x813564-0x813774",-,Not populated for the 144-byte protocol. Exact f0/0x90 split of this run is inferred from addresses; boundary +/- a byte not proven.
+94-111,18,UNKNOWN,18 bytes,UNKNOWN,no writer in toList nor reader in ctor (params 90-107),-,Likely reserved/padding. All zero in every observed buffer.
+112-143,32,mapKeys[32],1 byte per source slot: mapKeys[source_id] = target_id,PROVEN LIVE,"gamepadset.dart:20112-20128 (toList replaceRange(112,...,KeyRemapT::list)) + ctor sublist(112,..)->KeyRemapT @0x81468c; live D6 identity 0..31; real-config-semantic-map.md; id15 mutant readback","byte 127 changed by the D7 id15 mutant write (source slot 15: 0x0F -> 0x02); live bytes 135,136 already remapped (0x01,0x0D) in the as-found baseline",Region structure PROVEN (code + live identity default at bytes 112-143 == 0..31). Individual slot semantics from the live D2 key-id map. Slot 15 behaviour under the controlled byte-127 write was INCONCLUSIVE (no operator verdict) -> slot-15 semantics INFERRED.

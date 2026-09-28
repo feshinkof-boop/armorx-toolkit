@@ -1,0 +1,301 @@
+{
+  "schema": "armorx-lab/connection-updates/1",
+  "generated_by": "overnight research branch: connection-params-11ms",
+  "generated_at_local": "2026-09-27 (EDT)",
+  "analysis_mode": "offline static analysis of an existing capture file; no adapter, no radio, no git",
+
+  "source": {
+    "capture_file_repo_path": "results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa",
+    "sha256": "bbaf10bd337a840ee0316291cd53f442859b55d8ce10c2414973d9c59248ba2f",
+    "sha256_match_vs_sidecar": true,
+    "working_copy": "/tmp/official.cfa (COPY: tshark is AppArmor-confined and cannot read paths under /home/salamanka)",
+    "sidecar": "android-official-session.sha256",
+    "format": "BTSnoop v1, HCI UART (encapsulation 'Bluetooth H4 with linux header')",
+    "frames": 11029,
+    "decoder": "tshark 4.6.4 (Wireshark)",
+    "companion_logcat": "results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/logcat-official.txt",
+    "note_dead_field": "btatt.mtu does not exist in tshark 4.6.4; requesting it makes tshark exit non-zero and print nothing. Not used here."
+  },
+
+  "connection_under_analysis": {
+    "hci_handle": 2,
+    "hci_handle_hex": "0x0002",
+    "peer_address": "2D:37:35:6D:66:11",
+    "peer_address_type": "Public (0x00)",
+    "local_role": "Central (0x00)",
+    "bonded": false,
+    "encrypted": false,
+    "att_mtu_negotiated": 64
+  },
+
+  "tshark_field_names_used": {
+    "interval": "bthci_evt.le_con_interval",
+    "latency": "bthci_evt.le_con_latency",
+    "supervision_timeout": "bthci_evt.le_supv_timeout",
+    "le_meta_subevent": "bthci_evt.le_meta_subevent",
+    "min_interval": "bthci_evt.le_min_interval",
+    "max_interval": "bthci_evt.le_max_interval",
+    "l2cap_sig_code": "btl2cap.cmd_code",
+    "l2cap_cid": "btl2cap.cid",
+    "hci_cmd_opcode": "bthci_cmd.opcode",
+    "comment": "Interval/latency/timeout fields are in raw 1.25 ms / 10 ms units; tshark renders ms in -V output."
+  },
+
+  "exhaustiveness_checks": {
+    "l2cap_cid_0x0005_frames_total": 2,
+    "l2cap_0x12_or_0x13_frames_total": 2,
+    "hci_le_connection_update_commands_total": 3,
+    "hci_le_connection_update_complete_events_total": 3,
+    "le_enhanced_connection_complete_events_total": 1,
+    "conclusion": "The whole capture contains exactly one L2CAP LE-signalling negotiation and exactly three HCI LE Connection Update commands. The four interval states account for every interval-transition artefact in the capture; nothing is un-attributed."
+  },
+
+  "interval_timeline": [
+    {
+      "index": 1,
+      "frame": 4274,
+      "time_relative_s": 629.795457,
+      "event_kind": "LE_ENHANCED_CONNECTION_COMPLETE",
+      "le_meta_subevent": "0x0a",
+      "interval_raw": 24,
+      "interval_ms": 30.0,
+      "latency": 0,
+      "supervision_timeout_raw": 500,
+      "supervision_timeout_ms": 5000,
+      "initiator": "STACK_AUTOMATIC",
+      "evidence": {
+        "preceding_hci_le_connection_update_command": null,
+        "preceding_l2cap_connection_parameter_update_request": null,
+        "creation_command": {
+          "frame": 4262,
+          "time_relative_s": 629.751901,
+          "opcode": "0x2043",
+          "opcode_name": "LE Extended Create Connection",
+          "direction": "Sent (host -> controller)",
+          "interval_min_raw": [24, 24, 24],
+          "interval_max_raw": [40, 40, 40],
+          "latency": [0, 0, 0],
+          "note": "The phone itself chose interval min 24 (30 ms) / max 40 (50 ms) at connection creation. The negotiated result (24 = 30 ms) equals the minimum, i.e. the peripheral agreed to the fastest offered value."
+        }
+      },
+      "grade": "PROVEN",
+      "grade_note": "Interval value, handle, role and the LE Extended Create Connection command are read directly off the HCI stream."
+    },
+    {
+      "index": 2,
+      "frame": 4320,
+      "time_relative_s": 630.196132,
+      "event_kind": "LE_CONNECTION_UPDATE_COMPLETE",
+      "le_meta_subevent": "0x03",
+      "interval_raw": 6,
+      "interval_ms": 7.5,
+      "latency": 0,
+      "supervision_timeout_raw": 500,
+      "supervision_timeout_ms": 5000,
+      "initiator": "STACK_AUTOMATIC",
+      "evidence": {
+        "preceding_hci_le_connection_update_command": {
+          "frame": 4297,
+          "time_relative_s": 629.905698,
+          "opcode": "0x2013",
+          "opcode_name": "LE Connection Update",
+          "direction": "Sent (host -> controller)",
+          "interval_min_raw": 6,
+          "interval_max_raw": 6,
+          "latency": 0,
+          "supervision_timeout_raw": 500,
+          "tshark_crossref": "[Command in frame: 4297]"
+        },
+        "preceding_l2cap_connection_parameter_update_request": null,
+        "app_api_calls_in_window": "none (logcat MethodChannel: connect at 02:44:35.371, requestMtu(23) at 02:44:35.907; no requestConnectionPriority anywhere in the session)"
+      },
+      "grade": "STRONG EVIDENCE",
+      "grade_note": "PROVEN that the command was issued by the phone's host stack and that no L2CAP request preceded it, and PROVEN that the app made no connection-priority API call. The exact framework trigger (why 7.5 ms at this instant) is INFERRED: it coincides with the start of GATT service discovery (first Read By Group Type Request is frame 4298, 2 ms later)."
+    },
+    {
+      "index": 3,
+      "frame": 4407,
+      "time_relative_s": 630.706276,
+      "event_kind": "LE_CONNECTION_UPDATE_COMPLETE",
+      "le_meta_subevent": "0x03",
+      "interval_raw": 24,
+      "interval_ms": 30.0,
+      "latency": 0,
+      "supervision_timeout_raw": 500,
+      "supervision_timeout_ms": 5000,
+      "initiator": "STACK_AUTOMATIC",
+      "evidence": {
+        "preceding_hci_le_connection_update_command": {
+          "frame": 4402,
+          "time_relative_s": 630.627280,
+          "opcode": "0x2013",
+          "opcode_name": "LE Connection Update",
+          "direction": "Sent (host -> controller)",
+          "interval_min_raw": 24,
+          "interval_max_raw": 24,
+          "latency": 0,
+          "supervision_timeout_raw": 500,
+          "tshark_crossref": "[Command in frame: 4402]"
+        },
+        "preceding_l2cap_connection_parameter_update_request": null,
+        "app_api_calls_in_window": "none (logcat: requestMtu(23) completed at 02:44:36.284 -> onConfigureMTU mtu=23; requestMtu(512) at 02:44:36.639; no requestConnectionPriority)"
+      },
+      "grade": "STRONG EVIDENCE",
+      "grade_note": "PROVEN host-originated and PROVEN no L2CAP request / no app priority call. The 30 ms value equals the Android GATT BALANCED default and equals the creation-time interval, consistent with the stack reverting to its default. Mechanism INFERRED."
+    },
+    {
+      "index": 4,
+      "frame": 4426,
+      "time_relative_s": 631.493686,
+      "event_kind": "LE_CONNECTION_UPDATE_COMPLETE",
+      "le_meta_subevent": "0x03",
+      "interval_raw": 9,
+      "interval_ms": 11.25,
+      "latency": 0,
+      "supervision_timeout_raw": 200,
+      "supervision_timeout_ms": 2000,
+      "initiator": "PERIPHERAL_REQUEST",
+      "evidence": {
+        "preceding_hci_le_connection_update_command": {
+          "frame": 4421,
+          "time_relative_s": 631.190316,
+          "opcode": "0x2013",
+          "opcode_name": "LE Connection Update",
+          "direction": "Sent (host -> controller)",
+          "interval_min_raw": 9,
+          "interval_max_raw": 9,
+          "latency": 0,
+          "supervision_timeout_raw": 200,
+          "tshark_crossref": "[Command in frame: 4421]"
+        },
+        "preceding_l2cap_connection_parameter_update_request": {
+          "frame": 4420,
+          "time_relative_s": 631.186767,
+          "cid": "0x0005",
+          "cid_name": "Low Energy L2CAP Signaling Channel",
+          "code": "0x12",
+          "code_name": "Connection Parameter Update Request",
+          "identifier": "0x01",
+          "command_length": 8,
+          "direction": "Received (controller -> host)  => SENT BY THE PERIPHERAL",
+          "requested": {
+            "min_interval_raw": 6,
+            "min_interval_ms": 7.5,
+            "max_interval_raw": 6,
+            "max_interval_ms": 7.5,
+            "peripheral_latency": 0,
+            "timeout_multiplier_raw": 200,
+            "timeout_ms": 2000
+          }
+        },
+        "l2cap_connection_parameter_update_response": {
+          "frame": 4422,
+          "time_relative_s": 631.191432,
+          "cid": "0x0005",
+          "code": "0x13",
+          "code_name": "Connection Parameter Update Response",
+          "identifier": "0x01",
+          "direction": "Sent (host -> controller)  => SENT BY THE PHONE",
+          "result": "Accepted (0x0000)"
+        },
+        "app_api_calls_in_window": "none (logcat: no requestConnectionPriority at any point; discoverServices at 02:44:36.707 and setNotifyValue x2 at 02:44:36.722/36.766 bracket this event)"
+      },
+      "grade": "PROVEN",
+      "grade_note": "The L2CAP Connection Parameter Update Request (0x12) on CID 0x0005 was RECEIVED by the phone, therefore it was originated by the peripheral. The phone then applied it with an HCI LE Connection Update and answered with an Accepted (0x0000) L2CAP response. Causality is direct and ordered: 4420 (request) -> 4421 (apply) -> 4422 (accept) -> 4426 (complete).",
+      "deviation_to_note": {
+        "requested_interval_raw": 6,
+        "applied_interval_raw": 9,
+        "requested_ms": 7.5,
+        "applied_ms": 11.25,
+        "observation_grade": "PROVEN",
+        "explanation_grade": "INFERRED",
+        "explanation": "The peripheral asked for 7.50 ms (6 x 1.25 ms) and the phone answered 'Accepted' but then programmed 11.25 ms (9 x 1.25 ms). 11.25 ms / 1.25 ms = 9, and 9 is the lowest HCI connection interval value Android's GATT stack permits for peripheral-originated requests (AOSP constant BTM_BLE_CONN_INT_MIN_LIMIT). The clamp itself is observed in the stream; the reason is inferred from AOSP behaviour and was NOT verified by reading the AOSP constant in this session.",
+        "supporting_public_evidence": "AOSP commit titles referencing BTM_BLE_CONN_INT_MIN_LIMIT (e.g. 'Allow BTM_BLE_CONN_INT_MIN_LIMIT override by sysprop') confirm the constant exists; its value 0x0009 was not read verbatim here."
+      }
+    }
+  ],
+
+  "initiator_summary": [
+    {"index": 1, "frame": 4274, "interval_ms": 30.0, "initiator": "STACK_AUTOMATIC", "grade": "PROVEN"},
+    {"index": 2, "frame": 4320, "interval_ms": 7.5,  "initiator": "STACK_AUTOMATIC", "grade": "STRONG EVIDENCE"},
+    {"index": 3, "frame": 4407, "interval_ms": 30.0, "initiator": "STACK_AUTOMATIC", "grade": "STRONG EVIDENCE"},
+    {"index": 4, "frame": 4426, "interval_ms": 11.25, "initiator": "PERIPHERAL_REQUEST", "grade": "PROVEN"}
+  ],
+
+  "app_code_analysis": {
+    "app_package": "com.moojiang.bigbigwon.mygt",
+    "framework": "Flutter (Dart AOT) + flutter_blue_plus Android plugin (com.lib.flutter_blue_plus.FlutterBluePlusPlugin)",
+    "artifacts_searched": [
+      "static/jadx/4.0.8/  (EMPTY - contains 0 files; nothing to review)",
+      "static/strings/4.0.8-libapp.strings (Dart AOT string table for the 4.0.8 build)",
+      "static/strings/2.24-libapp.strings, static/strings/2.23-libapp.strings (older builds)",
+      "apk/extracted/4.0.8/base/classes.dex, classes2.dex, classes3.dex (plugin + app Java/Kotlin)",
+      "results/.../official-session-live/raw/logcat-official.txt (runtime MethodChannel trace)"
+    ],
+    "terms_searched": [
+      "requestConnectionPriority",
+      "CONNECTION_PRIORITY_HIGH / BALANCED / LOW_POWER",
+      "ConnectionPriority",
+      "connection_priority (connect() option key)",
+      "setPreferredPhy",
+      "requestMtu",
+      "BluetoothGatt / BluetoothGattCallback"
+    ],
+    "plugin_capability": {
+      "methods_registered_in_classes_dex": [
+        "connect", "connection_priority", "disconnect", "discoverServices", "flutterRestart",
+        "getAdapterState", "readCharacteristic", "requestConnectionPriority", "requestMtu",
+        "setNotifyValue", "setPreferredPhy", "stopScan", "writeCharacteristic"
+      ],
+      "note": "The plugin CAN request a connection priority and a PHY; the capability exists in the binary."
+    },
+    "app_call_surface": {
+      "method_names_present_in_libapp_strings_4_0_8": [
+        "connect", "disconnect", "discoverServices", "flutterRestart", "getAdapterState",
+        "readCharacteristic", "requestMtu", "setNotifyValue", "startScan", "stopScan", "writeCharacteristic"
+      ],
+      "method_names_ABSENT_from_libapp_strings_4_0_8": [
+        "requestConnectionPriority", "setPreferredPhy", "connection_priority"
+      ],
+      "absence_check_2_23_2_24": "requestConnectionPriority / setPreferredPhy / connection_priority also absent in the 2.23 and 2.24 libapp string tables; only 'requestMtu' (2.24) and 'requestMtuSize' (2.24) appear.",
+      "runtime_methodchannel_trace": [
+        "02:44:24.646 flutterRestart",
+        "02:44:24.654 getAdapterState",
+        "02:44:24.657 getAdapterState",
+        "02:44:33.546 startScan",
+        "02:44:35.359 stopScan",
+        "02:44:35.371 connect",
+        "02:44:35.907 requestMtu",
+        "02:44:36.639 requestMtu",
+        "02:44:36.707 discoverServices",
+        "02:44:36.722 setNotifyValue",
+        "02:44:36.766 setNotifyValue",
+        "02:45:34.379..02:46:44.953 writeCharacteristic (x7) / readCharacteristic (x1)",
+        "02:47:20.034 disconnect"
+      ],
+      "runtime_absence": "No requestConnectionPriority and no setPreferredPhy MethodChannel call occurs anywhere in the captured session."
+    },
+    "runtime_onConnectionUpdated": [
+      "02:44:35.838 interval=6  latency=0 timeout=500 status=0   (7.5 ms)",
+      "02:44:36.351 interval=24 latency=0 timeout=500 status=0   (30 ms)",
+      "02:44:37.139 interval=9  latency=0 timeout=200 status=0   (11.25 ms)"
+    ],
+    "answer": "NO. The application code does not explicitly request any connection-interval profile. It never calls requestConnectionPriority, never uses CONNECTION_PRIORITY_HIGH/BALANCED/LOW_POWER, never calls setPreferredPhy, and never passes a connection_priority option to connect(). The only GATT configuration the app performs is requestMtu (23, then 512 -> negotiated 64) and service/notification discovery.",
+    "explicit_warning": "There is NO evidence that the app requested 11.25 ms. The only 11.25 ms event in the capture was requested by the PERIPHERAL and clamped up by Android's GATT stack. Claiming app-requested 11.25 ms would be false.",
+    "grade": "PROVEN"
+  },
+
+  "conclusions": [
+    "Of the four interval states, exactly one (11.25 ms) was initiated by the peripheral via an L2CAP LE-signalling Connection Parameter Update Request; the phone accepted it and applied it.",
+    "The other three (30 ms at connect, 7.5 ms, 30 ms) are host-stack-initiated HCI LE Connection Update commands with no L2CAP negotiation and no app API call: STACK_AUTOMATIC.",
+    "The app does not request any interval profile. The 11.25 ms value is an Android-side clamp of the peripheral's 7.50 ms request, not an app preference.",
+    "The peripheral's own preference (7.50 ms) is independently corroborated: its GAP Peripheral Preferred Connection Parameters characteristic (0x2a04) reads 0600 0600 0000 c800, i.e. min 6 / max 6 (7.5 ms), latency 0, timeout 200 (2000 ms) - see the harness session capture, which read exactly that value."
+  ],
+
+  "grades_legend": {
+    "PROVEN": "Read directly off the HCI/L2CAP stream or off the app binary/trace in this session; no interpretation required.",
+    "STRONG EVIDENCE": "Multiple independent observations agree; a small inferential step remains (typically the framework's internal reasoning).",
+    "INFERRED": "Consistent with all observations but not directly verified in this session.",
+    "UNKNOWN": "Not determinable from the available evidence."
+  }
+}

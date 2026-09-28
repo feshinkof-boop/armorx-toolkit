@@ -1,0 +1,596 @@
+{
+ "device": {
+  "name": "ARMOR-X Pro",
+  "model_mark": "ZJ-XT",
+  "firmware": "2741",
+  "ble_address": "2D:37:35:6D:66:11"
+ },
+ "baseline": {
+  "length": 144,
+  "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "path": "baselines/device/ZJ-XT_2741_2D-37-35-6D-66-11/20260927-170400-baseline-as-found.bin",
+  "durability_status": "DURABLE_OK",
+  "verified_durable_path": "results/final/real-config-durability.md"
+ },
+ "mutant": {
+  "length": 144,
+  "sha256": "97fb2061a352650c29007b7918ecc2bed907291073b849cfda61e460296b103d",
+  "path": "results/experiments/physical-20260927-174445-buttons/baseline-as-found.bin",
+  "diff_offsets": [
+   0,
+   1,
+   127
+  ],
+  "changed": {
+   "0": "0x2c->0xbf",
+   "1": "0x40->0xd4",
+   "127": "0x0F->0x02"
+  }
+ },
+ "artifact_class": "GamepadSet30 / GamepadParam30 (protocol 0x90), Dart AOT",
+ "container_layout": "144 = 4 header (bytes 0-3) + 108 param block (bytes 4-111 = param[i] at byte 4+i) + 32 mapKeys (bytes 112-143)",
+ "crc": {
+  "field_bytes": "0-1",
+  "algorithm": "CRC-16/MODBUS",
+  "poly": "0xA001",
+  "init": "0xFFFF",
+  "over": "bytes 2..143",
+  "stored": "big-endian at bytes 0-1",
+  "baseline": {
+   "stored": "0x2c40",
+   "computed": "0x2c40",
+   "valid": true
+  },
+  "mutant": {
+   "stored": "0xbfd4",
+   "computed": "0xbfd4",
+   "valid": true
+  }
+ },
+ "length_field": {
+  "bytes": "2-3",
+  "encoding": "u16 big-endian",
+  "value": 144,
+  "live_match": true
+ },
+ "controlled_differences_available_in_project": [
+  {
+   "name": "baseline vs id15 mutant",
+   "diff": [
+    0,
+    1,
+    127
+   ],
+   "paths": [
+    "results/experiments/physical-20260927-174445-buttons/baseline-as-found.bin",
+    "results/experiments/physical-20260927-171616-id15/baseline-resume-current.bin"
+   ],
+   "note": "bytes 0,1 are the CRC (consequence of byte 127); only byte 127 is a directly set data byte"
+  },
+  {
+   "name": "no-op D7 write -> readback",
+   "diff": [],
+   "paths": [
+    "results/experiments/physical-20260927-170455-noop-d7/noop-write-readback.bin",
+    "results/experiments/physical-20260927-162602/noop-write-readback.bin"
+   ],
+   "note": "readback == baseline, no byte changed"
+  },
+  {
+   "name": "id15 restore + D2 + official-vs-harness D6 readbacks",
+   "diff": [],
+   "paths": [
+    "results/experiments/physical-20260927-171616-id15/restore-readback.bin",
+    "results/experiments/d2-live-differential-20260927-184643/final-d6.bin",
+    "results/experiments/official-vs-harness-session-20260927-190741/final-d6.bin"
+   ],
+   "note": "all equals baseline"
+  },
+  {
+   "name": "as-found device vs app default blob",
+   "diff": [
+    0,
+    1,
+    10,
+    11,
+    12,
+    13,
+    16,
+    18,
+    36,
+    135,
+    136
+   ],
+   "paths": [
+    "define.dart 144-byte default literal",
+    "live baseline"
+   ],
+   "note": "133/144 exact index agreement -> corroborates the container layout"
+  }
+ ],
+ "counts": {
+  "PROVEN LIVE": 32,
+  "PROVEN STATIC": 65,
+  "STRONG EVIDENCE": 0,
+  "INFERRED": 0,
+  "UNKNOWN": 47,
+  "CONTRADICTED": 0,
+  "total": 144
+ },
+ "bytes_still_unknown_ranges": [
+  [
+   6,
+   8
+  ],
+  [
+   26,
+   27
+  ],
+  [
+   34,
+   35
+  ],
+  [
+   50,
+   51
+  ],
+  [
+   58,
+   59
+  ],
+  [
+   66,
+   67
+  ],
+  [
+   73,
+   75
+  ],
+  [
+   76,
+   79
+  ],
+  [
+   85,
+   93
+  ],
+  [
+   94,
+   111
+  ]
+ ],
+ "corrections_to_prior_docs": [
+  "bytes 0-1 are a CRC-16/MODBUS (was 'header, semantics UNKNOWN') - proven by code and by arithmetic on two real buffers",
+  "turboSpeedIdx is at byte 80 (param idx76), not byte 76",
+  "turboKey is at bytes 81-84 (param idx77-80), not 77-80"
+ ],
+ "field_name_confidence": {
+  "proven_offsets_named_fields": [
+   "motorMax",
+   "triggerMode",
+   "triggerLeftDeadzone",
+   "triggerRightDeadzone",
+   "joystickCircleLimit",
+   "stickTurn",
+   "stickLeftDeadzone",
+   "stickRightDeadzone",
+   "stickLeftCurve",
+   "stickRightCurve",
+   "sensorMode",
+   "sensorDir",
+   "sensorRightKey0",
+   "sensorRightKey1",
+   "sensorRightKeyBit",
+   "sensorRightCurve0",
+   "sensorRightCurve1",
+   "sensorRightCurve2",
+   "sensorMin",
+   "sensorSwitch",
+   "turboKey",
+   "mapKeys"
+  ],
+  "inferred_names": [
+   "byte4 motorSpeedIdx",
+   "byte80 turboSpeedIdx",
+   "mapKeys slot 15 semantics"
+  ]
+ },
+ "rows": [
+  {
+   "byte_offset": 0,
+   "byte_end": 1,
+   "length": 2,
+   "field_name": "config_checksum_crc",
+   "encoding": "CRC-16/MODBUS big-endian (poly 0xA001, init 0xFFFF, over bytes 2..143)",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "static/blutter 4.0.8 mygt408 units/gamepadset.dart:20137-20212 (GamepadSet30::toList CRC loop); baselines/device/.../20260927-170400-baseline-as-found.bin",
+   "changed_by": "recomputed on any change to bytes>=2 (observed in id15 mutant: 0x2c40->0xbfd4)",
+   "notes": "Independently reproduced by arithmetic on BOTH real buffers (baseline 0x2c40==0x2c40; mutant 0xbfd4==0xbfd4). Prior docs labelled this 'header, semantics UNKNOWN' - now PROVEN. PROVEN LIVE corroboration."
+  },
+  {
+   "byte_offset": 2,
+   "byte_end": 3,
+   "length": 2,
+   "field_name": "config_length",
+   "encoding": "u16 big-endian total length",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:17796-17798 (toList writes len>>8@idx2, len&0xFF@idx3); ctor sublist(0,4) @0x8142a4; live D6 reads 0x0090",
+   "changed_by": "-",
+   "notes": "toList writes len>>8 at list index 2 and len&0xFF at index 3. Live value 0x0090=144 matches the real 144-byte buffer."
+  },
+  {
+   "byte_offset": 4,
+   "byte_end": 4,
+   "length": 1,
+   "field_name": "field_static_0xb5c (toolkit: motorSpeedIdx)",
+   "encoding": "byte, written from a Dart global static",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:17928-17940 (toList param idx0 <- LoadStaticField(0xb5c) @0x811ef8); default blob define.dart idx4=51",
+   "changed_by": "-",
+   "notes": "Byte (param index 0 -> config byte 4). Live value 0x33=51 equals the app default blob index 4. App field NAME not provable (no GamepadParam30 field); toolkit name INFERRED."
+  },
+  {
+   "byte_offset": 5,
+   "byte_end": 5,
+   "length": 1,
+   "field_name": "motorMax",
+   "encoding": "byte",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:17948-17978 (param idx1 <- pa.field_7); default blob idx5=255; live byte5=0xFF",
+   "changed_by": "-",
+   "notes": "Live 0xFF=255 == default blob index 5. NAME from GamepadParam30.field_7 / toolkit."
+  },
+  {
+   "byte_offset": 6,
+   "byte_end": 8,
+   "length": 3,
+   "field_name": "UNKNOWN",
+   "encoding": "3 raw bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "no writer in toList, no reader in ctor (params 2,3,4)",
+   "changed_by": "-",
+   "notes": "Never written or read in the protocol-0x90 path. Zero in all observed buffers."
+  },
+  {
+   "byte_offset": 9,
+   "byte_end": 9,
+   "length": 1,
+   "field_name": "triggerMode",
+   "encoding": "byte enum",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:17996-18002 (param idx5 <- pa.field_f); default idx9=0",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 10,
+   "byte_end": 11,
+   "length": 2,
+   "field_name": "triggerLeftDeadzone (center,side)",
+   "encoding": "2 bytes (Axis2)",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18012-18049 (param idx6,7 <- pa.field_13.field_7/.field_b)",
+   "changed_by": "-",
+   "notes": "Device live 0,0 vs default 10,5 (device zeroed these). Offset proven by code, not by value."
+  },
+  {
+   "byte_offset": 12,
+   "byte_end": 13,
+   "length": 2,
+   "field_name": "triggerRightDeadzone (center,side)",
+   "encoding": "2 bytes (Axis2)",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18067-18112 (param idx8,9 <- pa.field_17)",
+   "changed_by": "-",
+   "notes": "Same as left; device live 0,0."
+  },
+  {
+   "byte_offset": 14,
+   "byte_end": 14,
+   "length": 1,
+   "field_name": "joystickCircleLimit",
+   "encoding": "byte",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18122 (param idx10 <- pa.field_1b)",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 15,
+   "byte_end": 15,
+   "length": 1,
+   "field_name": "stickTurn",
+   "encoding": "byte",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18146 (param idx11 <- pa.field_1f)",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 16,
+   "byte_end": 17,
+   "length": 2,
+   "field_name": "stickLeftDeadzone (center,side)",
+   "encoding": "2 bytes (Axis2)",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18170-18215 (param idx12,13 <- pa.field_23)",
+   "changed_by": "-",
+   "notes": "Default center 15; live 0 (device uses 0). Byte 16/18 mismatch vs default noted."
+  },
+  {
+   "byte_offset": 18,
+   "byte_end": 19,
+   "length": 2,
+   "field_name": "stickRightDeadzone (center,side)",
+   "encoding": "2 bytes (Axis2)",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18225-18270 (param idx14,15 <- pa.field_27)",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 20,
+   "byte_end": 25,
+   "length": 6,
+   "field_name": "stickLeftCurve",
+   "encoding": "3 x Axis2 (x,y) points",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18280-18373 (param idx16-21 <- pa.field_2b)",
+   "changed_by": "-",
+   "notes": "Live 01 00 1e 1e 46 46 = 1,0,30,30,70,70 == default blob idx20-25. STRONG live corroboration."
+  },
+  {
+   "byte_offset": 26,
+   "byte_end": 27,
+   "length": 2,
+   "field_name": "UNKNOWN",
+   "encoding": "2 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "params 22,23 unwritten/unread",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 28,
+   "byte_end": 33,
+   "length": 6,
+   "field_name": "stickRightCurve",
+   "encoding": "3 x Axis2 (x,y) points",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18431-18524 (param idx24-29 <- pa.field_2f)",
+   "changed_by": "-",
+   "notes": "Live 01 00 1e 1e 46 46 == default idx28-33."
+  },
+  {
+   "byte_offset": 34,
+   "byte_end": 35,
+   "length": 2,
+   "field_name": "UNKNOWN",
+   "encoding": "2 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "params 30,31 unwritten/unread",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 36,
+   "byte_end": 36,
+   "length": 1,
+   "field_name": "sensorMode",
+   "encoding": "byte enum",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18582 (param idx32 <- pa.field_33)",
+   "changed_by": "-",
+   "notes": "Live byte36=0x02; default blob idx36=0 (device uses 2)."
+  },
+  {
+   "byte_offset": 37,
+   "byte_end": 37,
+   "length": 1,
+   "field_name": "sensorDir",
+   "encoding": "byte enum",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18606 (param idx33 <- pa.field_37)",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 38,
+   "byte_end": 38,
+   "length": 1,
+   "field_name": "sensorRightKey0",
+   "encoding": "byte key code",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18630 (param idx34 <- pa.field_3b); live=2 default=2",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 39,
+   "byte_end": 39,
+   "length": 1,
+   "field_name": "sensorRightKey1",
+   "encoding": "byte key code",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18654 (param idx35 <- pa.field_3f); live=2 default=2",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 40,
+   "byte_end": 43,
+   "length": 4,
+   "field_name": "sensorRightKeyBit",
+   "encoding": "u32 big-endian (from a hex String field)",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18678-18712 (param idx36-39 <- int.parse(pa.field_43,radix:16)>>24..&0xFF)",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 44,
+   "byte_end": 49,
+   "length": 6,
+   "field_name": "sensorRightCurve0",
+   "encoding": "3 x Axis2",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18843-18936 (param idx40-45 <- pa.field_47)",
+   "changed_by": "-",
+   "notes": "Live 00 0a 3c 3c 2a 00 == default idx44-49 (0,10,60,60,42,0)."
+  },
+  {
+   "byte_offset": 50,
+   "byte_end": 51,
+   "length": 2,
+   "field_name": "UNKNOWN",
+   "encoding": "2 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "params 46,47 unwritten/unread",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 52,
+   "byte_end": 57,
+   "length": 6,
+   "field_name": "sensorRightCurve1",
+   "encoding": "3 x Axis2",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:18994-19087 (param idx48-53 <- pa.field_4b)",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 58,
+   "byte_end": 59,
+   "length": 2,
+   "field_name": "UNKNOWN",
+   "encoding": "2 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "params 54,55 unwritten/unread",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 60,
+   "byte_end": 65,
+   "length": 6,
+   "field_name": "sensorRightCurve2",
+   "encoding": "3 x Axis2",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:19145-19238 (param idx56-61 <- pa.field_4f)",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 66,
+   "byte_end": 67,
+   "length": 2,
+   "field_name": "UNKNOWN",
+   "encoding": "2 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "params 62,63 unwritten/unread",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 68,
+   "byte_end": 68,
+   "length": 1,
+   "field_name": "sensorMin",
+   "encoding": "byte",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:19296 (param idx64 <- pa.field_53) @0x813044",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 69,
+   "byte_end": 72,
+   "length": 4,
+   "field_name": "sensorSwitch",
+   "encoding": "u32 big-endian (from a hex String field)",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:19320-19476 (param idx65-68 <- int.parse(pa.field_57,radix:16)>>24..&0xFF)",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 73,
+   "byte_end": 75,
+   "length": 3,
+   "field_name": "UNKNOWN",
+   "encoding": "3 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "params 69,70,71 unwritten/unread",
+   "changed_by": "-",
+   "notes": ""
+  },
+  {
+   "byte_offset": 76,
+   "byte_end": 79,
+   "length": 4,
+   "field_name": "UNKNOWN",
+   "encoding": "4 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "params 72,73,74,75 unwritten/unread",
+   "changed_by": "-",
+   "notes": "Prior doc mislabelled byte 76 as turboSpeedIdx; correct offset is byte 80 (param idx76). Bytes 76-79 have no writer."
+  },
+  {
+   "byte_offset": 80,
+   "byte_end": 80,
+   "length": 1,
+   "field_name": "field_static_0xb60 (toolkit: turboSpeedIdx)",
+   "encoding": "byte, written from a Dart global static",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:19490-19494 (param idx76 <- LoadStaticField(0xb60) @0x81325c); toolkit names it turboSpeedIdx",
+   "changed_by": "-",
+   "notes": "Byte (param idx76 -> config byte 80). Name INFERRED (no GamepadParam30 field). Corrects the prior 'byte 76' label."
+  },
+  {
+   "byte_offset": 81,
+   "byte_end": 84,
+   "length": 4,
+   "field_name": "turboKey",
+   "encoding": "u32 big-endian (from a hex String field)",
+   "evidence_grade": "PROVEN STATIC",
+   "evidence_paths": "gamepadset.dart:19490-19560 (param idx77,78,79,80 <- int.parse(pa.field_5b,radix:16)); live bytes 81-84 = 00 00 00 00",
+   "changed_by": "-",
+   "notes": "param idx77-80 -> config bytes 81-84. Corrects the prior '77-80' label (off by 4). Confirmed by the parse loop."
+  },
+  {
+   "byte_offset": 85,
+   "byte_end": 93,
+   "length": 9,
+   "field_name": "UNKNOWN (0xF0-branch only)",
+   "encoding": "9 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "written only in the protocol==0xF0 (240-byte) branch, gamepadset.dart:0x813564-0x813774",
+   "changed_by": "-",
+   "notes": "Not populated for the 144-byte protocol. Exact f0/0x90 split of this run is inferred from addresses; boundary +/- a byte not proven."
+  },
+  {
+   "byte_offset": 94,
+   "byte_end": 111,
+   "length": 18,
+   "field_name": "UNKNOWN",
+   "encoding": "18 bytes",
+   "evidence_grade": "UNKNOWN",
+   "evidence_paths": "no writer in toList nor reader in ctor (params 90-107)",
+   "changed_by": "-",
+   "notes": "Likely reserved/padding. All zero in every observed buffer."
+  },
+  {
+   "byte_offset": 112,
+   "byte_end": 143,
+   "length": 32,
+   "field_name": "mapKeys[32]",
+   "encoding": "1 byte per source slot: mapKeys[source_id] = target_id",
+   "evidence_grade": "PROVEN LIVE",
+   "evidence_paths": "gamepadset.dart:20112-20128 (toList replaceRange(112,...,KeyRemapT::list)) + ctor sublist(112,..)->KeyRemapT @0x81468c; live D6 identity 0..31; real-config-semantic-map.md; id15 mutant readback",
+   "changed_by": "byte 127 changed by the D7 id15 mutant write (source slot 15: 0x0F -> 0x02); live bytes 135,136 already remapped (0x01,0x0D) in the as-found baseline",
+   "notes": "Region structure PROVEN (code + live identity default at bytes 112-143 == 0..31). Individual slot semantics from the live D2 key-id map. Slot 15 behaviour under the controlled byte-127 write was INCONCLUSIVE (no operator verdict) -> slot-15 semantics INFERRED."
+  }
+ ]
+}

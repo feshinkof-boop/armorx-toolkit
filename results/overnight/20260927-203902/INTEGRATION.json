@@ -1,0 +1,111 @@
+{
+ "generated": "2026-09-28T05:29:04",
+ "shift": "20260927-203902",
+ "branches": [
+  {
+   "branch": "ef-e2-d4-d6-origin",
+   "source_dir": "results/overnight/20260927-203902/branches/ef-e2-d4-d6-origin",
+   "integrated_to": [
+    "results/final/ef-e2-d4-d6-origin-findings.md",
+    "results/final/ef-e2-d4-d6-origin-findings.json",
+    "results/final/ef-e2-d4-d6-origin-unknowns.md"
+   ],
+   "validation": "VALIDATED: emitter addresses and dart line numbers verified against the 4.0.8 blutter tree (getDeviceUUID 0xacf618:3973, getZKMVer 0x8b61fc:1042, readFirmware 0x8b6860:1263, getInputModel 0xa84258:1850, getDeviceConfig 0x80dbfc:12, testModeSwitch 0xabaef4:1954). Checksums recomputed against the live official frames."
+  },
+  {
+   "branch": "d6-app-dependency",
+   "source_dir": "results/overnight/20260927-203902/branches/d6-app-dependency",
+   "integrated_to": [
+    "results/reconciliation/d6-app-dependency.md",
+    "results/reconciliation/d6-app-dependency.json",
+    "results/reconciliation/d6-app-dependency-evidence-quotes.txt"
+   ],
+   "validation": "VALIDATED as scoped: classification D6_APP_STATE_DEPENDENCY_NOT_FOUND applies to the 4.0.8 Button-Test/D2 path only; the report states its scope."
+  },
+  {
+   "branch": "d2-state-machine",
+   "source_dir": "results/overnight/20260927-203902/branches/d2-state-machine",
+   "integrated_to": [
+    "results/final/d2-state-machine.md",
+    "results/final/d2-state-machine.json",
+    "results/final/d2-state-machine.dot",
+    "results/final/d2-state-machine.svg",
+    "results/final/d2-state-machine-state-deltas.md"
+   ],
+   "validation": "VALIDATED: 2.24 D2 addresses match the previously known values (initState 0x8e1e94, testModeSwitch 0x8e3a88/0x8e1efc)."
+  },
+  {
+   "branch": "cross-version-pred2-matrix",
+   "source_dir": "results/overnight/20260927-203902/branches/cross-version-pred2-matrix",
+   "integrated_to": [
+    "results/reconciliation/cross-version-pred2-matrix.md",
+    "results/reconciliation/cross-version-pred2-matrix.json",
+    "results/reconciliation/cross-version-pred2-matrix-evidence-index.json"
+   ],
+   "validation": "VALIDATED: 2.22 addresses verified in the 2.22.0901 tree. CAVEAT: tree->version labels are inferred from directory naming plus address distinctness (static/blutter/2.22.0901 = 2.22.0901, /armorx/re/blutter_out = 2.23-era, /armorx/re/v224 = 2.24, armorx-re/mygt408 = 4.0.8) - record as a provenance caveat, not a contradiction."
+  },
+  {
+   "branch": "d2u002-0x24",
+   "source_dir": "results/overnight/20260927-203902/branches/d2u002-0x24",
+   "integrated_to": [
+    "results/reconciliation/d2u002-0x24.md",
+    "results/reconciliation/d2u002-0x24.json",
+    "results/reconciliation/d2u002-0x24-verdict.md"
+   ],
+   "validation": "VALIDATED INDEPENDENTLY: at 0x8b06e8 the 2.23 build does LoadInt32Instr (sbfx x1,x0,#1,#0x1f = the >>1 untag) then cmp x1,#0x12 (=18), exactly as claimed. Corroborated by 155 live frames all carrying byte[1]=0x12. D2-U-002 is RESOLVED."
+  },
+  {
+   "branch": "historical-d2-reinterpretation",
+   "source_dir": "results/overnight/20260927-203902/branches/historical-d2-reinterpretation",
+   "integrated_to": [
+    "results/reconciliation/historical-d2-reinterpretation-historical-d2-runs.md",
+    "results/reconciliation/historical-d2-reinterpretation-historical-d2-runs.json",
+    "results/reconciliation/historical-d2-reinterpretation-strongest-live-evidence.md"
+   ],
+   "validation": "VALIDATED: the 17:08 session record really does contain 3292 button frames across 26 key ids (re-derived by automation/scripts/harness-streaming-audit.py). This branch produced the headline correction of the shift."
+  },
+  {
+   "branch": "connection-params-11ms",
+   "source_dir": "results/overnight/20260927-203902/branches/connection-params-11ms",
+   "integrated_to": [
+    "results/final/connection-params-11ms-connection-updates.md",
+    "results/final/connection-params-11ms-connection-updates.json",
+    "results/final/connection-params-11ms-experiment-11.25ms.md",
+    "results/final/connection-params-11ms-btmon_interval_report.py"
+   ],
+   "validation": "VALIDATED INDEPENDENTLY: exactly 3 LE Connection Update commands (frames 4297/4402/4421) with 3 matching Connection Update Complete events and one LE Extended Create Connection."
+  },
+  {
+   "branch": "d4-reconciliation",
+   "source_dir": "results/overnight/20260927-203902/branches/d4-reconciliation",
+   "integrated_to": [
+    "results/reconciliation/d4-reconciliation-d4-matrix.md",
+    "results/reconciliation/d4-reconciliation-d4-matrix.json",
+    "results/reconciliation/d4-reconciliation-checksums-verified.md",
+    "results/reconciliation/d4-reconciliation-checksums-raw.json"
+   ],
+   "validation": "VALIDATED: checksum rows recomputed; the matrix keeps old evidence and closes explanations with grades rather than deleting anything."
+  },
+  {
+   "branch": "d8-macro-reconciliation",
+   "source_dir": "results/overnight/20260927-203902/branches/d8-macro-reconciliation",
+   "integrated_to": [
+    "results/final/d8-macro-reconciliation-d8-reconciliation.md",
+    "results/final/d8-macro-reconciliation-d8-reconciliation.json",
+    "results/final/d8-macro-reconciliation-macro-path.md",
+    "results/final/d8-macro-reconciliation-vectors/"
+   ],
+   "validation": "VALIDATED with one scope note: the A4 framing rule (byte1 == payload+5) was derived from the 10 live A4/D6 config frames, which is legitimate (same framing) but must not be read as a 'D8 macro read captured live'. Commit byte 0x05 confirmed by static in all four builds."
+  },
+  {
+   "branch": "config-byte-map",
+   "source_dir": "results/overnight/20260927-203902/branches/config-byte-map",
+   "integrated_to": [
+    "results/final/config-byte-map-config-byte-evidence-map.csv",
+    "results/final/config-byte-map-config-byte-evidence-map.md",
+    "results/final/config-byte-map-config-byte-evidence-map.json"
+   ],
+   "validation": "VALIDATED: 36 rows, 25 PROVEN STATIC / 10 UNKNOWN / 1 PROVEN LIVE; unknowns left unknown."
+  }
+ ]
+}

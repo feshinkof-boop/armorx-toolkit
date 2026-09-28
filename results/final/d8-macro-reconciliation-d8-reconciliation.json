@@ -1,0 +1,139 @@
+{
+  "schema": "armorx-lab/d8-reconciliation/1",
+  "generated": "2026-09-27",
+  "scope": "STATIC ONLY - no hardware, no radio, no APK execution, no emulator",
+  "trees": {
+    "2.22.0901": {"dart": "2.17.5", "asm": "/home/salamanka/armorx-lab/static/blutter/2.22.0901/blutter_out/asm/moojiang"},
+    "2.23.0609": {"dart": "2.19.6", "asm": "/home/salamanka/armorx/re/blutter_out/asm/moojiang"},
+    "2.24.0919": {"dart": "3.2.3",  "asm": "/home/salamanka/armorx/re/v224/blutter_out/asm/moojiang"},
+    "4.0.8":     {"dart": "3.12.2", "asm": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang"}
+  },
+  "note_empty_stubs": "static/blutter/{2.23,2.24,4.0.8} are EMPTY; the real trees are the absolute paths above",
+
+  "req1_a4_layout": {
+    "rule": "A4 | total_len | opcode | ordinal | payload | csum ; commit = A4 | 05 | D8 | nfrags+1 | csum",
+    "length_byte": "equals the TOTAL frame length (== payload+5); the ordinal byte at offset 3 is what makes payload+5 close",
+    "checksum": "sum(all preceding bytes) & 0xFF",
+    "grade": "PROVEN STATIC",
+    "arithmetic_source": "/home/salamanka/armorx-lab/results/experiments/physical-20260927-165347/baseline-fragments.jsonl (10 byte-exact live A4/D6 frames)",
+    "arithmetic_result": "all 10 frames: byte1 == total len == payload+5 AND checksum_ok; payloads concatenate to 9*15+9 = 144 bytes",
+    "commit_examples": [
+      {"nfrags": 1, "frame": "A4 05 D8 02 83", "sum": "0x183", "and_ff": "0x83"},
+      {"nfrags": 2, "frame": "A4 05 D8 03 84", "sum": "0x184", "and_ff": "0x84"},
+      {"nfrags": 3, "frame": "A4 05 D8 04 85", "sum": "0x185", "and_ff": "0x85"}
+    ],
+    "zero_x0a": {
+      "verdict": "A4 0A D8 ... is NOT a commit frame in any build; the commit length byte is 0x05",
+      "what_it_would_mean": "byte1=0x0A=10 declares a 10-byte frame = a DATA fragment carrying 5 payload bytes",
+      "note": "A4 0A ... IS legal for a data fragment whose payload is 5 bytes (e.g. 2nd fragment of a 20-byte payload); it is only never the COMMIT",
+      "smi_proof": "4.0.8 units/gamepadset.dart 0x85a748 mov x16,#0x148 (=2 x 0xA4), 0x85a8f8 mov x16,#0x1b0 (=2 x 0xD8), 0x85aba8 mov x16,#0xa (=>2 x 0x05) stored into the SAME List<int> (TypeArguments <int>)",
+      "elsewhere": "2.24 0x80012c (siblings 0x800060 #0x148, 0x800188 #0x1b0); 2.22 0x79eb7c; 2.23 0x798744",
+      "genuine_0x0a_on_wire": "ordinal of the 10th fragment of the 144-byte D6 readback (a40ed60a...) - byte 3, not byte 1",
+      "grade": "PROVEN STATIC (all four)"
+    },
+    "corrections_confirmed": [
+      "commit byte is 0x05 not 0x0A (all four builds)",
+      "fragment ordinal byte at frame offset 3 present in every build",
+      "imported 19-byte fragments (declared len 20) are self-inconsistent -> rejected",
+      "automation/scripts/armorx_lab/frames.py::build_d8_terminator now emits 0x05 (the stale 'toolkit still encodes A4 0A' claim is CONTRADICTED by the current file)"
+    ]
+  },
+
+  "req2_model_verdict": {
+    "headline": "Neither model replaces the other. In 2.24/4.0.8 they coexist and are selected at runtime by macrosItemLen(). The ARMOR-X Pro takes the OLD (7-byte GamepadDefMap) branch in ALL four builds.",
+    "grade": "STRONG EVIDENCE (static branch + return-value analysis + UI-page attribution; no live macro-apply captured)",
+    "dispatch": {
+      "fn": "applicationMacro",
+      "4.0.8": "units/gamepadset.dart 0x858f78 macrosItemLen(); 0x858f7c cmp x0,#0xa; 0x858f80 b.ne 0x858fa8; 0x858f9c applicationFrameMacro()",
+      "2.24":  "units/gamepadset.dart 0x7febdc macrosItemLen(); 0x7febe0 cmp x0,#0xa; 0x7fec0c applicationFrameMacro()",
+      "eq_10_branch": "applicationFrameMacro -> TranscribeFrame.toFrameCmd -> 10-byte records, N=10+10n  (MODERN)",
+      "ne_10_branch": "synchronized(_lock, closure 0x859144/0x803728) -> changeGamepadDef -> GamepadDefMap, 7-byte records, N=10+7n  (OLD)"
+    },
+    "macros_item_len": {
+      "fn_4_0_8": "define.dart:1087 @0x859014",
+      "fn_2_24": "define.dart:131",
+      "semantics": "per-item record stride (used as a multiplier: 4.0.8 gamepadset.dart 0x85a0b8-0x85a0c8 mul; also 0x85bca4 add, 0x85bddc add)",
+      "devArmorX": {"4.0.8": "fw<40 -> 7 ; fw>=40 -> 6  (never 10)", "2.24": "same branch shape"},
+      "other_devices": "fw>=0x35 -> 10 ; 0x31<=fw<0x35 -> 6 ; else 7",
+      "devArmorX_enum": {"4.0.8": "objs.txt Obj!Device@b2eec1 {off_8: int(0xa), off_10: \"devArmorX\"}", "2.24": "Obj!Device@9ef961 {off_8: int(0x8), off_10: \"devArmorX\"}"},
+      "grade": "PROVEN STATIC"
+    },
+    "ui_page_attribution": {
+      "armorx_page": "widgets/general/config_macros.dart (1 ref to devArmorX enum obj; special-cases curDevice==devArmorX && macrosItemLen()==7 @0x997d90)",
+      "modern_page": "widgets/general/frame_config_macros.dart calls applicationFrameMacro() DIRECTLY @0x9ad0c0 but has 0 refs to devArmorX",
+      "grade": "PROVEN STATIC"
+    },
+    "per_build": {
+      "2.22.0901": {"old_path": "only path (applicationMacro @0x7a56c4 -> writeMacroConfig @0x79dfc8 -> changeGamepadDef @0x79c894)", "modern_path": "ABSENT", "macrosItemLen": "ABSENT (0 hits)", "subpackageLength": "ABSENT (0 hits)", "transcribe_frame.dart": "ABSENT", "grade": "PROVEN STATIC"},
+      "2.23.0609": {"old_path": "only serializer (writeMacroConfig @0x797fa0 -> changeGamepadDef @0x798b04)", "modern_path": "ABSENT (applicationFrameMacro 0 hits)", "macrosItemLen": "PRESENT (19 hits) but gates nothing modern", "subpackageLength": "ABSENT (0 hits)", "transcribe_frame.dart": "ABSENT", "grade": "PROVEN STATIC"},
+      "2.24.0919": {"old_path": "reachable via macrosItemLen()!=10", "modern_path": "reachable via macrosItemLen()==10", "armorx_takes": "OLD (devArmorX -> macrosItemLen 6/7)", "grade": "STRONG EVIDENCE"},
+      "4.0.8":     {"old_path": "reachable via macrosItemLen()!=10", "modern_path": "reachable via macrosItemLen()==10", "armorx_takes": "OLD (devArmorX -> macrosItemLen 6/7)", "grade": "STRONG EVIDENCE"}
+    },
+    "annotate_dont_delete": "The OLD (7-byte GamepadDefMap) model is retained and is the ACTIVE ARMOR-X Pro model in all four builds. GamepadDefMap field names exist in all four pp.txt (3 hits each); TranscribeFrame exists only in 2.24/4.0.8 (7 hits each). tests/test_d8_versions.py currently frames the split as per-BUILD; that is over-simplified and should be re-expressed as the macrosItemLen() dispatch. Its framing invariants (req 1) remain correct."
+  },
+
+  "req3_chunk_selector": {
+    "determinable": true,
+    "selector": "chunk = subpackageLength() - 5, where subpackageLength() switches on curDevice.field_7",
+    "returns": [20, 48, 72],
+    "chunks": [15, 43, 67],
+    "proof_no_smi": "4.0.8 gamepadset.dart 0x85a6f4 sub x1,x0,#5 (untagged immediate 5, not #0xa) then 0x85a704 scvtf d1,x1 with NO sbfx/asr unboxing of x0; contrast the explicit unbox of a field at 0x818940 sbfx x16,x0,#1",
+    "live_anchor": "the 10 live fragments are A4 14 (20-byte frames / 15-byte payloads) -> subpackageLength()==20",
+    "fn_addrs": {"4.0.8": "define.dart:316 @0x819190 (returns #0x14@0x819238, #0x48@0x819264, #0x30@0x819274)", "2.24": "define.dart:477 @0x7b9064 (returns #0x48@0x7b90ec, #0x14@0x7b9124, #0x30@0x7b9134)"},
+    "device_id_map_redecoded": {
+      "note": "CORRECTION to results/reconciliation/d8-taxonomy.json (which said 4.0.8 id 7..10 -> 20 and id 4..7 -> 72)",
+      "4.0.8": {"0": 48, "1": 20, "2": 20, "3": 20, "4": 72, "5": 48, "6": 48, "7": 72, "8": 48, "9": 20, "10": 20, "11": 72, ">=12": 48},
+      "2.24":  {"0": 48, "1": 20, "2": 20, "3": 20, "4": 48, "5": 72, "6": 48, "7": 20, "8": 20, ">=9": 48},
+      "grade": "PROVEN STATIC"
+    },
+    "armorx_resolution": {
+      "2.22.0901": {"id": null, "subpackageLength": null, "chunk": 15, "why": "hard-coded literal (fmov d1,#15.0 @0x79e300)"},
+      "2.23.0609": {"id": null, "subpackageLength": null, "chunk": 15, "why": "hard-coded literal (fmov d1,#15.0 @0x7980fc)"},
+      "2.24.0919": {"id": 8, "subpackageLength": 20, "chunk": 15},
+      "4.0.8":     {"id": 10, "subpackageLength": 20, "chunk": 15},
+      "grade": "PROVEN STATIC + anchored live"
+    },
+    "mtu_is_not_an_input": "no MTU term exists on this path; 43/67 exist for other device ids, so MTU alone could never select among 15/43/67",
+    "what_is_missing": "only the human-readable product name behind each non-ArmorX device id (UNKNOWN); nothing is missing for the ARMOR-X Pro"
+  },
+
+  "req4_macro_path": {
+    "trace_file": "macro-path.md",
+    "chain": [
+      "UI (config_macros.dart / armorx_pro_* / frame_config_macros.dart)",
+      "applicationMacro()",
+      "macrosItemLen()==10 ? applicationFrameMacro() : changeGamepadDef()",
+      "payload = CRC16 | len | hdr[4..9] | records",
+      "writeMacroConfig(): chunk=subpackageLength()-5; nfrags=ceil(N/chunk); A4|(segLen+5)|D8|i+1|seg|sum8; commit A4|05|D8|nfrags+1|sum8",
+      "writeDevice() -> BLE FFE1",
+      "readback: 2.24/4.0.8 notification closure (0xFC/0xD8/0xD3) -> parsingData -> TranscribeFrame.fromConfigData -> changeTranscribeFrameToDefMacro; 2.22/2.23 generic A4/D6 only"
+    ],
+    "storage_slots": "server-side JSON CRUD (MacroRow.fromJson / addMacroResponse / changeMacro*Response); no device-side macro slot arithmetic in any build"
+  },
+
+  "vectors": {
+    "file": "vectors/d8-vectors.json",
+    "generator": "gen_vectors.py (deterministic, self-verifying)",
+    "schema": "armorx-lab/d8-macro-vectors/1",
+    "count": 25,
+    "by_kind": {"framing_anchor": 10, "encode": 4, "chunk_class": 3, "commit": 6, "rejected": 2},
+    "invariant_violations": 0,
+    "sha256": "4fb5304f7149001fb1edb58a371673640c36009e041b8e45cdd84e82429852db"
+  },
+
+  "corrections": [
+    {"id": "C-1", "claim": "MODERN 10-byte TranscribeFrame is the 4.0.8 ARMOR-X Pro D8 format", "new_evidence": "applicationMacro dispatches on macrosItemLen()==10; devArmorX returns 6/7; ArmorX UI = config_macros.dart (frame page never references devArmorX)", "grade": "CONTRADICTED for the ArmorX / STRONG EVIDENCE"},
+    {"id": "C-2", "claim": "subpackageLength() device-id mapping (id 7->20, id 8->20 in 4.0.8)", "new_evidence": "re-decoded branch bodies: 4.0.8 id 7->72, id 8->48", "grade": "PROVEN STATIC correction"},
+    {"id": "C-3", "claim": "toolkit still encodes A4 0A D8", "new_evidence": "automation/scripts/armorx_lab/frames.py::build_d8_terminator now emits 0x05", "grade": "CONTRADICTED (already fixed)"},
+    {"id": "C-4", "claim": "D8 families map per build (2.22/2.23 OLD, 2.24/4.0.8 MODERN)", "new_evidence": "it is a macrosItemLen() dispatch, not a build split; framing invariants unaffected", "grade": "over-simplified"},
+    {"id": "C-5", "claim": "commit byte 0x0A", "new_evidence": "0x05 in all four builds (Smi misread of #0xa)", "grade": "CONTRADICTED (confirmed again this pass)"}
+  ],
+
+  "open_items": [
+    "No live 4.0.8 macro apply captured -> req2 verdict is STRONG EVIDENCE not PROVEN",
+    "repeatTime unit UNKNOWN in all four builds",
+    "meaning of field_23 (maxSteps) and the u16 readback at bytes 15-16: offsets proven, semantics PARTIAL",
+    "2.23 fragment ordinal value i+1 remains STRONG EVIDENCE",
+    "macrosItemLen() devArmorX branch reads a 2-char substring of an unresolved static string (return values 6/7 are unambiguous)"
+  ]
+}

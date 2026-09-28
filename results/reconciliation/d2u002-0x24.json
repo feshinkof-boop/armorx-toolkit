@@ -1,0 +1,77 @@
+{
+  "unknown_id": "D2-U-002",
+  "task": "Resolve the meaning of the 0x24 comparison in the 2.24 Button-Test parser",
+  "hypothesis_tested": "Does the immediate 0x24 in _RainbowTestState::analysisData (entry 0x91d130) at instruction 0x91d168 mean a 36-byte frame length, the integer 18 in Smi/tagged form, a container length, an array element index, a byte offset, an enum value, or something else?",
+  "verdict": "PROVEN STATIC: 0x24 is the Dart Smi (tagged) encoding of the integer 18 (0x12 << 1). It is compared against data[1] - the frame's byte at index 1, the frame length/type field, whose value is 0x12 = 18 for a full 18-byte report frame. It is NOT 36, NOT a 36-byte frame length, NOT an index, NOT a byte offset, NOT an enum value.",
+  "confidence": "HIGH",
+  "primary_address": "0x91d168",
+  "primary_instruction": "cmp w0, #0x24   (raw bytes 1f 90 00 71; imm12 = 0x24 = 36)",
+  "evidence_lines": [
+    "2.24 (v224 blutter, arm64) analysisData @0x91d130, size 0x1250",
+    "2.24 0x0091d148: a10b40f9 ldr  x1, [x29, #0x10]        ; x1 = data (List<int> notify payload)",
+    "2.24 0x0091d14c: 20f05ff8 ldur x0, [x1, #-1]           ; LoadClassIdInstr",
+    "2.24 0x0091d154: 500080d2 mov  x16, #2                 ; accessor ARGUMENT immediate (tagged Smi 1 => index 1)",
+    "2.24 0x0091d158: f00500a9 stp  x16, x1, [x15]          ; push arg + receiver (2 slots => 1-argument call)",
+    "2.24 0x0091d15c: 1e300cd1 sub  x30, x0, #0x30c         ; GDT[cid_x0 - 0x30c]",
+    "2.24 0x0091d164: c0033fd6 blr  x30                     ; dynamic call data.<index-accessor>(arg)",
+    "2.24 0x0091d168: 1f900071 cmp  w0, #0x24               ; <== THE COMPARISON (no sbfx untag before it)",
+    "2.24 0x0091d16c: 81860054 b.ne #0x91e23c               ; not equal -> return",
+    "2.24 0x0091d170 onward: equal -> data.sublist(3,14) -> Uint8List.fromList -> asByteData -> length>3 (0x91d1dc cmp x2,#3) -> 32-bit big-endian mask from bytes [3][4][5][6]",
+    "2.24 else-branch 0x0091e23c: e00316aa mov x0,x22 ; 0x0091e248: c0035fd6 ret   (immediate return, no parsing)",
+    "TAGGING PROOF 2.24 testModeSwitch @0x91e380 (frame A5 05 D2 01 7D, live-confirmed):",
+    "  2.24 0x0091e3c4: 512980d2 mov  x17, #0x14a          ; 330 = 2*165 -> element 0 = 0xA5",
+    "  2.24 0x0091e3cc: 510180d2 mov  x17, #0xa            ;  10 = 2*5   -> element 1 = 0x05",
+    "  2.24 0x0091e3d4: 913480d2 mov  x17, #0x1a4          ; 420 = 2*210 -> element 2 = 0xD2",
+    "  2.24 0x0091e3dc: 510080d2 mov  x17, #2              ;   2 = 2*1   -> element 3 = 0x01",
+    "  2.24 0x0091e3e4: 511f80d2 mov  x17, #0xfa           ; 250 = 2*125 -> element 4 = 0x7D",
+    "  2.24 0x0091e400: 400180d2 mov  x0, #0xa             ; GrowableList length 5 stored tagged (10)",
+    "CROSS-VERSION (2.22.0901) same gate, explicit untag then compare to 18:",
+    "  2.22 0x008e2438: 500080d2 mov  x16, #2              ; same argument immediate",
+    "  2.22 0x008e2450: 017c4193 sbfx x1, x0, #1, #0x1f    ; UNTAG Smi",
+    "  2.22 0x008e245c: 3f4800f1 cmp  x1, #0x12            ; == 18 (untagged)",
+    "CROSS-VERSION (2.23) identical:",
+    "  2.23 0x008b06d0: 500080d2 mov  x16, #2",
+    "  2.23 0x008b06e8: 017c4193 sbfx x1, x0, #1, #0x1f",
+    "  2.23 0x008b06f4: 3f4800f1 cmp  x1, #0x12            ; == 18 (untagged)",
+    "INDEPENDENT TAGGED-vs-UNTAGGED CHECK (sibling closure constant, same function family):",
+    "  2.23 0x008b06ac: 3fe402f1 cmp  x1, #0xb9            ; untagged 185",
+    "  2.24 0x0091d0ec: 1fc80571 cmp  w0, #0x172           ; 0x172 = 2*185 (tagged) -> ratio exactly 2, as for 0x24/0x12",
+    "LIVE-PINNED 4.0.8 GATE (anchor for the argument encoding):",
+    "  4.0.8 0x00acfa98: 900080d2 mov  x16, #4             ; tagged Smi 2 => index 2",
+    "  4.0.8 0x00acfaac: 1f100071 cmp  w0, #4              ; tagged Smi 2 => frame[2] == 2, matches live frame A5 12 02 (byte[2]=0x02)",
+    "  => the gate accessor's argument immediate is TAGGED; 2.24's #2 is therefore Smi 1 => index 1."
+  ],
+  "smi_tagging_chain": [
+    "1. Dart Smi n is stored as (n << 1) | 0 (low tag bit 0).",
+    "2. List<int> elements in this image are proven tagged (frame builder emits 0x14A for 0xA5, 0xA for 0x05, 0x1A4 for 0xD2, 2 for 0x01, 0xFA for 0x7D; GrowableList length 5 stored as 0xA).",
+    "3. w0 at 0x91d168 is the return of a List<int> element accessor -> w0 is a tagged Smi.",
+    "4. 0x24 = 0b0010_0100 has low bit 0 -> valid Smi; 0x24 >> 1 = 0x12 = 18.",
+    "5. The tagged form of the integer 36 would be 0x24 << 1 = 0x48, so 36 is arithmetically excluded.",
+    "6. 2.22/2.23 compile the same source with an explicit untag and compare against 0x12 = 18 -> source constant is 18.",
+    "7. The accessor takes exactly one argument (2 stack slots / pop #0x10, vs the no-arg property getter at 1 slot / pop #8) -> indexed element read, not .length.",
+    "8. Argument immediate #2 is tagged -> index 1 -> data[1], the frame byte whose value is 0x12 = 18."
+  ],
+  "branch_behavior": {
+    "equal": "fall through to 0x91d170: data.sublist(3,14) -> Uint8List.fromList -> asByteData -> (len>3) -> extract 32-bit big-endian mask from bytes [3][4][5][6]",
+    "not_equal": "b.ne #0x91e23c -> immediate return (mov x0,NULL; ...; ret); frame discarded"
+  },
+  "alternative_interpretations": [
+    {"candidate": "a 36-byte frame length / the raw integer 36", "status": "REFUTED", "reason": "36 as a Dart integer is emitted as 0x48, never 0x24; the compared byte is 0x12=18, so ==36 could never pass."},
+    {"candidate": "a container length (.length)", "status": "REFUTED as the operation", "reason": "the accessor takes one argument (indexed read), not the no-arg .length property. Numerically the compared element IS the frame's length field, so 18 coincides with the frame size (18 bytes)."},
+    {"candidate": "an array element index", "status": "REFUTED for 0x24", "reason": "the index is the separate immediate mov x16,#2 = Smi 1 (index 1); 0x24 is the compared value."},
+    {"candidate": "a byte offset", "status": "REFUTED", "reason": "0x24 is a comparison operand, not used in any address computation."},
+    {"candidate": "an enum value", "status": "REFUTED", "reason": "the operand is a tagged SmallInteger element of a List<int>; no enum dispatch present."},
+    {"candidate": "a tagged integer of another kind (Mint / heap int)", "status": "REFUTED", "reason": "tag bit is 0, value fits a Smi, no AllocateMint stub on this path."},
+    {"candidate": "integer 18 in Smi/tagged form", "status": "CONFIRMED", "reason": "w0 is a tagged Smi; 0x24>>1=0x12=18; 2.22/2.23 untag and compare to 0x12."}
+  ],
+  "residual_uncertainty": [
+    "The dispatch target of GDT[cid_x0 - 0x30c] is unnamed in the dump; it is inferable only as 'a one-int-argument accessor on List<int>' (operator[]/elementAt). Naming it would require resolving the class id to its method table.",
+    "Observation (no bearing on the verdict): the following sublist call pushes its range arguments as raw immediates mov x0,#3 / mov x16,#0xe (0x91d174/0x91d184) instead of tagged #6/#0x1c; the reason is not established."
+  ],
+  "artifacts": {
+    "2.24_blutter": "/home/salamanka/armorx/re/v224/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+    "note_static_blutter_224_empty": "/home/salamanka/armorx-lab/static/blutter/2.24/ contains no files",
+    "2.24_libapp": "/home/salamanka/armorx-lab/apk/extracted/2.24/lib/arm64-v8a/libapp.so (vaddr == file offset for the executable LOAD)",
+    "method": "jar/black-box free static analysis: Blutter ARM64 listing cross-checked by independent Capstone disassembly of libapp.so; no hardware, no network, no git after initial status"
+  }
+}
