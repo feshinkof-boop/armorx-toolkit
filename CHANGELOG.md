@@ -4,6 +4,29 @@ All notable project changes are documented here.
 
 ## Unreleased
 
+## 0.2.2 — 2026-09-28
+
+Public research and protocol-documentation snapshot. This release updates the public repository with the latest reproducible ARMOR-X Pro / F20 findings while keeping research/capture tooling separate from the end-user Windows application.
+
+### Public release scope
+
+- Added a public 2026-09-28 research-status document and linked the dedicated research handoff branch.
+- Published the latest protocol findings without promoting researcher-only capture/autopilot tooling into the public Windows app.
+- Kept the latest public Windows binary release at **v0.2.1**; v0.2.2 is a source/documentation research snapshot.
+- Kept the Python toolkit package version at **0.2.0**; no Python API compatibility claim is changed by this release.
+
+### Research snapshot — 2026-09-28
+
+- Confirmed the F20 receiver has two observed USB personalities: vendor HID `413D:2106` while idle/disconnected and Xbox GIP `045E:0B12` after ARMOR-X association.
+- Confirmed direct ARMOR-X USB follows the same power-state split: USB-powered/off with a red LED exposes `413D:2106`; pressing the power button without moving the cable re-enumerates as `045E:0B12` and binds to Linux `xpad`.
+- Mapped live PC-visible Xbox GIP fields for A, M1, M2, LT, RT and both sticks.
+- Resolved the apparent 32-byte/48-byte report conflict: the same type-`0x20` GIP input stream uses a 32-byte startup form and a 48-byte steady-state form; the cause of the switchover remains unknown.
+- Proved that ARMOR-X synthesizes RT digital bit 9 (`0x00000200`) from the analogue RT path rather than copying a separate digital RT bit from the Xbox report.
+- Traced `r4` to the current candidate mask and `r5` to persistent `[r15+0x1d0]`; corrected `r5 & r4` from a “changed-bit set” interpretation to an **intersection gate**.
+- Located `0x1e0a426` at the analogue-RT-to-digital-bit junction; its exact threshold/scaling behavior remains the highest-priority static target.
+- Corrected `0x1e094de`: it is a deadzone/direction classifier over four signed axis halfwords, not the producer of the 28-byte normalized record.
+- Kept unresolved items explicit: the internal USB-host receive callback/buffer, the object behind `usbh_gamepadp`, exact `state+0x1d4` store provenance, the meaning of `[r15+0x1d0]`, and the remaining RT timing/emission questions.
+
 ### Research documentation — 2026-09-27
 
 - Added the real BIGBIG WON 4.0.8 official-app vs Linux-harness BLE session differential.

@@ -24,6 +24,8 @@ Build, inspect, remap, validate, and research **ARMORX Pro** configurations and 
 
 ## Overview
 
+> **Latest project release:** **v0.2.2** is a public research/protocol documentation snapshot. The latest downloadable Windows configurator remains **v0.2.1**, and the Python toolkit package remains **v0.2.0**.
+
 **ArmorX Toolkit** is a community-driven interoperability project for the **BIGBIG WON ARMORX Pro**, an accessory for **Xbox controllers**.
 
 The project focuses on:
@@ -131,7 +133,9 @@ Android/BLE protocol: [docs/android-protocol.md](docs/android-protocol.md)
 
 Windows/Android bridge status: [docs/bridge-status-2026-09-25.md](docs/bridge-status-2026-09-25.md)
 
-Current reverse-engineering handoff: [docs/research-status-2026-09-25.md](docs/research-status-2026-09-25.md)
+Current reverse-engineering status: [docs/research-status-2026-09-28.md](docs/research-status-2026-09-28.md)
+
+Earlier handoff: [docs/research-status-2026-09-25.md](docs/research-status-2026-09-25.md)
 
 Latest controlled live BLE findings: [docs/live-ble-research-2026-09-26.md](docs/live-ble-research-2026-09-26.md)\n\nOfficial-app vs Linux D2 differential: [docs/d2-official-vs-harness-2026-09-27.md](docs/d2-official-vs-harness-2026-09-27.md)
 
@@ -167,7 +171,7 @@ Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Installation
 
-> **Public release scope:** the current public Windows configurator is **v0.2.1**. The Python toolkit/CLI remains **v0.2.0**. The internal Windows research/capture application, Autopilot workflows, raw BLE recorder, guided hardware experiments, and researcher-only diagnostics are **not** part of the public Windows release.
+> **Public release scope:** project release **v0.2.2** publishes the latest research/protocol documentation. The current public Windows configurator remains **v0.2.1**, and the Python toolkit/CLI remains **v0.2.0**. The internal Windows research/capture application, Autopilot workflows, raw BLE/USB capture, guided hardware experiments, and researcher-only diagnostics are **not** part of the public Windows release.
 
 
 ### Windows 10/11 x64

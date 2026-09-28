@@ -1,0 +1,36 @@
+name: Publish v0.2.2 research snapshot
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    if: github.event.head_commit.message == 'release: publish v0.2.2 research snapshot'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build source archive and checksums
+        shell: bash
+        run: |
+          set -euo pipefail
+          git archive --format=zip --output ArmorX-Toolkit-v0.2.2-source.zip HEAD
+          sha256sum ArmorX-Toolkit-v0.2.2-source.zip > ArmorX-Toolkit-v0.2.2-SHA256SUMS.txt
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.2.2 >/dev/null 2>&1; then
+            echo "v0.2.2 already exists; nothing to do."
+            exit 0
+          fi
+          gh release create v0.2.2             --target "$GITHUB_SHA"             --title "ArmorX Toolkit v0.2.2 — Research & Protocol Update"             --notes-file RELEASE_NOTES_v0.2.2.md             ArmorX-Toolkit-v0.2.2-source.zip             ArmorX-Toolkit-v0.2.2-SHA256SUMS.txt

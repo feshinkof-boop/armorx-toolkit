@@ -2,6 +2,20 @@
 
 ArmorX Toolkit is intentionally evidence-driven. Items move from research to stable support only after reproducible confirmation.
 
+## Research snapshot — 2026-09-28
+
+- [x] Publish a dedicated public research handoff branch and archived patch series
+- [x] Document F20 vendor-HID → Xbox-GIP dual USB identity
+- [x] Document direct ARMOR-X USB power-state identity switching
+- [x] Map live GIP A/M1/M2/LT/RT/stick fields
+- [x] Resolve 32-byte startup vs 48-byte steady-state GIP input forms
+- [x] Prove internally synthesized RT digital bit 9 (`0x00000200`)
+- [x] Trace `r4` and `r5` into the RT synthesis gate and correct `r5 & r4` to an intersection gate
+- [ ] Reverse `0x1e0a426` and characterize the RT threshold/scaling rule
+- [ ] Resolve the exact D2 trigger-only scheduling/emission gate
+- [ ] Recover the internal USB-host receive callback, report buffer, and `usbh_gamepadp` object
+- [ ] Close exact `state+0x1d4` producer/store provenance
+
 ## Near term
 
 - [x] Document the 144-byte ARMORX Pro configuration envelope
