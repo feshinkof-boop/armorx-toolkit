@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_rt_analog_power_on",
+ "title": "ArmorX RT Analog Test",
+ "response": "done",
+ "clicked_at": "2026-09-28T06:19:58-04:00",
+ "gui": "kdialog",
+ "pid": 293849
+}

@@ -265,3 +265,39 @@ write was sent.
 **Highest-value next physical step:** read the trigger from the **official app's own trigger/DPI view** while
 RT is pulled (app-side readback works regardless of the wire format), since the frame stream is now proven
 not to carry analog-only changes.
+
+---
+
+## 2026-09-28 — RT analog proven through D2 piggyback sampling (append-only)
+
+**Question:** is RT's analog state present in D2 frames when a *digital* control forces transmission?
+
+**Method:** analog-only movement emits no frame (proven: full stick travel and full RT travel both produced
+zero frames), so the analog fields were read from frames whose transmission `A` caused. Offsets verified
+first: `[15]` LT, `[16]` RT.
+
+| window | valid frames | bits | A-caused | byte[15] on A-caused | byte[16] on A-caused |
+|---|---|---|---|---|---|
+| P0 baseline | 204 | {0} | 56 | 0 | 0 |
+| P1 LT held | 186 | {0, 8} | 36 | **255** | 0 |
+| P2 RT held | 191 | {0, 9} | 40 | 0 | **255** |
+| P2R RT held (repeat) | 203 | {0, 9} | 52 | 0 | **255** |
+
+**Verdicts:** `LT_ANALOG_PIGGYBACK_PROVEN` (the method works and is selective) and
+`RT_ANALOG_PROVEN_LIVE__PLUS_DIGITAL_BIT_OBSERVED` — criteria 1,3,4,5,6 met; criterion 2 of the brief
+("RT still produces no independent digital bit") is **NOT met**, because a bit 9 *did* appear, so the
+result is deliberately not labelled "analog only".
+
+**Correction carried forward:** the earlier "RT = PROVEN_NEGATIVE as a digital bit" is superseded as
+method-limited (no frame is emitted while RT alone moves, so no bit could appear). The bit is preserved as
+`NEW_BIT_9_OBSERVED_UNNAMED` and is not named here.
+
+**HCI:** P1 and P2R are corroborated exactly (189 and 208 notifications matching the harness record); P0 and
+P2 are not covered because btmon stopped writing mid-session — stated as a limitation, not hidden.
+
+**State:** last write `a5 05 d2 00 7c` (D2 OFF) in every window, clean disconnect, no D7/D8/config write.
+Read-only D6 integrity returns `bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` →
+`CONFIG_BASELINE_MATCH`. `DURABLE_OK` unchanged.
+
+**Next action:** one confirmation window (`A` bursts alone vs `A` bursts with RT held, one control only) to
+name bit 9, or read RT's value in the official app's trigger/DPI view.

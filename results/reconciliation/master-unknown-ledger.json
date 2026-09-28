@@ -2,10 +2,10 @@
  "generated": "2026-09-27/28 overnight shift",
  "rule": "Every unknown carries what is ruled out, the best evidence, the next offline step and the next hardware step. Historical ids are kept, never silently retired.",
  "counts": {
+  "ANALOG_PROVEN_LIVE / DIGITAL_NEGATIVE_RETRACTED": 1,
   "DEFERRED_REQUIRES_HARDWARE": 9,
   "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 3,
-  "DEFERRED_REQUIRES_OPERATOR": 1,
-  "PROVEN_NEGATIVE": 1,
+  "DEFERRED_REQUIRES_OPERATOR": 2,
   "STATICALLY_EXHAUSTED": 5,
   "UNOBSERVED_RESERVED_OR_UNUSED": 1
  },
@@ -118,17 +118,17 @@
   },
   {
    "id": "KEY-U-002",
-   "question": "Does RT (id 9) have a digital key id on this unit, and does it report analog travel?",
+   "question": "Does RT report analog travel, and does it have a digital key id on this unit?",
    "priority": "MEDIUM",
    "ruled_out": [
     "id 9 as RT's bit"
    ],
-   "best_evidence": "requested in 4 windows + 3 dedicated retries; never appeared. CORRECTION of the earlier wording 'analog byte [16] never left zero': [16] was never SAMPLED during RT movement, because the device sends no frame at all while only RT moves. | 2026-09-28 closure session (results/experiments/key-id-closure-20260928-060134): RT requested once more - two FULL pulls (pull fully / release fully) inside a popup that stayed open 16.8 s and was ACKed at 06:05:49. Result: ZERO frames of any kind. HCI corroboration: exactly 3 notifications for that run (sanity reply a5 05 0b 30 e5, D2-enable echo, D2-disable echo) - nothing else crossed the link. The control probe that follows (L stick, full travel twice) also produced zero frames, which proves the device emits no report frame for analog-axis-only changes; therefore the analog channel cannot be read by this method and RT_ANALOG_ONLY is NEITHER CONFIRMED NOR EXCLUDED.",
+   "best_evidence": "closure session (2026-09-28): two full pulls produced zero frames - a method-limited negative, since RT alone emits no frame; [16] was UNSAMPLED, not measured zero. | piggyback session (2026-09-28): with A forcing transmission, byte[16] = 0 at rest and 255 at full pull in every A-caused frame (40/40 in P2, 52/52 in the repeat) while byte[15] stayed flat - LT positive control proven on the same method. A digital bit 9 appeared only in the RT-held windows (513/512; 107 frames P2, 144 P2R; absent in P0 and P1) and is preserved UNNAMED.",
    "next_offline_step": "-",
-   "next_hardware_step": "read the trigger from the official app's own trigger/DPI view while RT is pulled (app-side readback works regardless of the wire format), or find the Windows-side trigger calibration read path statically first",
+   "next_hardware_step": "one confirmation window: A bursts alone vs A bursts with RT held, one control only, to name bit 9; or read RT in the official app's trigger/DPI view",
    "dependencies": [],
-   "classification": "PROVEN_NEGATIVE (digital) / UNOBSERVABLE_BY_FRAME_METHOD (analog)",
-   "status": "RESOLVED",
+   "classification": "ANALOG_PROVEN_LIVE / DIGITAL_NEGATIVE_RETRACTED",
+   "status": "RESOLVED (analog) / SUPERSEDED (digital negative)",
    "resolved_at": "2026-09-28"
   },
   {
@@ -284,6 +284,19 @@
    "dependencies": [],
    "classification": "DEFERRED_REQUIRES_HARDWARE",
    "status": "OPEN"
+  },
+  {
+   "id": "KEY-U-003",
+   "question": "Which physical control owns digital bit 9 (observed in the RT-held windows)?",
+   "priority": "MEDIUM",
+   "ruled_out": [],
+   "best_evidence": "bit 9 appeared in masks 513 (A+bit9) and 512 (bit9) only while RT was fully held, in two independent windows (P2, P2R), and never in the baseline or LT-control windows. RT was the only control held, and the static reading for RT is id 9 - but the brief requires the bit be preserved unnamed until a one-variable confirmation, so it stays NEW_BIT_9_OBSERVED_UNNAMED.",
+   "next_offline_step": "-",
+   "next_hardware_step": "one popup: A bursts alone (control) then A bursts with RT held, nothing else touched",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_OPERATOR",
+   "status": "OPEN",
+   "opened_at": "2026-09-28"
   }
  ],
  "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md | 2026-09-28 key-ID closure session: all 26 requested physical controls are proven live except RT; KEY-U-001 and KEY-U-002 are both closed with dated evidence."

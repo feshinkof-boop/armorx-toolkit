@@ -1,0 +1,21 @@
+{
+ "read": "D6 configuration read request a504d67f (no writes sent)",
+ "frames": 10,
+ "frame_lengths": [
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  20,
+  14
+ ],
+ "image_bytes": 144,
+ "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "expected_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "match": true,
+ "note": "integrity readback only - NOT a durability proof; durability = write -> readback -> settle -> power cycle -> D6 match"
+}

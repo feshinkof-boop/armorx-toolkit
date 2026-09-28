@@ -85,3 +85,25 @@ Also corrected on the same date: `tshark` on this host is AppArmor-confined and 
 under `/home/salamanka` (copy captures to `/tmp` first), and `btatt.mtu` is not a valid field in
 tshark 4.6.4 (requesting it makes tshark exit non-zero and print nothing, which previously looked
 like "no frames").
+
+
+---
+
+## 2026-09-28T06:26:00-04:00 — RT analog PROVEN LIVE in `[16]` (append-only; offsets unchanged)
+
+`[15]` LT analog and `[16]` RT analog stay as contracted — what changed is that `[16]` is no longer an
+unverified field.
+
+- **`[16]` = RT analog: PROVEN LIVE.** Rest = `0`, full pull = `255`, sampled inside frames whose
+  transmission was caused by `A` (bit 0): every one of the 40 A-caused frames in P2 and all 52 in the
+  repeat carried `255`, against `0` in all 56 A-caused baseline frames. Observed ramp values during travel
+  (`9, 31, 62, 67, 95, 100, 102, 122, 160, 190, 204, 219, 238`) show a continuous 0..255 scale.
+- **`[15]` LT analog reconfirmed** by positive control: 255 in all 36 A-caused frames while LT was held,
+  `0` in all 36 while RT was held — the two channels do not leak into each other.
+- **Method note (important for anyone re-reading old notes):** analog-only movement emits **no frame**, so a
+  field can only be sampled while a digital event forces transmission. "The analog byte never left zero" in
+  an earlier note meant *unsampled*, not *measured zero*.
+- **Digital side:** a mask bit **9** appeared only in the two windows where RT was physically held
+  (masks `513`/`512`), never in the baseline or LT-control windows. Recorded as
+  `NEW_BIT_9_OBSERVED_UNNAMED` — preserved, deliberately **not named** in this pass.
+- Evidence: `results/experiments/rt-analog-piggyback-20260928-061800/RESULT.md` and `ANALYSIS.json`.

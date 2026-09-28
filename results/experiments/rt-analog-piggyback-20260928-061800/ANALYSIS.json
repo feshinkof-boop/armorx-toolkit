@@ -1,0 +1,1030 @@
+{
+ "generated_from": "results/experiments/rt-analog-piggyback-20260928-061800",
+ "lt_positive_control": {
+  "verdict": "LT_ANALOG_PIGGYBACK_PROVEN",
+  "lt": {
+   "label": "lt_positive_control",
+   "verdict": "CHANGED",
+   "baseline_dominant": 0,
+   "window_dominant": 255,
+   "delta": 255,
+   "window_dominant_fraction": 1.0,
+   "min_delta_required": 8,
+   "min_fraction_required": 0.6,
+   "baseline": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "window": {
+    "n": 36,
+    "mode": 255,
+    "median": 255.0,
+    "min": 255,
+    "max": 255,
+    "distinct": {
+     "255": 36
+    },
+    "dominant": 255,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "rt_cross_check": {
+   "label": "rt_must_stay_flat",
+   "verdict": "NO_CHANGE",
+   "baseline_dominant": 0,
+   "window_dominant": 0,
+   "delta": 0,
+   "window_dominant_fraction": 1.0,
+   "min_delta_required": 8,
+   "min_fraction_required": 0.6,
+   "baseline": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "window": {
+    "n": 36,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 36
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "baseline": {
+   "valid_frames": 204,
+   "bits_seen": [
+    0
+   ],
+   "masks": {
+    "1": 56,
+    "0": 148
+   },
+   "a_triggered_frames": 56,
+   "a_triggered_lt": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "a_triggered_rt": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_lt": {
+    "n": 204,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 204
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_rt": {
+    "n": 204,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 204
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_frames": 148,
+   "idle_rt": {
+    "n": 148,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 148
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_lt": {
+    "n": 148,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 148
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "control": {
+   "valid_frames": 186,
+   "bits_seen": [
+    0,
+    8
+   ],
+   "masks": {
+    "257": 36,
+    "256": 84,
+    "0": 66
+   },
+   "a_triggered_frames": 36,
+   "a_triggered_lt": {
+    "n": 36,
+    "mode": 255,
+    "median": 255.0,
+    "min": 255,
+    "max": 255,
+    "distinct": {
+     "255": 36
+    },
+    "dominant": 255,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "a_triggered_rt": {
+    "n": 36,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 36
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_lt": {
+    "n": 186,
+    "mode": 255,
+    "median": 255.0,
+    "min": 0,
+    "max": 255,
+    "distinct": {
+     "0": 66,
+     "122": 1,
+     "199": 1,
+     "204": 1,
+     "255": 117
+    },
+    "dominant": 255,
+    "dominant_fraction": 0.629,
+    "range": 255
+   },
+   "all_frames_rt": {
+    "n": 186,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 186
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_frames": 66,
+   "idle_rt": {
+    "n": 66,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 66
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_lt": {
+    "n": 66,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 66
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  }
+ },
+ "rt_analog": {
+  "verdict": "RT_ANALOG_PROVEN_LIVE__PLUS_DIGITAL_BIT_OBSERVED",
+  "criteria": {
+   "1_a_frames_present": true,
+   "2_no_rt_digital_bit": false,
+   "3_byte16_moves_consistently": true,
+   "4_returns_to_baseline_at_rest": true,
+   "5_effect_repeats": true,
+   "6_byte15_flat": true
+  },
+  "rt_digital_bit_observed": true,
+  "rt_analog": {
+   "label": "rt_analog",
+   "verdict": "CHANGED",
+   "baseline_dominant": 0,
+   "window_dominant": 255,
+   "delta": 255,
+   "window_dominant_fraction": 1.0,
+   "min_delta_required": 8,
+   "min_fraction_required": 0.6,
+   "baseline": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "window": {
+    "n": 40,
+    "mode": 255,
+    "median": 255.0,
+    "min": 255,
+    "max": 255,
+    "distinct": {
+     "255": 40
+    },
+    "dominant": 255,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "lt_cross_check": {
+   "label": "lt_cross_check_must_stay_flat",
+   "verdict": "NO_CHANGE",
+   "baseline_dominant": 0,
+   "window_dominant": 0,
+   "delta": 0,
+   "window_dominant_fraction": 1.0,
+   "min_delta_required": 8,
+   "min_fraction_required": 0.6,
+   "baseline": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "window": {
+    "n": 40,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 40
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "observed_range": [
+   255,
+   255
+  ],
+  "repeat_bursts_at_changed_value": 2,
+  "rt_digital_bit_holds": 2,
+  "baseline": {
+   "valid_frames": 204,
+   "bits_seen": [
+    0
+   ],
+   "masks": {
+    "1": 56,
+    "0": 148
+   },
+   "a_triggered_frames": 56,
+   "a_triggered_lt": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "a_triggered_rt": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_lt": {
+    "n": 204,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 204
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_rt": {
+    "n": 204,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 204
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_frames": 148,
+   "idle_rt": {
+    "n": 148,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 148
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_lt": {
+    "n": 148,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 148
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "runs": [
+   {
+    "valid_frames": 191,
+    "bits_seen": [
+     0,
+     9
+    ],
+    "masks": {
+     "513": 40,
+     "512": 67,
+     "0": 84
+    },
+    "a_triggered_frames": 40,
+    "a_triggered_lt": {
+     "n": 40,
+     "mode": 0,
+     "median": 0.0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 40
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "a_triggered_rt": {
+     "n": 40,
+     "mode": 255,
+     "median": 255.0,
+     "min": 255,
+     "max": 255,
+     "distinct": {
+      "255": 40
+     },
+     "dominant": 255,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "all_frames_lt": {
+     "n": 191,
+     "mode": 0,
+     "median": 0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 191
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "all_frames_rt": {
+     "n": 191,
+     "mode": 255,
+     "median": 255,
+     "min": 0,
+     "max": 255,
+     "distinct": {
+      "0": 84,
+      "31": 1,
+      "95": 1,
+      "122": 1,
+      "190": 1,
+      "255": 103
+     },
+     "dominant": 255,
+     "dominant_fraction": 0.539,
+     "range": 255
+    },
+    "idle_frames": 84,
+    "idle_rt": {
+     "n": 84,
+     "mode": 0,
+     "median": 0.0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 84
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "idle_lt": {
+     "n": 84,
+     "mode": 0,
+     "median": 0.0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 84
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    }
+   },
+   {
+    "valid_frames": 203,
+    "bits_seen": [
+     0,
+     9
+    ],
+    "masks": {
+     "513": 52,
+     "512": 92,
+     "0": 59
+    },
+    "a_triggered_frames": 52,
+    "a_triggered_lt": {
+     "n": 52,
+     "mode": 0,
+     "median": 0.0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 52
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "a_triggered_rt": {
+     "n": 52,
+     "mode": 255,
+     "median": 255.0,
+     "min": 255,
+     "max": 255,
+     "distinct": {
+      "255": 52
+     },
+     "dominant": 255,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "all_frames_lt": {
+     "n": 203,
+     "mode": 0,
+     "median": 0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 203
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "all_frames_rt": {
+     "n": 203,
+     "mode": 255,
+     "median": 255,
+     "min": 0,
+     "max": 255,
+     "distinct": {
+      "0": 59,
+      "9": 1,
+      "62": 1,
+      "67": 1,
+      "100": 1,
+      "102": 1,
+      "160": 1,
+      "219": 1,
+      "238": 1,
+      "255": 136
+     },
+     "dominant": 255,
+     "dominant_fraction": 0.67,
+     "range": 255
+    },
+    "idle_frames": 59,
+    "idle_rt": {
+     "n": 59,
+     "mode": 0,
+     "median": 0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 59
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "idle_lt": {
+     "n": 59,
+     "mode": 0,
+     "median": 0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 59
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    }
+   }
+  ]
+ },
+ "windows": {
+  "P0": {
+   "valid_frames": 204,
+   "bits_seen": [
+    0
+   ],
+   "masks": {
+    "1": 56,
+    "0": 148
+   },
+   "a_triggered_frames": 56,
+   "a_triggered_lt": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "a_triggered_rt": {
+    "n": 56,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 56
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_lt": {
+    "n": 204,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 204
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_rt": {
+    "n": 204,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 204
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_frames": 148,
+   "idle_rt": {
+    "n": 148,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 148
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_lt": {
+    "n": 148,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 148
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "P1": {
+   "valid_frames": 186,
+   "bits_seen": [
+    0,
+    8
+   ],
+   "masks": {
+    "257": 36,
+    "256": 84,
+    "0": 66
+   },
+   "a_triggered_frames": 36,
+   "a_triggered_lt": {
+    "n": 36,
+    "mode": 255,
+    "median": 255.0,
+    "min": 255,
+    "max": 255,
+    "distinct": {
+     "255": 36
+    },
+    "dominant": 255,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "a_triggered_rt": {
+    "n": 36,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 36
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_lt": {
+    "n": 186,
+    "mode": 255,
+    "median": 255.0,
+    "min": 0,
+    "max": 255,
+    "distinct": {
+     "0": 66,
+     "122": 1,
+     "199": 1,
+     "204": 1,
+     "255": 117
+    },
+    "dominant": 255,
+    "dominant_fraction": 0.629,
+    "range": 255
+   },
+   "all_frames_rt": {
+    "n": 186,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 186
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_frames": 66,
+   "idle_rt": {
+    "n": 66,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 66
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_lt": {
+    "n": 66,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 66
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "P2": {
+   "valid_frames": 191,
+   "bits_seen": [
+    0,
+    9
+   ],
+   "masks": {
+    "513": 40,
+    "512": 67,
+    "0": 84
+   },
+   "a_triggered_frames": 40,
+   "a_triggered_lt": {
+    "n": 40,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 40
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "a_triggered_rt": {
+    "n": 40,
+    "mode": 255,
+    "median": 255.0,
+    "min": 255,
+    "max": 255,
+    "distinct": {
+     "255": 40
+    },
+    "dominant": 255,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_lt": {
+    "n": 191,
+    "mode": 0,
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 191
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_rt": {
+    "n": 191,
+    "mode": 255,
+    "median": 255,
+    "min": 0,
+    "max": 255,
+    "distinct": {
+     "0": 84,
+     "31": 1,
+     "95": 1,
+     "122": 1,
+     "190": 1,
+     "255": 103
+    },
+    "dominant": 255,
+    "dominant_fraction": 0.539,
+    "range": 255
+   },
+   "idle_frames": 84,
+   "idle_rt": {
+    "n": 84,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 84
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_lt": {
+    "n": 84,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 84
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  },
+  "P2R": {
+   "valid_frames": 203,
+   "bits_seen": [
+    0,
+    9
+   ],
+   "masks": {
+    "513": 52,
+    "512": 92,
+    "0": 59
+   },
+   "a_triggered_frames": 52,
+   "a_triggered_lt": {
+    "n": 52,
+    "mode": 0,
+    "median": 0.0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 52
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "a_triggered_rt": {
+    "n": 52,
+    "mode": 255,
+    "median": 255.0,
+    "min": 255,
+    "max": 255,
+    "distinct": {
+     "255": 52
+    },
+    "dominant": 255,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_lt": {
+    "n": 203,
+    "mode": 0,
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 203
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "all_frames_rt": {
+    "n": 203,
+    "mode": 255,
+    "median": 255,
+    "min": 0,
+    "max": 255,
+    "distinct": {
+     "0": 59,
+     "9": 1,
+     "62": 1,
+     "67": 1,
+     "100": 1,
+     "102": 1,
+     "160": 1,
+     "219": 1,
+     "238": 1,
+     "255": 136
+    },
+    "dominant": 255,
+    "dominant_fraction": 0.67,
+    "range": 255
+   },
+   "idle_frames": 59,
+   "idle_rt": {
+    "n": 59,
+    "mode": 0,
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 59
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   },
+   "idle_lt": {
+    "n": 59,
+    "mode": 0,
+    "median": 0,
+    "min": 0,
+    "max": 0,
+    "distinct": {
+     "0": 59
+    },
+    "dominant": 0,
+    "dominant_fraction": 1.0,
+    "range": 0
+   }
+  }
+ }
+}

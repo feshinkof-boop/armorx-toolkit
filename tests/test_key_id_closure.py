@@ -117,12 +117,17 @@ def test_canonical_map_records_the_final_classifications():
     assert canon["proven_live_count"] == 26
     assert len(canon["proven_live"]) == 26
     cls = canon["unresolved_classification"]
-    assert cls["9"] == "PROVEN_NEGATIVE"
+    # 2026-09-28: the digital negative for id 9 is superseded by the piggyback session; the OLD verdict
+    # must survive as dated history rather than being deleted, so assert both the new state and the record.
+    assert cls["9"] == "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN"
+    assert "SUPERSEDED HISTORY" in canon["unresolved_detail"]["9"]
+    assert "PROVEN_NEGATIVE" in canon["unresolved_detail"]["9"]
     for i in ("2", "5", "21", "22", "31", "32", "33"):
         assert cls[i] == "UNOBSERVED_RESERVED_OR_UNUSED"
     assert set(cls) == {"2", "5", "9", "21", "22", "31", "32", "33"}
-    # the map must not claim an analog result for RT
-    assert "neither confirmed nor excluded" in canon["unresolved_detail"]["9"]
+    # the map must not claim a NAME for bit 9 either
+    assert "NEW_BIT_9_OBSERVED_UNNAMED" in canon["unresolved_detail"]["9"]
+    assert canon["rt_analog_piggyback_2026_09_28"]["digital_bit_9_observed_unnamed"] is True
 
 
 def test_consolidated_table_ingests_the_session_and_stays_at_26_proven():
@@ -131,10 +136,13 @@ def test_consolidated_table_ingests_the_session_and_stays_at_26_proven():
     controls = {c["control"] for c in km["closure_session_evidence"]}
     assert {"RT", "L stick"} <= controls
     assert all(c["valid_frames"] == 0 for c in km["closure_session_evidence"])
-    assert km["final_classification_of_unresolved"]["9"] == "PROVEN_NEGATIVE"
+    assert km["final_classification_of_unresolved"]["9"] == "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN"
     row9 = next(r for r in km["rows"] if r["id"] == 9)
-    assert row9["final_classification"] == "PROVEN_NEGATIVE"
-    assert "PROVEN NEGATIVE as a digital bit" in row9["notes"]
+    assert row9["final_classification"] == "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN"
+    # the method-limited negative must be recorded as such, not silently dropped
+    assert "method-limited" in row9["notes"]
+    assert "NEW_BIT_9_OBSERVED_UNNAMED" in row9["notes"]
+    assert km["rt_analog_piggyback"]["rt_analog"]["verdict"] == "RT_ANALOG_PROVEN_LIVE__PLUS_DIGITAL_BIT_OBSERVED"
 
 
 def test_no_unresolved_id_is_forced_to_acquire_a_control_name():
@@ -150,10 +158,12 @@ def test_ledger_both_key_unknowns_closed_with_dated_evidence():
     by_id = {e["id"]: e for e in led["entries"]}
     assert by_id["KEY-U-001"]["classification"] == "UNOBSERVED_RESERVED_OR_UNUSED"
     assert by_id["KEY-U-001"]["resolved_at"] == "2026-09-28"
-    assert by_id["KEY-U-002"]["status"] == "RESOLVED"
-    assert "PROVEN_NEGATIVE" in by_id["KEY-U-002"]["classification"]
+    assert by_id["KEY-U-002"]["status"].startswith("RESOLVED")
+    assert "DIGITAL_NEGATIVE_RETRACTED" in by_id["KEY-U-002"]["classification"]
     # the overstatement must be corrected, not silently kept
-    assert "never SAMPLED" in by_id["KEY-U-002"]["best_evidence"]
+    assert "UNSAMPLED" in by_id["KEY-U-002"]["best_evidence"] or "unsampled" in by_id["KEY-U-002"]["best_evidence"]
+    # and the new open question about bit 9 exists rather than being silently named away
+    assert by_id["KEY-U-003"]["classification"] == "DEFERRED_REQUIRES_OPERATOR"
 
 
 def test_control_inventory_says_rt_was_the_only_untested_control():

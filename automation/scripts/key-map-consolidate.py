@@ -123,10 +123,18 @@ def build() -> dict:
                         "bits": (r.get("analysis") or {}).get("bits"),
                         "transitions": (r.get("analysis") or {}).get("transitions"),
                         "source": str(rj.relative_to(REPO))})
-    # ids that no requested physical control maps to, plus the one proven negative
+    # RT analog piggyback session (2026-09-28): analog proven in byte[16]; a digital bit appeared.
+    piggyback = None
+    for aj in sorted(REPO.glob("results/experiments/rt-analog-piggyback-*/ANALYSIS.json")):
+        try:
+            piggyback = json.loads(aj.read_text())
+            piggyback["source"] = str(aj.relative_to(REPO))
+        except Exception:
+            continue
+    # ids that no requested physical control maps to, plus RT
     UNRESOLVED_BASIS = {
         2: "UNOBSERVED_RESERVED_OR_UNUSED", 5: "UNOBSERVED_RESERVED_OR_UNUSED",
-        9: "PROVEN_NEGATIVE", 21: "UNOBSERVED_RESERVED_OR_UNUSED",
+        9: "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN", 21: "UNOBSERVED_RESERVED_OR_UNUSED",
         22: "UNOBSERVED_RESERVED_OR_UNUSED", 31: "UNOBSERVED_RESERVED_OR_UNUSED",
         32: "UNOBSERVED_RESERVED_OR_UNUSED", 33: "UNOBSERVED_RESERVED_OR_UNUSED",
     }
@@ -184,10 +192,12 @@ def build() -> dict:
             row["final_classification"] = UNRESOLVED_BASIS[i]
             if i == 9:
                 row["notes"] = ((row.get("notes") or "") +
-                                " | 2026-09-28 closure session: RT requested again, two FULL pulls inside a popup "
-                                "open 16.8 s and ACKed at 06:05:49; zero frames of any kind arrived, so [16] could "
-                                "not be sampled - RT_ANALOG_ONLY neither confirmed nor excluded. PROVEN NEGATIVE as "
-                                "a digital bit; id 9 stays unresolved.")
+                                " | 2026-09-28 closure session: two FULL pulls produced zero frames, so [16] was "
+                                "unsampled (NOT measured zero) - that negative was method-limited. | 2026-09-28 "
+                                "piggyback session: with A forcing frame transmission, [16] reads 0 at rest and 255 "
+                                "at full pull in every A-caused frame (ANALOG PROVEN LIVE, LT control validated the "
+                                "method), AND a digital bit 9 appears only while RT is held - preserved as "
+                                "NEW_BIT_9_OBSERVED_UNNAMED and not yet named. RT keeps a name of UNKNOWN here.")
             else:
                 row["notes"] = ((row.get("notes") or "") +
                                 " | 2026-09-28 closure session: no requested physical control maps to this id and "
@@ -204,6 +214,7 @@ def build() -> dict:
             "static_constants_by_bit": {str(k): v for k, v in sorted(by_bit.items())},
             "name_conflicts": conflicts,
             "closure_session_evidence": closure,
+            "rt_analog_piggyback": piggyback,
             "closure_session_note": ("Evidence from results/experiments/key-id-closure-*/: one control per popup, "
                                      "no batch windows, no order-based attribution. Only RT and the L stick were "
                                      "tested; both emitted nothing, which is why the analog channel is unobservable. "

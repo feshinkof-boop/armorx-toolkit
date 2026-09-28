@@ -47,7 +47,9 @@ def test_unknown_ledger_is_complete_and_classified():
                # classes an item can be CLOSED into when a physical session answers it
                # (2026-09-28 key-ID closure: ids no control of this unit emits; RT proven negative)
                "UNOBSERVED_RESERVED_OR_UNUSED", "PROVEN_NEGATIVE",
-               "UNOBSERVABLE_BY_FRAME_METHOD"}
+               "UNOBSERVABLE_BY_FRAME_METHOD",
+               # 2026-09-28 RT analog piggyback: analog proven, the earlier digital negative retracted
+               "ANALOG_PROVEN_LIVE", "DIGITAL_NEGATIVE_RETRACTED"}
     assert len(d["entries"]) >= 15
     for e in d["entries"]:
         for field in ("id", "question", "priority", "ruled_out", "best_evidence",

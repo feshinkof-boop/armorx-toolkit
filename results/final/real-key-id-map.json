@@ -1,6 +1,6 @@
 {
  "generated": "2026-09-28T06:09:10.954413",
- "note": "Canonical key-id map. The 17:08 experiment copy (results/experiments/physical-20260927-170844-d2/real-key-id-map.json) is the historical source and is left untouched; this file is the current canonical view including the 2026-09-28 closure session.",
+ "note": "Canonical key-id map. The 17:08 experiment copy (results/experiments/physical-20260927-170844-d2/real-key-id-map.json) is the historical source and is left untouched; this file is the current canonical view including the 2026-09-28 closure session. Updated 2026-09-28 with the RT analog piggyback session.",
  "device": {
   "model": "ZJ-XT",
   "firmware": "2741",
@@ -205,7 +205,7 @@
  "unresolved_classification": {
   "2": "UNOBSERVED_RESERVED_OR_UNUSED",
   "5": "UNOBSERVED_RESERVED_OR_UNUSED",
-  "9": "PROVEN_NEGATIVE",
+  "9": "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN",
   "21": "UNOBSERVED_RESERVED_OR_UNUSED",
   "22": "UNOBSERVED_RESERVED_OR_UNUSED",
   "31": "UNOBSERVED_RESERVED_OR_UNUSED",
@@ -213,7 +213,7 @@
   "33": "UNOBSERVED_RESERVED_OR_UNUSED"
  },
  "unresolved_detail": {
-  "9": "PROVEN NEGATIVE as a digital bit. Requested in press_group_B/D/E/F, three dedicated retries, and again on 2026-09-28 with two FULL pulls in a popup open 16.8 s (ACKed 06:05:49): zero frames of any kind arrived. Because the device emits nothing while only RT moves, the analog byte [16] is unsamplable, so RT_ANALOG_ONLY is neither confirmed nor excluded. No analog claim is made.",
+  "9": "SUPERSEDED HISTORY (kept): 2026-09-28 closure session recorded id 9 as PROVEN_NEGATIVE as a digital bit after two full RT pulls produced zero frames. That negative was METHOD-LIMITED: RT alone emits no frame at all, so neither the analog byte nor a digital bit could appear in those windows - [16] was never sampled (the earlier wording 'never left zero' was wrong). CURRENT (2026-09-28 piggyback session): with A forcing frame transmission, byte[16] reads 0 at rest and 255 at a full pull in every A-caused frame (ANALOG PROVEN LIVE; the LT positive control validated the method), and a digital mask bit 9 appears only in the RT-held windows (masks 513/512; 107 frames in P2, 144 in the repeat; never in the baseline or LT windows). The bit is preserved as NEW_BIT_9_OBSERVED_UNNAMED and is deliberately NOT named in this pass.",
   "2,5,21,22,31,32,33": "UNOBSERVED_RESERVED_OR_UNUSED: no physical control that was ever requested maps to these bits, and no label for them exists in any of the four builds' inventories (the app's label set is A B X Y LB RB LT RT L3 R3 Menu Select Start Capture Up Down Left Right M1-M7 NIL + keyboard keys + ZL/ZR). The 32-slot mapKeys space is larger than the number of controls this unit reports."
  },
  "closure_session": {
@@ -242,5 +242,39 @@
   "live_experiment": "results/experiments/physical-20260927-170844-d2/real-key-id-map.json",
   "consolidated": "results/final/key-map-confidence.json",
   "closure_session": "results/experiments/key-id-closure-20260928-060134/RESULT.md"
+ },
+ "rt_analog_piggyback_2026_09_28": {
+  "source": "results/experiments/rt-analog-piggyback-20260928-061800",
+  "lt_positive_control": "LT_ANALOG_PIGGYBACK_PROVEN",
+  "rt_analog_verdict": "RT_ANALOG_PROVEN_LIVE__PLUS_DIGITAL_BIT_OBSERVED",
+  "criteria": {
+   "1_a_frames_present": true,
+   "2_no_rt_digital_bit": false,
+   "3_byte16_moves_consistently": true,
+   "4_returns_to_baseline_at_rest": true,
+   "5_effect_repeats": true,
+   "6_byte15_flat": true
+  },
+  "byte16_rest": 0,
+  "byte16_full_pull": 255,
+  "observed_scale_range": [
+   0,
+   255
+  ],
+  "digital_bit_9_observed_unnamed": true,
+  "bit_9_windows": [
+   "P2",
+   "P2R"
+  ],
+  "bit_9_absent_windows": [
+   "P0",
+   "P1"
+  ],
+  "hci_coverage": {
+   "P1": "189 notifications (exact)",
+   "P2R": "208 notifications (exact)",
+   "P0": "not covered (btmon stalled)",
+   "P2": "not covered (btmon stalled)"
+  }
  }
 }

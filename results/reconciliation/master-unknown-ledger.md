@@ -417,3 +417,22 @@ Session: `results/experiments/key-id-closure-20260928-060134/` (RESULT.md is aut
   path**, so the first RT popup never appeared and the harness **misreported it as `OPERATOR_CANCELLED`**.
   Fixed: the helper is resolved at its real path, a missing helper is a hard error, and only rc == 1 counts as
   an operator cancel (rc 2/3/127 are harness faults).
+
+---
+
+## 2026-09-28 — RT analog piggyback session (append-only)
+
+- **KEY-U-002 → RESOLVED (analog) / SUPERSEDED (digital negative).** RT's analog travel is **PROVEN LIVE in
+  D2 byte[16]**: 0 at rest, 255 at a full pull, in every frame whose transmission `A` caused (40/40 in P2,
+  52/52 in the repeat), with byte[15] flat. The earlier `PROVEN_NEGATIVE` digital verdict is **retracted as
+  method-limited** — RT alone emits no frame, so nothing could appear in those windows and `[16]` was never
+  sampled (the old wording "never left zero" was wrong: unsampled ≠ measured zero). The LT positive control
+  (`LT_ANALOG_PIGGYBACK_PROVEN`) validated the method before the RT window ran.
+- **KEY-U-003 OPEN (new).** A digital mask bit **9** appeared only while RT was fully held (masks `513`/`512`;
+  107 frames in P2, 144 in the repeat; absent from the baseline and LT windows). It is preserved as
+  `NEW_BIT_9_OBSERVED_UNNAMED` and deliberately **not named**: the candidate is RT, but that needs its own
+  one-variable confirmation.
+- HCI: P1 and P2R corroborated exactly (189 / 208 notifications matching the harness record); P0 and P2 are
+  **not** covered — btmon stopped writing mid-session. Stated, not hidden.
+- State: `a5 05 d2 00 7c` last write, clean disconnect, no D7/D8/config write, read-only D6 integrity
+  `bdef9c61…` → `CONFIG_BASELINE_MATCH` (`DURABLE_OK` unchanged).

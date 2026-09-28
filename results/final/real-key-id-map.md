@@ -39,7 +39,7 @@ Generated 2026-09-28T06:09:10.954413. Rule: **bit == id**; mask = bytes [3..6] b
 |---|---|
 | 2 | `UNOBSERVED_RESERVED_OR_UNUSED` |
 | 5 | `UNOBSERVED_RESERVED_OR_UNUSED` |
-| 9 | `PROVEN_NEGATIVE` |
+| 9 | `DIGITAL_BIT_UNNAMED_ANALOG_PROVEN` |
 | 21 | `UNOBSERVED_RESERVED_OR_UNUSED` |
 | 22 | `UNOBSERVED_RESERVED_OR_UNUSED` |
 | 31 | `UNOBSERVED_RESERVED_OR_UNUSED` |
@@ -67,3 +67,16 @@ One control remained untested (RT); it and a stick probe both produced zero fram
 - live_experiment: `results/experiments/physical-20260927-170844-d2/real-key-id-map.json`
 - consolidated: `results/final/key-map-confidence.json`
 - closure_session: `results/experiments/key-id-closure-20260928-060134/RESULT.md`
+
+---
+
+## 2026-09-28 — RT analog piggyback session (append-only)
+
+- **byte[16] = RT analog: PROVEN LIVE.** Rest `0`, full pull `255`, in every A-caused frame
+  (40/40 in P2, 52/52 in the repeat) against 0 in all 56 baseline A-caused frames. Observed scale 0..255.
+- **LT positive control proven** (`LT_ANALOG_PIGGYBACK_PROVEN`): byte[15] = 255 in all 36 A-caused frames
+  while LT was held; byte[16] stayed 0. The method is validated, so the RT result rests on a checked path.
+- **The earlier `id 9 = PROVEN_NEGATIVE` verdict is SUPERSEDED, not deleted** — it was method-limited
+  because RT alone emits no frame. A digital bit **9** appears only while RT is held
+  (`NEW_BIT_9_OBSERVED_UNNAMED`, not yet named). The 26 PROVEN LIVE names are unchanged.
+- Verdicts: `LT_ANALOG_PIGGYBACK_PROVEN` and `RT_ANALOG_PROVEN_LIVE__PLUS_DIGITAL_BIT_OBSERVED`.

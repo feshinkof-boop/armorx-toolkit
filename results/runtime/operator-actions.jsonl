@@ -53,3 +53,8 @@
 {"event":"acknowledged","action_id":"armorx_keymap_power_on","acknowledged_at":"2026-09-28T06:02:43-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_keymap_rt","acknowledged_at":"2026-09-28T06:05:49-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_keymap_l_stick","acknowledged_at":"2026-09-28T06:06:57-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_rt_analog_power_on","acknowledged_at":"2026-09-28T06:19:58-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_rt_analog_p0","acknowledged_at":"2026-09-28T06:20:53-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_rt_analog_p1","acknowledged_at":"2026-09-28T06:22:23-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_rt_analog_p2","acknowledged_at":"2026-09-28T06:23:35-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_rt_analog_p2r","acknowledged_at":"2026-09-28T06:25:46-04:00","response":"done","status":"ACK"}
