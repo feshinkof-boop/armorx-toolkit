@@ -127,5 +127,6 @@ def test_ledger_reflects_the_live_result():
     ids = {e.get("id"): e for e in d["entries"]}
     assert ids["TRG-U-001"]["status"] == "PARTIALLY_RESOLVED"
     assert "F7_WRITE_ONLY is explicitly NOT concluded" in ids["TRG-U-001"]["ruled_out"]
-    assert ids["TRG-U-003"]["status"] == "OPEN"
-    assert ids["TRG-U-003"]["classification"] == "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE"
+    assert ids["TRG-U-003"]["status"].startswith("RESOLVED"), "the static answer must be recorded as resolved"
+    assert ids["TRG-U-003"]["classification"] == "STATICALLY_EXHAUSTED"
+    assert "field_23" in ids["TRG-U-003"]["best_evidence"], "resolution must cite the state field"

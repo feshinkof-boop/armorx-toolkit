@@ -457,3 +457,17 @@ unattributed ids: 2, 5, 21, 22, 31, 32, 33 (`UNOBSERVED_RESERVED_OR_UNUSED`).
 
 Attempt 1 of this experiment was void (restarting btmon mid-connection kills the BLE link) and is preserved
 under `attempt-1-link-lost/`.
+
+---
+
+## Addendum — 2026-09-28, F7 value-provenance pass (static-only, HEAD `0e59a66`)
+
+Full trace: `results/reconciliation/f7-value-provenance.{md,json}`, graph `f7-dataflow.dot` (+ `.svg`/`.png`).
+
+- **`TRG-U-003` → ANSWERED STATICALLY, `STATICALLY_EXHAUSTED`.** The step-length value can only arrive as an **inbound F7 *event* frame** (≥7 bytes, write-shaped: `A5 ≤len F7 <flag> <lo> <hi> [extra] <cks>`), delivered by the generic stream `BluetoothModel.notifyCharacteristicStream` (0x826814 over `AsyncBroadcastStreamController` `field_43`, fed by the notify callback 0xacb7f8) to `_handleConfigEvent` (0xab94fc), whose follow-up closure 0xab9764 stores state **`field_23`** — exactly the field `_requestStepLength` (0xa6e320) polls (max **3 attempts**) to stop retrying. **No other source exists**: `step_accuracy`/`stepLength` have 24/27 AOT hits and **0** hits in the app's assets (`SERVER_PROFILE_VALUE`: NOT OBSERVED).
+- **`TRG-U-001` stays OPEN / `DEFERRED_REQUIRES_HARDWARE`.** Silence ranking: (1) an F7 event is expected and never arrived; (2) the read expects no reply on this model; (3) a state/page gate was missing — the earlier probe sent **2 of the app's 3 attempts** and omitted the handshake ordering. Verdict remains **`F7_NO_REPLY_LINK_HEALTHY`**; `F7_WRITE_ONLY` is still **not** concluded.
+- **`TRG-U-004` ADDED** (does the device ever emit such an event?): not observed anywhere held — 3 decoded btmon captures (0 unsolicited RX) and the official app's 250-record live session (**zero** records containing `f7`); the latter was a D2/button session, so its absence is expected and is *not* evidence about F7. Next: the corrected **read-only** probe (3 attempts, ≥10 s tail, app handshake first) — prepared, **not run**.
+- **`TRG-U-005` ADDED** (flag + optional byte): the flag selects frame length (`((flag & 2) + 14) / 2` → 7 or 8, `and x3,x3,#2` @0x944610), so it governs the optional byte; its feature meaning is unresolved.
+- **`PRS-U-001`**: F7 shares the direct-write path; an F7 write is **`WRITE_TEST_NOT_YET_SAFE`** — no restoration value exists (no readback, no proven device event; `field_23` is filled only by that same event).
+- **D6:** `F7_NOT_D6_GOVERNED_STATICALLY_OBSERVED` (STRONG EVIDENCE) — no offset, property, serializer or conversion path links F7 to the 144-byte config.
+- **Cross-version:** the inbound config-event architecture (broadcast stream) is **absent in 2.22/2.23**, appears with F6/F7 in **2.24** (15 consumers), and is refactored to 2 root consumers in **4.0.8**.

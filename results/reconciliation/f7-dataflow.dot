@@ -1,0 +1,50 @@
+// F7 (stick step-length / step accuracy) value dataflow — reconstructed from 4.0.8 AOT disassembly.
+// Solid edges = proven static; dashed = inferred/unknown-valued.
+digraph f7_value_provenance {
+  rankdir=LR;
+  node [shape=box, style=rounded, fontname="Helvetica", fontsize=10];
+  edge [fontname="Helvetica", fontsize=9];
+
+  subgraph cluster_rx {
+    label="inbound (device -> app)"; color="#4b7bec";
+    dev  [label="device\n(ARMOR-X Pro, fw 2741)"];
+    notif[label="FFE2 notification\nnon-empty payload"];
+    ctl  [label="AsyncBroadcastStreamController\nBluetoothModel.field_43"];
+    cb   [label="notify callback\n0xacb7f8:\nfield_43.add(payload)"];
+    st   [label="notifyCharacteristicStream\ngetter 0x826814\n_BroadcastStream<List<int>>", shape=box];
+    dev -> notif -> cb -> ctl -> st;
+  }
+
+  subgraph cluster_page {
+    label="config_simulate_command page (state)"; color="#20bf6b";
+    h    [label="_handleConfigEvent\n0xab94fc / closure 0xab94c0\nguard: len>=7 && [0]==0xA5 && [2]==0xF7\nvalue = ([5]<<8) | [4]\nflag = [3]"];
+    f23  [label="state field_23\n(the current step-length value)", style=filled, fillcolor="#d1f2eb"];
+    setk [label="_setKeyExchange\n0x95c578\nreads field_23"];
+    req  [label="_requestStepLength\n0xa6e320\nloop max 3 attempts\nbreaks when field_23 != NULL"];
+    sch  [label="_scheduleStepLengthRead\n0xa6e178\nregisters closure 0xa6e2d8\non static listener list"];
+  }
+
+  st  -> h   [label="frames"];
+  h   -> f23 [label="closure 0xab9764\nStoreField field_23 @0xab97d8"];
+  f23 -> req [label="break condition\nLoadField @0xa6e3fc", style=dashed];
+  sch -> req [label="closure @0xa6e2d8"];
+  req -> get [label="Provider.of<BluetoothModel>()\n.getStepLength() @0xa6e40c"];
+  f23 -> setk[label="LoadField @0x95c5e0"];
+  setk-> wr  [label="LoadInt32Instr(field_23)\nbl @0x95c60c"];
+
+  subgraph cluster_tx {
+    label="outbound (app -> device)"; color="#eb3b5a";
+    get [label="getStepLength 0x8b4d30\nbuilds A5 04 F7 <cks>\nNO await, NO callback, NO gate"];
+    wr  [label="writeStepLengthConfig 0x9445d4\nA5 <len> F7 <flag> <lo> <hi> [extra] <cks>\nlen = ((flag & 2) + 14)/2 -> 7|8\n16-bit LE, cks via define::getCheckSum"];
+    bmw [label="BluetoothManager::write\n(direct characteristic write,\nno D6/D7 commit)"];
+    get -> bmw [label="FFE1 write 0x0075"];
+    wr  -> bmw;
+    bmw -> dev [label="MUTATES DEVICE STATE", color="#eb3b5a"];
+  }
+
+  get -> dev [label="A5 04 F7 A0 (live-proven TX)", style=dashed];
+  dev -> notif [label="EXPECTED F7 event (>=7 bytes)\nNEVER OBSERVED on the live unit", style=dashed, color="#e58e26"];
+
+  note [shape=note, label="live: 2 attempts, 0 notifications in 3 s and 5 s;\n0B + FC controls answered in 23-30 ms\nverdict F7_NO_REPLY_LINK_HEALTHY\nwrite test: WRITE_TEST_NOT_YET_SAFE (no restoration value)", fillcolor="#fff3cd"];
+  note -> dev [style=invis];
+}

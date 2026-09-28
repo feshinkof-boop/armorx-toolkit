@@ -1,383 +1,410 @@
 {
- "generated": "2026-09-27/28 overnight shift",
- "rule": "Every unknown carries what is ruled out, the best evidence, the next offline step and the next hardware step. Historical ids are kept, never silently retired.",
- "counts": {
-  "STATICALLY_EXHAUSTED": 7,
-  "DEFERRED_REQUIRES_HARDWARE": 11,
-  "UNOBSERVED_RESERVED_OR_UNUSED": 1,
-  "ANALOG_PROVEN_LIVE / DIGITAL_NEGATIVE_RETRACTED": 1,
-  "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 5,
-  "DEFERRED_REQUIRES_OPERATOR": 1,
-  "PHYSICALLY_RESOLVED": 1
- },
- "entries": [
-  {
-   "id": "D2-U-001",
-   "question": "What write type does the official app use for D2?",
-   "priority": "CLOSED",
-   "ruled_out": [
-    "write-with-response"
-   ],
-   "best_evidence": "the official capture shows ATT Write Command (0x52) on handle 0x0075 = write WITHOUT response, identical to the harness",
-   "next_offline_step": "-",
-   "next_hardware_step": "-",
-   "dependencies": [],
-   "classification": "STATICALLY_EXHAUSTED",
-   "status": "RESOLVED"
+  "generated": "2026-09-27/28 overnight shift",
+  "rule": "Every unknown carries what is ruled out, the best evidence, the next offline step and the next hardware step. Historical ids are kept, never silently retired.",
+  "counts": {
+    "STATICALLY_EXHAUSTED": 8,
+    "DEFERRED_REQUIRES_HARDWARE": 12,
+    "UNOBSERVED_RESERVED_OR_UNUSED": 1,
+    "ANALOG_PROVEN_LIVE / DIGITAL_NEGATIVE_RETRACTED": 1,
+    "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 5,
+    "DEFERRED_REQUIRES_OPERATOR": 1,
+    "PHYSICALLY_RESOLVED": 1
   },
-  {
-   "id": "D2-U-002",
-   "question": "What is the 0x24 comparison in the 2.24 Button-Test parser?",
-   "priority": "CLOSED",
-   "ruled_out": [
-    "36-byte frame length",
-    "a container .length",
-    "an array index",
-    "a byte offset",
-    "an enum"
-   ],
-   "best_evidence": "0x24 is the tagged Smi of 18 (18<<1); verified byte-level at 0x8b06e8 in 2.23 (LoadInt32Instr then cmp x1,#0x12) and corroborated by all 155 live frames carrying byte[1]=0x12",
-   "next_offline_step": "-",
-   "next_hardware_step": "-",
-   "dependencies": [],
-   "classification": "STATICALLY_EXHAUSTED",
-   "status": "RESOLVED"
-  },
-  {
-   "id": "D2-U-007",
-   "question": "Why did the harness appear silent after a D2 enable?",
-   "priority": "CLOSED",
-   "ruled_out": [
-    "a device-level difference between app and harness",
-    "a capability limit of the harness"
-   ],
-   "best_evidence": "Two independent facts. (1) The harness streams: 3,292 valid frames / 26 ids in the 2026-09-27 17:08 run under 0B -> D2 ON with no pre-clear. (2) PROVEN LIVE 2026-09-28: case C0 - WITH the D2 OFF pre-clear and a confirmed A-twice press - produced 167 valid frames including PRESS/RELEASE/PRESS/RELEASE on bit 0, while 0 frames arrived before the press and after the release. So the historical differential windows were silent because no physical press was requested in them, not because of any protocol state. EXPLANATION RECORDED, NOT ERASED: see results/reconciliation/d2-u007-harness-streaming-reconciliation.md and results/experiments/d2-c0-physical-20260928-054549/RESULT.md",
-   "next_offline_step": "none - closed",
-   "next_hardware_step": "none - closed",
-   "dependencies": [],
-   "classification": "STATICALLY_EXHAUSTED",
-   "status": "RESOLVED"
-  },
-  {
-   "id": "D2-U-010",
-   "question": "Does a D2 OFF pre-clear before the D2 enable suppress streaming while a key IS pressed?",
-   "priority": "CRITICAL",
-   "ruled_out": [
-    "the D2 OFF pre-clear as a suppressor of button reports"
-   ],
-   "best_evidence": "PROVEN LIVE 2026-09-28: C0 (pre-clear present) + confirmed A-twice press = 167 valid frames, 4 transitions PRESS/RELEASE/PRESS/RELEASE on bit 0, only bit 0 set; 0 frames before the press and 0 after the release. C1/C2 were NOT run - the question was already answered.",
-   "next_offline_step": "none - closed",
-   "next_hardware_step": "none - closed",
-   "dependencies": [],
-   "classification": "STATICALLY_EXHAUSTED",
-   "status": "RESOLVED - C0_STREAMS_WITH_PRECLEAR"
-  },
-  {
-   "id": "D2-U-008",
-   "question": "Does the device require a bonded/encrypted link?",
-   "priority": "CLOSED",
-   "ruled_out": [
-    "bonding",
-    "encryption",
-    "SMP"
-   ],
-   "best_evidence": "BOND_NONE on the phone, zero SMP frames, zero encryption events on both sides",
-   "next_offline_step": "-",
-   "next_hardware_step": "-",
-   "dependencies": [],
-   "classification": "STATICALLY_EXHAUSTED",
-   "status": "REFUTED"
-  },
-  {
-   "id": "D2-U-009",
-   "question": "Do the connection parameters cause the difference?",
-   "priority": "VERY LOW",
-   "ruled_out": [
-    "causality (explicitly not claimed)"
-   ],
-   "best_evidence": "official 30 -> 7.5 -> 30 -> 11.25 ms (1 create + 3 update commands, verified) vs harness 7.5 ms; the app requests no interval profile at all 2026-09-28: C0 streamed 167 frames with the harness's own 7.5 ms interval, so no interval change is needed to receive button reports.",
-   "next_offline_step": "11.25 ms mechanism documented (results/final/connection-params-11ms-experiment-11.25ms.md)",
-   "next_hardware_step": "apply the documented OS-level mechanism, then repeat C0",
-   "dependencies": [
-    "D2-U-010 must fail first"
-   ],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "NOT IMPLICATED (stays the weakest candidate; do not run unless a new failure appears)"
-  },
-  {
-   "id": "KEY-U-001",
-   "question": "Which buttons are ids 2, 5, 21, 22, 31, 32, 33?",
-   "priority": "MEDIUM",
-   "ruled_out": [],
-   "best_evidence": "no physical button produced these bits in any capture; the static label inventories do not resolve them; define.dart getters are offset +1 and cannot be used to name wire bits. | 2026-09-28 closure session (results/experiments/key-id-closure-20260928-060134): the physical-control inventory was derived from what the operator was actually asked to press (results/runtime/press-groups.jsonl) and cross-checked against the proven-live map: ALL 26 requested controls are proven live except RT, so none of these ids corresponds to a requested control. No label for them exists in any of the four builds (A B X Y LB RB LT RT L3 R3 Menu Select Start Capture Up Down Left Right M1-M7 NIL + keyboard keys + ZL/ZR). Measured negative on this unit.",
-   "next_offline_step": "-",
-   "next_hardware_step": "none - not emitted by this unit; a different model/mode would be needed to observe them",
-   "dependencies": [],
-   "classification": "UNOBSERVED_RESERVED_OR_UNUSED",
-   "status": "RESOLVED_FOR_THIS_UNIT",
-   "resolved_at": "2026-09-28"
-  },
-  {
-   "id": "KEY-U-002",
-   "question": "Does RT report analog travel, and does it have a digital key id on this unit?",
-   "priority": "MEDIUM",
-   "ruled_out": [
-    "id 9 as RT's bit"
-   ],
-   "best_evidence": "closure session (2026-09-28): two full pulls produced zero frames - a method-limited negative, since RT alone emits no frame; [16] was UNSAMPLED, not measured zero. | piggyback session (2026-09-28): with A forcing transmission, byte[16] = 0 at rest and 255 at full pull in every A-caused frame (40/40 in P2, 52/52 in the repeat) while byte[15] stayed flat - LT positive control proven on the same method. A digital bit 9 appeared only in the RT-held windows (513/512; 107 frames P2, 144 P2R; absent in P0 and P1) and is preserved UNNAMED.",
-   "next_offline_step": "-",
-   "next_hardware_step": "one confirmation window: A bursts alone vs A bursts with RT held, one control only, to name bit 9; or read RT in the official app's trigger/DPI view",
-   "dependencies": [],
-   "classification": "ANALOG_PROVEN_LIVE / DIGITAL_NEGATIVE_RETRACTED",
-   "status": "RESOLVED (analog) / SUPERSEDED (digital negative)",
-   "resolved_at": "2026-09-28"
-  },
-  {
-   "id": "DPI-U-001",
-   "question": "What real DPI value does selector N mean?",
-   "priority": "MEDIUM",
-   "ruled_out": [
-    "any in-binary mapping table"
-   ],
-   "best_evidence": "STATIC (2026-09-28): the writer `A5 05 FC <selector & 0x0F>` carries ONLY a 4-bit selector - no value byte, no clamp beyond the mask, and no numeric table anywhere in the binary. The preset table is server-side, which is why no selector->DPI mapping can be recovered from the APK.",
-   "next_offline_step": "none left in the APK for the numeric mapping; only a per-selector live differential of the reported DPI (deferred, needs a read path that returns a value)",
-   "next_hardware_step": "none useful without the vendor table",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
-   "status": "OPEN"
-  },
-  {
-   "id": "DPI-U-002",
-   "question": "What is the shape of the DPI reply, and does it carry a value?",
-   "priority": "MEDIUM",
-   "ruled_out": [],
-   "best_evidence": "LIVE: TX `A5 05 FC 80 26` -> RX `A5 05 FF FC A5`. STATIC (2026-09-28): the reply family is `A5 <len> FF <echoed opcode> <cks>`; byte[3] echoes the queried opcode; the captured reply has ZERO payload, so this query returns no numeric DPI value. The chained read (getDpi then getStepLength inside one notification handler) shows the official workflow is a read sequence.",
-   "next_offline_step": "find the 0xFF dispatch table and the per-opcode handlers; determine whether any 0xFF reply carries a payload at all",
-   "next_hardware_step": "re-read the query and vary the selector while capturing, to see which field moves",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
-   "status": "PARTIALLY_RESOLVED"
-  },
-  {
-   "id": "MOT-U-001",
-   "question": "What do the AB motion/gyro payload fields mean (mode, sensitivity, deadzone, filter)?",
-   "priority": "LOW",
-   "ruled_out": [],
-   "best_evidence": "the writer AB 07 05 25 <u16 LE> and the query shapes AB 05 05 25/26 are known; the queries return NOTHING on this firmware",
-   "next_offline_step": "static field trace around writeMotionDpiConfig @0x946158",
-   "next_hardware_step": "none until a reply exists",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN"
-  },
-  {
-   "id": "LGT-U-001",
-   "question": "What is the RGB byte order and the lighting field layout?",
-   "priority": "MEDIUM",
-   "ruled_out": [
-    "conventional RGB ordering (no evidence)"
-   ],
-   "best_evidence": "the 0x70 writers exist in all builds but no read path exists; RGB order is UNKNOWN in all four builds",
-   "next_offline_step": "static field trace through writeLightConfig and the 0x05/0x3F sub-commands",
-   "next_hardware_step": "minimum reversible experiment: one zone, one known colour, visual confirm, restore",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_OPERATOR",
-   "status": "OPEN"
-  },
-  {
-   "id": "D8-U-001",
-   "question": "What selects the D8 chunk class (15 / 43 / 67 payload sizes)?",
-   "priority": "MEDIUM",
-   "ruled_out": [
-    "A4 0A D8 as a commit frame (CONTRADICTED in all four builds)"
-   ],
-   "best_evidence": "commit is A4 05 D8 <nfrags+1> <cks>; the 10-byte TranscribeFrame model and subpackageLength-5 arithmetic are reconstructed; the class selector is not",
-   "next_offline_step": "static branch analysis of the fragmenter in all four builds",
-   "next_hardware_step": "read a macro back and observe which classes the device emits",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN (static step available)"
-  },
-  {
-   "id": "CFG-U-001",
-   "question": "What are the 10 UNKNOWN byte regions of the 144-byte configuration?",
-   "priority": "HIGH",
-   "ruled_out": [],
-   "best_evidence": "config-byte-evidence-map: 25 PROVEN STATIC / 10 UNKNOWN / 1 PROVEN LIVE; baseline and mutant images both exist and differ in {0,1,127}",
-   "next_offline_step": "resolve more regions statically from the four builds' config codecs",
-   "next_hardware_step": "controlled single-field diffs with readback + power-cycle verification",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN"
-  },
-  {
-   "id": "WIN-U-001",
-   "question": "Why does the current Windows Assistant leave the ARMORX legacy device type inaccessible?",
-   "priority": "MEDIUM",
-   "ruled_out": [
-    "conflating the two numbering systems (now explicitly separated)"
-   ],
-   "best_evidence": "DevMgr.dll has t_BBW_DevType and t_ProductType colliding at 5-7; the classifier switch is at 0x1003212f",
-   "next_offline_step": "PE xref pass mapping the classifier to the UI device list",
-   "next_hardware_step": "attach the unit and observe which type the Assistant picks",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN (static step available)"
-  },
-  {
-   "id": "WIN-U-002",
-   "question": "Is there a latent ArmorX Pro factory/DFU path in the vendor software?",
-   "priority": "LOW",
-   "ruled_out": [],
-   "best_evidence": "devmgr_dfu_analysis.json exists as a starting point; no factory entry point was identified",
-   "next_offline_step": "dedicated static pass over the DFU/upgrade DLLs",
-   "next_hardware_step": "NOT to be attempted (no flash/firmware operations)",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
-   "status": "OPEN"
-  },
-  {
-   "id": "WIN-U-003",
-   "question": "Does the pad re-enumerate differently in normal vs Xbox-compatible mode?",
-   "priority": "MEDIUM",
-   "ruled_out": [],
-   "best_evidence": "the Windows-side question is about device behaviour, not code",
-   "next_offline_step": "static prediction of which descriptors each mode would request",
-   "next_hardware_step": "mode switch on real hardware with enumeration monitoring",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN"
-  },
-  {
-   "id": "FW-U-001",
-   "question": "Which MCU is in the ARMOR-X Pro body?",
-   "priority": "LOW",
-   "ruled_out": [],
-   "best_evidence": "RCSP-capable service layout + a JieLi AC632N .ufw upgrade library in the vendor Windows software => AC6321A/AC632N/BD19 is STRONG EVIDENCE, not proof; no firmware image exists locally",
-   "next_offline_step": "static analysis of the vendor .ufw container/signature handling",
-   "next_hardware_step": "a firmware dump (not attempted, and not proposed)",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
-   "status": "OPEN"
-  },
-  {
-   "id": "SES-U-001",
-   "question": "Can an 11.25 ms connection interval be requested reproducibly on Linux?",
-   "priority": "LOW",
-   "ruled_out": [],
-   "best_evidence": "mechanism research is documented (BlueZ/btmgmt/kernel vs raw HCI) with privileges, adapter requirements and rollback",
-   "next_offline_step": "done",
-   "next_hardware_step": "apply and measure without a device first, then with",
-   "dependencies": [
-    "D2-U-010 must fail"
-   ],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN"
-  },
-  {
-   "id": "OP-U-001",
-   "question": "What are opcodes 0xFD and 0xD3, and what does the app's per-opcode write-result dispatcher imply?",
-   "priority": "MEDIUM",
-   "ruled_out": [],
-   "best_evidence": "frame_config_macros.dart (4.0.8) dispatches write results on {0xFD, 0xFC, 0xD8, 0xD3}; 0xFD and 0xD3 were not previously in our opcode catalogue",
-   "next_offline_step": "trace the 0xFD and 0xD3 builders and their consumers in all four builds",
-   "next_hardware_step": "none until the builders are understood",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN"
-  },
-  {
-   "id": "KEY-U-003",
-   "question": "Which physical control owns digital bit 9?",
-   "priority": "MEDIUM",
-   "ruled_out": [],
-   "best_evidence": "RESOLVED by one-variable confirmation (2026-09-28): one connection, one D2 session, three windows - W0 A-only (228 valid frames, bit 9 in 0), W1 RT fully held + A (263 frames, bit 9 in 184, two holds, byte[16] ramping 0..255), W2 A-only again (283 frames, bit 9 in 0). 79 idle frames in W1 with bit 9 clear. All 8 criteria pass -> RT_DIGITAL_ID_9_PROVEN_LIVE. HCI: 780 notifications = 777 harness records + 2 liveness replies + D2-OFF echo; per-window capture growth verified.",
-   "next_offline_step": "-",
-   "next_hardware_step": "-",
-   "dependencies": [],
-   "classification": "PHYSICALLY_RESOLVED",
-   "status": "RESOLVED",
-   "opened_at": "2026-09-28",
-   "rule_out": [],
-   "resolved_at": "2026-09-28"
-  },
-  {
-   "id": "TRG-U-001",
-   "question": "What does the F7 step-length read return, and what are the value's units/bounds/scope?",
-   "priority": "high",
-   "ruled_out": "F7 is not a trigger parameter; the tested unit produces no observable reply to the read request; F7_WRITE_ONLY is explicitly NOT concluded from silence",
-   "best_evidence": "LIVE 2026-09-28: `A5 04 F7 A0` transmitted twice, zero notifications observed (3 s and 5 s), while 0B (before/between/after) and the FC DPI control (before/after) answered in 23-30 ms; HCI shows 7 writes / 5 notifications. STATIC: `writeStepLengthConfig` encodes a 16-bit LE value + bool flag, gated on version >= 0x36; UI keys `step_accuracy_setting` = \u6b65\u957f\u7cbe\u5ea6\u8bbe\u7f6e, tip names the stick.",
-   "next_offline_step": "determine how the app expects to obtain the value - examine `_handleConfigEvent` / `_requestStepLength` / `_scheduleStepLengthRead` in config_simulate_command.dart and look for a device-initiated config-event path",
-   "next_hardware_step": "only after the offline step: a guarded same-value no-op write with readback and restore, gated on a proven recovery path",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "PARTIALLY_RESOLVED"
-  },
-  {
-   "id": "TRG-U-002",
-   "question": "Does F7 configuration transform the reported D2 trigger analog bytes [15]/[16], or the actuation threshold/deadzone/range?",
-   "priority": "high",
-   "ruled_out": "NO code path connects F7 to the D2 frame contract: `getStepLength`/`writeStepLengthConfig` reference no trigger field and contain no clamp/scale/normalize/threshold code",
-   "best_evidence": "full disassembly read of both functions plus the callgraph; the frame carries only a bool + a 16-bit value",
-   "next_offline_step": "none - this is a static negative; do not re-open without new evidence",
-   "next_hardware_step": "none until a different command is implicated",
-   "dependencies": [],
-   "classification": "STATICALLY_EXHAUSTED",
-   "status": "CLOSED_NEGATIVE"
-  },
-  {
-   "id": "DPI-U-003",
-   "question": "What does the zero-payload `A5 05 FF FC A5` reply mean, and is DPI numeric or an index?",
-   "priority": "high",
-   "ruled_out": "the reply does not carry the current DPI value in the captured case",
-   "best_evidence": "live capture; static reply-envelope rule; `writeDpiConfig` transmits only `selector & 0x0F`",
-   "next_offline_step": "locate the 0xFF handler chain and confirm the expected reply length per opcode",
-   "next_hardware_step": "re-read `A5 05 FC 80 26` and decode the reply against the handler's expectation",
-   "dependencies": [
-    "DPI-U-001",
-    "DPI-U-002"
-   ],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN"
-  },
-  {
-   "id": "DPI-U-004",
-   "question": "Is the `A5 0B FC` transcription pair part of the DPI feature?",
-   "priority": "medium",
-   "ruled_out": "no - different length byte (0x0B), different callers (frame_config_macros start/stopTranscribe), and it controls macro recording, not DPI",
-   "best_evidence": "`startTranscribe` -> `A5 0B FC 01`, `stopTranscribe` -> `A5 0B FC 00`; neither touches the DPI model",
-   "next_offline_step": "none for DPI; track separately under the macro/transcribe backlog",
-   "next_hardware_step": "none",
-   "dependencies": [],
-   "classification": "STATICALLY_EXHAUSTED",
-   "status": "CLOSED_SEPARATE_FEATURE"
-  },
-  {
-   "id": "PRS-U-001",
-   "question": "Are DPI and step-length settings persistent on the device, or runtime-only?",
-   "priority": "medium",
-   "ruled_out": "they do not go through the D6/D7 commit path: both writers call `BluetoothModel::write` directly",
-   "best_evidence": "`writeDpiConfig` @0x9468e0 and `writeStepLengthConfig` end in a direct `write(frame)`; no D6/D7/D8 frame is built on either path",
-   "next_offline_step": "check whether the device answers a read of the written setting after a power cycle (needs hardware)",
-   "next_hardware_step": "read-only D6 SHA before/after a same-value no-op write, then a power cycle, then D6 again (deferred)",
-   "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN"
-  },
-  {
-   "id": "TRG-U-003",
-   "question": "If the F7 read is silent on this unit, how does the app ever learn the step-length value?",
-   "priority": "high",
-   "ruled_out": "it is not obtained as a reply to `A5 04 F7 A0` on this firmware (two controlled attempts, healthy link)",
-   "best_evidence": "the silent read plus the presence of `_handleConfigEvent` (which compares a value against 0xF7) and `_requestStepLength` / `_scheduleStepLengthRead` in config_simulate_command.dart",
-   "next_offline_step": "trace those three symbols: is there a device-initiated config event that carries the value, or does the app only ever write it?",
-   "next_hardware_step": "none until the offline step resolves the expected delivery path",
-   "dependencies": [
-    "TRG-U-001"
-   ],
-   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
-   "status": "OPEN"
-  }
- ],
- "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md | 2026-09-28 key-ID closure session: all 26 requested physical controls are proven live except RT; KEY-U-001 and KEY-U-002 are both closed with dated evidence. | 2026-09-28: KEY-U-003 RESOLVED - bit 9 is RT's digital id (mask 0x00000200), proven by a one-variable W0/W1/W2 experiment. The key map is complete: 27/27 physical controls proven live. 2026-09-28: added TRG-U-001/002, DPI-U-003/004, PRS-U-001 and revised DPI-U-001/002 after the F7/F6/FC static pass. 2026-09-28 (live): F7 read probed read-only -> F7_NO_REPLY_LINK_HEALTHY; TRG-U-001 revised, TRG-U-003 added."
+  "entries": [
+    {
+      "id": "D2-U-001",
+      "question": "What write type does the official app use for D2?",
+      "priority": "CLOSED",
+      "ruled_out": [
+        "write-with-response"
+      ],
+      "best_evidence": "the official capture shows ATT Write Command (0x52) on handle 0x0075 = write WITHOUT response, identical to the harness",
+      "next_offline_step": "-",
+      "next_hardware_step": "-",
+      "dependencies": [],
+      "classification": "STATICALLY_EXHAUSTED",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "D2-U-002",
+      "question": "What is the 0x24 comparison in the 2.24 Button-Test parser?",
+      "priority": "CLOSED",
+      "ruled_out": [
+        "36-byte frame length",
+        "a container .length",
+        "an array index",
+        "a byte offset",
+        "an enum"
+      ],
+      "best_evidence": "0x24 is the tagged Smi of 18 (18<<1); verified byte-level at 0x8b06e8 in 2.23 (LoadInt32Instr then cmp x1,#0x12) and corroborated by all 155 live frames carrying byte[1]=0x12",
+      "next_offline_step": "-",
+      "next_hardware_step": "-",
+      "dependencies": [],
+      "classification": "STATICALLY_EXHAUSTED",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "D2-U-007",
+      "question": "Why did the harness appear silent after a D2 enable?",
+      "priority": "CLOSED",
+      "ruled_out": [
+        "a device-level difference between app and harness",
+        "a capability limit of the harness"
+      ],
+      "best_evidence": "Two independent facts. (1) The harness streams: 3,292 valid frames / 26 ids in the 2026-09-27 17:08 run under 0B -> D2 ON with no pre-clear. (2) PROVEN LIVE 2026-09-28: case C0 - WITH the D2 OFF pre-clear and a confirmed A-twice press - produced 167 valid frames including PRESS/RELEASE/PRESS/RELEASE on bit 0, while 0 frames arrived before the press and after the release. So the historical differential windows were silent because no physical press was requested in them, not because of any protocol state. EXPLANATION RECORDED, NOT ERASED: see results/reconciliation/d2-u007-harness-streaming-reconciliation.md and results/experiments/d2-c0-physical-20260928-054549/RESULT.md",
+      "next_offline_step": "none - closed",
+      "next_hardware_step": "none - closed",
+      "dependencies": [],
+      "classification": "STATICALLY_EXHAUSTED",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "D2-U-010",
+      "question": "Does a D2 OFF pre-clear before the D2 enable suppress streaming while a key IS pressed?",
+      "priority": "CRITICAL",
+      "ruled_out": [
+        "the D2 OFF pre-clear as a suppressor of button reports"
+      ],
+      "best_evidence": "PROVEN LIVE 2026-09-28: C0 (pre-clear present) + confirmed A-twice press = 167 valid frames, 4 transitions PRESS/RELEASE/PRESS/RELEASE on bit 0, only bit 0 set; 0 frames before the press and 0 after the release. C1/C2 were NOT run - the question was already answered.",
+      "next_offline_step": "none - closed",
+      "next_hardware_step": "none - closed",
+      "dependencies": [],
+      "classification": "STATICALLY_EXHAUSTED",
+      "status": "RESOLVED - C0_STREAMS_WITH_PRECLEAR"
+    },
+    {
+      "id": "D2-U-008",
+      "question": "Does the device require a bonded/encrypted link?",
+      "priority": "CLOSED",
+      "ruled_out": [
+        "bonding",
+        "encryption",
+        "SMP"
+      ],
+      "best_evidence": "BOND_NONE on the phone, zero SMP frames, zero encryption events on both sides",
+      "next_offline_step": "-",
+      "next_hardware_step": "-",
+      "dependencies": [],
+      "classification": "STATICALLY_EXHAUSTED",
+      "status": "REFUTED"
+    },
+    {
+      "id": "D2-U-009",
+      "question": "Do the connection parameters cause the difference?",
+      "priority": "VERY LOW",
+      "ruled_out": [
+        "causality (explicitly not claimed)"
+      ],
+      "best_evidence": "official 30 -> 7.5 -> 30 -> 11.25 ms (1 create + 3 update commands, verified) vs harness 7.5 ms; the app requests no interval profile at all 2026-09-28: C0 streamed 167 frames with the harness's own 7.5 ms interval, so no interval change is needed to receive button reports.",
+      "next_offline_step": "11.25 ms mechanism documented (results/final/connection-params-11ms-experiment-11.25ms.md)",
+      "next_hardware_step": "apply the documented OS-level mechanism, then repeat C0",
+      "dependencies": [
+        "D2-U-010 must fail first"
+      ],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "NOT IMPLICATED (stays the weakest candidate; do not run unless a new failure appears)"
+    },
+    {
+      "id": "KEY-U-001",
+      "question": "Which buttons are ids 2, 5, 21, 22, 31, 32, 33?",
+      "priority": "MEDIUM",
+      "ruled_out": [],
+      "best_evidence": "no physical button produced these bits in any capture; the static label inventories do not resolve them; define.dart getters are offset +1 and cannot be used to name wire bits. | 2026-09-28 closure session (results/experiments/key-id-closure-20260928-060134): the physical-control inventory was derived from what the operator was actually asked to press (results/runtime/press-groups.jsonl) and cross-checked against the proven-live map: ALL 26 requested controls are proven live except RT, so none of these ids corresponds to a requested control. No label for them exists in any of the four builds (A B X Y LB RB LT RT L3 R3 Menu Select Start Capture Up Down Left Right M1-M7 NIL + keyboard keys + ZL/ZR). Measured negative on this unit.",
+      "next_offline_step": "-",
+      "next_hardware_step": "none - not emitted by this unit; a different model/mode would be needed to observe them",
+      "dependencies": [],
+      "classification": "UNOBSERVED_RESERVED_OR_UNUSED",
+      "status": "RESOLVED_FOR_THIS_UNIT",
+      "resolved_at": "2026-09-28"
+    },
+    {
+      "id": "KEY-U-002",
+      "question": "Does RT report analog travel, and does it have a digital key id on this unit?",
+      "priority": "MEDIUM",
+      "ruled_out": [
+        "id 9 as RT's bit"
+      ],
+      "best_evidence": "closure session (2026-09-28): two full pulls produced zero frames - a method-limited negative, since RT alone emits no frame; [16] was UNSAMPLED, not measured zero. | piggyback session (2026-09-28): with A forcing transmission, byte[16] = 0 at rest and 255 at full pull in every A-caused frame (40/40 in P2, 52/52 in the repeat) while byte[15] stayed flat - LT positive control proven on the same method. A digital bit 9 appeared only in the RT-held windows (513/512; 107 frames P2, 144 P2R; absent in P0 and P1) and is preserved UNNAMED.",
+      "next_offline_step": "-",
+      "next_hardware_step": "one confirmation window: A bursts alone vs A bursts with RT held, one control only, to name bit 9; or read RT in the official app's trigger/DPI view",
+      "dependencies": [],
+      "classification": "ANALOG_PROVEN_LIVE / DIGITAL_NEGATIVE_RETRACTED",
+      "status": "RESOLVED (analog) / SUPERSEDED (digital negative)",
+      "resolved_at": "2026-09-28"
+    },
+    {
+      "id": "DPI-U-001",
+      "question": "What real DPI value does selector N mean?",
+      "priority": "MEDIUM",
+      "ruled_out": [
+        "any in-binary mapping table"
+      ],
+      "best_evidence": "STATIC (2026-09-28): the writer `A5 05 FC <selector & 0x0F>` carries ONLY a 4-bit selector - no value byte, no clamp beyond the mask, and no numeric table anywhere in the binary. The preset table is server-side, which is why no selector->DPI mapping can be recovered from the APK.",
+      "next_offline_step": "none left in the APK for the numeric mapping; only a per-selector live differential of the reported DPI (deferred, needs a read path that returns a value)",
+      "next_hardware_step": "none useful without the vendor table",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+      "status": "OPEN"
+    },
+    {
+      "id": "DPI-U-002",
+      "question": "What is the shape of the DPI reply, and does it carry a value?",
+      "priority": "MEDIUM",
+      "ruled_out": [],
+      "best_evidence": "LIVE: TX `A5 05 FC 80 26` -> RX `A5 05 FF FC A5`. STATIC (2026-09-28): the reply family is `A5 <len> FF <echoed opcode> <cks>`; byte[3] echoes the queried opcode; the captured reply has ZERO payload, so this query returns no numeric DPI value. The chained read (getDpi then getStepLength inside one notification handler) shows the official workflow is a read sequence.",
+      "next_offline_step": "find the 0xFF dispatch table and the per-opcode handlers; determine whether any 0xFF reply carries a payload at all",
+      "next_hardware_step": "re-read the query and vary the selector while capturing, to see which field moves",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+      "status": "PARTIALLY_RESOLVED"
+    },
+    {
+      "id": "MOT-U-001",
+      "question": "What do the AB motion/gyro payload fields mean (mode, sensitivity, deadzone, filter)?",
+      "priority": "LOW",
+      "ruled_out": [],
+      "best_evidence": "the writer AB 07 05 25 <u16 LE> and the query shapes AB 05 05 25/26 are known; the queries return NOTHING on this firmware",
+      "next_offline_step": "static field trace around writeMotionDpiConfig @0x946158",
+      "next_hardware_step": "none until a reply exists",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN"
+    },
+    {
+      "id": "LGT-U-001",
+      "question": "What is the RGB byte order and the lighting field layout?",
+      "priority": "MEDIUM",
+      "ruled_out": [
+        "conventional RGB ordering (no evidence)"
+      ],
+      "best_evidence": "the 0x70 writers exist in all builds but no read path exists; RGB order is UNKNOWN in all four builds",
+      "next_offline_step": "static field trace through writeLightConfig and the 0x05/0x3F sub-commands",
+      "next_hardware_step": "minimum reversible experiment: one zone, one known colour, visual confirm, restore",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_OPERATOR",
+      "status": "OPEN"
+    },
+    {
+      "id": "D8-U-001",
+      "question": "What selects the D8 chunk class (15 / 43 / 67 payload sizes)?",
+      "priority": "MEDIUM",
+      "ruled_out": [
+        "A4 0A D8 as a commit frame (CONTRADICTED in all four builds)"
+      ],
+      "best_evidence": "commit is A4 05 D8 <nfrags+1> <cks>; the 10-byte TranscribeFrame model and subpackageLength-5 arithmetic are reconstructed; the class selector is not",
+      "next_offline_step": "static branch analysis of the fragmenter in all four builds",
+      "next_hardware_step": "read a macro back and observe which classes the device emits",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN (static step available)"
+    },
+    {
+      "id": "CFG-U-001",
+      "question": "What are the 10 UNKNOWN byte regions of the 144-byte configuration?",
+      "priority": "HIGH",
+      "ruled_out": [],
+      "best_evidence": "config-byte-evidence-map: 25 PROVEN STATIC / 10 UNKNOWN / 1 PROVEN LIVE; baseline and mutant images both exist and differ in {0,1,127}",
+      "next_offline_step": "resolve more regions statically from the four builds' config codecs",
+      "next_hardware_step": "controlled single-field diffs with readback + power-cycle verification",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN"
+    },
+    {
+      "id": "WIN-U-001",
+      "question": "Why does the current Windows Assistant leave the ARMORX legacy device type inaccessible?",
+      "priority": "MEDIUM",
+      "ruled_out": [
+        "conflating the two numbering systems (now explicitly separated)"
+      ],
+      "best_evidence": "DevMgr.dll has t_BBW_DevType and t_ProductType colliding at 5-7; the classifier switch is at 0x1003212f",
+      "next_offline_step": "PE xref pass mapping the classifier to the UI device list",
+      "next_hardware_step": "attach the unit and observe which type the Assistant picks",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN (static step available)"
+    },
+    {
+      "id": "WIN-U-002",
+      "question": "Is there a latent ArmorX Pro factory/DFU path in the vendor software?",
+      "priority": "LOW",
+      "ruled_out": [],
+      "best_evidence": "devmgr_dfu_analysis.json exists as a starting point; no factory entry point was identified",
+      "next_offline_step": "dedicated static pass over the DFU/upgrade DLLs",
+      "next_hardware_step": "NOT to be attempted (no flash/firmware operations)",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+      "status": "OPEN"
+    },
+    {
+      "id": "WIN-U-003",
+      "question": "Does the pad re-enumerate differently in normal vs Xbox-compatible mode?",
+      "priority": "MEDIUM",
+      "ruled_out": [],
+      "best_evidence": "the Windows-side question is about device behaviour, not code",
+      "next_offline_step": "static prediction of which descriptors each mode would request",
+      "next_hardware_step": "mode switch on real hardware with enumeration monitoring",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN"
+    },
+    {
+      "id": "FW-U-001",
+      "question": "Which MCU is in the ARMOR-X Pro body?",
+      "priority": "LOW",
+      "ruled_out": [],
+      "best_evidence": "RCSP-capable service layout + a JieLi AC632N .ufw upgrade library in the vendor Windows software => AC6321A/AC632N/BD19 is STRONG EVIDENCE, not proof; no firmware image exists locally",
+      "next_offline_step": "static analysis of the vendor .ufw container/signature handling",
+      "next_hardware_step": "a firmware dump (not attempted, and not proposed)",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+      "status": "OPEN"
+    },
+    {
+      "id": "SES-U-001",
+      "question": "Can an 11.25 ms connection interval be requested reproducibly on Linux?",
+      "priority": "LOW",
+      "ruled_out": [],
+      "best_evidence": "mechanism research is documented (BlueZ/btmgmt/kernel vs raw HCI) with privileges, adapter requirements and rollback",
+      "next_offline_step": "done",
+      "next_hardware_step": "apply and measure without a device first, then with",
+      "dependencies": [
+        "D2-U-010 must fail"
+      ],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN"
+    },
+    {
+      "id": "OP-U-001",
+      "question": "What are opcodes 0xFD and 0xD3, and what does the app's per-opcode write-result dispatcher imply?",
+      "priority": "MEDIUM",
+      "ruled_out": [],
+      "best_evidence": "frame_config_macros.dart (4.0.8) dispatches write results on {0xFD, 0xFC, 0xD8, 0xD3}; 0xFD and 0xD3 were not previously in our opcode catalogue",
+      "next_offline_step": "trace the 0xFD and 0xD3 builders and their consumers in all four builds",
+      "next_hardware_step": "none until the builders are understood",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN"
+    },
+    {
+      "id": "KEY-U-003",
+      "question": "Which physical control owns digital bit 9?",
+      "priority": "MEDIUM",
+      "ruled_out": [],
+      "best_evidence": "RESOLVED by one-variable confirmation (2026-09-28): one connection, one D2 session, three windows - W0 A-only (228 valid frames, bit 9 in 0), W1 RT fully held + A (263 frames, bit 9 in 184, two holds, byte[16] ramping 0..255), W2 A-only again (283 frames, bit 9 in 0). 79 idle frames in W1 with bit 9 clear. All 8 criteria pass -> RT_DIGITAL_ID_9_PROVEN_LIVE. HCI: 780 notifications = 777 harness records + 2 liveness replies + D2-OFF echo; per-window capture growth verified.",
+      "next_offline_step": "-",
+      "next_hardware_step": "-",
+      "dependencies": [],
+      "classification": "PHYSICALLY_RESOLVED",
+      "status": "RESOLVED",
+      "opened_at": "2026-09-28",
+      "rule_out": [],
+      "resolved_at": "2026-09-28"
+    },
+    {
+      "id": "TRG-U-001",
+      "question": "What does the F7 step-length read return, and what are the value's units/bounds/scope?",
+      "priority": "high",
+      "ruled_out": "F7 is not a trigger parameter; the tested unit produces no observable reply to the read request; F7_WRITE_ONLY is explicitly NOT concluded from silence; the read is NOT a request-reply pair (the app expects a >=7-byte write-shaped event frame)",
+      "best_evidence": "LIVE 2026-09-28: `A5 04 F7 A0` transmitted twice, zero notifications (3 s and 5 s) while 0B (before/between/after) and the FC control (before/after) answered in 23-30 ms; HCI 7 writes / 5 notifications, no F7 frame either way. STATIC 2026-09-28: `getStepLength` 0x8b4d30 builds `A5 04 F7 <cks>` and writes only (no await/callback/flag, no version gate); the page polls it up to 3 times (`_requestStepLength` 0xa6e320) and stops when state `field_23` is non-null; the inbound handler (`_handleConfigEvent` 0xab94fc) requires len>=7, [0]==0xA5, [2]==0xF7 and parses value=([5]<<8)|[4], flag=[3] - the same layout as `writeStepLengthConfig` (0x9445d4). `writeDpiConfig`/`writeStepLengthConfig` are direct writes, no D6/D7 commit. STATUS NOTE: read semantics resolved live (no reply on this unit); units/bounds/scope remain UNKNOWN -> PARTIALLY_RESOLVED.",
+      "next_offline_step": "DONE (see TRG-U-003). Remaining offline gap: flag feature-meaning, optional byte, bounds/units, stick/profile scope.",
+      "next_hardware_step": "READ-ONLY corrected probe (justified, NOT run): 3 attempts, >=10 s listening tail after the last, app handshake order (2A24/2A26 -> EF -> D6) reproduced first. Classification stays F7_NO_REPLY_LINK_HEALTHY until an event frame is seen.",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "PARTIALLY_RESOLVED"
+    },
+    {
+      "id": "TRG-U-002",
+      "question": "Does F7 configuration transform the reported D2 trigger analog bytes [15]/[16], or the actuation threshold/deadzone/range?",
+      "priority": "high",
+      "ruled_out": "NO code path connects F7 to the D2 frame contract: `getStepLength`/`writeStepLengthConfig` reference no trigger field and contain no clamp/scale/normalize/threshold code",
+      "best_evidence": "full disassembly read of both functions plus the callgraph; the frame carries only a bool + a 16-bit value",
+      "next_offline_step": "none - this is a static negative; do not re-open without new evidence",
+      "next_hardware_step": "none until a different command is implicated",
+      "dependencies": [],
+      "classification": "STATICALLY_EXHAUSTED",
+      "status": "CLOSED_NEGATIVE"
+    },
+    {
+      "id": "DPI-U-003",
+      "question": "What does the zero-payload `A5 05 FF FC A5` reply mean, and is DPI numeric or an index?",
+      "priority": "high",
+      "ruled_out": "the reply does not carry the current DPI value in the captured case",
+      "best_evidence": "live capture; static reply-envelope rule; `writeDpiConfig` transmits only `selector & 0x0F`",
+      "next_offline_step": "locate the 0xFF handler chain and confirm the expected reply length per opcode",
+      "next_hardware_step": "re-read `A5 05 FC 80 26` and decode the reply against the handler's expectation",
+      "dependencies": [
+        "DPI-U-001",
+        "DPI-U-002"
+      ],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN"
+    },
+    {
+      "id": "DPI-U-004",
+      "question": "Is the `A5 0B FC` transcription pair part of the DPI feature?",
+      "priority": "medium",
+      "ruled_out": "no - different length byte (0x0B), different callers (frame_config_macros start/stopTranscribe), and it controls macro recording, not DPI",
+      "best_evidence": "`startTranscribe` -> `A5 0B FC 01`, `stopTranscribe` -> `A5 0B FC 00`; neither touches the DPI model",
+      "next_offline_step": "none for DPI; track separately under the macro/transcribe backlog",
+      "next_hardware_step": "none",
+      "dependencies": [],
+      "classification": "STATICALLY_EXHAUSTED",
+      "status": "CLOSED_SEPARATE_FEATURE"
+    },
+    {
+      "id": "PRS-U-001",
+      "question": "Are DPI and step-length settings persistent on the device, or runtime-only?",
+      "priority": "medium",
+      "ruled_out": "they do not go through the D6/D7 commit path: both writers call `BluetoothModel::write` directly",
+      "best_evidence": "`writeDpiConfig` @0x9468e0 and `writeStepLengthConfig` end in a direct `write(frame)`; no D6/D7/D8 frame is built on either path 2026-09-28: F7 shares this - `writeStepLengthConfig` also ends in a direct write; an F7 write cannot be tested safely yet (WRITE_TEST_NOT_YET_SAFE: no restoration value - no readback, no proven device event, field_23 filled only by that event).",
+      "next_offline_step": "check whether the device answers a read of the written setting after a power cycle (needs hardware)",
+      "next_hardware_step": "read-only D6 SHA before/after a same-value no-op write, then a power cycle, then D6 again (deferred)",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN"
+    },
+    {
+      "id": "TRG-U-003",
+      "question": "How does the app obtain the F7 step-length value if the read is silent?",
+      "priority": "high",
+      "ruled_out": "not as a reply to `A5 04 F7 A0`; not from D6; not from a local/cloud/profile field (step_accuracy/stepLength: 24/27 AOT hits, 0 assets hits -> SERVER_PROFILE_VALUE NOT OBSERVED)",
+      "best_evidence": "ANSWERED STATICALLY: the value can only arrive as an inbound F7 *event* frame (>=7 bytes, write-shaped) delivered by the generic stream `BluetoothModel.notifyCharacteristicStream` (0x826814, over AsyncBroadcastStreamController field_43, fed by the notify callback 0xacb7f8) to `_handleConfigEvent`, whose follow-up closure 0xab9764 stores state `field_23` @0xab97d8 - exactly the field `_requestStepLength` polls to stop retrying. No other source exists in the app.",
+      "next_offline_step": "none - static path exhausted",
+      "next_hardware_step": "observe whether the device EVER emits such an event frame (corrected read-only probe)",
+      "dependencies": [
+        "TRG-U-001"
+      ],
+      "classification": "STATICALLY_EXHAUSTED",
+      "status": "RESOLVED (static); live emission unobserved"
+    },
+    {
+      "id": "TRG-U-004",
+      "question": "Does the device ever emit an F7 step-length event frame, and under what state?",
+      "priority": "high",
+      "ruled_out": "not observed in any capture held: 3 decoded btmon files (0 unsolicited RX in 2.0 s windows) and the official app's live session (250 ATT records, zero containing 'f7')",
+      "best_evidence": "the app's design expects it (3-attempt poll + >=7-byte handler + field_23 break condition); the official trace was a D2/button session, so its F7 absence is expected and is not evidence about F7 itself",
+      "next_offline_step": "none pending",
+      "next_hardware_step": "corrected READ-ONLY probe: 3 attempts, >=10 s tail, app handshake first (PREPARED, NOT RUN)",
+      "dependencies": [
+        "TRG-U-001",
+        "TRG-U-003"
+      ],
+      "classification": "DEFERRED_REQUIRES_HARDWARE",
+      "status": "OPEN"
+    },
+    {
+      "id": "TRG-U-005",
+      "question": "What do the F7 write flag and the optional 8th byte mean?",
+      "priority": "medium",
+      "ruled_out": "the flag is not a checksum or length byte: it selects the frame length via ((flag & 2) + 14) / 2 -> 7 or 8",
+      "best_evidence": "`and x3,x3,#2` @0x944610 in `writeStepLengthConfig`; the inbound handler stores frame[3] separately from the value",
+      "next_offline_step": "find the UI/state argument passed as the flag at the `_setKeyExchange` call site (0x95c578 region)",
+      "next_hardware_step": "none",
+      "dependencies": [],
+      "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+      "status": "OPEN"
+    }
+  ],
+  "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md | 2026-09-28 key-ID closure session: all 26 requested physical controls are proven live except RT; KEY-U-001 and KEY-U-002 are both closed with dated evidence. | 2026-09-28: KEY-U-003 RESOLVED - bit 9 is RT's digital id (mask 0x00000200), proven by a one-variable W0/W1/W2 experiment. The key map is complete: 27/27 physical controls proven live. 2026-09-28: added TRG-U-001/002, DPI-U-003/004, PRS-U-001 and revised DPI-U-001/002 after the F7/F6/FC static pass. 2026-09-28 (live): F7 read probed read-only -> F7_NO_REPLY_LINK_HEALTHY; TRG-U-001 revised, TRG-U-003 added. | 2026-09-28 F7 value-provenance (static-only): TRG-U-003 answered statically (value arrives only as an inbound F7 event frame via the broadcast stream -> state field_23); TRG-U-004/005 added; TRG-U-001 keeps F7_NO_REPLY_LINK_HEALTHY; PRS-U-001 notes WRITE_TEST_NOT_YET_SAFE."
 }

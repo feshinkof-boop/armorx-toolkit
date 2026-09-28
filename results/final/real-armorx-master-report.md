@@ -369,3 +369,17 @@ shows 7 writes / 5 notifications with the two F7 writes followed by nothing. Con
 
 `F7_WRITE_ONLY` is **not** claimed - see `results/experiments/f7-read-live-20260928-074652/RESULT.md` for the alternative explanations that
 silence leaves open. No mutating command was sent.
+
+---
+
+## 2026-09-28 (F7 value-provenance pass, static-only, HEAD 0e59a66)
+
+**Question answered: where does the app obtain the current F7 step-length value?** Full trace in `results/reconciliation/f7-value-provenance.md` (+ `.json`, `f7-dataflow.dot`).
+
+- **ORIGIN = a device F7 *event* frame, ≥7 bytes, write-shaped** — not a short reply. The F7 handler requires `len>=7`, `frame[0]==0xA5`, `frame[2]==0xF7` and parses `value = ([5]<<8) | [4]` with the flag at `[3]` — the same layout as `writeStepLengthConfig` (`A5 07|08 F7 <flag> <lo> <hi> [extra] <cks>`).
+- **The read is a trigger, not a request-reply pair.** `getStepLength` (0x8b4d30) only builds `A5 04 F7 <cks>` and writes it: no await, no callback, no pending flag, no version gate. The expectation lives in the page: `_requestStepLength` (0xa6e320) sends the read **up to 3 times** with delays between attempts and **breaks when state `field_23` becomes non-null**; the handler's follow-up closure (0xab9764) sets exactly that field.
+- **Inbound path is generic:** `BluetoothModel.notifyCharacteristicStream` (0x826814) = `_BroadcastStream<List<int>>` over an `AsyncBroadcastStreamController` (`field_43`), fed by the notify callback (0xacb7f8). Consumers: 0 files (2.22/2.23) → 15 (2.24) → 2 (4.0.8). The generic `A5 05 FF <opcode> <cks>` envelope is **not** the F7 carrier.
+- **No local/cloud/D6 source exists** for the value (`step_accuracy`/`stepLength`: 24/27 AOT hits, **0 in app assets**), and **`F7_NOT_D6_GOVERNED_STATICALLY_OBSERVED`** (STRONG EVIDENCE).
+- **Live silence, ranked:** (1) a device event is expected and never arrived; (2) the read expects no reply on this model; (3) a state/page gate was missing — the earlier probe sent **2 of the app's 3 attempts** and omitted the handshake ordering. A corrected READ-ONLY probe (3 attempts + ≥10 s listening tail + app handshake first) is **justified but not run**.
+- **`WRITE_TEST_NOT_YET_SAFE`** — no reliable restoration value exists (no readback, no proven event; `field_23` is filled only by that same missing event).
+- **No hardware was touched in this pass**; the F7 = trigger-travel hypothesis remains **CONTRADICTED** and its provenance is preserved above.

@@ -1,0 +1,315 @@
+{
+  "artifact": "f7-value-provenance",
+  "generated": "2026-09-28",
+  "branch": "research/physical-armorx-live-2026-09-27",
+  "head_at_start": "0e59a66",
+  "scope": "offline/static F7 step-length value lifecycle (no hardware touched)",
+  "canonical": {
+    "command": "F7",
+    "feature": "stick step-length / step accuracy",
+    "ui_string": "step_accuracy_setting = \u6b65\u957f\u7cbe\u5ea6\u8bbe\u7f6e",
+    "ui_tip": "\u6b65\u957f\u7cbe\u5ea6\u5f71\u54cd\u6447\u6746\u7684\u7cbe\u786e\u5ea6",
+    "read_frame": "A5 04 F7 A0",
+    "write_family": "A5 07|08 F7 <flag> <lo> <hi> [extra] <cks>",
+    "trigger_travel_hypothesis": "CONTRADICTED"
+  },
+  "lifecycle": {
+    "origin": {
+      "answer": "device event frame (write-shaped, >=7 bytes); no local/cloud source found",
+      "grade": "STRONG EVIDENCE",
+      "evidence": [
+        "_handleConfigEvent requires len>=7, frame[0]==0xA5, frame[2]==0xF7 (0xab9614)",
+        "value = (frame[5]<<8)|frame[4] (0xab96b0..0xab9710)",
+        "flag = frame[3] stored separately (0xab9640)",
+        "step_accuracy/stepLength: 24/27 asm hits, 0 hits in APK assets -> no server/profile field"
+      ]
+    },
+    "storage": {
+      "answer": "page state field_23 (set by the handler's follow-up closure 0xab9764 @0xab97d8)",
+      "grade": "PROVEN STATIC",
+      "evidence": [
+        "StoreField r3->field_23 = r0 @0xab97d8",
+        "LoadField r3 = r0->field_23 @0xa6e3fc (retry-loop break)",
+        "LoadField r2 = r1->field_23 @0x95c5e0 (write path)"
+      ]
+    },
+    "request": {
+      "answer": "BluetoothModel.getStepLength (0x8b4d30) builds A5 04 F7 <cks> and writes it; no await of a reply, no callback, no pending flag, no version gate",
+      "grade": "PROVEN STATIC",
+      "evidence": [
+        "literals 330/8/494 = A5 04 F7 (L478-486)",
+        "getCheckSum @0x8b4dac then write @0x8b4e18",
+        "no 0xb6c (zkmVersion) reference in the function"
+      ]
+    },
+    "delivery": {
+      "answer": "polled + event-driven: _scheduleStepLengthRead registers a closure in a static listener list; that closure calls _requestStepLength, which sends the read up to 3 times with a delay between attempts and stops when field_23 becomes non-null",
+      "grade": "PROVEN STATIC",
+      "evidence": [
+        "_scheduleStepLengthRead 0xa6e178 appends AllocateClosure(0xa6e2d8) to static list (0x678 -> field_53)",
+        "closure calls _requestStepLength @0xa6e304",
+        "_requestStepLength 0xa6e320: stores true to field_1b (re-entrancy guard), cmp x1,#3 loop cap, Provider.of<BluetoothModel>().getStepLength() @0xa6e40c-0xa6e428, Future.delayed between attempts, LoadField field_23 @0xa6e3fc -> break"
+      ]
+    },
+    "ui_state": {
+      "answer": "state field_23 read by _setKeyExchange (0x95c578) which passes LoadInt32Instr(field_23) to writeStepLengthConfig (0x9445d4)",
+      "grade": "STRONG EVIDENCE (device-origin field; the UI edit step is INFERRED)",
+      "evidence": [
+        "LoadField r2 = r1->field_23 @0x95c5e0",
+        "bl #0x9445d4 ::writeStepLengthConfig @0x95c60c"
+      ]
+    },
+    "write": {
+      "answer": "writeStepLengthConfig builds A5 <len> F7 <flag> <lo> <hi> [extra] <cks>; length = ((flag & 2) + 14)/2 => 7 or 8 bytes; 16-bit LE value; checksum via define::getCheckSum",
+      "grade": "PROVEN STATIC",
+      "evidence": [
+        "and x3,x3,#2 @0x944610 (length from flag)",
+        "r16=330 -> field_f, r16=494 -> [0] (0xA5/F7) @0x94466c-0x94467c",
+        "value boxed/2 @0x944690, checksum @0x94471c"
+      ]
+    },
+    "persistence": {
+      "answer": "direct characteristic write (BluetoothManager::write) - no D6/D7 commit observed in the F7 path",
+      "grade": "STRONG EVIDENCE",
+      "note": "durability of an F7 write is UNKNOWN until a guarded write + power-cycle readback is run",
+      "evidence": [
+        "writeStepLengthConfig terminates in BluetoothManager::write (direct characteristic write)",
+        "no D6/D7/D8 frame is built on the F7 path (same as writeDpiConfig @0x9468e0)",
+        "no 0xb6c (zkmVersion) reference inside getStepLength -> the read itself is ungated"
+      ]
+    }
+  },
+  "inbound_dispatch": {
+    "parser_exists": true,
+    "generic_envelope": "A5 05 FF <opcode> <cks> (e.g. A5 05 FF FC A5) is the model-agnostic reply envelope; F7 does NOT use it - the F7 consumer is a per-page stream listener, not a switch arm",
+    "stream": "BluetoothModel.notifyCharacteristicStream (0x826814) = _BroadcastStream<List<int>> over field_43 = AsyncBroadcastStreamController",
+    "producer": "notify callback 0xacb7f8: if payload non-empty -> field_43.add(payload)",
+    "consumers": {
+      "2.22.0901": 0,
+      "2.23.0609": 0,
+      "2.24.0919": 15,
+      "4.0.8": 2,
+      "4.0.8_files": [
+        "widgets/armor-x_pro/armorx_pro_root.dart (handshake opcodes 0xA5/0x0B/0xEF only)",
+        "units/ble/bluetooth_mode.dart (definition)"
+      ]
+    },
+    "verdict": "an F7 event frame would be delivered generically by the stream; no F7-specific opcode switch is needed"
+  },
+  "device_initiated_events": {
+    "found": false,
+    "searched": [
+      "3 decoded btmon.txt captures (0 unsolicited RX; every RX within 2.0 s of a TX)",
+      "official app live session official-att.jsonl: 250 ATT records, opcode histogram {02:155, d2:6, ef:2, 0b:2, e2:2, d4:2, d6:1}, ZERO records containing 'f7'"
+    ],
+    "caveat": "the official trace is a D2/button session - the app was not on the step-accuracy page, so its F7 absence is expected and is not evidence about F7 itself",
+    "grade": "STRONG EVIDENCE for 'no unsolicited config events in the captures held'; UNKNOWN in general"
+  },
+  "value_source_answer": "the displayed/current step-length value can only come from a device F7 event frame; the app has no local, D6, profile, or cloud source for it",
+  "bounds_defaults_units": {
+    "min": "UNKNOWN",
+    "max": "UNKNOWN",
+    "default": "UNKNOWN",
+    "units": "UNKNOWN",
+    "note": "no step-length-specific clamp or slider found in config_simulate_command.dart; the only clamp in the file is _clampPercentage (0x95a304)"
+  },
+  "flag_and_extra_byte": {
+    "flag": "controls frame length 7 vs 8 via ((flag & 2) + 14)/2 - i.e. whether the optional byte is present",
+    "flag_semantics": "UNRESOLVED (candidates: stick side / enable / precision class) - no UI string ties it yet",
+    "extra_byte": "present only in the 8-byte form; source UNKNOWN"
+  },
+  "stick_scope": "UNKNOWN between left/right/both; no left/right selector observed in the F7 builder or handler",
+  "profile_scope": "UNKNOWN (no profile selector in the F7 path)",
+  "d6_relationship": {
+    "verdict": "F7_NOT_D6_GOVERNED_STATICALLY_OBSERVED",
+    "grade": "STRONG EVIDENCE",
+    "evidence": [
+      "F7 builder/handler never reference the D6 offsets or the config model",
+      "F7 write ends in BluetoothManager::write (direct), same as the DPI writers"
+    ]
+  },
+  "live_silence_ranking": [
+    {
+      "rank": 1,
+      "explanation": "B - F7 triggers a later device-initiated event that never arrived",
+      "why": "the page's 3-attempt retry loop + the >=7-byte event handler + field_23 break condition show the design intent is an asynchronous event, not a reply"
+    },
+    {
+      "rank": 2,
+      "explanation": "A - the F7 read deliberately expects no reply on this model",
+      "why": "consistent with silence, but does not explain the handler's existence"
+    },
+    {
+      "rank": 3,
+      "explanation": "E - a state/page/mode gate was absent in the live probe",
+      "why": "the probe sent 2 of the app's 3 attempts and did not reproduce the app's full handshake (2A24/2A26 reads, D6 config page)"
+    },
+    {
+      "rank": 4,
+      "explanation": "F - a generic path we failed to recognise",
+      "why": "weaker now: the generic stream is understood and no F7 frame appeared in any capture"
+    },
+    {
+      "rank": 5,
+      "explanation": "D - legacy/dead code on this device",
+      "why": "the page still schedules the read and registers the handler in 4.0.8"
+    },
+    {
+      "rank": 6,
+      "explanation": "C - value already cached locally",
+      "why": "no local/cloud source exists for it"
+    },
+    {
+      "rank": 7,
+      "explanation": "G - unresolved"
+    }
+  ],
+  "prior_probe_gaps": [
+    "sent 2 attempts, the app sends up to 3",
+    "no listening window after the final attempt beyond the 3 s/5 s captures",
+    "did not reproduce the app's handshake ordering (2A24/2A26 identity reads) before the F7 read"
+  ],
+  "new_read_only_probe_justified": true,
+  "write_test_status": "WRITE_TEST_NOT_YET_SAFE",
+  "write_test_reason": "no reliable restoration value exists: no live readback, no proven device event, and the app's field_23 is populated only by that same event. A default is not acceptable.",
+  "server_profile_value": "NOT OBSERVED",
+  "cross_version": {
+    "2.22.0901": {
+      "F7": "absent",
+      "stream": false
+    },
+    "2.23.0609": {
+      "F7": "absent",
+      "stream": false
+    },
+    "2.24.0919": {
+      "F7": "present (F6+F7 added)",
+      "stream": true,
+      "stream_consumers": 15
+    },
+    "4.0.8": {
+      "F7": "present",
+      "stream": true,
+      "stream_consumers": 2
+    }
+  },
+  "references": [
+    {
+      "version": "4.0.8",
+      "file": "units/ble/bluetooth_mode.dart",
+      "function": "getStepLength",
+      "address": "0x8b4d30",
+      "kind": "read builder",
+      "direction": "outgoing",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "units/ble/bluetooth_mode.dart",
+      "function": "getBriCompConfig",
+      "address": "0x8b4c24",
+      "kind": "read builder (F8)",
+      "direction": "outgoing",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "units/ble/bluetooth_mode.dart",
+      "function": "getDpi",
+      "address": "0x8b4e3c",
+      "kind": "read builder (F6/FC, version-gated >=0x35)",
+      "direction": "outgoing",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "units/ble/bluetooth_mode.dart",
+      "function": "notifyCharacteristicStream",
+      "address": "0x826814",
+      "kind": "stream getter",
+      "direction": "incoming",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "units/ble/bluetooth_mode.dart",
+      "function": "notify callback",
+      "address": "0xacb7f8",
+      "kind": "field_43.add(payload)",
+      "direction": "incoming",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "units/gamepadset.dart",
+      "function": "writeStepLengthConfig",
+      "address": "0x9445d4",
+      "kind": "write builder",
+      "direction": "outgoing",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "widgets/configV280/config_simulate_command.dart",
+      "function": "_handleConfigEvent (closure)",
+      "address": "0xab94c0/0xab9614",
+      "kind": "inbound F7 handler (len>=7, A5, F7)",
+      "direction": "incoming",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "widgets/configV280/config_simulate_command.dart",
+      "function": "_handleConfigEvent",
+      "address": "0xab94fc",
+      "kind": "frame parse + value assembly",
+      "direction": "incoming",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "widgets/configV280/config_simulate_command.dart",
+      "function": "anonymous closure",
+      "address": "0xab9764",
+      "kind": "stores field_23",
+      "direction": "internal",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "widgets/configV280/config_simulate_command.dart",
+      "function": "_scheduleStepLengthRead",
+      "address": "0xa6e178",
+      "kind": "registers read closure on a static listener list",
+      "direction": "internal",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "widgets/configV280/config_simulate_command.dart",
+      "function": "_requestStepLength",
+      "address": "0xa6e320",
+      "kind": "3-attempt retry loop, breaks on field_23",
+      "direction": "outgoing",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "version": "4.0.8",
+      "file": "widgets/configV280/config_simulate_command.dart",
+      "function": "_setKeyExchange",
+      "address": "0x95c578",
+      "kind": "passes field_23 to writeStepLengthConfig",
+      "direction": "outgoing",
+      "grade": "STRONG EVIDENCE"
+    },
+    {
+      "version": "4.0.8",
+      "file": "widgets/armor-x_pro/armorx_pro_root.dart",
+      "function": "stream listener",
+      "address": "0x8b7468",
+      "kind": "root consumer (handshake opcodes)",
+      "direction": "incoming",
+      "grade": "PROVEN STATIC"
+    }
+  ]
+}
