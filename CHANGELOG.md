@@ -4,6 +4,17 @@ All notable project changes are documented here.
 
 ## Unreleased
 
+### Research documentation — 2026-09-27
+
+- Added the real BIGBIG WON 4.0.8 official-app vs Linux-harness BLE session differential.
+- Confirmed `OFFICIAL_WORKS_HARNESS_SILENT`: the official app produces valid `A5 12 02` Button Test reports while the preserved Linux harness session did not.
+- Corrected the D2 success criterion: the official app produces zero Button Test frames while idle; reports are event-driven and repeat while a button is held.
+- Refuted bonding/encryption as the D2 prerequisite: the working official session was unbonded and unencrypted.
+- Confirmed official and harness D2 use the same `A5 05 D2 01 7D` payload, Write Command `0x52`, handle `0x0075`, MTU 64, and the same FFE1/FFE2/CCCD handles.
+- Recorded the first protocol-sequence difference: official performs `EF -> 0B -> E2 -> D4 -> D6` before D2, while the harness performs `0B -> D2 OFF -> D2 ON`; causality remains unresolved.
+- Recorded the connection-interval difference (official final 11.25 ms vs harness 7.50 ms) as evidence, not as a proven cause.
+
+
 ## 0.2.1 — 2026-09-27
 
 Public Windows safety and reliability release.
