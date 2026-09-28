@@ -1,0 +1,231 @@
+{
+ "image": "V41 body app.bin",
+ "base": "0x01e00000",
+ "image_size": 227440,
+ "symbols": [
+  {
+   "address": "0x1e00000",
+   "name": "fw_start",
+   "category": "entry/startup",
+   "grade": "PROVEN STATIC",
+   "evidence": "image load base; startup stub clears BSS and copies .data (verified by disassembly)"
+  },
+  {
+   "address": "0x1e00120",
+   "name": "armorx_entry_point",
+   "category": "entry/startup",
+   "grade": "PROVEN STATIC",
+   "evidence": "JLFS app directory entry-point field for the V41 body image"
+  },
+  {
+   "address": "0x1e042d0",
+   "name": "user_cfg_engine",
+   "category": "config engine",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references 'USER_CFG...warning_tone_v/poweroff_tone_v', 'auto_off_time', 'init mac addr', 'imu_not calibrated'"
+  },
+  {
+   "address": "0x1e0494a",
+   "name": "config_auto_off_and_mac",
+   "category": "config engine",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references 'USER_CFGauto_off_time:%d' and 'G>>>init mac addr!!!'"
+  },
+  {
+   "address": "0x1e04b38",
+   "name": "app_select_24g",
+   "category": "2.4G",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references '------app select 24g--------'"
+  },
+  {
+   "address": "0x1e05856",
+   "name": "macro_engine_config",
+   "category": "macro engine",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references 'GAMEPAD_MACRO_MAX =%d'"
+  },
+  {
+   "address": "0x1e05c66",
+   "name": "record_build_with_hash",
+   "category": "flash/VM",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "indexes 0xDC-byte records (r4 += r5 * 0xdc), zero-fills, hashes 8 bytes at record+2, stores the byte-reversed result at record+0, logs '...len=%d crc=%x'"
+  },
+  {
+   "address": "0x1e06216",
+   "name": "enum_switch_0_to_10",
+   "category": "config engine",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "bounds check 'if (r0 > 0xa)' followed by a tbb table branch: an 11-way switch"
+  },
+  {
+   "address": "0x1e0642c",
+   "name": "armorx_f7_response_build",
+   "category": "protocol TX",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "single call site, inside the F7 handler, passing opcode 0xF6: the F7 settings path emits an F6 frame rather than an F7 reply"
+  },
+  {
+   "address": "0x1e06e8a",
+   "name": "frame_err_length",
+   "category": "protocol parser",
+   "grade": "PROVEN STATIC",
+   "evidence": "unique reference to the command-length error literal; called from the frame handler"
+  },
+  {
+   "address": "0x1e0701c",
+   "name": "frame_err_head",
+   "category": "protocol parser",
+   "grade": "PROVEN STATIC",
+   "evidence": "unique reference to '...cmd head err %x %x'; called from the frame handler"
+  },
+  {
+   "address": "0x1e070da",
+   "name": "frame_err_checksum",
+   "category": "protocol parser",
+   "grade": "PROVEN STATIC",
+   "evidence": "unique reference to the checksum-error literal; called from the frame handler"
+  },
+  {
+   "address": "0x1e071fe",
+   "name": "stick_curve_engine",
+   "category": "stick",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references 'stick curve init %d: point1(%d,%d), point2(%d,%d)' and 'sensor curve[%d]: dir, min, curve, speed, y_div_x, smooth'"
+  },
+  {
+   "address": "0x1e08772",
+   "name": "armorx_cmd_dispatch",
+   "category": "command dispatcher",
+   "grade": "PROVEN STATIC",
+   "evidence": "compares the frame opcode against D2/D4/D7/F7/F8/F9/FA/FF and calls the frame head/length/checksum error printers"
+  },
+  {
+   "address": "0x1e08772",
+   "name": "frame_parse_and_dispatch",
+   "category": "protocol parser",
+   "grade": "PROVEN STATIC",
+   "evidence": "same function as armorx_cmd_dispatch: validates then dispatches"
+  },
+  {
+   "address": "0x1e08860",
+   "name": "armorx_f7_handler",
+   "category": "F7",
+   "grade": "PROVEN STATIC",
+   "evidence": "fall-through block of the dispatcher's rOP != 0xF7 test"
+  },
+  {
+   "address": "0x1e08912",
+   "name": "armorx_f9_handler",
+   "category": "unknown opcode",
+   "grade": "PROVEN STATIC",
+   "evidence": "goto target of the dispatcher's rOP == 0xF9 test"
+  },
+  {
+   "address": "0x1e08944",
+   "name": "armorx_d4_handler",
+   "category": "D4",
+   "grade": "PROVEN STATIC",
+   "evidence": "fall-through block of the dispatcher's rOP != 0xD4 test (second D4 site)"
+  },
+  {
+   "address": "0x1e0898e",
+   "name": "armorx_fa_handler",
+   "category": "unknown opcode",
+   "grade": "PROVEN STATIC",
+   "evidence": "fall-through block of the dispatcher's rOP != 0xFA test"
+  },
+  {
+   "address": "0x1e08a68",
+   "name": "armorx_d7_handler",
+   "category": "D7",
+   "grade": "PROVEN STATIC",
+   "evidence": "goto target of the dispatcher's rOP == 0xD7 test"
+  },
+  {
+   "address": "0x1e08b86",
+   "name": "armorx_f8_handler",
+   "category": "F6/F7/F8 config",
+   "grade": "PROVEN STATIC",
+   "evidence": "goto target of the dispatcher's rOP == 0xF8 test"
+  },
+  {
+   "address": "0x1e08d24",
+   "name": "armorx_d2_handler",
+   "category": "D2",
+   "grade": "PROVEN STATIC",
+   "evidence": "fall-through block of the dispatcher's rOP != 0xD2 test inside armorx_cmd_dispatch"
+  },
+  {
+   "address": "0x1e0914a",
+   "name": "armorx_2f_handler",
+   "category": "unknown opcode",
+   "grade": "PROVEN STATIC",
+   "evidence": "goto target of the dispatcher's rOP == 0x2F test"
+  },
+  {
+   "address": "0x1e0944e",
+   "name": "armorx_ff_response_handler",
+   "category": "protocol TX",
+   "grade": "PROVEN STATIC",
+   "evidence": "goto target of the dispatcher's rOP == 0xFF test (response envelope family)"
+  },
+  {
+   "address": "0x1e0aff2",
+   "name": "ble_transport_layer",
+   "category": "BLE",
+   "grade": "INFERRED",
+   "evidence": "contains compares against A5 and 0B and 3 references to the 0B query opcode, calls the frame handler"
+  },
+  {
+   "address": "0x1e0ebcc",
+   "name": "imu_axis_dump",
+   "category": "gyro/IMU",
+   "grade": "INFERRED",
+   "evidence": "references a '%d,%d,%d,%d' literal attributed to the IMU calibration area"
+  },
+  {
+   "address": "0x1e12714",
+   "name": "user_cfg_bt_name",
+   "category": "config engine",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references 'USER_CFGread bt name err' and 'pps/hid/modules/bt/ble_multi.c'"
+  },
+  {
+   "address": "0x1e12db4",
+   "name": "imu_type_and_unsupported_cmd",
+   "category": "gyro/IMU",
+   "grade": "INFERRED",
+   "evidence": "references 'IMU_TYPE_RIGHT'/'IMU_TYPE_LEFT' and 'unsupport cmd: 0x%x'; single function mixing the unsupported-command default with IMU type naming"
+  },
+  {
+   "address": "0x1e139aa",
+   "name": "usbd_auto_detect_init",
+   "category": "USB device",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references 'usbd auto det init'"
+  },
+  {
+   "address": "0x1e1569a",
+   "name": "gyro_calibration",
+   "category": "gyro/IMU",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references '... gyro CAL data now:%d,%d,%d'"
+  },
+  {
+   "address": "0x1e16368",
+   "name": "zikway_2g4_deal",
+   "category": "2.4G",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references '...pp_zikway_deal', 'mode=%x, mac:', ' tx busy!'"
+  },
+  {
+   "address": "0x1e2155a",
+   "name": "sdfile_mount",
+   "category": "storage",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "references '[SDFILE]sdfile mount failed!!!'"
+  }
+ ]
+}

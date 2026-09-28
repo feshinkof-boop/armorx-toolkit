@@ -154,7 +154,7 @@ def main(argv: list[str]) -> int:
         "distinct_data_targets": len(data_hits),
         "insn_size_histogram": {str(s): sum(1 for r in recs if r["size"] == s)
                                 for s in sorted({r["size"] for r in recs})},
-        "kind_histogram": {}, 
+        "kind_histogram": {},
     }
     for r in recs:
         coverage["kind_histogram"][r["kind"]] = coverage["kind_histogram"].get(r["kind"], 0) + 1

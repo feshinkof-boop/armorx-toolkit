@@ -1,0 +1,291 @@
+{
+ "function": "0x1e08772",
+ "function_end": "0x1e0948c",
+ "instructions_examined": 1027,
+ "range_gates": [
+  {
+   "reg": "r1",
+   "value": "0xd6",
+   "at": "0x1e0881c",
+   "raw": "ifs (r1 > 0xd6) goto 0x2c <fw_start+0x884E : 1e0884e >"
+  },
+  {
+   "reg": "r1",
+   "value": "0x6f",
+   "at": "0x1e08822",
+   "raw": "ifs (r1 > 0x6f) goto 0x114 <fw_start+0x893A : 1e0893a >"
+  },
+  {
+   "reg": "r1",
+   "value": "0xf7",
+   "at": "0x1e0884e",
+   "raw": "ifs (r1 > 0xf7) goto 0x12e <fw_start+0x8982 : 1e08982 >"
+  },
+  {
+   "reg": "r1",
+   "value": "0x2e",
+   "at": "0x1e089b6",
+   "raw": "ifs (r1 > 0x2e) goto 0x3a <fw_start+0x89F4 : 1e089f4 >"
+  },
+  {
+   "reg": "r2",
+   "value": "0x10",
+   "at": "0x1e089be",
+   "raw": "if (r2 > 0x10) goto 0x49c <fw_start+0x8E5E : 1e08e5e >"
+  },
+  {
+   "reg": "r0",
+   "value": "0x4",
+   "at": "0x1e089fe",
+   "raw": "if (r0 > 0x4) goto 0x48a <fw_start+0x8E8C : 1e08e8c >"
+  },
+  {
+   "reg": "r0",
+   "value": "0x1",
+   "at": "0x1e08ba8",
+   "raw": "if (r0 > 0x1) goto 0x1ba <fw_start+0x8D66 : 1e08d66 >"
+  },
+  {
+   "reg": "r0",
+   "value": "0x5",
+   "at": "0x1e08e72",
+   "raw": "if (r0 > 0x5) goto 0x52c <fw_start+0x93A2 : 1e093a2 >"
+  },
+  {
+   "reg": "r0",
+   "value": "0xa",
+   "at": "0x1e08ff6",
+   "raw": "if (r0 > 0xa) goto 0x370 <fw_start+0x936A : 1e0936a >"
+  },
+  {
+   "reg": "r0",
+   "value": "0xe",
+   "at": "0x1e09028",
+   "raw": "if (r0 > 0xe) goto 0x1c8 <fw_start+0x91F4 : 1e091f4 >"
+  },
+  {
+   "reg": "r0",
+   "value": "0x5",
+   "at": "0x1e0905a",
+   "raw": "if (r0 > 0x5) goto 0x19a <fw_start+0x91F8 : 1e091f8 >"
+  },
+  {
+   "reg": "r1",
+   "value": "0xdc",
+   "at": "0x1e092be",
+   "raw": "if (r1 > 0xdc) goto 0x15a <fw_start+0x941C : 1e0941c >"
+  },
+  {
+   "reg": "r1",
+   "value": "0x3",
+   "at": "0x1e092cc",
+   "raw": "if (r1 > 0x3) goto 0x1c <fw_start+0x92EC : 1e092ec >"
+  },
+  {
+   "reg": "r1",
+   "value": "0x1",
+   "at": "0x1e09462",
+   "raw": "if (r1 > 0x1) goto 0x2 <fw_start+0x9468 : 1e09468 >"
+  },
+  {
+   "reg": "r1",
+   "value": "0x1",
+   "at": "0x1e09470",
+   "raw": "if (r1 > 0x1) goto 0x8 <fw_start+0x947C : 1e0947c >"
+  }
+ ],
+ "handlers": [
+  {
+   "opcode": 2,
+   "opcode_hex": "0x02",
+   "compare_at": "0x1e08864",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e08868",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0x2) goto 0x6 <fw_start+0x886E : 1e0886e >",
+   "family": "UNKNOWN",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 5,
+   "opcode_hex": "0x05",
+   "compare_at": "0x1e08e5e",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e08e62",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0x5) goto 0x190 <fw_start+0x8FF2 : 1e08ff2 >",
+   "family": "UNKNOWN",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 13,
+   "opcode_hex": "0x0d",
+   "compare_at": "0x1e091de",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e091e2",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0xd) goto 0x1b4 <fw_start+0x9396 : 1e09396 >",
+   "family": "UNKNOWN",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 25,
+   "opcode_hex": "0x19",
+   "compare_at": "0x1e08826",
+   "reg": "r1",
+   "test": "==",
+   "handler": "0x1e08d32",
+   "handler_note": null,
+   "raw": "if (r1 == 0x19) goto 0x2 <fw_start+0x8D32 : 1e08d32 >",
+   "family": "UNKNOWN",
+   "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+  },
+  {
+   "opcode": 27,
+   "opcode_hex": "0x1b",
+   "compare_at": "0x1e0882a",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e0882e",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0x1b) goto 0x186 <fw_start+0x89B4 : 1e089b4 >",
+   "family": "UNKNOWN",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 47,
+   "opcode_hex": "0x2f",
+   "compare_at": "0x1e08d1a",
+   "reg": "r1",
+   "test": "==",
+   "handler": "0x1e0914a",
+   "handler_note": null,
+   "raw": "if (r1 == 0x2f) goto 0x42c <fw_start+0x914A : 1e0914a >",
+   "family": "unknown family seen in dispatch chain",
+   "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+  },
+  {
+   "opcode": 112,
+   "opcode_hex": "0x70",
+   "compare_at": "0x1e0893a",
+   "reg": "r1",
+   "test": "==",
+   "handler": "0x1e093e4",
+   "handler_note": null,
+   "raw": "if (r1 == 0x70) goto 0xaa6 <fw_start+0x93E4 : 1e093e4 >",
+   "family": "unknown family seen in dispatch chain",
+   "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+  },
+  {
+   "opcode": 210,
+   "opcode_hex": "0xd2",
+   "compare_at": "0x1e08d1e",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e08d24",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0xd2) goto 0x2ce <fw_start+0x8FF2 : 1e08ff2 >",
+   "family": "D2 input-report enable/disable (live: A5 05 D2 01 7D / A5 05 D2 00 7C)",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 212,
+   "opcode_hex": "0xd4",
+   "compare_at": "0x1e087c8",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e087ce",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0xd4) goto 0x1e6 <fw_start+0x89B4 : 1e089b4 >",
+   "family": "D4 query (live: A5 04 D4 7D -> A5 07 D4 11 01 00 92)",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 212,
+   "opcode_hex": "0xd4",
+   "compare_at": "0x1e0893e",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e08944",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0xd4) goto 0x70 <fw_start+0x89B4 : 1e089b4 >",
+   "family": "D4 query (live: A5 04 D4 7D -> A5 07 D4 11 01 00 92)",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 215,
+   "opcode_hex": "0xd7",
+   "compare_at": "0x1e08854",
+   "reg": "r1",
+   "test": "==",
+   "handler": "0x1e08a68",
+   "handler_note": null,
+   "raw": "if (r1 == 0xd7) goto 0x20e <fw_start+0x8A68 : 1e08a68 >",
+   "family": "D7 configuration write",
+   "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+  },
+  {
+   "opcode": 239,
+   "opcode_hex": "0xef",
+   "compare_at": "0x1e08e8c",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e08e92",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0xef) goto 0x160 <fw_start+0x8FF2 : 1e08ff2 >",
+   "family": "UNKNOWN",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 247,
+   "opcode_hex": "0xf7",
+   "compare_at": "0x1e0885a",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e08860",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0xf7) goto 0x154 <fw_start+0x89B4 : 1e089b4 >",
+   "family": "F7 stick step-length / step accuracy",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  },
+  {
+   "opcode": 248,
+   "opcode_hex": "0xf8",
+   "compare_at": "0x1e08982",
+   "reg": "r1",
+   "test": "==",
+   "handler": "0x1e08b86",
+   "handler_note": null,
+   "raw": "if (r1 == 0xf8) goto 0x1fe <fw_start+0x8B86 : 1e08b86 >",
+   "family": "F8 brightness-compensation config (app: A5 04 F8)",
+   "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+  },
+  {
+   "opcode": 249,
+   "opcode_hex": "0xf9",
+   "compare_at": "0x1e087c2",
+   "reg": "r1",
+   "test": "==",
+   "handler": "0x1e08912",
+   "handler_note": null,
+   "raw": "if (r1 == 0xf9) goto 0x14a <fw_start+0x8912 : 1e08912 >",
+   "family": "unknown family seen in dispatch chain",
+   "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+  },
+  {
+   "opcode": 250,
+   "opcode_hex": "0xfa",
+   "compare_at": "0x1e08988",
+   "reg": "r1",
+   "test": "!=",
+   "handler": "0x1e0898e",
+   "handler_note": "fall-through block after the != test",
+   "raw": "if (r1 != 0xfa) goto 0x26 <fw_start+0x89B4 : 1e089b4 >",
+   "family": "unknown family seen in dispatch chain",
+   "evidence": "STRONG EVIDENCE (fell through the != test)"
+  }
+ ]
+}
