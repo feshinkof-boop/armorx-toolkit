@@ -25,10 +25,8 @@ from datetime import datetime, timezone
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from d2_cases import CASES as CASE_DEFS, sequence as case_sequence  # noqa: E402
-
-class OperatorCancelled(Exception):
-    """Raised when the operator pressed CANCEL/STOP on a popup: stop safely, never continue."""
-
+from d2_runner import (FFE1, FFE2, OperatorCancelled, observe_window,  # noqa: E402
+                       run_steps)
 
 try:
     from bleak import BleakClient, BleakScanner
@@ -37,8 +35,6 @@ except Exception as exc:                                          # pragma: no c
     sys.exit(3)
 
 NAME_PREFIX = "ARMOR-X Pro"
-FFE1 = "0000ffe1-0000-1000-8000-00805f9b34fb"   # control write
-FFE2 = "0000ffe2-0000-1000-8000-00805f9b34fb"   # notify
 ID_CHARS = {
     "2a24": "00002a24-0000-1000-8000-00805f9b34fb",   # model number string
     "2a26": "00002a26-0000-1000-8000-00805f9b34fb",   # firmware revision string
@@ -51,22 +47,6 @@ Q_0B = bytes.fromhex("A5040BB4")
 R_0B = bytes.fromhex("A5050B30E5")
 
 OBSERVE_S = 20.0
-
-def observe_window() -> float:
-    """Observation window in seconds.
-
-    Overridable via the D2_OBSERVE_S environment variable (Phase 10 of the session-differential
-    brief uses 10 s where the differential matrix used 20 s). An env var is used rather than a CLI
-    flag because the value must survive into the asyncio worker regardless of subparser routing.
-    """
-    env = os.environ.get("D2_OBSERVE_S")
-    if env:
-        try:
-            return float(env)
-        except ValueError:
-            pass
-    return _OBSERVE_OVERRIDE if _OBSERVE_OVERRIDE else OBSERVE_S
-
 
 _OBSERVE_OVERRIDE: float | None = None
 BRIEF_S = 7.0
@@ -236,71 +216,6 @@ async def d2_off(client, rec: Recorder) -> None:
         await asyncio.sleep(1.5)
     except Exception as exc:
         rec.mark("d2_off_error", str(exc))
-
-
-async def run_steps(client, rec: Recorder, steps) -> None:
-    """Execute a declarative case step list (see automation/scripts/d2_cases.py).
-
-    Deliberately dumb and explicit: every write is recorded with its label so the resulting
-    tx-rx.jsonl is self-describing evidence. The observe step never treats an empty window as a
-    failure - D2 input is event-driven (155 official frames while A was pressed, 0 while idle).
-    """
-    for st in steps:
-        op = st["op"]
-        if op == "sanity":
-            continue  # already performed before the case body
-        if op == "write":
-            frame = bytes.fromhex(st["frame"])
-            mode = "with_response" if st.get("response") else "without_response"
-            await client.write_gatt_char(FFE1, frame, response=bool(st.get("response", False)))
-            rec.log("TX", FFE1, frame, label=st["label"], write_mode=mode)
-        elif op == "sleep":
-            rec.mark("sleep", st.get("why", ""))
-            await asyncio.sleep(float(st["seconds"]))
-        elif op == "wait_fragments":
-            prefix, want = st["prefix"], int(st["expect_min"])
-            rec.mark("wait_fragments", f"{prefix} expect>={want}")
-            deadline = time.monotonic() + float(st["seconds"])
-            while time.monotonic() < deadline:
-                if sum(1 for f in rec.frames if f["hex"].startswith(prefix)) >= want:
-                    break
-                await asyncio.sleep(0.1)
-            got = sum(1 for f in rec.frames if f["hex"].startswith(prefix))
-            rec.mark("fragments_received", f"{got} (expected >= {want})")
-        elif op == "cccd_renew":
-            try:
-                await client.stop_notify(FFE2)
-                rec.mark("cccd_unsubscribe_done")
-                await asyncio.sleep(1.0)
-                await client.start_notify(FFE2, rec.on_notify)
-                rec.mark("cccd_resubscribe_done")
-            except Exception as exc:
-                rec.mark("cccd_renew_error", str(exc))
-        elif op == "operator_prompt":
-            # The one and only operator interaction. Run the dialog ASYNCHRONOUSLY so the event loop
-            # keeps servicing BLE notifications while the popup is up - a synchronous wait would
-            # stall notify callbacks and lose exactly the frames this experiment is looking for.
-            # Clicking the popup button is the acknowledgement channel; chat is not.
-            script = pathlib.Path(__file__).resolve().parent.parent / "operator-dialog-kdialog.sh"
-            rec.mark("operator_prompt_raised", st["action_id"])
-            proc = await asyncio.create_subprocess_exec(
-                "bash", str(script), "--id", st["action_id"], "--title", st["title"],
-                "--message", st["message"], "--button", st["button"],
-                stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
-            ack = await proc.wait()
-            rec.mark("operator_prompt_result", f"action_id={st['action_id']} rc={ack}")
-            if ack != 0:
-                rec.mark("operator_cancelled", st["action_id"])
-                raise OperatorCancelled(st["action_id"])
-        elif op == "observe":
-            n = observe_window()
-            rec.mark("observe_start", f"{n}s")
-            await asyncio.sleep(n)
-            valid = sum(1 for f in rec.frames if f["kind"] == "valid_status")
-            rec.mark("observe_end",
-                     f"valid_status_frames={valid} (event-driven: zero idle frames is NORMAL, not failure)")
-        else:
-            raise RuntimeError(f"unknown step {op!r}")
 
 
 async def run_case(args) -> int:

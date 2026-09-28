@@ -185,11 +185,13 @@ def test_no_case_uses_chat_acknowledgement_or_a_repeating_alert():
 
 
 def test_cancel_returns_the_device_to_a_safe_state():
-    """The harness must attempt D2 disable on the cancel path (static check of the source)."""
-    src = (REPO / "automation/scripts/d2-differential.py").read_text()
-    assert "OperatorCancelled" in src
-    assert "D2 disable (operator cancel path)" in src
-    assert "OPERATOR_CANCELLED" in src
-    # and the prompt must be awaited asynchronously, not blocking the notify loop
-    assert "create_subprocess_exec" in src
-    assert "proc.wait()" in src
+    """The harness must attempt D2 disable on the cancel path (static check of the sources)."""
+    script = (REPO / "automation/scripts/d2-differential.py").read_text()
+    runner = (REPO / "automation/scripts/d2_runner.py").read_text()
+    assert "OperatorCancelled" in script and "OperatorCancelled" in runner
+    assert "D2 disable (operator cancel path)" in script
+    assert "OPERATOR_CANCELLED" in script
+    # the prompt must be awaited asynchronously, not blocking the notify loop
+    assert "create_subprocess_exec" in runner and "proc.wait()" in runner
+    # and the executor must not depend on a BLE stack, so it stays offline-testable
+    assert "from bleak" not in runner and "import bleak" not in runner
