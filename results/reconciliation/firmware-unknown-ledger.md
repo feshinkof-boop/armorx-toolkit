@@ -396,7 +396,7 @@ Scope: ArmorX Pro firmware/updater ecosystem (four operator packages), offline/s
 
 **Status:** PARTIALLY_RESOLVED | **Priority:** high
 
-**Answer:** Builder, frame construction, payload field map and the enable-flag gate are PROVEN STATIC. The digital-event trigger that decides WHEN this path runs is still open: the containing function 0x1e0aff2 is reached from 0x1e0a9b4, not yet traced.
+**Answer:** Enable half + trigger half + repeat behaviour are PROVEN STATIC (D2_SEND_IF = state+0x10 != 0 AND memcmp(14 bytes @0x4ecc) != 0 AND the periodic gate). The RT parameter remains open: RT lives at +0x0d inside the compared range, so its analogue movement should trip the detector; the live observation says it does not. One candidate mechanism (RT outside the compared range) has been eliminated at instruction level.
 
 **Evidence:**
 
@@ -406,8 +406,11 @@ Scope: ArmorX Pro firmware/updater ecosystem (four operator packages), offline/s
 - payload layout proven by the serialiser 0x1e07464 (rev8 u32 at +0, rev8 s16 at +4/+6/+8/+0xa, 0x1e07444 at +0x0e)
 - send gate 0x1e0dae6 reads b[cfg+0x10]; 0x1e0db38 additionally requires b[cfg+0x11] for the 28-byte 0x02 variant
 - repeat counter b[cfg+0x3a] set to 0x64 at 0x1e0dae0 and decremented in the loop at 0x1e0db1c-0x1e0db2c
+- trigger: 0x1e0dad2 compares the 14-byte struct at 0x4ecc with the previous snapshot via library compare 0x2f92fa and skips the report when equal (zero idle frames explained)
+- struct 0x4ecc = u32 mask, four s16 axes, LT at +0x0c, RT at +0x0d, six further s16 at +0x0e..+0x19 (28 bytes total)
+- the LT/RT exclusion hypothesis is REFUTED: 0x1e07444 swaps three s16 fields, so the serializer's +0x0e/+0x14 calls are not LT/RT
 
-**Next offline step:** Trace callers of 0x1e0a9b4 and find the digital-change trigger; then reconcile with the observed zero-idle-frames behaviour.
+**Next offline step:** Enumerate writers of 0x4e40+0x8c+0x0d and test the update condition.
 
 ### FW-U-027 - Is there a lighting/RGB handler and an identifiable IMU part in the image?
 

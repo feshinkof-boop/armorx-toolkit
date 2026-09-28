@@ -1,0 +1,174 @@
+{
+ "artifact": "armorx-input-state-v41",
+ "date": "2026-09-28",
+ "image": "V41 app.bin base 0x01E00000",
+ "headline": "The LT/RT trigger-exclusion hypothesis is REFUTED at instruction level. The serializer's helper calls at +0x0e and +0x14 are not LT and RT: 0x1e07444 byte-swaps THREE more s16 fields at each site. LT and RT are the untransformed single bytes at +0x0c and +0x0d, which are inside the 14-byte change detector.",
+ "serializer_layout": {
+  "addr": "0x1e07464",
+  "operates": "in place on the buffer whose pointer is passed in r0 (for D2: sp+1052, a 28-byte copy of the current state at sp+1080)",
+  "ops": [
+   {
+    "src": "0x1e07468/0x1e0746e",
+    "field": "+0x00",
+    "width": 4,
+    "transform": "rev8 (u32 byte swap)"
+   },
+   {
+    "src": "0x1e07470-0x1e07478",
+    "field": "+0x04",
+    "width": 2,
+    "transform": "rev8 then >>16 (s16 swap)"
+   },
+   {
+    "src": "0x1e0747a-0x1e07482",
+    "field": "+0x06",
+    "width": 2,
+    "transform": "s16 swap"
+   },
+   {
+    "src": "0x1e07484-0x1e0748c",
+    "field": "+0x08",
+    "width": 2,
+    "transform": "s16 swap"
+   },
+   {
+    "src": "0x1e0748e-0x1e07496",
+    "field": "+0x0a",
+    "width": 2,
+    "transform": "s16 swap"
+   },
+   {
+    "src": "0x1e07498/0x1e0749a",
+    "field": "+0x0e, +0x10, +0x12",
+    "width": "3x2",
+    "transform": "call 0x1e07444 - which swaps h[r0+0], h[r0+2], h[r0+4]"
+   },
+   {
+    "src": "0x1e0749c/0x1e074a0",
+    "field": "+0x14, +0x16, +0x18",
+    "width": "3x2",
+    "transform": "tail call 0x1e07444 (same three swaps)"
+   }
+  ],
+  "helper_proof": "0x1e07444: r1 = h[r0+0x0]; rev8; >>16; h[r0+0x0] = r1 ; then the same for h[r0+0x2] and h[r0+0x4] ; rts. It is a THREE-s16 swapper, not a byte load.",
+  "untouched_bytes": "+0x0c, +0x0d, +0x1a, +0x1b (single bytes need no swap)"
+ },
+ "struct_28B": {
+  "base": "0x4ecc (proven: r12 = 0x4e40 then +0x8c at 0x1e0dac2; the same 28 bytes are mirrored at sp+1080)",
+  "fields": [
+   {
+    "offset": "0x00",
+    "width": 4,
+    "semantic": "digital mask (u32, sent bytes [3..6])",
+    "in_compared_14": true
+   },
+   {
+    "offset": "0x04",
+    "width": 2,
+    "semantic": "axis s16 #1 (sent bytes [7..8])",
+    "in_compared_14": true
+   },
+   {
+    "offset": "0x06",
+    "width": 2,
+    "semantic": "axis s16 #2 (sent bytes [9..10])",
+    "in_compared_14": true
+   },
+   {
+    "offset": "0x08",
+    "width": 2,
+    "semantic": "axis s16 #3 (sent bytes [11..12])",
+    "in_compared_14": true
+   },
+   {
+    "offset": "0x0a",
+    "width": 2,
+    "semantic": "axis s16 #4 (sent bytes [13..14])",
+    "in_compared_14": true
+   },
+   {
+    "offset": "0x0c",
+    "width": 1,
+    "semantic": "LT - single byte, no swap, sent as frame [15]",
+    "in_compared_14": true
+   },
+   {
+    "offset": "0x0d",
+    "width": 1,
+    "semantic": "RT - single byte, no swap, sent as frame [16]",
+    "in_compared_14": true
+   },
+   {
+    "offset": "0x0e",
+    "width": 2,
+    "semantic": "s16 #5 - swapped by the serializer, NOT in the 14-byte frame",
+    "in_compared_14": false
+   },
+   {
+    "offset": "0x10",
+    "width": 2,
+    "semantic": "s16 #6",
+    "in_compared_14": false
+   },
+   {
+    "offset": "0x12",
+    "width": 2,
+    "semantic": "s16 #7",
+    "in_compared_14": false
+   },
+   {
+    "offset": "0x14",
+    "width": 2,
+    "semantic": "s16 #8",
+    "in_compared_14": false
+   },
+   {
+    "offset": "0x16",
+    "width": 2,
+    "semantic": "s16 #9",
+    "in_compared_14": false
+   },
+   {
+    "offset": "0x18",
+    "width": 2,
+    "semantic": "s16 #10 - the last transformed field",
+    "in_compared_14": false
+   },
+   {
+    "offset": "0x1a",
+    "width": 2,
+    "semantic": "untouched tail bytes",
+    "in_compared_14": false
+   }
+  ],
+  "note": "4 + 8 + 2 + 12 + 2 = 28 exactly. The 14-byte D2 frame carries the first 14 bytes; the 28-byte variant (built at 0x1e0db5e) would carry all of it, which is consistent with its payload length 0x1c."
+ },
+ "hypothesis_verdict": {
+  "hypothesis": "LT at +0x0e and RT at +0x14, both outside the compared 14 bytes, explaining the RT observation",
+  "verdict": "REFUTED",
+  "why": "+0x0e and +0x14 are the start of two three-s16 groups transformed by 0x1e07444; the LT and RT bytes are at +0x0c and +0x0d, i.e. INSIDE the 14-byte range the change detector compares."
+ },
+ "rt_contradiction": {
+  "status": "STILL OPEN - now with the hypothesis eliminated",
+  "restated": "byte +0x0d is inside the compared range, so if RT analogue movement updates +0x0d the detector must differ and a report must be emitted. The live observation says otherwise, so the remaining candidate is that +0x0d is NOT updated by analogue RT movement (for example it may hold the digital/threshold RT state, or only refresh on a digital event).",
+  "next_provable_step": "find every writer of base 0x4e40 + 0x8c + 0x0d (and of +0x0c) and check the update condition. The base 0x4e40 is loaded at 0x1e0052c, 0x1e0471e, 0x1e04796, 0x1e04810, 0x1e04b60, 0x1e06672 and 0x1e087b8.",
+  "must_not_claim": "do not report RT as explained in either direction until that writer is found"
+ },
+ "fw_u_026": {
+  "status": "PARTIALLY_RESOLVED - ledger updated this pass",
+  "D2_SEND_IF": "b[state+0x10] != 0 AND memcmp(struct14 @ 0x4ecc, previous14) != 0 AND the periodic gate (tick - [state+0x18c]) >= h[r9+0x12]",
+  "repeat": "state+0x3a counts down from 100 in the loop 0x1e0db1c-0x1e0db32",
+  "open": "the RT parameter - why the RT byte does not change the detector"
+ },
+ "not_advanced": [
+  "axes order LX/LY/RX/RY",
+  "LT/RT raw sources and thresholds",
+  "bit-9 generation",
+  "USB emitters 0x1e096b4/0x1e09ad4/0x1e09ce0",
+  "M1-M4 record semantics",
+  "macro engine",
+  "F7/FC/F6",
+  "cross-version",
+  "dongle V3600"
+ ]
+}
