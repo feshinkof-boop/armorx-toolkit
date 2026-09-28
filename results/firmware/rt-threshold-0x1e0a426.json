@@ -1,0 +1,38 @@
+{
+ "artifact": "rt-threshold-0x1e0a426",
+ "date": "2026-09-29",
+ "status": "FULLY REVERSED STATIC",
+ "function": "0x1e0a426",
+ "size": 166,
+ "callers": [
+  "0x1e0cee8 (inside the D2 candidate builder)"
+ ],
+ "abi": {
+  "r0": "channel/index byte, caller passes 1 at 0x1e0cee6",
+  "r1": "current reading, the candidate RT byte read at 0x1e0cee2",
+  "r4": "base pointer supplied by the caller; state is addressed as base+index"
+ },
+ "per_channel_state": {
+  "+0x76": "previous reading (updated unconditionally at 0x1e0a4ba)",
+  "+0x78": "mode byte (0, 1 or other)",
+  "+0x7a": "hysteresis counter",
+  "+0x7c": "armed byte - this is what the return value is derived from"
+ },
+ "behaviour": [
+  "r3 = state[+0x76] (previous), compared with r1 (current).",
+  "current < previous (decreasing): if mode == 0, set mode = 1, clear the armed byte, and set the armed byte only when the drop is at least 0x1f (31).",
+  "current < previous with mode != 0: increment the counter; after 3 consecutive decreases clear the armed byte.",
+  "current > previous (increasing): if mode == 1, set mode = 0 and clear the armed byte; otherwise increment the counter and, if the rise is at least 0x1e (30) relative to the previous value, clear the armed byte after 5 consecutive increases.",
+  "current == previous: arm (state[+0x7c] = 1).",
+  "previous is then updated to the current reading and the return value is 0xFF when the armed byte is non-zero, otherwise 0x00."
+ ],
+ "return_semantics": "0xFF (non-zero) or 0x00 only - never an analogue value",
+ "interpretation": "A per-channel arming/hysteresis state machine with a large-drop fast path (>= 31 counts) and consecutive-sample counters (3 on the way down, 5 on the way up). It converts a noisy analogue reading into a stable armed/not-armed decision.",
+ "what_this_means_for_the_D2_question": "The caller writes this 0xFF/0x00 return straight into the candidate RT byte at sp+1093 and sets or clears mask bit 0x200 from the same non-zero test. So the byte the D2 frame carries for RT is NOT the analogue reading when this path runs - it is the armed decision. That is a candidate explanation for the observed 0/17/27/96/255 spread and for why an analogue-only change need not produce the same edge: an intermediate value is only visible when the analogue copy path writes the byte instead.",
+ "not_proven": [
+  "whether the same helper serves LT (the LT byte is set to 0xff directly in the synthesis block, and 0x1e0a426 has only one caller in this image)",
+  "the meaning of the mode byte beyond its 0/1 use",
+  "the full caller context that supplies r4"
+ ],
+ "evidence": "PROVEN STATIC at instruction level; no live validation"
+}
