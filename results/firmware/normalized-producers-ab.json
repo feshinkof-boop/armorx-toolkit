@@ -1,0 +1,126 @@
+{
+ "artifact": "armorx-normalized-producers-ab",
+ "date": "2026-09-28",
+ "image": "V41 app.bin base 0x01E00000",
+ "headline": "The two 'source-mux producers' are NOT device parsers and NOT normalized-state copiers. They are 30/32-byte switch tables that INJECT pre-canned synthetic axis constants into the candidate buffer. Neither one writes LT or RT.",
+ "producer_A": {
+  "addr": "0x1e0a5f2",
+  "size": 30,
+  "signature": "(r0 = selector, r1 = candidate @ sp+1080)",
+  "selector": "r0 = r0 & 0xf; r0 += -1; if (r0 > 9) default; tbb [r0]  - the LOW nibble minus one indexes a 10-entry table",
+  "writes": [
+   {
+    "case": "table default / r0>9",
+    "code": "1e0a618: [r1 + 0x4] = 0x0"
+   },
+   {
+    "case": "1",
+    "code": "1e0a61e: r0 = 0x8000 ; h[r1 + 0x4] = r0"
+   },
+   {
+    "case": "2",
+    "code": "1e0a626: r0 = 0x5a7ea582 ; [r1 + 0x4] = r0"
+   },
+   {
+    "case": "3",
+    "code": "1e0a630: r0 = 0xa582a582 ; [r1 + 0x4] = r0"
+   },
+   {
+    "case": "4",
+    "code": "1e0a63a: r0 = 0x7fff ; h[r1 + 0x4] = r0"
+   },
+   {
+    "case": "5",
+    "code": "1e0a642: r0 = 0x5a7e5a7e ; [r1 + 0x4] = r0"
+   },
+   {
+    "case": "6",
+    "code": "1e0a64c: r0 = 0xa5825a7e ; [r1 + 0x4] = r0"
+   },
+   {
+    "case": "7",
+    "code": "1e0a60c: r0 = 0x7fff ; h[r1 + 0x6] = r0"
+   },
+   {
+    "case": "8",
+    "code": "1e0a614: r0 = 0x8000 ; h[r1 + 0x6] = r0"
+   },
+   {
+    "case": "other arms",
+    "code": "1e0a600 calls 0x1e0a61c, 1e0a602 goto 0x1e0a82c, 1e0a604 goto 0x1e0a220"
+   }
+  ],
+  "fields_written": "candidate +0x04 and +0x06 (axis #1 and axis #2) as u32 or s16 stores",
+  "fields_NOT_written": "LT (+0x0c) and RT (+0x0d) - no store to either offset anywhere in the function",
+  "value_set": "0x0000, 0x8000, 0x7fff, and s16 pairs +/-0x2582 (the 32-bit constants decompose into two s16: 0x5a7e = +0x2582, 0xa582 = -0x2582)"
+ },
+ "producer_B": {
+  "addr": "0x1e0a656",
+  "size": 32,
+  "signature": "(r0 = selector, r1 = candidate @ sp+1080)",
+  "selector": "r0 = r0 & 0xf0; r0 += -0x10; r0 = r0 >> 4; if (r0 > 9) default; tbb [r0]  - the HIGH nibble minus one indexes the table",
+  "writes": [
+   {
+    "case": "default",
+    "code": "1e0a67e: [r1 + 0x8] = 0x0"
+   },
+   {
+    "case": "1",
+    "code": "1e0a684: r0 = 0x8000 ; h[r1 + 0x8] = r0"
+   },
+   {
+    "case": "2",
+    "code": "1e0a68c: r0 = 0x5a7ea582 ; [r1 + 0x8] = r0"
+   },
+   {
+    "case": "3",
+    "code": "1e0a696: r0 = 0xa582a582 ; [r1 + 0x8] = r0"
+   },
+   {
+    "case": "4",
+    "code": "1e0a66e: r0 = 0x7fff ; h[r1 + 0xa] = r0"
+   },
+   {
+    "case": "5",
+    "code": "1e0a676: r0 = 0x8000 ; h[r1 + 0xa] = r0"
+   },
+   {
+    "case": "other arms",
+    "code": "1e0a666 calls 0x1e0a682, 1e0a668 goto 0x1e0a892, 1e0a66a goto 0x1e0a286"
+   }
+  ],
+  "fields_written": "candidate +0x08 and +0x0a (axis #3 and axis #4)",
+  "fields_NOT_written": "LT (+0x0c) and RT (+0x0d)"
+ },
+ "answers_to_the_brief": {
+  "does_producer_A_write_RT": "NO - proven by exhaustive read of all 12 instructions; no store targets +0x0c or +0x0d",
+  "does_producer_B_write_RT": "NO - same, all 13 instructions read",
+  "does_A_write_LT": "NO",
+  "does_B_write_LT": "NO",
+  "selector_low_nibble": "a MODE/pattern id (values 1..10), not a device id: the low nibble minus one indexes a 10-entry table of canned axis values for axes #1/#2",
+  "selector_high_nibble": "the same kind of mode id for axes #3/#4",
+  "architectural_conclusion": "this is a SYNTHETIC INPUT / TEST-PATTERN INJECTOR, not an input-source mux. Calling it a device/source mux was a misreading of the selector - the values written are constants, not copies of any source structure.",
+  "why_the_synthetic_values_matter": "0x8000 is the centre of a 16-bit axis, 0x7fff full-scale, and +/-0x2582 is a fixed partial deflection, so the table produces recognisable canned stick positions. The nested arms also call/goto 0x1e0a61c, 0x1e0a82c, 0x1e0a220 (A) and 0x1e0a682, 0x1e0a892, 0x1e0a286 (B), i.e. other canned-vector tables, consistent with a pattern generator rather than a parser.",
+  "what_this_does_to_the_RT_question": "it REMOVES the previous best hypothesis. The mux does not touch LT/RT, so it cannot explain the RT live observation in either direction."
+ },
+ "rt_status": {
+  "status": "OPEN - candidates reduced again",
+  "facts": [
+   "the candidate buffer at sp+1080 is seeded at +0x0c/+0x0d from packed bits 8 and 9 at 0x1e0da54/0x1e0da62, which makes those two bytes DIGITAL by construction on this path",
+   "no other store in the region 0x1e0ac14-0x1e0f154 writes +0x0c/+0x0d except that seeding",
+   "the same buffer is referenced at 0x1e0cd24, 0x1e0db90, 0x1e0e29c, 0x1e0e2bc, 0x1e0e3c6 and 0x1e0e3d6 and those sites are NOT yet analysed"
+  ],
+  "implication": "if +0x0c/+0x0d really are digital only, then the D2 14-byte frame carries DIGITAL LT/RT, and the live 0..255 analogue values seen in bytes [15]/[16] must come from a different report path (for example the 28-byte variant or another builder). That would be a significant correction to the live field map - but it is NOT proven yet and must not be stated as fact.",
+  "next": "analyse the remaining buffer references (0x1e0e29c / 0x1e0e2bc / 0x1e0e3c6 / 0x1e0e3d6 in particular, they sit next to the second report variant) and check whether an analogue LT/RT write exists there."
+ },
+ "not_advanced": [
+  "LT/RT analogue source",
+  "axes semantics",
+  "USB emitters",
+  "M1-M4",
+  "macro",
+  "F7/FC/F6",
+  "cross-version",
+  "dongle"
+ ]
+}
