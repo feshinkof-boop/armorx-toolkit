@@ -1,0 +1,16 @@
+{
+ "window": "W2",
+ "title": "ArmorX RT Bit 9 \u2014 Final Control",
+ "capture": {
+  "tag": "W2",
+  "file": "btmon-W2.btsnoop",
+  "bytes_before": 383,
+  "restarted": true,
+  "bytes_after": 383,
+  "grew": false,
+  "hci_coverage": false
+ },
+ "valid_frames": 0,
+ "frames_total": 0,
+ "per_frame": []
+}

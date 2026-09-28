@@ -1,0 +1,252 @@
+{
+ "started": "2026-09-28T10:35:28.670863+00:00",
+ "identity": {
+  "2a24": "5a4a2d5854",
+  "2a26": "32373431"
+ },
+ "tx": [
+  "a5040bb4",
+  "a505d2017d",
+  "a505d2007c"
+ ],
+ "cancelled": false,
+ "capture_log": [
+  {
+   "event": "start",
+   "tag": "pre",
+   "file": "btmon-pre.btsnoop",
+   "alive": true,
+   "grew_on_start": false,
+   "bytes": 383
+  },
+  {
+   "event": "start",
+   "tag": "W0",
+   "file": "btmon-W0.btsnoop",
+   "alive": true,
+   "grew_on_start": false,
+   "bytes": 383
+  },
+  {
+   "event": "window",
+   "tag": "W0",
+   "file": "btmon-W0.btsnoop",
+   "bytes_before": 383,
+   "restarted": true,
+   "bytes_after": 383,
+   "grew": false,
+   "hci_coverage": false
+  },
+  {
+   "event": "start",
+   "tag": "W1",
+   "file": "btmon-W1.btsnoop",
+   "alive": true,
+   "grew_on_start": false,
+   "bytes": 383
+  },
+  {
+   "event": "window",
+   "tag": "W1",
+   "file": "btmon-W1.btsnoop",
+   "bytes_before": 383,
+   "restarted": true,
+   "bytes_after": 383,
+   "grew": false,
+   "hci_coverage": false
+  },
+  {
+   "event": "start",
+   "tag": "W2",
+   "file": "btmon-W2.btsnoop",
+   "alive": true,
+   "grew_on_start": false,
+   "bytes": 383
+  },
+  {
+   "event": "window",
+   "tag": "W2",
+   "file": "btmon-W2.btsnoop",
+   "bytes_before": 383,
+   "restarted": true,
+   "bytes_after": 383,
+   "grew": false,
+   "hci_coverage": false
+  }
+ ],
+ "windows": {
+  "W0": {
+   "window": "W0",
+   "title": "ArmorX RT Bit 9 \u2014 Control",
+   "capture": {
+    "tag": "W0",
+    "file": "btmon-W0.btsnoop",
+    "bytes_before": 383,
+    "restarted": true,
+    "bytes_after": 383,
+    "grew": false,
+    "hci_coverage": false
+   },
+   "valid_frames": 248,
+   "frames_total": 250
+  },
+  "W1": {
+   "window": "W1",
+   "title": "ArmorX RT Bit 9 \u2014 RT Test",
+   "capture": {
+    "tag": "W1",
+    "file": "btmon-W1.btsnoop",
+    "bytes_before": 383,
+    "restarted": true,
+    "bytes_after": 383,
+    "grew": false,
+    "hci_coverage": false
+   },
+   "valid_frames": 0,
+   "frames_total": 0
+  },
+  "W2": {
+   "window": "W2",
+   "title": "ArmorX RT Bit 9 \u2014 Final Control",
+   "capture": {
+    "tag": "W2",
+    "file": "btmon-W2.btsnoop",
+    "bytes_before": 383,
+    "restarted": true,
+    "bytes_after": 383,
+    "grew": false,
+    "hci_coverage": false
+   },
+   "valid_frames": 0,
+   "frames_total": 0
+  }
+ },
+ "classification": {
+  "verdict": "BIT9_RT_ASSOCIATION_NOT_REPRODUCED",
+  "criteria": {
+   "1_w0_has_a_frames": true,
+   "2_bit_absent_in_w0": true,
+   "3_w1_has_a_frames": false,
+   "4_bit_present_while_rt_held": false,
+   "5_rt_analog_moves_at_the_same_time": false,
+   "6_bit_clears_after_release": null,
+   "7_bit_absent_again_in_w2": true,
+   "8_no_other_control": true
+  },
+  "rt_bit_id": 9,
+  "rt_mask": 512,
+  "windows": {
+   "W0": {
+    "valid_frames": 248,
+    "bits_seen": [
+     0
+    ],
+    "masks": null,
+    "a_triggered_frames": 98,
+    "bit_frames": 0,
+    "bit_present": false,
+    "bit_fraction": 0.0,
+    "rt_range": [
+     0,
+     0
+    ],
+    "rt_stats": {
+     "n": 248,
+     "mode": 0,
+     "median": 0.0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 248
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "idle_rt": {
+     "n": 150,
+     "mode": 0,
+     "median": 0.0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 150
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "bit_9_holds": 0,
+    "unexpected_bits": []
+   },
+   "W1": {
+    "valid_frames": 0,
+    "bits_seen": [],
+    "masks": null,
+    "a_triggered_frames": 0,
+    "bit_frames": 0,
+    "bit_present": false,
+    "bit_fraction": null,
+    "rt_range": null,
+    "rt_stats": {
+     "n": 0,
+     "mode": null,
+     "median": null,
+     "min": null,
+     "max": null,
+     "distinct": {},
+     "dominant": null,
+     "dominant_fraction": null,
+     "range": null
+    },
+    "idle_rt": {
+     "n": 0,
+     "mode": null,
+     "median": null,
+     "min": null,
+     "max": null,
+     "distinct": {},
+     "dominant": null,
+     "dominant_fraction": null,
+     "range": null
+    },
+    "bit_9_holds": 0,
+    "unexpected_bits": []
+   },
+   "W2": {
+    "valid_frames": 0,
+    "bits_seen": [],
+    "masks": null,
+    "a_triggered_frames": 0,
+    "bit_frames": 0,
+    "bit_present": false,
+    "bit_fraction": null,
+    "rt_range": null,
+    "rt_stats": {
+     "n": 0,
+     "mode": null,
+     "median": null,
+     "min": null,
+     "max": null,
+     "distinct": {},
+     "dominant": null,
+     "dominant_fraction": null,
+     "range": null
+    },
+    "idle_rt": {
+     "n": 0,
+     "mode": null,
+     "median": null,
+     "min": null,
+     "max": null,
+     "distinct": {},
+     "dominant": null,
+     "dominant_fraction": null,
+     "range": null
+    },
+    "bit_9_holds": 0,
+    "unexpected_bits": []
+   }
+  }
+ }
+}

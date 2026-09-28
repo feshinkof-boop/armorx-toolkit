@@ -49,7 +49,9 @@ def test_unknown_ledger_is_complete_and_classified():
                "UNOBSERVED_RESERVED_OR_UNUSED", "PROVEN_NEGATIVE",
                "UNOBSERVABLE_BY_FRAME_METHOD",
                # 2026-09-28 RT analog piggyback: analog proven, the earlier digital negative retracted
-               "ANALOG_PROVEN_LIVE", "DIGITAL_NEGATIVE_RETRACTED"}
+               "ANALOG_PROVEN_LIVE", "DIGITAL_NEGATIVE_RETRACTED",
+               # closed by a direct physical proof rather than by static analysis
+               "PHYSICALLY_RESOLVED"}
     assert len(d["entries"]) >= 15
     for e in d["entries"]:
         for field in ("id", "question", "priority", "ruled_out", "best_evidence",
@@ -80,13 +82,13 @@ def test_tomorrow_plan_states_the_press_requirement_and_stops_after_c0():
 
 # ---------------------------------------------------------------- Parts A-I
 
-def test_key_map_has_26_live_ids_and_leaves_the_rest_unknown():
+def test_key_map_live_ids_and_leaves_the_rest_unknown():
     d = load("results/final/key-map-confidence.json")
     rows = {r["id"]: r for r in d["rows"]}
-    assert d["counts"]["proven_live"] == 26
+    assert d["counts"]["proven_live"] == 27      # 26 + RT, proven 2026-09-28
     for i in (0, 1, 3, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 23, 24, 25, 26, 27, 28, 29, 30):
         assert rows[i]["grade"] == "PROVEN LIVE", i
-    for i in (2, 5, 9, 21, 22, 31, 32, 33):
+    for i in (2, 5, 21, 22, 31, 32, 33):   # 9 left this set on 2026-09-28 - it is RT
         assert rows[i]["grade"] == "UNKNOWN", i
     # the define.dart offset finding must be recorded, and must not be used to re-name wire bits
     assert d["name_conflicts"] and all("offset" in c["grade"] for c in d["name_conflicts"])

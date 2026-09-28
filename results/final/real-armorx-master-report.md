@@ -301,3 +301,36 @@ Read-only D6 integrity returns `bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946
 
 **Next action:** one confirmation window (`A` bursts alone vs `A` bursts with RT held, one control only) to
 name bit 9, or read RT's value in the official app's trigger/DPI view.
+
+---
+
+## 2026-09-28T06:38:30-04:00 — RT digital id 9 PROVEN LIVE; the key map is complete (append-only)
+
+**One-variable experiment**, one connection, one D2 session, three operator windows:
+
+| window | valid frames | A-caused | frames with bit 9 | byte[16] |
+|---|---|---|---|---|
+| W0 — A only (control) | 228 | 78 | **0** | 0 |
+| W1 — RT fully held + A | 263 | 113 | **184** | 0 – 255 |
+| W2 — A only (control) | 283 | 132 | **0** | 0 |
+
+Temporal **ABSENT → PRESENT-WITH-RT → ABSENT**, all 8 criteria pass →
+**`RT_DIGITAL_ID_9_PROVEN_LIVE`**, `KEY-U-003` **RESOLVED**. Canonical: RT = digital id **9**, mask
+**`0x00000200`**, analog byte `[16]` range **0..255**; RT is **not** analog-only — its state is in D2 frames
+but RT alone does not trigger a report, so it becomes observable when another digital event forces frames.
+
+**Key map status: 27 of 27 physical controls proven live.** The only ids that remain unattributed are
+2, 5, 21, 22, 31, 32, 33 — `UNOBSERVED_RESERVED_OR_UNUSED`, with no label in any build and no requested
+control mapping to them.
+
+**HCI:** one capture for the whole run (started before the connection, never restarted); coverage verified
+per window by file growth, and 780 notifications decoded = 777 harness records + 2 liveness replies + the
+D2-OFF echo, with 6 writes on `0x0075` and the CCCD on `0x0078`.
+
+**Attempt 1 was void and is kept** (`attempt-1-link-lost/`): restarting btmon mid-connection kills the BLE
+link (btmon takes the HCI user channel), so W1/W2 captured nothing. Fixed with a single external capture,
+per-window buckets, and an active `0B` liveness probe between windows (all three returned alive).
+
+**State:** `a5 05 d2 00 7c` last write, clean disconnect, no D7/D8/config write; read-only D6 integrity
+`bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` → `CONFIG_BASELINE_MATCH`
+(`DURABLE_OK` unchanged).

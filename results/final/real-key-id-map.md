@@ -39,7 +39,7 @@ Generated 2026-09-28T06:09:10.954413. Rule: **bit == id**; mask = bytes [3..6] b
 |---|---|
 | 2 | `UNOBSERVED_RESERVED_OR_UNUSED` |
 | 5 | `UNOBSERVED_RESERVED_OR_UNUSED` |
-| 9 | `DIGITAL_BIT_UNNAMED_ANALOG_PROVEN` |
+
 | 21 | `UNOBSERVED_RESERVED_OR_UNUSED` |
 | 22 | `UNOBSERVED_RESERVED_OR_UNUSED` |
 | 31 | `UNOBSERVED_RESERVED_OR_UNUSED` |
@@ -80,3 +80,28 @@ One control remained untested (RT); it and a stick probe both produced zero fram
   because RT alone emits no frame. A digital bit **9** appears only while RT is held
   (`NEW_BIT_9_OBSERVED_UNNAMED`, not yet named). The 26 PROVEN LIVE names are unchanged.
 - Verdicts: `LT_ANALOG_PIGGYBACK_PROVEN` and `RT_ANALOG_PROVEN_LIVE__PLUS_DIGITAL_BIT_OBSERVED`.
+
+---
+
+## 2026-09-28 — RT digital id 9 PROVEN LIVE (append-only)
+
+One-variable experiment (`A` alone → `RT` held + `A` → `A` alone), one connection, one D2 session:
+
+| window | valid frames | A-caused | frames with bit 9 | byte[16] |
+|---|---|---|---|---|
+| W0 control | 228 | 78 | **0** | 0 |
+| W1 RT held | 263 | 113 | **184** | 0 – 255 |
+| W2 control | 283 | 132 | **0** | 0 |
+
+All 8 criteria pass → **`RT_DIGITAL_ID_9_PROVEN_LIVE`**; `KEY-U-003` RESOLVED.
+
+| RT | value |
+|---|---|
+| digital id | **9** |
+| digital mask | **`0x00000200`** |
+| analog byte | `[16]`, observed range **0..255** |
+| behaviour | RT state is in D2 frames, but RT alone does not trigger a report; it becomes observable when another digital event forces frames. **Not analog-only.** |
+
+Superseded history kept: the earlier `PROVEN_NEGATIVE as a digital bit` was **method-limited** (RT alone
+emits no frame, so bit 9 could never appear; byte[16] was unsampled, not measured zero). The 26 previously
+proven names are unchanged; RT makes **27**.

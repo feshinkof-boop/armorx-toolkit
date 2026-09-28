@@ -436,3 +436,24 @@ Session: `results/experiments/key-id-closure-20260928-060134/` (RESULT.md is aut
   **not** covered — btmon stopped writing mid-session. Stated, not hidden.
 - State: `a5 05 d2 00 7c` last write, clean disconnect, no D7/D8/config write, read-only D6 integrity
   `bdef9c61…` → `CONFIG_BASELINE_MATCH` (`DURABLE_OK` unchanged).
+
+---
+
+## 2026-09-28 — KEY-U-003 RESOLVED: bit 9 is RT (append-only)
+
+One-variable confirmation (`results/experiments/rt-bit9-confirmation-20260928-063300/`): `A` alone → **RT**
+fully held + `A` → `A` alone, one connection, one D2 session.
+
+| window | valid frames | A-caused | frames with bit 9 | byte[16] |
+|---|---|---|---|---|
+| W0 control | 228 | 78 | **0** | 0 |
+| W1 RT held | 263 | 113 | **184** | 0 – 255 |
+| W2 control | 283 | 132 | **0** | 0 |
+
+All 8 criteria pass → **`RT_DIGITAL_ID_9_PROVEN_LIVE`**. Canonical RT: digital id **9**, mask
+**`0x00000200`**, analog byte `[16]` range **0..255**; RT is **not** analog-only (its state is in D2 frames,
+but RT alone does not trigger a report). **The key map is now complete: 27/27 proven live.** Remaining
+unattributed ids: 2, 5, 21, 22, 31, 32, 33 (`UNOBSERVED_RESERVED_OR_UNUSED`).
+
+Attempt 1 of this experiment was void (restarting btmon mid-connection kills the BLE link) and is preserved
+under `attempt-1-link-lost/`.

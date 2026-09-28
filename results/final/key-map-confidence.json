@@ -1291,11 +1291,263 @@
   },
   "source": "results/experiments/rt-analog-piggyback-20260928-061800/ANALYSIS.json"
  },
+ "rt_digital_id_confirmation": {
+  "started": "2026-09-28T10:38:17.665510+00:00",
+  "identity": {
+   "2a24": "5a4a2d5854",
+   "2a26": "32373431"
+  },
+  "tx": [
+   "a5040bb4",
+   "a505d2017d",
+   "a505d2007c"
+  ],
+  "cancelled": false,
+  "capture_log": [
+   {
+    "event": "attach",
+    "file": "btmon.btsnoop",
+    "bytes": 383,
+    "running": true
+   },
+   {
+    "event": "window",
+    "tag": "W0",
+    "file": "btmon.btsnoop",
+    "bytes_before": 6257,
+    "btmon_running": true,
+    "bytes_after": 18341,
+    "grew": true,
+    "hci_coverage": true
+   },
+   {
+    "event": "window",
+    "tag": "W1",
+    "file": "btmon.btsnoop",
+    "bytes_before": 18451,
+    "btmon_running": true,
+    "bytes_after": 32390,
+    "grew": true,
+    "hci_coverage": true
+   },
+   {
+    "event": "window",
+    "tag": "W2",
+    "file": "btmon.btsnoop",
+    "bytes_before": 32500,
+    "btmon_running": true,
+    "bytes_after": 47499,
+    "grew": true,
+    "hci_coverage": true
+   }
+  ],
+  "windows": {
+   "W0": {
+    "window": "W0",
+    "title": "ArmorX RT Bit 9 \u2014 Control",
+    "capture": {
+     "tag": "W0",
+     "file": "btmon.btsnoop",
+     "bytes_before": 6257,
+     "btmon_running": true,
+     "bytes_after": 18341,
+     "grew": true,
+     "hci_coverage": true,
+     "link_alive_after_window": true
+    },
+    "valid_frames": 228,
+    "frames_total": 231
+   },
+   "W1": {
+    "window": "W1",
+    "title": "ArmorX RT Bit 9 \u2014 RT Test",
+    "capture": {
+     "tag": "W1",
+     "file": "btmon.btsnoop",
+     "bytes_before": 18451,
+     "btmon_running": true,
+     "bytes_after": 32390,
+     "grew": true,
+     "hci_coverage": true,
+     "link_alive_after_window": true
+    },
+    "valid_frames": 263,
+    "frames_total": 263
+   },
+   "W2": {
+    "window": "W2",
+    "title": "ArmorX RT Bit 9 \u2014 Final Control",
+    "capture": {
+     "tag": "W2",
+     "file": "btmon.btsnoop",
+     "bytes_before": 32500,
+     "btmon_running": true,
+     "bytes_after": 47499,
+     "grew": true,
+     "hci_coverage": true,
+     "link_alive_after_window": true
+    },
+    "valid_frames": 283,
+    "frames_total": 283
+   }
+  },
+  "classification": {
+   "verdict": "RT_DIGITAL_ID_9_PROVEN_LIVE",
+   "criteria": {
+    "1_w0_has_a_frames": true,
+    "2_bit_absent_in_w0": true,
+    "3_w1_has_a_frames": true,
+    "4_bit_present_while_rt_held": true,
+    "5_rt_analog_moves_at_the_same_time": true,
+    "6_bit_clears_after_release": true,
+    "7_bit_absent_again_in_w2": true,
+    "8_no_other_control": true
+   },
+   "rt_bit_id": 9,
+   "rt_mask": 512,
+   "windows": {
+    "W0": {
+     "valid_frames": 228,
+     "bits_seen": [
+      0
+     ],
+     "masks": null,
+     "a_triggered_frames": 78,
+     "bit_frames": 0,
+     "bit_present": false,
+     "bit_fraction": 0.0,
+     "rt_range": [
+      0,
+      0
+     ],
+     "rt_stats": {
+      "n": 228,
+      "mode": 0,
+      "median": 0.0,
+      "min": 0,
+      "max": 0,
+      "distinct": {
+       "0": 228
+      },
+      "dominant": 0,
+      "dominant_fraction": 1.0,
+      "range": 0
+     },
+     "idle_rt": {
+      "n": 150,
+      "mode": 0,
+      "median": 0.0,
+      "min": 0,
+      "max": 0,
+      "distinct": {
+       "0": 150
+      },
+      "dominant": 0,
+      "dominant_fraction": 1.0,
+      "range": 0
+     },
+     "bit_9_holds": 0,
+     "unexpected_bits": []
+    },
+    "W1": {
+     "valid_frames": 263,
+     "bits_seen": [
+      0,
+      9
+     ],
+     "masks": null,
+     "a_triggered_frames": 113,
+     "bit_frames": 184,
+     "bit_present": true,
+     "bit_fraction": 0.7,
+     "rt_range": [
+      0,
+      255
+     ],
+     "rt_stats": {
+      "n": 263,
+      "mode": 255,
+      "median": 255,
+      "min": 0,
+      "max": 255,
+      "distinct": {
+       "0": 79,
+       "17": 1,
+       "27": 1,
+       "96": 1,
+       "255": 181
+      },
+      "dominant": 255,
+      "dominant_fraction": 0.688,
+      "range": 255
+     },
+     "idle_rt": {
+      "n": 79,
+      "mode": 0,
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "distinct": {
+       "0": 79
+      },
+      "dominant": 0,
+      "dominant_fraction": 1.0,
+      "range": 0
+     },
+     "bit_9_holds": 2,
+     "unexpected_bits": []
+    },
+    "W2": {
+     "valid_frames": 283,
+     "bits_seen": [
+      0
+     ],
+     "masks": null,
+     "a_triggered_frames": 132,
+     "bit_frames": 0,
+     "bit_present": false,
+     "bit_fraction": 0.0,
+     "rt_range": [
+      0,
+      0
+     ],
+     "rt_stats": {
+      "n": 283,
+      "mode": 0,
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "distinct": {
+       "0": 283
+      },
+      "dominant": 0,
+      "dominant_fraction": 1.0,
+      "range": 0
+     },
+     "idle_rt": {
+      "n": 151,
+      "mode": 0,
+      "median": 0,
+      "min": 0,
+      "max": 0,
+      "distinct": {
+       "0": 151
+      },
+      "dominant": 0,
+      "dominant_fraction": 1.0,
+      "range": 0
+     },
+     "bit_9_holds": 0,
+     "unexpected_bits": []
+    }
+   }
+  },
+  "source": "results/experiments/rt-bit9-confirmation-20260928-063300/RESULT.json"
+ },
  "closure_session_note": "Evidence from results/experiments/key-id-closure-*/: one control per popup, no batch windows, no order-based attribution. Only RT and the L stick were tested; both emitted nothing, which is why the analog channel is unobservable. See the session RESULT.md.",
  "final_classification_of_unresolved": {
   "2": "UNOBSERVED_RESERVED_OR_UNUSED",
   "5": "UNOBSERVED_RESERVED_OR_UNUSED",
-  "9": "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN",
   "21": "UNOBSERVED_RESERVED_OR_UNUSED",
   "22": "UNOBSERVED_RESERVED_OR_UNUSED",
   "31": "UNOBSERVED_RESERVED_OR_UNUSED",
@@ -1303,8 +1555,8 @@
   "33": "UNOBSERVED_RESERVED_OR_UNUSED"
  },
  "counts": {
-  "proven_live": 26,
-  "unknown": 8,
+  "proven_live": 27,
+  "unknown": 7,
   "unobserved": 0
  },
  "rows": [
@@ -1411,15 +1663,14 @@
   },
   {
    "id": 9,
-   "static_constant": "keyL2",
-   "name": null,
-   "name_full": null,
-   "grade": "UNKNOWN",
+   "static_constant": "0x00000200",
+   "name": "RT",
+   "name_full": "RT (right trigger)",
+   "grade": "PROVEN LIVE",
    "live_frames": 0,
    "static_label": null,
-   "name_confidence": "UNKNOWN",
-   "notes": "RT: requested in press_group_B/D/E/F and three dedicated retries - NEVER appeared | 2026-09-28 closure session: two FULL pulls produced zero frames, so [16] was unsampled (NOT measured zero) - that negative was method-limited. | 2026-09-28 piggyback session: with A forcing frame transmission, [16] reads 0 at rest and 255 at full pull in every A-caused frame (ANALOG PROVEN LIVE, LT control validated the method), AND a digital bit 9 appears only while RT is held - preserved as NEW_BIT_9_OBSERVED_UNNAMED and not yet named. RT keeps a name of UNKNOWN here.",
-   "final_classification": "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN"
+   "name_confidence": "PROVEN LIVE by one-variable confirmation (2026-09-28 W0/W1/W2): bit 9 absent with A alone, present through two RT holds, absent again after release",
+   "notes": "RT: requested in press_group_B/D/E/F and three dedicated retries - NEVER appeared | 2026-09-28 RT digital id confirmation: bit 9 ABSENT (W0, 0/228 frames) -> PRESENT through two RT holds (W1, 184/263 frames, byte[16] 0..255) -> ABSENT again (W2, 0/283). All 8 criteria pass: RT_DIGITAL_ID_9_PROVEN_LIVE. RT is NOT analog-only: its state is in D2 frames but RT alone does not trigger a report. SUPERSEDED HISTORY: the earlier PROVEN_NEGATIVE-as-a-digital-bit verdict was method-limited (RT alone emits no frame, so bit 9 could never appear) and the earlier note that byte[16] 'never left zero' was wrong - it was unsampled, not measured zero."
   },
   {
    "id": 10,

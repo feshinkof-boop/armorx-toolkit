@@ -67,6 +67,13 @@
    "corroborating_frames": 13,
    "evidence": "PROVEN LIVE"
   },
+  "9": {
+   "button": "RT",
+   "static": "0x00000200",
+   "group": "one-variable confirmation W0/W1/W2 (2026-09-28)",
+   "corroborating_frames": 184,
+   "evidence": "PROVEN LIVE by one-variable confirmation"
+  },
   "10": {
    "button": "View/Select",
    "static": "View",
@@ -201,11 +208,10 @@
    "evidence": "PROVEN LIVE"
   }
  },
- "proven_live_count": 26,
+ "proven_live_count": 27,
  "unresolved_classification": {
   "2": "UNOBSERVED_RESERVED_OR_UNUSED",
   "5": "UNOBSERVED_RESERVED_OR_UNUSED",
-  "9": "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN",
   "21": "UNOBSERVED_RESERVED_OR_UNUSED",
   "22": "UNOBSERVED_RESERVED_OR_UNUSED",
   "31": "UNOBSERVED_RESERVED_OR_UNUSED",
@@ -213,7 +219,6 @@
   "33": "UNOBSERVED_RESERVED_OR_UNUSED"
  },
  "unresolved_detail": {
-  "9": "SUPERSEDED HISTORY (kept): 2026-09-28 closure session recorded id 9 as PROVEN_NEGATIVE as a digital bit after two full RT pulls produced zero frames. That negative was METHOD-LIMITED: RT alone emits no frame at all, so neither the analog byte nor a digital bit could appear in those windows - [16] was never sampled (the earlier wording 'never left zero' was wrong). CURRENT (2026-09-28 piggyback session): with A forcing frame transmission, byte[16] reads 0 at rest and 255 at a full pull in every A-caused frame (ANALOG PROVEN LIVE; the LT positive control validated the method), and a digital mask bit 9 appears only in the RT-held windows (masks 513/512; 107 frames in P2, 144 in the repeat; never in the baseline or LT windows). The bit is preserved as NEW_BIT_9_OBSERVED_UNNAMED and is deliberately NOT named in this pass.",
   "2,5,21,22,31,32,33": "UNOBSERVED_RESERVED_OR_UNUSED: no physical control that was ever requested maps to these bits, and no label for them exists in any of the four builds' inventories (the app's label set is A B X Y LB RB LT RT L3 R3 Menu Select Start Capture Up Down Left Right M1-M7 NIL + keyboard keys + ZL/ZR). The 32-slot mapKeys space is larger than the number of controls this unit reports."
  },
  "closure_session": {
@@ -276,5 +281,18 @@
    "P0": "not covered (btmon stalled)",
    "P2": "not covered (btmon stalled)"
   }
+ },
+ "rt_mapping": {
+  "physical_control": "RT (right trigger)",
+  "digital_id": 9,
+  "digital_mask": "0x00000200",
+  "analog_byte": 16,
+  "analog_observed_range": [
+   0,
+   255
+  ],
+  "report_generation": "RT state is represented in D2 frames, but RT alone did not make the device emit a report in the tested isolated windows; its state becomes observable when another digital event forces D2 reports. RT is NOT analog-only.",
+  "superseded_history": "2026-09-28 earlier in the day: 'PROVEN_NEGATIVE as a digital bit' - retracted as METHOD-LIMITED (RT alone emits no frame, so the bit could never appear; byte[16] was unsampled, not measured zero).",
+  "source": "results/experiments/rt-bit9-confirmation-20260928-063300/RESULT.md"
  }
 }

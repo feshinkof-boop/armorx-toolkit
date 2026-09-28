@@ -5,7 +5,8 @@
   "ANALOG_PROVEN_LIVE / DIGITAL_NEGATIVE_RETRACTED": 1,
   "DEFERRED_REQUIRES_HARDWARE": 9,
   "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 3,
-  "DEFERRED_REQUIRES_OPERATOR": 2,
+  "DEFERRED_REQUIRES_OPERATOR": 1,
+  "PHYSICALLY_RESOLVED": 1,
   "STATICALLY_EXHAUSTED": 5,
   "UNOBSERVED_RESERVED_OR_UNUSED": 1
  },
@@ -287,17 +288,19 @@
   },
   {
    "id": "KEY-U-003",
-   "question": "Which physical control owns digital bit 9 (observed in the RT-held windows)?",
+   "question": "Which physical control owns digital bit 9?",
    "priority": "MEDIUM",
    "ruled_out": [],
-   "best_evidence": "bit 9 appeared in masks 513 (A+bit9) and 512 (bit9) only while RT was fully held, in two independent windows (P2, P2R), and never in the baseline or LT-control windows. RT was the only control held, and the static reading for RT is id 9 - but the brief requires the bit be preserved unnamed until a one-variable confirmation, so it stays NEW_BIT_9_OBSERVED_UNNAMED.",
+   "best_evidence": "RESOLVED by one-variable confirmation (2026-09-28): one connection, one D2 session, three windows - W0 A-only (228 valid frames, bit 9 in 0), W1 RT fully held + A (263 frames, bit 9 in 184, two holds, byte[16] ramping 0..255), W2 A-only again (283 frames, bit 9 in 0). 79 idle frames in W1 with bit 9 clear. All 8 criteria pass -> RT_DIGITAL_ID_9_PROVEN_LIVE. HCI: 780 notifications = 777 harness records + 2 liveness replies + D2-OFF echo; per-window capture growth verified.",
    "next_offline_step": "-",
-   "next_hardware_step": "one popup: A bursts alone (control) then A bursts with RT held, nothing else touched",
+   "next_hardware_step": "-",
    "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_OPERATOR",
-   "status": "OPEN",
-   "opened_at": "2026-09-28"
+   "classification": "PHYSICALLY_RESOLVED",
+   "status": "RESOLVED",
+   "opened_at": "2026-09-28",
+   "rule_out": [],
+   "resolved_at": "2026-09-28"
   }
  ],
- "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md | 2026-09-28 key-ID closure session: all 26 requested physical controls are proven live except RT; KEY-U-001 and KEY-U-002 are both closed with dated evidence."
+ "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md | 2026-09-28 key-ID closure session: all 26 requested physical controls are proven live except RT; KEY-U-001 and KEY-U-002 are both closed with dated evidence. | 2026-09-28: KEY-U-003 RESOLVED - bit 9 is RT's digital id (mask 0x00000200), proven by a one-variable W0/W1/W2 experiment. The key map is complete: 27/27 physical controls proven live."
 }

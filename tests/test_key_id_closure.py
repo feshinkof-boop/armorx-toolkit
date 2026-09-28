@@ -114,41 +114,43 @@ def test_dialog_helper_exit_code_contract_is_documented():
 
 def test_canonical_map_records_the_final_classifications():
     canon = _j(REPO / "results/final/real-key-id-map.json")
-    assert canon["proven_live_count"] == 26
-    assert len(canon["proven_live"]) == 26
+    assert canon["proven_live_count"] == 27      # 26 + RT (2026-09-28)
+    assert len(canon["proven_live"]) == 27
     cls = canon["unresolved_classification"]
-    # 2026-09-28: the digital negative for id 9 is superseded by the piggyback session; the OLD verdict
-    # must survive as dated history rather than being deleted, so assert both the new state and the record.
-    assert cls["9"] == "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN"
-    assert "SUPERSEDED HISTORY" in canon["unresolved_detail"]["9"]
-    assert "PROVEN_NEGATIVE" in canon["unresolved_detail"]["9"]
+    # 2026-09-28 (later): id 9 is no longer unresolved at all - it is RT, proven by the one-variable
+    # W0/W1/W2 experiment, so it must have left the unresolved table entirely while the OLD negative
+    # survives as dated history rather than being deleted.
+    assert "9" not in cls
+    assert canon["rt_mapping"]["digital_id"] == 9
+    assert canon["rt_mapping"]["digital_mask"] == "0x00000200"
+    assert "METHOD-LIMITED" in canon["rt_mapping"]["superseded_history"]
+    assert "PROVEN_NEGATIVE" in canon["rt_mapping"]["superseded_history"]
     for i in ("2", "5", "21", "22", "31", "32", "33"):
         assert cls[i] == "UNOBSERVED_RESERVED_OR_UNUSED"
-    assert set(cls) == {"2", "5", "9", "21", "22", "31", "32", "33"}
-    # the map must not claim a NAME for bit 9 either
-    assert "NEW_BIT_9_OBSERVED_UNNAMED" in canon["unresolved_detail"]["9"]
+    assert set(cls) == {"2", "5", "21", "22", "31", "32", "33"}
+    # the piggyback session's own record of the bit still stands as it was written (unnamed there)
     assert canon["rt_analog_piggyback_2026_09_28"]["digital_bit_9_observed_unnamed"] is True
 
 
 def test_consolidated_table_ingests_the_session_and_stays_at_26_proven():
     km = _j(REPO / "results/final/key-map-confidence.json")
-    assert km["counts"]["proven_live"] == 26
+    assert km["counts"]["proven_live"] == 27      # RT joined the proven set on 2026-09-28
     controls = {c["control"] for c in km["closure_session_evidence"]}
     assert {"RT", "L stick"} <= controls
     assert all(c["valid_frames"] == 0 for c in km["closure_session_evidence"])
-    assert km["final_classification_of_unresolved"]["9"] == "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN"
+    assert "9" not in km["final_classification_of_unresolved"]
     row9 = next(r for r in km["rows"] if r["id"] == 9)
-    assert row9["final_classification"] == "DIGITAL_BIT_UNNAMED_ANALOG_PROVEN"
-    # the method-limited negative must be recorded as such, not silently dropped
-    assert "method-limited" in row9["notes"]
-    assert "NEW_BIT_9_OBSERVED_UNNAMED" in row9["notes"]
+    assert row9["name"] == "RT" and row9["grade"] == "PROVEN LIVE"
+    # the method-limited negative must still be recorded, not silently dropped
+    assert "method-limited" in row9["notes"].lower()
+    assert "RT_DIGITAL_ID_9_PROVEN_LIVE" in row9["notes"]
     assert km["rt_analog_piggyback"]["rt_analog"]["verdict"] == "RT_ANALOG_PROVEN_LIVE__PLUS_DIGITAL_BIT_OBSERVED"
 
 
 def test_no_unresolved_id_is_forced_to_acquire_a_control_name():
     km = _j(REPO / "results/final/key-map-confidence.json")
     for row in km["rows"]:
-        if row["id"] in (2, 5, 9, 21, 22, 31, 32, 33):
+        if row["id"] in (2, 5, 21, 22, 31, 32, 33):      # 9 left this set on 2026-09-28 (it is RT)
             assert row["grade"] == "UNKNOWN", f"id {row['id']} must not be promoted to PROVEN LIVE"
             assert not row.get("name")
 
@@ -163,7 +165,7 @@ def test_ledger_both_key_unknowns_closed_with_dated_evidence():
     # the overstatement must be corrected, not silently kept
     assert "UNSAMPLED" in by_id["KEY-U-002"]["best_evidence"] or "unsampled" in by_id["KEY-U-002"]["best_evidence"]
     # and the new open question about bit 9 exists rather than being silently named away
-    assert by_id["KEY-U-003"]["classification"] == "DEFERRED_REQUIRES_OPERATOR"
+    assert by_id["KEY-U-003"]["status"] == "RESOLVED"          # bit 9 proven to be RT on 2026-09-28
 
 
 def test_control_inventory_says_rt_was_the_only_untested_control():

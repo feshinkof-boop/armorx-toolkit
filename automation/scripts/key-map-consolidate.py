@@ -131,6 +131,14 @@ def build() -> dict:
             piggyback["source"] = str(aj.relative_to(REPO))
         except Exception:
             continue
+    # RT digital-id confirmation (2026-09-28): one-variable W0/W1/W2 proof that bit 9 is RT.
+    bit9 = None
+    for cj in sorted(REPO.glob("results/experiments/rt-bit9-confirmation-*/RESULT.json")):
+        try:
+            bit9 = json.loads(cj.read_text())
+            bit9["source"] = str(cj.relative_to(REPO))
+        except Exception:
+            continue
     # ids that no requested physical control maps to, plus RT
     UNRESOLVED_BASIS = {
         2: "UNOBSERVED_RESERVED_OR_UNUSED", 5: "UNOBSERVED_RESERVED_OR_UNUSED",
@@ -186,6 +194,25 @@ def build() -> dict:
                                 if entry else "UNKNOWN"),
             "notes": "; ".join(notes) if notes else None,
         })
+    # promote id 9 to PROVEN LIVE only on the strength of the one-variable confirmation
+    if bit9 and bit9.get("classification", {}).get("verdict") == "RT_DIGITAL_ID_9_PROVEN_LIVE":
+        r9 = next((r for r in rows if r["id"] == 9), None)
+        if r9 is not None:
+            r9["name"] = "RT"
+            r9["name_full"] = "RT (right trigger)"
+            r9["grade"] = "PROVEN LIVE"
+            r9["name_confidence"] = ("PROVEN LIVE by one-variable confirmation (2026-09-28 W0/W1/W2): bit 9 "
+                                     "absent with A alone, present through two RT holds, absent again after release")
+            r9["static_constant"] = "0x00000200"
+            r9["notes"] = ((r9.get("notes") or "") +
+                           " | 2026-09-28 RT digital id confirmation: bit 9 ABSENT (W0, 0/228 frames) -> PRESENT "
+                           "through two RT holds (W1, 184/263 frames, byte[16] 0..255) -> ABSENT again (W2, "
+                           "0/283). All 8 criteria pass: RT_DIGITAL_ID_9_PROVEN_LIVE. RT is NOT analog-only: its "
+                           "state is in D2 frames but RT alone does not trigger a report. SUPERSEDED HISTORY: the "
+                           "earlier PROVEN_NEGATIVE-as-a-digital-bit verdict was method-limited (RT alone emits no "
+                           "frame, so bit 9 could never appear) and the earlier note that byte[16] 'never left zero' "
+                           "was wrong - it was unsampled, not measured zero.")
+        UNRESOLVED_BASIS.pop(9, None)
     for row in rows:
         i = row.get("id")
         if i in UNRESOLVED_BASIS:
@@ -215,6 +242,7 @@ def build() -> dict:
             "name_conflicts": conflicts,
             "closure_session_evidence": closure,
             "rt_analog_piggyback": piggyback,
+            "rt_digital_id_confirmation": bit9,
             "closure_session_note": ("Evidence from results/experiments/key-id-closure-*/: one control per popup, "
                                      "no batch windows, no order-based attribution. Only RT and the L stick were "
                                      "tested; both emitted nothing, which is why the analog channel is unobservable. "

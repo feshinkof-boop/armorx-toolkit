@@ -107,3 +107,21 @@ unverified field.
   (masks `513`/`512`), never in the baseline or LT-control windows. Recorded as
   `NEW_BIT_9_OBSERVED_UNNAMED` — preserved, deliberately **not named** in this pass.
 - Evidence: `results/experiments/rt-analog-piggyback-20260928-061800/RESULT.md` and `ANALYSIS.json`.
+
+
+---
+
+## 2026-09-28T06:38:30-04:00 — RT digital bit **9** PROVEN LIVE (append-only; offsets unchanged)
+
+- **Mask bit 9 = RT, PROVEN LIVE** by one-variable confirmation (`A` alone → `RT` fully held + `A` → `A`
+  alone; one connection, one D2 session). Bit 9 frames: **0/228** (W0) → **184/263** (W1, two holds, with
+  byte[16] ramping 0..255) → **0/283** (W2). Mask value `1 << 9` = **`0x00000200`**.
+- **`[16]` RT analog** (proven earlier the same day, rest 0 / full pull 255) is confirmed again inside the
+  same windows, and `[15]` LT stayed flat while RT was held.
+- **Behavioural note for readers of the frame stream:** RT's state *is* in D2 frames, but **RT alone does
+  not cause a report to be emitted** — an isolated RT pull produced zero frames. RT's bit and analog value
+  become observable when another digital event (e.g. A) forces transmission. **RT is not analog-only**, and
+  "no frames" from an isolated RT window must never be read as "RT is absent from the protocol".
+- The earlier note in this file/session history (`RT = PROVEN_NEGATIVE as a digital bit`) is **superseded as
+  method-limited**, not deleted: the bit could not have appeared in windows where no frame was ever emitted.
+- Evidence: `results/experiments/rt-bit9-confirmation-20260928-063300/` (`RESULT.md`, `RESULT.json`).

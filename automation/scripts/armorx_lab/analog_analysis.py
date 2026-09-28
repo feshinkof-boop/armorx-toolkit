@@ -193,3 +193,65 @@ def classify_rt(baseline: dict, rt_run: dict, repeats: list[dict] | None = None)
             "repeat_bursts_at_changed_value": len(repeated_holds),
             "rt_digital_bit_holds": len(hold_segments(rt_run.get("per_frame") or [], 9)),
             "baseline": base, "runs": runs}
+
+
+RT_BIT_ID = 9          # the candidate digital id for RT (not named anywhere until this proof passes)
+
+
+def window_bit_stats(result: dict, bit: int) -> dict:
+    """Everything the one-variable proof needs about one window, measured from its frames."""
+    pf = result.get("per_frame") or []
+    trig = a_triggered(pf)
+    hit = bit_frames(pf, bit)
+    rts = [f["rt"] for f in pf if f.get("rt") is not None]
+    return {"valid_frames": len(pf), "bits_seen": bits_seen(pf), "masks": result.get("masks"),
+            "a_triggered_frames": len(trig), "bit_frames": len(hit),
+            "bit_present": bool(hit), "bit_fraction": round(len(hit) / len(pf), 3) if pf else None,
+            "rt_range": [min(rts), max(rts)] if rts else None,
+            "rt_stats": bytes_stats(rts),
+            "idle_rt": bytes_stats([f["rt"] for f in idle_frames(pf)]),
+            "bit_9_holds": len(hold_segments(pf, bit)),
+            "unexpected_bits": sorted(set(bits_seen(pf)) - {A_BIT, bit})}
+
+
+def classify_bit9_confirmation(w0: dict, w1: dict, w2: dict, w2_extra: list[dict] | None = None) -> dict:
+    """The brief's 8 criteria, reported individually; the verdict name is the brief's own.
+
+    W0 = A only (before), W1 = RT held + A, W2 = A only (after). The only intended changed physical
+    variable is RT, so a bit that is absent / present-with-RT / absent again is attributed to RT only if
+    nothing else changed either - enforced by the `no_other_control` criterion below.
+    """
+    s0 = window_bit_stats(w0, RT_BIT_ID)
+    s1 = window_bit_stats(w1, RT_BIT_ID)
+    s2 = window_bit_stats(w2, RT_BIT_ID)
+    # criteria 4 and 6: the bit is on for the whole held span, and clears when RT is released.
+    # "clears" is only observable where idle (mask==0) frames exist after the hold.
+    clears = None
+    if s1["idle_rt"]["n"]:
+        clears = s1["idle_rt"]["dominant"] == 0 and not any(
+            (f.get("mask") or 0) & (1 << RT_BIT_ID) for f in idle_frames(w1.get("per_frame") or []))
+    crit = {
+        "1_w0_has_a_frames": s0["a_triggered_frames"] > 0,
+        "2_bit_absent_in_w0": not s0["bit_present"],
+        "3_w1_has_a_frames": s1["a_triggered_frames"] > 0,
+        "4_bit_present_while_rt_held": s1["bit_present"] and s1["a_triggered_frames"] > 0,
+        "5_rt_analog_moves_at_the_same_time": (s1["rt_stats"]["dominant"] or 0) > (s0["rt_stats"]["dominant"] or 0),
+        "6_bit_clears_after_release": clears,
+        "7_bit_absent_again_in_w2": not s2["bit_present"],
+        "8_no_other_control": not (s0["unexpected_bits"] or s1["unexpected_bits"] or s2["unexpected_bits"]),
+    }
+    # criteria 1,2,3,4,7,8 are mandatory; 5 must hold; 6 only counts where observation permits
+    mandatory = ["1_w0_has_a_frames", "2_bit_absent_in_w0", "3_w1_has_a_frames",
+                 "4_bit_present_while_rt_held", "5_rt_analog_moves_at_the_same_time",
+                 "7_bit_absent_again_in_w2", "8_no_other_control"]
+    passed = all(crit[k] for k in mandatory) and crit["6_bit_clears_after_release"] is not False
+    if passed:
+        verdict = "RT_DIGITAL_ID_9_PROVEN_LIVE"
+    elif s0["bit_present"] or s2["bit_present"]:
+        verdict = "BIT9_NOT_RT_SPECIFIC"
+    elif not s1["bit_present"]:
+        verdict = "BIT9_RT_ASSOCIATION_NOT_REPRODUCED"
+    else:
+        verdict = "INCONCLUSIVE_SEE_CRITERIA"
+    return {"verdict": verdict, "criteria": crit, "rt_bit_id": RT_BIT_ID,
+            "rt_mask": 1 << RT_BIT_ID, "windows": {"W0": s0, "W1": s1, "W2": s2}}

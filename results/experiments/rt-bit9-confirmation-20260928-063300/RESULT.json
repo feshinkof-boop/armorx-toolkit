@@ -1,0 +1,252 @@
+{
+ "started": "2026-09-28T10:38:17.665510+00:00",
+ "identity": {
+  "2a24": "5a4a2d5854",
+  "2a26": "32373431"
+ },
+ "tx": [
+  "a5040bb4",
+  "a505d2017d",
+  "a505d2007c"
+ ],
+ "cancelled": false,
+ "capture_log": [
+  {
+   "event": "attach",
+   "file": "btmon.btsnoop",
+   "bytes": 383,
+   "running": true
+  },
+  {
+   "event": "window",
+   "tag": "W0",
+   "file": "btmon.btsnoop",
+   "bytes_before": 6257,
+   "btmon_running": true,
+   "bytes_after": 18341,
+   "grew": true,
+   "hci_coverage": true
+  },
+  {
+   "event": "window",
+   "tag": "W1",
+   "file": "btmon.btsnoop",
+   "bytes_before": 18451,
+   "btmon_running": true,
+   "bytes_after": 32390,
+   "grew": true,
+   "hci_coverage": true
+  },
+  {
+   "event": "window",
+   "tag": "W2",
+   "file": "btmon.btsnoop",
+   "bytes_before": 32500,
+   "btmon_running": true,
+   "bytes_after": 47499,
+   "grew": true,
+   "hci_coverage": true
+  }
+ ],
+ "windows": {
+  "W0": {
+   "window": "W0",
+   "title": "ArmorX RT Bit 9 \u2014 Control",
+   "capture": {
+    "tag": "W0",
+    "file": "btmon.btsnoop",
+    "bytes_before": 6257,
+    "btmon_running": true,
+    "bytes_after": 18341,
+    "grew": true,
+    "hci_coverage": true,
+    "link_alive_after_window": true
+   },
+   "valid_frames": 228,
+   "frames_total": 231
+  },
+  "W1": {
+   "window": "W1",
+   "title": "ArmorX RT Bit 9 \u2014 RT Test",
+   "capture": {
+    "tag": "W1",
+    "file": "btmon.btsnoop",
+    "bytes_before": 18451,
+    "btmon_running": true,
+    "bytes_after": 32390,
+    "grew": true,
+    "hci_coverage": true,
+    "link_alive_after_window": true
+   },
+   "valid_frames": 263,
+   "frames_total": 263
+  },
+  "W2": {
+   "window": "W2",
+   "title": "ArmorX RT Bit 9 \u2014 Final Control",
+   "capture": {
+    "tag": "W2",
+    "file": "btmon.btsnoop",
+    "bytes_before": 32500,
+    "btmon_running": true,
+    "bytes_after": 47499,
+    "grew": true,
+    "hci_coverage": true,
+    "link_alive_after_window": true
+   },
+   "valid_frames": 283,
+   "frames_total": 283
+  }
+ },
+ "classification": {
+  "verdict": "RT_DIGITAL_ID_9_PROVEN_LIVE",
+  "criteria": {
+   "1_w0_has_a_frames": true,
+   "2_bit_absent_in_w0": true,
+   "3_w1_has_a_frames": true,
+   "4_bit_present_while_rt_held": true,
+   "5_rt_analog_moves_at_the_same_time": true,
+   "6_bit_clears_after_release": true,
+   "7_bit_absent_again_in_w2": true,
+   "8_no_other_control": true
+  },
+  "rt_bit_id": 9,
+  "rt_mask": 512,
+  "windows": {
+   "W0": {
+    "valid_frames": 228,
+    "bits_seen": [
+     0
+    ],
+    "masks": null,
+    "a_triggered_frames": 78,
+    "bit_frames": 0,
+    "bit_present": false,
+    "bit_fraction": 0.0,
+    "rt_range": [
+     0,
+     0
+    ],
+    "rt_stats": {
+     "n": 228,
+     "mode": 0,
+     "median": 0.0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 228
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "idle_rt": {
+     "n": 150,
+     "mode": 0,
+     "median": 0.0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 150
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "bit_9_holds": 0,
+    "unexpected_bits": []
+   },
+   "W1": {
+    "valid_frames": 263,
+    "bits_seen": [
+     0,
+     9
+    ],
+    "masks": null,
+    "a_triggered_frames": 113,
+    "bit_frames": 184,
+    "bit_present": true,
+    "bit_fraction": 0.7,
+    "rt_range": [
+     0,
+     255
+    ],
+    "rt_stats": {
+     "n": 263,
+     "mode": 255,
+     "median": 255,
+     "min": 0,
+     "max": 255,
+     "distinct": {
+      "0": 79,
+      "17": 1,
+      "27": 1,
+      "96": 1,
+      "255": 181
+     },
+     "dominant": 255,
+     "dominant_fraction": 0.688,
+     "range": 255
+    },
+    "idle_rt": {
+     "n": 79,
+     "mode": 0,
+     "median": 0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 79
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "bit_9_holds": 2,
+    "unexpected_bits": []
+   },
+   "W2": {
+    "valid_frames": 283,
+    "bits_seen": [
+     0
+    ],
+    "masks": null,
+    "a_triggered_frames": 132,
+    "bit_frames": 0,
+    "bit_present": false,
+    "bit_fraction": 0.0,
+    "rt_range": [
+     0,
+     0
+    ],
+    "rt_stats": {
+     "n": 283,
+     "mode": 0,
+     "median": 0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 283
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "idle_rt": {
+     "n": 151,
+     "mode": 0,
+     "median": 0,
+     "min": 0,
+     "max": 0,
+     "distinct": {
+      "0": 151
+     },
+     "dominant": 0,
+     "dominant_fraction": 1.0,
+     "range": 0
+    },
+    "bit_9_holds": 0,
+    "unexpected_bits": []
+   }
+  }
+ }
+}
