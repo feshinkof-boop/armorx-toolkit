@@ -391,3 +391,30 @@ Use the repository's evidence labels consistently:
 - **UNKNOWN** — deliberately unresolved.
 
 Do not infer device-side mark strings, firmware state, or destructive command semantics from human-readable product names alone.
+
+
+## 2026-09-27 update — official Button Test differential
+
+A real BIGBIG WON 4.0.8 Android session was captured and compared stage-by-stage with the preserved Linux/Bleak harness session. The result is **`OFFICIAL_WORKS_HARNESS_SILENT`**.
+
+Key corrections and closures:
+
+- the working official session is unbonded and unencrypted, refuting bonding/encryption as the D2 prerequisite;
+- official and harness use the same D2 enable bytes `A5 05 D2 01 7D`, the same FFE1 handle `0x0075`, and the same ATT Write Command (`0x52`);
+- both negotiate ATT MTU 64 and use the same FFE1/FFE2/CCCD handles;
+- the official app emits **zero** `A5 12 02` reports while idle: D2 input is event-driven, so earlier zero-idle-frame observations are not by themselves evidence of failure;
+- a controlled A-button-twice action produced 155 valid official `A5 12 02` frames with bit 0 = A and clean press/release transitions;
+- the earliest measured session difference is the connection-interval profile (official final 11.25 ms vs harness 7.50 ms), with causality unresolved;
+- the first protocol-level sequence difference is that the official app performs `EF -> 0B -> E2 -> D4 -> full D6 read` before D2, while the harness uses `0B -> D2 OFF -> D2 ON`.
+
+The extra official reads and the harness D2 pre-clear are differences, **not yet proven prerequisites/causes**.
+
+Current D2 hypotheses:
+
+- `D2-U-008` bonding/encryption: **REFUTED**;
+- `D2-U-009` session/connection difference: **SUPPORTED, not causal**;
+- `D2-U-007` harness silence: **NARROWED, still UNKNOWN**.
+
+The next controlled test must use real button input and isolate, in order: current harness behavior, removal of D2 pre-clear, then the official read-oriented pre-D2 burst. Connection-parameter manipulation comes only after those cheaper causal tests.
+
+Full sanitized note: [d2-official-vs-harness-2026-09-27.md](d2-official-vs-harness-2026-09-27.md).
