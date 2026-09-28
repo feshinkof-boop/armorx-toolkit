@@ -1,0 +1,14 @@
+[19544.875760] usb 1-7: New USB device found, idVendor=045e, idProduct=0b12, bcdDevice= 5.18
+[19544.875767] usb 1-7: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[19544.875769] usb 1-7: Product: Controller
+[19544.875771] usb 1-7: Manufacturer: Microsoft
+[19544.875773] usb 1-7: SerialNumber: 3039373130373639393537313433
+[19544.937158] input: Microsoft Xbox Series S|X Controller as /devices/pci0000:00/0000:00:14.0/usb1/1-7/1-7:1.0/input/input19
+[19544.956875] usbcore: registered new interface driver xpad
+[20440.026281] usb 1-7: USB disconnect, device number 8
+[20440.506798] usb 1-7: new full-speed USB device number 9 using xhci_hcd
+[20440.632876] usb 1-7: New USB device found, idVendor=413d, idProduct=2106, bcdDevice= 1.00
+[20440.632881] usb 1-7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[20440.632882] usb 1-7: Product: HID zk
+[20440.632883] usb 1-7: Manufacturer: Zikway
+[20440.635852] hid-generic 0003:413D:2106.0005: hiddev1,hidraw2: USB HID v1.11 Device [Zikway HID zk] on usb-0000:00:14.0-7/input0

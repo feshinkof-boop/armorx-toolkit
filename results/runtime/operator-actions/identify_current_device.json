@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "identify_current_device",
+ "response": "armorx",
+ "clicked_at": "2026-09-28T15:23:15.662523-04:00",
+ "pid": 41403,
+ "title": "ARMOR-X ACTION REQUIRED - WHICH DEVICE IS CONNECTED?",
+ "gui": "PySide6"
+}

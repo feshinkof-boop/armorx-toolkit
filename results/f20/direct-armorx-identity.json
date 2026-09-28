@@ -1,0 +1,66 @@
+{
+ "artifact": "armorx-direct-usb",
+ "date": "2026-09-28",
+ "capture": "results/experiments/armorx-direct-usb-20260928-151903",
+ "capture_sha256": "ffd6f3827b3878234634b981733262181d07853868b8883a2450caf5be60505e",
+ "capture_bytes": 2218041,
+ "headline": "The ARMOR-X body, connected directly over its own USB port, enumerates as the SAME vendor HID identity as the F20 (413d:2106 Zikway 'HID zk', byte-identical 29-byte report descriptor, no serial) and is COMPLETELY SILENT: zero payload-bearing frames, and a physical A-button press produced no USB traffic at all. So the vendor FF7A personality is a configuration/diagnostic channel, not an input channel.",
+ "direct_enumeration": {
+  "port": "bus 1 port 1-7 (same port the F20 used)",
+  "vid_pid": "413d:2106",
+  "manufacturer": "Zikway",
+  "product": "HID zk",
+  "bcdDevice": "1.00",
+  "speed": "full speed 12 Mbps",
+  "iSerial": "0 (none)",
+  "interface": "1 HID, subclass 0 protocol 0",
+  "endpoints": "0x83 IN interrupt 64 B bInterval 8; 0x03 OUT interrupt 64 B bInterval 8",
+  "driver": "hid-generic -> hiddev1, hidraw2",
+  "hid_report_descriptor_sha256": "f0e418decf688e7409ccebc1beb79a8d8c8c60e5c70150c5de7b056575bb366f",
+  "descriptor_vs_f20": "IDENTICAL - byte-for-byte equal to the F20 vendor descriptor frozen in the previous run",
+  "input_nodes": "none - no /dev/input/event, no /dev/input/js"
+ },
+ "traffic": {
+  "interrupt_IN_urbs": 12,
+  "interrupt_OUT_urbs": 3,
+  "payload_bearing_frames": 0,
+  "last_activity_t_s": 183.4,
+  "capture_length_s": 357.0,
+  "button_test": "operator ACK press_a_direct at 15:24:09 (t~290 s): A pressed twice - NO traffic of any kind appeared on the body's interface",
+  "conclusion": "silent at rest and silent under input; the device-side vendor interface does not carry controller state"
+ },
+ "identity_cycle_confirmed": {
+  "vendor_in_": [
+   "19321.864 device 5 413d:2106 (insertion, no controller)"
+  ],
+  "to_xbox": [
+   "19542.747 disconnect device 5",
+   "19543.118 device 6 config read error -71",
+   "19543.839 device 7 descriptor error -32",
+   "19544.276 host power cycle",
+   "19544.655 device 8 045e:0b12 Microsoft Controller + xpad + js0"
+  ],
+  "back_to_vendor": [
+   "20440.026 disconnect device 8",
+   "20440.507 device 9 413d:2106 vendor HID again, clean single re-enumeration"
+  ],
+  "direct_body": [
+   "20796.735 device 10 413d:2106 after the operator connected the ARMOR-X body directly (ACK connect_armorx_direct 15:21:22)"
+  ],
+  "reading": "the receiver round-trips vendor -> Xbox -> vendor, and the body on its own USB presents the vendor identity, so identity is driven by whether a wireless/host controller session is active"
+ },
+ "disambiguation": "The direct device was indistinguishable from the F20 by USB evidence alone (same VID/PID, bcdDevice, strings, descriptor hash, endpoints, and no serial), so I ran a one-shot popup asking the operator which unit was physically connected; the answer was ARMOR-X PRO body (ack identify_current_device, 15:23:15). Without that answer this conclusion could not have been drawn from the wire.",
+ "architecture_implication": "Xbox controller -> ARMOR-X internal USB HOST -> normalized state is still the leading model, and it is now supported by firmware strings rather than only caller placement: the trio reference the diagnostic 'usbh_socket_en = %d, m_xbox_enum_step= %d, usbh_gamepad_ready= %d, usbh_gamepadp = %p', which names a USB-host socket enable, an XBOX ENUMERATION STEP variable and the gamepad pointer. The body's own device-mode USB is not that path - it is silent.",
+ "not_proven": [
+  "the trio's report field offsets (no live payload exists to match against on the device-side interface)",
+  "that the Xbox input path reaches state+0x1d4 (architecture supported, path not traced)",
+  "the normalized state field names beyond the previously proven mask/axes/LT/RT layout"
+ ],
+ "safety": {
+  "popups": "four, all ACKed and closed (remove_f20, connect_armorx_direct, identify_current_device, press_a_direct)",
+  "agent_initiated_writes": "none - no control requests sent, no HID output reports, no feature sets",
+  "automatic_host_traffic": "present and separate from agent actions: the Linux HID core submitted 12 interrupt IN and 3 interrupt OUT URBs at probe on both vendor-mode devices, and in Xbox mode the kernel/xpad generated its normal GIP initialization output (documented in the F20 artifact). None of that was agent-generated.",
+  "capture": "tcpdump stopped; no capture process left running",
+  "flash_config": "none"
+ }
+}

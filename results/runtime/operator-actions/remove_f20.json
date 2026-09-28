@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "remove_f20",
+ "response": "done",
+ "clicked_at": "2026-09-28T15:20:20.664871-04:00",
+ "pid": 40606,
+ "title": "ARMOR-X ACTION REQUIRED - REMOVE F20",
+ "gui": "PySide6"
+}

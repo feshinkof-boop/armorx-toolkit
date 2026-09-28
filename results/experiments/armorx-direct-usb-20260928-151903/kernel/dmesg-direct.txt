@@ -1,0 +1,6 @@
+[20796.735072] usb 1-7: new full-speed USB device number 10 using xhci_hcd
+[20796.863244] usb 1-7: New USB device found, idVendor=413d, idProduct=2106, bcdDevice= 1.00
+[20796.863250] usb 1-7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[20796.863252] usb 1-7: Product: HID zk
+[20796.863253] usb 1-7: Manufacturer: Zikway
+[20796.869122] hid-generic 0003:413D:2106.0006: hiddev1,hidraw2: USB HID v1.11 Device [Zikway HID zk] on usb-0000:00:14.0-7/input0

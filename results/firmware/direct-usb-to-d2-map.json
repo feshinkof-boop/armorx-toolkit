@@ -1,0 +1,18 @@
+{
+ "artifact": "direct-usb-to-d2-map",
+ "date": "2026-09-28",
+ "status": "NO DIRECT USB ROUTE EXISTS - the body's device-side vendor interface carries no input, so there is no direct-USB byte to map to D2",
+ "proof": "zero payload-bearing frames from the directly connected body, including during a physical A press",
+ "known_chain": "Xbox controller (USB host side, inside the body) -> trio 0x1e096b4/0x1e09ad4/0x1e09ce0 -> normalized state -> state+0x1d4 -> D2 candidate -> A5 12 02 frame",
+ "known_d2_facts": {
+  "payload": "mask u32 + 4 s16 axes + LT + RT",
+  "live": "byte 15 LT analog, byte 16 RT analog, RT digital bit 9 mask 0x00000200",
+  "gate": "state+0x10 != 0 AND 14-byte memcmp against the last-sent mirror AND the periodic tick gate"
+ },
+ "unresolved": [
+  "the host-side report layout (no live capture available on that bus)",
+  "the store that writes state+0x1d4 from the host path",
+  "why an RT-only change does not trip the D2 change gate"
+ ],
+ "next_experiment": "capture the ARMOR-X internal USB host bus, which is not reachable from this host: it would need an internal tap, so the realistic substitute is to correlate the D2 frames already proven live against byte patterns of the known Xbox GIP input packets."
+}

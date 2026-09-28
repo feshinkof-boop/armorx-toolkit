@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "connect_armorx_direct",
+ "response": "done",
+ "clicked_at": "2026-09-28T15:21:22.444476-04:00",
+ "pid": 40782,
+ "title": "ARMOR-X ACTION REQUIRED - CONNECT ARMOR-X DIRECTLY",
+ "gui": "PySide6"
+}
