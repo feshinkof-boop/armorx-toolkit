@@ -3,5 +3,14 @@
  "expected": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
  "verdict": "CONFIG_BASELINE_MATCH",
  "method": "read-only D6 via id15-experiment.py --probe after the official session disconnected (fresh read this pass)",
- "durability_note": "readback integrity confirmation only - NOT a new durability proof; baseline remains DURABLE_OK"
+ "durability_note": "readback integrity confirmation only - NOT a new durability proof; baseline remains DURABLE_OK",
+ "raw_readback_file": "probe-readback.bin (144 B) - gitignored by the repository's global *.bin rule; final-d6.bin is a copy",
+ "raw_readback_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "readback_length": 144,
+ "identity_observed_live": {
+  "2a24": "ZJ-XT",
+  "2a26": "2741"
+ },
+ "identity_match_manifest": true,
+ "note": "the authoritative record of the raw readback is the committed sha256 + length; the 144-byte blob itself follows the repo's existing *.bin ignore convention (same as the baselines)"
 }

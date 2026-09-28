@@ -42,6 +42,10 @@ Fresh D6 read this pass, after the official app disconnected and Linux regained 
 
 `sha256 bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` → **CONFIG_BASELINE_MATCH**
 
+Device identity observed live (`2A24=ZJ-XT`, `2A26=2741`) matches the manifest before the read.
+The 144-byte raw readback follows the repository's global `*.bin` ignore rule, so the committed
+evidence is its sha256 + length (in `final-d6.json` / `id15-probe-result.json`).
+
 Readback integrity confirmation **only** — not a new durability proof. The baseline remains
 **DURABLE_OK** from the earlier `write → readback → idle/settle → power cycle → D6 exact match`
 procedure; immediate readback alone is still **STAGED_OK**.
