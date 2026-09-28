@@ -225,3 +225,43 @@ repeated.
      which is the weakest remaining candidate.
 3. Always issue D2 disable before disconnecting, and re-read D6 afterwards to confirm the baseline
    (`bdef9c61…`) is intact.
+
+---
+
+## 2026-09-28 — physical key map closed (append-only)
+
+**Starting state:** HEAD `2916b84`, 214 passed / 12 subtests / 0 failed, worktree clean.
+Branch `research/physical-armorx-live-2026-09-27`.
+
+**Control inventory derivation (done before any popup was raised).** From what the operator was actually
+asked to press: **26 controls requested, all 26 proven live except RT.** Unresolved numeric ids
+(2, 5, 9, 21, 22, 31, 32, 33) have **no** corresponding requested control, so they are not "unnamed buttons"
+waiting to be found — see the classification below.
+
+**Physical result.**
+
+| control | popup / ACK | valid frames | bits | transitions | classification |
+|---|---|---|---|---|---|
+| RT | `ArmorX Key Map — RT`, open 16.8 s, ACKed 06:05:49 | **0** | none | none | `RT_NO_REPORT_OBSERVED` |
+| L stick | `ArmorX Key Map — L stick`, ACKed | **0** | none | none | `STICK_NO_REPORT_OBSERVED` |
+| R stick | — | — | — | — | **skipped** (L-stick probe already determined the outcome) |
+
+HCI capture covered the whole session this time (2,049 decoded lines, 2 connect/disconnect pairs, CCCD write
+to `0x0078` in both runs, 6 Write Commands on `0x0075`, and exactly **6 notifications = 3 per run**, i.e. the
+sanity reply and the two D2 echoes and **no button frames at all**). Read with `btmon -r`: tshark reads 0
+frames from these files, a tooling quirk, not a capture failure.
+
+**Final id classifications:** `9` = **PROVEN_NEGATIVE** as a digital bit (analog channel unobservable by this
+method); `2, 5, 21, 22, 31, 32, 33` = **UNOBSERVED_RESERVED_OR_UNUSED** (no requested control maps to them, no
+label exists in any build, not emitted by this unit).
+
+**D2-U-007 and D2-U-010 remain CLOSED** (`C0_STREAMS_WITH_PRECLEAR`, 167 frames). C1/C2 and the 11.25 ms
+experiment were **not** run, per the brief.
+
+**Config:** unchanged. Post-session read-only integrity read `bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`
+→ `CONFIG_BASELINE_MATCH`. `DURABLE_OK` unchanged; `STAGED_OK != DURABLE_OK`. No D7/D8/DPI/lighting/macro
+write was sent.
+
+**Highest-value next physical step:** read the trigger from the **official app's own trigger/DPI view** while
+RT is pulled (app-side readback works regardless of the wire format), since the frame stream is now proven
+not to carry analog-only changes.

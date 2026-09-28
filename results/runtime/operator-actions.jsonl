@@ -50,3 +50,6 @@
 {"event":"acknowledged","action_id":"armorx_d2_causal_c2_a_twice","acknowledged_at":"2026-09-28T05:32:55-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_d2_c0_power_on","acknowledged_at":"2026-09-28T05:47:15-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_d2_causal_c0_a_twice","acknowledged_at":"2026-09-28T05:50:15-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_keymap_power_on","acknowledged_at":"2026-09-28T06:02:43-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_keymap_rt","acknowledged_at":"2026-09-28T06:05:49-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_keymap_l_stick","acknowledged_at":"2026-09-28T06:06:57-04:00","response":"done","status":"ACK"}

@@ -2,10 +2,12 @@
  "generated": "2026-09-27/28 overnight shift",
  "rule": "Every unknown carries what is ruled out, the best evidence, the next offline step and the next hardware step. Historical ids are kept, never silently retired.",
  "counts": {
-  "STATICALLY_EXHAUSTED": 5,
   "DEFERRED_REQUIRES_HARDWARE": 9,
-  "DEFERRED_REQUIRES_OPERATOR": 3,
-  "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 3
+  "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 3,
+  "DEFERRED_REQUIRES_OPERATOR": 1,
+  "PROVEN_NEGATIVE": 1,
+  "STATICALLY_EXHAUSTED": 5,
+  "UNOBSERVED_RESERVED_OR_UNUSED": 1
  },
  "entries": [
   {
@@ -106,26 +108,28 @@
    "question": "Which buttons are ids 2, 5, 21, 22, 31, 32, 33?",
    "priority": "MEDIUM",
    "ruled_out": [],
-   "best_evidence": "no physical button produced these bits in any capture; the static label inventories do not resolve them; define.dart getters are offset +1 and cannot be used to name wire bits",
+   "best_evidence": "no physical button produced these bits in any capture; the static label inventories do not resolve them; define.dart getters are offset +1 and cannot be used to name wire bits. | 2026-09-28 closure session (results/experiments/key-id-closure-20260928-060134): the physical-control inventory was derived from what the operator was actually asked to press (results/runtime/press-groups.jsonl) and cross-checked against the proven-live map: ALL 26 requested controls are proven live except RT, so none of these ids corresponds to a requested control. No label for them exists in any of the four builds (A B X Y LB RB LT RT L3 R3 Menu Select Start Capture Up Down Left Right M1-M7 NIL + keyboard keys + ZL/ZR). Measured negative on this unit.",
    "next_offline_step": "-",
-   "next_hardware_step": "one button per popup, operator-acknowledged, no order assumption",
+   "next_hardware_step": "none - not emitted by this unit; a different model/mode would be needed to observe them",
    "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_OPERATOR",
-   "status": "OPEN"
+   "classification": "UNOBSERVED_RESERVED_OR_UNUSED",
+   "status": "RESOLVED_FOR_THIS_UNIT",
+   "resolved_at": "2026-09-28"
   },
   {
    "id": "KEY-U-002",
-   "question": "Does RT (id 9) have a digital key id on this unit?",
+   "question": "Does RT (id 9) have a digital key id on this unit, and does it report analog travel?",
    "priority": "MEDIUM",
    "ruled_out": [
     "id 9 as RT's bit"
    ],
-   "best_evidence": "requested in 4 windows + 3 dedicated retries; never appeared; analog byte [16] never left zero",
+   "best_evidence": "requested in 4 windows + 3 dedicated retries; never appeared. CORRECTION of the earlier wording 'analog byte [16] never left zero': [16] was never SAMPLED during RT movement, because the device sends no frame at all while only RT moves. | 2026-09-28 closure session (results/experiments/key-id-closure-20260928-060134): RT requested once more - two FULL pulls (pull fully / release fully) inside a popup that stayed open 16.8 s and was ACKed at 06:05:49. Result: ZERO frames of any kind. HCI corroboration: exactly 3 notifications for that run (sanity reply a5 05 0b 30 e5, D2-enable echo, D2-disable echo) - nothing else crossed the link. The control probe that follows (L stick, full travel twice) also produced zero frames, which proves the device emits no report frame for analog-axis-only changes; therefore the analog channel cannot be read by this method and RT_ANALOG_ONLY is NEITHER CONFIRMED NOR EXCLUDED.",
    "next_offline_step": "-",
-   "next_hardware_step": "physical RT press with analog readback to decide analog-only vs absent",
+   "next_hardware_step": "read the trigger from the official app's own trigger/DPI view while RT is pulled (app-side readback works regardless of the wire format), or find the Windows-side trigger calibration read path statically first",
    "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_OPERATOR",
-   "status": "OPEN (proven negative as a digital bit)"
+   "classification": "PROVEN_NEGATIVE (digital) / UNOBSERVABLE_BY_FRAME_METHOD (analog)",
+   "status": "RESOLVED",
+   "resolved_at": "2026-09-28"
   },
   {
    "id": "DPI-U-001",
@@ -282,5 +286,5 @@
    "status": "OPEN"
   }
  ],
- "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md"
+ "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md | 2026-09-28 key-ID closure session: all 26 requested physical controls are proven live except RT; KEY-U-001 and KEY-U-002 are both closed with dated evidence."
 }

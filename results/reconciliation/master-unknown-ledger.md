@@ -389,3 +389,31 @@ Historical ids are preserved; resolved ones carry their evidence rather than bei
 
 **Classification:** `DEFERRED_REQUIRES_HARDWARE`
 
+
+---
+
+## 2026-09-28 — key-ID closure session (append-only)
+
+Session: `results/experiments/key-id-closure-20260928-060134/` (RESULT.md is authoritative for detail).
+
+- **Phase 1 (before any popup):** the physical-control list was derived from what the operator was actually
+  asked to press (`results/runtime/press-groups.jsonl`) cross-checked with the proven-live map.
+  **26 controls requested, 26 proven live.** Only **RT** was requested and never proven. Two analog sticks
+  had never been requested at all. Sources: `control-inventory.{json,md}` in the session directory.
+- **KEY-U-002 (RT / id 9) → RESOLVED.** RT was requested again with two FULL pulls inside a popup open
+  16.8 s, ACKed 06:05:49. **Zero frames of any kind** arrived; HCI shows exactly 3 notifications for that run
+  (sanity reply, D2 enable echo, D2 disable echo). Digital: **PROVEN NEGATIVE**. Analog: **UNOBSERVABLE BY
+  THIS METHOD** — the L-stick probe (full travel twice) also produced zero frames, proving the device emits no
+  report frame for analog-axis-only changes. `RT_ANALOG_ONLY` is neither confirmed nor excluded, and no
+  analog claim is made. The earlier wording "analog byte [16] never left zero" was wrong and is corrected:
+  the byte was never *sampled* during RT movement.
+- **KEY-U-001 (ids 2, 5, 21, 22, 31, 32, 33) → RESOLVED_FOR_THIS_UNIT** as
+  `UNOBSERVED_RESERVED_OR_UNUSED`: no requested physical control maps to them, and no label exists for them
+  in any of the four builds. The app's 32-slot `mapKeys` space is larger than the number of controls this
+  unit reports. Observed negative on this hardware.
+- Post-session read-only integrity read: `bdef9c61…` → `CONFIG_BASELINE_MATCH` (integrity readback only, not
+  a durability proof). Final runtime write on the wire: `a5 05 d2 00 7c`.
+- Harness defect found and fixed: the one-control runner resolved the dialog helper to a **non-existent
+  path**, so the first RT popup never appeared and the harness **misreported it as `OPERATOR_CANCELLED`**.
+  Fixed: the helper is resolved at its real path, a missing helper is a hard error, and only rc == 1 counts as
+  an operator cancel (rc 2/3/127 are harness faults).

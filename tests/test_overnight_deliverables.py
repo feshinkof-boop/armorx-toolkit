@@ -6,6 +6,7 @@ drop the master report, the ledger or the key-map table, or reintroduce a resolv
 """
 import csv
 import json
+import re
 import pathlib
 
 import pytest
@@ -42,13 +43,19 @@ def test_previous_master_report_is_archived_not_lost():
 def test_unknown_ledger_is_complete_and_classified():
     d = load("results/reconciliation/master-unknown-ledger.json")
     allowed = {"DEFERRED_REQUIRES_HARDWARE", "DEFERRED_REQUIRES_OPERATOR",
-               "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE", "STATICALLY_EXHAUSTED"}
+               "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE", "STATICALLY_EXHAUSTED",
+               # classes an item can be CLOSED into when a physical session answers it
+               # (2026-09-28 key-ID closure: ids no control of this unit emits; RT proven negative)
+               "UNOBSERVED_RESERVED_OR_UNUSED", "PROVEN_NEGATIVE",
+               "UNOBSERVABLE_BY_FRAME_METHOD"}
     assert len(d["entries"]) >= 15
     for e in d["entries"]:
         for field in ("id", "question", "priority", "ruled_out", "best_evidence",
                       "next_offline_step", "next_hardware_step", "dependencies", "classification"):
             assert field in e, (e["id"], field)
-        assert e["classification"] in allowed, (e["id"], e["classification"])
+        # an entry may carry a compound class ("A (digital) / B (analog)"); every part must be known
+        for part in re.split(r"\s*/\s*", e["classification"]):
+            assert part.split(" (")[0] in allowed, (e["id"], part)
         assert e["status"], e["id"]
 
 

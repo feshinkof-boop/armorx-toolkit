@@ -1,0 +1,283 @@
+{
+ "generated": "2026-09-28T06:01:42.832704",
+ "method": "Derived from what the operator was ACTUALLY asked to press (results/runtime/press-groups.jsonl) cross-referenced with the proven-live map. No ordering inference, no +1 bit interpretation; the operative rule is bit == id.",
+ "request_groups": [
+  {
+   "action_id": "press_group_B",
+   "requested_buttons": [
+    "LB",
+    "RB",
+    "LT",
+    "RT"
+   ],
+   "requested_timestamp": "2026-09-27T17:10:49-04:00"
+  },
+  {
+   "action_id": "press_group_C",
+   "requested_buttons": [
+    "View",
+    "Menu",
+    "L3",
+    "R3"
+   ],
+   "requested_timestamp": "2026-09-27T17:11:53-04:00"
+  },
+  {
+   "action_id": "press_group_C",
+   "requested_buttons": [
+    "View",
+    "Menu",
+    "L3",
+    "R3"
+   ],
+   "requested_timestamp": "2026-09-27T17:11:53-04:00"
+  },
+  {
+   "action_id": "press_group_D",
+   "requested_buttons": [
+    "RT",
+    "D-pad Up",
+    "D-pad Down",
+    "D-pad Left",
+    "D-pad Right"
+   ],
+   "requested_timestamp": "2026-09-27T17:12:38-04:00"
+  },
+  {
+   "action_id": "press_group_E",
+   "requested_buttons": [
+    "RT",
+    "Capture",
+    "Guide",
+    "M1",
+    "M2",
+    "M3",
+    "M4",
+    "M5",
+    "M6",
+    "M7"
+   ],
+   "requested_timestamp": "2026-09-27T17:13:26-04:00"
+  },
+  {
+   "action_id": "press_group_F",
+   "requested_buttons": [
+    "RT",
+    "M5",
+    "M6",
+    "M7",
+    "other"
+   ],
+   "requested_timestamp": "2026-09-27T17:14:50-04:00"
+  },
+  {
+   "action_id": "press_group_A",
+   "requested_buttons": [
+    "A",
+    "B",
+    "X",
+    "Y"
+   ],
+   "requested_timestamp": "2026-09-27T17:09:23-04:00"
+  }
+ ],
+ "distinct_requested_controls": [
+  "LB",
+  "RB",
+  "LT",
+  "RT",
+  "View",
+  "Menu",
+  "L3",
+  "R3",
+  "D-pad Up",
+  "D-pad Down",
+  "D-pad Left",
+  "D-pad Right",
+  "Capture",
+  "Guide",
+  "M1",
+  "M2",
+  "M3",
+  "M4",
+  "M5",
+  "M6",
+  "M7",
+  "other",
+  "A",
+  "B",
+  "X",
+  "Y"
+ ],
+ "proven_live": {
+  "0": {
+   "button": "A",
+   "group": "press_group_A",
+   "frames": 14
+  },
+  "1": {
+   "button": "B",
+   "group": "press_group_A",
+   "frames": 13
+  },
+  "3": {
+   "button": "X",
+   "group": "press_group_A",
+   "frames": 14
+  },
+  "4": {
+   "button": "Y",
+   "group": "press_group_A",
+   "frames": 14
+  },
+  "6": {
+   "button": "LB",
+   "group": "press_group_B",
+   "frames": 38
+  },
+  "7": {
+   "button": "RB",
+   "group": "press_group_B",
+   "frames": 35
+  },
+  "8": {
+   "button": "LT",
+   "group": "press_group_B",
+   "frames": 13
+  },
+  "10": {
+   "button": "View/Select",
+   "group": "press_group_C",
+   "frames": 29
+  },
+  "11": {
+   "button": "Menu/Start",
+   "group": "press_group_C",
+   "frames": 22
+  },
+  "12": {
+   "button": "Guide/Xbox",
+   "group": "press_group_E",
+   "frames": 26
+  },
+  "13": {
+   "button": "L3",
+   "group": "press_group_C",
+   "frames": 14
+  },
+  "14": {
+   "button": "R3",
+   "group": "press_group_C",
+   "frames": 18
+  },
+  "15": {
+   "button": "Capture/Share",
+   "group": "press_group_E",
+   "frames": 28
+  },
+  "16": {
+   "button": "D-pad Up",
+   "group": "press_group_D",
+   "frames": 24
+  },
+  "17": {
+   "button": "D-pad Down",
+   "group": "press_group_D",
+   "frames": 24
+  },
+  "18": {
+   "button": "D-pad Left",
+   "group": "press_group_D",
+   "frames": 19
+  },
+  "19": {
+   "button": "D-pad Right",
+   "group": "press_group_D",
+   "frames": 18
+  },
+  "20": {
+   "button": "UNATTRIBUTED - one frame with id 20 appeared in this window; it cannot be tied to RT with confidence",
+   "group": "press_group_F",
+   "frames": 19
+  },
+  "23": {
+   "button": "M1",
+   "group": "press_group_E",
+   "frames": 22
+  },
+  "24": {
+   "button": "M2",
+   "group": "press_group_E",
+   "frames": 28
+  },
+  "25": {
+   "button": "M3",
+   "group": "press_group_E",
+   "frames": 24
+  },
+  "26": {
+   "button": "M4",
+   "group": "press_group_E",
+   "frames": 21
+  },
+  "27": {
+   "button": "M5",
+   "group": "press_group_F",
+   "frames": 19
+  },
+  "28": {
+   "button": "M6",
+   "group": "press_group_F",
+   "frames": 17
+  },
+  "29": {
+   "button": "M7",
+   "group": "press_group_F",
+   "frames": 24
+  },
+  "30": {
+   "button": "extra button (as pressed by the operator)",
+   "group": "press_group_F",
+   "frames": 13
+  }
+ },
+ "proven_live_count": 26,
+ "requested_but_not_proven": [
+  "RT"
+ ],
+ "never_requested_physical_controls": [
+  "L stick (analog, full deflection)",
+  "R stick (analog, full deflection)"
+ ],
+ "physical_controls_not_yet_proven": [
+  "RT",
+  "L stick (analog, full deflection)",
+  "R stick (analog, full deflection)"
+ ],
+ "unresolved_numeric_ids": [
+  2,
+  5,
+  9,
+  21,
+  22,
+  31,
+  32,
+  33
+ ],
+ "unresolved_id_note": "Of the unresolved ids, only id 9 has a candidate physical control (RT, requested 4x and never observed). The rest correspond to no requested control and may be unused, reserved, mode-dependent, analog-only, or not emitted by this unit - no name is assumed.",
+ "mask_byte_fields_in_capture": [
+  "b3",
+  "b4",
+  "b5",
+  "b6",
+  "lt_analog",
+  "rt_analog"
+ ],
+ "app_label_inventory_4_0_8": "A B X Y LB RB LT RT L3 R3 Menu Select Start Capture Up Down Left Right M1..M7 NIL, plus keyboard keys and ZL/ZR (Switch-mode names). No M8+ and no Turbo label exists.",
+ "session_plan": [
+  "RT (digital mask + analog channel)",
+  "L stick (analog, full deflection)",
+  "R stick (analog, full deflection)"
+ ],
+ "name_normalisation": "Request labels and proven labels differ in form ('View' vs 'View/Select', 'Capture' vs 'Capture/Share', 'Guide' vs 'Guide/Xbox', 'Menu' vs 'Menu/Start'); comparison strips everything after '/' and lowercases. 'other' maps to the id-30 entry the operator self-selected."
+}

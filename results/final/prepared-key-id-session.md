@@ -61,3 +61,24 @@ cancelled (`OPERATOR_CANCELLED`), send D2 OFF, disconnect, and report.
 - The operator dialog supports `CANCEL / STOP` and one-shot ACK recording.
 - The config baseline is intact (`CONFIG_BASELINE_MATCH`, `bdef9c61…`) and this session needs **no
   configuration writes** — it is D2 enable/press/disable only.
+
+
+---
+
+## 2026-09-28 — EXECUTED, and the plan narrowed to one control
+
+This plan was executed in `results/experiments/key-id-closure-20260928-060134/`. Phase 1 (deriving the
+control list from what the operator was actually asked to press) showed that **26 of the 26 requested
+controls were already proven live, and RT was the only one left** — so the eight-id queue below collapsed
+to a single control:
+
+- **RT** — tested, `RT_NO_REPORT_OBSERVED` (zero frames in a 16.8 s ACKed window; HCI confirms only the
+  three control-plane notifications crossed the link).
+- **L stick** (never requested before) — tested, `STICK_NO_REPORT_OBSERVED`; this is what proves the device
+  emits no frame for analog-axis-only changes, which is why RT's `[16]` analog byte is unsamplable.
+- **R stick** — skipped as redundant once the L stick answered the mechanism question.
+
+The ids below were therefore not queued one-per-popup: none of them corresponds to a requested physical
+control. Final classifications: `9` = **PROVEN_NEGATIVE** (digital), `2, 5, 21, 22, 31, 32, 33` =
+**UNOBSERVED_RESERVED_OR_UNUSED**. Do not re-run this queue expecting names to appear; if RT's analog travel
+is ever needed, read it from the **official app's** trigger/DPI view instead of the frame stream.

@@ -1,0 +1,40 @@
+{
+ "control": "L stick",
+ "action_id": "armorx_keymap_l_stick",
+ "started": "2026-09-28T10:07:10.158935+00:00",
+ "identity": {
+  "2a24": "5a4a2d5854",
+  "2a26": "32373431"
+ },
+ "tx": [
+  "a5040bb4",
+  "a505d2017d",
+  "a505d2007c"
+ ],
+ "cancelled": false,
+ "analysis": {
+  "verdict": "NO_REPORT_OBSERVED",
+  "valid_frames": 0,
+  "frames_total": 3,
+  "nonzero_mask_frames": 0,
+  "bits": [],
+  "isolated_single_bit": false,
+  "transitions": [],
+  "analog": {
+   "lt": {
+    "index": 15,
+    "min": null,
+    "max": null,
+    "moved": false
+   },
+   "rt": {
+    "index": 16,
+    "min": null,
+    "max": null,
+    "moved": false
+   }
+  }
+ },
+ "classification": "STICK_NO_REPORT_OBSERVED",
+ "classification_note": "Full stick travel twice inside an ACKed popup produced no frame at all. This is the probe that shows the device does not emit report frames for analog-axis-only changes, which is why RT's analog byte [16] cannot be sampled by this method. The R-stick probe was therefore skipped as redundant."
+}

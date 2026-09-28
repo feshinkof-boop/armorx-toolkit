@@ -1,0 +1,246 @@
+{
+ "generated": "2026-09-28T06:09:10.954413",
+ "note": "Canonical key-id map. The 17:08 experiment copy (results/experiments/physical-20260927-170844-d2/real-key-id-map.json) is the historical source and is left untouched; this file is the current canonical view including the 2026-09-28 closure session.",
+ "device": {
+  "model": "ZJ-XT",
+  "firmware": "2741",
+  "ble_address": "2D:37:35:6D:66:11",
+  "advertised_name": "ARMOR-X Pro_11"
+ },
+ "frame_layout": {
+  "opcode": "0x02",
+  "length": 18,
+  "key_mask_bytes": "[3][4][5][6] -> ids 24-31 / 16-23 / 8-15 / 0-7 (bit == source id)",
+  "lt_analog_byte": "[15] (0x83 -> 0xFF on a full pull)",
+  "rt_analog_byte": "[16]",
+  "analog_axis_bytes": "[7]-[14] semantics UNKNOWN",
+  "checksum_byte": "[17] sum8"
+ },
+ "mask_rule": "mask bytes [3..6] big-endian u32; bit index == key id (no +1)",
+ "proven_live": {
+  "0": {
+   "button": "A",
+   "static": "A",
+   "group": "press_group_A",
+   "corroborating_frames": 14,
+   "evidence": "PROVEN LIVE"
+  },
+  "1": {
+   "button": "B",
+   "static": "B",
+   "group": "press_group_A",
+   "corroborating_frames": 13,
+   "evidence": "PROVEN LIVE"
+  },
+  "3": {
+   "button": "X",
+   "static": "X",
+   "group": "press_group_A",
+   "corroborating_frames": 14,
+   "evidence": "PROVEN LIVE"
+  },
+  "4": {
+   "button": "Y",
+   "static": "Y",
+   "group": "press_group_A",
+   "corroborating_frames": 14,
+   "evidence": "PROVEN LIVE"
+  },
+  "6": {
+   "button": "LB",
+   "static": "LB",
+   "group": "press_group_B",
+   "corroborating_frames": 38,
+   "evidence": "PROVEN LIVE"
+  },
+  "7": {
+   "button": "RB",
+   "static": "RB",
+   "group": "press_group_B",
+   "corroborating_frames": 35,
+   "evidence": "PROVEN LIVE"
+  },
+  "8": {
+   "button": "LT",
+   "static": "LT",
+   "group": "press_group_B",
+   "corroborating_frames": 13,
+   "evidence": "PROVEN LIVE"
+  },
+  "10": {
+   "button": "View/Select",
+   "static": "View",
+   "group": "press_group_C",
+   "corroborating_frames": 29,
+   "evidence": "PROVEN LIVE"
+  },
+  "11": {
+   "button": "Menu/Start",
+   "static": "Menu",
+   "group": "press_group_C",
+   "corroborating_frames": 22,
+   "evidence": "PROVEN LIVE"
+  },
+  "12": {
+   "button": "Guide/Xbox",
+   "static": "UNKNOWN (was)",
+   "group": "press_group_E",
+   "corroborating_frames": 26,
+   "evidence": "PROVEN LIVE"
+  },
+  "13": {
+   "button": "L3",
+   "static": "L3",
+   "group": "press_group_C",
+   "corroborating_frames": 14,
+   "evidence": "PROVEN LIVE"
+  },
+  "14": {
+   "button": "R3",
+   "static": "R3",
+   "group": "press_group_C",
+   "corroborating_frames": 18,
+   "evidence": "PROVEN LIVE"
+  },
+  "15": {
+   "button": "Capture/Share",
+   "static": "Capture",
+   "group": "press_group_E",
+   "corroborating_frames": 28,
+   "evidence": "PROVEN LIVE"
+  },
+  "16": {
+   "button": "D-pad Up",
+   "static": "D-pad Up",
+   "group": "press_group_D",
+   "corroborating_frames": 24,
+   "evidence": "PROVEN LIVE"
+  },
+  "17": {
+   "button": "D-pad Down",
+   "static": "D-pad Down",
+   "group": "press_group_D",
+   "corroborating_frames": 24,
+   "evidence": "PROVEN LIVE"
+  },
+  "18": {
+   "button": "D-pad Left",
+   "static": "D-pad Left",
+   "group": "press_group_D",
+   "corroborating_frames": 19,
+   "evidence": "PROVEN LIVE"
+  },
+  "19": {
+   "button": "D-pad Right",
+   "static": "D-pad Right",
+   "group": "press_group_D",
+   "corroborating_frames": 18,
+   "evidence": "PROVEN LIVE"
+  },
+  "20": {
+   "button": "UNATTRIBUTED - one frame with id 20 appeared in this window; it cannot be tied to RT with confidence",
+   "static": "UNKNOWN (was)",
+   "group": "press_group_F",
+   "corroborating_frames": 19,
+   "evidence": "PROVEN LIVE"
+  },
+  "23": {
+   "button": "M1",
+   "static": "UNKNOWN (was)",
+   "group": "press_group_E",
+   "corroborating_frames": 22,
+   "evidence": "PROVEN LIVE"
+  },
+  "24": {
+   "button": "M2",
+   "static": "UNKNOWN (was)",
+   "group": "press_group_E",
+   "corroborating_frames": 28,
+   "evidence": "PROVEN LIVE"
+  },
+  "25": {
+   "button": "M3",
+   "static": "UNKNOWN (was)",
+   "group": "press_group_E",
+   "corroborating_frames": 24,
+   "evidence": "PROVEN LIVE"
+  },
+  "26": {
+   "button": "M4",
+   "static": "UNKNOWN (was)",
+   "group": "press_group_E",
+   "corroborating_frames": 21,
+   "evidence": "PROVEN LIVE"
+  },
+  "27": {
+   "button": "M5",
+   "static": "M5",
+   "group": "press_group_F",
+   "corroborating_frames": 19,
+   "evidence": "PROVEN LIVE"
+  },
+  "28": {
+   "button": "M6",
+   "static": "M6",
+   "group": "press_group_F",
+   "corroborating_frames": 17,
+   "evidence": "PROVEN LIVE"
+  },
+  "29": {
+   "button": "M7",
+   "static": "M7",
+   "group": "press_group_F",
+   "corroborating_frames": 24,
+   "evidence": "PROVEN LIVE"
+  },
+  "30": {
+   "button": "extra button (as pressed by the operator)",
+   "static": "UNKNOWN (was)",
+   "group": "press_group_F",
+   "corroborating_frames": 13,
+   "evidence": "PROVEN LIVE"
+  }
+ },
+ "proven_live_count": 26,
+ "unresolved_classification": {
+  "2": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "5": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "9": "PROVEN_NEGATIVE",
+  "21": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "22": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "31": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "32": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "33": "UNOBSERVED_RESERVED_OR_UNUSED"
+ },
+ "unresolved_detail": {
+  "9": "PROVEN NEGATIVE as a digital bit. Requested in press_group_B/D/E/F, three dedicated retries, and again on 2026-09-28 with two FULL pulls in a popup open 16.8 s (ACKed 06:05:49): zero frames of any kind arrived. Because the device emits nothing while only RT moves, the analog byte [16] is unsamplable, so RT_ANALOG_ONLY is neither confirmed nor excluded. No analog claim is made.",
+  "2,5,21,22,31,32,33": "UNOBSERVED_RESERVED_OR_UNUSED: no physical control that was ever requested maps to these bits, and no label for them exists in any of the four builds' inventories (the app's label set is A B X Y LB RB LT RT L3 R3 Menu Select Start Capture Up Down Left Right M1-M7 NIL + keyboard keys + ZL/ZR). The 32-slot mapKeys space is larger than the number of controls this unit reports."
+ },
+ "closure_session": {
+  "dir": "results/experiments/key-id-closure-20260928-060134",
+  "result": "One control remained untested (RT); it and a stick probe both produced zero frames.",
+  "controls_tested": [
+   {
+    "control": "RT",
+    "verdict": "RT_NO_REPORT_OBSERVED",
+    "valid_frames": 0
+   },
+   {
+    "control": "L stick",
+    "verdict": "STICK_NO_REPORT_OBSERVED",
+    "valid_frames": 0
+   }
+  ],
+  "controls_skipped": [
+   {
+    "control": "R stick",
+    "why": "the L-stick probe already proved analog-axis-only changes produce no frames, so the outcome was determined"
+   }
+  ]
+ },
+ "sources": {
+  "live_experiment": "results/experiments/physical-20260927-170844-d2/real-key-id-map.json",
+  "consolidated": "results/final/key-map-confidence.json",
+  "closure_session": "results/experiments/key-id-closure-20260928-060134/RESULT.md"
+ }
+}

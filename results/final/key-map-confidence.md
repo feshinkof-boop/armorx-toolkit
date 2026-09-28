@@ -18,14 +18,14 @@ Counts: **26 PROVEN LIVE**, 8 UNKNOWN, 0 unobserved.
 |---|---|---|---|---|---|---|
 | 0 | A | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 14 | — | single-bit mask inside press_group_A window (2026-09-27T17:09:23-04:00 .. 2026-09-27T17:10:15-04:00) |
 | 1 | B | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 13 | — | single-bit mask inside press_group_A window (2026-09-27T17:09:23-04:00 .. 2026-09-27T17:10:15-04:00) |
-| 2 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold |
+| 2 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware. |
 | 3 | X | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 14 | — | single-bit mask inside press_group_A window (2026-09-27T17:09:23-04:00 .. 2026-09-27T17:10:15-04:00) |
 | 4 | Y | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 14 | — | single-bit mask inside press_group_A window (2026-09-27T17:09:23-04:00 .. 2026-09-27T17:10:15-04:00) |
-| 5 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold |
+| 5 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware. |
 | 6 | LB | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 57 | — | single-bit mask inside press_group_B window (2026-09-27T17:10:49-04:00 .. 2026-09-27T17:11:34-04:00) |
 | 7 | RB | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 46 | keyL1 | single-bit mask inside press_group_B window (2026-09-27T17:10:49-04:00 .. 2026-09-27T17:11:34-04:00) |
 | 8 | LT | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 13 | keyR1 | single-bit mask inside press_group_B window (2026-09-27T17:10:49-04:00 .. 2026-09-27T17:11:34-04:00) |
-| 9 | — | UNKNOWN | UNKNOWN | 0 | keyL2 | RT: requested in press_group_B/D/E/F and three dedicated retries - NEVER appeared |
+| 9 | — | UNKNOWN | UNKNOWN | 0 | keyL2 | RT: requested in press_group_B/D/E/F and three dedicated retries - NEVER appeared | 2026-09-28 closure session: RT requested again, two FULL pulls inside a popup open 16.8 s and ACKed at 06:05:49; zero frames of any kind arrived, so [16] could not be sampled - RT_ANALOG_ONLY neither confirmed nor excluded. PROVEN NEGATIVE as a digital bit; id 9 stays unresolved. |
 | 10 | View/Select | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 29 | keyR2 | single-bit mask inside press_group_C window (2026-09-27T17:11:53-04:00 .. 2026-09-27T17:12:27-04:00) |
 | 11 | Menu/Start | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 44 | keySelect | single-bit mask inside press_group_C window (2026-09-27T17:11:53-04:00 .. 2026-09-27T17:12:27-04:00) |
 | 12 | Guide/Xbox | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 26 | keyStart | single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold |
@@ -37,8 +37,8 @@ Counts: **26 PROVEN LIVE**, 8 UNKNOWN, 0 unobserved.
 | 18 | D-pad Left | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 72 | keyDown | single-bit mask inside press_group_D window (2026-09-27T17:12:38-04:00 .. 2026-09-27T17:13:08-04:00) |
 | 19 | D-pad Right | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 66 | keyLeft | single-bit mask inside press_group_D window (2026-09-27T17:12:38-04:00 .. 2026-09-27T17:13:08-04:00) |
 | 20 | UNATTRIBUTED | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 19 | keyRight | single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00); no static label found in the builds we hold |
-| 21 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold |
-| 22 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold |
+| 21 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware. |
+| 22 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware. |
 | 23 | M1 | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 22 | — | single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold |
 | 24 | M2 | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 28 | keyM1 | single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold |
 | 25 | M3 | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 24 | keyM2 | single-bit mask inside press_group_E window (2026-09-27T17:13:26-04:00 .. 2026-09-27T17:14:27-04:00); no static label found in the builds we hold |
@@ -47,9 +47,9 @@ Counts: **26 PROVEN LIVE**, 8 UNKNOWN, 0 unobserved.
 | 28 | M6 | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 17 | — | single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00) |
 | 29 | M7 | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 24 | — | single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00) |
 | 30 | extra button (as pressed by the operator) | PROVEN LIVE + corroborated by the mask rule in all four builds | PROVEN LIVE | 13 | — | single-bit mask inside press_group_F window (2026-09-27T17:14:50-04:00 .. 2026-09-27T17:15:38-04:00); no static label found in the builds we hold |
-| 31 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold |
-| 32 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold |
-| 33 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold |
+| 31 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware. |
+| 32 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware. |
+| 33 | — | UNKNOWN | UNKNOWN | 0 | — | no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware. |
 
 ## How an id is proven
 

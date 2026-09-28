@@ -1,0 +1,2 @@
+FOUND after 24s: 2D:37:35:6D:66:11 rssi=-90 mfr=True name=''
+btmon_bytes=4095

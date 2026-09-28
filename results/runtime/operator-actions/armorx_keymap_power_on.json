@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_keymap_power_on",
+ "title": "ArmorX Key Map",
+ "response": "done",
+ "clicked_at": "2026-09-28T06:02:43-04:00",
+ "gui": "kdialog",
+ "pid": 290311
+}

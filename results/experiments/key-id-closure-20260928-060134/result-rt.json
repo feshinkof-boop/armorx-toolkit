@@ -1,0 +1,45 @@
+{
+ "control": "RT",
+ "action_id": "armorx_keymap_rt",
+ "started": "2026-09-28T10:06:04.154232+00:00",
+ "identity": {
+  "2a24": "5a4a2d5854",
+  "2a26": "32373431"
+ },
+ "tx": [
+  "a5040bb4",
+  "a505d2017d",
+  "a505d2007c"
+ ],
+ "cancelled": false,
+ "analysis": {
+  "verdict": "NO_REPORT_OBSERVED",
+  "valid_frames": 0,
+  "frames_total": 3,
+  "nonzero_mask_frames": 0,
+  "bits": [],
+  "isolated_single_bit": false,
+  "transitions": [],
+  "analog": {
+   "lt": {
+    "index": 15,
+    "min": null,
+    "max": null,
+    "moved": false
+   },
+   "rt": {
+    "index": 16,
+    "min": null,
+    "max": null,
+    "moved": false
+   }
+  }
+ },
+ "classification": "RT_NO_REPORT_OBSERVED",
+ "classification_note": "Two full pulls inside a popup that stayed open 16.8 s and was ACKed at 06:05:49; the capture received the sanity reply, the D2 enable echo and the D2 disable echo and NOTHING else. Because the device emits no frame while only RT moves, the analog byte [16] could not be sampled at all - so ANALOG_ONLY can neither be confirmed nor excluded by this method, and no analog claim is made. ID 9 stays unresolved/negative.",
+ "rt_analog_offset_verified": {
+  "index": 16,
+  "source": "results/reconciliation/d2-frame-contract.md",
+  "contract": "[15] LT analog, [16] RT analog, [17] trailer; LT was PROVEN LIVE to move [15]"
+ }
+}

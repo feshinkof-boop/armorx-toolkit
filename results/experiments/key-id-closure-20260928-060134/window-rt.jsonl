@@ -1,0 +1,3 @@
+{"t": 1.144, "ts": "2026-09-28T10:05:32.219870+00:00", "hex": "a5050b30e5", "valid": false, "mask": null, "len": 5, "checksum_ok": false}
+{"t": 1.233, "ts": "2026-09-28T10:05:32.308940+00:00", "hex": "a505d2017d", "valid": false, "mask": null, "len": 5, "checksum_ok": false}
+{"t": 30.048, "ts": "2026-09-28T10:06:01.123313+00:00", "hex": "a505d2007c", "valid": false, "mask": null, "len": 5, "checksum_ok": false}

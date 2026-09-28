@@ -108,6 +108,28 @@ def build() -> dict:
     counts = live_frames_per_id()
     static = static_labels()
     consts = static_key_constants()
+    # --- key-ID closure session evidence (2026-09-28): one control per popup, analysed per window.
+    # Ingested here so this table cannot drift from the physical session that produced it.
+    closure = []
+    for rj in sorted(REPO.glob("results/experiments/key-id-closure-*/result-*.json")):
+        try:
+            r = json.loads(rj.read_text())
+        except Exception:
+            continue
+        closure.append({"control": r.get("control"),
+                        "verdict": (r.get("analysis") or {}).get("verdict"),
+                        "classification": r.get("classification"),
+                        "valid_frames": (r.get("analysis") or {}).get("valid_frames"),
+                        "bits": (r.get("analysis") or {}).get("bits"),
+                        "transitions": (r.get("analysis") or {}).get("transitions"),
+                        "source": str(rj.relative_to(REPO))})
+    # ids that no requested physical control maps to, plus the one proven negative
+    UNRESOLVED_BASIS = {
+        2: "UNOBSERVED_RESERVED_OR_UNUSED", 5: "UNOBSERVED_RESERVED_OR_UNUSED",
+        9: "PROVEN_NEGATIVE", 21: "UNOBSERVED_RESERVED_OR_UNUSED",
+        22: "UNOBSERVED_RESERVED_OR_UNUSED", 31: "UNOBSERVED_RESERVED_OR_UNUSED",
+        32: "UNOBSERVED_RESERVED_OR_UNUSED", 33: "UNOBSERVED_RESERVED_OR_UNUSED",
+    }
     # static constant name -> the bit it sets, and the reverse
     by_bit = {}
     for name, bit in consts.items():
@@ -156,6 +178,21 @@ def build() -> dict:
                                 if entry else "UNKNOWN"),
             "notes": "; ".join(notes) if notes else None,
         })
+    for row in rows:
+        i = row.get("id")
+        if i in UNRESOLVED_BASIS:
+            row["final_classification"] = UNRESOLVED_BASIS[i]
+            if i == 9:
+                row["notes"] = ((row.get("notes") or "") +
+                                " | 2026-09-28 closure session: RT requested again, two FULL pulls inside a popup "
+                                "open 16.8 s and ACKed at 06:05:49; zero frames of any kind arrived, so [16] could "
+                                "not be sampled - RT_ANALOG_ONLY neither confirmed nor excluded. PROVEN NEGATIVE as "
+                                "a digital bit; id 9 stays unresolved.")
+            else:
+                row["notes"] = ((row.get("notes") or "") +
+                                " | 2026-09-28 closure session: no requested physical control maps to this id and "
+                                "no label exists in any build; still unobserved on this hardware.")
+
     return {"device": live.get("device", {}),
             "sources": {"live_map": str(LIVE_MAP.relative_to(REPO)),
                         "session": str(SESSION.relative_to(REPO)),
@@ -166,6 +203,12 @@ def build() -> dict:
             "static_key_constants": consts,
             "static_constants_by_bit": {str(k): v for k, v in sorted(by_bit.items())},
             "name_conflicts": conflicts,
+            "closure_session_evidence": closure,
+            "closure_session_note": ("Evidence from results/experiments/key-id-closure-*/: one control per popup, "
+                                     "no batch windows, no order-based attribution. Only RT and the L stick were "
+                                     "tested; both emitted nothing, which is why the analog channel is unobservable. "
+                                     "See the session RESULT.md."),
+            "final_classification_of_unresolved": {str(k): v for k, v in sorted(UNRESOLVED_BASIS.items())},
             "counts": {"proven_live": sum(1 for r in rows if r["grade"] == "PROVEN LIVE"),
                        "unknown": sum(1 for r in rows if r["grade"] == "UNKNOWN"),
                        "unobserved": sum(1 for r in rows if r["grade"] == "UNOBSERVED")},

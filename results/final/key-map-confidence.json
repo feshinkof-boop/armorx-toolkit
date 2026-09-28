@@ -240,6 +240,37 @@
    "grade": "static_indexing_offset (not a contradiction of the wire naming)"
   }
  ],
+ "closure_session_evidence": [
+  {
+   "control": "L stick",
+   "verdict": "NO_REPORT_OBSERVED",
+   "classification": null,
+   "valid_frames": 0,
+   "bits": [],
+   "transitions": [],
+   "source": "results/experiments/key-id-closure-20260928-060134/result-l_stick.json"
+  },
+  {
+   "control": "RT",
+   "verdict": "NO_REPORT_OBSERVED",
+   "classification": "RT_NO_REPORT_OBSERVED",
+   "valid_frames": 0,
+   "bits": [],
+   "transitions": [],
+   "source": "results/experiments/key-id-closure-20260928-060134/result-rt.json"
+  }
+ ],
+ "closure_session_note": "Evidence from results/experiments/key-id-closure-*/: one control per popup, no batch windows, no order-based attribution. Only RT and the L stick were tested; both emitted nothing, which is why the analog channel is unobservable. See the session RESULT.md.",
+ "final_classification_of_unresolved": {
+  "2": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "5": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "9": "PROVEN_NEGATIVE",
+  "21": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "22": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "31": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "32": "UNOBSERVED_RESERVED_OR_UNUSED",
+  "33": "UNOBSERVED_RESERVED_OR_UNUSED"
+ },
  "counts": {
   "proven_live": 26,
   "unknown": 8,
@@ -277,7 +308,8 @@
    "live_frames": 0,
    "static_label": null,
    "name_confidence": "UNKNOWN",
-   "notes": "no physical button produced this bit in any capture we hold"
+   "notes": "no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware.",
+   "final_classification": "UNOBSERVED_RESERVED_OR_UNUSED"
   },
   {
    "id": 3,
@@ -310,7 +342,8 @@
    "live_frames": 0,
    "static_label": null,
    "name_confidence": "UNKNOWN",
-   "notes": "no physical button produced this bit in any capture we hold"
+   "notes": "no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware.",
+   "final_classification": "UNOBSERVED_RESERVED_OR_UNUSED"
   },
   {
    "id": 6,
@@ -354,7 +387,8 @@
    "live_frames": 0,
    "static_label": null,
    "name_confidence": "UNKNOWN",
-   "notes": "RT: requested in press_group_B/D/E/F and three dedicated retries - NEVER appeared"
+   "notes": "RT: requested in press_group_B/D/E/F and three dedicated retries - NEVER appeared | 2026-09-28 closure session: RT requested again, two FULL pulls inside a popup open 16.8 s and ACKed at 06:05:49; zero frames of any kind arrived, so [16] could not be sampled - RT_ANALOG_ONLY neither confirmed nor excluded. PROVEN NEGATIVE as a digital bit; id 9 stays unresolved.",
+   "final_classification": "PROVEN_NEGATIVE"
   },
   {
    "id": 10,
@@ -486,7 +520,8 @@
    "live_frames": 0,
    "static_label": null,
    "name_confidence": "UNKNOWN",
-   "notes": "no physical button produced this bit in any capture we hold"
+   "notes": "no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware.",
+   "final_classification": "UNOBSERVED_RESERVED_OR_UNUSED"
   },
   {
    "id": 22,
@@ -497,7 +532,8 @@
    "live_frames": 0,
    "static_label": null,
    "name_confidence": "UNKNOWN",
-   "notes": "no physical button produced this bit in any capture we hold"
+   "notes": "no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware.",
+   "final_classification": "UNOBSERVED_RESERVED_OR_UNUSED"
   },
   {
    "id": 23,
@@ -596,7 +632,8 @@
    "live_frames": 0,
    "static_label": null,
    "name_confidence": "UNKNOWN",
-   "notes": "no physical button produced this bit in any capture we hold"
+   "notes": "no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware.",
+   "final_classification": "UNOBSERVED_RESERVED_OR_UNUSED"
   },
   {
    "id": 32,
@@ -607,7 +644,8 @@
    "live_frames": 0,
    "static_label": null,
    "name_confidence": "UNKNOWN",
-   "notes": "no physical button produced this bit in any capture we hold"
+   "notes": "no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware.",
+   "final_classification": "UNOBSERVED_RESERVED_OR_UNUSED"
   },
   {
    "id": 33,
@@ -618,7 +656,8 @@
    "live_frames": 0,
    "static_label": null,
    "name_confidence": "UNKNOWN",
-   "notes": "no physical button produced this bit in any capture we hold"
+   "notes": "no physical button produced this bit in any capture we hold | 2026-09-28 closure session: no requested physical control maps to this id and no label exists in any build; still unobserved on this hardware.",
+   "final_classification": "UNOBSERVED_RESERVED_OR_UNUSED"
   }
  ]
 }
