@@ -1,0 +1,36 @@
+{
+ "artifacts": {
+  "v41-disassembly.asm": {
+   "bytes": 4456961,
+   "sha256": "597b105dae70077d30742f417b3ddb76cc0789a1e180304c987a5c06149b9bb2",
+   "tracked_in_git": false
+  },
+  "v41-instructions.json": {
+   "bytes": 12148852,
+   "sha256": "bfce16b5f6c9fe01cd611c03f30b0971797ff558d8815a8844fb97c6fad073f2",
+   "tracked_in_git": false
+  },
+  "v41-functions.json": {
+   "bytes": 296457,
+   "sha256": "2f3acdfa0fa2aa5c2b94e80e9b10f8deed0770ee37c0a8d74c1c1864eee0f9f6",
+   "tracked_in_git": true
+  },
+  "v41-string-xrefs.json": {
+   "bytes": 326125,
+   "sha256": "24c2af84d5d8b51a1930f0b6c498dfcc556d74bab546a30857f95390000f4017",
+   "tracked_in_git": true
+  },
+  "v41-switch-tables.json": {
+   "bytes": 30338,
+   "sha256": "1a2c6ba4c7117842810d593bca7c4d6d27f793a372426c2cb2db4d86ac7920c8",
+   "tracked_in_git": true
+  },
+  "v41-coverage.json": {
+   "bytes": 684,
+   "sha256": "d4943fa1074e3ac7bd7f46c8af414cb50e1222f662aab957494375c1acf5f863",
+   "tracked_in_git": true
+  }
+ },
+ "regenerate_with": "tools/q32s/ (see tools/q32s/README.md)",
+ "note": "v41-disassembly.asm and v41-instructions.json are git-ignored for size; their hashes are recorded here"
+}

@@ -1,0 +1,2012 @@
+[
+ {
+  "tbb": "0x1e00b7c",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 4,
+  "table_start": "0x1e00b7e",
+  "table_end": "0x1e00b86",
+  "raw_entries": [
+   8450,
+   10020,
+   2192,
+   5513
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e04d80",
+   "0x1e059c4",
+   "0x1e01c9c",
+   "0x1e0368e"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e00be4",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 5,
+  "table_start": "0x1e00be6",
+  "table_end": "0x1e00bf0",
+  "raw_entries": [
+   779,
+   1539,
+   14,
+   2208,
+   5595
+  ],
+  "model": "u*2",
+  "base_guess": "after_table",
+  "base_confidence": 0.8,
+  "cases": [
+   "0x1e01206",
+   "0x1e017f6",
+   "0x1e00c0c",
+   "0x1e01d30",
+   "0x1e037a6"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e012d8",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 9,
+  "table_start": "0x1e012da",
+  "table_end": "0x1e012ec",
+  "raw_entries": [
+   10501,
+   10537,
+   32842,
+   10537,
+   148,
+   65472,
+   18809,
+   482,
+   62336
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 0.667,
+  "cases": [
+   "0x1e064e4",
+   "0x1e0652c",
+   "0x1e1136e",
+   "0x1e0652c",
+   "0x1e01402",
+   "0x1e2125a",
+   "0x1e0a5cc",
+   "0x1e0169e",
+   "0x1e1f9da"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e01a76",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 4,
+  "table_start": "0x1e01a78",
+  "table_end": "0x1e01a80",
+  "raw_entries": [
+   14082,
+   15674,
+   62976,
+   33096
+  ],
+  "model": "u*1",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e0517a",
+   "0x1e057b2",
+   "0x1e11078",
+   "0x1e09bc0"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e04b8a",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 9,
+  "table_start": "0x1e04b8c",
+  "table_end": "0x1e04b9e",
+  "raw_entries": [
+   3334,
+   5381,
+   10264,
+   12293,
+   63,
+   8151,
+   28688,
+   63760,
+   45296
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.778,
+  "cases": [
+   "0x1e06596",
+   "0x1e07594",
+   "0x1e09bba",
+   "0x1e0ab94",
+   "0x1e04c08",
+   "0x1e08b38",
+   "0x1e12baa",
+   "0x1e23daa",
+   "0x1e1ad6a"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e04efa",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 4,
+  "table_start": "0x1e04efc",
+  "table_end": "0x1e04f04",
+  "raw_entries": [
+   8194,
+   10789,
+   16386,
+   64961
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e08efe",
+   "0x1e0a344",
+   "0x1e0cefe",
+   "0x1e24a7c"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e05304",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e05306",
+  "table_end": "0x1e05314",
+  "raw_entries": [
+   1054,
+   23387,
+   23300,
+   44,
+   64612,
+   490,
+   28673
+  ],
+  "model": "u*2",
+  "base_guess": "after_table",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e05b50",
+   "0x1e109ca",
+   "0x1e1091c",
+   "0x1e0536c",
+   "0x1e24bdc",
+   "0x1e056e8",
+   "0x1e13316"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0623a",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 11,
+  "table_start": "0x1e0623c",
+  "table_end": "0x1e06252",
+  "raw_entries": [
+   36102,
+   36118,
+   7821,
+   36237,
+   11917,
+   68,
+   26624,
+   8324,
+   22592,
+   65376,
+   2559
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.909,
+  "cases": [
+   "0x1e17c46",
+   "0x1e17c66",
+   "0x1e09f54",
+   "0x1e17d54",
+   "0x1e0bf54",
+   "0x1e062c2",
+   "0x1e1323a",
+   "0x1e0a342",
+   "0x1e112ba",
+   "0x1e260fa",
+   "0x1e07638"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0625c",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 5,
+  "table_start": "0x1e0625e",
+  "table_end": "0x1e06268",
+  "raw_entries": [
+   870,
+   872,
+   106,
+   28720,
+   6248
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e0692a",
+   "0x1e0692e",
+   "0x1e06332",
+   "0x1e142be",
+   "0x1e0932e"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e062a6",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 5,
+  "table_start": "0x1e062a8",
+  "table_end": "0x1e062b2",
+  "raw_entries": [
+   771,
+   771,
+   3,
+   28728,
+   5613
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e068ae",
+   "0x1e068ae",
+   "0x1e062ae",
+   "0x1e14318",
+   "0x1e08e82"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e062f8",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e062fa",
+  "table_end": "0x1e06308",
+  "raw_entries": [
+   1092,
+   3341,
+   3332,
+   4,
+   1410,
+   30736,
+   2129
+  ],
+  "model": "u*2",
+  "base_guess": "after_table",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e06b90",
+   "0x1e07d22",
+   "0x1e07d10",
+   "0x1e06310",
+   "0x1e06e0c",
+   "0x1e15328",
+   "0x1e073aa"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0671e",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 7,
+  "table_start": "0x1e06720",
+  "table_end": "0x1e0672e",
+  "raw_entries": [
+   6424,
+   1028,
+   3598,
+   27,
+   65472,
+   8192,
+   252
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e0994e",
+   "0x1e06f26",
+   "0x1e0833a",
+   "0x1e06754",
+   "0x1e2669e",
+   "0x1e0a71e",
+   "0x1e06916"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e06c0e",
+  "op": "tbb",
+  "index_reg": "r5",
+  "entries": 4,
+  "table_start": "0x1e06c10",
+  "table_end": "0x1e06c18",
+  "raw_entries": [
+   8450,
+   12841,
+   16385,
+   45425
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.75,
+  "cases": [
+   "0x1e0ae12",
+   "0x1e0d060",
+   "0x1e0ec10",
+   "0x1e1cef0"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e071f4",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e071f6",
+  "table_end": "0x1e07204",
+  "raw_entries": [
+   2052,
+   12818,
+   7449,
+   33,
+   65472,
+   29502,
+   482
+  ],
+  "model": "s*4",
+  "base_guess": "table_start",
+  "base_confidence": 0.857,
+  "cases": [
+   "0x1e09206",
+   "0x1e13a3e",
+   "0x1e0e65a",
+   "0x1e0727a",
+   "0x1e070f6",
+   "0x1e23eee",
+   "0x1e0797e"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e073ec",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 12,
+  "table_start": "0x1e073ee",
+  "table_end": "0x1e07406",
+  "raw_entries": [
+   2822,
+   1578,
+   7192,
+   10794,
+   10794,
+   10538,
+   65475,
+   16561,
+   482,
+   28738,
+   6165,
+   65475
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 0.917,
+  "cases": [
+   "0x1e089fa",
+   "0x1e08042",
+   "0x1e0ac1e",
+   "0x1e0c842",
+   "0x1e0c842",
+   "0x1e0c642",
+   "0x1e27374",
+   "0x1e0f550",
+   "0x1e077b2",
+   "0x1e15472",
+   "0x1e0a418",
+   "0x1e27374"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e076a0",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 9,
+  "table_start": "0x1e076a2",
+  "table_end": "0x1e076b4",
+  "raw_entries": [
+   1286,
+   1292,
+   8219,
+   1285,
+   61,
+   7974,
+   63744,
+   49436,
+   5696
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e080ac",
+   "0x1e080b8",
+   "0x1e0b6d6",
+   "0x1e080aa",
+   "0x1e0771a",
+   "0x1e0b4ec",
+   "0x1e268a0",
+   "0x1e1f8d8",
+   "0x1e0a320"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e07772",
+  "op": "tbb",
+  "index_reg": "r3",
+  "entries": 6,
+  "table_start": "0x1e07774",
+  "table_end": "0x1e07780",
+  "raw_entries": [
+   773,
+   1298,
+   771,
+   64802,
+   2319,
+   64800
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e07d7e",
+   "0x1e08198",
+   "0x1e07d7a",
+   "0x1e271b8",
+   "0x1e08992",
+   "0x1e271b4"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e07e6a",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 5,
+  "table_start": "0x1e07e6c",
+  "table_end": "0x1e07e76",
+  "raw_entries": [
+   3075,
+   7188,
+   36,
+   29762,
+   65473
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e09670",
+   "0x1e0b692",
+   "0x1e07eb2",
+   "0x1e166ee",
+   "0x1e27dec"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e09ae8",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e09aea",
+  "table_end": "0x1e09af8",
+  "raw_entries": [
+   45899,
+   1028,
+   18436,
+   72,
+   28688,
+   26712,
+   25240
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e2017e",
+   "0x1e0a2f0",
+   "0x1e12af0",
+   "0x1e09b78",
+   "0x1e17b08",
+   "0x1e16b98",
+   "0x1e16018"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e09cfc",
+  "op": "tbb",
+  "index_reg": "r4",
+  "entries": 6,
+  "table_start": "0x1e09cfe",
+  "table_end": "0x1e09d0a",
+  "raw_entries": [
+   774,
+   4681,
+   16938,
+   62399,
+   58726,
+   12391
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.833,
+  "cases": [
+   "0x1e0a308",
+   "0x1e0c18e",
+   "0x1e12150",
+   "0x1e2847a",
+   "0x1e267c8",
+   "0x1e0fdca"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0a5fc",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 10,
+  "table_start": "0x1e0a5fe",
+  "table_end": "0x1e0a612",
+  "raw_entries": [
+   2309,
+   4109,
+   6420,
+   7693,
+   10018,
+   64256,
+   32767,
+   21048,
+   32,
+   64288
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 0.9,
+  "cases": [
+   "0x1e0b808",
+   "0x1e0c618",
+   "0x1e0d826",
+   "0x1e0e218",
+   "0x1e0f442",
+   "0x1e29bfe",
+   "0x1e1a5fc",
+   "0x1e14a6e",
+   "0x1e0a63e",
+   "0x1e29c3e"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0a662",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 10,
+  "table_start": "0x1e0a664",
+  "table_end": "0x1e0a678",
+  "raw_entries": [
+   2309,
+   4109,
+   6420,
+   7693,
+   10018,
+   64256,
+   32767,
+   21080,
+   32,
+   64288
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 0.9,
+  "cases": [
+   "0x1e0b86e",
+   "0x1e0c67e",
+   "0x1e0d88c",
+   "0x1e0e27e",
+   "0x1e0f4a8",
+   "0x1e29c64",
+   "0x1e1a662",
+   "0x1e14b14",
+   "0x1e0a6a4",
+   "0x1e29ca4"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0a964",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 7,
+  "table_start": "0x1e0a966",
+  "table_end": "0x1e0a974",
+  "raw_entries": [
+   2052,
+   7691,
+   7176,
+   19,
+   28998,
+   65479,
+   16600
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e0b96e",
+   "0x1e0e57c",
+   "0x1e0e176",
+   "0x1e0a98c",
+   "0x1e18bf2",
+   "0x1e2a8f4",
+   "0x1e12b16"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0a9c4",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 10,
+  "table_start": "0x1e0a9c6",
+  "table_end": "0x1e0a9da",
+  "raw_entries": [
+   1797,
+   2318,
+   3339,
+   3854,
+   4881,
+   28672,
+   32,
+   28736,
+   32,
+   28768
+  ],
+  "model": "u*4",
+  "base_guess": "after_table",
+  "base_confidence": 0.9,
+  "cases": [
+   "0x1e0c5ee",
+   "0x1e0ce12",
+   "0x1e0de06",
+   "0x1e0e612",
+   "0x1e0f61e",
+   "0x1e269da",
+   "0x1e0aa5a",
+   "0x1e26ada",
+   "0x1e0aa5a",
+   "0x1e26b5a"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0ab4c",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 12,
+  "table_start": "0x1e0ab4e",
+  "table_end": "0x1e0ab66",
+  "raw_entries": [
+   2054,
+   3082,
+   3605,
+   4117,
+   5394,
+   5141,
+   28672,
+   32,
+   28704,
+   32,
+   28688,
+   32
+  ],
+  "model": "u*4",
+  "base_guess": "after_table",
+  "base_confidence": 0.917,
+  "cases": [
+   "0x1e0cb7e",
+   "0x1e0db8e",
+   "0x1e0e3ba",
+   "0x1e0ebba",
+   "0x1e0ffae",
+   "0x1e0fbba",
+   "0x1e26b66",
+   "0x1e0abe6",
+   "0x1e26be6",
+   "0x1e0abe6",
+   "0x1e26ba6",
+   "0x1e0abe6"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0bf40",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 4,
+  "table_start": "0x1e0bf42",
+  "table_end": "0x1e0bf4a",
+  "raw_entries": [
+   21506,
+   45174,
+   62980,
+   61732
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e16746",
+   "0x1e2202e",
+   "0x1e2ab4a",
+   "0x1e2a18a"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0c12c",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 4,
+  "table_start": "0x1e0c12e",
+  "table_end": "0x1e0c136",
+  "raw_entries": [
+   7682,
+   30313,
+   63232,
+   61528
+  ],
+  "model": "s*4",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e13936",
+   "0x1e29ad2",
+   "0x1e09d2e",
+   "0x1e0828e"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0d99a",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 5,
+  "table_start": "0x1e0d99c",
+  "table_end": "0x1e0d9a6",
+  "raw_entries": [
+   30475,
+   1283,
+   5,
+   62463,
+   63989
+  ],
+  "model": "s*4",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e2b5c8",
+   "0x1e0eda8",
+   "0x1e0d9b0",
+   "0x1e0a998",
+   "0x1e0c170"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0e7ec",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e0e7ee",
+  "table_end": "0x1e0e7fc",
+  "raw_entries": [
+   4100,
+   5654,
+   5648,
+   20,
+   28678,
+   27278,
+   62351
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 0.857,
+  "cases": [
+   "0x1e107f6",
+   "0x1e1141a",
+   "0x1e1140e",
+   "0x1e0e816",
+   "0x1e1c7fa",
+   "0x1e1bd0a",
+   "0x1e2cf0c"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0ef4a",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 5,
+  "table_start": "0x1e0ef4c",
+  "table_end": "0x1e0ef56",
+  "raw_entries": [
+   4355,
+   5908,
+   26,
+   62976,
+   4528
+  ],
+  "model": "u*2",
+  "base_guess": "after_table",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e1115c",
+   "0x1e11d7e",
+   "0x1e0ef8a",
+   "0x1e2db56",
+   "0x1e112b6"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0ef5c",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 5,
+  "table_start": "0x1e0ef5e",
+  "table_end": "0x1e0ef68",
+  "raw_entries": [
+   5123,
+   6679,
+   29,
+   62976,
+   4532
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e11762",
+   "0x1e1238a",
+   "0x1e0ef96",
+   "0x1e2db5c",
+   "0x1e112c4"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0f5be",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 6,
+  "table_start": "0x1e0f5c0",
+  "table_end": "0x1e0f5cc",
+  "raw_entries": [
+   32260,
+   897,
+   51596,
+   8170,
+   62976,
+   57740
+  ],
+  "model": "s*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e1f1c8",
+   "0x1e0fcc2",
+   "0x1e088d8",
+   "0x1e13594",
+   "0x1e0e1c0",
+   "0x1e0b8d8"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e0f6aa",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 4,
+  "table_start": "0x1e0f6ac",
+  "table_end": "0x1e0f6b4",
+  "raw_entries": [
+   37890,
+   43162,
+   28752,
+   28818
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e21eae",
+   "0x1e247de",
+   "0x1e1d74a",
+   "0x1e1d7ce"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e106ec",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 4,
+  "table_start": "0x1e106ee",
+  "table_end": "0x1e106f6",
+  "raw_entries": [
+   8194,
+   10789,
+   16386,
+   64961
+  ],
+  "model": "s*4",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.75,
+  "cases": [
+   "0x1e186f4",
+   "0x1e1af80",
+   "0x1e206f4",
+   "0x1e0fdf0"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e10d88",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e10d8a",
+  "table_end": "0x1e10d98",
+  "raw_entries": [
+   1028,
+   14091,
+   21919,
+   135,
+   30272,
+   65152,
+   58368
+  ],
+  "model": "s*4",
+  "base_guess": "table_start",
+  "base_confidence": 0.857,
+  "cases": [
+   "0x1e11d9a",
+   "0x1e1e9b6",
+   "0x1e26406",
+   "0x1e10fa6",
+   "0x1e2e68a",
+   "0x1e1078a",
+   "0x1e09d8a"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1104c",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e1104e",
+  "table_end": "0x1e1105c",
+  "raw_entries": [
+   1028,
+   2570,
+   2564,
+   4,
+   64640,
+   490,
+   28673
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e11856",
+   "0x1e12462",
+   "0x1e12456",
+   "0x1e11056",
+   "0x1e3094e",
+   "0x1e11422",
+   "0x1e1f050"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1201c",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 4,
+  "table_start": "0x1e1201e",
+  "table_end": "0x1e12026",
+  "raw_entries": [
+   514,
+   514,
+   28672,
+   62864
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e12420",
+   "0x1e12420",
+   "0x1e2001c",
+   "0x1e30b3c"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e12272",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 5,
+  "table_start": "0x1e12274",
+  "table_end": "0x1e1227e",
+  "raw_entries": [
+   796,
+   5395,
+   23,
+   29366,
+   6167
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e128aa",
+   "0x1e14c98",
+   "0x1e122a0",
+   "0x1e207de",
+   "0x1e152a0"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e12e04",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 4,
+  "table_start": "0x1e12e06",
+  "table_end": "0x1e12e0e",
+  "raw_entries": [
+   1794,
+   3595,
+   64679,
+   65408
+  ],
+  "model": "s*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e13c08",
+   "0x1e14a1a",
+   "0x1e12752",
+   "0x1e12d04"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e12e70",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 4,
+  "table_start": "0x1e12e72",
+  "table_end": "0x1e12e7a",
+  "raw_entries": [
+   6914,
+   5387,
+   65472,
+   29536
+  ],
+  "model": "s*4",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e19a7a",
+   "0x1e1829e",
+   "0x1e12d72",
+   "0x1e2fbf2"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1399e",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e139a0",
+  "table_end": "0x1e139ae",
+  "raw_entries": [
+   4100,
+   6711,
+   6682,
+   55,
+   2148,
+   63744,
+   20594
+  ],
+  "model": "s*4",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e179b0",
+   "0x1e1a27c",
+   "0x1e1a208",
+   "0x1e13a7c",
+   "0x1e15b30",
+   "0x1e11da0",
+   "0x1e27b68"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e14622",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e14624",
+  "table_end": "0x1e14632",
+  "raw_entries": [
+   1028,
+   17183,
+   30089,
+   163,
+   28675,
+   64746,
+   260
+  ],
+  "model": "s*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e14e2a",
+   "0x1e1cc60",
+   "0x1e23134",
+   "0x1e14768",
+   "0x1e22628",
+   "0x1e13ff6",
+   "0x1e1482a"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e15a34",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 6,
+  "table_start": "0x1e15a36",
+  "table_end": "0x1e15a42",
+  "raw_entries": [
+   810,
+   843,
+   17227,
+   64513,
+   65487,
+   57393
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e16088",
+   "0x1e160ca",
+   "0x1e1e0ca",
+   "0x1e35236",
+   "0x1e359d2",
+   "0x1e31a96"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e15a4a",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 4,
+  "table_start": "0x1e15a4c",
+  "table_end": "0x1e15a54",
+  "raw_entries": [
+   29186,
+   41097,
+   62464,
+   2564
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e23e4e",
+   "0x1e29b5c",
+   "0x1e3424a",
+   "0x1e16e52"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e15a9a",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 4,
+  "table_start": "0x1e15a9c",
+  "table_end": "0x1e15aa4",
+  "raw_entries": [
+   6914,
+   14889,
+   28673,
+   64006
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e1909e",
+   "0x1e1ceec",
+   "0x1e23a9c",
+   "0x1e34ea6"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e15e7c",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 4,
+  "table_start": "0x1e15e7e",
+  "table_end": "0x1e15e86",
+  "raw_entries": [
+   1794,
+   5132,
+   62464,
+   2561
+  ],
+  "model": "s*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e16c80",
+   "0x1e18694",
+   "0x1e1467c",
+   "0x1e1727e"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e162b0",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 4,
+  "table_start": "0x1e162b2",
+  "table_end": "0x1e162ba",
+  "raw_entries": [
+   530,
+   5909,
+   32832,
+   32
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e166d6",
+   "0x1e190dc",
+   "0x1e26332",
+   "0x1e162f2"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e16bf8",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 12,
+  "table_start": "0x1e16bfa",
+  "table_end": "0x1e16c12",
+  "raw_entries": [
+   20486,
+   33370,
+   33410,
+   29314,
+   33410,
+   31618,
+   512,
+   36929,
+   521,
+   16385,
+   28770,
+   2144
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e20c06",
+   "0x1e270ae",
+   "0x1e270fe",
+   "0x1e250fe",
+   "0x1e270fe",
+   "0x1e262fe",
+   "0x1e16ffa",
+   "0x1e28c7c",
+   "0x1e1700c",
+   "0x1e1ebfc",
+   "0x1e24cbe",
+   "0x1e17cba"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e16d3e",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 10,
+  "table_start": "0x1e16d40",
+  "table_end": "0x1e16d54",
+  "raw_entries": [
+   14355,
+   3896,
+   14392,
+   14347,
+   1336,
+   512,
+   36930,
+   522,
+   16384,
+   26680
+  ],
+  "model": "u*2",
+  "base_guess": "after_table",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e1dd7a",
+   "0x1e18bc4",
+   "0x1e1ddc4",
+   "0x1e1dd6a",
+   "0x1e177c4",
+   "0x1e17154",
+   "0x1e28dd8",
+   "0x1e17168",
+   "0x1e1ed54",
+   "0x1e23dc4"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e16d78",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e16d7a",
+  "table_end": "0x1e16d88",
+  "raw_entries": [
+   6931,
+   3867,
+   6920,
+   4,
+   26704,
+   45456,
+   26712
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e1a39e",
+   "0x1e18bae",
+   "0x1e1a388",
+   "0x1e16d80",
+   "0x1e23e18",
+   "0x1e2d098",
+   "0x1e23e28"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e17cf4",
+  "op": "tbb",
+  "index_reg": "r5",
+  "entries": 12,
+  "table_start": "0x1e17cf6",
+  "table_end": "0x1e17d0e",
+  "raw_entries": [
+   13830,
+   22074,
+   22102,
+   19542,
+   22102,
+   20822,
+   516,
+   32836,
+   524,
+   32865,
+   6219,
+   63777
+  ],
+  "model": "s*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.667,
+  "cases": [
+   "0x1e1e900",
+   "0x1e22968",
+   "0x1e229a0",
+   "0x1e215a0",
+   "0x1e229a0",
+   "0x1e21fa0",
+   "0x1e180fc",
+   "0x1e07d7c",
+   "0x1e1810c",
+   "0x1e07db6",
+   "0x1e1ad8a",
+   "0x1e16f36"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1ad68",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 12,
+  "table_start": "0x1e1ad6a",
+  "table_end": "0x1e1ad82",
+  "raw_entries": [
+   1542,
+   8738,
+   8747,
+   14644,
+   8738,
+   46114,
+   560,
+   35350,
+   57840,
+   53272,
+   6313,
+   64592
+  ],
+  "model": "u*1",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.75,
+  "cases": [
+   "0x1e1b36e",
+   "0x1e1cf8a",
+   "0x1e1cf93",
+   "0x1e1e69c",
+   "0x1e1cf8a",
+   "0x1e2618a",
+   "0x1e1af98",
+   "0x1e2377e",
+   "0x1e28f58",
+   "0x1e27d80",
+   "0x1e1c611",
+   "0x1e2a9b8"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1ad8e",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 9,
+  "table_start": "0x1e1ad90",
+  "table_end": "0x1e1ada2",
+  "raw_entries": [
+   12037,
+   3930,
+   3943,
+   3855,
+   110,
+   62851,
+   20,
+   62850,
+   16
+  ],
+  "model": "s*4",
+  "base_guess": "after_table",
+  "base_confidence": 0.889,
+  "cases": [
+   "0x1e269b6",
+   "0x1e1eb0a",
+   "0x1e1eb3e",
+   "0x1e1e9de",
+   "0x1e1af5a",
+   "0x1e183ae",
+   "0x1e1adf2",
+   "0x1e183aa",
+   "0x1e1ade2"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1b894",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 4,
+  "table_start": "0x1e1b896",
+  "table_end": "0x1e1b89e",
+  "raw_entries": [
+   16130,
+   23110,
+   63769,
+   20487
+  ],
+  "model": "s*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e2369a",
+   "0x1e26d22",
+   "0x1e1aac8",
+   "0x1e258a4"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1dce6",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 6,
+  "table_start": "0x1e1dce8",
+  "table_end": "0x1e1dcf4",
+  "raw_entries": [
+   2307,
+   7196,
+   6684,
+   2081,
+   2098,
+   2195
+  ],
+  "model": "u*4",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e200f4",
+   "0x1e24d58",
+   "0x1e24558",
+   "0x1e1fd6c",
+   "0x1e1fdb0",
+   "0x1e1ff34"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1df2c",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 4,
+  "table_start": "0x1e1df2e",
+  "table_end": "0x1e1df36",
+  "raw_entries": [
+   7426,
+   11557,
+   63744,
+   45056
+  ],
+  "model": "s*4",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e25334",
+   "0x1e293c0",
+   "0x1e1c32c",
+   "0x1e09f2c"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1e5b8",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 5,
+  "table_start": "0x1e1e5ba",
+  "table_end": "0x1e1e5c4",
+  "raw_entries": [
+   19971,
+   30042,
+   107,
+   28705,
+   2112
+  ],
+  "model": "u*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.8,
+  "cases": [
+   "0x1e281be",
+   "0x1e2d06c",
+   "0x1e1e68e",
+   "0x1e2c5fa",
+   "0x1e1f638"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e1ed28",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 9,
+  "table_start": "0x1e1ed2a",
+  "table_end": "0x1e1ed3c",
+  "raw_entries": [
+   1289,
+   22789,
+   24837,
+   1285,
+   9,
+   608,
+   36882,
+   618,
+   6310
+  ],
+  "model": "u*2",
+  "base_guess": "table_start",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e1f73c",
+   "0x1e29f34",
+   "0x1e2af34",
+   "0x1e1f734",
+   "0x1e1ed3c",
+   "0x1e1f1ea",
+   "0x1e30d4e",
+   "0x1e1f1fe",
+   "0x1e21e76"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e2b19c",
+  "op": "tbb",
+  "index_reg": "r5",
+  "entries": 4,
+  "table_start": "0x1e2b19e",
+  "table_end": "0x1e2b1a6",
+  "raw_entries": [
+   2818,
+   5378,
+   18464,
+   64994
+  ],
+  "model": "s*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e2c7a0",
+   "0x1e2dba0",
+   "0x1e341dc",
+   "0x1e2ad60"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e2b232",
+  "op": "tbb",
+  "index_reg": "r5",
+  "entries": 4,
+  "table_start": "0x1e2b234",
+  "table_end": "0x1e2b23c",
+  "raw_entries": [
+   2562,
+   2562,
+   18465,
+   64994
+  ],
+  "model": "s*1",
+  "base_guess": "after_table",
+  "base_confidence": 0.75,
+  "cases": [
+   "0x1e2bc3e",
+   "0x1e2bc3e",
+   "0x1e2fa5d",
+   "0x1e2b01e"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e2c626",
+  "op": "tbb",
+  "index_reg": "r1",
+  "entries": 8,
+  "table_start": "0x1e2c628",
+  "table_end": "0x1e2c638",
+  "raw_entries": [
+   7949,
+   1028,
+   1028,
+   4361,
+   19969,
+   8729,
+   62398,
+   47965
+  ],
+  "model": "s*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.75,
+  "cases": [
+   "0x1e30440",
+   "0x1e2ce2e",
+   "0x1e2ce2e",
+   "0x1e2e838",
+   "0x1e36228",
+   "0x1e30a58",
+   "0x1e2ada2",
+   "0x1e23ce0"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e2db60",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 7,
+  "table_start": "0x1e2db62",
+  "table_end": "0x1e2db70",
+  "raw_entries": [
+   8708,
+   17668,
+   17733,
+   4,
+   22656,
+   64801,
+   10511
+  ],
+  "model": "s*1",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.429,
+  "cases": [
+   "0x1e2fd64",
+   "0x1e32064",
+   "0x1e320a5",
+   "0x1e2db64",
+   "0x1e333e0",
+   "0x1e2d881",
+   "0x1e3046f"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e2dce8",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 7,
+  "table_start": "0x1e2dcea",
+  "table_end": "0x1e2dcf8",
+  "raw_entries": [
+   1091,
+   18755,
+   1097,
+   4,
+   62976,
+   40988,
+   28678
+  ],
+  "model": "s*1",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.571,
+  "cases": [
+   "0x1e2e12b",
+   "0x1e3262b",
+   "0x1e2e131",
+   "0x1e2dcec",
+   "0x1e2d2e8",
+   "0x1e27d04",
+   "0x1e34cee"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e2f4f0",
+  "op": "tbb",
+  "index_reg": "r0",
+  "entries": 15,
+  "table_start": "0x1e2f4f2",
+  "table_end": "0x1e2f510",
+  "raw_entries": [
+   2056,
+   27166,
+   13418,
+   3341,
+   29714,
+   29812,
+   27252,
+   24,
+   2128,
+   2193,
+   2178,
+   5937,
+   6237,
+   2128,
+   2193
+  ],
+  "model": "u*1",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.667,
+  "cases": [
+   "0x1e2fcf8",
+   "0x1e35f0e",
+   "0x1e3295a",
+   "0x1e301fd",
+   "0x1e36902",
+   "0x1e36964",
+   "0x1e35f64",
+   "0x1e2f508",
+   "0x1e2fd40",
+   "0x1e2fd81",
+   "0x1e2fd72",
+   "0x1e30c21",
+   "0x1e30d4d",
+   "0x1e2fd40",
+   "0x1e2fd81"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e2fac4",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 4,
+  "table_start": "0x1e2fac6",
+  "table_end": "0x1e2face",
+  "raw_entries": [
+   1026,
+   1026,
+   32784,
+   6146
+  ],
+  "model": "s*1",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e2fec6",
+   "0x1e2fec6",
+   "0x1e27ad4",
+   "0x1e312c6"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e2fb56",
+  "op": "tbb",
+  "index_reg": "r5",
+  "entries": 5,
+  "table_start": "0x1e2fb58",
+  "table_end": "0x1e2fb62",
+  "raw_entries": [
+   3075,
+   12584,
+   58,
+   62865,
+   0
+  ],
+  "model": "s*2",
+  "base_guess": "tbb_addr",
+  "base_confidence": 1.0,
+  "cases": [
+   "0x1e3135c",
+   "0x1e35da6",
+   "0x1e2fbca",
+   "0x1e2e678",
+   "0x1e2fb56"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e3107e",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 5,
+  "table_start": "0x1e31080",
+  "table_end": "0x1e3108a",
+  "raw_entries": [
+   33539,
+   17723,
+   79,
+   36929,
+   42452
+  ],
+  "model": "s*1",
+  "base_guess": "tbb_addr",
+  "base_confidence": 0.2,
+  "cases": [
+   "0x1e29381",
+   "0x1e355b9",
+   "0x1e310cd",
+   "0x1e2a0bf",
+   "0x1e2b652"
+  ],
+  "unresolved": false
+ },
+ {
+  "tbb": "0x1e3430a",
+  "op": "tbb",
+  "index_reg": "r2",
+  "entries": 4,
+  "table_start": "0x1e3430c",
+  "table_end": "0x1e34314",
+  "raw_entries": [
+   1282,
+   3081,
+   28689,
+   28676
+  ],
+  "model": null,
+  "base_guess": null,
+  "base_confidence": null,
+  "cases": [],
+  "unresolved": true
+ },
+ {
+  "tbb": "0x1e34336",
+  "op": "tbb",
+  "index_reg": "r5",
+  "entries": 20,
+  "table_start": "0x1e34338",
+  "table_end": "0x1e34360",
+  "raw_entries": [
+   3082,
+   4110,
+   4369,
+   4369,
+   4369,
+   4369,
+   4369,
+   4369,
+   3082,
+   4110,
+   28689,
+   6149,
+   28690,
+   6147,
+   28691,
+   6145,
+   28692,
+   16389,
+   45301,
+   64961
+  ],
+  "model": null,
+  "base_guess": null,
+  "base_confidence": null,
+  "cases": [],
+  "unresolved": true
+ }
+]

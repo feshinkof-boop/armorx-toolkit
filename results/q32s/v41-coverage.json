@@ -1,0 +1,29 @@
+{
+  "image": "research/firmware/2026-09-28/unpacked/cmp__01\u6218\u7532X Pro\u56fa\u4ef6-V41__slot0/ji/files/app.bin",
+  "base": "0x1e00000",
+  "image_size": 227440,
+  "instructions": 82944,
+  "code_bytes": 227384,
+  "code_pct": 99.98,
+  "functions_recovered": 1416,
+  "distinct_call_targets": 1429,
+  "calls_resolved": 4662,
+  "string_refs": 879,
+  "distinct_strings_referenced": 759,
+  "data_refs_in_image": 483,
+  "distinct_data_targets": 388,
+  "insn_size_histogram": {
+    "2": 56377,
+    "4": 22386,
+    "6": 4181
+  },
+  "kind_histogram": {
+    "alu": 50460,
+    "call": 6571,
+    "branch": 12066,
+    "store": 6349,
+    "loadaddr": 1590,
+    "load": 5419,
+    "ret": 489
+  }
+}

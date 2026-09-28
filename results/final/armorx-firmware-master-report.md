@@ -266,3 +266,38 @@ AC632N/AC6321A JLFS images extracted and **decrypted**, all seven `app.bin` reco
 vendor's own debug strings give a detailed picture of the application (dispatcher, config, macro,
 curves, gyro, USB, 2.4G, multi-console). The blocking gap is instruction-level disassembly tooling
 for the BD19 core, not the data.
+
+---
+
+## 30. q32s pass (2026-09-28) — firmware code navigation achieved
+
+The instruction-level blocker is gone. The vendor's own disassembler was located and used, so the
+V41 body image is disassembled and navigable. Details: `results/final/q32s-reverse-engineering.md`
+and `results/final/armorx-firmware-symbol-map.md`.
+
+* Toolchain: JieLi Linux toolchain, LLVM 4.0.1 fork, registered targets `pi32`/`pi32v2`/`q32s`
+  (the AC63 SDK's `download.bat` names the same toolchain and its `-address-mask`/`-print-dbg`
+  switches, which is what `rom.lst` was produced with).
+* Validation: the BD19 ROM reconstructed from `rom.lst` re-disassembles with **9,746/9,746 exact
+  matches** (100.0% text, length and branch-target agreement). Reproduced after a second
+  extraction of the toolchain archive.
+* V41 coverage: 82,944 instructions, 1,416 recovered functions, 4,662 resolved calls,
+  879 string references to 759 distinct strings, 69 switch tables (48 at >=0.9 alignment
+  confidence). Coverage caveat: the image is decoded linearly from offset 0, so these are
+  decode statistics, not a code/data split.
+* **Command dispatcher found: `armorx_cmd_dispatch` at `0x1e08772`** — it validates the frame
+  (calling the head/length/checksum error printers at 0x1e0701c / 0x1e06e8a / 0x1e070da) and then
+  dispatches on the opcode byte with an if/else chain. Recovered entries: 0x2F->0x1e0914a,
+  0x70->0x1e093e4, 0xD2->0x1e08d24, 0xD4->0x1e08944 (and 0x1e087ce), 0xD7->0x1e08a68,
+  0xF7->0x1e08860, 0xF8->0x1e08b86, 0xF9->0x1e08912, 0xFA->0x1e0898e, 0xFF->0x1e0944e.
+  Recorded in `results/firmware/armorx-command-dispatch.{json,md}`.
+* The chain does **not** test D6, D8, FC, F6, AB or 0B — a negative result, recorded as such in
+  the ledger (FW-U-023). 0B compares live in 0x1e0aff2 (three) and 0x1e0a944 (two).
+* F7: the handler exists. It reads the byte after the opcode, only acts on values 0/1, and on
+  that path emits a frame with opcode **0xF6** via 0x1e0642c (single call site, inside the F7
+  handler) — so the F7 settings path's acknowledgement is an F6 frame, not an F7 reply. This is
+  a candidate explanation for the silent live F7 read; it depends on the unresolved base-register
+  question FW-U-024 and is therefore graded STRONG EVIDENCE, not proof.
+* FC/F6: no FC compare exists in the dispatcher, and F6 appears only as the opcode emitted by the
+  F7 path. This **contradicts** the assumption that FC is handled in this dispatcher and is
+  recorded as a contradiction, not smoothed over.
