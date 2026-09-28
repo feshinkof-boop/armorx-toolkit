@@ -39,3 +39,7 @@ research/firmware/2026-09-28/unpacked/**
 # large derived JSON (regenerable: tools/firmware/armorx_fw_compare.py + reports)
 research/firmware/2026-09-28/string-corpus.json
 research/firmware/2026-09-28/cross-version.json
+
+# q32s pass: large derived disassembly artifacts (regenerate with tools/q32s; hashed in q32s-manifest.json)
+results/q32s/v41-disassembly.asm
+results/q32s/v41-instructions.json

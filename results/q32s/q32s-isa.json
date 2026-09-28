@@ -1,0 +1,29 @@
+{
+  "architecture": "q32s",
+  "platform": "AC632N / AC6321A (BD19 family)",
+  "toolchain": "JieLi Linux toolchain, LLVM 4.0.1 fork",
+  "registered_llvm_targets": [
+    "pi32",
+    "pi32v2",
+    "q32s"
+  ],
+  "instruction_lengths": {
+    "2": 56377,
+    "4": 22386,
+    "6": 4181
+  },
+  "address_mask": "0x1ffffff",
+  "load_base": "0x01e00000",
+  "switch_instructions": [
+    "tbb",
+    "tbh"
+  ],
+  "rom_symbols_available": 442,
+  "source_of_ground_truth": "cpu/bd19/tools/rom.lst (vendor llvm-objdump listing)",
+  "validation": {
+    "instructions_compared": 9746,
+    "exact_text_match_pct": 100.0,
+    "instruction_length_pct": 100.0,
+    "verdict": "AGREES with the vendor listing"
+  }
+}
