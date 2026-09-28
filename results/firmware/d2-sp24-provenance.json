@@ -1,0 +1,134 @@
+{
+ "artifact": "armorx-d2-sp24-provenance",
+ "date": "2026-09-28",
+ "image": "V41 app.bin base 0x01E00000",
+ "headline": "sp+24 is a POINTER to the 28-byte input-state record at [r14 + 0x1d4]. The tagged-pointer reading is REFUTED: the store value is r13 = r14 + 0x1d4, an address.",
+ "writers_of_sp24_in_region": [
+  {
+   "addr": "0x1e0aeba",
+   "code": "[sp+24] = r13",
+   "note": "the one that feeds the D2 copy"
+  },
+  {
+   "addr": "0x1e0ce0c",
+   "code": "[sp+24] = r13"
+  },
+  {
+   "addr": "0x1e0d0ba",
+   "code": "[sp+24] = r5"
+  },
+  {
+   "addr": "0x1e0d16e",
+   "code": "[sp+24] = r13"
+  },
+  {
+   "addr": "0x1e0d57c",
+   "code": "[sp+24] = r13"
+  },
+  {
+   "addr": "0x1e0d9c8",
+   "code": "[sp+24] = r13"
+  },
+  {
+   "addr": "0x1e0f586",
+   "code": "[sp+24] = r1"
+  },
+  {
+   "addr": "0x1e0a082",
+   "code": "b[sp+24] = r8",
+   "note": "BYTE store - different function/meaning, excluded"
+  }
+ ],
+ "origin_of_the_d2_value": {
+  "producer_block": "0x1e0ae74-0x1e0aec2",
+  "sequence": [
+   "0x1e0ae6c: call 0x1e094de(r0 = sp+40) - fills the 28-byte local input record at sp+40",
+   "0x1e0ae74: r13 = r14 + 0x1d4",
+   "0x1e0ae7e: call 0x2fbf4a((state+0x1d4), (sp+40), 0x1c) - 28-byte compare",
+   "0x1e0ae82: if (r0 == 0) goto 0x1e0aea6 - equal => skip",
+   "0x1e0ae8a: call 0x2fbf36((state+0x1d4), (sp+40), 0x1c) - 28-byte copy when different",
+   "0x1e0aea6: call 0x1fb956 ; 0x1e0aeaa: r0 = r0 - [r15+0x11c]",
+   "0x1e0aeb6: if (r0 < 0xa) goto 0x1e0bab8",
+   "0x1e0aeba: [sp+24] = r13  <-- ONLY on this branch"
+  ],
+  "conclusion": "sp+24 receives the address of the persistent input-state record at state+0x1d4, and only on the branch where the tick delta is >= 0xa."
+ },
+ "object": {
+  "address": "[r14 + 0x1d4]",
+  "size": 28,
+  "nature": "a persistent 28-byte input-state record INSIDE the global state, maintained by compare-then-copy against a local candidate at sp+40",
+  "own_change_detection": "yes - 0x2fbf4a compares it against sp+40 and 0x2fbf36 copies only when they differ",
+  "related": "0x1e0cd36 uses r7 = r8 + 0x1d6, i.e. record+0x02, and passes candidate+0x0c with it to 0x1e0a114"
+ },
+ "refuted": [
+  "tagged pointer: the stored value is a plain address computed as r14 + 0x1d4; no high-byte tag is produced at this store",
+  "device-report object: the source is an internal state record, not a USB/HID report buffer"
+ ],
+ "open": [
+  "the packed-word blocks (0x1e0da40, 0x1e0e390) derive bits 8/9 from a value I have NOT proven is sp+24; register reuse across blocks is the likely explanation of the earlier 'tag byte' reading and must be re-tested before any claim",
+  "r14 base value not yet re-resolved in this pass"
+ ],
+ "usb_trio_head_only": {
+  "0x1e096b4": {
+   "size": 1056,
+   "insns": 332,
+   "callers": [
+    "0x1e0a6bc",
+    "0x1e0aff2",
+    "0x1e0e414"
+   ],
+   "calls": [
+    "0x1e0642c",
+    "0x1e066b6",
+    "0x1e0675c",
+    "0x1e06770",
+    "0x1e0679e",
+    "0x1e067d4",
+    "0x1e06842",
+    "0x1e069d8",
+    "0x1e1f076"
+   ],
+   "n_calls": 9,
+   "strings": [
+    "d, usbh_gamepad_ready= %d, usbh_gamepadp = %p"
+   ]
+  },
+  "0x1e09ad4": {
+   "size": 524,
+   "insns": 174,
+   "callers": [
+    "0x1e0aff2"
+   ],
+   "calls": [
+    "0x1e055b0",
+    "0x1e05628",
+    "0x1e0642c",
+    "0x1e066b6",
+    "0x1e0675c",
+    "0x1e06842",
+    "0x1e069d8"
+   ],
+   "n_calls": 7,
+   "strings": []
+  },
+  "0x1e09ce0": {
+   "size": 284,
+   "insns": 94,
+   "callers": [
+    "0x1e0aff2"
+   ],
+   "calls": [
+    "0x1e0642c",
+    "0x1e0675c",
+    "0x1e067d4",
+    "0x1e06842",
+    "0x1e069d8",
+    "0x1e1f076"
+   ],
+   "n_calls": 6,
+   "strings": [
+    "d, usbh_gamepad_ready= %d, usbh_gamepadp = %p"
+   ]
+  }
+ }
+}

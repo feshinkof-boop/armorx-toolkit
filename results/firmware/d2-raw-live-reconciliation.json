@@ -1,0 +1,68 @@
+{
+ "artifact": "armorx-d2-raw-live-reconciliation",
+ "date": "2026-09-28",
+ "source_captures": "results/experiments/rt-bit9-confirmation-20260928-063300 (result-w0/w1/w2.json, 18-byte frames with checksum_ok)",
+ "frame_contract_confirmed": {
+  "layout": "A5 12 02 | mask u32 [3..6] | axes [7..14] | [15] LT | [16] RT | [17] sum8",
+  "worked_example": "a5120200000201fa92fd60fa98fe1100ff45 -> mask 0x00000201 (bits 0 and 9), axes fa92fd60fa98fe11, LT 0x00, RT 0xff, checksum 0x45 = sum8 of the preceding 17 bytes"
+ },
+ "distributions": {
+  "W0": {
+   "frames": 228,
+   "byte15": {
+    "0": 228
+   },
+   "byte16": {
+    "0": 228
+   },
+   "byte15_distinct": 1,
+   "byte16_distinct": 1,
+   "frames_with_bit9": 0,
+   "byte16_min": 0,
+   "byte16_max": 0
+  },
+  "W1": {
+   "frames": 263,
+   "byte15": {
+    "0": 263
+   },
+   "byte16": {
+    "255": 181,
+    "96": 1,
+    "17": 1,
+    "0": 79,
+    "27": 1
+   },
+   "byte15_distinct": 1,
+   "byte16_distinct": 5,
+   "frames_with_bit9": 184,
+   "byte16_min": 0,
+   "byte16_max": 255
+  },
+  "W2": {
+   "frames": 283,
+   "byte15": {
+    "0": 283
+   },
+   "byte16": {
+    "0": 283
+   },
+   "byte15_distinct": 1,
+   "byte16_distinct": 1,
+   "frames_with_bit9": 0,
+   "byte16_min": 0,
+   "byte16_max": 0
+  }
+ },
+ "verdict": {
+  "historical_field_map": "CORRECT - PROVEN LIVE. byte15 is LT and byte16 is RT, confirmed against raw frames whose checksum validates.",
+  "analogue_evidence": "byte16 reaches 0xff (255) in W1 and takes intermediate values, so the D2 payload's +0x0c/+0x0d carry ANALOGUE values in the live streaming path.",
+  "reconciliation_with_static": "Under the dominance result (r13 copy precedes the compare gate and both builders), the packed-bit seed arm would overwrite +0x0d with 0/1 whenever it is taken. The live frames show 0..255, therefore the seed arm is NOT taken on the normal streaming path: the live bytes come from the state+0x1d4 record copy at 0x1e0cd2e. The two are mode-dependent mechanisms, not a precedence chain that always runs.",
+  "no_self_trigger": "RT-only movement emits no D2 frame because the D2 emission is gated on a change in the first 14 candidate bytes as compared against the last-sent mirror; the live evidence shows RT state is only observable when another (digital) event drives a frame. The precise reason byte +0x0d does not by itself trip the gate on an RT-only move remains OPEN - the static path says a change there should trip it."
+ },
+ "frames_reviewed": {
+  "W0": 228,
+  "W1": 263,
+  "W2": 283
+ }
+}
