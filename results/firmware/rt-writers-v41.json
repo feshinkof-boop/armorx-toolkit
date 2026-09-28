@@ -1,0 +1,58 @@
+{
+ "artifact": "armorx-rt-writers-v41",
+ "date": "2026-09-28",
+ "image": "V41 app.bin base 0x01E00000",
+ "headline": "No direct store anywhere in the image writes the normalized struct byte at 0x4ecc+0x0c or +0x0d. The ONLY writer of those bytes is the 28-byte whole-struct copy at 0x1e0dadc. The struct is ASSEMBLED in a stack buffer at sp+1080 by two source-specific producers called immediately before the compare.",
+ "writer_enumeration": {
+  "method": "scanned every instruction accessing [reg + off] for off in 0x8c..0xa0 with per-function register-base resolution (immediate loads and simple pointer copies) against base 0x4e40, i.e. the struct at 0x4ecc",
+  "result_for_0x4ed8_0x4ed9": "ZERO direct stores. The 65 raw offset hits all resolve to other base registers or to bases that cannot be shown to be 0x4e40, e.g. 0x1e0ac30 r1 = [r9 + 0x98] where r9 = 0x8a0 (so 0x938, the command queue, not the input state).",
+  "only_writer": {
+   "addr": "0x1e0dadc",
+   "code": "r1 = sp+1080 ; r2 = 0x1c ; r0 = r12+0x8c ; call 0x2f92e4",
+   "covers": "+0x00..+0x1b including +0x0c and +0x0d",
+   "condition": "executed only after 0x1e0dad2 finds the compared 14 bytes DIFFERENT"
+  },
+  "consequence": "0x4ecc is a mirror of the last SENT state, not the live state. The live state is the stack buffer at sp+1080, so the update condition question moves to the producers of sp+1080."
+ },
+ "normalized_state_producers": {
+  "site": "0x1e0da40-0x1e0da86, immediately before the compare at 0x1e0dace",
+  "sequence": [
+   "1e0da40: r12 = sp + 0",
+   "1e0da42-1e0da52: a packed value r13 is assembled from a source word (bit inserts and rev8)",
+   "1e0da54: b[sp+1092] = sextra(r13,8,1)   <-- struct+0x0c = packed BIT 8",
+   "1e0da5c/1e0da62: b[sp+1093] = sextra(r13,9,1)   <-- struct+0x0d = packed BIT 9",
+   "1e0da60: r2 = r0 >> 0x18",
+   "1e0da66: if ((r2 & 0xf) == 0) skip",
+   "1e0da6c/1e0da72: r1 = sp+1080 ; r0 = r2 ; call 0x1e0a5f2",
+   "1e0da76: if ((r2 & 0xf0) == 0) goto 0x1e0e370",
+   "1e0da7c/1e0da82: r1 = sp+1080 ; r0 = r2 ; call 0x1e0a656"
+  ],
+  "interpretation": "a source mux: the low nibble and the high nibble of r2 select which producer fills the 28-byte normalized struct at sp+1080. Both producers receive the struct pointer and the selector.",
+  "critical_detail": "the LT/RT DIGITAL bits are written into struct+0x0c/+0x0d from packed bits 8 and 9 BEFORE the producers run, so the producers may overwrite them with the analog values. That ordering is exactly what a bit-vs-analog overlap needs.",
+  "next": "reverse 0x1e0a5f2 and 0x1e0a656 - they are the real normalized-state writers and therefore the real answer to when RT is refreshed."
+ },
+ "rt_pipeline": {
+  "status": "NOT YET PROVEN - but the search space collapsed to two functions",
+  "known": "bit 9 of the packed trigger word maps to struct+0x0d, which matches the live RT digital id 9 / mask 0x00000200 only in *bit id*, not yet in mask placement",
+  "warning": "do not infer that +0x0d is digital-only; the producers likely write the analogue 0..255 value over it"
+ },
+ "contradiction_candidates_resolved": {
+  "raw RT changes elsewhere but +0x0d updates only on another event": "SUPPORTED by structure - +0x0d is written by the whole-struct copy only after a change, and the producers run in the reported pipeline",
+  "USB parser commits state conditionally": "CONSISTENT with the r2-nibble mux at 0x1e0da66/0x1e0da76",
+  "trigger processing suppresses normalized updates": "NOT SUPPORTED by any code read yet",
+  "cached source updated on callbacks": "NOT YET TESTED",
+  "historical live test used a different mode": "NOT YET TESTED"
+ },
+ "not_advanced": [
+  "0x1e0a5f2 / 0x1e0a656 bodies",
+  "LT writers",
+  "axes order",
+  "USB emitters",
+  "bit-9 mask generation",
+  "M1-M4",
+  "macro",
+  "F7/FC/F6",
+  "cross-version",
+  "dongle"
+ ]
+}
