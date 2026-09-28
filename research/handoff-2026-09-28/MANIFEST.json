@@ -1,0 +1,609 @@
+{
+  "generated_at": "2026-09-28",
+  "source": "Google Drive armorx/armorx_git_handoff",
+  "local_research_branch": "research/physical-armorx-live-2026-09-27",
+  "local_head": "87478461e662ede8f056cbcf8b35b44c10c8fbd5",
+  "local_commit_count": 83,
+  "local_tracked_files": 1130,
+  "local_worktree": "clean",
+  "latest_validation": {
+    "local": "495 passed + 12 subtests",
+    "fresh_clone": "489 passed + 6 skipped"
+  },
+  "latest_full_bundle": {
+    "file": "armorx-physical-full-8747846.bundle",
+    "size_bytes": 110536081,
+    "sha256": "d04c77cf3fa9651482cd841497f3d5f9b50574b54402fd2f684f838636e7f0ee"
+  },
+  "drive_inventory": {
+    "direct_count": 85,
+    "overnight_patch_count": 11,
+    "direct_items": [
+      {
+        "title": "overnight-patch",
+        "size": null,
+        "mime_type": "application/vnd.google-apps.folder",
+        "kind": "folder"
+      },
+      {
+        "title": "armorx-physical-full-8747846.bundle",
+        "size": 110536081,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-rt-provenance.bundle",
+        "size": 110536136,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-rt-provenance.patch",
+        "size": 12145,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-rt-synthesis.bundle",
+        "size": 110532286,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-rt-synthesis.patch",
+        "size": 25398,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-gip-control-map.bundle",
+        "size": 110521074,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-gip-control-map.patch",
+        "size": 71091,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-power-state.bundle",
+        "size": 110508073,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-power-state.patch",
+        "size": 13791,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-direct-usb.bundle",
+        "size": 110504041,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-direct-usb.patch",
+        "size": 41374,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-f20-live-usb.patch",
+        "size": 64240,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-f20-live-usb.bundle",
+        "size": 110493282,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-sp24-live-recon.patch",
+        "size": 13817,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-sp24-live-recon.bundle",
+        "size": 110474378,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-candidate-cfg.patch",
+        "size": 37426,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-candidate-cfg.bundle",
+        "size": 110467720,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-population-modes.patch",
+        "size": 6563,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-population-modes.bundle",
+        "size": 110458010,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-candidate-refs.patch",
+        "size": 10268,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-candidate-refs.bundle",
+        "size": 110454221,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-normalized-producers.patch",
+        "size": 9603,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-normalized-producers.bundle",
+        "size": 110448828,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-rt-writers.patch",
+        "size": 7536,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-rt-writers.bundle",
+        "size": 110444103,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-input-state-v41.patch",
+        "size": 14476,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-input-state-v41.bundle",
+        "size": 110439973,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-trigger-path.patch",
+        "size": 9666,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-trigger-path.bundle",
+        "size": 110433635,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-report-engine.patch",
+        "size": 16354,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-d2-report-engine.bundle",
+        "size": 110429636,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-persistence-closure.patch",
+        "size": 124844,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-persistence-closure.bundle",
+        "size": 110421788,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "HANDOFF-README.md",
+        "size": 12840,
+        "mime_type": "text/markdown",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-config-persistence.patch",
+        "size": 25973,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-config-persistence.bundle",
+        "size": 110403419,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-family-reconciliation.patch",
+        "size": 431622,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-family-reconciliation.bundle",
+        "size": 110392838,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-firmware-semantics.patch",
+        "size": 213968,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-firmware-semantics.bundle",
+        "size": 110367401,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "q32s-navigation.patch",
+        "size": 893510,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "q32s-navigation.bundle",
+        "size": 110325338,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "firmware-shift.patch",
+        "size": 156367,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "overnight.bundle",
+        "size": 110191888,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "f7-value-provenance.patch",
+        "size": 404873,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "f7-read-probe.patch",
+        "size": 87932,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "dpi-trigger-protocol.patch",
+        "size": 117100,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "rt-bit9-confirmation.patch",
+        "size": 528969,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "rt-analog-piggyback.patch",
+        "size": 456158,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "keymap-closure.patch",
+        "size": 110630,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "overnight-shift-range.bundle",
+        "size": 693459,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "overnight.patch",
+        "size": 4260850,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "verify_telegram_roundtrip.py",
+        "size": 3215,
+        "mime_type": "text/x-python",
+        "kind": "file"
+      },
+      {
+        "title": "verify_telegram.py",
+        "size": 1883,
+        "mime_type": "text/x-python",
+        "kind": "file"
+      },
+      {
+        "title": "send_telegram.py",
+        "size": 2622,
+        "mime_type": "text/x-python",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-04",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-05",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-06",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-07",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-08",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-09",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-10",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-11",
+        "size": 1352,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-00",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-01",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-02",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "hexchunk-03",
+        "size": 6000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-handoff.hex",
+        "size": 67352,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "chunk-00",
+        "size": 7000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "chunk-01",
+        "size": 7000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "chunk-02",
+        "size": 7000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "chunk-03",
+        "size": 7000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "chunk-04",
+        "size": 7000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "chunk-05",
+        "size": 7000,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "chunk-06",
+        "size": 2904,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-hermes-git-handoff.tar.gz.b64",
+        "size": 44904,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-hermes-git-handoff.tar.gz",
+        "size": 33676,
+        "mime_type": "application/gzip",
+        "kind": "file"
+      },
+      {
+        "title": "SHA256SUMS",
+        "size": 503,
+        "mime_type": "application/octet-stream",
+        "kind": "file"
+      },
+      {
+        "title": "test-results.txt",
+        "size": 99,
+        "mime_type": "text/plain",
+        "kind": "file"
+      },
+      {
+        "title": "commit-log.txt",
+        "size": 2514,
+        "mime_type": "text/plain",
+        "kind": "file"
+      },
+      {
+        "title": "diff-check.txt",
+        "size": 0,
+        "mime_type": "text/plain",
+        "kind": "file"
+      },
+      {
+        "title": "changed-files.txt",
+        "size": 1151,
+        "mime_type": "text/plain",
+        "kind": "file"
+      },
+      {
+        "title": "diff-stat.txt",
+        "size": 1935,
+        "mime_type": "text/plain",
+        "kind": "file"
+      },
+      {
+        "title": "armorx-hermes-commits.patch",
+        "size": 119155,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      }
+    ],
+    "overnight_patch_items": [
+      {
+        "title": "0011-research-overnight-shift-ledger-continuation-loop-st.patch",
+        "size": 16602,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0010-research-overnight-shift-pass-2-closures-master-repo.patch",
+        "size": 112594,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0009-research-overnight-shift-key-map-exhaustion-Part-A-w.patch",
+        "size": 51952,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0008-research-overnight-shift-virtual-ARMOR-X-Pro-and-C0-.patch",
+        "size": 51411,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0007-research-overnight-shift-integrate-the-ten-harvested.patch",
+        "size": 520828,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0006-research-overnight-shift-D2-U-007-RESOLVED-the-harne.patch",
+        "size": 28891,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0005-research-overnight-shift-tomorrow-s-execution-plan.patch",
+        "size": 6443,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0004-research-overnight-shift-offline-testable-causal-exe.patch",
+        "size": 69313,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0003-research-overnight-shift-opcode-corpus-over-every-ca.patch",
+        "size": 97899,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0002-research-overnight-shift-D6-read-is-10-frames-and-eq.patch",
+        "size": 422970,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      },
+      {
+        "title": "0001-research-overnight-shift-inventory-canonical-officia.patch",
+        "size": 2881947,
+        "mime_type": "text/x-patch",
+        "kind": "file"
+      }
+    ]
+  },
+  "publication_policy": {
+    "main_branch_untouched": true,
+    "releases_untouched": true,
+    "raw_bundles_mirrored": false,
+    "raw_capture_binaries_mirrored": false,
+    "reason": "The source handoff contains >100 MB Git bundles and raw experiment/device artifacts. The public research branch mirrors the text patch series and handoff metadata instead of publishing large/raw binary captures."
+  }
+}
