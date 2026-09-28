@@ -46,5 +46,14 @@
   "button_frames": 0,
   "status": "VALID_EVENT_DRIVEN_SILENCE"
  },
- "discrepancies": []
+ "discrepancies": [],
+ "d6_read": {
+  "frames": 10,
+  "full_frames_20B": 9,
+  "tail_frame_14B": 1,
+  "payload_bytes": 144,
+  "reassembled_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "matches_durable_baseline": true,
+  "correction": "earlier extraction capped at 8 fragments; the read is 10 frames / 144 bytes"
+ }
 }

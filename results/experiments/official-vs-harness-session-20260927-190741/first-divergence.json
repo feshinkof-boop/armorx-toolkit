@@ -14,5 +14,6 @@
  "explicitly_not_labelled": [
   "MISSING_PRECONDITION"
  ],
- "no_unknown_official_traffic_replayed": true
+ "no_unknown_official_traffic_replayed": true,
+ "correction_2026_09_27_d6_fragment_count": "the D6 read is 10 frames (nine 20-byte + one 14-byte tail) totalling 144 payload bytes, matching the durable baseline sha256 bdef9c61...; earlier wording said eight"
 }

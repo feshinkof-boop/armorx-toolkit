@@ -56,9 +56,15 @@
     6272,
     6273,
     6274,
-    6276
+    6276,
+    6277,
+    6279
    ],
-   "reply_form": "a414d6NN.. (20-byte fragments, 8 of them)"
+   "reply_form": "ten reply frames: nine 20-byte A4 14 D6 NN (ordinals 01-09, 15 payload bytes each) then one 14-byte tail A4 0E D6 0A (9 payload bytes)",
+   "reassembled_bytes": 144,
+   "reassembled_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+   "matches_durable_baseline": true,
+   "correction": "was '8 of them' - an extraction step capped the list; the read is 10 frames / 144 bytes"
   }
  ],
  "d2_enable": {
@@ -80,5 +86,8 @@
   "delta_from_connect_s": 129.526,
   "echo_frames": [],
   "writes_after_disable": []
- }
+ },
+ "corrections": [
+  "D6 read is 10 frames (nine 20-byte + one 14-byte tail) = 144 payload bytes matching baseline sha256 bdef9c61..."
+ ]
 }

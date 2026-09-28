@@ -1,0 +1,132 @@
+{
+  "artifact": "d6-app-dependency",
+  "title": "Does the FULL D6 configuration read change application state the Button Test / D2 path depends on?",
+  "app": {
+    "name": "BIGBIGWON official Android app",
+    "version": "4.0.8",
+    "framework": "Flutter / Dart AOT (compressed pointers, arm64 android, null-safety)",
+    "disassembly": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/ (Blutter)",
+    "analysis_mode": "offline static only (no hardware, no BLE, no network)",
+    "lab_branch_at_start": "research/physical-armorx-live-2026-09-27",
+    "lab_head_at_start": "9f57cc7"
+  },
+  "classification": "D6_APP_STATE_DEPENDENCY_NOT_FOUND",
+  "classification_scope": "4.0.8 Button-Test / D2 (testModeSwitch) path, statically analysed surface",
+  "critical_framing_rule": "This verdict is APP-side only. It states the app's Button-Test/D2 code has no app-state dependency on a prior D6 read. It does NOT claim the DEVICE requires or does-not-require D6 before answering D2.",
+  "d6_request_encoder": {
+    "symbol": "BluetoothModel::getDeviceConfig",
+    "address": "0x80dbfc",
+    "file": "moojiang/units/ble/bluetooth_mode.dart:12",
+    "wire_frame": "A5 04 D6 7F",
+    "frame_bytes": [165, 4, 214, 127],
+    "checksum": "getCheckSum @0x80fbbc = sum(preceding bytes) mod 256; 0xA5+0x04+0xD6=0x17F -> 0x7F",
+    "side_effect_on_app_state": "NONE (builds frame, calls write() @0x80dd28; stores no config, sets no flag, notifies nothing)",
+    "call_sites": ["rainbow_tab_config_1s.dart:3592", "rainbow_tab_config_1s.dart:7672", "rainbow_tab_config_1s.dart:7976", "rainbow_tab_config_1s.dart:8501", "rainbow_tab_config_1s.dart:10746", "rainbow_tab_config_1s.dart:14654"],
+    "grade": "PROVEN STATIC"
+  },
+  "d6_reply_consumers": {
+    "note": "The eight A4 14 D6 NN fragments are consumed ONLY by the config pages.",
+    "handlers": [
+      {"symbol": "_RainbowDeviceConfig1sState::subscribeCharacteristic closure", "address": "0x82684c", "file": "moojiang/widgets/rainbow/rainbow_tab_config_1s.dart", "gate": "frame[2]==0xD6 (cmp w0,#0x1ac @0x826894)", "evidence": "prints \"首页监听D6：\" @0x8268b4; protocolLength=frame[12]<<8|frame[14] stored @0x826aa4"},
+      {"symbol": "_RainbowDeviceConfig1sState::parsingData", "address": "0x8270b0"},
+      {"symbol": "_ConfigsMainWidget484State::parsingData", "address": "0xaad760"},
+      {"symbol": "_ConfigsMainWidget280State::parsingData", "address": "0xaac980"},
+      {"symbol": "_ConfigsConfigWidgetState::parsingData", "address": "0xac2200"},
+      {"symbol": "_FrameMacrosConfigWidgetState::parsingData", "address": "0xac35ac"}
+    ],
+    "reassembly": "_GrowableList::replaceRange / sublist over the accumulated buffer; result written via setUserConfig + ::writeDevice (gamepadset.dart)",
+    "grade": "PROVEN STATIC"
+  },
+  "d6_populated_app_state": {
+    "note": "D6-populated app state exists (positive control that the absence search is meaningful).",
+    "items": [
+      {"name": "::protocolLength", "blutter_static_offset": "0xb70", "written_at": "0x826aa4 (inside D6 closure 0x82684c)", "value": "frame[12]<<8 | frame[14]", "read_by_file_count": 18, "read_by_button_test_path": false},
+      {"name": "static 0xb5c", "written_at": "0x827300 etc. (D6 parsingData in rainbow_tab_config_1s.dart)", "read_by_button_test_path": false},
+      {"name": "static 0xb60", "written_at": "0x8272f0 etc.", "read_by_button_test_path": false},
+      {"name": "page config object", "written_at": "setUserConfig / writeDevice (gamepadset.dart)", "read_by_button_test_path": false}
+    ],
+    "grade": "PROVEN STATIC"
+  },
+  "button_test_entry_path": {
+    "entry_label": {"string": "按键测试", "address": "0x940684", "file": "moojiang/widgets/armor-x_pro/armorx_pro_more.dart", "conditional": false, "grade": "PROVEN STATIC"},
+    "page_build": {"symbol": "_ArmorXProMoreWidgetState::build", "address": "0x940554", "external_state_reads": "NONE (only locale dispatch cmp #0x3fc/#0x3fd)", "grade": "PROVEN STATIC"},
+    "onTap_route": {"address": "0x94773c", "action": "Navigator.push(MaterialPageRoute(builder: () => RainbowTest()))", "builder_closure": "0x947674 (rainbow_more.dart -> AllocateRainbowTestStub)", "state_reads": "NONE", "grade": "PROVEN STATIC"},
+    "real_entry_gate": {"address": "0x948660 (_ArmorXProWidgetState onTap closure, armorx_pro_root.dart)", "condition": "BluetoothModel.field_3b == BluetoothConnectionState instance (cmp w1,w16; b.ne #0x948760)", "is_d6_dependency": false, "grade": "PROVEN STATIC"},
+    "page_class": "RainbowTest (file moojiang/widgets/rainbow/rainbow_test.dart)",
+    "page_state": "_RainbowTestState"
+  },
+  "d2_enable_path": {
+    "sender": {"symbol": "BluetoothModel::testModeSwitch", "address": "0xabaef4", "file": "moojiang/units/ble/bluetooth_mode.dart:1955", "wire_frame_enable": "A5 05 D2 01 7D", "wire_frame_disable": "A5 05 D2 00 7C", "state_reads": "NONE (only the receiver used for write())", "grade": "PROVEN STATIC"},
+    "write": {"symbol": "BluetoothModel::write", "address": "0x80dd28", "reads": "model.field_3f / model.field_23 (BLE characteristic) only", "grade": "PROVEN STATIC"},
+    "invocation_from_button_test": {"initState": "0xacf744", "initState_registered_closure": "0xacf874", "sequence": "ReadContext.read<BluetoothModel>() -> testModeSwitch(true) @0xacf8cc (bl #0xabaef4) -> subscribeCharacteristic() @0xacf8fc (bl #0xacf8dc)", "grade": "PROVEN STATIC"},
+    "subscription": {"symbol": "_RainbowTestState::subscribeCharacteristic", "address": "0xacf8fc", "source": "BluetoothModel.field_43 -> _BroadcastStream<List<int>> -> listen()", "producer_of_field_43": "BluetoothModel::onCharacteristicChanged @0xaca7c4 closure 0xacb7f8 -> model.field_43.add(data) @0xacb870", "grade": "PROVEN STATIC"},
+    "parser": {"symbol": "_RainbowTestState::analysisData", "address": "0xacfa64", "gate_address": "0xacfaac", "gate": "frame[2]==2 (cmp w0,#4 -> Smi 2)", "effect": "parses frame bytes; 2x State::setState (@0xad0b30, @0xad0c7c)", "config_reads": "NONE", "grade": "PROVEN STATIC"},
+    "dispose": {"address": "0xadd7e0", "calls": "testModeSwitch(false) @0xadd844", "grade": "PROVEN STATIC"},
+    "all_testModeSwitch_call_sites": ["0xacf8cc (rainbow_test initState closure)", "0xadd844 (rainbow_test dispose)", "0xab9c5c (config_stick_view)", "0xadcbec (config_stick_view)", "0xabcb2c (gale_tab_keymap)"],
+    "note_on_other_sites": "The two config_stick_view sites and the gale_tab_keymap site guard only on a non-null captured context; none reads D6 state. gale wraps the argument in IsType_bool_Stub."
+  },
+  "button_test_state_surface": {
+    "static_reads_in_rainbow_test.dart": [
+      {"line": 970, "address": "0x9f6b98", "static_offset": "0xaf4", "name": "::curDevice", "use": "device-identity enum for the device Image.asset in build"},
+      {"line": 1624, "address": "0xacf774", "static_offset": "0x678", "name": "(framework binding, inferred WidgetsBinding-style)", "use": "initState post-frame/dispatch registration"}
+    ],
+    "static_reads_in_armorx_pro_more.dart": "NONE",
+    "static_reads_in_keybutton.dart": "NONE (and no calls into bluetooth_mode/config functions)",
+    "curDevice_write_sites": ["device_card.dart:1324 (0x9c9be0)", "device_bottom_sheet.dart:2392 (0xac6c7c)", "device_bottom_sheet.dart:3659 (0xacca74)", "device_bottom_sheet.dart:3681 (0xaccab4)", "device_bottom_sheet.dart:3702 (0xaccaf0)", "device_bottom_sheet.dart:3724 (0xaccb30)", "kb_dou_jiang_main_vm.dart:523 (0xb854f8)"],
+    "curDevice_is_d6_populated": false,
+    "grade": "PROVEN STATIC"
+  },
+  "evidence_grades": {
+    "PROVEN_STATIC": [
+      "getDeviceConfig 0x80dbfc encodes A5 04 D6 7F with no app-state side effect",
+      "D6 fragments consumed by config pages' parsingData; ::protocolLength (0xb70) D6-written @0x826aa4",
+      "::protocolLength (0xb70) read by 18 app files, none in the Button-Test/D2 path",
+      "按键测试 ListTile built unconditionally in build @0x940554",
+      "Button-Test route 0x94773c reads no state",
+      "More-page entry gate is BluetoothModel.field_3b connection state, not D6",
+      "testModeSwitch 0xabaef4 reads no state; write 0x80dd28 touches only the characteristic",
+      "rainbow_test.dart reads only statics 0xaf4 and 0x678; armorx_pro_more.dart reads none; keybutton.dart reads none",
+      "analysisData gate is frame[2]==2 and reads no config",
+      "curDevice (0xaf4) is never written by a D6 handler"
+    ],
+    "STRONG_EVIDENCE": [
+      "BluetoothModel.field_43 is a raw-notify broadcast stream fed by onCharacteristicChanged closure 0xacb7f8 (single producer observed)"
+    ],
+    "INFERRED": [
+      "framework static 0x678 is a WidgetsBinding-style framework binding (identical load pattern in flutter/src/widgets/heroes.dart, flutter/src/material/{ink_well,dropdown,scaffold}.dart)"
+    ],
+    "UNKNOWN": [
+      "internal byte layout of the 144-byte D6 payload (not needed for this question)",
+      "whether the DEVICE gates its D2 response on a prior D6 read (device-side, out of scope)"
+    ]
+  },
+  "falsifiers": [
+    "A LoadStaticField/LoadField in rainbow_test.dart, keybutton.dart, armorx_pro_more.dart, or testModeSwitch @0xabaef4 that resolves to a D6-written field (statics 0xb5c/0xb60/0xb70 or a config object member).",
+    "A branch in _ArmorXProMoreWidgetState::build @0x940554 or its route @0x94773c that skips the 按键测试 tile/route on a D6-derived value.",
+    "StoreStaticField(0xaf4) (curDevice) appearing in any D6 parse path rather than only in the three device-selection files.",
+    "BluetoothModel.field_43 being fed by the D6 parser rather than by onCharacteristicChanged's add(data).",
+    "A newer build inserting a D6-config read before the D2 send or before subscribeCharacteristic in the Button-Test path."
+  ],
+  "supporting_addresses": {
+    "D6_encoder": "0x80dbfc",
+    "D6_getCheckSum": "0x80fbbc",
+    "D6_reply_closure_config1s": "0x82684c",
+    "D6_protocolLength_store": "0x826aa4",
+    "D6_protocolLength_read": "0x827204",
+    "button_test_entry_tile": "0x940684",
+    "armorx_pro_more_build": "0x940554",
+    "button_test_route": "0x94773c",
+    "button_test_route_builder": "0x947674",
+    "more_page_entry_gate": "0x948660",
+    "testModeSwitch": "0xabaef4",
+    "write": "0x80dd28",
+    "rainbow_test_initState": "0xacf744",
+    "rainbow_test_initState_closure": "0xacf874",
+    "subscribeCharacteristic": "0xacf8fc",
+    "analysisData": "0xacfa64",
+    "analysisData_gate": "0xacfaac",
+    "rainbow_test_dispose": "0xadd7e0",
+    "onCharacteristicChanged": "0xaca7c4",
+    "onCharacteristicChanged_closure": "0xacb7f8"
+  }
+}

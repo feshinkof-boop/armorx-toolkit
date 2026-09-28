@@ -1,0 +1,88 @@
+{
+  "title": "Cross-version pre-D2 matrix",
+  "scope": "button-test pre-D2 burst origin, static Dart AOT (Blutter)",
+  "versions": ["2.22.0901", "2.23", "2.24", "4.0.8"],
+  "grade_vocabulary": ["PROVEN STATIC", "STRONG EVIDENCE", "INFERRED", "UNKNOWN"],
+  "top_question_answer": {
+    "verdict": "GENERIC APPLICATION INITIALISATION (not D2-specific)",
+    "basis": "code structure only; _RainbowTestState::initState emits no EF/0B/E2/D4/D6 in any build; emitters live in the device root page and config tabs",
+    "grade": "PROVEN STATIC"
+  },
+  "matrix": {
+    "2.22.0901": {
+      "EF":              {"present": true,  "emitter": "armorx_pro_root.dart / rainbow_root.dart closure", "emitter_addr": null, "origin": "device/detail page", "grade": "STRONG EVIDENCE"},
+      "0B":              {"present": true,  "emitter": "getZKMVer closure", "emitter_addr": "0x7ab7f8 (armorx) / 0x7a9b8c (rainbow)", "origin": "device/detail page (triggered by EF response)", "grade": "STRONG EVIDENCE"},
+      "E2":              {"present": false, "emitter": null, "emitter_addr": null, "origin": null, "grade": "PROVEN STATIC", "note": "absence: no readFirmware, no #0x1c4 frame"},
+      "D4":              {"present": true,  "emitter": "_ArmorXProConfigWidgetState closure", "emitter_addr": "0x89b16c", "origin": "configuration initialisation", "grade": "STRONG EVIDENCE"},
+      "D6":              {"present": true,  "emitter": "_ArmorXProConfigWidgetState closure / _ConfigsConfigWidgetState closure", "emitter_addr": "0x89c3c8 / 0x8a64b4", "origin": "configuration initialisation/refresh", "grade": "STRONG EVIDENCE"},
+      "D2_preClear":     {"value": false, "grade": "PROVEN STATIC"},
+      "D2_enable":       {"bytes": "A505D2017D", "emitter": "_RainbowTestState::testModeSwitch", "emitter_addr": "0x8e3a88", "entry": "_RainbowTestState::initState @0x8e1e94", "grade": "PROVEN STATIC"},
+      "D2_disable":      {"bytes": "A505D2007C", "emitter": "_RainbowTestState::testModeSwitch1", "emitter_addr": "0x8e1efc", "caller": "dispose @0x95a864", "grade": "PROVEN STATIC"},
+      "write_type":      {"value": "write-without-response", "evidence": "BleDeviceInteractor::writeCharacterisiticWithoutResponse @0x9699b0", "grade": "PROVEN STATIC"},
+      "notification_owner": {"value": "Button Test page", "evidence": "_RainbowTestState::subscribeCharacteristic @0x8e2190", "grade": "PROVEN STATIC"},
+      "parser_gate":     {"value": "frame[1]==0x12 (len 18) only", "evidence": "closure @0x8e2408/0x8e2430", "grade": "PROVEN STATIC"},
+      "connection_gate": {"value": "disable gated on DeviceConnectionState==connected", "grade": "STRONG EVIDENCE"},
+      "config_dependency": {"value": false, "grade": "PROVEN STATIC"},
+      "firmware_gate":   {"value": "none", "grade": "PROVEN STATIC"},
+      "timing":          {"value": "enable unawaited then subscribe; no delay; 500ms re-render timer (disconnected only)", "grade": "PROVEN STATIC"}
+    },
+    "2.23": {
+      "EF":              {"present": true,  "emitter": "_ArmorXProWidgetState::getDeviceUUID / _RainbowWidget::getDeviceUUID", "emitter_addr": "0x791a30 / 0x7ff67c", "origin": "device/detail page", "grade": "STRONG EVIDENCE"},
+      "0B":              {"present": true,  "emitter": "_ArmorXProWidgetState::getZKMVer / _RainbowWidget::getZKMVer", "emitter_addr": "0x7617f4 / 0x800610", "origin": "device/detail page (triggered by EF response)", "grade": "PROVEN STATIC"},
+      "E2":              {"present": false, "emitter": null, "emitter_addr": null, "origin": null, "grade": "PROVEN STATIC", "note": "absence: no readFirmware, no #0x1c4 frame"},
+      "D4":              {"present": true,  "emitter": "RainbowMoreWidget::getInputModel", "emitter_addr": "0x8afa98", "origin": "configuration initialisation", "grade": "PROVEN STATIC"},
+      "D6":              {"present": true,  "emitter": "_RainbowTabConfig1sWidgetState::getDeviceConfig / _ConfigsConfigWidgetState::getDeviceConfig", "emitter_addr": "0x810d2c / 0x8abc64", "origin": "configuration initialisation/refresh", "grade": "PROVEN STATIC"},
+      "D2_preClear":     {"value": false, "grade": "PROVEN STATIC"},
+      "D2_enable":       {"bytes": "A505D2017D", "emitter": "_RainbowTestState::testModeSwitch", "emitter_addr": "0x8b1d68", "entry": "_RainbowTestState::initState @0x8b0504", "grade": "PROVEN STATIC"},
+      "D2_disable":      {"bytes": "A505D2007C", "emitter": "_RainbowTestState::testModeSwitch1", "emitter_addr": "0x881a78", "caller": "dispose @0x8819d0", "grade": "PROVEN STATIC"},
+      "write_type":      {"value": "write-without-response", "evidence": "BleDeviceInteractor::writeCharacterisiticWithoutResponse @0x4d0eb4", "grade": "PROVEN STATIC"},
+      "notification_owner": {"value": "Button Test page", "evidence": "_RainbowTestState::subscribeCharacteristic @0x8b0550", "grade": "PROVEN STATIC"},
+      "parser_gate":     {"value": "frame[1]==0x12 (len 18) only", "evidence": "closure @0x8b0654", "grade": "PROVEN STATIC"},
+      "connection_gate": {"value": "disable gated on DeviceConnectionState==connected", "grade": "PROVEN STATIC"},
+      "config_dependency": {"value": false, "grade": "PROVEN STATIC"},
+      "firmware_gate":   {"value": "none", "grade": "PROVEN STATIC"},
+      "timing":          {"value": "enable unawaited then subscribe; no delay", "grade": "PROVEN STATIC"}
+    },
+    "2.24": {
+      "EF":              {"present": true,  "emitter": "_ArmorXProWidgetState::getDeviceUUID / _RainbowWidget::getDeviceUUID", "emitter_addr": "0x7b4c48 / 0x8972a4", "origin": "device/detail page", "grade": "STRONG EVIDENCE"},
+      "0B":              {"present": true,  "emitter": "_ArmorXProWidgetState::getZKMVer / _RainbowWidget::getZKMVer", "emitter_addr": "0x78c208 / 0x8975d4", "origin": "device/detail page (triggered by EF response)", "grade": "PROVEN STATIC"},
+      "E2":              {"present": false, "emitter": null, "emitter_addr": null, "origin": null, "grade": "PROVEN STATIC", "note": "absence: no readFirmware, no #0x1c4 frame"},
+      "D4":              {"present": true,  "emitter": "_RainbowTabConfig1sWidgetState::getOnBoardConfig", "emitter_addr": "0x91b988", "origin": "configuration initialisation", "grade": "PROVEN STATIC"},
+      "D6":              {"present": true,  "emitter": "_RainbowTabConfig1sWidgetState::getDeviceConfig / _ConfigsConfigOnlyC1WidgetState::getDeviceConfig", "emitter_addr": "0x8a8798 / 0x91433c", "origin": "configuration initialisation/refresh", "grade": "PROVEN STATIC"},
+      "D2_preClear":     {"value": false, "grade": "PROVEN STATIC"},
+      "D2_enable":       {"bytes": "A505D2017D", "emitter": "_RainbowTestState::testModeSwitch", "emitter_addr": "0x91e380", "entry": "_RainbowTestState::initState @0x91cf94", "grade": "PROVEN STATIC"},
+      "D2_disable":      {"bytes": "A505D2007C", "emitter": "_RainbowTestState::testModeSwitch1", "emitter_addr": "0x93371c", "caller": "dispose @0x93367c", "grade": "PROVEN STATIC"},
+      "write_type":      {"value": "write-without-response", "evidence": "BleCharacteristic::writeCharacterisiticWithoutResponse @0x89254c", "grade": "STRONG EVIDENCE"},
+      "notification_owner": {"value": "Button Test page", "evidence": "_RainbowTestState::subscribeCharacteristic @0x91cfdc", "grade": "PROVEN STATIC"},
+      "parser_gate":     {"value": "first comparison 0x24 (meaning unresolved)", "evidence": "_RainbowTestState::analysisData @0x91d130", "grade": "UNKNOWN"},
+      "connection_gate": {"value": "disable gated on DeviceConnectionState==connected", "grade": "PROVEN STATIC"},
+      "config_dependency": {"value": false, "grade": "PROVEN STATIC"},
+      "firmware_gate":   {"value": "none", "grade": "PROVEN STATIC"},
+      "timing":          {"value": "enable unawaited then subscribe; no delay", "grade": "PROVEN STATIC"}
+    },
+    "4.0.8": {
+      "EF":              {"present": true,  "emitter": "BluetoothModel::getDeviceUUID", "emitter_addr": "0xacf618", "origin": "device/detail page (root initState @0xab9068 armorx / @0xacf590 rainbow)", "grade": "PROVEN STATIC"},
+      "0B":              {"present": true,  "emitter": "BluetoothModel::getZKMVer", "emitter_addr": "0x8b61fc", "caller": "FFE2 dispatcher closure @0x8b5994 -> @0x8b6084 (EF-response branch)", "origin": "device/detail page", "grade": "PROVEN STATIC"},
+      "E2":              {"present": true,  "emitter": "BluetoothModel::readFirmware", "emitter_addr": "0x8b6860", "caller": "FFE2 dispatcher -> @0x8b5cdc (0B-response branch)", "origin": "device/detail page", "grade": "PROVEN STATIC"},
+      "D4":              {"present": true,  "emitter": "BluetoothModel::getInputModel", "emitter_addr": "0xa84258", "origin": "configuration initialisation", "grade": "PROVEN STATIC"},
+      "D6":              {"present": true,  "emitter": "BluetoothModel::getDeviceConfig", "emitter_addr": "0x80dbfc", "origin": "configuration initialisation/refresh", "grade": "PROVEN STATIC"},
+      "D2_preClear":     {"value": false, "grade": "PROVEN STATIC"},
+      "D2_enable":       {"bytes": "A505D2017D", "emitter": "BluetoothModel::testModeSwitch", "emitter_addr": "0xabaef4", "entry": "_RainbowTestState::initState @0xacf744 / closure @0xacf874", "grade": "PROVEN STATIC"},
+      "D2_disable":      {"bytes": "A505D2007C", "emitter": "BluetoothModel::testModeSwitch(false)", "emitter_addr": "0xabaef4", "caller": "dispose @0xadd7e0", "grade": "PROVEN STATIC"},
+      "write_type":      {"value": "UNKNOWN (static) -> write-without-response (LIVE)", "evidence": "BluetoothModel::write @0x80dd28 -> flutter_blue_plus BluetoothCharacteristic::write (withoutResponse arg unresolved); LIVE 2026-09-27: ATT Write Command 0x52 on handle 0x0075", "grade": "UNKNOWN"},
+      "notification_owner": {"value": "connection handler", "evidence": "BluetoothModel::initGattServices @0xaca0a8 arms notify via onCharacteristicChanged @0xaca7c4 (setNotifyValue) at connect; page adds Dart listener @0xacf8fc", "grade": "PROVEN STATIC"},
+      "parser_gate":     {"value": "frame[2]==0x02 (cmp w0,#4 @0xacfaac)", "evidence": "_RainbowTestState::analysisData @0xacfa64", "grade": "PROVEN STATIC"},
+      "connection_gate": {"value": "disable gated on connected; every write awaits init-complete future (\u7b49\u5f85\u521d\u59cb\u5316\u5b8c\u6210 @0x80dd80)", "grade": "PROVEN STATIC"},
+      "config_dependency": {"value": false, "grade": "PROVEN STATIC"},
+      "firmware_gate":   {"value": "none", "grade": "PROVEN STATIC"},
+      "timing":          {"value": "enable unawaited inside initState closure @0xacf874 then subscribe; no delay; burst is response-chained (EF->0B->E2), serial and round-trip-gated", "grade": "PROVEN STATIC"}
+    }
+  },
+  "unknown_cells": [
+    "2.22 EF/0B exact emitter addresses (opcode tag present, builder not isolated)",
+    "2.22 burst ordering/chain (INFERRED from 2.23/2.24 structure)",
+    "2.24 parser gate meaning (0x24: length 36 vs element compare)",
+    "4.0.8 D2 write type statically (resolved LIVE as write-without-response)",
+    "Exact D4/D6 page-open trigger ordering (first fire vs response refresh)"
+  ]
+}

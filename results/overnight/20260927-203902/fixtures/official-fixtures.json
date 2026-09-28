@@ -101,66 +101,82 @@
   {
    "frame": 6267,
    "delta_s": 59.32,
-   "op": "0x1b",
-   "handle": "0x0077",
+   "ordinal": 1,
    "bytes": "a414d6012c40009033ff000000000000000000bd",
-   "length": 20
+   "length": 20,
+   "payload_len": 15
   },
   {
    "frame": 6268,
    "delta_s": 59.331,
-   "op": "0x1b",
-   "handle": "0x0077",
+   "ordinal": 2,
    "bytes": "a414d602000000000001001e1e4646000001005a",
-   "length": 20
+   "length": 20,
+   "payload_len": 15
   },
   {
    "frame": 6269,
    "delta_s": 59.355,
-   "op": "0x1b",
-   "handle": "0x0077",
+   "ordinal": 3,
    "bytes": "a414d6031e1e464600000200020200000000005f",
-   "length": 20
+   "length": 20,
+   "payload_len": 15
   },
   {
    "frame": 6270,
    "delta_s": 59.365,
-   "op": "0x1b",
-   "handle": "0x0077",
+   "ordinal": 4,
    "bytes": "a414d6040a3c3c2a000000000a3c3c2a000000ea",
-   "length": 20
+   "length": 20,
+   "payload_len": 15
   },
   {
    "frame": 6272,
    "delta_s": 59.377,
-   "op": "0x1b",
-   "handle": "0x0077",
+   "ordinal": 5,
    "bytes": "a414d605000a3c3c2a000000000000000000003f",
-   "length": 20
+   "length": 20,
+   "payload_len": 15
   },
   {
    "frame": 6273,
    "delta_s": 59.4,
-   "op": "0x1b",
-   "handle": "0x0077",
+   "ordinal": 6,
    "bytes": "a414d60600000000000000000000000000000094",
-   "length": 20
+   "length": 20,
+   "payload_len": 15
   },
   {
    "frame": 6274,
    "delta_s": 59.41,
-   "op": "0x1b",
-   "handle": "0x0077",
+   "ordinal": 7,
    "bytes": "a414d60700000000000000000000000000000095",
-   "length": 20
+   "length": 20,
+   "payload_len": 15
   },
   {
    "frame": 6276,
    "delta_s": 59.433,
-   "op": "0x1b",
-   "handle": "0x0077",
+   "ordinal": 8,
    "bytes": "a414d608000000000000000001020304050607b2",
-   "length": 20
+   "length": 20,
+   "payload_len": 15
+  },
+  {
+   "frame": 6277,
+   "delta_s": 59.444,
+   "ordinal": 9,
+   "bytes": "a414d60908090a0b0c0d0e0f1011121314151678",
+   "length": 20,
+   "payload_len": 15
+  },
+  {
+   "frame": 6279,
+   "delta_s": 59.467,
+   "ordinal": 10,
+   "bytes": "a40ed60a010d191a1b1c1d1e1f64",
+   "length": 14,
+   "payload_len": 9
   }
  ],
  "d2_echoes": [
@@ -246,5 +262,21 @@
  },
  "d2_disable": {
   "delta_s": 129.526
+ },
+ "d6_read": {
+  "request": {
+   "frame": 6265,
+   "delta_s": 59.288,
+   "op": "0x52",
+   "handle": "0x0075",
+   "bytes": "a504d67f",
+   "length": 4
+  },
+  "reply_frames": 10,
+  "shape": "A4 | len | D6 | ordinal | payload | checksum; nine 20-byte frames (15 payload bytes) then one 14-byte frame (9 payload bytes)",
+  "total_payload_bytes": 144,
+  "reassembled_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "matches_durable_baseline": true,
+  "correction": "an earlier extraction capped the fragment list at 8 and several documents therefore said 'eight fragments'; the read is 10 frames / 144 bytes. Corrected 2026-09-27."
  }
 }

@@ -1,0 +1,643 @@
+EVIDENCE QUOTES — d6-app-dependency (BIGBIGWON 4.0.8, Blutter AOT, armorx-re/mygt408/blutter_out/asm/)
+Rule: addresses are Blutter-annotated asm addresses for build 4.0.8. Smi note: raw immediate #N = Dart int N/2.
+
+====================================================================================================
+[1] D6 REQUEST ENCODER  BluetoothModel::getDeviceConfig  @0x80dbfc  (bluetooth_mode.dart)
+    Frame = [A5, 04, D6, checksum]; checksum via getCheckSum; getCheckSum(sum A5+04+D6=0x17F)%256 = 0x7F -> wire A5 04 D6 7F
+====================================================================================================
+
+bluetooth_mode.dart:12|  _ getDeviceConfig(/* No info */) async {
+bluetooth_mode.dart:13|    // ** addr: 0x80dbfc, size: 0x10c
+bluetooth_mode.dart:14|    // 0x80dbfc: EnterFrame
+bluetooth_mode.dart:15|    //     0x80dbfc: stp             fp, lr, [SP, #-0x10]!
+bluetooth_mode.dart:16|    //     0x80dc00: mov             fp, SP
+bluetooth_mode.dart:17|    // 0x80dc04: AllocStack(0x20)
+bluetooth_mode.dart:18|    //     0x80dc04: sub             SP, SP, #0x20
+bluetooth_mode.dart:19|    // 0x80dc08: SetupParameters(BluetoothModel this /* r1 => r1, fp-0x10 */)
+bluetooth_mode.dart:20|    //     0x80dc08: stur            NULL, [fp, #-8]
+bluetooth_mode.dart:21|    //     0x80dc0c: stur            x1, [fp, #-0x10]
+bluetooth_mode.dart:22|    // 0x80dc10: CheckStackOverflow
+bluetooth_mode.dart:23|    //     0x80dc10: ldr             x16, [THR, #0x48]  ; THR::stack_limit
+bluetooth_mode.dart:24|    //     0x80dc14: cmp             SP, x16
+bluetooth_mode.dart:25|    //     0x80dc18: b.ls            #0x80dcfc
+bluetooth_mode.dart:26|    // 0x80dc1c: InitAsync() -> Future<void?>
+bluetooth_mode.dart:27|    //     0x80dc1c: ldr             x0, [PP, #0x238]  ; [pp+0x238] TypeArguments: <void?>
+bluetooth_mode.dart:28|    //     0x80dc20: bl              #0x4ed1e4  ; InitAsyncStub
+bluetooth_mode.dart:29|    // 0x80dc24: r1 = Null
+bluetooth_mode.dart:30|    //     0x80dc24: mov             x1, NULL
+bluetooth_mode.dart:31|    // 0x80dc28: r2 = 8
+bluetooth_mode.dart:32|    //     0x80dc28: mov             x2, #8
+bluetooth_mode.dart:33|    // 0x80dc2c: r0 = AllocateArray()
+bluetooth_mode.dart:34|    //     0x80dc2c: bl              #0xd2aab4  ; AllocateArrayStub
+bluetooth_mode.dart:35|    // 0x80dc30: stur            x0, [fp, #-0x18]
+bluetooth_mode.dart:36|    // 0x80dc34: r16 = 330
+bluetooth_mode.dart:37|    //     0x80dc34: mov             x16, #0x14a
+bluetooth_mode.dart:38|    // 0x80dc38: StoreField: r0->field_f = r16
+bluetooth_mode.dart:39|    //     0x80dc38: stur            w16, [x0, #0xf]
+bluetooth_mode.dart:40|    // 0x80dc3c: r16 = 8
+bluetooth_mode.dart:41|    //     0x80dc3c: mov             x16, #8
+bluetooth_mode.dart:42|    // 0x80dc40: StoreField: r0->field_13 = r16
+bluetooth_mode.dart:43|    //     0x80dc40: stur            w16, [x0, #0x13]
+bluetooth_mode.dart:44|    // 0x80dc44: r16 = 428
+bluetooth_mode.dart:45|    //     0x80dc44: mov             x16, #0x1ac
+bluetooth_mode.dart:46|    // 0x80dc48: ArrayStore: r0[0] = r16  ; List_4
+bluetooth_mode.dart:47|    //     0x80dc48: stur            w16, [x0, #0x17]
+bluetooth_mode.dart:48|    // 0x80dc4c: StoreField: r0->field_1b = rZR
+bluetooth_mode.dart:49|    //     0x80dc4c: stur            wzr, [x0, #0x1b]
+bluetooth_mode.dart:50|    // 0x80dc50: r1 = <int>
+bluetooth_mode.dart:51|    //     0x80dc50: ldr             x1, [PP, #0xee8]  ; [pp+0xee8] TypeArguments: <int>
+bluetooth_mode.dart:52|    // 0x80dc54: r0 = AllocateGrowableArray()
+bluetooth_mode.dart:53|    //     0x80dc54: bl              #0xd29984  ; AllocateGrowableArrayStub
+bluetooth_mode.dart:54|    // 0x80dc58: mov             x3, x0
+bluetooth_mode.dart:55|    // 0x80dc5c: ldur            x0, [fp, #-0x18]
+bluetooth_mode.dart:56|    // 0x80dc60: stur            x3, [fp, #-0x20]
+bluetooth_mode.dart:57|    // 0x80dc64: StoreField: r3->field_f = r0
+bluetooth_mode.dart:58|    //     0x80dc64: stur            w0, [x3, #0xf]
+bluetooth_mode.dart:59|    // 0x80dc68: r0 = 8
+bluetooth_mode.dart:60|    //     0x80dc68: mov             x0, #8
+bluetooth_mode.dart:61|    // 0x80dc6c: StoreField: r3->field_b = r0
+bluetooth_mode.dart:62|    //     0x80dc6c: stur            w0, [x3, #0xb]
+bluetooth_mode.dart:63|    // 0x80dc70: ldur            x1, [fp, #-0x10]
+bluetooth_mode.dart:64|    // 0x80dc74: mov             x2, x3
+bluetooth_mode.dart:65|    // 0x80dc78: r0 = getCheckSum()
+bluetooth_mode.dart:66|    //     0x80dc78: bl              #0x80fbbc  ; [package:moojiang/units/ble/bluetooth_mode.dart] BluetoothModel::getCheckSum
+bluetooth_mode.dart:67|    // 0x80dc7c: mov             x3, x0
+bluetooth_mode.dart:99|    // 0x80dce0: ldur            x1, [fp, #-0x10]
+bluetooth_mode.dart:100|    // 0x80dce4: r0 = write()
+bluetooth_mode.dart:101|    //     0x80dce4: bl              #0x80dd28  ; [package:moojiang/units/ble/bluetooth_mode.dart] BluetoothModel::write
+bluetooth_mode.dart:102|    // 0x80dce8: mov             x1, x0
+bluetooth_mode.dart:103|    // 0x80dcec: stur            x1, [fp, #-0x10]
+bluetooth_mode.dart:104|    // 0x80dcf0: r0 = Await()
+bluetooth_mode.dart:105|    //     0x80dcf0: bl              #0x4ecf8c  ; AwaitStub
+
+====================================================================================================
+[2] D6 REPLY HANDLER ON A CONFIG PAGE — _RainbowDeviceConfig1sState::subscribeCharacteristic closure @0x82684c
+    (rainbow_tab_config_1s.dart). Gate frame[2]==0xD6, prints '首页监听D6', computes protocolLength (frame[12]<<8|frame[14])
+====================================================================================================
+
+rainbow_tab_config_1s.dart:8830|    // 0x826790: LoadField: r2 = r0->field_43
+rainbow_tab_config_1s.dart:8831|    //     0x826790: ldur            w2, [x0, #0x43]
+rainbow_tab_config_1s.dart:8832|    // 0x826794: DecompressPointer r2
+rainbow_tab_config_1s.dart:8833|    //     0x826794: add             x2, x2, HEAP, lsl #32
+rainbow_tab_config_1s.dart:8834|    // 0x826798: stur            x2, [fp, #-0x20]
+rainbow_tab_config_1s.dart:8835|    // 0x82679c: r1 = <List<int>>
+rainbow_tab_config_1s.dart:8836|    //     0x82679c: add             x1, PP, #8, lsl #12  ; [pp+0x8b20] TypeArguments: <List<int>>
+rainbow_tab_config_1s.dart:8837|    //     0x8267a0: ldr             x1, [x1, #0xb20]
+rainbow_tab_config_1s.dart:8838|    // 0x8267a4: r0 = _BroadcastStream()
+rainbow_tab_config_1s.dart:8839|    //     0x8267a4: bl              #0x637af8  ; Allocate_BroadcastStreamStub -> _BroadcastStream<X0> (size=0x10)
+rainbow_tab_config_1s.dart:8840|    // 0x8267a8: mov             x3, x0
+rainbow_tab_config_1s.dart:8841|    // 0x8267ac: ldur            x0, [fp, #-0x20]
+rainbow_tab_config_1s.dart:8842|    // 0x8267b0: stur            x3, [fp, #-0x28]
+rainbow_tab_config_1s.dart:8843|    // 0x8267b4: StoreField: r3->field_b = r0
+rainbow_tab_config_1s.dart:8844|    //     0x8267b4: stur            w0, [x3, #0xb]
+rainbow_tab_config_1s.dart:8845|    // 0x8267b8: ldur            x2, [fp, #-0x18]
+rainbow_tab_config_1s.dart:8846|    // 0x8267bc: r1 = Function '<anonymous closure>':.
+rainbow_tab_config_1s.dart:8847|    //     0x8267bc: add             x1, PP, #0x58, lsl #12  ; [pp+0x58560] AnonymousClosure: (0x82684c), in [package:moojiang/widgets/rainbow/rainbow_tab_config_1s.dart] _RainbowDeviceConfig1sState::subscribeCharacteristic (0x8266a4)
+rainbow_tab_config_1s.dart:8848|    //     0x8267c0: ldr             x1, [x1, #0x560]
+rainbow_tab_config_1s.dart:8879|  [closure] void <anonymous closure>(dynamic, List<int>) {
+rainbow_tab_config_1s.dart:8880|    // ** addr: 0x82684c, size: 0x864
+rainbow_tab_config_1s.dart:8881|    // 0x82684c: EnterFrame
+rainbow_tab_config_1s.dart:8882|    //     0x82684c: stp             fp, lr, [SP, #-0x10]!
+rainbow_tab_config_1s.dart:8883|    //     0x826850: mov             fp, SP
+rainbow_tab_config_1s.dart:8884|    // 0x826854: AllocStack(0x40)
+rainbow_tab_config_1s.dart:8885|    //     0x826854: sub             SP, SP, #0x40
+rainbow_tab_config_1s.dart:8886|    // 0x826858: SetupParameters([dynamic _ /* r0 */])
+rainbow_tab_config_1s.dart:8887|    //     0x826858: ldr             x0, [fp, #0x18]
+rainbow_tab_config_1s.dart:8888|    //     0x82685c: ldur            w2, [x0, #0x17]
+rainbow_tab_config_1s.dart:8889|    //     0x826860: add             x2, x2, HEAP, lsl #32
+rainbow_tab_config_1s.dart:8890|    //     0x826864: stur            x2, [fp, #-8]
+rainbow_tab_config_1s.dart:8891|    // 0x826868: CheckStackOverflow
+rainbow_tab_config_1s.dart:8892|    //     0x826868: ldr             x16, [THR, #0x48]  ; THR::stack_limit
+rainbow_tab_config_1s.dart:8893|    //     0x82686c: cmp             SP, x16
+rainbow_tab_config_1s.dart:8894|    //     0x826870: b.ls            #0x82707c
+rainbow_tab_config_1s.dart:8895|    // 0x826874: ldr             x1, [fp, #0x10]
+rainbow_tab_config_1s.dart:8896|    // 0x826878: r0 = LoadClassIdInstr(r1)
+rainbow_tab_config_1s.dart:8897|    //     0x826878: ldur            x0, [x1, #-1]
+rainbow_tab_config_1s.dart:8898|    //     0x82687c: ubfx            x0, x0, #0xc, #0x14
+rainbow_tab_config_1s.dart:8899|    // 0x826880: r16 = 4
+rainbow_tab_config_1s.dart:8900|    //     0x826880: mov             x16, #4
+rainbow_tab_config_1s.dart:8901|    // 0x826884: stp             x16, x1, [SP]
+rainbow_tab_config_1s.dart:8902|    // 0x826888: mov             lr, x0
+rainbow_tab_config_1s.dart:8903|    // 0x82688c: ldr             lr, [x21, lr, lsl #3]
+rainbow_tab_config_1s.dart:8904|    // 0x826890: blr             lr
+rainbow_tab_config_1s.dart:8905|    // 0x826894: cmp             w0, #0x1ac
+rainbow_tab_config_1s.dart:8906|    // 0x826898: b.ne            #0x826980
+rainbow_tab_config_1s.dart:8916|    // 0x8268b4: r16 = "首页监听D6："
+rainbow_tab_config_1s.dart:8917|    //     0x8268b4: add             x16, PP, #0x58, lsl #12  ; [pp+0x58568] "首页监听D6："
+rainbow_tab_config_1s.dart:8918|    //     0x8268b8: ldr             x16, [x16, #0x568]
+rainbow_tab_config_1s.dart:9061|    // 0x826a84: ldur            x0, [fp, #-0x18]
+rainbow_tab_config_1s.dart:9062|    // 0x826a88: orr             x2, x0, x1
+rainbow_tab_config_1s.dart:9063|    // 0x826a8c: r0 = BoxInt64Instr(r2)
+rainbow_tab_config_1s.dart:9064|    //     0x826a8c: sbfiz           x0, x2, #1, #0x1f
+rainbow_tab_config_1s.dart:9065|    //     0x826a90: cmp             x2, x0, asr #1
+rainbow_tab_config_1s.dart:9066|    //     0x826a94: b.eq            #0x826aa0
+rainbow_tab_config_1s.dart:9067|    //     0x826a98: bl              #0xd2ad40  ; AllocateMintSharedWithoutFPURegsStub
+rainbow_tab_config_1s.dart:9068|    //     0x826a9c: stur            x2, [x0, #7]
+rainbow_tab_config_1s.dart:9069|    // 0x826aa0: mov             x2, x0
+rainbow_tab_config_1s.dart:9070|    // 0x826aa4: StoreStaticField(0xb70, r2)
+rainbow_tab_config_1s.dart:9071|    //     0x826aa4: ldr             x0, [THR, #0x78]  ; THR::field_table_values
+rainbow_tab_config_1s.dart:9072|    //     0x826aa8: str             x2, [x0, #0x16e0]
+rainbow_tab_config_1s.dart:9080|    // 0x826abc: r16 = "protocolLength============"
+rainbow_tab_config_1s.dart:9081|    //     0x826abc: add             x16, PP, #0x58, lsl #12  ; [pp+0x58580] "protocolLength============"
+rainbow_tab_config_1s.dart:9082|    //     0x826ac0: ldr             x16, [x16, #0x580]
+rainbow_tab_config_1s.dart:9083|    // 0x826ac4: StoreField: r0->field_f = r16
+rainbow_tab_config_1s.dart:9084|    //     0x826ac4: stur            w16, [x0, #0xf]
+
+====================================================================================================
+[3] D6-POPULATED STATIC IS READ HERE (NOT in the Button-Test path)
+    static ::protocolLength (Blutter offset 0xb70) read in _RainbowDeviceConfig1sState::parsingData @0x8270b0 to select ProtocolType
+====================================================================================================
+
+rainbow_tab_config_1s.dart:9592|  _ parsingData(/* No info */) {
+rainbow_tab_config_1s.dart:9593|    // ** addr: 0x8270b0, size: 0x984
+rainbow_tab_config_1s.dart:9594|    // 0x8270b0: EnterFrame
+rainbow_tab_config_1s.dart:9595|    //     0x8270b0: stp             fp, lr, [SP, #-0x10]!
+rainbow_tab_config_1s.dart:9596|    //     0x8270b4: mov             fp, SP
+rainbow_tab_config_1s.dart:9597|    // 0x8270b8: AllocStack(0x18)
+rainbow_tab_config_1s.dart:9598|    //     0x8270b8: sub             SP, SP, #0x18
+rainbow_tab_config_1s.dart:9599|    // 0x8270bc: SetupParameters(_RainbowDeviceConfig1sState this /* r1 => r3, fp-0x8 */, dynamic _ /* r2 => r2, fp-0x10 */)
+rainbow_tab_config_1s.dart:9600|    //     0x8270bc: mov             x3, x1
+rainbow_tab_config_1s.dart:9601|    //     0x8270c0: stur            x1, [fp, #-8]
+rainbow_tab_config_1s.dart:9602|    //     0x8270c4: stur            x2, [fp, #-0x10]
+rainbow_tab_config_1s.dart:9726|    // 0x827204: r6 = LoadStaticField(0xb70)
+rainbow_tab_config_1s.dart:9727|    //     0x827204: ldr             x6, [THR, #0x78]  ; THR::field_table_values
+rainbow_tab_config_1s.dart:9728|    //     0x827208: ldr             x6, [x6, #0x16e0]
+rainbow_tab_config_1s.dart:9729|    // 0x82720c: r0 = LoadInt32Instr(r6)
+rainbow_tab_config_1s.dart:9730|    //     0x82720c: sbfx            x0, x6, #1, #0x1f
+rainbow_tab_config_1s.dart:9731|    //     0x827210: tbz             w6, #0, #0x827218
+rainbow_tab_config_1s.dart:9732|    //     0x827214: ldur            x0, [x6, #7]
+rainbow_tab_config_1s.dart:9733|    // 0x827218: cmp             x0, #0x58
+rainbow_tab_config_1s.dart:9734|    // 0x82721c: b.ne            #0x82722c
+rainbow_tab_config_1s.dart:9735|    // 0x827220: r1 = Instance_ProtocolType
+rainbow_tab_config_1s.dart:9736|    //     0x827220: add             x1, PP, #0x57, lsl #12  ; [pp+0x579a0] Obj!ProtocolType@b2ed81
+rainbow_tab_config_1s.dart:9737|    //     0x827224: ldr             x1, [x1, #0x9a0]
+rainbow_tab_config_1s.dart:9738|    // 0x827228: b               #0x8272bc
+rainbow_tab_config_1s.dart:9739|    // 0x82722c: cmp             x0, #0x90
+rainbow_tab_config_1s.dart:9740|    // 0x827230: b.ne            #0x827240
+rainbow_tab_config_1s.dart:9741|    // 0x827234: r1 = Instance_ProtocolType
+rainbow_tab_config_1s.dart:9742|    //     0x827234: add             x1, PP, #0x57, lsl #12  ; [pp+0x579a8] Obj!ProtocolType@b2ed61
+rainbow_tab_config_1s.dart:9743|    //     0x827238: ldr             x1, [x1, #0x9a8]
+rainbow_tab_config_1s.dart:9744|    // 0x82723c: b               #0x8272bc
+rainbow_tab_config_1s.dart:9745|    // 0x827240: cmp             x0, #0xf0
+LoadStaticField(0xb70) is read by 18 app files (define.dart, units/gamepadset*.dart, widgets/configV*/configs_mian.dart,
+widgets/general/configs_config.dart, widgets/rainbow/rainbow_tab_config_1s.dart, ...). POSITIVE CONTROL that the scan works:
+$ grep -rl LoadStaticField(0xb70) moojiang/ -> 18 files; grep in rainbow_test.dart -> 0.
+
+====================================================================================================
+[4] BUTTON TEST ENTRY — _ArmorXProMoreWidgetState::build @0x940554 (armorx_pro_more.dart):
+    '按键测试'/'Button Test' ListTile built UNCONDITIONALLY (only locale dispatch 0x3fc/0x3fd selects the label);
+    onTap = AnonymousClosure 0x94773c ; no config/state read anywhere in build
+====================================================================================================
+
+armorx_pro_more.dart:155|    // 0x940684: r0 = "按键测试"
+armorx_pro_more.dart:156|    //     0x940684: add             x0, PP, #0x43, lsl #12  ; [pp+0x43890] "按键测试"
+armorx_pro_more.dart:157|    //     0x940688: ldr             x0, [x0, #0x890]
+armorx_pro_more.dart:216|    // 0x940738: r0 = ListTile()
+armorx_pro_more.dart:217|    //     0x940738: bl              #0x7adc70  ; AllocateListTileStub -> ListTile (size=0xa0)
+armorx_pro_more.dart:218|    // 0x94073c: mov             x3, x0
+armorx_pro_more.dart:219|    // 0x940740: ldur            x0, [fp, #-0x28]
+armorx_pro_more.dart:220|    // 0x940744: stur            x3, [fp, #-0x20]
+armorx_pro_more.dart:221|    // 0x940748: StoreField: r3->field_f = r0
+armorx_pro_more.dart:222|    //     0x940748: stur            w0, [x3, #0xf]
+armorx_pro_more.dart:223|    // 0x94074c: ldur            x0, [fp, #-0x30]
+armorx_pro_more.dart:224|    // 0x940750: StoreField: r3->field_13 = r0
+armorx_pro_more.dart:225|    //     0x940750: stur            w0, [x3, #0x13]
+armorx_pro_more.dart:226|    // 0x940754: r0 = Instance_Icon
+armorx_pro_more.dart:227|    //     0x940754: add             x0, PP, #0x55, lsl #12  ; [pp+0x555f8] Obj!Icon@b28f01
+armorx_pro_more.dart:228|    //     0x940758: ldr             x0, [x0, #0x5f8]
+armorx_pro_more.dart:229|    // 0x94075c: ArrayStore: r3[0] = r0  ; List_4
+armorx_pro_more.dart:230|    //     0x94075c: stur            w0, [x3, #0x17]
+armorx_pro_more.dart:231|    // 0x940760: r4 = Instance_Border
+armorx_pro_more.dart:232|    //     0x940760: add             x4, PP, #0x51, lsl #12  ; [pp+0x51b00] Obj!Border@b18361
+armorx_pro_more.dart:233|    //     0x940764: ldr             x4, [x4, #0xb00]
+armorx_pro_more.dart:234|    // 0x940768: StoreField: r3->field_27 = r4
+armorx_pro_more.dart:235|    //     0x940768: stur            w4, [x3, #0x27]
+armorx_pro_more.dart:236|    // 0x94076c: r5 = true
+armorx_pro_more.dart:237|    //     0x94076c: add             x5, NULL, #0x20  ; true
+armorx_pro_more.dart:238|    // 0x940770: StoreField: r3->field_4b = r5
+armorx_pro_more.dart:239|    //     0x940770: stur            w5, [x3, #0x4b]
+armorx_pro_more.dart:240|    // 0x940774: ldur            x2, [fp, #-0x18]
+armorx_pro_more.dart:241|    // 0x940778: r1 = Function '<anonymous closure>':.
+armorx_pro_more.dart:242|    //     0x940778: add             x1, PP, #0x55, lsl #12  ; [pp+0x55600] AnonymousClosure: (0x94773c), in [package:moojiang/widgets/armor-x_pro/armorx_pro_more.dart] _ArmorXProMoreWidgetState::build (0x940554)
+armorx_pro_more.dart:243|    //     0x94077c: ldr             x1, [x1, #0x600]
+armorx_pro_more.dart:244|    // 0x940780: r0 = AllocateClosure()
+armorx_pro_more.dart:245|    //     0x940780: bl              #0xd29d98  ; AllocateClosureStub
+armorx_pro_more.dart:246|    // 0x940784: mov             x1, x0
+armorx_pro_more.dart:247|    // 0x940788: ldur            x0, [fp, #-0x20]
+armorx_pro_more.dart:248|    // 0x94078c: StoreField: r0->field_4f = r1
+armorx_pro_more.dart:249|    //     0x94078c: stur            w1, [x0, #0x4f]
+
+====================================================================================================
+[5] BUTTON TEST ROUTE  @0x94773c  (armorx_pro_more.dart) -> Navigator.push(MaterialPageRoute(builder: () => RainbowTest()))
+    no state read; builder closure is in rainbow_more.dart @0x947674 -> constructs RainbowTest()
+====================================================================================================
+
+armorx_pro_more.dart:562|    // ** addr: 0x94773c, size: 0xb8
+armorx_pro_more.dart:563|    // 0x94773c: EnterFrame
+armorx_pro_more.dart:564|    //     0x94773c: stp             fp, lr, [SP, #-0x10]!
+armorx_pro_more.dart:565|    //     0x947740: mov             fp, SP
+armorx_pro_more.dart:566|    // 0x947744: AllocStack(0x38)
+armorx_pro_more.dart:567|    //     0x947744: sub             SP, SP, #0x38
+armorx_pro_more.dart:568|    // 0x947748: SetupParameters(_ArmorXProMoreWidgetState this /* r1 */)
+armorx_pro_more.dart:569|    //     0x947748: stur            NULL, [fp, #-8]
+armorx_pro_more.dart:570|    //     0x94774c: mov             x0, #0
+armorx_pro_more.dart:571|    //     0x947750: add             x1, fp, w0, sxtw #2
+armorx_pro_more.dart:572|    //     0x947754: ldr             x1, [x1, #0x10]
+armorx_pro_more.dart:573|    //     0x947758: ldur            w2, [x1, #0x17]
+armorx_pro_more.dart:574|    //     0x94775c: add             x2, x2, HEAP, lsl #32
+armorx_pro_more.dart:575|    //     0x947760: stur            x2, [fp, #-0x10]
+armorx_pro_more.dart:576|    // 0x947764: CheckStackOverflow
+armorx_pro_more.dart:577|    //     0x947764: ldr             x16, [THR, #0x48]  ; THR::stack_limit
+armorx_pro_more.dart:578|    //     0x947768: cmp             SP, x16
+armorx_pro_more.dart:579|    //     0x94776c: b.ls            #0x9477ec
+armorx_pro_more.dart:580|    // 0x947770: InitAsync() -> Future<void?>
+armorx_pro_more.dart:581|    //     0x947770: ldr             x0, [PP, #0x238]  ; [pp+0x238] TypeArguments: <void?>
+armorx_pro_more.dart:582|    //     0x947774: bl              #0x4ed1e4  ; InitAsyncStub
+armorx_pro_more.dart:583|    // 0x947778: ldur            x0, [fp, #-0x10]
+armorx_pro_more.dart:584|    // 0x94777c: LoadField: r1 = r0->field_f
+armorx_pro_more.dart:585|    //     0x94777c: ldur            w1, [x0, #0xf]
+armorx_pro_more.dart:586|    // 0x947780: DecompressPointer r1
+armorx_pro_more.dart:587|    //     0x947780: add             x1, x1, HEAP, lsl #32
+armorx_pro_more.dart:588|    // 0x947784: r4 = const [0, 0x1, 0, 0x1, null]
+armorx_pro_more.dart:589|    //     0x947784: ldr             x4, [PP, #0xa8]  ; [pp+0xa8] List(5) [0, 0x1, 0, 0x1, Null]
+armorx_pro_more.dart:590|    // 0x947788: r0 = of()
+armorx_pro_more.dart:591|    //     0x947788: bl              #0x5380c0  ; [package:flutter/src/widgets/navigator.dart] Navigator::of
+armorx_pro_more.dart:592|    // 0x94778c: r1 = Function '<anonymous closure>':.
+armorx_pro_more.dart:593|    //     0x94778c: add             x1, PP, #0x55, lsl #12  ; [pp+0x55618] AnonymousClosure: (0x947674), in [package:moojiang/widgets/rainbow/rainbow_more.dart] _RainbowMoreWidget::build (0x9f152c)
+armorx_pro_more.dart:594|    //     0x947790: ldr             x1, [x1, #0x618]
+armorx_pro_more.dart:595|    // 0x947794: r2 = Null
+armorx_pro_more.dart:596|    //     0x947794: mov             x2, NULL
+armorx_pro_more.dart:597|    // 0x947798: stur            x0, [fp, #-0x18]
+armorx_pro_more.dart:598|    // 0x94779c: r0 = AllocateClosure()
+armorx_pro_more.dart:599|    //     0x94779c: bl              #0xd29d98  ; AllocateClosureStub
+armorx_pro_more.dart:600|    // 0x9477a0: r1 = Null
+armorx_pro_more.dart:601|    //     0x9477a0: mov             x1, NULL
+armorx_pro_more.dart:602|    // 0x9477a4: stur            x0, [fp, #-0x20]
+armorx_pro_more.dart:603|    // 0x9477a8: r0 = MaterialPageRoute()
+rainbow_more.dart:10238|    // ** addr: 0x947674, size: 0x18
+rainbow_more.dart:10239|    // 0x947674: EnterFrame
+rainbow_more.dart:10240|    //     0x947674: stp             fp, lr, [SP, #-0x10]!
+rainbow_more.dart:10241|    //     0x947678: mov             fp, SP
+rainbow_more.dart:10242|    // 0x94767c: r0 = RainbowTest()
+rainbow_more.dart:10243|    //     0x94767c: bl              #0x94768c  ; AllocateRainbowTestStub -> RainbowTest (size=0xc)
+rainbow_more.dart:10244|    // 0x947680: LeaveFrame
+rainbow_more.dart:10245|    //     0x947680: mov             SP, fp
+rainbow_more.dart:10246|    //     0x947684: ldp             fp, lr, [SP], #0x10
+rainbow_more.dart:10247|    // 0x947688: ret
+rainbow_more.dart:10248|    //     0x947688: ret
+rainbow_more.dart:10249|  }
+
+====================================================================================================
+[6] GATE THAT ACTUALLY GUARDS OPENING THE 'MORE' PAGE (hence Button Test) — connection state, NOT D6
+    _ArmorXProWidgetState onTap closure @0x948660 (armorx_pro_root.dart): reads BluetoothModel.field_3b and compares to BluetoothConnectionState instance
+====================================================================================================
+
+armorx_pro_root.dart:2452|    // 0x9486c4: r0 = ReadContext.read()
+armorx_pro_root.dart:2453|    //     0x9486c4: bl              #0x80fcec  ; [package:provider/src/provider.dart] ::ReadContext.read
+armorx_pro_root.dart:2454|    // 0x9486c8: LoadField: r1 = r0->field_3b
+armorx_pro_root.dart:2455|    //     0x9486c8: ldur            w1, [x0, #0x3b]
+armorx_pro_root.dart:2456|    // 0x9486cc: DecompressPointer r1
+armorx_pro_root.dart:2457|    //     0x9486cc: add             x1, x1, HEAP, lsl #32
+armorx_pro_root.dart:2458|    // 0x9486d0: r16 = Instance_BluetoothConnectionState
+armorx_pro_root.dart:2459|    //     0x9486d0: add             x16, PP, #0x13, lsl #12  ; [pp+0x132e8] Obj!BluetoothConnectionState@b2f901
+armorx_pro_root.dart:2460|    //     0x9486d4: ldr             x16, [x16, #0x2e8]
+armorx_pro_root.dart:2461|    // 0x9486d8: cmp             w1, w16
+armorx_pro_root.dart:2462|    // 0x9486dc: b.ne            #0x948760
+armorx_pro_root.dart:2524|    // ** addr: 0x948778, size: 0x18
+armorx_pro_root.dart:2525|    // 0x948778: EnterFrame
+armorx_pro_root.dart:2526|    //     0x948778: stp             fp, lr, [SP, #-0x10]!
+armorx_pro_root.dart:2527|    //     0x94877c: mov             fp, SP
+armorx_pro_root.dart:2528|    // 0x948780: r0 = ArmorXProMoreWidget()
+armorx_pro_root.dart:2529|    //     0x948780: bl              #0x948790  ; AllocateArmorXProMoreWidgetStub -> ArmorXProMoreWidget (size=0xc)
+
+====================================================================================================
+[7] D2 ENABLE SENDER  BluetoothModel::testModeSwitch  @0xabaef4 (bluetooth_mode.dart)
+    Builds [A5,05,D2,01,7D] (or [A5,05,D2,00,7C]); reads NO state/field; only prints and calls write()
+====================================================================================================
+
+bluetooth_mode.dart:1955|    // ** addr: 0xabaef4, size: 0x148
+bluetooth_mode.dart:1956|    // 0xabaef4: EnterFrame
+bluetooth_mode.dart:1957|    //     0xabaef4: stp             fp, lr, [SP, #-0x10]!
+bluetooth_mode.dart:1958|    //     0xabaef8: mov             fp, SP
+bluetooth_mode.dart:1972|    // 0xabaf20: ldur            x0, [fp, #-0x18]
+bluetooth_mode.dart:1973|    // 0xabaf24: tbnz            w0, #4, #0xabaf88
+bluetooth_mode.dart:1974|    // 0xabaf28: r0 = 10
+bluetooth_mode.dart:1975|    //     0xabaf28: mov             x0, #0xa
+bluetooth_mode.dart:1976|    // 0xabaf2c: mov             x2, x0
+bluetooth_mode.dart:1977|    // 0xabaf30: r1 = Null
+bluetooth_mode.dart:1978|    //     0xabaf30: mov             x1, NULL
+bluetooth_mode.dart:1979|    // 0xabaf34: r0 = AllocateArray()
+bluetooth_mode.dart:1980|    //     0xabaf34: bl              #0xd2aab4  ; AllocateArrayStub
+bluetooth_mode.dart:1981|    // 0xabaf38: stur            x0, [fp, #-0x18]
+bluetooth_mode.dart:1982|    // 0xabaf3c: r16 = 330
+bluetooth_mode.dart:1983|    //     0xabaf3c: mov             x16, #0x14a
+bluetooth_mode.dart:1984|    // 0xabaf40: StoreField: r0->field_f = r16
+bluetooth_mode.dart:1985|    //     0xabaf40: stur            w16, [x0, #0xf]
+bluetooth_mode.dart:1986|    // 0xabaf44: r16 = 10
+bluetooth_mode.dart:1987|    //     0xabaf44: mov             x16, #0xa
+bluetooth_mode.dart:1988|    // 0xabaf48: StoreField: r0->field_13 = r16
+bluetooth_mode.dart:1989|    //     0xabaf48: stur            w16, [x0, #0x13]
+bluetooth_mode.dart:1990|    // 0xabaf4c: r16 = 420
+bluetooth_mode.dart:1991|    //     0xabaf4c: mov             x16, #0x1a4
+bluetooth_mode.dart:1992|    // 0xabaf50: ArrayStore: r0[0] = r16  ; List_4
+bluetooth_mode.dart:1993|    //     0xabaf50: stur            w16, [x0, #0x17]
+bluetooth_mode.dart:1994|    // 0xabaf54: r16 = 2
+bluetooth_mode.dart:1995|    //     0xabaf54: mov             x16, #2
+bluetooth_mode.dart:1996|    // 0xabaf58: StoreField: r0->field_1b = r16
+bluetooth_mode.dart:1997|    //     0xabaf58: stur            w16, [x0, #0x1b]
+bluetooth_mode.dart:1998|    // 0xabaf5c: r16 = 250
+bluetooth_mode.dart:1999|    //     0xabaf5c: mov             x16, #0xfa
+bluetooth_mode.dart:2000|    // 0xabaf60: StoreField: r0->field_1f = r16
+bluetooth_mode.dart:2001|    //     0xabaf60: stur            w16, [x0, #0x1f]
+bluetooth_mode.dart:2032|    // 0xabafac: r16 = 420
+bluetooth_mode.dart:2033|    //     0xabafac: mov             x16, #0x1a4
+bluetooth_mode.dart:2034|    // 0xabafb0: ArrayStore: r0[0] = r16  ; List_4
+bluetooth_mode.dart:2035|    //     0xabafb0: stur            w16, [x0, #0x17]
+bluetooth_mode.dart:2036|    // 0xabafb4: StoreField: r0->field_1b = rZR
+bluetooth_mode.dart:2037|    //     0xabafb4: stur            wzr, [x0, #0x1b]
+bluetooth_mode.dart:2038|    // 0xabafb8: r16 = 248
+bluetooth_mode.dart:2039|    //     0xabafb8: mov             x16, #0xf8
+bluetooth_mode.dart:2040|    // 0xabafbc: StoreField: r0->field_1f = r16
+bluetooth_mode.dart:2041|    //     0xabafbc: stur            w16, [x0, #0x1f]
+bluetooth_mode.dart:2062|    // 0xabaff0: r16 = "cmd: "
+bluetooth_mode.dart:2063|    //     0xabaff0: add             x16, PP, #0x54, lsl #12  ; [pp+0x54c38] "cmd: "
+bluetooth_mode.dart:2064|    //     0xabaff4: ldr             x16, [x16, #0xc38]
+bluetooth_mode.dart:2065|    // 0xabaff8: StoreField: r0->field_f = r16
+bluetooth_mode.dart:2066|    //     0xabaff8: stur            w16, [x0, #0xf]
+bluetooth_mode.dart:2067|    // 0xabaffc: ldur            x2, [fp, #-0x18]
+bluetooth_mode.dart:2068|    // 0xabb000: StoreField: r0->field_13 = r2
+bluetooth_mode.dart:2069|    //     0xabb000: stur            w2, [x0, #0x13]
+bluetooth_mode.dart:2070|    // 0xabb004: str             x0, [SP]
+bluetooth_mode.dart:2071|    // 0xabb008: r0 = _interpolate()
+bluetooth_mode.dart:2072|    //     0xabb008: bl              #0x4cdf8c  ; [dart:core] _StringBase::_interpolate
+bluetooth_mode.dart:2073|    // 0xabb00c: mov             x1, x0
+bluetooth_mode.dart:2074|    // 0xabb010: r0 = print()
+bluetooth_mode.dart:2075|    //     0xabb010: bl              #0x4f87f4  ; [dart:core] ::print
+bluetooth_mode.dart:2076|    // 0xabb014: ldur            x1, [fp, #-0x10]
+bluetooth_mode.dart:2077|    // 0xabb018: ldur            x2, [fp, #-0x18]
+bluetooth_mode.dart:2078|    // 0xabb01c: r0 = write()
+bluetooth_mode.dart:2079|    //     0xabb01c: bl              #0x80dd28  ; [package:moojiang/units/ble/bluetooth_mode.dart] BluetoothModel::write
+bluetooth_mode.dart:2080|    // 0xabb020: mov             x1, x0
+bluetooth_mode.dart:2081|    // 0xabb024: stur            x1, [fp, #-0x10]
+bluetooth_mode.dart:2082|    // 0xabb028: r0 = Await()
+bluetooth_mode.dart:2083|    //     0xabb028: bl              #0x4ecf8c  ; AwaitStub
+bluetooth_mode.dart:2084|    // 0xabb02c: r0 = Null
+bluetooth_mode.dart:2085|    //     0xabb02c: mov             x0, NULL
+bluetooth_mode.dart:2086|    // 0xabb030: r0 = ReturnAsyncNotFuture()
+bluetooth_mode.dart:2087|    //     0xabb030: b               #0x4eccb4  ; ReturnAsyncNotFutureStub
+
+====================================================================================================
+[8] Button Test initState  _RainbowTestState::initState @0xacf744 (rainbow_test.dart)
+    Loads framework static 0x678 (WidgetsBinding-style binding) + registers closure @0xacf874
+====================================================================================================
+
+rainbow_test.dart:1604|    // ** addr: 0xacf744, size: 0x130
+rainbow_test.dart:1605|    // 0xacf744: EnterFrame
+rainbow_test.dart:1606|    //     0xacf744: stp             fp, lr, [SP, #-0x10]!
+rainbow_test.dart:1607|    //     0xacf748: mov             fp, SP
+rainbow_test.dart:1608|    // 0xacf74c: AllocStack(0x18)
+rainbow_test.dart:1609|    //     0xacf74c: sub             SP, SP, #0x18
+rainbow_test.dart:1610|    // 0xacf750: SetupParameters(_RainbowTestState this /* r1 => r1, fp-0x8 */)
+rainbow_test.dart:1611|    //     0xacf750: stur            x1, [fp, #-8]
+rainbow_test.dart:1612|    // 0xacf754: CheckStackOverflow
+rainbow_test.dart:1613|    //     0xacf754: ldr             x16, [THR, #0x48]  ; THR::stack_limit
+rainbow_test.dart:1614|    //     0xacf758: cmp             SP, x16
+rainbow_test.dart:1615|    //     0xacf75c: b.ls            #0xacf868
+rainbow_test.dart:1616|    // 0xacf760: r1 = 1
+rainbow_test.dart:1617|    //     0xacf760: mov             x1, #1
+rainbow_test.dart:1618|    // 0xacf764: r0 = AllocateContext()
+rainbow_test.dart:1619|    //     0xacf764: bl              #0xd299c4  ; AllocateContextStub
+rainbow_test.dart:1620|    // 0xacf768: mov             x1, x0
+rainbow_test.dart:1621|    // 0xacf76c: ldur            x0, [fp, #-8]
+rainbow_test.dart:1622|    // 0xacf770: StoreField: r1->field_f = r0
+rainbow_test.dart:1623|    //     0xacf770: stur            w0, [x1, #0xf]
+rainbow_test.dart:1624|    // 0xacf774: r0 = LoadStaticField(0x678)
+rainbow_test.dart:1625|    //     0xacf774: ldr             x0, [THR, #0x78]  ; THR::field_table_values
+rainbow_test.dart:1626|    //     0xacf778: ldr             x0, [x0, #0xcf0]
+rainbow_test.dart:1627|    // 0xacf77c: cmp             w0, NULL
+rainbow_test.dart:1628|    // 0xacf780: b.eq            #0xacf870
+rainbow_test.dart:1629|    // 0xacf784: LoadField: r3 = r0->field_53
+rainbow_test.dart:1630|    //     0xacf784: ldur            w3, [x0, #0x53]
+rainbow_test.dart:1631|    // 0xacf788: DecompressPointer r3
+rainbow_test.dart:1632|    //     0xacf788: add             x3, x3, HEAP, lsl #32
+rainbow_test.dart:1633|    // 0xacf78c: stur            x3, [fp, #-0x10]
+rainbow_test.dart:1634|    // 0xacf790: LoadField: r0 = r3->field_7
+rainbow_test.dart:1635|    //     0xacf790: ldur            w0, [x3, #7]
+rainbow_test.dart:1636|    // 0xacf794: DecompressPointer r0
+rainbow_test.dart:1637|    //     0xacf794: add             x0, x0, HEAP, lsl #32
+rainbow_test.dart:1638|    // 0xacf798: mov             x2, x1
+rainbow_test.dart:1639|    // 0xacf79c: stur            x0, [fp, #-8]
+rainbow_test.dart:1640|    // 0xacf7a0: r1 = Function '<anonymous closure>':.
+rainbow_test.dart:1641|    //     0xacf7a0: add             x1, PP, #0x5b, lsl #12  ; [pp+0x5b470] AnonymousClosure: (0xacf874), in [package:moojiang/widgets/rainbow/rainbow_test.dart] _RainbowTestState::initState (0xacf744)
+rainbow_test.dart:1642|    //     0xacf7a4: ldr             x1, [x1, #0x470]
+rainbow_test.dart:1643|    // 0xacf7a8: r0 = AllocateClosure()
+rainbow_test.dart:1644|    //     0xacf7a8: bl              #0xd29d98  ; AllocateClosureStub
+
+====================================================================================================
+[9] initState closure @0xacf874 -> ReadContext.read<BluetoothModel>() -> testModeSwitch(true) @0xacf8cc -> subscribeCharacteristic() @0xacf8dc
+    NO D6 state read
+====================================================================================================
+
+rainbow_test.dart:1718|  [closure] void <anonymous closure>(dynamic, Duration) {
+rainbow_test.dart:1719|    // ** addr: 0xacf874, size: 0x88
+rainbow_test.dart:1720|    // 0xacf874: EnterFrame
+rainbow_test.dart:1721|    //     0xacf874: stp             fp, lr, [SP, #-0x10]!
+rainbow_test.dart:1722|    //     0xacf878: mov             fp, SP
+rainbow_test.dart:1723|    // 0xacf87c: AllocStack(0x18)
+rainbow_test.dart:1724|    //     0xacf87c: sub             SP, SP, #0x18
+rainbow_test.dart:1725|    // 0xacf880: SetupParameters([dynamic _ /* r0 */])
+rainbow_test.dart:1726|    //     0xacf880: ldr             x0, [fp, #0x18]
+rainbow_test.dart:1727|    //     0xacf884: ldur            w1, [x0, #0x17]
+rainbow_test.dart:1728|    //     0xacf888: add             x1, x1, HEAP, lsl #32
+rainbow_test.dart:1729|    //     0xacf88c: stur            x1, [fp, #-8]
+rainbow_test.dart:1730|    // 0xacf890: CheckStackOverflow
+rainbow_test.dart:1731|    //     0xacf890: ldr             x16, [THR, #0x48]  ; THR::stack_limit
+rainbow_test.dart:1732|    //     0xacf894: cmp             SP, x16
+rainbow_test.dart:1733|    //     0xacf898: b.ls            #0xacf8f0
+rainbow_test.dart:1734|    // 0xacf89c: LoadField: r0 = r1->field_f
+rainbow_test.dart:1735|    //     0xacf89c: ldur            w0, [x1, #0xf]
+rainbow_test.dart:1736|    // 0xacf8a0: DecompressPointer r0
+rainbow_test.dart:1737|    //     0xacf8a0: add             x0, x0, HEAP, lsl #32
+rainbow_test.dart:1738|    // 0xacf8a4: LoadField: r2 = r0->field_f
+rainbow_test.dart:1739|    //     0xacf8a4: ldur            w2, [x0, #0xf]
+rainbow_test.dart:1740|    // 0xacf8a8: DecompressPointer r2
+rainbow_test.dart:1741|    //     0xacf8a8: add             x2, x2, HEAP, lsl #32
+rainbow_test.dart:1742|    // 0xacf8ac: cmp             w2, NULL
+rainbow_test.dart:1743|    // 0xacf8b0: b.eq            #0xacf8f8
+rainbow_test.dart:1744|    // 0xacf8b4: r16 = <BluetoothModel>
+rainbow_test.dart:1745|    //     0xacf8b4: ldr             x16, [PP, #0x75e0]  ; [pp+0x75e0] TypeArguments: <BluetoothModel>
+rainbow_test.dart:1746|    // 0xacf8b8: stp             x2, x16, [SP]
+rainbow_test.dart:1747|    // 0xacf8bc: r4 = const [0x1, 0x1, 0x1, 0x1, null]
+rainbow_test.dart:1748|    //     0xacf8bc: ldr             x4, [PP, #0x118]  ; [pp+0x118] List(5) [0x1, 0x1, 0x1, 0x1, Null]
+rainbow_test.dart:1749|    // 0xacf8c0: r0 = ReadContext.read()
+rainbow_test.dart:1750|    //     0xacf8c0: bl              #0x80fcec  ; [package:provider/src/provider.dart] ::ReadContext.read
+rainbow_test.dart:1751|    // 0xacf8c4: mov             x1, x0
+rainbow_test.dart:1752|    // 0xacf8c8: r2 = true
+rainbow_test.dart:1753|    //     0xacf8c8: add             x2, NULL, #0x20  ; true
+rainbow_test.dart:1754|    // 0xacf8cc: r0 = testModeSwitch()
+rainbow_test.dart:1755|    //     0xacf8cc: bl              #0xabaef4  ; [package:moojiang/units/ble/bluetooth_mode.dart] BluetoothModel::testModeSwitch
+rainbow_test.dart:1756|    // 0xacf8d0: ldur            x0, [fp, #-8]
+rainbow_test.dart:1757|    // 0xacf8d4: LoadField: r1 = r0->field_f
+rainbow_test.dart:1758|    //     0xacf8d4: ldur            w1, [x0, #0xf]
+rainbow_test.dart:1759|    // 0xacf8d8: DecompressPointer r1
+rainbow_test.dart:1760|    //     0xacf8d8: add             x1, x1, HEAP, lsl #32
+rainbow_test.dart:1761|    // 0xacf8dc: r0 = subscribeCharacteristic()
+rainbow_test.dart:1762|    //     0xacf8dc: bl              #0xacf8fc  ; [package:moojiang/widgets/rainbow/rainbow_test.dart] _RainbowTestState::subscribeCharacteristic
+rainbow_test.dart:1763|    // 0xacf8e0: r0 = Null
+rainbow_test.dart:1764|    //     0xacf8e0: mov             x0, NULL
+rainbow_test.dart:1765|    // 0xacf8e4: LeaveFrame
+rainbow_test.dart:1766|    //     0xacf8e4: mov             SP, fp
+rainbow_test.dart:1767|    //     0xacf8e8: ldp             fp, lr, [SP], #0x10
+rainbow_test.dart:1768|    // 0xacf8ec: ret
+rainbow_test.dart:1769|    //     0xacf8ec: ret
+rainbow_test.dart:1770|    // 0xacf8f0: r0 = StackOverflowSharedWithoutFPURegs()
+rainbow_test.dart:1771|    //     0xacf8f0: bl              #0xd2abc0  ; StackOverflowSharedWithoutFPURegsStub
+rainbow_test.dart:1772|    // 0xacf8f4: b               #0xacf89c
+rainbow_test.dart:1773|    // 0xacf8f8: r0 = NullCastErrorSharedWithoutFPURegs()
+rainbow_test.dart:1774|    //     0xacf8f8: bl              #0xd2b250  ; NullCastErrorSharedWithoutFPURegsStub
+rainbow_test.dart:1775|  }
+
+====================================================================================================
+[10] subscribeCharacteristic @0xacf8fc -> BluetoothModel.field_43 (raw notify broadcast stream) -> listen(closure @0xacf9dc -> analysisData)
+     field_43 is filled by onCharacteristicChanged, i.e. RAW BLE NOTIFICATIONS, not the D6 config object
+====================================================================================================
+
+rainbow_test.dart:1802|    // 0xacf93c: ldur            x0, [fp, #-0x10]
+rainbow_test.dart:1803|    // 0xacf940: LoadField: r1 = r0->field_f
+rainbow_test.dart:1804|    //     0xacf940: ldur            w1, [x0, #0xf]
+rainbow_test.dart:1805|    // 0xacf944: DecompressPointer r1
+rainbow_test.dart:1806|    //     0xacf944: add             x1, x1, HEAP, lsl #32
+rainbow_test.dart:1807|    // 0xacf948: cmp             w1, NULL
+rainbow_test.dart:1808|    // 0xacf94c: b.eq            #0xacf9d8
+rainbow_test.dart:1809|    // 0xacf950: r16 = <BluetoothModel>
+rainbow_test.dart:1810|    //     0xacf950: ldr             x16, [PP, #0x75e0]  ; [pp+0x75e0] TypeArguments: <BluetoothModel>
+rainbow_test.dart:1811|    // 0xacf954: stp             x1, x16, [SP]
+rainbow_test.dart:1812|    // 0xacf958: r4 = const [0x1, 0x1, 0x1, 0x1, null]
+rainbow_test.dart:1813|    //     0xacf958: ldr             x4, [PP, #0x118]  ; [pp+0x118] List(5) [0x1, 0x1, 0x1, 0x1, Null]
+rainbow_test.dart:1814|    // 0xacf95c: r0 = ReadContext.read()
+rainbow_test.dart:1815|    //     0xacf95c: bl              #0x80fcec  ; [package:provider/src/provider.dart] ::ReadContext.read
+rainbow_test.dart:1816|    // 0xacf960: LoadField: r2 = r0->field_43
+rainbow_test.dart:1817|    //     0xacf960: ldur            w2, [x0, #0x43]
+rainbow_test.dart:1818|    // 0xacf964: DecompressPointer r2
+rainbow_test.dart:1819|    //     0xacf964: add             x2, x2, HEAP, lsl #32
+rainbow_test.dart:1820|    // 0xacf968: stur            x2, [fp, #-0x20]
+rainbow_test.dart:1821|    // 0xacf96c: r1 = <List<int>>
+rainbow_test.dart:1822|    //     0xacf96c: add             x1, PP, #8, lsl #12  ; [pp+0x8b20] TypeArguments: <List<int>>
+rainbow_test.dart:1823|    //     0xacf970: ldr             x1, [x1, #0xb20]
+rainbow_test.dart:1824|    // 0xacf974: r0 = _BroadcastStream()
+rainbow_test.dart:1825|    //     0xacf974: bl              #0x637af8  ; Allocate_BroadcastStreamStub -> _BroadcastStream<X0> (size=0x10)
+rainbow_test.dart:1826|    // 0xacf978: mov             x3, x0
+rainbow_test.dart:1827|    // 0xacf97c: ldur            x0, [fp, #-0x20]
+rainbow_test.dart:1828|    // 0xacf980: stur            x3, [fp, #-0x28]
+rainbow_test.dart:1829|    // 0xacf984: StoreField: r3->field_b = r0
+rainbow_test.dart:1830|    //     0xacf984: stur            w0, [x3, #0xb]
+rainbow_test.dart:1831|    // 0xacf988: ldur            x2, [fp, #-0x18]
+rainbow_test.dart:1832|    // 0xacf98c: r1 = Function '<anonymous closure>':.
+rainbow_test.dart:1833|    //     0xacf98c: add             x1, PP, #0x5b, lsl #12  ; [pp+0x5b488] AnonymousClosure: (0xacf9dc), in [package:moojiang/widgets/rainbow/rainbow_test.dart] _RainbowTestState::subscribeCharacteristic (0xacf8fc)
+rainbow_test.dart:1834|    //     0xacf990: ldr             x1, [x1, #0x488]
+rainbow_test.dart:1835|    // 0xacf994: r0 = AllocateClosure()
+rainbow_test.dart:1836|    //     0xacf994: bl              #0xd29d98  ; AllocateClosureStub
+rainbow_test.dart:1837|    // 0xacf998: ldur            x1, [fp, #-0x28]
+rainbow_test.dart:1838|    // 0xacf99c: mov             x2, x0
+rainbow_test.dart:1839|    // 0xacf9a0: r4 = const [0, 0x2, 0, 0x2, null]
+rainbow_test.dart:1840|    //     0xacf9a0: ldr             x4, [PP, #0x7d8]  ; [pp+0x7d8] List(5) [0, 0x2, 0, 0x2, Null]
+rainbow_test.dart:1841|    // 0xacf9a4: r0 = listen()
+rainbow_test.dart:1842|    //     0xacf9a4: bl              #0xc0c474  ; [dart:async] _StreamImpl::listen
+rainbow_test.dart:1843|    // 0xacf9a8: ldur            x1, [fp, #-0x10]
+rainbow_test.dart:1844|    // 0xacf9ac: StoreField: r1->field_1b = r0
+rainbow_test.dart:1845|    //     0xacf9ac: stur            w0, [x1, #0x1b]
+rainbow_test.dart:1894|    // 0xacfa38: ldur            x0, [fp, #-8]
+rainbow_test.dart:1895|    // 0xacfa3c: LoadField: r1 = r0->field_f
+rainbow_test.dart:1896|    //     0xacfa3c: ldur            w1, [x0, #0xf]
+rainbow_test.dart:1897|    // 0xacfa40: DecompressPointer r1
+rainbow_test.dart:1898|    //     0xacfa40: add             x1, x1, HEAP, lsl #32
+rainbow_test.dart:1899|    // 0xacfa44: ldr             x2, [fp, #0x10]
+rainbow_test.dart:1900|    // 0xacfa48: r0 = analysisData()
+rainbow_test.dart:1901|    //     0xacfa48: bl              #0xacfa64  ; [package:moojiang/widgets/rainbow/rainbow_test.dart] _RainbowTestState::analysisData
+
+====================================================================================================
+[11] BluetoothModel::onCharacteristicChanged @0xaca7c4 + closure @0xacb7f8 -> model.field_43.add(data)  (bluetooth_mode.dart)
+     proves field_43 carries the raw notification bytes; not a D6 config store
+====================================================================================================
+
+bluetooth_mode.dart:3561|    // 0xaca808: InitAsync() -> Future<StreamSubscription>
+bluetooth_mode.dart:3562|    //     0xaca808: add             x0, PP, #0x13, lsl #12  ; [pp+0x13460] TypeArguments: <StreamSubscription>
+bluetooth_mode.dart:3563|    //     0xaca80c: ldr             x0, [x0, #0x460]
+bluetooth_mode.dart:3564|    //     0xaca810: bl              #0x4ed1e4  ; InitAsyncStub
+bluetooth_mode.dart:3565|    // 0xaca814: ldur            x1, [fp, #-0x18]
+bluetooth_mode.dart:3566|    // 0xaca818: r0 = setNotifyValue()
+bluetooth_mode.dart:3567|    //     0xaca818: bl              #0xacabfc  ; [package:flutter_blue_plus/flutter_blue_plus.dart] BluetoothCharacteristic::setNotifyValue
+bluetooth_mode.dart:3628|    // 0xacb854: ldur            x0, [fp, #-8]
+bluetooth_mode.dart:3629|    // 0xacb858: LoadField: r1 = r0->field_f
+bluetooth_mode.dart:3630|    //     0xacb858: ldur            w1, [x0, #0xf]
+bluetooth_mode.dart:3631|    // 0xacb85c: DecompressPointer r1
+bluetooth_mode.dart:3632|    //     0xacb85c: add             x1, x1, HEAP, lsl #32
+bluetooth_mode.dart:3633|    // 0xacb860: LoadField: r0 = r1->field_43
+bluetooth_mode.dart:3634|    //     0xacb860: ldur            w0, [x1, #0x43]
+bluetooth_mode.dart:3635|    // 0xacb864: DecompressPointer r0
+bluetooth_mode.dart:3636|    //     0xacb864: add             x0, x0, HEAP, lsl #32
+bluetooth_mode.dart:3637|    // 0xacb868: mov             x1, x0
+bluetooth_mode.dart:3638|    // 0xacb86c: ldr             x2, [fp, #0x10]
+bluetooth_mode.dart:3639|    // 0xacb870: r0 = add()
+bluetooth_mode.dart:3640|    //     0xacb870: bl              #0xbe95f0  ; [dart:async] _BroadcastStreamController::add
+
+====================================================================================================
+[12] analysisData parser gate @0xacfaac (rainbow_test.dart) — frame[2]==2 ; body only parses frame bytes + 2x setState; reads NO config
+====================================================================================================
+
+rainbow_test.dart:1914|    // ** addr: 0xacfa64, size: 0x1248
+rainbow_test.dart:1915|    // 0xacfa64: EnterFrame
+rainbow_test.dart:1916|    //     0xacfa64: stp             fp, lr, [SP, #-0x10]!
+rainbow_test.dart:1917|    //     0xacfa68: mov             fp, SP
+rainbow_test.dart:1918|    // 0xacfa6c: AllocStack(0x40)
+rainbow_test.dart:1919|    //     0xacfa6c: sub             SP, SP, #0x40
+rainbow_test.dart:1920|    // 0xacfa70: SetupParameters(_RainbowTestState this /* r1 => r2, fp-0x8 */, dynamic _ /* r2 => r1, fp-0x10 */)
+rainbow_test.dart:1921|    //     0xacfa70: stur            x1, [fp, #-8]
+rainbow_test.dart:1922|    //     0xacfa74: mov             x16, x2
+rainbow_test.dart:1923|    //     0xacfa78: mov             x2, x1
+rainbow_test.dart:1924|    //     0xacfa7c: mov             x1, x16
+rainbow_test.dart:1925|    //     0xacfa80: stur            x1, [fp, #-0x10]
+rainbow_test.dart:1926|    // 0xacfa84: CheckStackOverflow
+rainbow_test.dart:1927|    //     0xacfa84: ldr             x16, [THR, #0x48]  ; THR::stack_limit
+rainbow_test.dart:1928|    //     0xacfa88: cmp             SP, x16
+rainbow_test.dart:1929|    //     0xacfa8c: b.ls            #0xad0c90
+rainbow_test.dart:1930|    // 0xacfa90: r0 = LoadClassIdInstr(r1)
+rainbow_test.dart:1931|    //     0xacfa90: ldur            x0, [x1, #-1]
+rainbow_test.dart:1932|    //     0xacfa94: ubfx            x0, x0, #0xc, #0x14
+rainbow_test.dart:1933|    // 0xacfa98: r16 = 4
+rainbow_test.dart:1934|    //     0xacfa98: mov             x16, #4
+rainbow_test.dart:1935|    // 0xacfa9c: stp             x16, x1, [SP]
+rainbow_test.dart:1936|    // 0xacfaa0: mov             lr, x0
+rainbow_test.dart:1937|    // 0xacfaa4: ldr             lr, [x21, lr, lsl #3]
+rainbow_test.dart:1938|    // 0xacfaa8: blr             lr
+rainbow_test.dart:1939|    // 0xacfaac: cmp             w0, #4
+rainbow_test.dart:1940|    // 0xacfab0: b.ne            #0xad0c80
+
+====================================================================================================
+[13] RainbowTest::build @0x9f6264 — only external read is static 0xaf4 = ::curDevice (device-identity enum, for the device image); NO D6 field
+====================================================================================================
+
+rainbow_test.dart:968|    // 0x9f6b94: StoreField: r1->field_b = r0
+rainbow_test.dart:969|    //     0x9f6b94: stur            w0, [x1, #0xb]
+rainbow_test.dart:970|    // 0x9f6b98: r0 = LoadStaticField(0xaf4)
+rainbow_test.dart:971|    //     0x9f6b98: ldr             x0, [THR, #0x78]  ; THR::field_table_values
+All LoadStaticField/StoreStaticField sites in rainbow_test.dart: line 970 (0x9f6b98, static 0xaf4) and line 1624 (0xacf774, static 0x678). NONE is a D6 field.
+All LoadStaticField/StoreStaticField sites in armorx_pro_more.dart: NONE.
+moojiang/units/keybutton.dart (all Key*Component widgets used by Button Test): ZERO static-field accesses and ZERO calls into bluetooth_mode/config funcs.
+
+====================================================================================================
+[14] curDevice (static 0xaf4) is set only by DEVICE SELECTION UI, never by D6:
+    StoreStaticField(0xaf4,...) sites:
+====================================================================================================
+
+widgets/home/pages/config/widgets/device_card.dart:1324   // 0x9c9be0: StoreStaticField(0xaf4, r2)
+widgets/kb_doujiang/viewmodel/kb_dou_jiang_main_vm.dart:523 // 0xb854f8: StoreStaticField(0xaf4, r2)
+widgets/other/device_bottom_sheet.dart:2392,3659,3681,3702,3724 // StoreStaticField(0xaf4, r2)
+
+====================================================================================================
+[15] testModeSwitch call sites (5) — all follow the same postFrame -> enable D2 -> subscribe pattern:
+    config_stick_view.dart:585 (0xab9c5c), config_stick_view.dart:2380 (0xadcbec),
+    rainbow_test.dart:1755 (0xacf8cc), rainbow_test.dart:3661 (0xadd844, dispose -> testModeSwitch(false)),
+    gale_tab_keymap.dart:2950 (0xabcb2c)
+====================================================================================================
+

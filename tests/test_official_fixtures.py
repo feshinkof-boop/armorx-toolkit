@@ -131,9 +131,56 @@ def test_official_write_type_was_write_command():
     assert en["op"] == "0x52" and en["handle"] == "0x0075"
 
 
-def test_d6_reply_is_eight_twenty_byte_fragments():
+def test_d6_reply_is_ten_frames_reassembling_to_the_durable_config():
+    """CORRECTED 2026-09-27: the D6 read is TEN frames (nine 20-byte + one 14-byte), not eight.
+
+    An earlier extraction truncated the list at 8 and several documents inherited the error. The
+    ten frames carry 135 + 9 = 144 payload bytes, which reassemble to exactly the lab's durable
+    baseline (sha256 bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6).
+    """
+    import hashlib
     frags = FX["d6_fragments"]
-    assert len(frags) == 8
-    assert all(f["length"] == 20 and f["bytes"].startswith("a414d6") for f in frags)
-    # ordinals are 1-based and contiguous
-    assert [int(f["bytes"][6:8], 16) for f in frags] == list(range(1, 9))
+    assert len(frags) == 10
+    assert [int(f["bytes"][6:8], 16) for f in frags] == list(range(1, 11)), "1-based contiguous ordinals"
+    assert all(f["bytes"].startswith(("a414d6", "a40ed6")) for f in frags)
+    assert [f["length"] for f in frags] == [20] * 9 + [14], "nine full frames then a short tail frame"
+    payload = b"".join(bytes.fromhex(f["bytes"])[4:-1] for f in frags)
+    assert len(payload) == 144
+    assert hashlib.sha256(payload).hexdigest() == FX["d6_read"]["reassembled_sha256"]
+    assert FX["d6_read"]["matches_durable_baseline"] is True
+    # every frame self-validates
+    for f in frags:
+        raw = bytes.fromhex(f["bytes"])
+        assert raw[1] == len(raw) and (sum(raw[:-1]) & 0xFF) == raw[-1]
+
+
+def test_official_config_read_equals_the_durable_baseline():
+    """The strongest cross-check available offline.
+
+    The official app's D6 read (10 frames, reassembled in ordinal order) must reproduce the lab's
+    durable baseline byte for byte. If this ever fails, either the fixture extraction or the
+    baseline has moved, and the whole configuration story needs re-examination.
+    """
+    import hashlib
+    frags = FX["d6_fragments"]
+    payload = b"".join(bytes.fromhex(f["bytes"])[4:-1] for f in frags)
+    assert len(payload) == 144
+    baseline = REPO / "baselines/device/ZJ-XT_2741_2D-37-35-6D-66-11/20260927-170400-baseline-as-found.bin"
+    if not baseline.exists():
+        pytest.skip("baseline binary not present in this checkout")
+    raw = baseline.read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == FX["d6_read"]["reassembled_sha256"]
+    assert raw == payload, "official D6 read must equal the durable baseline byte for byte"
+
+
+def test_last_d6_frame_is_shorter_and_still_validates():
+    """A reassembler that assumes a constant frame length would silently truncate to 135 bytes."""
+    frags = FX["d6_fragments"]
+    tail = frags[-1]
+    raw = bytes.fromhex(tail["bytes"])
+    assert len(raw) == 14 and raw[1] == 14 and raw[3] == 10
+    assert (sum(raw[:-1]) & 0xFF) == raw[-1]
+    assert len(raw[4:-1]) == 9
+    full = frags[:-1]
+    assert all(len(bytes.fromhex(f["bytes"])) == 20 for f in full)
+    assert len(full) * 15 + 9 == 144

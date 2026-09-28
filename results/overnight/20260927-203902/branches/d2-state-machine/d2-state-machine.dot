@@ -1,0 +1,51 @@
+// d2-state-machine.dot
+// BIGBIG WON (moojiang) Button-Test / D2 state machine, reconstructed from static AOT disassembly.
+// Solid edges = shared across all four builds. Dashed edges = version-specific (label says which).
+// Every node/edge carries the address of the code that drives it. No invented addresses.
+digraph d2_state_machine {
+  rankdir=TB;
+  graph [fontname="Helvetica", fontsize=11, label="D2 / Button-Test state machine  (BIGBIG WON moojiang)\nversions 4.0.8 | 2.24 | 2.23 | 2.22.0901   —  static reconstruction", labelloc=t];
+  node  [shape=box, style="rounded,filled", fillcolor="#eef4ff", fontname="Helvetica", fontsize=10];
+  edge  [fontname="Helvetica", fontsize=9];
+
+  APP_DISCONNECTED   [label="APP_DISCONNECTED"];
+  APP_CONNECTED      [label="APP_CONNECTED\nGATT resolved: FFE1 write, FFE2 notify"];
+  NOTIFY_ARMED       [label="NOTIFY_ARMED", fillcolor="#d8f5d8"];
+  ROUTE_PUSHED       [label="ROUTE_PUSHED\nRainbowTest route"];
+  WIDGET_INIT        [label="WIDGET_INIT\n_RainbowTestState + deps"];
+  INITSTATE_RAN      [label="INITSTATE_RAN"];
+  D2_ENABLE_ISSUED   [label="D2_ENABLE_ISSUED\nTX A5 05 D2 01 7D", fillcolor="#ffe8cc"];
+  WRITE_FFE1         [label="WRITE FFE1"];
+  LISTENER_OWNED     [label="LISTENER_OWNED\nsubscription stored", fillcolor="#d8f5d8"];
+  PARSER_ACTIVE      [label="PARSER_ACTIVE"];
+  FRAME_DROPPED      [label="FRAME_DROPPED", fillcolor="#ffe0e0"];
+  FRAME_ACCEPTED     [label="FRAME_ACCEPTED\nmask = BE u32 frame[3..6]"];
+  UI_UPDATED         [label="UI_UPDATED\n21 key booleans + setState"];
+  DISPOSE_ENTERED    [label="DISPOSE_ENTERED"];
+  D2_DISABLE_ISSUED  [label="D2_DISABLE_ISSUED\nTX A5 05 D2 00 7C", fillcolor="#ffe8cc"];
+  DISPOSED           [label="DISPOSED"];
+
+  APP_DISCONNECTED -> APP_CONNECTED [label="connect()\n4.0.8 0xac9a88 | 2.22-2.24 rainbow_more"];
+  APP_CONNECTED -> NOTIFY_ARMED [style=bold, label="v4.0.8 ONLY: initGattServices 0xaca0a8\n-> onCharacteristicChanged 0xaca7c4\nsetNotifyValue 0xaca818; field_43 <- frames (0xacb870)"];
+  APP_CONNECTED -> ROUTE_PUSHED [style=dashed, label="v2.22/2.23/2.24: notify armed later, by the page"];
+  NOTIFY_ARMED -> ROUTE_PUSHED [label="\u6309\u952e\u6d4b\u8bd5 ListTile onTap\n4.0.8 0x940684/0x94773c | 2.24 0x78a7f4 | 2.23 0x75fd24 | 2.22 0x92add8"];
+  APP_CONNECTED -> ROUTE_PUSHED [label="2.22 0x92add8 | 2.23 0x75fd24 | 2.24 0x78a7f4"];
+  ROUTE_PUSHED -> WIDGET_INIT [label="createState 4.0.8 0xb08f98 | 2.24 0x93f698 | 2.23 0x925a14 | 2.22 0x9b7860"];
+  WIDGET_INIT -> INITSTATE_RAN [label="initState 4.0.8 0xacf744 | 2.24 0x91cf94 | 2.23 0x8b0504 | 2.22 0x8e1e94"];
+
+  INITSTATE_RAN -> D2_ENABLE_ISSUED [style=dashed, label="v4.0.8: via post-frame callback 0xacf874\n(initState itself sends nothing)"];
+  INITSTATE_RAN -> D2_ENABLE_ISSUED [style=dashed, label="v2.22 0x8e1eb0 | 2.23 0x8b0520 | 2.24 0x91cfb4\n(sent inline, not awaited)"];
+
+  D2_ENABLE_ISSUED -> WRITE_FFE1 [label="4.0.8 0xabaef4 -> BluetoothModel::write 0x80dd28\n2.22 0x8e3be4 | 2.23 0x8b1d68 | 2.24 0x91e380"];
+  WRITE_FFE1 -> LISTENER_OWNED [label="subscribeCharacteristic\n4.0.8 0xacf8fc | 2.24 0x91cfdc | 2.23 0x8b0550 | 2.22 0x8e2190"];
+  LISTENER_OWNED -> PARSER_ACTIVE [label="listener closure\n4.0.8 0xacf9dc | 2.24 0x91d0a4 | 2.23 0x8b0654 | 2.22 0x8e2408"];
+  PARSER_ACTIVE -> FRAME_DROPPED [style=dashed, label="opcode/length gate fails\n4.0.8 frame[2]!=2 @0xacfaac\n2.24 frame[1]!=18 @0x91d168\n2.23 .length!=18 @0x8b06f4\n2.22 .length!=18 @0x8e245c"];
+  PARSER_ACTIVE -> FRAME_ACCEPTED [label="gate passes"];
+  FRAME_ACCEPTED -> UI_UPDATED [label="4.0.8 setState 0xad0b30\n2.24 0x91d130 | 2.23 0x8b0654 | 2.22 0x8e2408"];
+  UI_UPDATED -> PARSER_ACTIVE [label="next notification (event-driven)"];
+  PARSER_ACTIVE -> DISPOSE_ENTERED [label="user leaves the page"];
+  DISPOSE_ENTERED -> D2_DISABLE_ISSUED [style=bold, label="gate: 4.0.8 field_1f!=null @0xadd838\n2.24 connState==connected @0x9336e8\n2.23 connState==connected @0x881a40\n2.22 connState==connected @0x95a8d0\n(+ cancel listener first)"];
+  D2_DISABLE_ISSUED -> DISPOSED [label="4.0.8 0xadd844 | 2.24 0x9336fc\n2.23 0x881a54 | 2.22 0x95a8e4"];
+
+  { rank=same; FRAME_DROPPED; }
+}

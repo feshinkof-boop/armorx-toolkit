@@ -1066,5 +1066,20 @@
   "function": "",
   "snippet_file": "apk-sha256.txt",
   "notes": "OFFICIAL_4_0_8_MATCH"
+ },
+ {
+  "correction_2026_09_27_d6_fragment_count": "D6 read is 10 frames (nine 20-byte + one 14-byte tail) = 144 payload bytes matching baseline sha256 bdef9c61..."
+ },
+ {
+  "id": "D2-LIVE-AX-007",
+  "build": "4.0.8",
+  "category": "CFG",
+  "claim": "the official app's D6 configuration read is TEN frames (nine 20-byte + one 14-byte tail) = 144 payload bytes and reassembles byte-identically to the lab's durable baseline (sha256 bdef9c61...)",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/overnight/20260927-203902/official-config-read-reassembled.json",
+  "address": "",
+  "function": "",
+  "snippet_file": "official-config-read-reassembled.bin",
+  "notes": "corrects an earlier 'eight fragments' count; ordinals 01-10, last frame short (9 payload bytes)"
  }
 ]

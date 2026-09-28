@@ -59,3 +59,11 @@ procedure; immediate readback alone is still **STAGED_OK**.
   could not decode our Linux-monitor captures — it can, and its view agrees exactly with `btmon -r`.
 - `btatt.mtu` is not a valid field in tshark 4.6.4 here; asking for it makes tshark exit non-zero and
   return nothing (which silently looked like "no frames"). MTU values were taken from `-V` output.
+
+> **CORRECTION 2026-09-27 (overnight shift):** the D6 configuration read is **TEN reply frames**, not
+> eight: nine 20-byte frames (`A4 14 D6 01`..`A4 14 D6 09`, 15 payload bytes each) followed by one
+> 14-byte tail frame (`A4 0E D6 0A 01 0D 19 1A 1B 1C 1D 1E 1F 64`, 9 payload bytes). Payload total is
+> 135 + 9 = **144 bytes**, and it reassembles to sha256
+> `bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` - byte-identical to the lab's
+> durable baseline. An earlier extraction step capped the list at eight and that error propagated into
+> this file's wording. The numbers above were correct for the frames examined; the count was not.

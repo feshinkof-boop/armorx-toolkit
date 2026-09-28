@@ -83,13 +83,19 @@ def test_only_whitelisted_frames_can_be_written():
             assert (sum(w[:-1]) & 0xFF) == w[-1], f"checksum drift in {w.hex()}"
 
 
-def test_config_read_waits_for_eight_fragments():
+def test_config_read_waits_for_nine_full_fragments():
+    """The D6 read is ten reply frames; the harness waits for the nine full ones (the tenth is short).
+
+    CORRECTED 2026-09-27: the read is 10 frames / 144 bytes, not 8.
+    """
     wf = [s for s in steps("C2") if s["op"] == "wait_fragments"]
     assert len(wf) == 1
-    assert wf[0]["prefix"] == "a414d6" and wf[0]["expect_min"] == 8
+    assert wf[0]["prefix"] == "a414d6" and wf[0]["expect_min"] == 9
     assert 0 < wf[0]["seconds"] <= 10
-    # and every fragment in the real fixture carries that prefix
-    assert all(f["bytes"].startswith("a414d6") for f in FX["d6_fragments"])
+    frags = FX["d6_fragments"]
+    assert len(frags) == 10
+    assert sum(1 for f in frags if f["bytes"].startswith("a414d6")) == 9
+    assert sum(1 for f in frags if f["bytes"].startswith("a40ed6")) == 1
 
 
 def test_success_criteria_use_the_corrected_event_driven_semantics():

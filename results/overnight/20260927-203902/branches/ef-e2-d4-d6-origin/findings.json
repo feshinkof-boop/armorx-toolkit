@@ -1,0 +1,217 @@
+{
+  "meta": {
+    "task": "trace static origin of five pre-D2 ARMOR-X Pro requests (EF,0B,E2,D4,D6) + D2",
+    "app": "BIGBIG WON mygt com.moojiang.bigbigwon 4.0.8",
+    "git_branch": "research/physical-armorx-live-2026-09-27",
+    "git_head": "9f57cc7edfc1d4a97a35a88b18d7b5fe3c22444f",
+    "blutter_root": "/home/salamanka/armorx-re/mygt408/blutter_out/asm/moojiang",
+    "grading_legend": ["PROVEN STATIC", "STRONG EVIDENCE", "INFERRED", "UNKNOWN"],
+    "note_smi_tagging": "blutter prints Dart Smi immediates as value*2; r16=4 means index/value 2. All byte constants below are already de-tagged (value = printed/2)."
+  },
+  "critical_answer": {
+    "verdict": "MULTIPLE INDEPENDENT REQUESTS (two paths); NOT one ordered init state machine",
+    "grade": "PROVEN STATIC",
+    "path_1": {
+      "name": "EF -> 0B -> E2 reply-gated chain",
+      "gated_on_previous_reply": true,
+      "explanation": "Each request is emitted from inside the reply-parser branch of the previous opcode: EF reply handler calls getZKMVer (0B); 0B reply handler calls getDeviceParam->readFirmware (E2); E2 reply handler only stores firmwareVer and emits nothing.",
+      "pages": ["_ArmorXProWidgetState (moojiang/widgets/armor-x-pro/armorx_pro_root.dart)", "_RainbowWidget (moojiang/widgets/rainbow/rainbow_root.dart)"]
+    },
+    "path_2": {
+      "name": "D4 -> D6 programmatic sequence",
+      "gated_on_previous_reply": false,
+      "explanation": "Both fired from one listener callback in _RainbowDeviceConfig1sState::initState (config tab): await getInputModel() -> await Future.delayed() -> await getDeviceConfig(). D6 follows D4 by fixed program order + delay, not by a reply. E2 reply does not trigger either.",
+      "page": "_RainbowDeviceConfig1sState (moojiang/widgets/rainbow/rainbow_tab_config_1s.dart)"
+    },
+    "wire_order_explanation": "EF->0B->E2->D4->D6 observed order is the interleaving of the gated device-page chain (EF/0B/E2) with the independent config-tab init (D4/D6)."
+  },
+  "emitters": [
+    {
+      "request": "EF",
+      "bytes": "A5 0C EF 00 00 00 00 00 00 00 00 A0",
+      "class": "BluetoothModel",
+      "method": "getDeviceUUID",
+      "emitter_addr": "0xacf618",
+      "emitter_src": "moojiang/units/ble/bluetooth_mode.dart:3973",
+      "array_consts_raw": [330, 24, 478, 0,0,0,0,0,0,0,0],
+      "array_consts_bytes": ["A5","0C","EF","00","00","00","00","00","00","00","00"],
+      "emit_routine": "getCheckSum @0x80fbbc -> store checksum idx11 -> write @0x80dd28 -> AwaitStub @0x4ecf8c",
+      "awaited_in_emitter": true,
+      "callers": [
+        {"chain": "_ArmorXProWidgetState::initState closure 0xab903c", "call_addr": "0xab9068", "src": "armorx_pro_root.dart:2817", "awaited_at_caller": false, "grade": "PROVEN STATIC"},
+        {"chain": "_RainbowWidget::initState closure 0xacf53c", "call_addr": "0xacf590", "src": "rainbow_root.dart:4049", "awaited_at_caller": false, "grade": "PROVEN STATIC"}
+      ],
+      "reply_parser": {
+        "addr": "0x8b6a18 (armorx_pro) / 0x8b5994 (rainbow_root)",
+        "opcode": "0xEF",
+        "branch_addr": "0x8b6be8 / 0x8b5f88",
+        "state_written": "static 0xb68 = deviceUUID (onGetDeviceUUID @0x8b6e18); then server.dart::devRegister"
+      },
+      "trigger": "device page initState (post-subscribe delayed) / rainbow page initState",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "request": "0B",
+      "bytes": "A5 04 0B B4",
+      "class": "BluetoothModel",
+      "method": "getZKMVer",
+      "emitter_addr": "0x8b61fc",
+      "emitter_src": "moojiang/units/ble/bluetooth_mode.dart:1042",
+      "array_consts_raw": [330, 8, 22],
+      "array_consts_bytes": ["A5","04","0B"],
+      "awaited_in_emitter": true,
+      "callers": [
+        {"chain": "EF reply handler, parser 0x8b6a18", "call_addr": "0x8b6cc0", "src": "armorx_pro_root.dart:296", "awaited_at_caller": false, "grade": "PROVEN STATIC"},
+        {"chain": "EF reply handler, parser 0x8b5994", "call_addr": "0x8b6084", "src": "rainbow_root.dart:819", "awaited_at_caller": false, "grade": "PROVEN STATIC"}
+      ],
+      "reply_parser": {
+        "addr": "0x8b6a18 / 0x8b5994",
+        "opcode": "0x0B",
+        "branch_addr": "0x8b6aa0 / 0x8b5c34",
+        "state_written": "static 0xb6c = zkm version"
+      },
+      "trigger": "EF reply (gated)",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "request": "E2",
+      "bytes": "A5 04 E2 8B",
+      "class": "BluetoothModel",
+      "method": "readFirmware",
+      "emitter_addr": "0x8b6860",
+      "emitter_src": "moojiang/units/ble/bluetooth_mode.dart:1263",
+      "array_consts_raw": [330, 8, 452],
+      "array_consts_bytes": ["A5","04","E2"],
+      "awaited_in_emitter": true,
+      "callers": [
+        {"chain": "0B reply handler -> _ArmorXProWidgetState::getDeviceParam @0x8b73a4", "call_addr": "0x8b73e0", "src": "armorx_pro_root.dart:887", "awaited_at_caller": false, "grade": "PROVEN STATIC"},
+        {"chain": "0B reply handler, parser 0x8b5994", "call_addr": "0x8b5cdc", "src": "rainbow_root.dart:488", "awaited_at_caller": false, "grade": "PROVEN STATIC"}
+      ],
+      "reply_parser": {
+        "addr": "0x8b6a18 / 0x8b5994",
+        "opcode": "0xE2",
+        "branch_addr": "0x8b6b30 / 0x8b5d34",
+        "state_written": "static 0xaf0 = firmwareVer (no follow-up request)"
+      },
+      "trigger": "0B reply (gated)",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "request": "D4",
+      "bytes": "A5 04 D4 7D",
+      "class": "BluetoothModel",
+      "method": "getInputModel",
+      "emitter_addr": "0xa84258",
+      "emitter_src": "moojiang/units/ble/bluetooth_mode.dart:1850",
+      "array_consts_raw": [330, 8, 424],
+      "array_consts_bytes": ["A5","04","D4"],
+      "awaited_in_emitter": true,
+      "callers": [
+        {"chain": "_RainbowDeviceConfig1sState::initState closure 0xa84160", "call_addr": "0xa841dc", "src": "rainbow_tab_config_1s.dart:14616", "awaited_at_caller": true, "grade": "PROVEN STATIC"}
+      ],
+      "reply_parser": {
+        "addr": "0x82684c",
+        "opcode": "0xD4",
+        "branch_addr": "0x826ec8",
+        "state_written": "prints '板载mode = ' + frame[4]; setState (onboard mode)"
+      },
+      "trigger": "config tab initState listener (independent of EF/0B/E2)",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "request": "D6",
+      "bytes": "A5 04 D6 7F",
+      "class": "BluetoothModel",
+      "method": "getDeviceConfig",
+      "emitter_addr": "0x80dbfc",
+      "emitter_src": "moojiang/units/ble/bluetooth_mode.dart:12",
+      "array_consts_raw": [330, 8, 428],
+      "array_consts_bytes": ["A5","04","D6"],
+      "awaited_in_emitter": true,
+      "callers": [
+        {"chain": "same closure 0xa84160, after Future.delayed", "call_addr": "0xa84238", "src": "rainbow_tab_config_1s.dart:14653", "awaited_at_caller": true, "grade": "PROVEN STATIC"},
+        {"chain": "delConfigResponse", "call_addr": "0x80dbdc", "src": "rainbow_tab_config_1s.dart:3591", "awaited_at_caller": null, "grade": "STRONG EVIDENCE (post-write refresh)"},
+        {"chain": "changeConfigResponse", "call_addr": "0x8257a0", "src": "rainbow_tab_config_1s.dart:7671", "awaited_at_caller": null, "grade": "STRONG EVIDENCE"},
+        {"chain": "renameConfigResponse", "call_addr": "0x825aec", "src": "rainbow_tab_config_1s.dart:7975", "awaited_at_caller": null, "grade": "STRONG EVIDENCE"},
+        {"chain": "addConfigResponse", "call_addr": "0x826094", "src": "rainbow_tab_config_1s.dart:8500", "awaited_at_caller": null, "grade": "STRONG EVIDENCE"},
+        {"chain": "0x827f30 (save-result Timer)", "call_addr": "0x8280dc", "src": "rainbow_tab_config_1s.dart:10746", "awaited_at_caller": null, "grade": "STRONG EVIDENCE"}
+      ],
+      "reply_parser": {
+        "addr": "0x82684c",
+        "gate": "frame[0]==0xA4 (A4-prefixed 20-byte fragments)",
+        "branch_addr": "0x82699c",
+        "state_written": "static 0xb70 = protocolLength; state.field_13 config buffer via replaceRange; completion -> parsingData @0x8270b0",
+        "also": "frame[2]==0xD6 prints '首页监听D6：' @0x826894"
+      },
+      "trigger": "config tab initState listener (after D4); plus post-config-write refreshes",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "request": "D2 enable",
+      "bytes": "A5 05 D2 01 7D",
+      "class": "BluetoothModel",
+      "method": "testModeSwitch(enable=true)",
+      "emitter_addr": "0xabaef4",
+      "emitter_src": "moojiang/units/ble/bluetooth_mode.dart:1954",
+      "array_consts_raw": [330, 10, 420, 2, 250],
+      "array_consts_bytes": ["A5","05","D2","01","7D"],
+      "awaited_in_emitter": true,
+      "callers": [
+        {"chain": "_RainbowTestState::initState closure 0xacf874 (Button Test page open)", "call_addr": "0xacf8cc", "src": "rainbow_test.dart:1754", "awaited_at_caller": false, "grade": "PROVEN STATIC"}
+      ],
+      "reply_parser": {"addr": "0xacfa64", "method": "_RainbowTestState::analysisData", "gate": "frame[2]==0x02", "grade": "PROVEN STATIC"},
+      "trigger": "Button Test page entry",
+      "grade": "PROVEN STATIC"
+    },
+    {
+      "request": "D2 disable",
+      "bytes": "A5 05 D2 00 7C",
+      "class": "BluetoothModel",
+      "method": "testModeSwitch(enable=false)",
+      "emitter_addr": "0xabaef4",
+      "emitter_src": "moojiang/units/ble/bluetooth_mode.dart:1982",
+      "array_consts_raw": [330, 10, 420, 0, 248],
+      "array_consts_bytes": ["A5","05","D2","00","7C"],
+      "callers": [
+        {"chain": "_RainbowTestState::dispose", "call_addr": "0xadd844", "src": "rainbow_test.dart:3660", "awaited_at_caller": false, "grade": "PROVEN STATIC"}
+      ],
+      "trigger": "Button Test page exit",
+      "grade": "PROVEN STATIC"
+    }
+  ],
+  "shared_plumbing": {
+    "checksum": {"fn": "BluetoothModel::getCheckSum", "addr": "0x80fbbc", "grade": "PROVEN STATIC"},
+    "low_level_write": {"fn": "BluetoothModel::write", "addr": "0x80dd28", "forwards_to": "flutter_blue_plus BluetoothCharacteristic::write @0x80de14", "grade": "PROVEN STATIC"},
+    "notify_stream_getter": {"fn": "BluetoothModel::notifyCharacteristicStream", "addr": "0x826814", "returns": "field_43 wrapped as _BroadcastStream<List<int>>", "grade": "PROVEN STATIC"},
+    "notify_rebroadcast": {"fn": "BluetoothModel::onCharacteristicChanged", "addr": "0xaca7c4", "note": "subscribes lastValueStream and re-broadcasts raw bytes via field_43; does NOT parse", "grade": "PROVEN STATIC"},
+    "parsers": [
+      {"owner": "_ArmorXProWidgetState", "subscribe": "0x8b7400", "closure": "0x8b6a18", "src": "armorx_pro_root.dart:67", "opcodes": ["0x0B","0xE2","0xEF"], "grade": "PROVEN STATIC"},
+      {"owner": "_RainbowWidget", "subscribe": "0x8b5898", "closure": "0x8b5994", "src": "rainbow_root.dart:193", "opcodes": ["0x04","0x0B","0xE1","0xE2","0xE4","0xEF"], "grade": "PROVEN STATIC"},
+      {"owner": "_RainbowDeviceConfig1sState", "subscribe": "0x8266a4", "closure": "0x82684c", "src": "rainbow_tab_config_1s.dart:8880", "opcodes": ["0xA4-frag","0xD4","0xD6","0xD7","0x0E"], "grade": "PROVEN STATIC"}
+    ]
+  },
+  "state_fields": {
+    "static_0xb68": {"meaning": "deviceUUID", "written_by": "EF reply (onGetDeviceUUID @0x8b6e18)", "grade": "PROVEN STATIC"},
+    "static_0xb6c": {"meaning": "zkm version", "written_by": "0B reply", "grade": "PROVEN STATIC"},
+    "static_0xaf0": {"meaning": "firmwareVer", "written_by": "E2 reply", "grade": "PROVEN STATIC"},
+    "static_0xb70": {"meaning": "protocolLength", "written_by": "D6 A4-fragment parsing @0x826aa4", "grade": "PROVEN STATIC"},
+    "static_0xaf4": {"meaning": "curDevice", "written_by": "device selection", "grade": "PROVEN STATIC"},
+    "static_0x678": {"meaning": "app-wide singleton exposing listener list (field_53->field_7) that fires with a Duration arg; listened to in initState by device page, config tab, Button Test", "exact_class": "UNKNOWN", "grade": "INFERRED"},
+    "BluetoothModel.field_43": {"meaning": "notify broadcast stream source", "grade": "PROVEN STATIC"},
+    "_RainbowDeviceConfig1sState.field_13": {"meaning": "config byte buffer", "grade": "PROVEN STATIC"},
+    "_RainbowDeviceConfig1sState.field_2b": {"meaning": "collecting-started flag (set true in closure 0xa84160)", "grade": "PROVEN STATIC"},
+    "_RainbowDeviceConfig1sState.field_27": {"meaning": "saving flag (set false on 0x0E reply)", "grade": "PROVEN STATIC"}
+  },
+  "button_test_reads": {
+    "page": "_RainbowTestState (moojiang/widgets/rainbow/rainbow_test.dart)",
+    "fields": [
+      {"field": "BluetoothModel.field_43 (notifyCharacteristicStream)", "read_at": "rainbow_test.dart:1816", "addr": "0xacf960", "grade": "PROVEN STATIC"},
+      {"field": "static curDevice (0xaf4)", "read_at": "rainbow_test.dart:970", "addr": "0x9f6b98", "grade": "PROVEN STATIC"},
+      {"field": "static 0x678 singleton listener list", "read_at": "rainbow_test.dart:1624", "addr": "0xacf774", "grade": "STRONG EVIDENCE"},
+      {"field": "own field_1b (subscription), field_23/27/2b/2f (UI state)", "read_at": "rainbow_test.dart various", "grade": "PROVEN STATIC"}
+    ],
+    "d2_emitter_used": "0xabaef4",
+    "d2_on_call": "0xacf8cc", "d2_off_call": "0xadd844",
+    "parser": "analysisData @0xacfa64 (gate frame[2]==0x02)"
+  }
+}

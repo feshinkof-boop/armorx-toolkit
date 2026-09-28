@@ -60,3 +60,39 @@ unfalsifiable evidence about any button. The tooling is ready and already refuse
 a button in this situation: `button-capture-harness.py` returns
 `DEVICE_NOT_STREAMING` (exit 2) without touching the button map, and `button-capture.py`
 records `d2_streaming` / `link_alive_after_capture` separately from the press analysis.
+
+---
+
+## DATED CORRECTION — 2026-09-27 (overnight autonomous shift, no hardware)
+
+**Applies to the "silent / no stream" conclusions in the text above. The original wording is left
+exactly as it was written; this annotation records what later evidence changed.**
+
+The official BIGBIG WON 4.0.8 app was captured live against the real ARMOR-X Pro (Android HCI snoop,
+official-session differential, `results/experiments/official-vs-harness-session-20260927-190741/`)
+and the correction is unambiguous:
+
+**D2 input is EVENT-DRIVEN.** During that session the official app produced
+
+* **0** valid `A5 12 02` frames while nothing was pressed, and
+* **155** valid `A5 12 02` frames while the A button was pressed (18-byte frames, every checksum
+  valid, only bit 0 ever set, PRESS -> RELEASE -> PRESS -> RELEASE, repeats ~every 11.7 ms).
+
+Consequences for the conclusions above:
+
+1. `NO_STREAM_IN_ANY_VARIANT` / "silent" / "no longer streaming" records where **no physical button
+   was pressed after D2 was enabled** must be read as **`NO_IDLE_FRAMES_OBSERVED`**. In those runs
+   the harness was looking for idle traffic; the device does not emit idle traffic even when it is
+   working perfectly. Zero idle frames is the *expected* signature of a healthy link.
+2. Such a result is therefore **not** evidence that the D2 stream is broken, and it is not a durable
+   device-state finding.
+3. Conversely, a run *with* a physical press and still no frames remains meaningful evidence, and has
+   not been reinterpreted.
+
+See `results/overnight/20260927-203902/branches/historical-d2-reinterpretation/` for the per-run
+table, per-run annotations and the strongest remaining live button-streaming evidence.
+
+Also corrected on the same date: `tshark` on this host is AppArmor-confined and cannot read paths
+under `/home/salamanka` (copy captures to `/tmp` first), and `btatt.mtu` is not a valid field in
+tshark 4.6.4 (requesting it makes tshark exit non-zero and print nothing, which previously looked
+like "no frames").

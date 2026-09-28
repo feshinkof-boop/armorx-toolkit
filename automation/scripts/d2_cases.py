@@ -98,8 +98,11 @@ OFFICIAL_READ_BURST = [
     _write(GET_VERSION, "0B version query (official pre-D2)"),
     _write(E2_QUERY, "E2 firmware query (official pre-D2)"),
     _write(D4_QUERY, "D4 query (official pre-D2)"),
-    _write(D6_QUERY, "D6 configuration read request (official pre-D2; expect 8 x A4 14 D6 NN fragments)"),
-    {"op": "wait_fragments", "prefix": "a414d6", "expect_min": 8, "seconds": D6_READ_WAIT_S},
+    _write(D6_QUERY, "D6 configuration read request (official pre-D2; 10 reply frames: nine A4 14 D6 NN + one A4 0E D6 0A)"),
+    {"op": "wait_fragments", "prefix": "a414d6", "expect_min": 9, "seconds": D6_READ_WAIT_S},
+    # the 10th reply frame is SHORTER (A4 0E D6 0A ...): nine 20-byte frames carry 135 bytes,
+    # the tail frame carries 9, giving the 144-byte configuration. Waiting for 9 full frames is
+    # the safe signal that the series is nearly complete without risking a hang on the tail.
 ]
 
 

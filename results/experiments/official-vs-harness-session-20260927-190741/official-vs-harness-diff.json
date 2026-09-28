@@ -170,5 +170,6 @@
   "when": "~59 s after connect, ~9 s before the D2 enable",
   "causality": "NOT established - explicitly NOT labelled MISSING_PRECONDITION"
  },
- "leakage": "no unknown official traffic was replayed from Linux"
+ "leakage": "no unknown official traffic was replayed from Linux",
+ "correction_2026_09_27_d6_fragment_count": "the D6 read is 10 frames (nine 20-byte + one 14-byte tail) totalling 144 payload bytes, matching the durable baseline sha256 bdef9c61...; earlier wording said eight"
 }
