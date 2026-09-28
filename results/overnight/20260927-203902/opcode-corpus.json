@@ -1,0 +1,583 @@
+{
+ "generated": "/home/salamanka/armorx-lab/results/overnight/20260927-203902",
+ "classification_rule": {
+  "protocol_frame": "A5/A4/AB frame written to FFE1 (0x0075) or notified from FFE2 (0x0077)",
+  "gatt_cccd_write": "2-byte descriptor write (notify enable)",
+  "gatt_attribute_data": "attribute values read via GATT (names, params, manufacturer data) - NOT protocol frames",
+  "gatt_control_or_empty": "ATT operations carrying no value (read requests, responses with no value field)"
+ },
+ "decoders": {
+  "btsnoop/cfa/pcap": "tshark (copy to /tmp first: AppArmor)",
+  "btmon text": "strict Handle->Data adjacency"
+ },
+ "total_att_records": 615,
+ "entries": [
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0x02",
+   "att_opcode": "0x1b",
+   "att_name": "Handle Value Notification",
+   "direction": "DEVICE->HOST",
+   "count": 155,
+   "lengths": {
+    "18": 155
+   },
+   "checksum_ok": 155,
+   "checksum_bad": 0,
+   "examples": [
+    "a5120200000001fd6500b6fc4f0158000076",
+    "a5120200000000fd6500b6fc4f0158000075"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 155
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x0a",
+   "att_name": "Read Request",
+   "direction": "HOST->DEVICE",
+   "count": 73,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 24,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 8,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 8,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 24,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 8
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x0b",
+   "att_name": "Read Response",
+   "direction": "DEVICE->HOST",
+   "count": 65,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 24,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 8,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 8,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 24
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x13",
+   "att_name": "Write Response",
+   "direction": "DEVICE->HOST",
+   "count": 40,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 2,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 13,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 4,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 4,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 13,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 4
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x01",
+   "att_name": "Error Response",
+   "direction": "DEVICE->HOST",
+   "count": 37,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 13,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 9,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 2,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 2,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 9,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 2
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xD2",
+   "att_opcode": "0x1b",
+   "att_name": "Handle Value Notification",
+   "direction": "DEVICE->HOST",
+   "count": 35,
+   "lengths": {
+    "5": 35
+   },
+   "checksum_ok": 35,
+   "checksum_bad": 0,
+   "examples": [
+    "a505d2017d",
+    "a505d2007c"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 4,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 11,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 3,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 11,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 3
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x11",
+   "att_name": "Read By Group Type Response",
+   "direction": "DEVICE->HOST",
+   "count": 31,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 4,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 9,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 3,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 9,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 3
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xD2",
+   "att_opcode": "0x52",
+   "att_name": "Write Command",
+   "direction": "HOST->DEVICE",
+   "count": 31,
+   "lengths": {
+    "5": 31
+   },
+   "checksum_ok": 31,
+   "checksum_bad": 0,
+   "examples": [
+    "a505d2017d",
+    "a505d2007c"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 2,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 10,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 3,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 10,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 3
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x12",
+   "att_name": "Write Request",
+   "direction": "HOST->DEVICE",
+   "count": 22,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 2,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 12,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 4,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 4
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x10",
+   "att_name": "Read By Group Type Request",
+   "direction": "HOST->DEVICE",
+   "count": 21,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 13,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 4,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 4
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x09",
+   "att_name": "Read By Type Response",
+   "direction": "DEVICE->HOST",
+   "count": 17,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 9,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 4,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 4
+   }
+  },
+  {
+   "category": "gatt_cccd_write",
+   "protocol_opcode": "",
+   "att_opcode": "0x12",
+   "att_name": "Write Request",
+   "direction": "HOST->DEVICE",
+   "count": 16,
+   "lengths": {
+    "2": 16
+   },
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [
+    "0200",
+    "0100",
+    "0000"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 12,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 4
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x08",
+   "att_name": "Read By Type Request",
+   "direction": "HOST->DEVICE",
+   "count": 11,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 9,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 1,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0x0B",
+   "att_opcode": "0x52",
+   "att_name": "Write Command",
+   "direction": "HOST->DEVICE",
+   "count": 10,
+   "lengths": {
+    "4": 10
+   },
+   "checksum_ok": 10,
+   "checksum_bad": 0,
+   "examples": [
+    "a5040bb4"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 1,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 1,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0x0B",
+   "att_opcode": "0x1b",
+   "att_name": "Handle Value Notification",
+   "direction": "DEVICE->HOST",
+   "count": 10,
+   "lengths": {
+    "5": 10
+   },
+   "checksum_ok": 10,
+   "checksum_bad": 0,
+   "examples": [
+    "a5050b30e5"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 1,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 1,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xD6",
+   "att_opcode": "0x1b",
+   "att_name": "Handle Value Notification",
+   "direction": "DEVICE->HOST",
+   "count": 10,
+   "lengths": {
+    "14": 1,
+    "20": 9
+   },
+   "checksum_ok": 10,
+   "checksum_bad": 0,
+   "examples": [
+    "a414d6012c40009033ff000000000000000000bd",
+    "a414d602000000000001001e1e4646000001005a",
+    "a414d6031e1e464600000200020200000000005f"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 10
+   }
+  },
+  {
+   "category": "gatt_attribute_data",
+   "protocol_opcode": "",
+   "att_opcode": "0x0b",
+   "att_name": "Read Response",
+   "direction": "DEVICE->HOST",
+   "count": 8,
+   "lengths": {
+    "1": 2,
+    "2": 1,
+    "4": 1,
+    "5": 1,
+    "7": 1,
+    "8": 1,
+    "14": 1
+   },
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [
+    "41524d4f522d582050726f5f3131",
+    "c103",
+    "060006000000c800"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 8
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x02",
+   "att_name": "MTU Request",
+   "direction": "HOST->DEVICE",
+   "count": 5,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 1,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 1
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x03",
+   "att_name": "MTU Response",
+   "direction": "DEVICE->HOST",
+   "count": 5,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 3,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 1,
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 1
+   }
+  },
+  {
+   "category": "gatt_control_or_empty",
+   "protocol_opcode": "",
+   "att_opcode": "0x05",
+   "att_name": "Find Info Response",
+   "direction": "DEVICE->HOST",
+   "count": 4,
+   "lengths": {},
+   "checksum_ok": 0,
+   "checksum_bad": 0,
+   "examples": [],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 4
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xD2",
+   "att_opcode": "0x12",
+   "att_name": "Write Request",
+   "direction": "HOST->DEVICE",
+   "count": 2,
+   "lengths": {
+    "5": 2
+   },
+   "checksum_ok": 2,
+   "checksum_bad": 0,
+   "examples": [
+    "a505d2017d"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 1,
+    "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xEF",
+   "att_opcode": "0x52",
+   "att_name": "Write Command",
+   "direction": "HOST->DEVICE",
+   "count": 1,
+   "lengths": {
+    "12": 1
+   },
+   "checksum_ok": 1,
+   "checksum_bad": 0,
+   "examples": [
+    "a50cef0000000000000000a0"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xEF",
+   "att_opcode": "0x1b",
+   "att_name": "Handle Value Notification",
+   "direction": "DEVICE->HOST",
+   "count": 1,
+   "lengths": {
+    "12": 1
+   },
+   "checksum_ok": 1,
+   "checksum_bad": 0,
+   "examples": [
+    "a50cefbb921542f21f55802a"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xE2",
+   "att_opcode": "0x52",
+   "att_name": "Write Command",
+   "direction": "HOST->DEVICE",
+   "count": 1,
+   "lengths": {
+    "4": 1
+   },
+   "checksum_ok": 1,
+   "checksum_bad": 0,
+   "examples": [
+    "a504e28b"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xE2",
+   "att_opcode": "0x1b",
+   "att_name": "Handle Value Notification",
+   "direction": "DEVICE->HOST",
+   "count": 1,
+   "lengths": {
+    "16": 1
+   },
+   "checksum_ok": 1,
+   "checksum_bad": 0,
+   "examples": [
+    "a510e22741025a4a2d5854000000007e"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xD4",
+   "att_opcode": "0x52",
+   "att_name": "Write Command",
+   "direction": "HOST->DEVICE",
+   "count": 1,
+   "lengths": {
+    "4": 1
+   },
+   "checksum_ok": 1,
+   "checksum_bad": 0,
+   "examples": [
+    "a504d47d"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xD4",
+   "att_opcode": "0x1b",
+   "att_name": "Handle Value Notification",
+   "direction": "DEVICE->HOST",
+   "count": 1,
+   "lengths": {
+    "7": 1
+   },
+   "checksum_ok": 1,
+   "checksum_bad": 0,
+   "examples": [
+    "a507d411010092"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1
+   }
+  },
+  {
+   "category": "protocol_frame",
+   "protocol_opcode": "0xD6",
+   "att_opcode": "0x52",
+   "att_name": "Write Command",
+   "direction": "HOST->DEVICE",
+   "count": 1,
+   "lengths": {
+    "4": 1
+   },
+   "checksum_ok": 1,
+   "checksum_bad": 0,
+   "examples": [
+    "a504d67f"
+   ],
+   "sources": {
+    "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 1
+   }
+  }
+ ],
+ "source_coverage": {
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/raw/android-official-session.cfa": 216,
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.txt": 151,
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon-live.txt": 44,
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.txt": 44,
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/raw/btmon.btsnoop": 123,
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/raw/btmon.btsnoop": 37
+ }
+}

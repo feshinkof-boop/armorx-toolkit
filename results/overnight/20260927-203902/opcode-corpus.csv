@@ -1,0 +1,29 @@
+category,protocol_opcode,att_opcode,att_name,direction,count,lengths,checksum_ok,checksum_bad,example
+protocol_frame,0x02,0x1b,Handle Value Notification,DEVICE->HOST,155,"{""18"": 155}",155,0,a5120200000001fd6500b6fc4f0158000076
+gatt_control_or_empty,,0x0a,Read Request,HOST->DEVICE,73,{},0,0,
+gatt_control_or_empty,,0x0b,Read Response,DEVICE->HOST,65,{},0,0,
+gatt_control_or_empty,,0x13,Write Response,DEVICE->HOST,40,{},0,0,
+gatt_control_or_empty,,0x01,Error Response,DEVICE->HOST,37,{},0,0,
+protocol_frame,0xD2,0x1b,Handle Value Notification,DEVICE->HOST,35,"{""5"": 35}",35,0,a505d2017d
+gatt_control_or_empty,,0x11,Read By Group Type Response,DEVICE->HOST,31,{},0,0,
+protocol_frame,0xD2,0x52,Write Command,HOST->DEVICE,31,"{""5"": 31}",31,0,a505d2017d
+gatt_control_or_empty,,0x12,Write Request,HOST->DEVICE,22,{},0,0,
+gatt_control_or_empty,,0x10,Read By Group Type Request,HOST->DEVICE,21,{},0,0,
+gatt_control_or_empty,,0x09,Read By Type Response,DEVICE->HOST,17,{},0,0,
+gatt_cccd_write,,0x12,Write Request,HOST->DEVICE,16,"{""2"": 16}",0,0,0200
+gatt_control_or_empty,,0x08,Read By Type Request,HOST->DEVICE,11,{},0,0,
+protocol_frame,0x0B,0x52,Write Command,HOST->DEVICE,10,"{""4"": 10}",10,0,a5040bb4
+protocol_frame,0x0B,0x1b,Handle Value Notification,DEVICE->HOST,10,"{""5"": 10}",10,0,a5050b30e5
+protocol_frame,0xD6,0x1b,Handle Value Notification,DEVICE->HOST,10,"{""14"": 1, ""20"": 9}",10,0,a414d6012c40009033ff000000000000000000bd
+gatt_attribute_data,,0x0b,Read Response,DEVICE->HOST,8,"{""1"": 2, ""2"": 1, ""4"": 1, ""5"": 1, ""7"": 1, ""8"": 1, ""14"": 1}",0,0,41524d4f522d582050726f5f3131
+gatt_control_or_empty,,0x02,MTU Request,HOST->DEVICE,5,{},0,0,
+gatt_control_or_empty,,0x03,MTU Response,DEVICE->HOST,5,{},0,0,
+gatt_control_or_empty,,0x05,Find Info Response,DEVICE->HOST,4,{},0,0,
+protocol_frame,0xD2,0x12,Write Request,HOST->DEVICE,2,"{""5"": 2}",2,0,a505d2017d
+protocol_frame,0xEF,0x52,Write Command,HOST->DEVICE,1,"{""12"": 1}",1,0,a50cef0000000000000000a0
+protocol_frame,0xEF,0x1b,Handle Value Notification,DEVICE->HOST,1,"{""12"": 1}",1,0,a50cefbb921542f21f55802a
+protocol_frame,0xE2,0x52,Write Command,HOST->DEVICE,1,"{""4"": 1}",1,0,a504e28b
+protocol_frame,0xE2,0x1b,Handle Value Notification,DEVICE->HOST,1,"{""16"": 1}",1,0,a510e22741025a4a2d5854000000007e
+protocol_frame,0xD4,0x52,Write Command,HOST->DEVICE,1,"{""4"": 1}",1,0,a504d47d
+protocol_frame,0xD4,0x1b,Handle Value Notification,DEVICE->HOST,1,"{""7"": 1}",1,0,a507d411010092
+protocol_frame,0xD6,0x52,Write Command,HOST->DEVICE,1,"{""4"": 1}",1,0,a504d67f
