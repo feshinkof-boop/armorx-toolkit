@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "power_button_on",
+ "response": "other",
+ "clicked_at": "2026-09-28T16:10:38.045760-04:00",
+ "pid": 6468,
+ "title": "ARMOR-X ACTION REQUIRED - PRESS POWER BUTTON ON",
+ "gui": "PySide6"
+}

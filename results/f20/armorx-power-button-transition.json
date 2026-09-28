@@ -1,0 +1,51 @@
+{
+ "artifact": "armorx-power-button-transition",
+ "date": "2026-09-28",
+ "capture": {
+  "path": "results/experiments/armorx-power-button-20260928-160852/usbmon/power-button.pcap",
+  "sha256": "b004ce0e890fd207b35fee74c8dc602349d065d6ebf9d58e3b4d036a62037e16",
+  "bytes": 6618777,
+  "span_s": 91.6
+ },
+ "baseline_state": {
+  "description": "direct USB + RED LED + power button NOT pressed",
+  "vid_pid": "413d:2106 Zikway 'HID zk' bcdDevice 1.00, no serial, port 1-7, HID interface, endpoints 0x83 IN / 0x03 OUT 64 B",
+  "behaviour": "silent - identical to every previous vendor-mode observation"
+ },
+ "operator_action": {
+  "popup": "power_button_on",
+  "ack": "2026-09-28T16:10:38-04:00",
+  "response": "other",
+  "meaning": "operator reported the LED changed to a non-red colour, i.e. the unit powered on",
+  "one_physical_action": "press the power button once; no cable was touched"
+ },
+ "transition": {
+  "kernel_log": [
+   "319.996 descriptor read/64 error -32",
+   "320.215 descriptor read/64 error -32",
+   "321.112 new full-speed device number 8",
+   "321.152 idVendor=045e idProduct=0b12 bcdDevice 5.18",
+   "321.153 Product: Controller / Manufacturer: Microsoft / SerialNumber: 3039373130373639393537313433",
+   "321.194 input: Microsoft Xbox Series S|X Controller",
+   "321.196 xpad registered"
+  ],
+  "device_path": "same port 1-7, no cable movement",
+  "usb_speed": "full speed both sides"
+ },
+ "resulting_state": {
+  "vid_pid": "045e:0b12",
+  "driver": "xpad",
+  "input_node": "/dev/input/js0 + event (input19)",
+  "traffic": "interrupt IN GIP reports streaming; 22,945 device-8 URBs; payload histogram 594 packets of 32 bytes, 2 of 4 bytes, 2 of 5 bytes; ~4 ms cadence",
+  "payload_shape": "type 0x20 packets with an incrementing sequence byte and payload tag 0x2c 0x01, mostly-zero controller state at rest, two 4-byte timestamps at the end; 32-byte reports on 64-byte-max endpoints",
+  "announce": "GIP announce packet present (0220...), same shape as the F20 Xbox-mode announce"
+ },
+ "finding": "The USB identity of the ARMOR-X body is a function of its POWER STATE, not of the wireless link. USB-powered with the unit off (red LED) = vendor HID 413d:2106, silent, companion-app channel. Powered on = 045e:0b12 Xbox GIP device with xpad and a live 4 ms input stream.",
+ "open_question": "The body's Xbox identity carries the SAME serial (09710769957143) and the same VID/PID/bcdDevice as the F20's Xbox identity. Whether the serial is a fixed firmware constant or is forwarded from the attached controller cannot be distinguished with one controller.",
+ "safety": {
+  "agent_writes": "none - passive capture only, no control requests, no HID writes, no vendor commands",
+  "automatic_host_writes": "HID-core probe URBs on the vendor interface at baseline, and the kernel/xpad GIP initialization output after the switch - automatic, not agent-generated",
+  "cables": "untouched; no disconnect or reconnect by the operator",
+  "capture": "stopped, no capture process left running"
+ }
+}
