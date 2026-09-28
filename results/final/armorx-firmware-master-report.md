@@ -517,3 +517,33 @@ trigger as FW-U-033). No vendor API name is invented for it.
   dispatcher, which was the point of the retirement).
 * `0x1e12db4` was labelled "IMU naming" in an earlier pass; by string xref it is the
   **`gamepad_setting_check failed, reset setting`** handler.
+
+---
+
+## §34 - Persistence closure attempt (2026-09-28): the boundary, measured
+
+**0x3003ec has exactly one call site in the entire 227,440-byte image** - `0x1e069d4` inside
+`0x1e069c2`. There is no second caller, so there is no length/buffer/mode variation anywhere in this
+firmware to widen the ABI from. What is proven is the call shape: `r0` = descriptor
+`[0x4850+0x1b0]`, `r1` = mode byte passed through from the D7 handler, `r2` = `0x90` (144).
+
+The library it lives in is large: **1,324 call sites to 1,300 distinct targets** across
+`0x1f0000-0x31ffff`, with only the standard ones identified (`0x301148` memset in the record writer,
+`0x306b64/0x306c1a` at startup, `0x300970/0x30095a` in the builder). None of those bytes are in
+`app.bin`, the SDK `rom.lst`, `maskrom_stubs.ld` or `p11_code.bin`.
+
+**Dirty-flag xrefs.** The only proven writer is `0x1e05cae` (`[r0+0x1b4] = 3`, inside the record
+writer, right after the header CRC is stored). The only proven reader is `0x1e0684c`
+(`r0 = [r5+0x1b4]`, with `r5 = 0x4850` loaded two instructions earlier), which ORs it with
+`[r5+0x1c4]` and early-outs at `0x1e06856`.
+
+**Caveat that matters.** `0x1e06842` - the reader - references `dev_type` diagnostics and is called
+from the dispatcher, from three functions that reference `usbh_gamepad_ready= %d, usbh_gamepadp = %p`
+(`0x1e096b4`, `0x1e09ad4`, `0x1e09ce0`), and from `0x1e0aff2`. That places `state+0x1b4` on USB-host
+gamepad report paths. *Calling value 3 a "dirty level" or "pending record count" is not supported by
+the code read so far*, and the flag may not be the BLE config dirty bit at all.
+
+**No flush trigger was found.** No timer, task, idle, power or disconnect hook reaching the shadow
+appeared. FW-U-033 stays open; FW-U-032 is now `DEFERRED_REQUIRES_LIBRARY_BINARY` - behaviour proven
+to the call boundary, identity unavailable - which is a stronger and more honest classification than
+"UNKNOWN".

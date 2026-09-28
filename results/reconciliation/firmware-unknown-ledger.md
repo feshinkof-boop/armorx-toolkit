@@ -37,12 +37,12 @@ Scope: ArmorX Pro firmware/updater ecosystem (four operator packages), offline/s
 | FW-U-029 | RESOLVED | high | Why does the firmware 0xD6 handler return a single 16-bit value when the live capture showed a 144-byte D6 read? |
 | FW-U-030 | OPEN | low | Why does the 0x0B handler load the constant 0x32 (50) when the live reply payload was 0x30 (48)? |
 | FW-U-031 | PARTIALLY_RESOLVED | high | Where do FC and F6 enter the device, given the A5 parser accepts only 0xEF above 0xE5? |
-| FW-U-032 | DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE | high | What is the nonvolatile API behind 0x3003ec, and does it commit synchronously? |
+| FW-U-032 | DEFERRED_REQUIRES_LIBRARY_BINARY | high | What is the nonvolatile API behind 0x3003ec, and does it commit synchronously? |
 | FW-U-033 | OPEN | high | What exactly triggers the RAM/VM shadow at 0x3120 + index*0x400 + 0x44 to be committed to flash? |
 
 ## Counts
 
-- DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE: 1
+- DEFERRED_REQUIRES_LIBRARY_BINARY: 1
 - OPEN: 6
 - PARTIALLY_RESOLVED: 12
 - RESOLVED: 13
@@ -486,15 +486,17 @@ Scope: ArmorX Pro firmware/updater ecosystem (four operator packages), offline/s
 
 ### FW-U-032 - What is the nonvolatile API behind 0x3003ec, and does it commit synchronously?
 
-**Status:** DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE | **Priority:** high
+**Status:** DEFERRED_REQUIRES_LIBRARY_BINARY | **Priority:** high
 
-**Answer:** Not answerable from the artifacts on disk. The call site and its argument shape are proven; the storage implementation is not recoverable without a library/ROM image for this chip.
+**Answer:** Behaviour proven only to the call boundary: submits a 144-byte config descriptor (r0 = descriptor, r1 = mode byte, r2 = 0x90) to an out-of-image vendor service. Identity unavailable -> DEFERRED_REQUIRES_LIBRARY_BINARY, not merely UNKNOWN.
 
 **Evidence:**
 
 - 0x1e069c2 tail-calls 0x3003ec(descriptor, mode, 0x90) - the only call in the D7 chain that leaves the app image
 - the library region 0x1f0000-0x31ffff is called from many sites (0x306b64 at startup, 0x301148 memset, 0x300970, 0x3003ec) and its bytes are in no artifact we hold: app.bin covers only 0x01E00000-0x01E37870; the SDK rom.lst covers 0x100000-0x106fff; cpu/bd19/maskrom_stubs.ld names only 0x106xxx; p11_code.bin is 4096 bytes
 - the AC63 SDK does contain AC6321A board configs but no ABSOLUTE symbol anywhere near 0x30xxxx
+- exhaustive call-site pass: 0x3003ec has EXACTLY ONE call site in the 227 KB image (0x1e069d4), so no caller-variation evidence exists to widen the ABI
+- the out-of-image library is large: 1324 call sites to 1300 distinct targets in 0x1f0000-0x31ffff, none present in any artifact we hold
 
 **Ruled out:** any vendor symbol name for 0x3003ec from the SDK we hold
 
@@ -504,7 +506,7 @@ Scope: ArmorX Pro firmware/updater ecosystem (four operator packages), offline/s
 
 **Status:** OPEN | **Priority:** high
 
-**Answer:** Open. The readback path provably reads the RAM/VM shadow, which fully explains STAGED_OK. The commit trigger is inside the out-of-image library (FW-U-032).
+**Answer:** Still OPEN, but narrowed: no timer/task/idle/power hook reaching the flag was found. The flag's proven reader sits on USB-host gamepad report and dispatcher paths, which raises the possibility that state+0x1b4 is not the BLE config dirty bit at all.
 
 **Evidence:**
 
@@ -512,6 +514,9 @@ Scope: ArmorX Pro firmware/updater ecosystem (four operator packages), offline/s
 - 0x1e0580c validates that buffer with 0x1e0566a and resets defaults via 0x1e056b6 when invalid
 - a record write sets [0x4850+0x1b4] = 3
 - live: an immediate D6 readback after a D7 write returns the new bytes (STAGED_OK), but durability needed a power cycle
+- 0x1e06842 is the only proven reader of state+0x1b4 (r5 = 0x4850 at 0x1e06846, read at 0x1e0684c, OR'd with state+0x1c4, early-out at 0x1e06856)
+- 0x1e06842 callers = dispatcher 0x1e08772, USB-host gamepad report builders 0x1e096b4/0x1e09ad4/0x1e09ce0 and 0x1e0aff2 - i.e. handler/report paths, NO timer or task entry point was found
+- 0x1e096b4/0x1e09ce0 reference 'usbh_gamepad_ready= %d, usbh_gamepadp = %p', so state+0x1b4 may belong to the USB/2.4G report path rather than the BLE config flush
 
-**Next offline step:** Search the app for periodic flush/task calls that reference 0x3120 or the 0x1b4 state field
+**Next offline step:** Enumerate callers of the flush-shaped library targets (0x3004xx-0x3005xx used by 0x1e06842/0x1e059a2) and match one to an SDK timer/idle API name.
 

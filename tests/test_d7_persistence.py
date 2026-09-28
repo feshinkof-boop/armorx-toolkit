@@ -66,7 +66,7 @@ class TestLedger:
 
     def test_new_unknowns_are_present_and_honest(self):
         led = self._led()
-        assert led["FW-U-032"]["status"] == "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE"
+        assert led["FW-U-032"]["status"] == "DEFERRED_REQUIRES_LIBRARY_BINARY"
         assert led["FW-U-033"]["status"] == "OPEN"
 
     def test_no_invented_vendor_api_name(self):
