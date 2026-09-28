@@ -2,14 +2,15 @@ name: Publish v0.2.2 research snapshot
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 permissions:
   contents: write
 
 jobs:
   release:
-    if: github.event.head_commit.message == 'release: publish v0.2.2 research snapshot'
+    if: "${{ github.event.head_commit.message == 'release: publish v0.2.2 research snapshot' }}"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,4 +34,4 @@ jobs:
             echo "v0.2.2 already exists; nothing to do."
             exit 0
           fi
-          gh release create v0.2.2             --target "$GITHUB_SHA"             --title "ArmorX Toolkit v0.2.2 — Research & Protocol Update"             --notes-file RELEASE_NOTES_v0.2.2.md             ArmorX-Toolkit-v0.2.2-source.zip             ArmorX-Toolkit-v0.2.2-SHA256SUMS.txt
+          gh release create v0.2.2 --target "$GITHUB_SHA" --title "ArmorX Toolkit v0.2.2 — Research & Protocol Update" --notes-file RELEASE_NOTES_v0.2.2.md ArmorX-Toolkit-v0.2.2-source.zip ArmorX-Toolkit-v0.2.2-SHA256SUMS.txt
