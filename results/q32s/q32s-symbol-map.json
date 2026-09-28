@@ -435,6 +435,47 @@
    "version": "V41",
    "callers": [],
    "callees": []
+  },
+  {
+   "address": "0x1e069c2",
+   "name": "armorx_config_save",
+   "category": "storage",
+   "grade": "PROVEN STATIC",
+   "evidence": "tail-calls library 0x3003ec(descriptor=[0x4850+0x1b0], mode, 0x90) - the out-of-image nonvolatile write.",
+   "version": "V41",
+   "callers": [
+    "0x1e09232"
+   ],
+   "callees": [
+    "0x3003ec"
+   ]
+  },
+  {
+   "address": "0x1e0580c",
+   "name": "armorx_config_slot_validate",
+   "category": "storage",
+   "grade": "PROVEN STATIC",
+   "evidence": "validates (descriptor, 0x90) with 0x1e0566a; on failure prints and resets the slot to defaults via 0x1e056b6.",
+   "version": "V41",
+   "callers": [
+    "0x1e059a2"
+   ],
+   "callees": [
+    "0x1e0566a",
+    "0x1e056b6"
+   ]
+  },
+  {
+   "address": "0x1e056b6",
+   "name": "armorx_config_reset_defaults",
+   "category": "storage",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "called only from the loader's invalid-slot path (0x1e05826) with the descriptor as r0.",
+   "version": "V41",
+   "callers": [
+    "0x1e0580c"
+   ],
+   "callees": []
   }
  ]
 }

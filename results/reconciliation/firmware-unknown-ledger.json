@@ -559,6 +559,43 @@
    "dependencies": [
     "FW-U-023"
    ]
+  },
+  {
+   "id": "FW-U-032",
+   "question": "What is the nonvolatile API behind 0x3003ec, and does it commit synchronously?",
+   "status": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+   "priority": "high",
+   "evidence": [
+    "0x1e069c2 tail-calls 0x3003ec(descriptor, mode, 0x90) - the only call in the D7 chain that leaves the app image",
+    "the library region 0x1f0000-0x31ffff is called from many sites (0x306b64 at startup, 0x301148 memset, 0x300970, 0x3003ec) and its bytes are in no artifact we hold: app.bin covers only 0x01E00000-0x01E37870; the SDK rom.lst covers 0x100000-0x106fff; cpu/bd19/maskrom_stubs.ld names only 0x106xxx; p11_code.bin is 4096 bytes",
+    "the AC63 SDK does contain AC6321A board configs but no ABSOLUTE symbol anywhere near 0x30xxxx"
+   ],
+   "answer": "Not answerable from the artifacts on disk. The call site and its argument shape are proven; the storage implementation is not recoverable without a library/ROM image for this chip.",
+   "ruled_out": [
+    "any vendor symbol name for 0x3003ec from the SDK we hold"
+   ],
+   "next_offline_step": "Obtain the AC6321A ROM/library image (or a matching JieLi liba link map) and disassemble 0x3003ec",
+   "dependencies": [
+    "FW-U-010"
+   ]
+  },
+  {
+   "id": "FW-U-033",
+   "question": "What exactly triggers the RAM/VM shadow at 0x3120 + index*0x400 + 0x44 to be committed to flash?",
+   "status": "OPEN",
+   "priority": "high",
+   "evidence": [
+    "the config descriptor pointer [0x4850+0x1b0] is computed as 0x3120 + index*0x400 + 0x44 by 0x1e059a2 (index clamped to <= 2, stride 1024)",
+    "0x1e0580c validates that buffer with 0x1e0566a and resets defaults via 0x1e056b6 when invalid",
+    "a record write sets [0x4850+0x1b4] = 3",
+    "live: an immediate D6 readback after a D7 write returns the new bytes (STAGED_OK), but durability needed a power cycle"
+   ],
+   "answer": "Open. The readback path provably reads the RAM/VM shadow, which fully explains STAGED_OK. The commit trigger is inside the out-of-image library (FW-U-032).",
+   "ruled_out": [],
+   "next_offline_step": "Search the app for periodic flush/task calls that reference 0x3120 or the 0x1b4 state field",
+   "dependencies": [
+    "FW-U-032"
+   ]
   }
  ]
 }

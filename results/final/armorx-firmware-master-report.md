@@ -469,3 +469,51 @@ accepts either framing. The magic is decided only on the transmit side (`0x1e064
   string pointers; `0x1e0aff2` is a 32-iteration mask-table builder over `r15+0x124`.
 * `tools/ble/parse_btsnoop.py` initially used a 20-byte record header and mis-decoded direction and
   timestamp; btmon writes the 24-byte shape `orig, incl, flags, drops, ts`.
+
+---
+
+## §33 - Config persistence chain (2026-09-28): D7 -> record writer -> out-of-image NV API
+
+### 33.1 The chain, with the instruction that shows each link
+
+| address | role | key instruction |
+|---|---|---|
+| `0x1e09232` | D7 handler: stage + slot loop | `1e09240` copy, `1e09248` validate(0x90), `1e0926c` record write |
+| `0x1e06998` | slot -> digital-bit | `1e069a6` masks `0x7800000` = bits **23..26** = M1..M4 |
+| `0x1e05c66` | record writer | `1e05c78` `r4 += r5*0xDC`, `1e05c98` CRC-16 over 8 bytes, `1e05cae` `[0x4850+0x1b4] = 3` |
+| `0x1e069c2` | save | `1e069d4` tail-call `0x3003ec(descriptor, mode, 0x90)` |
+| `0x1e059a2` | slot select + reload | `1e059b0` `index*0x400`, `1e059ba` `+0x44`, `1e059c4` -> `[0x4850+0x1b0]` |
+| `0x1e0580c` | slot validate | `1e05816` `0x1e0566a(descriptor, 0x90)`; invalid -> `1e05826` defaults `0x1e056b6` |
+
+### 33.2 Storage model
+
+The active config descriptor is `0x3120 + index*0x400 + 0x44`, with **index clamped to 0..2 - three
+slots of 1024 bytes** - and it is stored at `[0x4850+0x1b0]`, the very pointer the D6 handler reads.
+Record stride is `0xDC` (220) in the array at `[0x4850+0x1b8]`; the config record itself is
+`0x90` (144) with the `[BE16 CRC][BE16 length]` header. The active slot index is kept at
+`[0x4850+0x14]` and a write sets `[0x4850+0x1b4] = 3`.
+
+### 33.3 STAGED_OK is now PROVEN; DURABLE_OK is not
+
+**PROVEN STATIC:** the readback path reads the descriptor at `[0x4850+0x1b0]`, i.e. the RAM/VM
+shadow at `0x3120 + index*0x400 + 0x44`. A D7 write updates that shadow and then re-selects and
+reloads the slot (`0x1e059a2` -> `0x1e0580c`), so an immediate D6 readback returns the new bytes with
+**no flash commit involved**. That is exactly the observed STAGED_OK.
+
+**Not resolvable statically:** the commit is the library call `0x3003ec`, the only link in the chain
+that leaves the app image. Its code is in no artifact we hold - `app.bin` ends at `0x01E37870`, the
+SDK `rom.lst` covers only `0x100000-0x106fff`, `cpu/bd19/maskrom_stubs.ld` names only `0x106xxx`
+symbols, and `p11_code.bin` is 4096 bytes. So whether `0x3003ec` writes flash synchronously or leaves
+it to a VM flush **cannot be decided from the material on disk** (recorded as FW-U-032, and the flush
+trigger as FW-U-033). No vendor API name is invented for it.
+
+### 33.4 Corrections
+
+* The claim that config bytes **112..115** gate which records D7 rewrites is **wrong**. `0x1e06998`
+  maps slot *i* to digital bit `23+i`, and the handler then reads `staging[0x70 + bit]`, i.e. config
+  bytes **135..138**.
+* `0x1e0aff2` is a **13,346-byte** function that references `switchd flash write add=%x, len=%d`. The
+  earlier note calling it a mask-table builder was incomplete (it is still not a protocol
+  dispatcher, which was the point of the retirement).
+* `0x1e12db4` was labelled "IMU naming" in an earlier pass; by string xref it is the
+  **`gamepad_setting_check failed, reset setting`** handler.

@@ -1,0 +1,19 @@
+digraph d7_persistence {
+  rankdir=LR;
+  node [shape=box,fontsize=10];
+  "0x1e09232" [label="0x1e09232\nD7 handler"];
+  "0x1e06998" [label="0x1e06998\nslot index -> digital-mask bit position"];
+  "0x1e05c66" [label="0x1e05c66\nrecord writer"];
+  "0x1e069c2" [label="0x1e069c2\nFINALIZER"];
+  "0x3003ec" [label="0x3003ec\nLIBRARY CALL - the actual nonvolatile write (code absent from every artifact)"];
+  "0x1e059a2" [label="0x1e059a2\nconfig slot select + reload"];
+  "0x1e0580c" [label="0x1e0580c\nconfig slot validator/loader"];
+  "0x1e056b6" [label="0x1e056b6\nreset defaults for a failed slot (called only from the loader's invalid path)"];
+  "0x1e09232" -> "0x1e06998";
+  "0x1e06998" -> "0x1e05c66";
+  "0x1e05c66" -> "0x1e069c2";
+  "0x1e069c2" -> "0x3003ec";
+  "0x3003ec" -> "0x1e059a2";
+  "0x1e059a2" -> "0x1e0580c";
+  "0x1e0580c" -> "0x1e056b6";
+}
