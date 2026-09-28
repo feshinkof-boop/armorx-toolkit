@@ -88,3 +88,29 @@ reported D2 values, the actuation threshold, deadzone or range**. They are separ
 
 No F7 frame has ever been sent to real hardware. If a future session proposes to, it must first
 establish a read-back path, and must not assume the value is a trigger parameter.
+
+
+---
+
+## DATED ADDENDUM — 2026-09-28T07:48:30-04:00 (LIVE, read-only): the F7 read produces no observable reply
+
+`A5 04 F7 A0` (the application's own `getStepLength` request) was sent **twice** to the live unit.
+**Zero notifications of any kind** followed, in a 3 s and then a 5 s window with no opcode filtering.
+
+The link and the request/notification path were healthy throughout, proven by controls:
+`A5 04 0B B4` → `A5 05 0B 30 E5` **before, between and after** the two attempts, and the FC positive
+control `A5 05 FC 80 26` → `A5 05 FF FC A5` **before and after** — every reply in 23-30 ms.
+HCI (`btmon -r`) confirms 7 writes and 5 notifications, with the two `A5 04 F7 A0` writes followed by
+**nothing**. D6 read-only integrity: `bdef9c61...` **CONFIG_BASELINE_MATCH**.
+
+**Verdict: `F7_NO_REPLY_LINK_HEALTHY`.**
+
+**F7 is NOT classified `F7_WRITE_ONLY`.** Silence is compatible with: no protocol reply on this model,
+state delivered asynchronously elsewhere, an unidentified generic acknowledgement, a firmware/model
+gate, a timing/state requirement, or acceptance without payload. None of those is claimed.
+Across all four builds there is **exactly one** comparison against `0xF7` (`cmp w0, #0x1ee`, in
+`config_simulate_command.dart` 0xab9614, inside the closure `_handleConfigEvent`); what its argument
+is has not been established, and no other F7 handling exists anywhere.
+
+Evidence: `results/experiments/f7-read-live-20260928-074652/` (`RESULT.md`, `analysis.json`,
+`notifications.json`, `tx.json`, `session.jsonl`, `btmon.btsnoop`, `btmon.txt`).

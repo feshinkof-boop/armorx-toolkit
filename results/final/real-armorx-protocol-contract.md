@@ -93,3 +93,17 @@ A4 <total frame length> <opcode> <ordinal> <payload...> <checksum>
 **F7 is not a trigger command** — see `real-trigger-travel.md`. The trigger family in this app is the
 `F7`-unrelated 扳机 vocabulary (deadzone/fast-trigger from the 2.2x-era `config_trigger.dart`), and no
 code path connects F7 to the live D2 analog trigger bytes `[15]`/`[16]`.
+
+
+## DATED ADDENDUM — 2026-09-28T07:49:00-04:00: F7 read probed live (read-only)
+
+| opcode | direction | frame | result | grade |
+|---|---|---|---|---|
+| `0xF7` | TX (read) | `A5 04 F7 A0` | transmitted twice to the live unit; **no notification of any kind followed** (3 s, then 5 s) | PROVEN LIVE TX |
+| `0xF7` | RX | — | **none observable on this unit** while `0B` and `FC` controls answered in 23-30 ms around it | `F7_NO_REPLY_LINK_HEALTHY` |
+| `0x0B` | TX/RX | `A5 04 0B B4` -> `A5 05 0B 30 E5` | health control, passed before / between / after the F7 attempts | PROVEN LIVE |
+| `0xFC` | TX/RX | `A5 05 FC 80 26` -> `A5 05 FF FC A5` | positive control, passed before and after | PROVEN LIVE |
+
+**`F7_WRITE_ONLY` is explicitly NOT claimed** — silence is compatible with several other explanations
+(no reply on this model, asynchronous delivery, unidentified generic ack, firmware/model gate,
+timing/state requirement, acceptance without payload). Artifacts: `results/experiments/f7-read-live-20260928-074652/`.

@@ -1,0 +1,67 @@
+[
+ {
+  "ts": "2026-09-28T07:47:53.053-04:00",
+  "t_rel": 6.522,
+  "phase": "A",
+  "from_tx_s": 0.023,
+  "raw": "A5 05 0B 30 E5",
+  "length_byte": 5,
+  "declared_len_ok": true,
+  "opcode": "0x0B",
+  "payload": "30",
+  "trailer": "0xE5",
+  "checksum_ok": true
+ },
+ {
+  "ts": "2026-09-28T07:47:53.084-04:00",
+  "t_rel": 6.553,
+  "phase": "B",
+  "from_tx_s": 0.03,
+  "raw": "A5 05 FF FC A5",
+  "length_byte": 5,
+  "declared_len_ok": true,
+  "opcode": "0xFF",
+  "payload": "FC",
+  "trailer": "0xA5",
+  "checksum_ok": true
+ },
+ {
+  "ts": "2026-09-28T07:47:56.113-04:00",
+  "t_rel": 9.582,
+  "phase": "D",
+  "from_tx_s": 0.026,
+  "raw": "A5 05 0B 30 E5",
+  "length_byte": 5,
+  "declared_len_ok": true,
+  "opcode": "0x0B",
+  "payload": "30",
+  "trailer": "0xE5",
+  "checksum_ok": true
+ },
+ {
+  "ts": "2026-09-28T07:48:02.145-04:00",
+  "t_rel": 15.614,
+  "phase": "F",
+  "from_tx_s": 0.029,
+  "raw": "A5 05 0B 30 E5",
+  "length_byte": 5,
+  "declared_len_ok": true,
+  "opcode": "0x0B",
+  "payload": "30",
+  "trailer": "0xE5",
+  "checksum_ok": true
+ },
+ {
+  "ts": "2026-09-28T07:48:02.175-04:00",
+  "t_rel": 15.644,
+  "phase": "F",
+  "from_tx_s": 0.03,
+  "raw": "A5 05 FF FC A5",
+  "length_byte": 5,
+  "declared_len_ok": true,
+  "opcode": "0xFF",
+  "payload": "FC",
+  "trailer": "0xA5",
+  "checksum_ok": true
+ }
+]

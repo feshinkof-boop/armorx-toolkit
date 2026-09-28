@@ -76,3 +76,11 @@ Chained-read observation: the notification handler closure at `rainbow_more.dart
 `getDpi()` and then `getStepLength()` on the same code path — i.e. the official workflow is a
 **read sequence**, not a single query. The exact received opcode that triggers the pair is not yet
 pinned (recorded in the callgraph's pinned unknowns).
+
+
+## DATED ADDENDUM — 2026-09-28T07:49:00-04:00: the DPI control re-validated live after the F7 attempts
+
+`A5 05 FC 80 26` was sent twice in this session as the positive control (before and after the two F7
+read attempts) and answered `A5 05 FF FC A5` **both times, in 0.030 s**, with a valid length byte and
+checksum — so the request/notification path was demonstrably healthy while F7 produced nothing.
+No DPI/F6 write was performed. Artifacts: `results/experiments/f7-read-live-20260928-074652/`.

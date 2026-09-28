@@ -1,0 +1,17 @@
+{"ts": "2026-09-28T07:47:16.535-04:00", "t_rel": 0.0, "event": "START", "argv": ["automation/scripts/f7-read-probe.py", "--outdir", "results/experiments/f7-read-live-20260928-074652", "--capture-file", "results/experiments/f7-read-live-20260928-074652/btmon.btsnoop"], "adapter_expected": "E8:4E:06:8A:F2:00", "outdir": "results/experiments/f7-read-live-20260928-074652", "capture": "results/experiments/f7-read-live-20260928-074652/btmon.btsnoop"}
+{"ts": "2026-09-28T07:47:33.589-04:00", "t_rel": 0.0, "event": "START", "argv": ["automation/scripts/f7-read-probe.py", "--outdir", "results/experiments/f7-read-live-20260928-074652", "--capture-file", "results/experiments/f7-read-live-20260928-074652/btmon.btsnoop"], "adapter_expected": "E8:4E:06:8A:F2:00", "outdir": "results/experiments/f7-read-live-20260928-074652", "capture": "results/experiments/f7-read-live-20260928-074652/btmon.btsnoop"}
+{"ts": "2026-09-28T07:47:46.531-04:00", "t_rel": 0.0, "event": "START", "argv": ["automation/scripts/f7-read-probe.py", "--outdir", "results/experiments/f7-read-live-20260928-074652", "--capture-file", "results/experiments/f7-read-live-20260928-074652/btmon.btsnoop"], "adapter_expected": "E8:4E:06:8A:F2:00", "outdir": "results/experiments/f7-read-live-20260928-074652", "capture": "results/experiments/f7-read-live-20260928-074652/btmon.btsnoop"}
+{"ts": "2026-09-28T07:47:52.563-04:00", "t_rel": 6.032, "event": "DEVICE", "address": "2D:37:35:6D:66:11", "name": null, "rssi": -82}
+{"ts": "2026-09-28T07:47:52.873-04:00", "t_rel": 6.342, "event": "CONNECTED", "mtu_hint": null}
+{"ts": "2026-09-28T07:47:53.030-04:00", "t_rel": 6.499, "event": "SUBSCRIBED", "char": "0000ffe2-0000-1000-8000-00805f9b34fb"}
+{"ts": "2026-09-28T07:47:53.030-04:00", "t_rel": 6.499, "event": "TX", "phase": "A", "tx": "A5 04 0B B4", "label": "0B sanity query"}
+{"ts": "2026-09-28T07:47:53.053-04:00", "t_rel": 6.522, "event": "HEALTH", "label": "pre", "healthy": true, "reply": "A5 05 0B 30 E5", "frames_in_window": 1}
+{"ts": "2026-09-28T07:47:53.053-04:00", "t_rel": 6.522, "event": "TX", "phase": "B", "tx": "A5 05 FC 80 26", "label": "FC DPI read (positive control)"}
+{"ts": "2026-09-28T07:47:53.084-04:00", "t_rel": 6.553, "event": "TX", "phase": "C", "tx": "A5 04 F7 A0", "label": "F7 getStepLength read (attempt 1)"}
+{"ts": "2026-09-28T07:47:56.086-04:00", "t_rel": 9.555, "event": "TX", "phase": "D", "tx": "A5 04 0B B4", "label": "0B sanity query"}
+{"ts": "2026-09-28T07:47:56.113-04:00", "t_rel": 9.582, "event": "HEALTH", "label": "after_f7_1", "healthy": true, "reply": "A5 05 0B 30 E5", "frames_in_window": 1}
+{"ts": "2026-09-28T07:47:57.113-04:00", "t_rel": 10.582, "event": "TX", "phase": "E", "tx": "A5 04 F7 A0", "label": "F7 getStepLength read (attempt 2)"}
+{"ts": "2026-09-28T07:48:02.116-04:00", "t_rel": 15.585, "event": "TX", "phase": "F", "tx": "A5 04 0B B4", "label": "0B sanity query"}
+{"ts": "2026-09-28T07:48:02.145-04:00", "t_rel": 15.614, "event": "HEALTH", "label": "final", "healthy": true, "reply": "A5 05 0B 30 E5", "frames_in_window": 1}
+{"ts": "2026-09-28T07:48:02.145-04:00", "t_rel": 15.614, "event": "TX", "phase": "F", "tx": "A5 05 FC 80 26", "label": "FC DPI read (post-F7 control)"}
+{"ts": "2026-09-28T07:48:05.145-04:00", "t_rel": 18.615, "event": "DISCONNECTED"}

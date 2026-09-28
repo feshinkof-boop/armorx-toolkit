@@ -356,3 +356,16 @@ Cross-version: **2.22.0901 has none of F7/F6/FC**; `FC` arrives in 2.23, `F6` an
 The frame-literal tool independently reproduces every live-known frame (`A5 05 FC 80 26`,
 `A5 05 D2 01 7D`, `A5 05 D2 00 7C`, `A5 04 0B B4`), which validates both the tool and the `sum8`
 checksum rule. No hardware was touched in this pass.
+
+
+## DATED ADDENDUM — 2026-09-28T07:49:00-04:00: F7 read probed live, read-only
+
+The app's own `getStepLength` request, `A5 04 F7 A0`, was sent twice under a single pre-connection
+HCI capture. **Verdict `F7_NO_REPLY_LINK_HEALTHY`:** no notification of any kind followed either
+attempt, while the `0B` sanity control answered before, between and after and the FC DPI control
+passed before and after — all five replies in 23-30 ms. HCI decoded with `btmon -r` independently
+shows 7 writes / 5 notifications with the two F7 writes followed by nothing. Config integrity:
+`bdef9c61...` `CONFIG_BASELINE_MATCH` (read-only, not a new durability proof; `DURABLE_OK` stands).
+
+`F7_WRITE_ONLY` is **not** claimed - see `results/experiments/f7-read-live-20260928-074652/RESULT.md` for the alternative explanations that
+silence leaves open. No mutating command was sent.

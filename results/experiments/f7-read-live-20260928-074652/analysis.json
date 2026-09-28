@@ -1,0 +1,107 @@
+{
+ "verdict": "F7_NO_REPLY_LINK_HEALTHY",
+ "phases": {
+  "A_0B_pre": {
+   "healthy": true,
+   "reply": "A5 05 0B 30 E5"
+  },
+  "B_FC_control": {
+   "tx": "A5 05 FC 80 26",
+   "expected": "A5 05 FF FC A5",
+   "reported": {
+    "ts": "2026-09-28T07:47:53.084-04:00",
+    "t_rel": 6.553,
+    "phase": "B",
+    "from_tx_s": 0.03,
+    "raw": "A5 05 FF FC A5",
+    "length_byte": 5,
+    "declared_len_ok": true,
+    "opcode": "0xFF",
+    "payload": "FC",
+    "trailer": "0xA5",
+    "checksum_ok": true
+   },
+   "all_frames": [
+    {
+     "ts": "2026-09-28T07:47:53.084-04:00",
+     "t_rel": 6.553,
+     "phase": "B",
+     "from_tx_s": 0.03,
+     "raw": "A5 05 FF FC A5",
+     "length_byte": 5,
+     "declared_len_ok": true,
+     "opcode": "0xFF",
+     "payload": "FC",
+     "trailer": "0xA5",
+     "checksum_ok": true
+    }
+   ],
+   "status": "FC_READ_CONTROL_PASS"
+  },
+  "C_f7_attempt1": {
+   "tx": "A5 04 F7 A0",
+   "window_s": 3.0,
+   "frames": [],
+   "frame_count": 0
+  },
+  "D_0B_after_f7_1": {
+   "healthy": true,
+   "reply": "A5 05 0B 30 E5",
+   "other_frames": []
+  },
+  "E_f7_attempt2": {
+   "tx": "A5 04 F7 A0",
+   "window_s": 5.0,
+   "frames": [],
+   "frame_count": 0
+  },
+  "F_0B_final": {
+   "healthy": true,
+   "reply": "A5 05 0B 30 E5"
+  },
+  "F_FC_final": {
+   "reported": {
+    "ts": "2026-09-28T07:48:02.175-04:00",
+    "t_rel": 15.644,
+    "phase": "F",
+    "from_tx_s": 0.03,
+    "raw": "A5 05 FF FC A5",
+    "length_byte": 5,
+    "declared_len_ok": true,
+    "opcode": "0xFF",
+    "payload": "FC",
+    "trailer": "0xA5",
+    "checksum_ok": true
+   },
+   "all_frames": [
+    {
+     "ts": "2026-09-28T07:48:02.175-04:00",
+     "t_rel": 15.644,
+     "phase": "F",
+     "from_tx_s": 0.03,
+     "raw": "A5 05 FF FC A5",
+     "length_byte": 5,
+     "declared_len_ok": true,
+     "opcode": "0xFF",
+     "payload": "FC",
+     "trailer": "0xA5",
+     "checksum_ok": true
+    }
+   ],
+   "status": "FC_READ_CONTROL_PASS"
+  }
+ },
+ "notes": "A silent F7 read does NOT prove F7_WRITE_ONLY: the app's getStepLength request may expect no explicit reply (no protocol reply on this model, asynchronous state, an unidentified generic ack, a firmware/model gate, a timing/state requirement, or acceptance without payload).",
+ "capture": {
+  "file": "results/experiments/f7-read-live-20260928-074652/btmon.btsnoop",
+  "size_after": 4766
+ },
+ "counts": {
+  "notifications_total": 5,
+  "tx_total": 7,
+  "distinct_rx": [
+   "A5 05 0B 30 E5",
+   "A5 05 FF FC A5"
+  ]
+ }
+}

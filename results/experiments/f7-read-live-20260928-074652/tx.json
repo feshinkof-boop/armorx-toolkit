@@ -1,0 +1,51 @@
+[
+ {
+  "ts": "2026-09-28T07:47:53.030-04:00",
+  "t_rel": 6.499,
+  "phase": "A",
+  "tx": "A5 04 0B B4",
+  "label": "0B sanity query"
+ },
+ {
+  "ts": "2026-09-28T07:47:53.053-04:00",
+  "t_rel": 6.522,
+  "phase": "B",
+  "tx": "A5 05 FC 80 26",
+  "label": "FC DPI read (positive control)"
+ },
+ {
+  "ts": "2026-09-28T07:47:53.084-04:00",
+  "t_rel": 6.553,
+  "phase": "C",
+  "tx": "A5 04 F7 A0",
+  "label": "F7 getStepLength read (attempt 1)"
+ },
+ {
+  "ts": "2026-09-28T07:47:56.086-04:00",
+  "t_rel": 9.555,
+  "phase": "D",
+  "tx": "A5 04 0B B4",
+  "label": "0B sanity query"
+ },
+ {
+  "ts": "2026-09-28T07:47:57.113-04:00",
+  "t_rel": 10.582,
+  "phase": "E",
+  "tx": "A5 04 F7 A0",
+  "label": "F7 getStepLength read (attempt 2)"
+ },
+ {
+  "ts": "2026-09-28T07:48:02.116-04:00",
+  "t_rel": 15.585,
+  "phase": "F",
+  "tx": "A5 04 0B B4",
+  "label": "0B sanity query"
+ },
+ {
+  "ts": "2026-09-28T07:48:02.145-04:00",
+  "t_rel": 15.614,
+  "phase": "F",
+  "tx": "A5 05 FC 80 26",
+  "label": "FC DPI read (post-F7 control)"
+ }
+]
