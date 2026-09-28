@@ -1,0 +1,65 @@
+{
+ "session": "results/experiments/physical-20260927-170844-d2/session.jsonl",
+ "records": 3315,
+ "control_plane": [
+  {
+   "ts": "2026-09-27T21:08:57.031+00:00",
+   "frame": "a5040bb4",
+   "label": "0B version"
+  },
+  {
+   "ts": "2026-09-27T21:08:57.120+00:00",
+   "frame": "a505d2017d",
+   "label": "D2 test ON"
+  },
+  {
+   "ts": "2026-09-27T21:23:57.835+00:00",
+   "frame": "a505d2007c",
+   "label": "D2 test OFF"
+  }
+ ],
+ "d2_enable_preceded_by_pre_clear": false,
+ "rx_records": 3295,
+ "button_frames": 3292,
+ "button_frame_lengths": {
+  "18": 3292
+ },
+ "checksums_all_valid": true,
+ "zero_mask_frames": 2503,
+ "nonzero_mask_frames": 789,
+ "key_ids_seen": {
+  "0": 14,
+  "1": 13,
+  "3": 14,
+  "4": 14,
+  "6": 57,
+  "7": 46,
+  "8": 13,
+  "10": 29,
+  "11": 44,
+  "12": 26,
+  "13": 14,
+  "14": 18,
+  "15": 28,
+  "16": 66,
+  "17": 68,
+  "18": 72,
+  "19": 66,
+  "20": 19,
+  "23": 22,
+  "24": 28,
+  "25": 24,
+  "26": 21,
+  "27": 19,
+  "28": 17,
+  "29": 24,
+  "30": 13
+ },
+ "key_id_count": 26,
+ "first_button_frame": "a5120200000080fc280224fdc9012200006c",
+ "last_button_frame": "a5120200000000fc54fcec040dfb04000001",
+ "first_button_ts": "2026-09-27T21:08:59.498+00:00",
+ "last_button_ts": "2026-09-27T21:15:26.255+00:00",
+ "press_evidence_in_window": true,
+ "conclusion": "harness_receives_button_frames"
+}

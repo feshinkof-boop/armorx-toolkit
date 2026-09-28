@@ -54,14 +54,25 @@ Requires hardware: YES
 Risk: none
 Priority: LOW
 
+STATUS: RESOLVED (2026-09-27/28 overnight shift) — the premise was wrong, the harness is not silent
 UNKNOWN ID: D2-U-007
-Question: Why does the real unit not stream after a D2 enable?
-Why unresolved: Not explained by anything in the reconstructed workflow
-Evidence already checked: static reconstruction + 5 live variants + power states + config states
-What would resolve it: device-side or firmware evidence (or a fw dump)
-Requires hardware: YES
-Risk: UNKNOWN
-Priority: CRITICAL
+Question (as originally posed): Why does the real unit not stream after a D2 enable?
+Resolution: The unit DOES stream to the harness. On 2026-09-27 17:08 the harness captured 3,292 valid
+  18-byte A5 12 02 frames across 26 key ids with the control plane 0B -> D2 ON (no pre-clear). Every
+  window previously read as "silent" had no physical press requested, which under the event-driven
+  model is expected to yield zero frames in any configuration. The old classification
+  OFFICIAL_WORKS_HARNESS_SILENT is CONTRADICTED as a statement about the device and is reclassified
+  HARNESS_STREAMS_UNDER_PRESS__DIFFERENTIAL_WINDOWS_WERE_NOT_PRESS-MATCHED.
+Evidence: results/experiments/physical-20260927-170844-d2/session.jsonl (raw), reprocessed by
+  automation/scripts/harness-streaming-audit.py -> results/reconciliation/harness-streaming-170844.json;
+  results/runtime/operator-actions.jsonl (no press request in the differential windows);
+  results/reconciliation/d2-u007-harness-streaming-reconciliation.md
+Residual (still UNKNOWN, hardware): whether the D2 pre-clear suppresses streaming while a key IS
+  pressed. Every streaming window lacked a pre-clear; every pre-cleared window lacked a press, so the
+  two variables have never been separated. That is exactly case C0.
+Requires hardware: YES for the residual only
+Risk: low (D2 is a runtime mode; D2 disable is issued before disconnect)
+Priority: CRITICAL -> now a single-variable test, not an open mystery
 
 UNKNOWN ID: D2-U-008
 Question: Does the device require a bonded/encrypted link before it will report input in test mode?
@@ -96,7 +107,7 @@ resolution**:
   (server 64 / client 517), one `LE Connection Update` at t≈24.9 s. PHY is **not reported** by this
   adapter's capture, so no PHY comparison is possible from our side alone. Official values:
   NOT_CAPTURED.
-- **D2-U-007**: unchanged — still UNKNOWN, and explicitly **not** reclassified as a harness
+- **D2-U-007**: **RESOLVED 2026-09-27/28** — the harness is not silent; see the entry above. Superseded text follows:
   divergence, since the official behaviour has never been observed.
 
 New harness-side observation (about our implementation, **not** evidence of a missing precondition):

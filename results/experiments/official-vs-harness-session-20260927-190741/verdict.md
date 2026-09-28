@@ -67,3 +67,22 @@ procedure; immediate readback alone is still **STAGED_OK**.
 > `bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` - byte-identical to the lab's
 > durable baseline. An earlier extraction step capped the list at eight and that error propagated into
 > this file's wording. The numbers above were correct for the frames examined; the count was not.
+
+---
+
+## DATED CORRECTION — 2026-09-27/28 (overnight shift): the "harness silent" reading is superseded
+
+**This document's observation stands; its implication does not.** The harness half of this experiment
+requested **no physical press** (the operator-action log for that window contains only power-on/setup
+popups), while the official half requested one (`armorx_official_a_twice`, ACKed 19:46:25). Under the
+corrected event-driven model a window with no press is expected to produce zero frames in *every*
+configuration, so this comparison does not demonstrate a device difference.
+
+The harness demonstrably receives button frames: on 2026-09-27 at 17:08 the Linux/bleak harness
+captured **3,292 valid 18-byte `A5 12 02` frames across 26 key ids** with the control plane
+`0B → D2 ON` (no pre-clear). See `results/reconciliation/d2-u007-harness-streaming-reconciliation.md`
+and the reproducible audit `automation/scripts/harness-streaming-audit.py`.
+
+Consequently `OFFICIAL_WORKS_HARNESS_SILENT` is reclassified
+`HARNESS_STREAMS_UNDER_PRESS__DIFFERENTIAL_WINDOWS_WERE_NOT_PRESS-MATCHED`, and the pre-clear becomes
+the single untested-with-a-press variable (case `C0`).
