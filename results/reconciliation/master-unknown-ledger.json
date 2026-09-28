@@ -4,7 +4,7 @@
  "counts": {
   "STATICALLY_EXHAUSTED": 4,
   "DEFERRED_REQUIRES_OPERATOR": 4,
-  "DEFERRED_REQUIRES_HARDWARE": 8,
+  "DEFERRED_REQUIRES_HARDWARE": 9,
   "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 3
  },
  "entries": [
@@ -132,7 +132,7 @@
    "ruled_out": [
     "any in-binary mapping table"
    ],
-   "best_evidence": "the selector is a 4-bit mask; presets come from the vendor's server, so nothing in the APK maps selector->DPI",
+   "best_evidence": "the selector is a 4-bit mask; presets come from the vendor's server, so nothing in the APK maps selector->DPI App-side note: 0xFC appears in the write-result dispatcher (frame_config_macros.dart), so the app treats DPI writes as acknowledged.",
    "next_offline_step": "-",
    "next_hardware_step": "none useful without the vendor table",
    "dependencies": [],
@@ -145,7 +145,7 @@
    "priority": "MEDIUM",
    "ruled_out": [],
    "best_evidence": "one live reply captured, checksum valid, semantics undecoded",
-   "next_offline_step": "a dedicated static search for the notification handler in all four builds",
+   "next_offline_step": "a dedicated static search for the notification handler in all four builds - DONE this pass: no reply-side dispatch on 0xFC/0xF6 found (see results/reconciliation/static-increments-ledger-loop.md \u00a74), so this route is cold; the productive route is a live selector sweep",
    "next_hardware_step": "re-read the query and vary the selector while capturing, to see which field moves",
    "dependencies": [],
    "classification": "DEFERRED_REQUIRES_HARDWARE",
@@ -266,6 +266,19 @@
    ],
    "classification": "DEFERRED_REQUIRES_HARDWARE",
    "status": "OPEN"
+  },
+  {
+   "id": "OP-U-001",
+   "question": "What are opcodes 0xFD and 0xD3, and what does the app's per-opcode write-result dispatcher imply?",
+   "priority": "MEDIUM",
+   "ruled_out": [],
+   "best_evidence": "frame_config_macros.dart (4.0.8) dispatches write results on {0xFD, 0xFC, 0xD8, 0xD3}; 0xFD and 0xD3 were not previously in our opcode catalogue",
+   "next_offline_step": "trace the 0xFD and 0xD3 builders and their consumers in all four builds",
+   "next_hardware_step": "none until the builders are understood",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
   }
- ]
+ ],
+ "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md"
 }

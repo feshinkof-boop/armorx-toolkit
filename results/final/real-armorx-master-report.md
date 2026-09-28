@@ -187,10 +187,15 @@ part number stays **STRONG EVIDENCE, not proven**. No OTA, no firmware write, no
 
 ## 15. Unknowns (canonical ledger)
 
-`results/reconciliation/master-unknown-ledger.{md,json}` - every open item with what is ruled out, the
-best evidence, the next offline step, the next hardware step, and its classification
-(`DEFERRED_REQUIRES_HARDWARE` / `DEFERRED_REQUIRES_OPERATOR` / `DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE`
-/ `STATICALLY_EXHAUSTED`).
+`results/reconciliation/master-unknown-ledger.{md,json}` - **20 entries**, each with what is ruled out,
+the best evidence, the next offline step, the next hardware step and dependencies, classified
+`DEFERRED_REQUIRES_HARDWARE` / `DEFERRED_REQUIRES_OPERATOR` / `DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE`
+/ `STATICALLY_EXHAUSTED` (4 / 4 / 3 / 9). The continuation loop was then run over it and its executed
+steps are recorded in `results/reconciliation/static-increments-ledger-loop.md`: `E2`/`readFirmware`
+proven to be **4.0.8-only** (the 2.2x hits are localization table indices), the app's **write-result
+dispatcher** found to enumerate write-capable opcodes `{0xFD, 0xFC, 0xD8, 0xD3}` (surfacing two opcodes
+new to our catalogue), and the DPI **reply**-parser search executed with a negative result so it is not
+repeated.
 
 ## 16. Next physical tests (shortest path, in order)
 

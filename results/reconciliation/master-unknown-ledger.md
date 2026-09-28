@@ -1,8 +1,8 @@
 # ARMOR-X Pro - master unknown ledger
 
-Updated 2026-09-27/28. **19 entries.** Classifications: DEFERRED_REQUIRES_HARDWARE x8, DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE x3, DEFERRED_REQUIRES_OPERATOR x4, STATICALLY_EXHAUSTED x4.
+Updated 2026-09-27/28. **20 entries.** Classifications: DEFERRED_REQUIRES_HARDWARE x9, DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE x3, DEFERRED_REQUIRES_OPERATOR x4, STATICALLY_EXHAUSTED x4.
 
-Historical ids are preserved; resolved ones are marked RESOLVED with their evidence rather than deleted.
+Historical ids are preserved; resolved ones are marked RESOLVED with their evidence rather than deleted. Where an offline step was actually executed this pass it is marked DONE and points at `results/reconciliation/static-increments-ledger-loop.md`.
 
 | id | question | status | classification | next offline step | next hardware step |
 |---|---|---|---|---|---|
@@ -15,7 +15,7 @@ Historical ids are preserved; resolved ones are marked RESOLVED with their evide
 | **KEY-U-001** | Which buttons are ids 2, 5, 21, 22, 31, 32, 33? | OPEN | `DEFERRED_REQUIRES_OPERATOR` | - | one button per popup, operator-acknowledged, no order assumption |
 | **KEY-U-002** | Does RT (id 9) have a digital key id on this unit? | OPEN (proven negative as a digital bit) | `DEFERRED_REQUIRES_OPERATOR` | - | physical RT press with analog readback to decide analog-only vs absent |
 | **DPI-U-001** | What real DPI value does selector N mean? | OPEN | `DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE` | - | none useful without the vendor table |
-| **DPI-U-002** | What is the shape of the DPI reply (live: a5 05 ff fc a5)? | OPEN | `DEFERRED_REQUIRES_HARDWARE` | a dedicated static search for the notification handler in all four builds | re-read the query and vary the selector while capturing, to see which field moves |
+| **DPI-U-002** | What is the shape of the DPI reply (live: a5 05 ff fc a5)? | OPEN | `DEFERRED_REQUIRES_HARDWARE` | a dedicated static search for the notification handler in all four builds - DONE this pass: no reply-side dispatch on 0xFC/0xF6 found (see results/reconciliation/static-increments-ledger-loop.md §4), so this route is cold; the productive route is a live selector sweep | re-read the query and vary the selector while capturing, to see which field moves |
 | **MOT-U-001** | What do the AB motion/gyro payload fields mean (mode, sensitivity, deadzone, filter)? | OPEN | `DEFERRED_REQUIRES_HARDWARE` | static field trace around writeMotionDpiConfig @0x946158 | none until a reply exists |
 | **LGT-U-001** | What is the RGB byte order and the lighting field layout? | OPEN | `DEFERRED_REQUIRES_OPERATOR` | static field trace through writeLightConfig and the 0x05/0x3F sub-commands | minimum reversible experiment: one zone, one known colour, visual confirm, restore |
 | **D8-U-001** | What selects the D8 chunk class (15 / 43 / 67 payload sizes)? | OPEN (static step available) | `DEFERRED_REQUIRES_HARDWARE` | static branch analysis of the fragmenter in all four builds | read a macro back and observe which classes the device emits |
@@ -25,6 +25,7 @@ Historical ids are preserved; resolved ones are marked RESOLVED with their evide
 | **WIN-U-003** | Does the pad re-enumerate differently in normal vs Xbox-compatible mode? | OPEN | `DEFERRED_REQUIRES_HARDWARE` | static prediction of which descriptors each mode would request | mode switch on real hardware with enumeration monitoring |
 | **FW-U-001** | Which MCU is in the ARMOR-X Pro body? | OPEN | `DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE` | static analysis of the vendor .ufw container/signature handling | a firmware dump (not attempted, and not proposed) |
 | **SES-U-001** | Can an 11.25 ms connection interval be requested reproducibly on Linux? | OPEN | `DEFERRED_REQUIRES_HARDWARE` | done | apply and measure without a device first, then with |
+| **OP-U-001** | What are opcodes 0xFD and 0xD3, and what does the app's per-opcode write-result dispatcher imply? | OPEN | `DEFERRED_REQUIRES_HARDWARE` | trace the 0xFD and 0xD3 builders and their consumers in all four builds | none until the builders are understood |
 
 ## Entries in detail
 
@@ -180,7 +181,7 @@ Historical ids are preserved; resolved ones are marked RESOLVED with their evide
 
 **Ruled out:** any in-binary mapping table
 
-**Best evidence:** the selector is a 4-bit mask; presets come from the vendor's server, so nothing in the APK maps selector->DPI
+**Best evidence:** the selector is a 4-bit mask; presets come from the vendor's server, so nothing in the APK maps selector->DPI App-side note: 0xFC appears in the write-result dispatcher (frame_config_macros.dart), so the app treats DPI writes as acknowledged.
 
 **Next offline step:** -
 
@@ -200,7 +201,7 @@ Historical ids are preserved; resolved ones are marked RESOLVED with their evide
 
 **Best evidence:** one live reply captured, checksum valid, semantics undecoded
 
-**Next offline step:** a dedicated static search for the notification handler in all four builds
+**Next offline step:** a dedicated static search for the notification handler in all four builds - DONE this pass: no reply-side dispatch on 0xFC/0xF6 found (see results/reconciliation/static-increments-ledger-loop.md §4), so this route is cold; the productive route is a live selector sweep
 
 **Next hardware step:** re-read the query and vary the selector while capturing, to see which field moves
 
@@ -367,6 +368,24 @@ Historical ids are preserved; resolved ones are marked RESOLVED with their evide
 **Next hardware step:** apply and measure without a device first, then with
 
 **Dependencies:** D2-U-010 must fail
+
+**Classification:** `DEFERRED_REQUIRES_HARDWARE`
+
+### OP-U-001 - OPEN
+
+**Question:** What are opcodes 0xFD and 0xD3, and what does the app's per-opcode write-result dispatcher imply?
+
+**Priority:** MEDIUM
+
+**Ruled out:** nothing yet
+
+**Best evidence:** frame_config_macros.dart (4.0.8) dispatches write results on {0xFD, 0xFC, 0xD8, 0xD3}; 0xFD and 0xD3 were not previously in our opcode catalogue
+
+**Next offline step:** trace the 0xFD and 0xD3 builders and their consumers in all four builds
+
+**Next hardware step:** none until the builders are understood
+
+**Dependencies:** none
 
 **Classification:** `DEFERRED_REQUIRES_HARDWARE`
 
