@@ -1,0 +1,123 @@
+{
+ "artifact": "armorx-d2-candidate-reference-closure",
+ "date": "2026-09-28",
+ "image": "V41 app.bin base 0x01E00000",
+ "headline": "The candidate buffer has FOUR distinct references, not one, and they form two complete report paths plus a copy in and a copy out. The 28-byte variant sends the candidate struct DIRECTLY, and a third site fills the whole candidate (including +0x0c/+0x0d) from an external source r13 - which is a positive hit for option A of the brief.",
+ "references": {
+  "0x1e0e29c_0x1e0e2c2": {
+   "role": "SECOND REPORT VARIANT builder",
+   "evidence": [
+    "1e0e29c: r0 = sp+1080 ; call 0x1e07464 (serialize the candidate IN PLACE)",
+    "1e0e2a4: r0 = b[r15+0x35]",
+    "1e0e2a8: r1 = 0xe ; if (r0 > 0x1) goto 0x1e0e2b6",
+    "1e0e2ae/1e0e2b0: r0 = 0x64 ; b[r15+0x3a] = r0 (repeat counter)",
+    "1e0e2b4: r1 = 0x1c",
+    "1e0e2b6: r0 = r14 + 0x24 ; r3 = r1 ; r2 = sp+1080 ; r1 = 0x2 ; call 0x1e0642c"
+   ],
+   "conclusion": "payload length is 0x0e or 0x1c depending on state+0x35, and r2 points at the CANDIDATE ITSELF (sp+1080), not at a copy. So the 28-byte variant transmits the raw candidate struct, including +0x0c/+0x0d and the six extra s16 fields."
+  },
+  "0x1e0e3c6_0x1e0e3d6": {
+   "role": "the second candidate-construction sequence",
+   "evidence": [
+    "1e0e3b2: b[sp+1092] = sextra(r13, 8, 1)   <-- LT seed = packed bit 8",
+    "1e0e3bc: b[sp+1093] = sextra(r13, 9, 1)   <-- RT seed = packed bit 9",
+    "1e0e3c6/1e0e3cc: r1 = sp+1080 ; r0 = r2 ; call 0x1e0a5f2 (injector A)",
+    "1e0e3d6/1e0e3dc: r1 = sp+1080 ; r0 = r2 ; call 0x1e0a656 (injector B)"
+   ],
+   "conclusion": "an exact structural duplicate of the sequence at 0x1e0da54..0x1e0da82, feeding the 28-byte path instead of the 14-byte path."
+  },
+  "0x1e0db90": {
+   "role": "copy OUT of the candidate",
+   "evidence": [
+    "1e0db8c: r0 = sp+996 ; 1e0db90: r1 = sp+1080 ; r2 = 0x1c ; call 0x2f922a"
+   ],
+   "conclusion": "the candidate is copied to another stack buffer (sp+996), i.e. consumed by a further report/USB builder."
+  },
+  "0x1e0cd24_0x1e0cd2e": {
+   "role": "a THIRD population path - the candidate filled from an external source",
+   "evidence": [
+    "1e0cd14: r0 = b[r8 + 0x20] ; 1e0cd18: r1 = b[r15 + 0x10] (D2 enable) ; 1e0cd1c: r0 |= r1",
+    "1e0cd24: r4 = sp+1080 ; r2 = 0x1c ; r0 = r4 ; r1 = r13 ; call 0x2fa092"
+   ],
+   "conclusion": "28 bytes are copied FROM r13 INTO the candidate. This is the first proven way for analogue LT/RT bytes to reach +0x0c/+0x0d - it is option A of the brief, and it means the packed-bit seeding is best read as a DEFAULT/FALLBACK rather than the only source."
+  }
+ },
+ "write_timeline": {
+  "method": "scanned the container 0x1e0ac14-0x1e0f154 for stores into the candidate",
+  "result": "no hex-form stores found; the candidate is written only through pointer or through the decimal stack forms b[sp+1092]/b[sp+1093] used by the packed-bit seeding",
+  "tool_caveat": "IMPORTANT: this disassembly renders stack offsets in DECIMAL (b[sp+1092]) while global offsets are hex. A hex-only store scan silently misses every stack-based candidate write. Recorded so this trap is not repeated.",
+  "timeline": [
+   "1. packed-bit seeding: b[sp+1092] = bit 8 (LT), b[sp+1093] = bit 9 (RT) - sites 0x1e0da58/0x1e0da62 and 0x1e0e3b2/0x1e0e3bc",
+   "2. injector A (0x1e0a5f2) overwrites candidate +0x04/+0x06 with canned constants when the low nibble of r2 is 1..10",
+   "3. injector B (0x1e0a656) overwrites candidate +0x08/+0x0a on the high nibble",
+   "4. at 0x1e0cd2e the WHOLE candidate is filled from r13 (28 bytes) - this can overwrite the seeds with analogue values",
+   "5. the candidate is serialized in place (0x1e07464) and either copied to sp+1052 for the 14-byte frame or sent directly for the 28-byte frame",
+   "6. at 0x1e0dad2 the 14-byte form is compared against the last-sent mirror and only then copied to 0x4ecc"
+  ]
+ },
+ "lt_rt_verdict": {
+  "14B_path": "carries whatever the candidate holds at +0x0c/+0x0d at send time: bit-derived if only the seeding ran, analogue if the r13 copy at 0x1e0cd2e ran",
+  "28B_path": "carries the raw candidate, so it necessarily exposes the same two bytes plus the six extra s16 fields",
+  "status": "option A SUPPORTED (a second population path can place analogue values there); option B REFUTED (both variants use the same candidate and the same serializer, so the field ORDER does not differ); option C not settled; option D possible but not shown - the synthetic injectors sit inside these same paths, which does place diagnostic capability here",
+  "grade": "the existence of the r13 population path is PROVEN STATIC; whether it is the source of the live analogue values is NOT proven"
+ },
+ "usb_trio": {
+  "status": "HEAD ONLY - mandatory phase, still not fully reversed",
+  "0x1e096b4": {
+   "size": 1056,
+   "strings": [
+    "d, usbh_gamepad_ready= %d, usbh_gamepadp = %p"
+   ],
+   "first_insns": [
+    "0x1e096b4: [--sp] = {rets, r11-r4}",
+    "0x1e096b6: sp += -0x1a4",
+    "0x1e096b8: r5 = r0",
+    "0x1e096c6: if (r5 > 0xb) goto 0x3d0 <fw_start+0x9A9A : 1e09a9a >",
+    "0x1e096ca: r0 = r5 << 0x1",
+    "0x1e096cc: tbh [r0]",
+    "0x1e096ce: syscall",
+    "0x1e096d0: goto r8"
+   ]
+  },
+  "0x1e09ad4": {
+   "size": 524,
+   "strings": [],
+   "first_insns": [
+    "0x1e09ad4: [--sp] = {rets, r6-r4}",
+    "0x1e09ad6: sp += -0xc0",
+    "0x1e09ad8: if (r0 > 0x6) goto 0x170 <fw_start+0x9C4C : 1e09c4c >",
+    "0x1e09ae8: tbb [r0]",
+    "0x1e09aea: r11 = r1 + r5",
+    "0x1e09aec: r4 = r0.b0 (u)",
+    "0x1e09aee: r4 = [r4 + 0x0]",
+    "0x1e09af0: testset b[r8]"
+   ]
+  },
+  "0x1e09ce0": {
+   "size": 284,
+   "strings": [
+    "d, usbh_gamepad_ready= %d, usbh_gamepadp = %p"
+   ],
+   "first_insns": [
+    "0x1e09ce0: [--sp] = {rets, r5, r4}",
+    "0x1e09ce2: sp += -0x40",
+    "0x1e09ce4: r4 = r0",
+    "0x1e09cf8: if (r4 > 0x5) goto 0x14 <fw_start+0x9D10 : 1e09d10 >",
+    "0x1e09cfc: tbb [r4]",
+    "0x1e09cfe: r6 = [sp+64]",
+    "0x1e09d00: call 0x492 <fw_start+0xA194 : 1e0a194 >",
+    "0x1e09d02: [r1 + 0x8] = r2"
+   ]
+  }
+ },
+ "not_advanced": [
+  "USB trio bodies",
+  "usbh_gamepadp/_ready resolution",
+  "raw live D2 corpus re-read (byte 15/16 distributions)",
+  "M1-M4",
+  "macro",
+  "F7/FC/F6",
+  "cross-version",
+  "dongle"
+ ]
+}
