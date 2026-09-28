@@ -547,3 +547,27 @@ the code read so far*, and the flag may not be the BLE config dirty bit at all.
 appeared. FW-U-033 stays open; FW-U-032 is now `DEFERRED_REQUIRES_LIBRARY_BINARY` - behaviour proven
 to the call boundary, identity unavailable - which is a stronger and more honest classification than
 "UNKNOWN".
+
+---
+
+## §35 - The D2 report engine (2026-09-28): builder, payload layout and send gate
+
+The `A5 12 02` frame is built at **`0x1e0db0c`** with opcode `0x02` and a **14-byte payload**; the frame
+length byte is `0x12` = 14 + 4. A second `0x02` variant with a **28-byte payload** is built at
+`0x1e0db5e`. Both live inside the 13,346-byte manager `0x1e0aff2`.
+
+**The payload layout is derived, not assumed.** `0x1e07464` serialises the payload field by field:
+`rev8` on the u32 at `+0x00`, then `rev8`+`>>16` on the s16 values at `+0x04`, `+0x06`, `+0x08`,
+`+0x0a`, then `0x1e07444` at `+0x0e`. That is `{u32 digital mask, s16 x4, LT/RT}` = 4+8+1+1 = 14,
+which reproduces the live field map ([3..6] mask, [7..14] axes, [15] LT, [16] RT) from the code.
+
+**Send gate.** `0x1e0dae6` reads `b[cfg+0x10]` and skips the report entirely when it is zero;
+`0x1e0dae0` sets a repeat counter `b[cfg+0x3a] = 0x64` (100) and `0x1e0db1c`..`0x1e0db2c` decrement it
+while jumping back to re-send; `0x1e0db38` requires `b[cfg+0x11] != 0` for the 28-byte variant.
+
+**D2 handler.** `0x1e08d24` writes `b[r8+0x10]`, or `b[r8+0x11]` when the selector is `0x19`. So D2 is
+not merely on/off - it selects between two report variants, and the two gates above are exactly those
+two flags.
+
+**Still open:** the trigger side. Nothing here explains yet why idle produces zero frames while a
+button press produces them; `0x1e0aff2` is reached from `0x1e0a9b4`, which was not traced.

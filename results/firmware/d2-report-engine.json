@@ -1,0 +1,145 @@
+{
+ "artifact": "armorx-d2-report-engine",
+ "date": "2026-09-28",
+ "image": "V41 app.bin base 0x01E00000",
+ "headline": "The A5 12 02 report is built at 0x1e0db0c with opcode 0x02 and a 14-byte payload (frame length byte 0x12 = 14+4). A second 0x02 variant with a 28-byte payload is built at 0x1e0db5e. Both live inside the 13,346-byte manager 0x1e0aff2.",
+ "frame_construction": {
+  "builder": "0x1e0642c",
+  "builder_args": "r0 = ctx (r14+0x30), r1 = opcode, r2 = payload ptr, r3 = payload length",
+  "d2_18B": {
+   "callsite": "0x1e0db0c",
+   "opcode": "0x02",
+   "payload_len": "0x0e (14)",
+   "frame_len": "14 + 4 = 0x12 (18) - matches the live A5 12 02 frame exactly",
+   "payload_ptr": "sp+1052 (filled by the copy at 0x1e0daf8 from sp+1080, 0x1c bytes)",
+   "transform": "0x1e0db0c is preceded by 0x1e0dafe call 0x1e07464 (byte-order serialiser)"
+  },
+  "d2_32B": {
+   "callsite": "0x1e0db5e",
+   "opcode": "0x02",
+   "payload_len": "0x1c (28)",
+   "frame_len": "28 + 4 = 0x20 (32)",
+   "payload_ptr": "sp+1024 (copy at 0x1e0db4a from r13, 0x1c bytes)",
+   "transform": "0x1e0db50 call 0x1e07464"
+  }
+ },
+ "payload_layout_proven": {
+  "evidence": "0x1e07464 serialises the payload pointer field by field: [r2+0x0] rev8 (u32 byte swap), then h[r2+0x4], h[r2+0x6], h[r2+0x8], h[r2+0xa] each rev8 then >>16 (s16 byte swap), then 0x1e07444 is applied at +0x0e and at +0x14",
+  "fields": [
+   {
+    "offset": "0x00",
+    "width": 4,
+    "write": "rev8 u32",
+    "semantic": "digital mask",
+    "matches_live": "frame [3..6] = 32-bit digital mask"
+   },
+   {
+    "offset": "0x04",
+    "width": 2,
+    "write": "rev8 s16",
+    "semantic": "axis 1 (LX)",
+    "matches_live": "frame [7..8]"
+   },
+   {
+    "offset": "0x06",
+    "width": 2,
+    "write": "rev8 s16",
+    "semantic": "axis 2 (LY)",
+    "matches_live": "frame [9..10]"
+   },
+   {
+    "offset": "0x08",
+    "width": 2,
+    "write": "rev8 s16",
+    "semantic": "axis 3 (RX)",
+    "matches_live": "frame [11..12]"
+   },
+   {
+    "offset": "0x0a",
+    "width": 2,
+    "write": "rev8 s16",
+    "semantic": "axis 4 (RY)",
+    "matches_live": "frame [13..14]"
+   },
+   {
+    "offset": "0x0e",
+    "width": "1+",
+    "write": "0x1e07444",
+    "semantic": "LT / RT bytes",
+    "matches_live": "frame [15] LT, [16] RT"
+   },
+   {
+    "offset": "0x14",
+    "width": "?",
+    "write": "0x1e07444",
+    "semantic": "second group, only inside the 28-byte variant",
+    "matches_live": "not present in the 18-byte frame"
+   }
+  ],
+  "conclusion": "The 14-byte D2 payload is exactly {u32 mask, s16 x4, LT, RT} = 4+8+1+1, which reproduces the live field map without assuming it."
+ },
+ "send_gate": {
+  "enable_flag": "b[cfg+0x10]",
+  "gate_1": {
+   "addr": "0x1e0dae6",
+   "code": "r0 = b[r15 + 0x10]",
+   "addr2": "0x1e0daea",
+   "code2": "if (r0 == 0x0) goto 0x1e0db36",
+   "effect": "when the flag is zero the 14-byte report is NOT built at all"
+  },
+  "gate_2": {
+   "addr": "0x1e0dae0",
+   "code": "r0 = 0x64 ; b[r15 + 0x3a] = r0",
+   "effect": "a repeat counter is set to 100 for this pass"
+  },
+  "repeat_loop": {
+   "addrs": [
+    "0x1e0db1c",
+    "0x1e0db26",
+    "0x1e0db28",
+    "0x1e0db2c"
+   ],
+   "code": "r0 = b[r15+0x3a]; if (r0 == 0) exit; r0 += -1; b[r15+0x3a] = r0; if ((r0 & 0xff) != 0) goto 0x1e0dae6",
+   "effect": "the report is RE-BUILT AND RE-SENT up to 100 times, decrementing a counter in config space"
+  },
+  "gate_3": {
+   "addr": "0x1e0db38",
+   "code": "r1 = b[r15 + 0x11] ; if (r1 == 0) skip; if (r0 == 0) skip",
+   "effect": "the 28-byte variant additionally requires b[cfg+0x11] != 0 and the earlier result to be nonzero"
+  },
+  "boolean": "emit(A5 12 02, 14B payload) when b[cfg+0x10] != 0, repeated while the counter b[cfg+0x3a] decrements from 100; emit the 28-byte 0x02 variant when b[cfg+0x11] != 0 && b[cfg+0x10]-derived result != 0",
+  "not_proven": "what CALLS this region - i.e. the digital-event trigger that explains why idle produces zero frames and a button press produces them. The containing function 0x1e0aff2 is called from 0x1e0a9b4; that chain was not traced in this window."
+ },
+ "d2_handler_flag_write": {
+  "addr": "0x1e08d24",
+  "code": [
+   "r3 = r8 + 0x11",
+   "r2 = r8 + 0x10",
+   "if (r1 == 0x19) goto",
+   "r2 = r3",
+   "r4 = b[r9 + 0x3]",
+   "r3 = r0",
+   "if (r4 != 0) goto",
+   "r3 = 0x0",
+   "b[r2 + 0x0] = r3"
+  ],
+  "conclusion": "The D2 handler stores the enable byte at cfg+0x10 by default and at cfg+0x11 when the selector value is 0x19. These are exactly the two flags that gate the 14-byte and 28-byte reports, so D2 selects a REPORT VARIANT, not just on/off.",
+  "note": "state+0x10/0x11 here are the gate flags proven above; the brief's 'stores enable at state+0x10' is therefore confirmed AND extended to a second flag at +0x11."
+ },
+ "input_state": "The 28-byte buffer at sp+1080/sp+1024 is the pre-serialisation input snapshot (copied 0x1c bytes by 0x2f92c8 / 0x2f9276 then serialised in place by 0x1e07464). Its internal layout before serialisation is the input-state struct: mask u32, 4 axes s16, LT/RT, plus a second group at +0x14.",
+ "fw_u_026": {
+  "status": "PARTIALLY_RESOLVED",
+  "proven": "builder address, exact frame construction, payload field map, and the two-flag send gate with the 100-iteration repeat loop",
+  "open": "the trigger side (what schedules this path on digital activity) and therefore the full FW-U-026 boolean",
+  "next": "trace callers of 0x1e0a9b4 -> 0x1e0aff2 and find the digital-change trigger"
+ },
+ "not_advanced": [
+  "0x1e096b4 / 0x1e09ad4 / 0x1e09ce0 full reconstruction",
+  "USB/2.4G routing graph",
+  "M1-M4 record relation",
+  "macro/D8",
+  "FC/F6/F7",
+  "cross-version",
+  "dongle V3600"
+ ]
+}
