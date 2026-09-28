@@ -1,7 +1,21 @@
 # Tomorrow's plan (prepared overnight, nothing executed)
 
-Written 2026-09-27 during the autonomous shift. Hardware was not touched: every command below is
-**prepared and offline-tested**, not run.
+Written 2026-09-27, revised 2026-09-27/28 after the second overnight pass. Hardware was not touched:
+every command below is **prepared and offline-tested**, not run.
+
+## The corrected starting state (changed since the first draft)
+
+The harness is **not** silent. On 2026-09-27 at 17:08 it captured **3,292 valid 18-byte `A5 12 02`
+frames across 26 key ids** with the control plane `0B -> D2 ON` and **no pre-clear**
+(`results/reconciliation/d2-u007-harness-streaming-reconciliation.md`). Every window previously read as
+"silent" had **no physical press requested**; the official window did.
+
+Two consequences for tomorrow:
+
+1. **Case C1 (no pre-clear) is already known-good with a real press** - so the only untested variable is
+   the pre-clear, which is exactly what `C0` isolates.
+2. **A press must be CONFIRMED inside the observation window.** Without a press, every configuration
+   produces zero frames, and the run would prove nothing.
 
 ## Safety limits that still apply
 
@@ -20,11 +34,24 @@ Written 2026-09-27 during the autonomous shift. Hardware was not touched: every 
 
 Purpose: separate the three remaining D2 candidates, one variable at a time.
 
+### First action (shortest path)
+
+**Run `C0` only.** If C0 streams during a confirmed A-twice press: **STOP** - the pre-clear was never
+the problem, and the next work is the unresolved key ids, one button per popup. Only if C0 is silent
+*with a confirmed press* do you run `C1`, and only if C1 also fails, `C2` (the official burst is not
+required: the streaming run sent only `0B` before D2, and the static work shows the burst is generic
+application initialisation, not a D2 precondition).
+
 | case | sequence | isolates |
 |---|---|---|
 | C0 | connect → sanity `0B` → **D2 OFF (pre-clear)** → D2 ON → A-twice → observe → D2 OFF | control (today's harness) |
 | C1 | connect → sanity `0B` → D2 ON (no pre-clear) → A-twice → observe → D2 OFF | the pre-clear |
 | C2 | connect → sanity `0B` → `EF` → `0B` → `E2` → `D4` → **full D6 read** → D2 ON (no pre-clear) → A-twice → observe → D2 OFF | the official read burst |
+
+**Offline proof that this is decidable:** `results/reconciliation/offline-causal-run/offline-causal-matrix.json`
+- with a device where the pre-clear matters, `C0` is silent and `C1`/`C2` stream; with a device where it
+does not, all three stream. Redo it any time with
+`python3 automation/scripts/offline-causal-run.py` (no hardware, ~1 minute).
 
 Success is measured **during a real key press**, never by idle traffic:
 
@@ -89,4 +116,14 @@ questions; no writes should be attempted before reading those deliverables.
   `0x52`, handle `0x0075`) — PROVEN LIVE;
 - bonding/encryption theories: D2-U-008 is REFUTED (both links unbonded and unencrypted);
 - MTU theories: both sides negotiate 64;
-- re-counting the official D6 read: it is 10 frames / 144 bytes and equals our durable baseline.
+- re-counting the official D6 read: it is **10 frames / 144 bytes** and reassembles byte-identical to
+  our durable baseline `bdef9c61…`;
+- the D2 write type: the official frame is an ATT **Write Command (0x52)**, i.e. without response, same
+  as ours — D2-U-001 is CLOSED;
+- the pre-D2 burst as a *necessary* precondition: the streaming run sent no EF/E2/D4/D6, and the static
+  work shows the burst is generic initialisation — do not spend a case on it unless C0 and C1 both fail.
+
+## Full ledger
+
+`results/reconciliation/master-unknown-ledger.md` - 19 entries: 4 statically exhausted, 4 requiring the
+operator, 8 requiring hardware, 3 requiring new external evidence.

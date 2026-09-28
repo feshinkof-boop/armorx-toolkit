@@ -1,170 +1,210 @@
-# Real ARMOR-X Pro — master report (physical research pass)
+# ARMOR-X Pro — MASTER REPORT (supersedes all earlier handoffs)
 
-Device: REAL ARMOR-X Pro, `ARMOR-X Pro_11` / `2D:37:35:6D:66:11`, model `ZJ-XT`, firmware `2741`.
-Everything in this report is about that unit. Virtual-peripheral results are labelled VIRTUAL.
+Updated 2026-09-27/28 by the autonomous overnight shift (no hardware touched). This document is
+intended to be the **only** thing a reader needs: every claim carries a grade and a pointer, and where
+this shift changed an earlier conclusion the change is stated in place.
 
-## 1. Resumed state and what was reused
+Grades: **PROVEN LIVE / PROVEN STATIC / STRONG EVIDENCE / INFERRED / UNKNOWN / CONTRADICTED /
+NOT PRESENT**.
 
-- Branch `research/physical-armorx-live-2026-09-27`; lab HEAD at resume `ee772ec`, now `68dc6ea`
-  (see §12 for the full commit list). Toolkit repo `armorx-re/repo` @ `156368d`, same branch.
-- Reused, **not** re-proven: the D7 no-op round trip, the Emergency Restore exercise, the
-  immutable baseline, the D4/E2/0B/EF/DPI captures, the corrected D8 terminator, the Smi audit and
-  the `bit == id` correction.
-- Resume check: read-only D6 on the real unit found a **leftover ID-15 mutant** (not the
-  baseline) — an interrupted write. It was frozen as evidence, shown to be byte-for-byte our own
-  experiment (`diff {0,1,127}`), then restored and re-verified on a fresh connection.
-  Current D6 SHA: **`bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`**,
-  verified **persistent across a power cycle** at the end of the pass (see §14, which also
-  withdraws an earlier, invalid durability claim based on readback alone).
-
-## 2. Operator interaction (new model, validated)
-
-Repeating-popup alert **retired**. New contract: ONE popup, ONE sound, the **click** is the
-acknowledgement, returned to Hermes as JSON — chat is not the channel.
-`results/final/operator-ui-validation.md` records the validated test (`ACK/confirm_test` via click,
-`pw-play` fired once, no repeats). Dialogs used this pass: `operator_ui_test`,
-`armorx_power_required_restore`, `armorx_powercycle`, `armorx_console_state`,
-`armorx_wake_keep_active`. Every request + acknowledgement is in
-`results/runtime/operator-actions.jsonl`.
-
-## 3. Identity, GATT, and RCSP
-
-- Identity: `2A24 = ZJ-XT`, `2A26 = 2741`, `2A19 = 0x44` (68 %) → `0x41` (65 %). Advertisement
-  carries no service UUIDs. 6 services / 18 characteristics (`real-gatt-services.md`).
-- `AE00`/`AE01`/`AE02` (JieLi RCSP-compatible) **present on the device — PROVEN LIVE**; the
-  Android app does **not** use RCSP (PROVEN STATIC, control-verified, and re-confirmed this pass
-  with an independent zip-level scanner; `rcsp`/`FE DC BA` hits are coincidences — `strcspn`, a
-  compiler constant table). Verdict: `jieli-rcsp-verdict.md`.
-
-## 4. Protocol
-
-Full contract: `real-armorx-protocol-contract.md`. Headlines: `A5` short frames with sum8;
-`A4` fragments with 1-based ordinal and 20-byte frames (payload class **15**) on this unit;
-144-byte config with big-endian CRC-16/MODBUS and `mapKeys` at bytes 112–143.
-
-## 5. D4 / E2
-
-`real-d4-e2.md`. Note the **recorded conflict**: TX `A5 04 D4 7D` ✓, but every captured reply is
-`A5 07 D4 11 01 00 92`, whereas the brief states `A5 06 D4 00 00 7F`. The captured value is
-PROVEN LIVE; the brief's value is recorded as CONTRADICTED by the captures on disk and will be
-settled by a read-only re-query. `E2` firmware is **BCD** (`0x27 0x41` = `2741`), not ASCII.
-
-## 6. Key-ID map (button capture)
-
-`real-key-id-map.md`. 26 ids resolved, all PROVEN LIVE, from real D2 captures by claim
-verification (never positional guessing). Mask = bytes `[3][4][5][6]`, **bit == id**.
-Resolved: A 0, B 1, X 3, Y 4, LB 6, RB 7, LT 8, View 10, Menu 11, Guide 12, L3 13, R3 14,
-**Capture 15**, D-pad 16-19, M1-M4 23-26, M5-M7 27-29, plus an unattributed id 20.
-**RT unresolved** (4 attempts, no frame; its analog byte `[16]` never left zero).
-**ID 15 = Capture is PROVEN LIVE from live capture — no config write was needed.** The byte-127
-mutation was executed once, verified live (`97fb2061…`), then restored & verified; its operator
-verdict was never collected, so it is recorded **INCONCLUSIVE** and is not used as evidence.
-
-### Two-press standard and how it stands
-
-The two-press protocol was implemented (`button-capture-harness.py`) but could not be applied:
-the unit stopped streaming D2 status frames (`d2-mode-state-finding.md`). The existing rows are
-therefore single-clean-press evidence with releases observed, stated as such.
-
-## 7. D8
-
-`real-d8.md`. Fragment class for this unit determined as **15-byte payload** from static
-(`subpackageLength()` → 20/48/72) **and** live frames (only 20-byte `A4` frames accepted).
-**No D8 write attempted** — macro preservation must be established first (provably empty slot or
-an operator-chosen slot via dialog).
-
-## 8. DPI / lighting / motion
-
-- DPI: `real-dpi.md`. Query `A5 05 FC 80 26` → `A5 05 FF FC A5` (PROVEN LIVE). **No numeric DPI
-  assigned, no write performed.**
-- Motion/gyro `AB 05 05 25 / 26`: **no reply while the link was proven healthy** — PROVEN LIVE,
-  not retried.
-- Lighting: `real-lighting.md`. **Not started**; RGB order UNKNOWN; no mutation without a
-  verified restore path and GUI-collected colour observation.
-
-## 9. Not done in this pass (honest list)
-
-- D2 button capture with the two-press standard (blocked, §6).
-- D8 macro readback/write; DPI and lighting work; normal USB enumeration; F20 receiver/HID and
-  Linux-driver evidence; firmware-upgrade-mode enumeration; any firmware dump.
-- `real-gatt-services-bleak.json` characteristic **properties** (independent BlueZ path ran while
-  the unit was asleep and correctly reported `DEVICE_NOT_ADVERTISING`).
-
-## 10. Bugs found and fixed (not worked around)
-
-1. Capture tool defaulted to `hci-socket` (hci0) instead of the lab `hci-socket:1` → `Errno 16`.
-2. Harness phase is a **positional** argument, not `--phase`.
-3. Operator-dialog ack files were landing **root-owned** because the harness re-execs as root —
-   the dialog now launches as the desktop user.
-4. Shell quoting: multi-line `--message` through `use-bumble.sh --command` is word-split — tools
-   now tolerate trailing harness args (`parse_known_args`) and avoid multi-line CLI text.
-5. `bluetoothd` wedged (>90 s hang on `bluetoothctl show`) → mgmt restart; primary network
-   re-verified PASS.
-
-## 11. Tests
-
-`PYTHONPATH=ble/virtual-armorx:automation/scripts /usr/bin/python3.14 -m pytest tests -q`
-→ **104 passed**, including real-device regression vectors exported from the captures
-(`tests/vectors/real-device-vectors.json`, 61 real status frames + real 0B/EF/D4/E2 replies).
-Harness selftest: ALL CHECKS PASSED.
-
-## 12. Git
-
-Branch `research/physical-armorx-live-2026-09-27` (lab): `ee772ec` → `68dc6ea` →
-`7ead4a4`, `d9a4d52`, `47b7b98`, `dc537cf`, `5fd60fb`, `dc902f6`. Toolkit `armorx-re/repo`
-unchanged at `156368d`. No public-release branch touched, no history rewritten. Remote push is
-**auth-blocked** (no SSH key / `gh`) — hand-off remains git bundle + patch.
-
-## 13. Highest-value next experiment
-
-**Revive the D2 status stream and complete the button map under the two-press rule** — cheapest
-concrete test first: with the unit freshly powered and being actively used, re-probe the stream
-(`probe-d2.py`); if it returns, run `button-capture-harness.py` for **RT** (the only unresolved
-button), then re-run the 23 resolved buttons to upgrade them from single-press to two-press
-evidence. Rationale: the map underpins every later write experiment (macros, lighting, ID 15
-confirmation), and RT is the one button whose silence is currently unexplained.
-
-## 14. Durability finding (added after the earlier sections were written)
-
-**A `D7` config write is staging-only until it settles.** Readback (`D6`) faithfully reflects the
-working copy, but a power cycle reloads the previously persisted image. The write became durable
-only after a ~12–19 minute idle window before power-off; a hard power cycle then still read the
-intended image. Full chain: `real-config-durability.md`.
-
-This **withdraws** the durability interpretation of `restore_verified: true`, of the no-op `D7`
-gate, and of this report's own earlier "baseline intact" wording (now replaced above). Later
-persistent work (D8/DPI/lighting) must use the sequence **write → readback → settle → power cycle →
-read**, and must never report success from the readback alone.
-
-The finding does **not** explain the D2 status-stream silence: after the durable restore, D2 still
-streamed nothing (5 variants tested). That remains UNKNOWN.
+The previous physical-pass report is preserved at
+`results/final/archive/real-armorx-master-report-physical-pass-2026-09-27.md`.
 
 ---
 
-## Verification vocabulary (authoritative)
+## 0. The headline correction (read this first)
 
-```text
-STAGED_OK
+`OFFICIAL_WORKS_HARNESS_SILENT` - the finding that the harness receives nothing while the official app
+streams - is **CONTRADICTED as a statement about the device**. The harness received **3,292 valid
+18-byte `A5 12 02` frames across 26 key ids** on 2026-09-27 at 17:08, over the control plane
+`0B → D2 ON` with **no pre-clear**. The windows previously read as "harness silent" had **no physical
+press requested at all**; the official window did. Under the corrected event-driven model that is a
+comparison of *pressed* vs *not pressed*.
 
-D7 write
-→ immediate D6 readback equals target
+Reclassified: `HARNESS_STREAMS_UNDER_PRESS__DIFFERENTIAL_WINDOWS_WERE_NOT_PRESS-MATCHED`.
+Full working: `results/reconciliation/d2-u007-harness-streaming-reconciliation.md`.
 
-does NOT prove flash durability.
-```
+---
 
-```text
-DURABLE_OK
+## 1. Hardware
 
-D7 write
-→ immediate D6 readback
-→ idle / settle period
-→ power cycle
-→ D6 equals expected SHA256
-```
+| item | value | grade |
+|---|---|---|
+| unit | ARMOR-X Pro, `ARMOR-X Pro_11`, `2D:37:35:6D:66:11` | PROVEN LIVE |
+| identity | model `ZJ-XT`, firmware `2741`, id `ZJ-XT_2741_2D-37-35-6D-66-11` | PROVEN LIVE |
+| manufacturer data | `fe ff` + `5a4a2d5854` (`ZJ-XT` ASCII) | PROVEN LIVE |
+| config baseline | 144 bytes, `sha256 bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` | **PROVEN LIVE, DURABLE_OK** |
+| state at end of shift | unit off/asleep; **no hardware has been touched since** | - |
 
-Current durable baseline:
+## 2. BLE transport and GATT
 
-`bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`
+| item | value | grade |
+|---|---|---|
+| services | 6 services / 18 characteristics, including the custom service carrying FFE1/FFE2 | PROVEN LIVE |
+| control write | FFE1 = `0000ffe1-…` handle `0x0075` | PROVEN LIVE |
+| notify | FFE2 = `0000ffe2-…` handle `0x0077`; CCCD `0x0078` | PROVEN LIVE |
+| RCSP services | `AE00`/`AE01`/`AE02` **present on the real unit** (JieLi-capable stack) but **not** used for configuration | PROVEN LIVE |
+| ATT MTU | both the official app and the harness end at **64** (official: 23 then 512→64) | PROVEN LIVE |
+| security | official and harness are both **UNBONDED + UNENCRYPTED**; zero SMP frames, zero encryption events | PROVEN LIVE |
+| connection interval | official `30 → 7.5 → 30 → 11.25 ms` over 4 link states; harness `7.50 ms`; latency 0; supervision 5 s → 2000 ms | PROVEN LIVE |
 
-Previous no-op D7 and Emergency Restore evidence is **retained and reclassified as staging
-evidence** — it was never a durability proof, and nothing is deleted.
+The four official interval states are accounted for by **1 LE Extended Create Connection + exactly 3 LE
+Connection Update commands** (frames 4297/4402/4421, with 3 Complete events) - verified independently.
+The app **never calls `requestConnectionPriority`, `setPreferredPhy` or an MTU-request API**, so the
+interval history is stack/OS-driven, not app-requested (**PROVEN STATIC**).
+
+## 3. Official Android app
+
+| item | value | grade |
+|---|---|---|
+| phone | vivo V2304A / iQOO 11S, Android 16 / SDK 36, serial `10AD730KL6001AY` | PROVEN LIVE |
+| package | `com.moojiang.bigbigwon.mygt` **4.0.8 / versionCode 409**, targetSdk 36, not debuggable | PROVEN LIVE |
+| integrity | installed `base.apk` byte-identical to the repository's 4.0.8 (`64e0832b…9378e2`); no Frida/Xposed | PROVEN LIVE |
+| capture | Android HCI snoop (`.cfa`, plain BTSnoop v1) 3,777,571 B, `sha256 bbaf10bd…` | PROVEN LIVE |
+| ADB | established over USB (blocker resolved); transport available | PROVEN LIVE |
+
+## 4. D2 (Button Test / test mode)
+
+| item | value | grade |
+|---|---|---|
+| official enable | `A5 05 D2 01 7D`, ATT **Write Command (0x52)**, handle `0x0075` | PROVEN LIVE |
+| harness enable | **byte-identical** - same value, same opcode, same handle, echoed twice | PROVEN LIVE |
+| official disable | `A5 05 D2 00 7C` at +129.5 s | PROVEN LIVE |
+| input model | **event-driven**: 0 frames while idle (61 s window), 155 frames during a press window | PROVEN LIVE |
+| frame | 18 bytes `A5 12 02 <mask u32 BE> <axes> <LT> <RT> <cks>`; bit index == key id | PROVEN LIVE |
+| A-twice proof | PRESS 580.293 → RELEASE 580.518 → PRESS 581.361 → RELEASE 581.598 (225/237 ms, gap 843 ms), only bit 0 | PROVEN LIVE |
+| held cadence | median ≈ 11.7 ms while held | PROVEN LIVE |
+| harness streaming | **3,292 frames / 26 ids** with `0B → D2 ON`, no pre-clear | PROVEN LIVE |
+| `D2-U-007` | **RESOLVED** (harness is not silent); residual = is the D2 **pre-clear** harmful *when a key is pressed*? never tested together | residual UNKNOWN |
+| `D2-U-008` (bonding/encryption required) | **REFUTED** - both sides unbonded/unencrypted | PROVEN LIVE |
+| `D2-U-009` (connection params differ) | **SUPPORTED, not causal** - intervals differ, app requests no profile | PROVEN LIVE / PROVEN STATIC |
+| `D2-U-002` (2.24 `0x24`) | **RESOLVED**: `0x24` is the tagged Smi of 18, compared against `data[1]` (`=0x12`) | PROVEN STATIC (verified byte-level) |
+
+## 5. The pre-D2 burst, and its origin (static)
+
+The official app sends, before D2: `EF → 0B → E2 → D4 → D6 (ten frames)`. Static origin (**PROVEN STATIC**,
+addresses verified against the 4.0.8 AOT tree):
+
+| request | emitter | address | dart line |
+|---|---|---|---|
+| `EF` | `BluetoothModel::getDeviceUUID` | `0xacf618` | 3973 |
+| `0B` | `BluetoothModel::getZKMVer` | `0x8b61fc` | 1042 |
+| `E2` | `BluetoothModel::readFirmware` | `0x8b6860` | 1263 |
+| `D4` | `BluetoothModel::getInputModel` | `0xa84258` | 1850 |
+| `D6` | `BluetoothModel::getDeviceConfig` | `0x80dbfc` | 12 |
+| `D2` | `BluetoothModel::testModeSwitch` | `0xabaef4` | 1954 |
+
+**They are NOT one ordered initialisation pipeline.** `EF → 0B → E2` is a genuinely reply-gated chain
+(each request is emitted from the previous opcode's reply handler); `D4 → D6` is a *separate* sequence
+fired from the configuration tab's own state, gated on nothing. The cross-version branch adds the
+decisive context: the burst is **generic application initialisation**, present across builds, and is
+**not D2-specific**.
+
+**D6 → application state:** `D6_APP_STATE_DEPENDENCY_NOT_FOUND` for the 4.0.8 Button-Test/D2 path
+(scope stated): the configuration read populates app state that Button Test does not consult. A
+read-only *device* operation still initialises *app* state - but nothing gates D2 on it.
+
+## 6. D4
+
+Official live: TX `A5 04 D4 7D` → RX `A5 07 D4 11 01 00 92`. The exhaustive matrix
+(`results/reconciliation/d4-matrix.md`) reconciles the older conflicting readings: the primary
+explanations are **an old assumption** and **an early virtual-peripheral run**, with device-mode state
+also supported; a genuine protocol variant across the four app versions is **not** supported.
+Old evidence was preserved, not erased.
+
+## 7. D6 / D7 and configuration durability
+
+| item | value | grade |
+|---|---|---|
+| D6 read shape | **TEN reply frames**: nine 20-byte fragments + one 14-byte tail = **144 bytes** | PROVEN LIVE |
+| **correction** | earlier documents said "eight fragments"; the real read is ten (ordinals 01–09 plus a shorter ordinal 10) | CONTRADICTED → corrected with dated notes |
+| cross-check | the reassembled read is **byte-identical to our durable baseline** `bdef9c61…` | **PROVEN LIVE** |
+| D7 immediate readback | **STAGED_OK only** | PROVEN LIVE |
+| durable restore | `write → readback → idle/settle → power cycle → D6 exact SHA match` = **DURABLE_OK** | PROVEN LIVE |
+| rule | `STAGED_OK != DURABLE_OK` - never report an immediate readback as persistence | authoritative |
+
+## 8. Configuration format (144 bytes)
+
+Per-byte evidence map: `results/final/config-byte-evidence-map.{md,json,csv}` - 36 rows,
+25 PROVEN STATIC / 10 UNKNOWN / 1 PROVEN LIVE, with CRC, length field, stick/trigger/gyro/turbo/profile
+regions and the trailing 32-byte `mapKeys` region (a **source→target remap**, not a name table).
+Unknown bytes stay UNKNOWN.
+
+## 9. Key map
+
+`results/final/key-map-confidence.{md,json,csv}`: **26 ids PROVEN LIVE** (0,1,3,4,6,7,8,10,11,12,13,14,
+15,16,17,18,19,20,23,24,25,26,27,28,29,30), **8 UNKNOWN** (2,5,9,21,22,31,32,33). RT (9) is a proven
+**negative**. New finding: the app's own `define.dart` key getters sit **exactly one bit above** the
+wire for the same names, so they are a separate enumeration and must not be used to name a wire bit.
+
+## 10. D8 / macros
+
+Fragment layout `A4 | total_len | opcode | ordinal | payload | csum`, and the **commit frame is
+`A4 05 D8 <nfrags+1> <cks>`**, not `A4 0A D8` (PROVEN STATIC in all four builds). The older
+7-byte `GamepadDefMap` / 15-byte-segment model coexists with the modern 10-byte `TranscribeFrame`
+model whose payload classes are 15/43/67; the exact chunk-class selector is unresolved.
+`automation/scripts/armorx_lab/frames.py::build_d8_terminator` already emits `0x05`. No macro write was
+performed. Scope note: the A4 framing rule was derived from the ten live A4/**D6** config frames (same
+framing, legitimate) and must not be read as a live D8 macro capture.
+
+## 11. DPI, motion, lighting
+
+Consolidated in `results/final/protocol-closure-fc-dpi-motion-lighting.md`. Headlines: DPI query is
+`A5 05 FC 80 26` → live reply `a5 05 ff fc a5` (**PROVEN LIVE**); the selector→DPI table is **not in the
+binary** (server-side presets) so no numeric DPI is claimed; the motion family is **`AB`**
+(`AB 05 05 25 DA` / `AB 05 05 26 DB`, checksum-valid - a repo transcription error was corrected this
+shift) and it produced **no reply** on this firmware; lighting has **no read path at all**, so a write
+cannot be verified by readback, and **RGB byte order is UNKNOWN in all four builds**.
+
+## 12. USB / F20 receiver, Windows Assistant
+
+`results/final/windows-usb-static-closure.md`. Settled: `VID_413D&PID_2106`, Usage Page `FF7A`, Usage
+`0001`, N = 64, 65-byte Windows buffers with the report ID in slot 0, persistent/pre-posted IN, IOCP
+(`CreateIoCompletionPort`), `CUsbCmd::ToPacket`/`FromPacket`, and `request+0x10` aliasing
+`transfer_base+0x68`. Also settled: DevMgr.dll contains **two independent numbering systems**
+(`t_BBW_DevType` vs `t_ProductType`) that collide at 5–7 - they must never be conflated. Read symmetry,
+buffer ownership and the mark/model classifier stay UNKNOWN; the normal-vs-Xbox re-enumeration question
+is **hardware-bound**.
+
+## 13. JieLi / firmware
+
+`results/reconciliation/jieli-firmware-static.md`. The app contains **no RCSP client** and **no firmware
+download path** (proven negative, so nobody needs to re-search); the real unit exposes an RCSP-capable
+service layout but configures through the custom service; the vendor **Windows** updater carries a JieLi
+AC632N `.ufw` upgrade library. **No firmware image exists anywhere in the local artifacts**, so the MCU
+part number stays **STRONG EVIDENCE, not proven**. No OTA, no firmware write, no bootloader interaction.
+
+## 14. Linux support and community platform (design)
+
+- `docs/linux-support-architecture.md`: configuration support belongs in a **userspace BlueZ client**
+  behind a transport interface, with a thin state daemon and the GUI as a consumer. **No kernel driver**
+  - nothing needs one. **`uinput` is only relevant to input remapping**, not configuration. The F20/USB
+  path is a **separate** component.
+- `docs/community-platform-{architecture,api-draft,schema}.md`: design only, not deployed. Content is
+  content-addressed and **validated before listing**; diffs are **field-level** and surface
+  `unknown_regions_changed`; no firmware distribution; private by default; tombstones instead of hard
+  deletes.
+
+## 15. Unknowns (canonical ledger)
+
+`results/reconciliation/master-unknown-ledger.{md,json}` - every open item with what is ruled out, the
+best evidence, the next offline step, the next hardware step, and its classification
+(`DEFERRED_REQUIRES_HARDWARE` / `DEFERRED_REQUIRES_OPERATOR` / `DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE`
+/ `STATICALLY_EXHAUSTED`).
+
+## 16. Next physical tests (shortest path, in order)
+
+**First and only first action: case `C0` - the current harness *with a real A press*.**
+
+1. Wake the unit; confirm identity (`2A24`/`2A26`) before anything else.
+2. Run `C0` (`automation/scripts/d2-cases`/`d2-differential.py variant --case C0`, `D2_OBSERVE_S=15`)
+   with a **confirmed** A-twice press during the observation window.
+   - **Zero idle frames is NORMAL.** Success is frames *during the press*.
+   - If C0 streams → **STOP.** The pre-clear was never the problem; reconcile the diff register and move
+     to the next family (unresolved key ids one button per popup).
+   - If C0 is silent **and the press is confirmed** → run `C1` (no pre-clear). If C1 streams → the
+     pre-clear is the gate; STOP. If C1 also fails → run `C2` (official burst + no pre-clear).
+   - Only if all three fail during confirmed presses: the connection-interval experiment (11.25 ms),
+     which is the weakest remaining candidate.
+3. Always issue D2 disable before disconnecting, and re-read D6 afterwards to confirm the baseline
+   (`bdef9c61…`) is intact.

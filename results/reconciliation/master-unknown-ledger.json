@@ -1,0 +1,271 @@
+{
+ "generated": "2026-09-27/28 overnight shift",
+ "rule": "Every unknown carries what is ruled out, the best evidence, the next offline step and the next hardware step. Historical ids are kept, never silently retired.",
+ "counts": {
+  "STATICALLY_EXHAUSTED": 4,
+  "DEFERRED_REQUIRES_OPERATOR": 4,
+  "DEFERRED_REQUIRES_HARDWARE": 8,
+  "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 3
+ },
+ "entries": [
+  {
+   "id": "D2-U-001",
+   "question": "What write type does the official app use for D2?",
+   "priority": "CLOSED",
+   "ruled_out": [
+    "write-with-response"
+   ],
+   "best_evidence": "the official capture shows ATT Write Command (0x52) on handle 0x0075 = write WITHOUT response, identical to the harness",
+   "next_offline_step": "-",
+   "next_hardware_step": "-",
+   "dependencies": [],
+   "classification": "STATICALLY_EXHAUSTED",
+   "status": "RESOLVED"
+  },
+  {
+   "id": "D2-U-002",
+   "question": "What is the 0x24 comparison in the 2.24 Button-Test parser?",
+   "priority": "CLOSED",
+   "ruled_out": [
+    "36-byte frame length",
+    "a container .length",
+    "an array index",
+    "a byte offset",
+    "an enum"
+   ],
+   "best_evidence": "0x24 is the tagged Smi of 18 (18<<1); verified byte-level at 0x8b06e8 in 2.23 (LoadInt32Instr then cmp x1,#0x12) and corroborated by all 155 live frames carrying byte[1]=0x12",
+   "next_offline_step": "-",
+   "next_hardware_step": "-",
+   "dependencies": [],
+   "classification": "STATICALLY_EXHAUSTED",
+   "status": "RESOLVED"
+  },
+  {
+   "id": "D2-U-007",
+   "question": "Why did the harness appear silent after a D2 enable?",
+   "priority": "CLOSED",
+   "ruled_out": [
+    "a device-level difference between app and harness",
+    "a capability limit of the harness"
+   ],
+   "best_evidence": "the harness captured 3,292 valid 18-byte frames across 26 ids with control plane 0B -> D2 ON (no pre-clear); every 'silent' window had no press requested",
+   "next_offline_step": "-",
+   "next_hardware_step": "-",
+   "dependencies": [],
+   "classification": "STATICALLY_EXHAUSTED",
+   "status": "RESOLVED"
+  },
+  {
+   "id": "D2-U-010",
+   "question": "Does a D2 OFF pre-clear before the D2 enable suppress streaming while a key IS pressed?",
+   "priority": "CRITICAL",
+   "ruled_out": [],
+   "best_evidence": "every streaming window lacked a pre-clear; every pre-cleared window lacked a press, so the two have never been separated. The offline virtual-device matrix shows case C0 discriminates the hypotheses",
+   "next_offline_step": "done: C0/C1/C2 defined, executor tested, offline matrix committed",
+   "next_hardware_step": "case C0 with a CONFIRMED A-twice press",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_OPERATOR",
+   "status": "OPEN - the single first physical action"
+  },
+  {
+   "id": "D2-U-008",
+   "question": "Does the device require a bonded/encrypted link?",
+   "priority": "CLOSED",
+   "ruled_out": [
+    "bonding",
+    "encryption",
+    "SMP"
+   ],
+   "best_evidence": "BOND_NONE on the phone, zero SMP frames, zero encryption events on both sides",
+   "next_offline_step": "-",
+   "next_hardware_step": "-",
+   "dependencies": [],
+   "classification": "STATICALLY_EXHAUSTED",
+   "status": "REFUTED"
+  },
+  {
+   "id": "D2-U-009",
+   "question": "Do the connection parameters cause the difference?",
+   "priority": "LOW",
+   "ruled_out": [
+    "causality (explicitly not claimed)"
+   ],
+   "best_evidence": "official 30 -> 7.5 -> 30 -> 11.25 ms (1 create + 3 update commands, verified) vs harness 7.5 ms; the app requests no interval profile at all",
+   "next_offline_step": "11.25 ms mechanism documented (results/final/connection-params-11ms-experiment-11.25ms.md)",
+   "next_hardware_step": "apply the documented OS-level mechanism, then repeat C0",
+   "dependencies": [
+    "D2-U-010 must fail first"
+   ],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN (weakest candidate)"
+  },
+  {
+   "id": "KEY-U-001",
+   "question": "Which buttons are ids 2, 5, 21, 22, 31, 32, 33?",
+   "priority": "MEDIUM",
+   "ruled_out": [],
+   "best_evidence": "no physical button produced these bits in any capture; the static label inventories do not resolve them; define.dart getters are offset +1 and cannot be used to name wire bits",
+   "next_offline_step": "-",
+   "next_hardware_step": "one button per popup, operator-acknowledged, no order assumption",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_OPERATOR",
+   "status": "OPEN"
+  },
+  {
+   "id": "KEY-U-002",
+   "question": "Does RT (id 9) have a digital key id on this unit?",
+   "priority": "MEDIUM",
+   "ruled_out": [
+    "id 9 as RT's bit"
+   ],
+   "best_evidence": "requested in 4 windows + 3 dedicated retries; never appeared; analog byte [16] never left zero",
+   "next_offline_step": "-",
+   "next_hardware_step": "physical RT press with analog readback to decide analog-only vs absent",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_OPERATOR",
+   "status": "OPEN (proven negative as a digital bit)"
+  },
+  {
+   "id": "DPI-U-001",
+   "question": "What real DPI value does selector N mean?",
+   "priority": "MEDIUM",
+   "ruled_out": [
+    "any in-binary mapping table"
+   ],
+   "best_evidence": "the selector is a 4-bit mask; presets come from the vendor's server, so nothing in the APK maps selector->DPI",
+   "next_offline_step": "-",
+   "next_hardware_step": "none useful without the vendor table",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+   "status": "OPEN"
+  },
+  {
+   "id": "DPI-U-002",
+   "question": "What is the shape of the DPI reply (live: a5 05 ff fc a5)?",
+   "priority": "MEDIUM",
+   "ruled_out": [],
+   "best_evidence": "one live reply captured, checksum valid, semantics undecoded",
+   "next_offline_step": "a dedicated static search for the notification handler in all four builds",
+   "next_hardware_step": "re-read the query and vary the selector while capturing, to see which field moves",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
+  },
+  {
+   "id": "MOT-U-001",
+   "question": "What do the AB motion/gyro payload fields mean (mode, sensitivity, deadzone, filter)?",
+   "priority": "LOW",
+   "ruled_out": [],
+   "best_evidence": "the writer AB 07 05 25 <u16 LE> and the query shapes AB 05 05 25/26 are known; the queries return NOTHING on this firmware",
+   "next_offline_step": "static field trace around writeMotionDpiConfig @0x946158",
+   "next_hardware_step": "none until a reply exists",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
+  },
+  {
+   "id": "LGT-U-001",
+   "question": "What is the RGB byte order and the lighting field layout?",
+   "priority": "MEDIUM",
+   "ruled_out": [
+    "conventional RGB ordering (no evidence)"
+   ],
+   "best_evidence": "the 0x70 writers exist in all builds but no read path exists; RGB order is UNKNOWN in all four builds",
+   "next_offline_step": "static field trace through writeLightConfig and the 0x05/0x3F sub-commands",
+   "next_hardware_step": "minimum reversible experiment: one zone, one known colour, visual confirm, restore",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_OPERATOR",
+   "status": "OPEN"
+  },
+  {
+   "id": "D8-U-001",
+   "question": "What selects the D8 chunk class (15 / 43 / 67 payload sizes)?",
+   "priority": "MEDIUM",
+   "ruled_out": [
+    "A4 0A D8 as a commit frame (CONTRADICTED in all four builds)"
+   ],
+   "best_evidence": "commit is A4 05 D8 <nfrags+1> <cks>; the 10-byte TranscribeFrame model and subpackageLength-5 arithmetic are reconstructed; the class selector is not",
+   "next_offline_step": "static branch analysis of the fragmenter in all four builds",
+   "next_hardware_step": "read a macro back and observe which classes the device emits",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN (static step available)"
+  },
+  {
+   "id": "CFG-U-001",
+   "question": "What are the 10 UNKNOWN byte regions of the 144-byte configuration?",
+   "priority": "HIGH",
+   "ruled_out": [],
+   "best_evidence": "config-byte-evidence-map: 25 PROVEN STATIC / 10 UNKNOWN / 1 PROVEN LIVE; baseline and mutant images both exist and differ in {0,1,127}",
+   "next_offline_step": "resolve more regions statically from the four builds' config codecs",
+   "next_hardware_step": "controlled single-field diffs with readback + power-cycle verification",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
+  },
+  {
+   "id": "WIN-U-001",
+   "question": "Why does the current Windows Assistant leave the ARMORX legacy device type inaccessible?",
+   "priority": "MEDIUM",
+   "ruled_out": [
+    "conflating the two numbering systems (now explicitly separated)"
+   ],
+   "best_evidence": "DevMgr.dll has t_BBW_DevType and t_ProductType colliding at 5-7; the classifier switch is at 0x1003212f",
+   "next_offline_step": "PE xref pass mapping the classifier to the UI device list",
+   "next_hardware_step": "attach the unit and observe which type the Assistant picks",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN (static step available)"
+  },
+  {
+   "id": "WIN-U-002",
+   "question": "Is there a latent ArmorX Pro factory/DFU path in the vendor software?",
+   "priority": "LOW",
+   "ruled_out": [],
+   "best_evidence": "devmgr_dfu_analysis.json exists as a starting point; no factory entry point was identified",
+   "next_offline_step": "dedicated static pass over the DFU/upgrade DLLs",
+   "next_hardware_step": "NOT to be attempted (no flash/firmware operations)",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+   "status": "OPEN"
+  },
+  {
+   "id": "WIN-U-003",
+   "question": "Does the pad re-enumerate differently in normal vs Xbox-compatible mode?",
+   "priority": "MEDIUM",
+   "ruled_out": [],
+   "best_evidence": "the Windows-side question is about device behaviour, not code",
+   "next_offline_step": "static prediction of which descriptors each mode would request",
+   "next_hardware_step": "mode switch on real hardware with enumeration monitoring",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
+  },
+  {
+   "id": "FW-U-001",
+   "question": "Which MCU is in the ARMOR-X Pro body?",
+   "priority": "LOW",
+   "ruled_out": [],
+   "best_evidence": "RCSP-capable service layout + a JieLi AC632N .ufw upgrade library in the vendor Windows software => AC6321A/AC632N/BD19 is STRONG EVIDENCE, not proof; no firmware image exists locally",
+   "next_offline_step": "static analysis of the vendor .ufw container/signature handling",
+   "next_hardware_step": "a firmware dump (not attempted, and not proposed)",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+   "status": "OPEN"
+  },
+  {
+   "id": "SES-U-001",
+   "question": "Can an 11.25 ms connection interval be requested reproducibly on Linux?",
+   "priority": "LOW",
+   "ruled_out": [],
+   "best_evidence": "mechanism research is documented (BlueZ/btmgmt/kernel vs raw HCI) with privileges, adapter requirements and rollback",
+   "next_offline_step": "done",
+   "next_hardware_step": "apply and measure without a device first, then with",
+   "dependencies": [
+    "D2-U-010 must fail"
+   ],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
+  }
+ ]
+}
