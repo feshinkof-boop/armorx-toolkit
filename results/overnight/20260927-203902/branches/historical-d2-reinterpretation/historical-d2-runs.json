@@ -1,0 +1,378 @@
+{
+ "schema": "armorx-historical-d2-reinterpretation/v1",
+ "generated_for": "overnight shift 2026-09-27T20:39:02-04:00",
+ "method": "reinterpretation pass; originals untouched; corrections live in annotations/*.md",
+ "corrected_premise": {
+  "statement": "D2 input is EVENT-DRIVEN: zero idle frames != failure",
+  "source": "results/overnight/20260927-203902/manifest.json (no_regression_rules)",
+  "empirical_proof": "results/overnight/20260927-203902/official-timeline-verification.json \u2014 0 button frames over a 61.0 s idle window, then 155 frames on A presses"
+ },
+ "label_vocabulary": {
+  "old": [
+   "D2_STREAM_FAILED",
+   "SILENT",
+   "no longer streaming",
+   "CASE 6 none succeed",
+   "NO_STREAM_IN_ANY_VARIANT"
+  ],
+  "corrected": [
+   "NO_IDLE_FRAMES_OBSERVED",
+   "PRESS_PERFORMED__BUTTON_NOT_IN_MASK",
+   "BUTTON_FRAMES_OBSERVED",
+   "NOT_APPLICABLE_NO_D2",
+   "NOT_APPLICABLE_NO_D2_CAPTURE"
+  ]
+ },
+ "d2_runs": [
+  {
+   "run_dir": "results/experiments/physical-20260927-button-test",
+   "edt": "16:29:23",
+   "asked_of_operator": "nothing (scan only)",
+   "press_performed": "no",
+   "button_frames": null,
+   "original_verdict": "(implicit: no capture)",
+   "corrected_verdict": "NOT_APPLICABLE_NO_D2",
+   "grade": "PROVEN",
+   "note": "never connected; D2 never sent"
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-button-test2",
+   "edt": "16:29:57",
+   "asked_of_operator": "nothing",
+   "press_performed": "no",
+   "button_frames": null,
+   "original_verdict": "(implicit: no capture)",
+   "corrected_verdict": "NOT_APPLICABLE_NO_D2",
+   "grade": "PROVEN",
+   "note": "SESSION_START only; D2 never sent"
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-button-test3",
+   "edt": "16:30:54",
+   "asked_of_operator": "nothing (D2 ON sent 16:31:08; no operator request existed before 16:55)",
+   "press_performed": "no",
+   "button_frames": 0,
+   "original_verdict": "(none recorded)",
+   "corrected_verdict": "NO_IDLE_FRAMES_OBSERVED",
+   "grade": "PROVEN",
+   "mislabelled": true
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-button-test4",
+   "edt": "16:38:49",
+   "asked_of_operator": "nothing",
+   "press_performed": "no",
+   "button_frames": null,
+   "original_verdict": "(implicit: no capture)",
+   "corrected_verdict": "NOT_APPLICABLE_NO_D2",
+   "grade": "PROVEN",
+   "note": "no ARMOR-X advert; SESSION_END"
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-170844-d2",
+   "edt": "17:08:47-17:24:00",
+   "asked_of_operator": "d2_window_prepare + press_group_A..F (all acked DONE)",
+   "press_performed": "yes",
+   "button_frames": 3293,
+   "original_verdict": "SUCCESS (real-key-id-map.md, PROVEN LIVE)",
+   "corrected_verdict": "BUTTON_FRAMES_OBSERVED",
+   "grade": "PROVEN",
+   "ids_resolved": 26,
+   "ids": [
+    0,
+    1,
+    3,
+    4,
+    6,
+    7,
+    8,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+   ],
+   "unresolved": [
+    2,
+    5,
+    9,
+    21,
+    22,
+    31
+   ],
+   "note": "RT never produced a digital id"
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-171616-id15",
+   "edt": "17:16:16 (capture press 17:26:06)",
+   "asked_of_operator": "id15_observe_capture: press Capture/Share ONCE",
+   "press_performed": "yes",
+   "button_frames": null,
+   "original_verdict": "id15 probe BASELINE_LIVE; mutant INCONCLUSIVE",
+   "corrected_verdict": "NOT_APPLICABLE_NO_D2_CAPTURE",
+   "grade": "PROVEN",
+   "note": "no D2 capture channel in this dir; observation was console-side; ack note AMBIGUOUS"
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-174445-buttons",
+   "edt": "17:44:45 (RT tests 17:47:24 & 17:48:28)",
+   "asked_of_operator": "button_rt: press RT TWICE, twice (both acked DONE)",
+   "press_performed": "yes",
+   "button_frames": 0,
+   "original_verdict": "RETRY",
+   "corrected_verdict": "PRESS_PERFORMED__BUTTON_NOT_IN_MASK",
+   "grade": "press PROVEN / RT-not-in-mask STRONG EVIDENCE",
+   "mislabelled": true,
+   "note": "RT has no digital key id (4 attempts in 170844-d2, analog byte[16] never non-zero); 0 frames expected"
+  },
+  {
+   "run_dir": "results/experiments/d2-live-differential-20260927-184643",
+   "edt": "18:46:43-18:59",
+   "asked_of_operator": "nothing \u2014 README: 'no button presses (none was justified)'",
+   "press_performed": "no",
+   "button_frames": 0,
+   "original_verdict": "CASE 6 - none succeed / D2-U-007 UNKNOWN",
+   "corrected_verdict": "NO_IDLE_FRAMES_OBSERVED",
+   "grade": "PROVEN",
+   "mislabelled": true,
+   "note": "success rule demanded idle frames, which do not exist under event-driven D2"
+  },
+  {
+   "run_dir": "results/experiments/official-vs-harness-session-20260927-190741 (harness leg)",
+   "edt": "19:07-19:11",
+   "asked_of_operator": "nothing (10 s passive idle after D2)",
+   "press_performed": "no",
+   "button_frames": 0,
+   "original_verdict": "OFFICIAL_WORKS_HARNESS_SILENT",
+   "corrected_verdict": "NO_IDLE_FRAMES_OBSERVED",
+   "grade": "PROVEN",
+   "mislabelled": true
+  },
+  {
+   "run_dir": "results/experiments/official-vs-harness-session-20260927-190741 (official leg)",
+   "edt": "19:07-19:47",
+   "asked_of_operator": "armorx_official_a_twice: press A twice",
+   "press_performed": "yes",
+   "button_frames": 155,
+   "original_verdict": "OFFICIAL_WORKS",
+   "corrected_verdict": "BUTTON_FRAMES_OBSERVED",
+   "grade": "PROVEN",
+   "note": "29 press-mask 00000001, 126 release-mask 00000000; 0 frames in the 61.0 s idle window"
+  },
+  {
+   "run_dir": "results/runtime/d2-stream-probe.json",
+   "edt": "17:50-18:25",
+   "asked_of_operator": "nothing (variants A-E)",
+   "press_performed": "no",
+   "button_frames": 0,
+   "original_verdict": "NO_STREAM_IN_ANY_VARIANT",
+   "corrected_verdict": "NO_IDLE_FRAMES_OBSERVED",
+   "grade": "PROVEN",
+   "mislabelled": true
+  },
+  {
+   "run_dir": "results/runtime (proven path armorx_real.py d2) @ 17:50",
+   "edt": "17:50",
+   "asked_of_operator": "nothing (unattended)",
+   "press_performed": "no",
+   "button_frames": 0,
+   "original_verdict": "proven path also silent -> device-state finding",
+   "corrected_verdict": "NO_IDLE_FRAMES_OBSERVED",
+   "grade": "PROVEN",
+   "mislabelled": true
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-174445-buttons/raw-tx-rx.log D2 @ 18:06:40",
+   "edt": "18:06:40",
+   "asked_of_operator": "nothing",
+   "press_performed": "no",
+   "button_frames": 0,
+   "original_verdict": "(uneventful)",
+   "corrected_verdict": "NO_IDLE_FRAMES_OBSERVED",
+   "grade": "PROVEN"
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-174445-buttons/raw-tx-rx.log D2 @ 18:08:37",
+   "edt": "18:08:37",
+   "asked_of_operator": "nothing (EF/E2/D4/D6 pre-read then end)",
+   "press_performed": "no",
+   "button_frames": 0,
+   "original_verdict": "(uneventful)",
+   "corrected_verdict": "NO_IDLE_FRAMES_OBSERVED",
+   "grade": "PROVEN"
+  }
+ ],
+ "non_d2_runs": [
+  {
+   "run_dir": "results/experiments/physical-20260927-162321",
+   "phase": "scan",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162327",
+   "phase": "scan",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162402",
+   "phase": "scan",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162427",
+   "phase": "identity",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162448",
+   "phase": "readonly",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162545",
+   "phase": "noop-d7",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162602",
+   "phase": "noop-d7",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162801",
+   "phase": "query-dpi",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162815",
+   "phase": "query-dpi",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-162846",
+   "phase": "query-dpi",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-164022",
+   "phase": "scan",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-165347",
+   "phase": "scan",
+   "d2_sent": false
+  },
+  {
+   "run_dir": "results/experiments/physical-20260927-170455-noop-d7",
+   "phase": "noop-d7",
+   "d2_sent": false
+  }
+ ],
+ "presses_that_happened": [
+  {
+   "edt": "17:07:47",
+   "action_id": "d2_window_prepare",
+   "asked": "power on + keep awake, tap ~every 30 s",
+   "ack": "done 17:08:42",
+   "evidence": "results/runtime/physical-action-acks.jsonl"
+  },
+  {
+   "edt": "17:09:23",
+   "action_id": "press_group_A",
+   "asked": "A,B,X,Y one at a time",
+   "ack": "done 17:10:15",
+   "evidence": "results/runtime/press-groups.jsonl"
+  },
+  {
+   "edt": "17:10:49",
+   "action_id": "press_group_B",
+   "asked": "LB,RB,LT,RT",
+   "ack": "done 17:11:34",
+   "evidence": "results/runtime/press-groups.jsonl"
+  },
+  {
+   "edt": "17:11:53",
+   "action_id": "press_group_C",
+   "asked": "View,Menu,L3,R3",
+   "ack": "done 17:12:14/17:12:27",
+   "evidence": "results/runtime/press-groups.jsonl"
+  },
+  {
+   "edt": "17:12:38",
+   "action_id": "press_group_D",
+   "asked": "RT,D-pad U/D/L/R",
+   "ack": "done 17:13:08",
+   "evidence": "results/runtime/press-groups.jsonl"
+  },
+  {
+   "edt": "17:13:26",
+   "action_id": "press_group_E",
+   "asked": "RT,Capture,Guide,M1-M7",
+   "ack": "done 17:14:27",
+   "evidence": "results/runtime/press-groups.jsonl"
+  },
+  {
+   "edt": "17:14:50",
+   "action_id": "press_group_F",
+   "asked": "RT,M5,M6,M7,extra",
+   "ack": "done 17:15:38",
+   "evidence": "results/runtime/press-groups.jsonl"
+  },
+  {
+   "edt": "17:26:06",
+   "action_id": "id15_observe_capture",
+   "asked": "press Capture ONCE",
+   "ack": "done 17:27:03 (no verdict)",
+   "evidence": "results/runtime/physical-action-acks.jsonl"
+  },
+  {
+   "edt": "17:47:24",
+   "action_id": "button_rt",
+   "asked": "press RT twice",
+   "ack": "done 17:47:40",
+   "evidence": "results/runtime/operator-actions.jsonl"
+  },
+  {
+   "edt": "17:48:28",
+   "action_id": "button_rt",
+   "asked": "press RT twice (retry)",
+   "ack": "done 17:48:44",
+   "evidence": "results/runtime/operator-actions.jsonl"
+  },
+  {
+   "edt": "19:46:25",
+   "action_id": "armorx_official_a_twice",
+   "asked": "press A twice (official app)",
+   "ack": "done 19:46:25",
+   "evidence": "results/runtime/operator-actions/armorx_official_a_twice.json"
+  }
+ ],
+ "tally": {
+  "d2_records_reviewed": 15,
+  "mislabelled": 5,
+  "runs_with_real_press": 4,
+  "correct_as_is": "2 never-connected scan dirs + 13 non-D2 config dirs"
+ },
+ "mislabelled_list": [
+  "results/experiments/d2-live-differential-20260927-184643",
+  "results/final/d2-mode-state-finding.md + results/runtime/d2-stream-probe.json",
+  "results/experiments/official-vs-harness-session-20260927-190741 (harness leg)",
+  "results/experiments/physical-20260927-174445-buttons (RT)",
+  "results/experiments/physical-20260927-button-test3"
+ ]
+}

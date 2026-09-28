@@ -1,0 +1,250 @@
+{
+ "schema": "armorx-official-fixtures/v1",
+ "source": {
+  "capture": "bt_hci_20260928_023405_d.cfa",
+  "sha256": "bbaf10bd337a840ee0316291cd53f442859b55d8ce10c2414973d9c59248ba2f",
+  "obtained": "Android HCI snoop extracted via bugreport from vivo V2304A, official app com.moojiang.bigbigwon.mygt 4.0.8 (409), 2026-09-27",
+  "t0_note": "delta_s is relative to the LE connection complete of the ArmorX link (frame 4274)"
+ },
+ "sanitisation": "none needed: the capture contains no personal data; the ArmorX BLE address is already public project data",
+ "commands": {
+  "EF_query": {
+   "frame": 6245,
+   "delta_s": 58.956,
+   "op": "0x52",
+   "handle": "0x0075",
+   "bytes": "a50cef0000000000000000a0",
+   "length": 12
+  },
+  "EF_reply": {
+   "frame": 6247,
+   "delta_s": 58.982,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a50cefbb921542f21f55802a",
+   "length": 12
+  },
+  "0B_query": {
+   "frame": 6248,
+   "delta_s": 58.993,
+   "op": "0x52",
+   "handle": "0x0075",
+   "bytes": "a5040bb4",
+   "length": 4
+  },
+  "0B_reply": {
+   "frame": 6250,
+   "delta_s": 59.016,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a5050b30e5",
+   "length": 5
+  },
+  "E2_query": {
+   "frame": 6251,
+   "delta_s": 59.023,
+   "op": "0x52",
+   "handle": "0x0075",
+   "bytes": "a504e28b",
+   "length": 4
+  },
+  "E2_reply": {
+   "frame": 6255,
+   "delta_s": 59.039,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a510e22741025a4a2d5854000000007e",
+   "length": 16
+  },
+  "D4_query": {
+   "frame": 6257,
+   "delta_s": 59.079,
+   "op": "0x52",
+   "handle": "0x0075",
+   "bytes": "a504d47d",
+   "length": 4
+  },
+  "D4_reply": {
+   "frame": 6259,
+   "delta_s": 59.106,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a507d411010092",
+   "length": 7
+  },
+  "D6_query": {
+   "frame": 6265,
+   "delta_s": 59.288,
+   "op": "0x52",
+   "handle": "0x0075",
+   "bytes": "a504d67f",
+   "length": 4
+  },
+  "D2_enable": {
+   "frame": 6567,
+   "delta_s": 68.498,
+   "op": "0x52",
+   "handle": "0x0075",
+   "bytes": "a505d2017d",
+   "length": 5
+  },
+  "D2_disable": {
+   "frame": 8617,
+   "delta_s": 129.526,
+   "op": "0x52",
+   "handle": "0x0075",
+   "bytes": "a505d2007c",
+   "length": 5
+  }
+ },
+ "d6_fragments": [
+  {
+   "frame": 6267,
+   "delta_s": 59.32,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a414d6012c40009033ff000000000000000000bd",
+   "length": 20
+  },
+  {
+   "frame": 6268,
+   "delta_s": 59.331,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a414d602000000000001001e1e4646000001005a",
+   "length": 20
+  },
+  {
+   "frame": 6269,
+   "delta_s": 59.355,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a414d6031e1e464600000200020200000000005f",
+   "length": 20
+  },
+  {
+   "frame": 6270,
+   "delta_s": 59.365,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a414d6040a3c3c2a000000000a3c3c2a000000ea",
+   "length": 20
+  },
+  {
+   "frame": 6272,
+   "delta_s": 59.377,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a414d605000a3c3c2a000000000000000000003f",
+   "length": 20
+  },
+  {
+   "frame": 6273,
+   "delta_s": 59.4,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a414d60600000000000000000000000000000094",
+   "length": 20
+  },
+  {
+   "frame": 6274,
+   "delta_s": 59.41,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a414d60700000000000000000000000000000095",
+   "length": 20
+  },
+  {
+   "frame": 6276,
+   "delta_s": 59.433,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a414d608000000000000000001020304050607b2",
+   "length": 20
+  }
+ ],
+ "d2_echoes": [
+  {
+   "frame": 6569,
+   "delta_s": 68.522,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a505d2017d",
+   "length": 5
+  },
+  {
+   "frame": 6570,
+   "delta_s": 68.523,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "bytes": "a505d2017d",
+   "length": 5
+  }
+ ],
+ "button": {
+  "a_initial_press": {
+   "frame": 7742,
+   "delta_s": 104.86,
+   "bytes": "a5120200000001fd6500b6fc4f0158000076",
+   "mask": "00000001"
+  },
+  "a_held_frames": [
+   {
+    "frame": 7744,
+    "delta_s": 104.8711,
+    "bytes": "a5120200000001fd6500b6fc4f0158000076",
+    "mask": "00000001"
+   },
+   {
+    "frame": 7745,
+    "delta_s": 104.8934,
+    "bytes": "a5120200000001fd6500b6fc4f0158000076",
+    "mask": "00000001"
+   },
+   {
+    "frame": 7746,
+    "delta_s": 104.9047,
+    "bytes": "a5120200000001fd6500b6fc4f0158000076",
+    "mask": "00000001"
+   }
+  ],
+  "a_release": {
+   "frame": 7758,
+   "delta_s": 105.086,
+   "bytes": "a5120200000000fd6500b6fc4f0158000075",
+   "mask": "00000000"
+  },
+  "second_press": {
+   "frame": 7820,
+   "bytes": "a5120200000001fd6500b6fc4f0158000076",
+   "mask": "00000001"
+  },
+  "second_release": {
+   "frame": 7759,
+   "delta_s": 105.096,
+   "bytes": "a5120200000000fd6500b6fc4f0158000075",
+   "mask": "00000000"
+  },
+  "counts": {
+   "total_button_frames": 155,
+   "mask_00000001": 29,
+   "mask_00000000": 126
+  }
+ },
+ "windows": {
+  "idle_window": {
+   "start_s": 68.498,
+   "end_s": 129.526,
+   "button_frames": 0,
+   "meaning": "VALID_EVENT_DRIVEN_SILENCE - the official app produces NO frames while nothing is pressed"
+  },
+  "press_window": {
+   "start_s": 104.86,
+   "end_s": 105.096,
+   "button_frames": 155
+  }
+ },
+ "d2_disable": {
+  "delta_s": 129.526
+ }
+}

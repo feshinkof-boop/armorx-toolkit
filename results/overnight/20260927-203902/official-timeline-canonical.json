@@ -1,0 +1,2051 @@
+{
+ "schema": "armorx-official-timeline/v1",
+ "source": "bt_hci_20260928_023405_d.cfa (BTSnoop v1, HCI UART)",
+ "phone_clock_epoch_t0": 1790563475.432637,
+ "note": "delta_s is seconds from the LE connection complete for the ArmorX link",
+ "events": [
+  {
+   "delta_s": 0.0,
+   "kind": "LE_ENHANCED_CONNECTION_COMPLETE",
+   "frame": 4274,
+   "detail": {
+    "interval_ms": 30.0,
+    "latency": 0,
+    "supervision_timeout_ms": 5000,
+    "role": "Currently the Central for specified BD_ADDR",
+    "peer_addr_type": "Public Device Address",
+    "peer_address": null
+   }
+  },
+  {
+   "delta_s": 0.0,
+   "kind": "LE_CONNECTION_UPDATE_COMPLETE",
+   "frame": 4320,
+   "detail": {
+    "interval_ms": 7.5,
+    "latency": 0,
+    "supervision_timeout_ms": 5000
+   }
+  },
+  {
+   "delta_s": 0.0,
+   "kind": "LE_CONNECTION_UPDATE_COMPLETE",
+   "frame": 4407,
+   "detail": {
+    "interval_ms": 30.0,
+    "latency": 0,
+    "supervision_timeout_ms": 5000
+   }
+  },
+  {
+   "delta_s": 0.0,
+   "kind": "LE_CONNECTION_UPDATE_COMPLETE",
+   "frame": 4426,
+   "detail": {
+    "interval_ms": 11.25,
+    "latency": 0,
+    "supervision_timeout_ms": 2000
+   }
+  },
+  {
+   "delta_s": 0.112,
+   "kind": "DISCOVER_GROUP_TYPE_REQ",
+   "frame": 4298,
+   "op": "0x10",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.16,
+   "kind": "DISCOVER_GROUP_TYPE_RSP",
+   "frame": 4302,
+   "op": "0x11",
+   "handle": "0x0001,0x0008,0x000c",
+   "value": ""
+  },
+  {
+   "delta_s": 0.16,
+   "kind": "DISCOVER_GROUP_TYPE_REQ",
+   "frame": 4303,
+   "op": "0x10",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.219,
+   "kind": "DISCOVER_GROUP_TYPE_RSP",
+   "frame": 4305,
+   "op": "0x11",
+   "handle": "0x001f",
+   "value": ""
+  },
+  {
+   "delta_s": 0.221,
+   "kind": "DISCOVER_GROUP_TYPE_REQ",
+   "frame": 4306,
+   "op": "0x10",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.28,
+   "kind": "DISCOVER_GROUP_TYPE_RSP",
+   "frame": 4311,
+   "op": "0x11",
+   "handle": "0x0073",
+   "value": ""
+  },
+  {
+   "delta_s": 0.281,
+   "kind": "DISCOVER_GROUP_TYPE_REQ",
+   "frame": 4312,
+   "op": "0x10",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.34,
+   "kind": "DISCOVER_GROUP_TYPE_RSP",
+   "frame": 4316,
+   "op": "0x11",
+   "handle": "0x0080",
+   "value": ""
+  },
+  {
+   "delta_s": 0.341,
+   "kind": "DISCOVER_GROUP_TYPE_REQ",
+   "frame": 4317,
+   "op": "0x10",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.4,
+   "kind": "OTHER:0x01",
+   "frame": 4319,
+   "op": "0x01",
+   "handle": "0x0086",
+   "value": ""
+  },
+  {
+   "delta_s": 0.402,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4321,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.415,
+   "kind": "OTHER:0x01",
+   "frame": 4323,
+   "op": "0x01",
+   "handle": "0x0001",
+   "value": ""
+  },
+  {
+   "delta_s": 0.415,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4324,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.43,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4326,
+   "op": "0x09",
+   "handle": "0x0002,0x0003,0x0004,0x0005,0x0006,0x0007",
+   "value": ""
+  },
+  {
+   "delta_s": 0.431,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4327,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.445,
+   "kind": "OTHER:0x01",
+   "frame": 4329,
+   "op": "0x01",
+   "handle": "0x0007",
+   "value": ""
+  },
+  {
+   "delta_s": 0.446,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4330,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.46,
+   "kind": "OTHER:0x01",
+   "frame": 4332,
+   "op": "0x01",
+   "handle": "0x0008",
+   "value": ""
+  },
+  {
+   "delta_s": 0.461,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4333,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.49,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4335,
+   "op": "0x09",
+   "handle": "0x0009,0x000a",
+   "value": ""
+  },
+  {
+   "delta_s": 0.492,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4336,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.506,
+   "kind": "OTHER:0x01",
+   "frame": 4338,
+   "op": "0x01",
+   "handle": "0x000a",
+   "value": ""
+  },
+  {
+   "delta_s": 0.508,
+   "kind": "DISCOVER_FIND_INFO_REQ",
+   "frame": 4340,
+   "op": "0x04",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.52,
+   "kind": "DISCOVER_FIND_INFO_RSP",
+   "frame": 4342,
+   "op": "0x05",
+   "handle": "0x000b",
+   "value": ""
+  },
+  {
+   "delta_s": 0.522,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4343,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.535,
+   "kind": "OTHER:0x01",
+   "frame": 4345,
+   "op": "0x01",
+   "handle": "0x000c",
+   "value": ""
+  },
+  {
+   "delta_s": 0.536,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4346,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.55,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4349,
+   "op": "0x09",
+   "handle": "0x000d,0x000e,0x000f,0x0010,0x0011,0x0012",
+   "value": ""
+  },
+  {
+   "delta_s": 0.552,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4350,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.565,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4352,
+   "op": "0x09",
+   "handle": "0x0013,0x0014,0x0015,0x0016,0x0017,0x0018",
+   "value": ""
+  },
+  {
+   "delta_s": 0.567,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4353,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.58,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4355,
+   "op": "0x09",
+   "handle": "0x0019,0x001a,0x001b,0x001c,0x001d,0x001e",
+   "value": ""
+  },
+  {
+   "delta_s": 0.581,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4356,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.595,
+   "kind": "OTHER:0x01",
+   "frame": 4358,
+   "op": "0x01",
+   "handle": "0x001e",
+   "value": ""
+  },
+  {
+   "delta_s": 0.596,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4359,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.61,
+   "kind": "OTHER:0x01",
+   "frame": 4361,
+   "op": "0x01",
+   "handle": "0x001f",
+   "value": ""
+  },
+  {
+   "delta_s": 0.611,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4362,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.625,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4364,
+   "op": "0x09",
+   "handle": "0x0020,0x0021",
+   "value": ""
+  },
+  {
+   "delta_s": 0.625,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4365,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.64,
+   "kind": "OTHER:0x01",
+   "frame": 4367,
+   "op": "0x01",
+   "handle": "0x0021",
+   "value": ""
+  },
+  {
+   "delta_s": 0.641,
+   "kind": "DISCOVER_FIND_INFO_REQ",
+   "frame": 4368,
+   "op": "0x04",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.656,
+   "kind": "DISCOVER_FIND_INFO_RSP",
+   "frame": 4371,
+   "op": "0x05",
+   "handle": "0x0022",
+   "value": ""
+  },
+  {
+   "delta_s": 0.657,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4372,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.67,
+   "kind": "OTHER:0x01",
+   "frame": 4374,
+   "op": "0x01",
+   "handle": "0x0073",
+   "value": ""
+  },
+  {
+   "delta_s": 0.672,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4375,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.708,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4377,
+   "op": "0x09",
+   "handle": "0x0074,0x0075",
+   "value": ""
+  },
+  {
+   "delta_s": 0.709,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4378,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.722,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4380,
+   "op": "0x09",
+   "handle": "0x0076,0x0077",
+   "value": ""
+  },
+  {
+   "delta_s": 0.723,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4381,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.737,
+   "kind": "OTHER:0x01",
+   "frame": 4383,
+   "op": "0x01",
+   "handle": "0x0077",
+   "value": ""
+  },
+  {
+   "delta_s": 0.739,
+   "kind": "DISCOVER_FIND_INFO_REQ",
+   "frame": 4384,
+   "op": "0x04",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.752,
+   "kind": "DISCOVER_FIND_INFO_RSP",
+   "frame": 4386,
+   "op": "0x05",
+   "handle": "0x0078",
+   "value": ""
+  },
+  {
+   "delta_s": 0.754,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4387,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.768,
+   "kind": "OTHER:0x01",
+   "frame": 4391,
+   "op": "0x01",
+   "handle": "0x0080",
+   "value": ""
+  },
+  {
+   "delta_s": 0.77,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4392,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.797,
+   "kind": "DISCOVER_READ_BY_TYPE_RSP",
+   "frame": 4395,
+   "op": "0x09",
+   "handle": "0x0081,0x0082,0x0083,0x0084",
+   "value": ""
+  },
+  {
+   "delta_s": 0.798,
+   "kind": "DISCOVER_READ_BY_TYPE_REQ",
+   "frame": 4396,
+   "op": "0x08",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.812,
+   "kind": "OTHER:0x01",
+   "frame": 4398,
+   "op": "0x01",
+   "handle": "0x0084",
+   "value": ""
+  },
+  {
+   "delta_s": 0.813,
+   "kind": "DISCOVER_FIND_INFO_REQ",
+   "frame": 4399,
+   "op": "0x04",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.827,
+   "kind": "DISCOVER_FIND_INFO_RSP",
+   "frame": 4401,
+   "op": "0x05",
+   "handle": "0x0085",
+   "value": ""
+  },
+  {
+   "delta_s": 0.833,
+   "kind": "MTU_REQUEST",
+   "frame": 4403,
+   "op": "0x02",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 0.849,
+   "kind": "MTU_RESPONSE",
+   "frame": 4406,
+   "op": "0x03",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 1.209,
+   "kind": "MTU_REQUEST",
+   "frame": 4410,
+   "op": "0x02",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 1.27,
+   "kind": "MTU_RESPONSE",
+   "frame": 4412,
+   "op": "0x03",
+   "handle": "",
+   "value": ""
+  },
+  {
+   "delta_s": 1.294,
+   "kind": "WRITE_REQUEST",
+   "frame": 4413,
+   "op": "0x12",
+   "handle": "0x000b",
+   "value": ""
+  },
+  {
+   "delta_s": 1.33,
+   "kind": "WRITE_RESPONSE",
+   "frame": 4416,
+   "op": "0x13",
+   "handle": "0x000b",
+   "value": ""
+  },
+  {
+   "delta_s": 1.339,
+   "kind": "WRITE_REQUEST",
+   "frame": 4417,
+   "op": "0x12",
+   "handle": "0x0078",
+   "value": ""
+  },
+  {
+   "delta_s": 1.39,
+   "kind": "WRITE_RESPONSE",
+   "frame": 4419,
+   "op": "0x13",
+   "handle": "0x0078",
+   "value": ""
+  },
+  {
+   "delta_s": 58.956,
+   "kind": "QUERY_EF",
+   "frame": 6245,
+   "op": "0x52",
+   "handle": "0x0075",
+   "value": "a50cef0000000000000000a0"
+  },
+  {
+   "delta_s": 58.982,
+   "kind": "REPLY_EF",
+   "frame": 6247,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a50cefbb921542f21f55802a"
+  },
+  {
+   "delta_s": 58.993,
+   "kind": "QUERY_0B",
+   "frame": 6248,
+   "op": "0x52",
+   "handle": "0x0075",
+   "value": "a5040bb4"
+  },
+  {
+   "delta_s": 59.016,
+   "kind": "REPLY_0B",
+   "frame": 6250,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5050b30e5"
+  },
+  {
+   "delta_s": 59.023,
+   "kind": "QUERY_E2",
+   "frame": 6251,
+   "op": "0x52",
+   "handle": "0x0075",
+   "value": "a504e28b"
+  },
+  {
+   "delta_s": 59.028,
+   "kind": "OTHER:0x0a",
+   "frame": 6253,
+   "op": "0x0a",
+   "handle": "0x0016",
+   "value": ""
+  },
+  {
+   "delta_s": 59.039,
+   "kind": "REPLY_E2",
+   "frame": 6255,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a510e22741025a4a2d5854000000007e"
+  },
+  {
+   "delta_s": 59.05,
+   "kind": "OTHER:0x0b",
+   "frame": 6256,
+   "op": "0x0b",
+   "handle": "0x0016",
+   "value": ""
+  },
+  {
+   "delta_s": 59.079,
+   "kind": "QUERY_D4",
+   "frame": 6257,
+   "op": "0x52",
+   "handle": "0x0075",
+   "value": "a504d47d"
+  },
+  {
+   "delta_s": 59.106,
+   "kind": "REPLY_D4",
+   "frame": 6259,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a507d411010092"
+  },
+  {
+   "delta_s": 59.288,
+   "kind": "QUERY_D6",
+   "frame": 6265,
+   "op": "0x52",
+   "handle": "0x0075",
+   "value": "a504d67f"
+  },
+  {
+   "delta_s": 59.32,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6267,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d6012c40009033ff000000000000000000bd"
+  },
+  {
+   "delta_s": 59.331,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6268,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d602000000000001001e1e4646000001005a"
+  },
+  {
+   "delta_s": 59.355,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6269,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d6031e1e464600000200020200000000005f"
+  },
+  {
+   "delta_s": 59.365,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6270,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d6040a3c3c2a000000000a3c3c2a000000ea"
+  },
+  {
+   "delta_s": 59.377,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6272,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d605000a3c3c2a000000000000000000003f"
+  },
+  {
+   "delta_s": 59.4,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6273,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d60600000000000000000000000000000094"
+  },
+  {
+   "delta_s": 59.41,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6274,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d60700000000000000000000000000000095"
+  },
+  {
+   "delta_s": 59.433,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6276,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d608000000000000000001020304050607b2"
+  },
+  {
+   "delta_s": 59.444,
+   "kind": "REPLY_D6_FRAGMENT",
+   "frame": 6277,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a414d60908090a0b0c0d0e0f1011121314151678"
+  },
+  {
+   "delta_s": 59.467,
+   "kind": "OTHER:0x1b",
+   "frame": 6279,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a40ed60a010d191a1b1c1d1e1f64"
+  },
+  {
+   "delta_s": 68.498,
+   "kind": "D2_ENABLE_REQUEST",
+   "frame": 6567,
+   "op": "0x52",
+   "handle": "0x0075",
+   "value": "a505d2017d"
+  },
+  {
+   "delta_s": 68.522,
+   "kind": "D2_ECHO",
+   "frame": 6569,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a505d2017d"
+  },
+  {
+   "delta_s": 68.523,
+   "kind": "D2_ECHO",
+   "frame": 6570,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a505d2017d"
+  },
+  {
+   "delta_s": 104.86,
+   "kind": "BUTTON_FRAME",
+   "frame": 7742,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 104.871,
+   "kind": "BUTTON_FRAME",
+   "frame": 7744,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 104.893,
+   "kind": "BUTTON_FRAME",
+   "frame": 7745,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 104.905,
+   "kind": "BUTTON_FRAME",
+   "frame": 7746,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 104.916,
+   "kind": "BUTTON_FRAME",
+   "frame": 7747,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 104.939,
+   "kind": "BUTTON_FRAME",
+   "frame": 7748,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 104.951,
+   "kind": "BUTTON_FRAME",
+   "frame": 7749,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 104.973,
+   "kind": "BUTTON_FRAME",
+   "frame": 7751,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 104.984,
+   "kind": "BUTTON_FRAME",
+   "frame": 7752,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.006,
+   "kind": "BUTTON_FRAME",
+   "frame": 7753,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.018,
+   "kind": "BUTTON_FRAME",
+   "frame": 7754,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.029,
+   "kind": "BUTTON_FRAME",
+   "frame": 7755,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.052,
+   "kind": "BUTTON_FRAME",
+   "frame": 7756,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.063,
+   "kind": "BUTTON_FRAME",
+   "frame": 7757,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.086,
+   "kind": "BUTTON_FRAME",
+   "frame": 7758,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.096,
+   "kind": "BUTTON_FRAME",
+   "frame": 7759,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.119,
+   "kind": "BUTTON_FRAME",
+   "frame": 7760,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.13,
+   "kind": "BUTTON_FRAME",
+   "frame": 7761,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.141,
+   "kind": "BUTTON_FRAME",
+   "frame": 7762,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.164,
+   "kind": "BUTTON_FRAME",
+   "frame": 7763,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.175,
+   "kind": "BUTTON_FRAME",
+   "frame": 7764,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.198,
+   "kind": "BUTTON_FRAME",
+   "frame": 7766,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.209,
+   "kind": "BUTTON_FRAME",
+   "frame": 7767,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.232,
+   "kind": "BUTTON_FRAME",
+   "frame": 7768,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.243,
+   "kind": "BUTTON_FRAME",
+   "frame": 7769,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.265,
+   "kind": "BUTTON_FRAME",
+   "frame": 7770,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.276,
+   "kind": "BUTTON_FRAME",
+   "frame": 7771,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.287,
+   "kind": "BUTTON_FRAME",
+   "frame": 7772,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.31,
+   "kind": "BUTTON_FRAME",
+   "frame": 7774,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.321,
+   "kind": "BUTTON_FRAME",
+   "frame": 7775,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.344,
+   "kind": "BUTTON_FRAME",
+   "frame": 7776,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.355,
+   "kind": "BUTTON_FRAME",
+   "frame": 7777,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.378,
+   "kind": "BUTTON_FRAME",
+   "frame": 7778,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.39,
+   "kind": "BUTTON_FRAME",
+   "frame": 7779,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.411,
+   "kind": "BUTTON_FRAME",
+   "frame": 7781,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.423,
+   "kind": "BUTTON_FRAME",
+   "frame": 7782,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.433,
+   "kind": "BUTTON_FRAME",
+   "frame": 7783,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.457,
+   "kind": "BUTTON_FRAME",
+   "frame": 7784,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.469,
+   "kind": "BUTTON_FRAME",
+   "frame": 7785,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.49,
+   "kind": "BUTTON_FRAME",
+   "frame": 7786,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.501,
+   "kind": "BUTTON_FRAME",
+   "frame": 7787,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.524,
+   "kind": "BUTTON_FRAME",
+   "frame": 7789,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.535,
+   "kind": "BUTTON_FRAME",
+   "frame": 7790,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.546,
+   "kind": "BUTTON_FRAME",
+   "frame": 7791,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.569,
+   "kind": "BUTTON_FRAME",
+   "frame": 7792,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.58,
+   "kind": "BUTTON_FRAME",
+   "frame": 7793,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.604,
+   "kind": "BUTTON_FRAME",
+   "frame": 7795,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.614,
+   "kind": "BUTTON_FRAME",
+   "frame": 7796,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.636,
+   "kind": "BUTTON_FRAME",
+   "frame": 7797,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.647,
+   "kind": "BUTTON_FRAME",
+   "frame": 7802,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.67,
+   "kind": "BUTTON_FRAME",
+   "frame": 7803,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.681,
+   "kind": "BUTTON_FRAME",
+   "frame": 7804,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.692,
+   "kind": "BUTTON_FRAME",
+   "frame": 7805,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.715,
+   "kind": "BUTTON_FRAME",
+   "frame": 7806,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.726,
+   "kind": "BUTTON_FRAME",
+   "frame": 7807,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.749,
+   "kind": "BUTTON_FRAME",
+   "frame": 7808,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.76,
+   "kind": "BUTTON_FRAME",
+   "frame": 7809,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.784,
+   "kind": "BUTTON_FRAME",
+   "frame": 7810,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.793,
+   "kind": "BUTTON_FRAME",
+   "frame": 7812,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.817,
+   "kind": "BUTTON_FRAME",
+   "frame": 7813,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.828,
+   "kind": "BUTTON_FRAME",
+   "frame": 7814,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.839,
+   "kind": "BUTTON_FRAME",
+   "frame": 7815,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.861,
+   "kind": "BUTTON_FRAME",
+   "frame": 7816,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.872,
+   "kind": "BUTTON_FRAME",
+   "frame": 7817,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.895,
+   "kind": "BUTTON_FRAME",
+   "frame": 7818,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.906,
+   "kind": "BUTTON_FRAME",
+   "frame": 7819,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 105.929,
+   "kind": "BUTTON_FRAME",
+   "frame": 7820,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.94,
+   "kind": "BUTTON_FRAME",
+   "frame": 7822,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.951,
+   "kind": "BUTTON_FRAME",
+   "frame": 7823,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.975,
+   "kind": "BUTTON_FRAME",
+   "frame": 7825,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 105.985,
+   "kind": "BUTTON_FRAME",
+   "frame": 7826,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.007,
+   "kind": "BUTTON_FRAME",
+   "frame": 7827,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.019,
+   "kind": "BUTTON_FRAME",
+   "frame": 7828,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.041,
+   "kind": "BUTTON_FRAME",
+   "frame": 7829,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.054,
+   "kind": "BUTTON_FRAME",
+   "frame": 7830,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.075,
+   "kind": "BUTTON_FRAME",
+   "frame": 7831,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.086,
+   "kind": "BUTTON_FRAME",
+   "frame": 7832,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.109,
+   "kind": "BUTTON_FRAME",
+   "frame": 7833,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.12,
+   "kind": "BUTTON_FRAME",
+   "frame": 7834,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.131,
+   "kind": "BUTTON_FRAME",
+   "frame": 7835,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.154,
+   "kind": "BUTTON_FRAME",
+   "frame": 7837,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000001fd6500b6fc4f0158000076"
+  },
+  {
+   "delta_s": 106.165,
+   "kind": "BUTTON_FRAME",
+   "frame": 7838,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.187,
+   "kind": "BUTTON_FRAME",
+   "frame": 7840,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.2,
+   "kind": "BUTTON_FRAME",
+   "frame": 7841,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.221,
+   "kind": "BUTTON_FRAME",
+   "frame": 7842,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.232,
+   "kind": "BUTTON_FRAME",
+   "frame": 7843,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.244,
+   "kind": "BUTTON_FRAME",
+   "frame": 7844,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.267,
+   "kind": "BUTTON_FRAME",
+   "frame": 7845,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.277,
+   "kind": "BUTTON_FRAME",
+   "frame": 7850,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.302,
+   "kind": "BUTTON_FRAME",
+   "frame": 7851,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.311,
+   "kind": "BUTTON_FRAME",
+   "frame": 7852,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.336,
+   "kind": "BUTTON_FRAME",
+   "frame": 7853,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.346,
+   "kind": "BUTTON_FRAME",
+   "frame": 7854,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.356,
+   "kind": "BUTTON_FRAME",
+   "frame": 7855,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.38,
+   "kind": "BUTTON_FRAME",
+   "frame": 7857,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.39,
+   "kind": "BUTTON_FRAME",
+   "frame": 7858,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.412,
+   "kind": "BUTTON_FRAME",
+   "frame": 7859,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.424,
+   "kind": "BUTTON_FRAME",
+   "frame": 7860,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.447,
+   "kind": "BUTTON_FRAME",
+   "frame": 7861,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.458,
+   "kind": "BUTTON_FRAME",
+   "frame": 7862,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.48,
+   "kind": "BUTTON_FRAME",
+   "frame": 7863,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.491,
+   "kind": "BUTTON_FRAME",
+   "frame": 7864,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.502,
+   "kind": "BUTTON_FRAME",
+   "frame": 7865,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.525,
+   "kind": "BUTTON_FRAME",
+   "frame": 7866,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.536,
+   "kind": "BUTTON_FRAME",
+   "frame": 7867,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.558,
+   "kind": "BUTTON_FRAME",
+   "frame": 7869,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.57,
+   "kind": "BUTTON_FRAME",
+   "frame": 7870,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.594,
+   "kind": "BUTTON_FRAME",
+   "frame": 7871,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.604,
+   "kind": "BUTTON_FRAME",
+   "frame": 7873,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.626,
+   "kind": "BUTTON_FRAME",
+   "frame": 7874,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.638,
+   "kind": "BUTTON_FRAME",
+   "frame": 7875,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.65,
+   "kind": "BUTTON_FRAME",
+   "frame": 7876,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.671,
+   "kind": "BUTTON_FRAME",
+   "frame": 7877,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.683,
+   "kind": "BUTTON_FRAME",
+   "frame": 7878,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.705,
+   "kind": "BUTTON_FRAME",
+   "frame": 7879,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.716,
+   "kind": "BUTTON_FRAME",
+   "frame": 7880,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.739,
+   "kind": "BUTTON_FRAME",
+   "frame": 7881,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.75,
+   "kind": "BUTTON_FRAME",
+   "frame": 7882,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.761,
+   "kind": "BUTTON_FRAME",
+   "frame": 7883,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.784,
+   "kind": "BUTTON_FRAME",
+   "frame": 7884,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.796,
+   "kind": "BUTTON_FRAME",
+   "frame": 7886,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.818,
+   "kind": "BUTTON_FRAME",
+   "frame": 7887,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.829,
+   "kind": "BUTTON_FRAME",
+   "frame": 7888,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.851,
+   "kind": "BUTTON_FRAME",
+   "frame": 7889,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.863,
+   "kind": "BUTTON_FRAME",
+   "frame": 7890,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.885,
+   "kind": "BUTTON_FRAME",
+   "frame": 7891,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.897,
+   "kind": "BUTTON_FRAME",
+   "frame": 7892,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.907,
+   "kind": "BUTTON_FRAME",
+   "frame": 7896,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.93,
+   "kind": "BUTTON_FRAME",
+   "frame": 7897,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.941,
+   "kind": "BUTTON_FRAME",
+   "frame": 7898,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.966,
+   "kind": "BUTTON_FRAME",
+   "frame": 7900,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.986,
+   "kind": "BUTTON_FRAME",
+   "frame": 7901,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 106.998,
+   "kind": "BUTTON_FRAME",
+   "frame": 7902,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.009,
+   "kind": "BUTTON_FRAME",
+   "frame": 7903,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.031,
+   "kind": "BUTTON_FRAME",
+   "frame": 7904,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.043,
+   "kind": "BUTTON_FRAME",
+   "frame": 7905,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.054,
+   "kind": "BUTTON_FRAME",
+   "frame": 7906,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.076,
+   "kind": "BUTTON_FRAME",
+   "frame": 7907,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.088,
+   "kind": "BUTTON_FRAME",
+   "frame": 7908,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.11,
+   "kind": "BUTTON_FRAME",
+   "frame": 7909,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.121,
+   "kind": "BUTTON_FRAME",
+   "frame": 7910,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.145,
+   "kind": "BUTTON_FRAME",
+   "frame": 7911,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.157,
+   "kind": "BUTTON_FRAME",
+   "frame": 7912,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.167,
+   "kind": "BUTTON_FRAME",
+   "frame": 7914,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.189,
+   "kind": "BUTTON_FRAME",
+   "frame": 7915,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.2,
+   "kind": "BUTTON_FRAME",
+   "frame": 7916,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.222,
+   "kind": "BUTTON_FRAME",
+   "frame": 7917,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.234,
+   "kind": "BUTTON_FRAME",
+   "frame": 7918,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.256,
+   "kind": "BUTTON_FRAME",
+   "frame": 7919,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.267,
+   "kind": "BUTTON_FRAME",
+   "frame": 7920,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.29,
+   "kind": "BUTTON_FRAME",
+   "frame": 7921,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.301,
+   "kind": "BUTTON_FRAME",
+   "frame": 7922,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.313,
+   "kind": "BUTTON_FRAME",
+   "frame": 7923,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.335,
+   "kind": "BUTTON_FRAME",
+   "frame": 7925,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 107.346,
+   "kind": "BUTTON_FRAME",
+   "frame": 7929,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a5120200000000fd6500b6fc4f0158000075"
+  },
+  {
+   "delta_s": 129.526,
+   "kind": "D2_DISABLE_REQUEST",
+   "frame": 8617,
+   "op": "0x52",
+   "handle": "0x0075",
+   "value": "a505d2007c"
+  },
+  {
+   "delta_s": 129.542,
+   "kind": "D2_ECHO",
+   "frame": 8619,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a505d2007c"
+  },
+  {
+   "delta_s": 129.544,
+   "kind": "D2_ECHO",
+   "frame": 8620,
+   "op": "0x1b",
+   "handle": "0x0077",
+   "value": "a505d2007c"
+  }
+ ]
+}

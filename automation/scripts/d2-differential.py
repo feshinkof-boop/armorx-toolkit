@@ -23,6 +23,13 @@ from __future__ import annotations
 import argparse, asyncio, json, os, pathlib, sys, time
 from datetime import datetime, timezone
 
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from d2_cases import CASES as CASE_DEFS, sequence as case_sequence  # noqa: E402
+
+class OperatorCancelled(Exception):
+    """Raised when the operator pressed CANCEL/STOP on a popup: stop safely, never continue."""
+
+
 try:
     from bleak import BleakClient, BleakScanner
 except Exception as exc:                                          # pragma: no cover
@@ -231,6 +238,71 @@ async def d2_off(client, rec: Recorder) -> None:
         rec.mark("d2_off_error", str(exc))
 
 
+async def run_steps(client, rec: Recorder, steps) -> None:
+    """Execute a declarative case step list (see automation/scripts/d2_cases.py).
+
+    Deliberately dumb and explicit: every write is recorded with its label so the resulting
+    tx-rx.jsonl is self-describing evidence. The observe step never treats an empty window as a
+    failure - D2 input is event-driven (155 official frames while A was pressed, 0 while idle).
+    """
+    for st in steps:
+        op = st["op"]
+        if op == "sanity":
+            continue  # already performed before the case body
+        if op == "write":
+            frame = bytes.fromhex(st["frame"])
+            mode = "with_response" if st.get("response") else "without_response"
+            await client.write_gatt_char(FFE1, frame, response=bool(st.get("response", False)))
+            rec.log("TX", FFE1, frame, label=st["label"], write_mode=mode)
+        elif op == "sleep":
+            rec.mark("sleep", st.get("why", ""))
+            await asyncio.sleep(float(st["seconds"]))
+        elif op == "wait_fragments":
+            prefix, want = st["prefix"], int(st["expect_min"])
+            rec.mark("wait_fragments", f"{prefix} expect>={want}")
+            deadline = time.monotonic() + float(st["seconds"])
+            while time.monotonic() < deadline:
+                if sum(1 for f in rec.frames if f["hex"].startswith(prefix)) >= want:
+                    break
+                await asyncio.sleep(0.1)
+            got = sum(1 for f in rec.frames if f["hex"].startswith(prefix))
+            rec.mark("fragments_received", f"{got} (expected >= {want})")
+        elif op == "cccd_renew":
+            try:
+                await client.stop_notify(FFE2)
+                rec.mark("cccd_unsubscribe_done")
+                await asyncio.sleep(1.0)
+                await client.start_notify(FFE2, rec.on_notify)
+                rec.mark("cccd_resubscribe_done")
+            except Exception as exc:
+                rec.mark("cccd_renew_error", str(exc))
+        elif op == "operator_prompt":
+            # The one and only operator interaction. Run the dialog ASYNCHRONOUSLY so the event loop
+            # keeps servicing BLE notifications while the popup is up - a synchronous wait would
+            # stall notify callbacks and lose exactly the frames this experiment is looking for.
+            # Clicking the popup button is the acknowledgement channel; chat is not.
+            script = pathlib.Path(__file__).resolve().parent.parent / "operator-dialog-kdialog.sh"
+            rec.mark("operator_prompt_raised", st["action_id"])
+            proc = await asyncio.create_subprocess_exec(
+                "bash", str(script), "--id", st["action_id"], "--title", st["title"],
+                "--message", st["message"], "--button", st["button"],
+                stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
+            ack = await proc.wait()
+            rec.mark("operator_prompt_result", f"action_id={st['action_id']} rc={ack}")
+            if ack != 0:
+                rec.mark("operator_cancelled", st["action_id"])
+                raise OperatorCancelled(st["action_id"])
+        elif op == "observe":
+            n = observe_window()
+            rec.mark("observe_start", f"{n}s")
+            await asyncio.sleep(n)
+            valid = sum(1 for f in rec.frames if f["kind"] == "valid_status")
+            rec.mark("observe_end",
+                     f"valid_status_frames={valid} (event-driven: zero idle frames is NORMAL, not failure)")
+        else:
+            raise RuntimeError(f"unknown step {op!r}")
+
+
 async def run_case(args) -> int:
     case = args.case
     rec = Recorder(args.outdir, case)
@@ -244,9 +316,34 @@ async def run_case(args) -> int:
         if not await sanity(client, rec):
             print("PREFLIGHT_CONTROL_CHANNEL_FAILED")
             return 6
-        await d2_off(client, rec)
+        cancelled = False
+        try:
+            if case in ("C1", "C2"):
+                # Declarative cases: NO pre-clear, plus (C2) the official pre-D2 read burst.
+                steps = [st_ for st_ in case_sequence(case) if st_["op"] != "sanity"]
+                rec.mark("case_plan", CASE_DEFS[case]["description"])
+                await run_steps(client, rec, steps)
+                case_ran = True
+            else:
+                case_ran = False
+        except OperatorCancelled as exc:
+            # The operator pressed CANCEL/STOP. Return the device to a safe state and stop: never
+            # continue a causal test the operator declined.
+            cancelled = True
+            case_ran = False
+            rec.mark("operator_cancelled_stop", str(exc))
+            try:
+                await client.write_gatt_char(FFE1, D2_OFF, response=False)
+                rec.log("TX", FFE1, D2_OFF, label="D2 disable (operator cancel path)",
+                        write_mode="without_response")
+                await asyncio.sleep(1.0)
+            except Exception as exc2:
+                rec.mark("d2_off_after_cancel_error", str(exc2))
+            print("OPERATOR_CANCELLED")
 
-        if case == "C0":                                  # current harness behaviour
+        if cancelled or case_ran:
+            pass
+        elif case == "C0":                                  # current harness behaviour
             await client.write_gatt_char(FFE1, D2_ON, response=False)
             rec.log("TX", FFE1, D2_ON, label="D2 enable", write_mode="without_response")
             rec.mark("observe_start", f"{observe_window()}s")
@@ -332,7 +429,7 @@ def main() -> int:
         p = sub.add_parser(name)
         p.add_argument("--outdir", required=True, type=pathlib.Path)
         if name == "variant":
-            p.add_argument("--case", required=True, choices=["C0", "A", "B", "C"])
+            p.add_argument("--case", required=True, choices=["C0", "C1", "C2", "A", "B", "C"])
     args = ap.parse_args()
     global _OBSERVE_OVERRIDE
     if getattr(args, "observe", None):

@@ -1,0 +1,975 @@
+{
+ "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855": [
+  "armorx-lab/results/experiments/physical-20260927-164022/raw-tx-rx.log",
+  "armorx-lab/results/experiments/physical-20260927-162402/raw-tx-rx.log",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/official-att.jsonl",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/completion-20260927-192908/official-att.jsonl",
+  "armorx-lab/results/experiments/physical-20260927-button-test2/raw-tx-rx.log",
+  "armorx-lab/results/experiments/physical-20260927-162545/raw-tx-rx.log",
+  "armorx-lab/results/experiments/physical-20260927-162801/raw-tx-rx.log",
+  "armorx-lab/results/experiments/physical-20260927-162321/raw-tx-rx.log",
+  "armorx-lab/results/experiments/physical-20260927-button-test4/raw-tx-rx.log",
+  "armorx-lab/results/experiments/physical-20260927-button-test/raw-tx-rx.log",
+  "armorx-lab/results/experiments/physical-20260927-162327/raw-tx-rx.log",
+  "armorx-lab/results/runtime/physical-alert/popup-errors.log",
+  "armorx-lab/ble/virtual-armorx/logs/2220901-api33c/2220901-api33c.bin",
+  "armorx-lab/ble/virtual-armorx/logs/2220901-api33d/2220901-api33d.bin",
+  "armorx-lab/ble/virtual-armorx/logs/2220901-api30/2220901-api30.bin",
+  "armorx-lab/ble/virtual-armorx/logs/2220901-api33b/2220901-api33b.bin",
+  "armorx-lab/ble/virtual-armorx/logs/2220901-live/2220901-live.bin",
+  "armorx-lab/tools/vendor/AC632Nuke/mboot/tools/app.bin",
+  "armorx_research/live_getmode/getmode_raw_rx.bin",
+  "armorx_research/live_getmode/padded_probe_raw_rx.bin",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pkg_resources/tests/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_internal/resolution/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_internal/resolution/resolvelib/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_internal/resolution/legacy/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_internal/operations/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_internal/utils/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/resolvelib/compat/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/chardet/cli/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/chardet/metadata/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/urllib3/packages/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/urllib3/packages/backports/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/urllib3/contrib/_securetransport/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/elftools/common/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/elftools/elf/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/elftools/ehabi/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/elftools/dwarf/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/backports/tarfile/compat/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/wheel/vendored/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/wheel/vendored/packaging/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/zipp/compat/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/inflect/compat/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/importlib_metadata/compat/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_distutils/tests/test_versionpredicate.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_distutils/tests/compat/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/tests/integration/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/tests/config/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/tests/compat/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/compat/__init__.py",
+  "armorx_git_handoff/diff-check.txt"
+ ],
+ "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6": [
+  "armorx-lab/results/experiments/physical-20260927-170455-noop-d7/noop-write-readback.bin",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/final-d6.bin",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/probe-readback.bin",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/final-d6.bin",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/harness-session/probe-readback.bin",
+  "armorx-lab/results/experiments/physical-20260927-171616-id15/probe-readback.bin",
+  "armorx-lab/results/experiments/physical-20260927-171616-id15/restore-readback.bin",
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/probe-readback.bin",
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/final-d6.bin",
+  "armorx-lab/results/experiments/physical-20260927-162448/baseline-as-found.bin",
+  "armorx-lab/results/experiments/physical-20260927-165347/baseline-as-found.bin",
+  "armorx-lab/results/experiments/physical-20260927-162602/noop-write-readback.bin",
+  "armorx-lab/baselines/device/ZJ-XT_2741_2D-37-35-6D-66-11/20260927-170400-baseline-as-found.bin",
+  "armorx-lab/baselines/device/ZJ-XT_2741_2D-37-35-6D-66-11/20260927-162448-baseline-as-found.bin"
+ ],
+ "d4ed57f5ffffbeb73c99be3683509f44b5d85a3db05221fd673a6120cce1a782": [
+  "armorx_research/live_getmode/final_corrected/evidence/post_transaction_hid_caps.json",
+  "armorx_research/live_getmode/final_corrected/evidence/pf_hid_caps.json",
+  "armorx_research/live_getmode/evidence/r11_prewrite_hid_caps.json",
+  "armorx_research/live_getmode/evidence/p01_preflight_hid_caps.json",
+  "armorx_research/live_getmode/evidence/p06_postpadded_hid_caps.json",
+  "armorx_research/live_getmode/evidence/r7_hid_capabilities.json",
+  "armorx_research/getmode_recovery_read/evidence/r1_hid_caps.json"
+ ],
+ "79a84dd80023c9e6f499801f9b696c3df168eaf56d2ebbbe75e898398ae4face": [
+  "armorx_research/live_getmode/final_corrected/evidence/pf_hid_describe.json",
+  "armorx_research/live_getmode/evidence/r10_prewrite_hid_describe.json",
+  "armorx_research/live_getmode/evidence/p03_preflight_hid_describe.json",
+  "armorx_research/live_getmode/evidence/r17_postprobe_hid_describe.json",
+  "armorx_research/live_getmode/evidence/r6_hid_describe.json",
+  "armorx_research/getmode_recovery_read/evidence/r4_hid_describe.json"
+ ],
+ "64e0832b1f97d995b40bf994465c277340e96a4f2b6b2fc5ef1eb4e2af9378e2": [
+  "armorx-lab/apk/extracted/4.0.8/splits/base.apk",
+  "armorx-lab/apk/extracted/4.0.8-apkm-splits/base.apk",
+  "armorx-lab/apk/original/4.0.8/base.apk",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/apk-pull/base.apk",
+  "armorx-re/mygt408/apks/base.apk"
+ ],
+ "5d5360e950532e7521ad20b9909f53abf3ba445de8cff6255ceb6e18c39318af": [
+  "armorx-lab/results/static/2.22.0901/scripts/resolve_defaultconfig_switch.py",
+  "armorx-lab/tools/2.22.0901/resolve_defaultconfig_switch.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/resolve_defaultconfig_switch.py",
+  "armorx-re/mygt408/scripts/resolve_defaultconfig_switch.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/resolve_defaultconfig_switch.py"
+ ],
+ "0dd825fc4393e5681524962662434d0cbf7f7b4450d24beba6d6abaa648086c8": [
+  "armorx-lab/results/static/2.22.0901/scripts/asm_calls.py",
+  "armorx-lab/tools/2.22.0901/asm_calls.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/asm_calls.py",
+  "armorx-re/mygt408/scripts/asm_calls.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/asm_calls.py"
+ ],
+ "ddec450503f5eba464a592eb5dbf1849cd0c06ea2bd2018ce36ae5b748402ccb": [
+  "armorx-lab/results/static/2.22.0901/scripts/reconstruct_frames.py",
+  "armorx-lab/tools/2.22.0901/reconstruct_frames.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/reconstruct_frames.py",
+  "armorx-re/mygt408/scripts/reconstruct_frames.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/reconstruct_frames.py"
+ ],
+ "0164ee595433ddccd2c2015131c260ade3789544c18412b517cdea5abfdfa0f0": [
+  "armorx-lab/results/static/2.22.0901/scripts/extract_default_configs.py",
+  "armorx-lab/tools/2.22.0901/extract_default_configs.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/extract_default_configs.py",
+  "armorx-re/mygt408/scripts/extract_default_configs.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/extract_default_configs.py"
+ ],
+ "3eea9bc1410d2d20f1c6d28ac5dab7371bbe603eb48ce90edc9b2b17ad4f1c8e": [
+  "armorx-lab/results/static/2.22.0901/scripts/frame_index.py",
+  "armorx-lab/tools/2.22.0901/frame_index.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/frame_index.py",
+  "armorx-re/mygt408/scripts/frame_index.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/frame_index.py"
+ ],
+ "9ebd83e662bdb3372d532c0243d8c96c003e0b1c2a5d6a766364d2b4ff79266c": [
+  "armorx-lab/results/static/2.22.0901/scripts/extract_pool_lists.py",
+  "armorx-lab/tools/2.22.0901/extract_pool_lists.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/extract_pool_lists.py",
+  "armorx-re/mygt408/scripts/extract_pool_lists.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/extract_pool_lists.py"
+ ],
+ "080ece2c3ae214293650f17b34cef32b89eaa718c5ce1266fb83212885ffa4df": [
+  "armorx-lab/results/static/2.22.0901/scripts/opcode_scan.py",
+  "armorx-lab/tools/2.22.0901/opcode_scan.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/opcode_scan.py",
+  "armorx-re/mygt408/scripts/opcode_scan.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/opcode_scan.py"
+ ],
+ "47b8ed719e58c68f6430bfea756939494266e077b523f6c1c411487c350b5e50": [
+  "armorx-lab/results/static/2.22.0901/scripts/provenance.py",
+  "armorx-lab/tools/2.22.0901/provenance.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/provenance.py",
+  "armorx-re/mygt408/scripts/provenance.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/provenance.py"
+ ],
+ "64b3450a7c01a19199ddea7b1a0531bceee4feb0daac916fe2a261e700258620": [
+  "armorx-lab/results/static/2.22.0901/scripts/parse_axml.py",
+  "armorx-lab/tools/2.22.0901/parse_axml.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/parse_axml.py",
+  "armorx-re/mygt408/scripts/parse_axml.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/parse_axml.py"
+ ],
+ "3d6041d1152dbd70aa70e6e968bb03995f11e29f708240ecea8b2f435936d2bf": [
+  "armorx-lab/results/static/2.22.0901/scripts/index_asm.py",
+  "armorx-lab/tools/2.22.0901/index_asm.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/index_asm.py",
+  "armorx-re/mygt408/scripts/index_asm.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/index_asm.py"
+ ],
+ "1d994cc1ab8a6349440bc5c480f552996fc85cf46ecaed4441934b449803d16e": [
+  "armorx-lab/results/static/2.22.0901/scripts/dispatch_scan.py",
+  "armorx-lab/tools/2.22.0901/dispatch_scan.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/dispatch_scan.py",
+  "armorx-re/mygt408/scripts/dispatch_scan.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/dispatch_scan.py"
+ ],
+ "3466804604cbc5a5c3f46a3789b17d6349f0827eef351ba99369a50e35fb2684": [
+  "armorx-lab/results/static/2.22.0901/scripts/build_command_index.py",
+  "armorx-lab/tools/2.22.0901/build_command_index.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/build_command_index.py",
+  "armorx-re/mygt408/scripts/build_command_index.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/build_command_index.py"
+ ],
+ "90770cb146a4c378fdca26e657fbe20eeb9e2ab5ee564c1ea6a4530b991eea53": [
+  "armorx-lab/results/static/2.22.0901/scripts/extract_strings.py",
+  "armorx-lab/tools/2.22.0901/extract_strings.py",
+  "armorx-re/repo/research/mygt-4.0.8/tools/extract_strings.py",
+  "armorx-re/mygt408/scripts/extract_strings.py",
+  "armorx-re/mygt408/research/mygt-4.0.8/tools/extract_strings.py"
+ ],
+ "37c26c7f4a188f3e49cf706cf559dd12d9470a0dadcb53cefe5e09f3930c8896": [
+  "armorx_research/getmode_choreography/evidence/pe.py",
+  "armorx_research/getmode_final_static_closure/evidence/pe.py",
+  "armorx_research/model_string_provenance/evidence/pe.py",
+  "armorx_research/devmgr_static/scripts/pe.py",
+  "armorx_research/devmgr_static/evidence/pe.py"
+ ],
+ "9bc6d5e579b26ea4063370716c5479ecf9eb18c375ae62fc45d833218fb69c6a": [
+  "armorx_research/getmode_choreography/evidence/xr.py",
+  "armorx_research/getmode_final_static_closure/evidence/xr.py",
+  "armorx_research/model_string_provenance/evidence/xr.py",
+  "armorx_research/devmgr_static/scripts/xr.py",
+  "armorx_research/devmgr_static/evidence/xr.py"
+ ],
+ "2a492735d942c478beb8921a5aa35bb4fe5d8339961f01b3d84a7ba560637266": [
+  "armorx_research/live_getmode/final_corrected/evidence/pf_hid_collections.json",
+  "armorx_research/live_getmode/evidence/p02_preflight_hid_collections.json",
+  "armorx_research/live_getmode/evidence/p07_postpadded_hid_collections.json",
+  "armorx_research/getmode_transport_v2/evidence/hid_collections_raw.json",
+  "armorx_research/getmode_recovery_read/evidence/r2_hid_collections.json"
+ ],
+ "07e299fd48bd1ac5ae65d442a26af9a8567ded32e65c3110ad77f1130343527a": [
+  "armorx_research/live_getmode/final_corrected/evidence/pf_usb_describe.json",
+  "armorx_research/live_getmode/evidence/r4_usb_describe.json",
+  "armorx_research/live_getmode/evidence/r12_prewrite_usb_describe.json",
+  "armorx_research/live_getmode/evidence/p04_preflight_usb_describe.json",
+  "armorx_research/getmode_recovery_read/evidence/r3_usb_describe.json"
+ ],
+ "2e9805fc20b0ec88b62c5d107f0c1634a27f47469d63c79c90b842f9f15bd1fb": [
+  "armorx-lab/apk/extracted/4.0.8/splits/config.arm64_v8a.apk",
+  "armorx-lab/apk/extracted/4.0.8-apkm-splits/config.arm64_v8a.apk",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/apk-pull/split_config.arm64_v8a.apk",
+  "armorx-re/mygt408/apks/config.arm64_v8a.apk"
+ ],
+ "00df4a3b837f2e5c067279e65242917e797fa5fa7e9e58905f93e5373a89b959": [
+  "armorx-lab/apk/extracted/4.0.8/splits/config.en.apk",
+  "armorx-lab/apk/extracted/4.0.8-apkm-splits/config.en.apk",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/apk-pull/split_config.en.apk",
+  "armorx-re/mygt408/apks/config.en.apk"
+ ],
+ "172052b2b749db30c5fbfaae36dcbbb5e7e1e393fdd26ece8ab1fd74b9e6d78e": [
+  "armorx-lab/apk/extracted/4.0.8/splits/config.ar.apk",
+  "armorx-lab/apk/extracted/4.0.8-apkm-splits/config.ar.apk",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/apk-pull/split_config.ar.apk",
+  "armorx-re/mygt408/apks/config.ar.apk"
+ ],
+ "a1998122b37e9edb5271a048a8a433bfadcd8dbfad09da19ad9891e74e7e74a8": [
+  "armorx-lab/apk/extracted/4.0.8/splits/config.xxhdpi.apk",
+  "armorx-lab/apk/extracted/4.0.8-apkm-splits/config.xxhdpi.apk",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/apk-pull/split_config.xxhdpi.apk",
+  "armorx-re/mygt408/apks/config.xxhdpi.apk"
+ ],
+ "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b": [
+  "armorx-lab/results/static/2.22.0901/strings-AndroidManifest.xml.txt",
+  "armorx-re/repo/src/armorx_toolkit.egg-info/dependency_links.txt",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pkg_resources/tests/data/my-test-package_unpacked-egg/my_test_package-1.0-py3.7.egg/EGG-INFO/dependency_links.txt",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pkg_resources/tests/data/my-test-package_unpacked-egg/my_test_package-1.0-py3.7.egg/EGG-INFO/top_level.txt"
+ ],
+ "bec617501b0792d0e5ac3eedb83ffe3bafec364c3e773fb99208e27ea78c26bb": [
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/identity.json",
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/preflight/identity.json",
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/A-write-with-response/identity.json",
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/C-reenable/identity.json"
+ ],
+ "7d3bd7ae0c326babf2ea961149445e69b4dca4b1b6978788115a8efc08e4a206": [
+  "armorx-lab/ble/virtual-armorx/logs/selftest-20260927-120800/selftest-peripheral.bin",
+  "armorx-lab/ble/virtual-armorx/logs/selftest-20260927-115717/selftest-peripheral.bin",
+  "armorx-lab/ble/virtual-armorx/logs/selftest-20260927-164634/selftest-peripheral.bin",
+  "armorx-lab/ble/virtual-armorx/logs/selftest-20260927-115857/selftest-peripheral.bin"
+ ],
+ "99dfd009a28cd10f637ecf185c8edf95be790c61a364af81ce02cdbeb92ae0b2": [
+  "armorx-lab/tools/vendor/AC632Nuke/btstack/btstack_a/att_profile.c.o.cbe.c",
+  "armorx-lab/tools/vendor/AC632Nuke/btstack/btstack_a/pbg_profile.c.o.cbe.c",
+  "armorx-lab/tools/vendor/AC632Nuke/btstack/btstack_a/spp_update_profile.c.o.cbe.c",
+  "armorx-lab/tools/vendor/AC632Nuke/btstack/btstack_a/multi_bd.c.o.cbe.c"
+ ],
+ "653cb3219abd09338c1590375a60162e6e4fd7b72c1856aaa7b796b7da7d709c": [
+  "armorx-lab/firmware/original/DevMgr.dll",
+  "armorx_research/dongle_baseline_v13/artifacts/DevMgr.dll",
+  "armorx_research/devmgr_static/DevMgr.dll",
+  "armorx_handoff/project/raw_private/current/DevMgr.dll"
+ ],
+ "d02e28136a22e48bb8db4ab59556fb71df524dd5ad3842f3ff482a18b534f0cf": [
+  "armorx-re/repo/src/armorx/config.py",
+  "armorx-re/repo/tools/armorx_config.py",
+  "armorx_research/bridge_windows_armorx/scripts/armorx_config.py",
+  "armorx_research/android_lab/scripts/armorx_config.py"
+ ],
+ "d8adb2b7884e77d68b52fd7ed8ea330957504ab59d7aad2fc403f98d301d66b5": [
+  "armorx_research/getmode_final_static_closure/vendor_getmode_probe.py",
+  "armorx_research/getmode_final_static_closure/scripts/vendor_getmode_probe.py",
+  "armorx_research/bridge_windows_armorx/vendor_getmode_probe.baseline.py",
+  "armorx_research/dongle_baseline_v13/scripts/vendor_getmode_probe.py"
+ ],
+ "d099cddcb7d71f82c845f5cbf9014e18227341664edc42f1e11d5dfe5a2ea103": [
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/jaraco.text-3.12.1.dist-info/top_level.txt",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/jaraco.collections-5.1.0.dist-info/top_level.txt",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/jaraco.functools-4.0.1.dist-info/top_level.txt",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/jaraco.context-5.3.0.dist-info/top_level.txt"
+ ],
+ "2607dd7a7379d775a8b8c011f0336576f57320617e9d6a5e152b52dbcdc9ddae": [
+  "armorx-lab/apk/extracted/2.23/DebugProbesKt.bin",
+  "armorx-lab/apk/extracted/2.22.0901/DebugProbesKt.bin",
+  "armorx-lab/apk/extracted/2.24/DebugProbesKt.bin"
+ ],
+ "e4ec962577a8f717abd0651917bdc3e6eba87a5aac3453c5d80b32b7b9e738bb": [
+  "armorx-lab/apk/extracted/2.23/assets/flutter_assets/FontManifest.json",
+  "armorx-lab/apk/extracted/2.22.0901/assets/flutter_assets/FontManifest.json",
+  "armorx-lab/apk/extracted/2.24/assets/flutter_assets/FontManifest.json"
+ ],
+ "4bbc89b1eabac05fbe55f04091a98f63d2626939461509614bb2410926237f04": [
+  "armorx-lab/ble/virtual-armorx/logs/selftest-20260927-100407/selftest-peripheral.bin",
+  "armorx-lab/ble/virtual-armorx/logs/selftest-20260927-115656/selftest-peripheral.bin",
+  "armorx-lab/ble/virtual-armorx/logs/selftest-20260927-101536/selftest-peripheral.bin"
+ ],
+ "73fd6fccdd802c419a6b2d983d6c3173b7da97558ac4b589edec2dfe443db9ad": [
+  "armorx-lab/ble/virtual-armorx/.pytest_cache/README.md",
+  "armorx-lab/.pytest_cache/README.md",
+  "armorx-re/repo/.pytest_cache/README.md"
+ ],
+ "8cb212bd22c544b548f0d3012ef9db3c133e8863523e89eb8220ab9667d9777c": [
+  "armorx-lab/baselines/imported-research/command-index.json",
+  "armorx-re/repo/research/mygt-4.0.8/command-index.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/command-index.json"
+ ],
+ "f7a241c54efe3f939bd3e0da1ede1ad711a36754fe3ba7d9588b6b96e0c00e39": [
+  "armorx-lab/baselines/imported-research/key-id-table.md",
+  "armorx-re/repo/research/mygt-4.0.8/key-id-table.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/key-id-table.md"
+ ],
+ "bf7abb7f8130bbc6188e6f601a670b520c442644f69dbda12b3b858dd8055a9a": [
+  "armorx-lab/baselines/imported-research/provenance.md",
+  "armorx-re/repo/research/mygt-4.0.8/provenance.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/provenance.md"
+ ],
+ "be0986c1f74e1dc567a58637955e101c1aeef89edabecf9024a76790255a0174": [
+  "armorx-lab/baselines/imported-research/config-144-reconstruction.md",
+  "armorx-re/repo/research/mygt-4.0.8/config-144-reconstruction.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/config-144-reconstruction.md"
+ ],
+ "a11f5525d9e61255d2bb36bbcf624ea3c2255b838ab9ce109dc7022588eca1ff": [
+  "armorx-lab/baselines/imported-research/fc-dpi-test-vectors.json",
+  "armorx-re/repo/research/mygt-4.0.8/fc-dpi-test-vectors.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/fc-dpi-test-vectors.json"
+ ],
+ "dc45d58732e09d6c96e85f4fccd41faf97f0025e59c5bc049d32df6c83589da7": [
+  "armorx-lab/baselines/imported-research/ff-lighting-test-vectors.json",
+  "armorx-re/repo/research/mygt-4.0.8/ff-lighting-test-vectors.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/ff-lighting-test-vectors.json"
+ ],
+ "45df97ff414bbc26afb5e265b9b0fdd2275d893396087d7a94f1a1c653ba6ea1": [
+  "armorx-lab/baselines/imported-research/config-field-map.json",
+  "armorx-re/repo/research/mygt-4.0.8/config-field-map.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/config-field-map.json"
+ ],
+ "85f840fbf15b32d7a5537e3222071341acb3a47efe0f1215c06b5e61a0ab69af": [
+  "armorx-lab/baselines/imported-research/device-model-matrix.json",
+  "armorx-re/repo/research/mygt-4.0.8/device-model-matrix.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/device-model-matrix.json"
+ ],
+ "6e01b7b8361c687bff8156a820036ed38d60d44f8df516dae71a729748545a64": [
+  "armorx-lab/baselines/imported-research/api-map.md",
+  "armorx-re/repo/research/mygt-4.0.8/api-map.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/api-map.md"
+ ],
+ "ea293c4684bdec090becface82e937b464dd9abe8af03f591dab1d197adc8079": [
+  "armorx-lab/baselines/imported-research/gyro-trigger-stick.md",
+  "armorx-re/repo/research/mygt-4.0.8/gyro-trigger-stick.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/gyro-trigger-stick.md"
+ ],
+ "91402bad3324d0a9b0e999c7e5cae338234ce4d1fe55a1b928f56c9b6d4d8ca6": [
+  "armorx-lab/baselines/imported-research/d8-test-vectors.json",
+  "armorx-re/repo/research/mygt-4.0.8/d8-test-vectors.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/d8-test-vectors.json"
+ ],
+ "9642d3be1b810dcf3ae1eb23444bac5126c8fc89add8f4704f1592d7a2f90caf": [
+  "armorx-lab/baselines/imported-research/device-model-matrix.md",
+  "armorx-re/repo/research/mygt-4.0.8/device-model-matrix.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/device-model-matrix.md"
+ ],
+ "604a582404be1c984a28069fa4b9610045b343d25761311acfcfd2a111ceddb9": [
+  "armorx-lab/baselines/imported-research/turbo.md",
+  "armorx-re/repo/research/mygt-4.0.8/turbo.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/turbo.md"
+ ],
+ "a6bafe3fd40733968709f0d3f36ac0b7d70dc1788023ef6477dc7b4253bad1dd": [
+  "armorx-lab/baselines/imported-research/ff-lighting.md",
+  "armorx-re/repo/research/mygt-4.0.8/ff-lighting.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/ff-lighting.md"
+ ],
+ "d525d7b996f4fdae840f660386ec8d137ee304714913e10032dcc97e3f9a2ede": [
+  "armorx-lab/baselines/imported-research/old-vs-mygt-4.0.8.json",
+  "armorx-re/repo/research/mygt-4.0.8/old-vs-mygt-4.0.8.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/old-vs-mygt-4.0.8.json"
+ ],
+ "af9dbede37f277b1afd78d03146fb5dba84e4d218e7d4b0cc434ec3e7851daad": [
+  "armorx-lab/baselines/imported-research/captures/HANDOFF_REPORT_2026-09-23.md",
+  "armorx_handoff/project/HANDOFF_REPORT.md",
+  "armorx_handoff/project/current_handoff/HANDOFF_REPORT_2026-09-23.md"
+ ],
+ "10346e70a377995352daae06b18dd84f9dac6e948cc870dcab7332fb7f938bcd": [
+  "armorx-lab/baselines/imported-research/captures/PCAPdroid_23_Sep_20_53_43.pcap",
+  "armorx_handoff/project/raw_private/current/PCAPdroid_23_Sep_20_53_43.pcap",
+  "armorx_handoff/project/current_handoff/PCAPdroid_23_Sep_20_53_43.pcap"
+ ],
+ "3595c8d0f367b40b6da4e64d19c99304339f2bd6f86fdd119359f471bee21940": [
+  "armorx-lab/tools/vendor/AC632Nuke/mboot/tools/ota.bin",
+  "armorx-lab/firmware/original/PC_AC632N_ota.bin",
+  "armorx-lab/firmware/original/PC_AC632N_ota_decrypted.bin"
+ ],
+ "71f201ba41235cb2f9a239d3f553fbe660a44218e9ff296560383084c90bc826": [
+  "armorx-lab/automation/scripts/emergency-restore/logs/ZJ-XT_2741_2D-37-35-6D-66-11_20260927-170558.bin",
+  "armorx-lab/automation/scripts/emergency-restore/logs/ZJ-XT_2741_2D-37-35-6D-66-11_20260927-162727.bin",
+  "armorx-lab/automation/scripts/emergency-restore/logs/ZJ-XT_2741_2D-37-35-6D-66-11_20260927-162719.bin"
+ ],
+ "74ca47e7c025340915f8ef6a225fb10823cc8bfef74fd9f7db5e0b8bc204ffe2": [
+  "armorx_research/dongle_baseline_v13/software/software_bigbig.json",
+  "armorx_research/dongle_baseline_v13/software/software_won.json",
+  "armorx_research/dongle_baseline_v13/software/software_pub_bigbig.json"
+ ],
+ "b35dc5ed86bce35b21cdb6f6625fed888fe5f5b860e106ef21b327598cf03b66": [
+  "armorx_research/dongle_baseline_v13/software/svc_vhid.json",
+  "armorx_research/dongle_baseline_v13/software/svc_gamepad.json",
+  "armorx_research/dongle_baseline_v13/software/svc_bigbig.json"
+ ],
+ "ab77953666d62461bf4b40e2b7f4b7028f2a42acffe4f6135c500a0597b9cabe": [
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/packaging/_structures.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/wheel/vendored/packaging/_structures.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/packaging/_structures.py"
+ ],
+ "9ffd3f348c211feca7a88c6485022b4d4d00c31bc3d732fdc263b64868a67313": [
+  "armorx-lab/apk/extracted/4.0.8/base/assets/flutter_assets/AssetManifest.bin",
+  "armorx-re/mygt408/ext/assets/flutter_assets/AssetManifest.bin"
+ ],
+ "9548a31e4a048135c1d94f919328bfb62ae2c7bb3cab96557c7941daa97776cb": [
+  "armorx-lab/apk/extracted/4.0.8/base/assets/flutter_assets/NativeAssetsManifest.json",
+  "armorx-re/mygt408/ext/assets/flutter_assets/NativeAssetsManifest.json"
+ ],
+ "40fa0f7a34688ca53c66cf94ecc6b8bb937e517df5d3120f3448b10e83c2184b": [
+  "armorx-lab/apk/extracted/4.0.8/base/assets/flutter_assets/FontManifest.json",
+  "armorx-re/mygt408/ext/assets/flutter_assets/FontManifest.json"
+ ],
+ "e8def4ce3918efec2726ebc02cc618cc3ac2d1a278eb4c4d6446c5a6fabb0755": [
+  "armorx-lab/apk/extracted/4.0.8/base/assets/flutter_assets/assets/json/game_map.json",
+  "armorx-re/mygt408/ext/assets/flutter_assets/assets/json/game_map.json"
+ ],
+ "357a24511f3c6aa3cd511acfa27cd01f6fb36a17d4ebf113affded51cc440cb9": [
+  "armorx-lab/apk/extracted/2.23/kotlin-tooling-metadata.json",
+  "armorx-lab/apk/extracted/2.24/kotlin-tooling-metadata.json"
+ ],
+ "32f1a30c4dbfcd55dbfb07e41af8d1925c44e80c49d1abce25dea59e52f486ae": [
+  "armorx-lab/apk/manifests/version-matrix.json",
+  "armorx-lab/results/version-diff/static-version-matrix.json"
+ ],
+ "915aa8e309f96aca1b9b39cce559d15938ea2a6932acc201690f53b60c8e0ee5": [
+  "armorx-lab/logs/2.22-logcat-full.txt",
+  "armorx-lab/results/static/2.22.0901/logcat-full.txt"
+ ],
+ "a14558bbbd5c2508b6dbc8333cba1fc82436d79f74d4ce609d27e5c964088e15": [
+  "armorx-lab/logs/2.22-emulator-api30-fresh.log",
+  "armorx-lab/logs/2.22-emulator-launch-api30.log"
+ ],
+ "be49296bdca2804abccf309ffefa4eab7773ef4d3f40b0eb90b5e33fbc57e541": [
+  "armorx-lab/logs/2.22-emulator-launch.log",
+  "armorx-lab/logs/2.22-emulator-api33-run2.log"
+ ],
+ "456d8c8a2bc0ea5c56345840e7eec205a9d10995f44d56b1dbbc59e517350007": [
+  "armorx-lab/results/version-diff/device-enum-history.json",
+  "armorx-re/repo/research/mygt-2.22.0901/version-diff/device-enum-history.json"
+ ],
+ "7d577b3720f0480534ba9c4caba03127f92b6cdd55da85fcc93e838f5d3c8958": [
+  "armorx-lab/results/version-diff/2.22-vs-2.23-vs-2.24-vs-4.0.8.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/2.22-vs-2.23-vs-2.24-vs-4.0.8.md"
+ ],
+ "dd12b60f6b6d9b0fc6b64cf3202a5eecb2bcfaa97407497c5ce7b79f19585180": [
+  "armorx-lab/results/version-diff/lighting-history.md",
+  "armorx-re/repo/research/mygt-2.22.0901/version-diff/lighting-history.md"
+ ],
+ "a896d89fbf944f9658b137f7cf022f086a51c4041510ca9f8d6a905f2a8aa0bb": [
+  "armorx-lab/results/version-diff/2.22-vs-2.23-vs-2.24-vs-4.0.8.json",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/2.22-vs-2.23-vs-2.24-vs-4.0.8.json"
+ ],
+ "0aed6f0820ede4da916acf0500bae117b254214b6b0f71466cb7faf540d733c6": [
+  "armorx-lab/results/version-diff/dpi-history.md",
+  "armorx-re/repo/research/mygt-2.22.0901/version-diff/dpi-history.md"
+ ],
+ "519ea5dc0c1843794868c9b44dd8b4234d0d49330b9017eb941a6e4549a0b03d": [
+  "armorx-lab/results/version-diff/server-api-history.md",
+  "armorx-re/repo/research/mygt-2.22.0901/version-diff/server-api-history.md"
+ ],
+ "f997f89a94a56ee407edf66c01ad4e9fac5a546ca43f1f107733bc21ffbfdc40": [
+  "armorx-lab/results/reconciliation/d4-reconstruction.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/d4-reconstruction.md"
+ ],
+ "8a0ab9f2098f54222a351a3d75fc685feb8f37fdc4980c13dca22b36b24d2de1": [
+  "armorx-lab/results/reconciliation/smi-audit-summary.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/smi-audit-summary.md"
+ ],
+ "c00ae73b8280bb5499357861cea0385a243b8d46555839ae0fb28d37fb038cee": [
+  "armorx-lab/results/reconciliation/d8-taxonomy.json",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/d8-taxonomy.json"
+ ],
+ "b12888665e7c77cc7cd4258ee9e368c0ed58c3195b1da6a3f1cd6a9df1d47a6c": [
+  "armorx-lab/results/reconciliation/d8-taxonomy.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/d8-taxonomy.md"
+ ],
+ "6fa2b15081e5ac87085331ddbb0d3570b4c6b60d57417ff492a0bdb3e8b1cda0": [
+  "armorx-lab/results/reconciliation/dart-smi-methodology.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/dart-smi-methodology.md"
+ ],
+ "985b0f9c81332be5f32b17f52b86607a70e5e7d03b8c435183f2cad028fe2381": [
+  "armorx-lab/results/reconciliation/e2-ab-summary.json",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/e2-ab-summary.json"
+ ],
+ "9d77c2aa8a4981b2fd5c978e2ee5cb3ee7456ec6637d3b616400393e1d61af6e": [
+  "armorx-lab/results/reconciliation/smi-audit.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/smi-audit.md"
+ ],
+ "edd5b0ce155d802ccb18cf15b5c6d6b89f493b4edb6cd1c934e5046fdca0db1d": [
+  "armorx-lab/results/reconciliation/fc-f6-timeline.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/fc-f6-timeline.md"
+ ],
+ "a69ba72988793104c734f22b92bb895f86ff5d54dc8587ca3eb9489ada1a9d8c": [
+  "armorx-lab/results/reconciliation/d8-version-test-vectors.json",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/d8-version-test-vectors.json"
+ ],
+ "966a18da87b5e6ac4f91023ca25cc93189d5cb618e0c9c94bb7993c5057a645f": [
+  "armorx-lab/results/reconciliation/docs-amended.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/docs-amended.md"
+ ],
+ "4cdcb1bbee2c7d83a80732920b3df571b829a6ae985c8a1dc42c3fc289ac60b7": [
+  "armorx-lab/results/reconciliation/smi-audit.json",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/smi-audit.json"
+ ],
+ "4996b965f345a18aa52e0d80674ba6575383bd0f682b63423a2b00b631217735": [
+  "armorx-lab/results/reconciliation/d4-reconstruction.json",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/d4-reconstruction.json"
+ ],
+ "6a6d93cfbb941a0eafc489136e281d1a2de3ee055f2f7c631385d64f3832b881": [
+  "armorx-lab/results/reconciliation/e2-ab-2.23-2.24.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/e2-ab-2.23-2.24.md"
+ ],
+ "ec760e90a2a714488ca2b749cbcd70a7d7826650669e94880385e6bf800084ae": [
+  "armorx-lab/results/final/mygt-2.22.0901-executive-report.md",
+  "armorx-re/repo/research/mygt-2.22.0901/mygt-2.22.0901-executive-report.md"
+ ],
+ "ffefd8424de3f9bb0fd5ba551093dca5fd9c56d987464706d095ffafa9f8f9ec": [
+  "armorx-lab/results/final/d4-smi-protocol-reconciliation.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/d4-smi-protocol-reconciliation.md"
+ ],
+ "1599c199e98d78392e8cda890140291ae3c2f7f35293027b574eb139ac4e7b3f": [
+  "armorx-lab/results/static/2.22.0901/command-index.json",
+  "armorx-re/repo/research/mygt-2.22.0901/static/command-index.json"
+ ],
+ "257477a58827efbacbd8693c48b28f2bcec1a7ff4400b8b962e7692d92371e8d": [
+  "armorx-lab/results/static/2.22.0901/key-id-table.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/key-id-table.md"
+ ],
+ "32246e3129be3ce552c63dfaeb6be1453687d7b838065c83499ebe4917a529c2": [
+  "armorx-lab/results/static/2.22.0901/strings-inventory.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/strings-inventory.md"
+ ],
+ "8694a8e295646cc991d361233811525fc4b92bd31452224478097d8f3f18b996": [
+  "armorx-lab/results/static/2.22.0901/e2-verdict.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/e2-verdict.md"
+ ],
+ "20e81b5f8c3ed35d1cc67b0ee09f8a7e312bbfa7e8eda1b7f03ec41377fbca39": [
+  "armorx-lab/results/static/2.22.0901/crc.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/crc.md"
+ ],
+ "e381a6791bfa47cd53f9cdeb2f98dc16a5aa357f78a24d49171e98f364e0adee": [
+  "armorx-lab/results/static/2.22.0901/d4-dynamic-verification.md",
+  "armorx-re/repo/research/d4-smi-protocol-reconciliation/d4-dynamic-verification.md"
+ ],
+ "20e4dfce509bb62af5dc0e91852c0118ad180e189db8d6e25085dc2c7c812dbe": [
+  "armorx-lab/results/static/2.22.0901/archaeology-summary.json",
+  "armorx-re/repo/research/mygt-2.22.0901/static/archaeology-summary.json"
+ ],
+ "e1856c93e871049add3bae01058bebd6c3aeb0d3a954f36bc9925c9fe7afe20f": [
+  "armorx-lab/results/static/2.22.0901/removed-useful-strings.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/removed-useful-strings.md"
+ ],
+ "2925523b9aeab857a7b086200341a54bda362b792a3f585318836e7496a4ecbd": [
+  "armorx-lab/results/static/2.22.0901/_artifact-string-counts.json",
+  "armorx-re/repo/research/mygt-2.22.0901/static/_artifact-string-counts.json"
+ ],
+ "f5ed1a96bf4d3e30d78cb30fa5e1d7a358a2777be63b1ba98fb6f55a36f1c4c3": [
+  "armorx-lab/results/static/2.22.0901/device-mark-search.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/device-mark-search.md"
+ ],
+ "c8c174908b63741fee3da05d5d5ce29c380921d8a201045c7cbf0e3f78ca0e40": [
+  "armorx-lab/results/static/2.22.0901/config-map.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/config-map.md"
+ ],
+ "85c94bb3bbebaca474663ac2110069a3d6ff2d75bb9a280892a6ada97007a983": [
+  "armorx-lab/results/static/2.22.0901/d8-macro.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/d8-macro.md"
+ ],
+ "fbba3aa4e6d75f412f663f9cdf820cbc902d8055405a344a6bdfcbcaff05a5a4": [
+  "armorx-lab/results/static/2.22.0901/device-enum.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/device-enum.md"
+ ],
+ "b028fc7d1f2712c7b483491b90e3d48e09f0f6638580df7e6c1484da3ed58896": [
+  "armorx-lab/results/static/2.22.0901/command-index.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/command-index.md"
+ ],
+ "733f74c1ac664388a3a7b3398ad8284febf8fe5d5830174ea6e376c8a83bea2f": [
+  "armorx-lab/results/static/2.22.0901/config-map.json",
+  "armorx-re/repo/research/mygt-2.22.0901/static/config-map.json"
+ ],
+ "0a187d5df63716e55f470e030dc7390cd6c86d719276db1fec4310b51c041a46": [
+  "armorx-lab/results/static/2.22.0901/key-id-table.json",
+  "armorx-re/repo/research/mygt-2.22.0901/static/key-id-table.json"
+ ],
+ "0c13403528047668a76f4a98429e4839a371ed80d44740406045448ea167e2b2": [
+  "armorx-lab/results/static/2.22.0901/peripheral-2220901-api33e-D2.jsonl",
+  "armorx-lab/ble/virtual-armorx/logs/2220901-api33e/2220901-api33e.jsonl"
+ ],
+ "b3a236cebc95337d699d48e976c0758e029aab9dd60c2e3fa8500a3bdaa5aad5": [
+  "armorx-lab/results/static/2.22.0901/lighting.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/lighting.md"
+ ],
+ "6fbe3a146b7733a96c3142ebc46a5d817c4ce89317abe38deba4a896418ad95a": [
+  "armorx-lab/results/static/2.22.0901/fc-dpi.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/fc-dpi.md"
+ ],
+ "c70dc9003495a2989c03c1fb0266e3a272a919f6917c535cc0268ea034fbf7d4": [
+  "armorx-lab/results/static/2.22.0901/default-config-archaeology.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/default-config-archaeology.md"
+ ],
+ "036b8139b0d4c72dc99fc19acaf26b5ebd8c90f5ab7711150e819eef17b27586": [
+  "armorx-lab/results/static/2.22.0901/server-api.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/server-api.md"
+ ],
+ "f53d73238bcbfe10c85b542d72716bccba3c09d3a075a6bf612f5b0962a854ec": [
+  "armorx-lab/results/static/2.22.0901/turbo.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/turbo.md"
+ ],
+ "7d75a92f5ffb6524bb116834410b23a3f88520d236e4c7bd7b204ddd3bbfe1a5": [
+  "armorx-lab/results/static/2.22.0901/dynamic-run.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/dynamic-run.md"
+ ],
+ "94d8ee381bf91b70e742e0245689c04d2abc184f9fc97358ffb29a3c5f66e496": [
+  "armorx-lab/results/static/2.22.0901/d8-macro.json",
+  "armorx-re/repo/research/mygt-2.22.0901/static/d8-macro.json"
+ ],
+ "92427aabb1db64b44b4a66debaf9e6a10c2ffae615b644d439d7555f3a8349d6": [
+  "armorx-lab/results/static/2.22.0901/unresolved.md",
+  "armorx-re/repo/research/mygt-2.22.0901/static/unresolved.md"
+ ],
+ "f1a6842c0fd6320e7f06627c4da063d492baa5f801f25e6c884529e4355513fc": [
+  "armorx-lab/results/static/2.22.0901/scripts/ctx.py",
+  "armorx-lab/tools/2.22.0901/ctx.py"
+ ],
+ "6d9efefb322cd924b0318fb1411d7820ae649e36eeb316109f3956e52894b913": [
+  "armorx-lab/results/static/2.22.0901/scripts/extract_default_configs222.py",
+  "armorx-lab/tools/2.22.0901/extract_default_configs222.py"
+ ],
+ "24d0d1e6c8e8abea54066c6e21f1d867bf938d513c23168254b3b9b1950ed7ab": [
+  "armorx-lab/results/static/2.22.0901/scripts/dispatch_census.py",
+  "armorx-lab/tools/2.22.0901/dispatch_census.py"
+ ],
+ "268bcacc259ee68848e0d1bf72fcd2b46862e7be75ff8c193222a8ac8e352d9e": [
+  "armorx-lab/results/static/2.22.0901/scripts/opcode_census.py",
+  "armorx-lab/tools/2.22.0901/opcode_census.py"
+ ],
+ "23ab460abca94092d9373542f13a96a93afb2dda59a0965f96c547f6250b4585": [
+  "armorx-lab/results/static/2.22.0901/scripts/gp30_param_map.py",
+  "armorx-lab/tools/2.22.0901/gp30_param_map.py"
+ ],
+ "37778dc858b16076e59cb880c1c7edc191a7ed1d767e1aa2616b92f670d2a9d2": [
+  "armorx-lab/results/static/2.22.0901/scripts/reconstruct_frames222.py",
+  "armorx-lab/tools/2.22.0901/reconstruct_frames222.py"
+ ],
+ "37e9c243017f06703cc7c99b267ac0b9a9e19f6640e2ab9d07b241720f91c194": [
+  "armorx-lab/results/experiments/physical-20260927-170455-noop-d7/noop-roundtrip.json",
+  "armorx-lab/results/experiments/physical-20260927-162602/noop-roundtrip.json"
+ ],
+ "2b9f1ed77708aaf22ef667fc284fe72131925e4efb79487f0b665722c58db57e": [
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/app-identity.json",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/completion-20260927-192908/app-identity.json"
+ ],
+ "f6665819c5ba52129d20e681254ca7ad0963f62abd95e2c0472b4ceb857030c7": [
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/final-d6.json",
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/final-d6.json"
+ ],
+ "431971b6e6817558c00f6afae24b4f829c5f494bc0562498ec5a17ad9ee4b650": [
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/official-timeline.csv",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/completion-20260927-192908/official-timeline.csv"
+ ],
+ "f19b54f223ae8697a7bef811d0fef35edf9232fda3ce68388fb3f28e77cbc57b": [
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/completion-20260927-192908/official-gatt-sequence.json",
+  "armorx-lab/results/experiments/official-vs-harness-session-20260927-190741/official-session/completion-20260927-192908/official-hci-summary.json"
+ ],
+ "97fb2061a352650c29007b7918ecc2bed907291073b849cfda61e460296b103d": [
+  "armorx-lab/results/experiments/physical-20260927-171616-id15/baseline-resume-current.bin",
+  "armorx-lab/results/experiments/physical-20260927-174445-buttons/baseline-as-found.bin"
+ ],
+ "526bf46ff37037dab3961998f19a0c72ff68b935dd5541313216d757c4438de4": [
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/services.json",
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/preflight/services.json"
+ ],
+ "ee741953af3a7815d1e1ce6df453efefe527828edaead0140b7428916b5cf16d": [
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/B-cccd-renewal/identity.json",
+  "armorx-lab/results/experiments/d2-live-differential-20260927-184643/C0-harness-control/identity.json"
+ ],
+ "29371fded92634ea3e5a8e0553d84cfbaa7775da9fd8639a5f2f80bf6398081d": [
+  "armorx-lab/results/experiments/physical-20260927-162448/baseline-as-found.json",
+  "armorx-lab/results/experiments/physical-20260927-165347/baseline-as-found.json"
+ ],
+ "878060e3710d4db628dd8c757dc8a16fc7cff39a503012377951fbb0fe1446ea": [
+  "armorx-lab/results/experiments/physical-20260927-165347/baseline-fragments.jsonl",
+  "armorx-lab/baselines/device/ZJ-XT_2741_2D-37-35-6D-66-11/20260927-170400-baseline-fragments.jsonl"
+ ],
+ "36894285edac52e51d13cfbaea40391f2b8d849d30c99f0cf59e4b7da7af79e3": [
+  "armorx-lab/results/experiments/physical-20260927-165347/baseline-decode.json",
+  "armorx-lab/baselines/device/ZJ-XT_2741_2D-37-35-6D-66-11/20260927-170400-baseline-decode.json"
+ ],
+ "2bd70525ddeb898260cfb8ca32f5a307a75ff6355a7a15aa2951f5723dc6b9c8": [
+  "armorx-lab/results/experiments/physical-20260927-165347/observations/session-path.txt",
+  "armorx-lab/results/runtime/current-session-path.txt"
+ ],
+ "bafa61974f4f18b46d2cade456baf3c7b37d21733f68720ca7958efbc1818c9f": [
+  "armorx-lab/results/runtime/operator-actions/armorx_console_state.json",
+  "armorx-lab/results/runtime/operator-ui-proof/console-state.json"
+ ],
+ "f53c2d95f599b8c6b90c658b26e1469d49d7e254d0c709c11fbb2795387e3981": [
+  "armorx-lab/results/runtime/operator-actions/operator_ui_test.json",
+  "armorx-lab/results/runtime/operator-ui-proof/ui-test-result.json"
+ ],
+ "7ec65b5c2f45714c6424e2e5c29d802dc09577f337f4ac0837a733a5cc683df0": [
+  "armorx-lab/results/runtime/operator-actions/armorx_power_required_restore.json",
+  "armorx-lab/results/runtime/operator-ui-proof/power-restore-ready.json"
+ ],
+ "1e6bb390a663e68f0578bd6cc43d6ab30ac76baa5875ec0d0bd148561f3c4c03": [
+  "armorx-lab/baselines/imported-research/captures/PROJECT_STATE_2026-09-23.json",
+  "armorx_handoff/project/current_handoff/PROJECT_STATE_2026-09-23.json"
+ ],
+ "6b4555c3256766a307fd2e1c47877f38cf72d64e4cc5834e08e94a11f41a289f": [
+  "armorx-lab/baselines/imported-research/captures/ArmorX_Pro_ReadOnly_Probe_2026-09-23.zip",
+  "armorx_handoff/project/current_handoff/ArmorX_Pro_ReadOnly_Probe_2026-09-23.zip"
+ ],
+ "147b2a5b9d9997654313584d85dd497643ab95a79fb1ad3f524a79afab3c99b6": [
+  "armorx-lab/baselines/imported-research/patches/mygt-4.0.8-research.patch",
+  "armorx-re/mygt408/mygt-4.0.8-research.patch"
+ ],
+ "0d1b736d001812ecef1eb01111e14342aeba0b036e58a761fff738fca5bb6b25": [
+  "armorx-lab/baselines/imported-research/patches/mygt-4.0.8-branch.bundle",
+  "armorx-re/mygt408/mygt-4.0.8-branch.bundle"
+ ],
+ "ff89c2158c2ca3d4d3452f6140d304222039f52379cb2fa53422dc615fa34e23": [
+  "armorx-lab/baselines/imported-research/pcap/v1_handoff10_PCAPdroid_21_Sep_18_38_15.pcap",
+  "armorx-lab/baselines/imported-research/pcap/v2_handoff_pcap_PCAPdroid_21_Sep_18_38_15.pcap"
+ ],
+ "2a028ae30d506ab432bb2375a48ce2735262cc604829428ffe7c6115bf79cc4b": [
+  "armorx-lab/baselines/imported-research/pcap/v2_handoff_pcap_ArmorX_HTTP_PCAP_Extract.txt",
+  "armorx-lab/baselines/imported-research/pcap/v1_handoff10_ArmorX_HTTP_PCAP_Extract.txt"
+ ],
+ "a2d386f37e8365fbf00c5b2a99c8487f9702ff0f92b38cde7028b82ce0fa0dc6": [
+  "armorx-lab/baselines/radio/primary-network-snapshot.txt",
+  "armorx-lab/automation/radio/state/primary-before-combo-wifi-disable.txt"
+ ],
+ "7471a98cea335d7b09cc6bbf687e7b7e9aa020ba80f4e669e406a1483d6c59da": [
+  "armorx-lab/tools/vendor/AC632Nuke/btstack/btstack_a/gap.c.o.cbe.c",
+  "armorx-lab/tools/vendor/AC632Nuke/btstack/btstack_a/att_db_util.c.o.cbe.c"
+ ],
+ "65715c61ead048ba8d13b65b1f86ce05ff994bb8f3273bdedc58ca30ae8987e8": [
+  "armorx-lab/automation/scripts/harness_selftest.py",
+  "armorx-re/repo/tools/lab/harness/harness_selftest.py"
+ ],
+ "14fdf4bd2ff5fa32bdfed3a1eb8f3dd65486a92c8852dc81ecf844e59eb414af": [
+  "armorx-lab/automation/scripts/real_device_harness.py",
+  "armorx-re/repo/tools/lab/harness/real_device_harness.py"
+ ],
+ "1fa849e35fd3ddea137603d0013946d609819964165daef6ca4207da74eb2a58": [
+  "armorx-lab/automation/scripts/emergency-restore/README.md",
+  "armorx-re/repo/tools/lab/emergency-restore/README.md"
+ ],
+ "71ef91c57db21d9e52f7d9850badbbc43d3a783fe157e973ae7b3372edee8d4d": [
+  "armorx-lab/automation/experiment-matrix/matrix.json",
+  "armorx-re/repo/tools/lab/experiment-matrix/matrix.json"
+ ],
+ "26ba759955bb7804ad3f3428b4908f4cd044ff45728a1cafda00c3ec1c5302c0": [
+  "armorx-lab/firmware/original/NetMgr.dll",
+  "armorx_research/dongle_baseline_v13/artifacts/NetMgr.dll"
+ ],
+ "998d1306bffec1b34dbbc96a50be3bca3a4e2e11e9131f3bc7a6f2e7389045a5": [
+  "armorx-lab/firmware/original/WndMgr.dll",
+  "armorx_research/dongle_baseline_v13/artifacts/WndMgr.dll"
+ ],
+ "c80c22f4154e2b8d908a03ebb58b082dd8b2a4bde7a7aad96750e3069ad918a8": [
+  "armorx-lab/firmware/original/BIGBIGWON_Assistant_1.0.6.1.zip",
+  "armorx_handoff/project/raw_private/current/BIGBIGWON_Assistant_1.0.6.1.zip"
+ ],
+ "45cfd9562b73ece6d08b29e0f71c1568bea3d5a84b63e11dca8c8ed83289945b": [
+  "armorx-lab/firmware/original/BigBigWonAssistant.exe",
+  "armorx_research/dongle_baseline_v13/artifacts/BigBigWonAssistant.exe"
+ ],
+ "a0a8feaf2dd1dcbbaaf5bfeaaa0b0f37416d1a4a8c32b0f262c5464b388f9b4a": [
+  "armorx-re/repo/src/armorx/community.py",
+  "armorx-re/repo/tools/armorx_community.py"
+ ],
+ "40a0eb9c91667589d2da445ad4f6b48ad19dc53ca09dd7578160e0afc49fcad2": [
+  "armorx-re/repo/src/armorx/macro.py",
+  "armorx-re/repo/tools/armorx_macro.py"
+ ],
+ "7f8659f973cfdc0d328d41a37815b2584f583d432d82b3be701a61a4c81d22b2": [
+  "armorx-re/repo/research/mygt-4.0.8/ble-architecture.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/ble-architecture.md"
+ ],
+ "78e992cd3ca86a5350236cff570c34f0c7dde7d436be9d3db4f4e38d475d627d": [
+  "armorx-re/repo/research/mygt-4.0.8/live-test-plan.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/live-test-plan.md"
+ ],
+ "817b2fc255f3c12a84ae13b2da2cdb5dd0553dbecb229378ca51d8d614d15111": [
+  "armorx-re/repo/research/mygt-4.0.8/_opcode_scan_raw.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/_opcode_scan_raw.json"
+ ],
+ "84db4fb1c1a783056c1c617db0154d114279cc29a1c90f2f4b5bc15b4ddd8f09": [
+  "armorx-re/repo/research/mygt-4.0.8/d8-macro.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/d8-macro.md"
+ ],
+ "195f357443198d5c93deacd5c9bb91c7a9f861bd3170e5d91ad972d6621e5fd4": [
+  "armorx-re/repo/research/mygt-4.0.8/command-index.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/command-index.md"
+ ],
+ "a66f17a163c2c7606c6d95e45228a094eaab5b90cc93636a51dbc6b451ec3786": [
+  "armorx-re/repo/research/mygt-4.0.8/key-id-evidence.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/key-id-evidence.json"
+ ],
+ "6d3fde323c7ca24926f707e2d2a107ffdb06787836c99e58e07be2e5e37ea49a": [
+  "armorx-re/repo/research/mygt-4.0.8/_frames_exact.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/_frames_exact.json"
+ ],
+ "6757d87b533f62ae679ce42e3bf4dd9efafa18ff9619dc8c08aafd42c2e85d67": [
+  "armorx-re/repo/research/mygt-4.0.8/fc-dpi.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/fc-dpi.md"
+ ],
+ "69bf9f8141f6f2c5b6121f53b42f60d96ac55b4c0818ff12f2c7ccb4dfd4c77a": [
+  "armorx-re/repo/research/mygt-4.0.8/executive-report.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/executive-report.md"
+ ],
+ "1b002c3d380466587b9379a7ff02bf993ebbbf62871053146695e606a95a9025": [
+  "armorx-re/repo/research/mygt-4.0.8/_dispatch_scan_raw.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/_dispatch_scan_raw.md"
+ ],
+ "027919fc24c44eef02761f1d96d8fcda70acee6795927239ed87c11a09941bc4": [
+  "armorx-re/repo/research/mygt-4.0.8/README.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/README.md"
+ ],
+ "3ea3660cdaef8dc42be47b1ad8e5d4c1853b3151d31bbe9fa528c3a3672d4c0a": [
+  "armorx-re/repo/research/mygt-4.0.8/unresolved.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/unresolved.md"
+ ],
+ "ff64101957e7001068a1563a50b21ddf8769dbd8ce78638e6eea447a610a67c8": [
+  "armorx-re/repo/research/mygt-4.0.8/old-vs-mygt-4.0.8.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/old-vs-mygt-4.0.8.md"
+ ],
+ "a532718554bfe22ec907f893cd18cbc3a99ce9198cd6817ab57ef37935137895": [
+  "armorx-re/repo/research/mygt-4.0.8/_frame_index_raw.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/_frame_index_raw.json"
+ ],
+ "8d2d27d2853205b1ac766f1a84a9b67dab9e44ed8e04cd584645b080152da715": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_010_device___len_335.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_010_device___len_335.json"
+ ],
+ "550bd6929fa774dff08a8885512f58fa9341444aafb14b0773c1a89035a95fc3": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_009_device___len_456.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_009_device___len_456.json"
+ ],
+ "801f18dcd5a68048893c33f9141f7901add392e86841b797c3218e1ef1b95693": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/index.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/index.json"
+ ],
+ "85b9608cb886dc557a328efa97e996b9c5a6bb16f97a0b90a73a886a9dbf81f9": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_008_device___len_240.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_008_device___len_240.json"
+ ],
+ "ffb4c36ef4782468af09859124a5507e2064b5ecc257eaa060b7576030824d83": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_004_device___len_240.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_004_device___len_240.json"
+ ],
+ "8954dcdea8dbb6ea3185f2ac4cbb5819e6c01f7ab14519b4cd92a133ea1aa94b": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_006_device___len_484.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_006_device___len_484.json"
+ ],
+ "958ebd2616f33bd1b88117bd9141f0e2ace888b2c8c1dae5f3c901f79f6c1d53": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_001_device___len_144.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_001_device___len_144.json"
+ ],
+ "080550aeb465829bc0fae516059721ff1f2f2eea93b8f5cc8171292f12c0bbe3": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_007_device___len_144.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_007_device___len_144.json"
+ ],
+ "3d114cd1b01723886cf507cb7a8551ee2bd43e3854c492548a64b3fe66c77cca": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/README.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/README.md"
+ ],
+ "63b7b304dcf11b186fb5a57ee8ffe7580d36459093d70fef59328954fc270052": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_000_device___len_88.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_000_device___len_88.json"
+ ],
+ "48659332f9e3635ca4387b2bceefac6c9009ae5a8216d8dd0772ff5dc44386fd": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_005_device___len_240.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_005_device___len_240.json"
+ ],
+ "a64dda02c3f41cf10409a21d45aa6741da79fd46136e3e5f06c4fd3d37de6cea": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_003_device___len_280.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_003_device___len_280.json"
+ ],
+ "f2e9bd3767f0d8719bce59c1f55bd4d39554d1115ebd5fd3fa4cd97dbdcd8b32": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_002_device___len_508.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_002_device___len_508.json"
+ ],
+ "ced1e34f64d34af245c119ad938a3da60006527e288ae306f0045de34da85c3f": [
+  "armorx-re/repo/research/mygt-4.0.8/default-configs/default_011_device___len_280.json",
+  "armorx-re/mygt408/research/mygt-4.0.8/default-configs/default_011_device___len_280.json"
+ ],
+ "e2f90514c9a7b27147d15829c9fd9f2e07ff31941ab1caa8280c0aad04887da3": [
+  "armorx-re/repo/research/mygt-4.0.8/flutter/version.md",
+  "armorx-re/mygt408/research/mygt-4.0.8/flutter/version.md"
+ ],
+ "65f175e510c55801b3307a259b33a439fc9a8f212d4f8853ea325db3b769ab7e": [
+  "armorx_research/live_getmode/final_corrected/tx_buffer.bin",
+  "armorx_research/getmode_transport_v2/evidence/proposed_tx_65.bin"
+ ],
+ "98ce42deef51d40269d542f5314bef2c7468d401ad5d85168bfab4c0108f75f7": [
+  "armorx_research/live_getmode/final_corrected/rx_raw.bin",
+  "armorx_research/getmode_recovery_read/queued_raw_rx.bin"
+ ],
+ "7f29bbd5f28c884b1a142bf058f3db019eac46213371482c99dcfbde8c3d5073": [
+  "armorx_research/live_getmode/evidence/r2_hid_list.json",
+  "armorx_research/live_getmode/evidence/r14_prewrite_hid_list.json"
+ ],
+ "9a111c8efca32a245c823f469ff23b6688a468803057077368358b0bb2ec635c": [
+  "armorx_research/live_getmode/evidence/r13_prewrite_usb_list.json",
+  "armorx_research/live_getmode/evidence/r1_usb_list.json"
+ ],
+ "409e411ede0acfcd08b4e9f990eab74179feda37a1bc9130deeb17fa02da1342": [
+  "armorx_research/getmode_final_static_closure/scripts/trace_vendor_transport.py",
+  "armorx_research/dongle_baseline_v13/scripts/trace_vendor_transport.py"
+ ],
+ "a50de84f43c913c1181131f5810a2f6e7edbaa62f6c6b9cef333fe33684d6ebc": [
+  "armorx_research/dongle_baseline_v13/armorx_candidates.json",
+  "armorx_research/dongle_baseline_v13/tools/armorx_candidates.json"
+ ],
+ "1471e347035af8252f8a8bf80d348488fbe0f2d04718621e15bf03c7bc236bb6": [
+  "armorx_research/dongle_baseline_v13/software/proc_gamepad.json",
+  "armorx_research/dongle_baseline_v13/software/proc_bigbig.json"
+ ],
+ "64942648236c6c761e51894900c907c68cf11c856413214a49b438f9d00cdc1b": [
+  "armorx_research/dongle_baseline_v13/software/reg_413d_props_a.json",
+  "armorx_research/dongle_baseline_v13/software/reg_413d_props_children.json"
+ ],
+ "75b8e0e428594f6dca6bdcfd0c73977ddb52a4fc147dd80c5e78fc34ea25cbec": [
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/tomli/_re.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/tomli/_re.py"
+ ],
+ "f864c6d9552a929c7032ace654ee05ef26ca75d21b027b801d77e65907138b74": [
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/tomli/_types.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/tomli/_types.py"
+ ],
+ "83df8435a00b4be07c768918a42bb35056a55a5a20ed3f922183232d9496aed3": [
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/tomli/_parser.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/tomli/_parser.py"
+ ],
+ "26153057ae830758381efb7551009531d7c2bbe220015f055e6bc353da27c5de": [
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/pip/_vendor/tomli/__init__.py",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/_vendor/tomli/__init__.py"
+ ],
+ "85dae1e95d77845f2cb59bcac3d4afe74bbe4c91a9bcc5bf4a71cd43104dbe7c": [
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/gui-32.exe",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/gui.exe"
+ ],
+ "32acc1bc543116cbe2cff10cb867772df2f254ff2634c870aef0b46c4b696fdb": [
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/cli-32.exe",
+  "armorx_research/android_lab/.venv-re/lib/python3.11/site-packages/setuptools/cli.exe"
+ ],
+ "a1196ef3fd2d8237d2c44920c50d82d37acf19b4a95a0f12c398573c16194d1c": [
+  "armorx_handoff/project/MODEL_HANDOFF_PROMPT.md",
+  "armorx_handoff/project/MODEL_HANDOFF_PROMPT.txt"
+ ],
+ "eaaed01a70e305006a3c2e205c4791a0216815a456de33c3405c89f9230fc68b": [
+  "armorx_handoff/project/evidence/static/devmgr_relevant_strings.txt",
+  "armorx_handoff/project/raw_private/analysis/devmgr_relevant_strings.txt"
+ ],
+ "14f286a9802eaa4096aa0daa553facc57571ea2c87dbc8dc08bd81d55e63ddcf": [
+  "armorx_handoff/project/evidence/static/devmgr_objdump_headers.txt",
+  "armorx_handoff/project/raw_private/analysis/devmgr_objdump_headers.txt"
+ ]
+}

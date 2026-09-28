@@ -1,0 +1,23 @@
+{
+  "recognized": 227,
+  "mismatches": {
+    "a504d400": {
+      "ok": false,
+      "recomputed": "0x7D",
+      "stored": "0x00",
+      "paths": [
+        "/home/salamanka/armorx-lab/ble/virtual-armorx/logs/2220901-d4-truncated.jsonl",
+        "/home/salamanka/armorx-lab/frida/traces/2.22.0901/trace-d4-truncated.jsonl"
+      ]
+    },
+    "a506d4000080": {
+      "ok": false,
+      "recomputed": "0x7F",
+      "stored": "0x80",
+      "paths": [
+        "/home/salamanka/armorx-lab/ble/virtual-armorx/logs/2220901-d4-badcksum.jsonl",
+        "/home/salamanka/armorx-lab/frida/traces/2.22.0901/trace-d4-badcksum.jsonl"
+      ]
+    }
+  }
+}

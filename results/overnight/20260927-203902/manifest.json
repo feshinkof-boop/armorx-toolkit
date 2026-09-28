@@ -1,0 +1,230 @@
+{
+ "purpose": "autonomous overnight research shift (no hardware, no operator)",
+ "start_ts": "2026-09-27T20:39:02.760851-04:00",
+ "host": {
+  "os": "Linux 7.0.0-34-generic x86_64",
+  "distro": "Ubuntu 26.04.1 LTS",
+  "python": "Python 3.14.7",
+  "tshark": "TShark (Wireshark) 4.6.4.",
+  "btmon": "5.85",
+  "git": "git version 2.53.0",
+  "pytest": "pytest 9.0.2"
+ },
+ "repositories": [
+  {
+   "path": "/home/salamanka/armorx-lab",
+   "branch": "research/physical-armorx-live-2026-09-27",
+   "head": "9f57cc7edfc1d4a97a35a88b18d7b5fe3c22444f",
+   "head_subject": "research: pin D6 readback provenance (identity match, gitignored blob)",
+   "status_short": [
+    "?? results/overnight/"
+   ],
+   "remotes": [],
+   "last15": [
+    "9f57cc7 research: pin D6 readback provenance (identity match, gitignored blob)",
+    "c701ed7 research: record that HCI snoop logging was enabled (vivo key)",
+    "fbc33a0 research: capture official ArmorX Android session",
+    "cd22474 research: attempt official ArmorX BLE session capture (ADB transport unavailable)",
+    "069546f research: compare official and harness BLE sessions",
+    "8b9a02e research: run D2 live differential experiment",
+    "b4dd1f5 reports: make the STAGED_OK / DURABLE_OK distinction explicit in restore-validation, durability and master reports",
+    "7b70a40 handoff: D2 static reconstruction bundle + patch (remote auth still unavailable)",
+    "d80b7f0 research(d2): reconstruct button-test TX/RX workflow across app versions",
+    "f32566e CRITICAL: config writes are staging-only until settled; durable restore proven via idle window + power cycle; earlier restore_verified claim withdrawn",
+    "84263f8 fix: kill the capture's whole process group (SIGTERM to the wrapper left the python child holding the HCI channel -> Errno 16 busy)",
+    "9aa1aa7 reports: protocol contract + master report",
+    "68dc6ea reports: identity, D4/E2 (with recorded D4 conflict), DPI, lighting status, tooling recon",
+    "dc902f6 report: real D8 fragment class determined (subpackageLength 20/48/72 -> payload 15/43/67; live unit uses 15)",
+    "dc537cf reports: config semantic map (raw bytes vs normalized view) per the community-format requirement"
+   ],
+   "branches_recent": [
+    "master 2026-09-27",
+    "research/d4-smi-protocol-reconciliation 2026-09-27",
+    "research/mygt-2.22.0901 2026-09-27",
+    "research/physical-armorx-live-2026-09-27 2026-09-27"
+   ],
+   "dirty_files": 1
+  },
+  {
+   "path": "/home/salamanka/armorx-re/repo",
+   "branch": "research/physical-armorx-live-2026-09-27",
+   "head": "156368d9eb7b00eb5071577387d686020376b305",
+   "head_subject": "docs(real-device): corrected RCSP verdict + live ARMOR-X findings (read-only pass)",
+   "status_short": [],
+   "remotes": [
+    "origin\thttps://github.com/feshinkof-boop/armorx-toolkit/ (fetch)",
+    "origin\thttps://github.com/feshinkof-boop/armorx-toolkit/ (push)"
+   ],
+   "last15": [
+    "156368d docs(real-device): corrected RCSP verdict + live ARMOR-X findings (read-only pass)",
+    "9ce3997 docs: final commit ids in the reconciliation report",
+    "7d0b181 research: live D4 verification results (PROVEN LIVE on 2.22.0901) + updated final report",
+    "c2d70fd research: D4/Smi/protocol reconciliation (dated corrections, not a history rewrite)",
+    "5524f54 research(mygt-2.22.0901): historical 2.22.0901 findings, four-way matrix and executive report",
+    "6f0acd5 research(lab): multi-version BLE lab tooling (harness, experiment matrix, radio isolation, emergency restore)",
+    "dbe2ce7 research(mygt-4.0.8): full static pass over BIGBIG WON MYGT 4.0.8",
+    "3b2d07d docs: reconcile verified Android/Windows findings into canonical docs",
+    "c981e73 research: verify Android frame builders, dispatchers, and default-config templates",
+    "3ff17e6 docs: list new protocol research documents"
+   ],
+   "branches_recent": [
+    "main 2026-09-25",
+    "research/ble-lab-multiversion 2026-09-27",
+    "research/d4-smi-protocol-reconciliation 2026-09-27",
+    "research/mygt-2.22.0901 2026-09-27",
+    "research/mygt-4.0.8 2026-09-27",
+    "research/physical-armorx-live-2026-09-27 2026-09-27",
+    "origin 2026-09-25",
+    "origin/main 2026-09-25"
+   ],
+   "dirty_files": 0
+  },
+  {
+   "path": "/home/salamanka/armorx/re/blutter",
+   "branch": "main",
+   "head": "4a60ac648bf448c5a7596437243bcd0b9376fdf0",
+   "head_subject": "Merge pull request #217 from norkts/fix/dart311-leaf-runtime-ldur",
+   "status_short": [
+    "?? .venv/"
+   ],
+   "remotes": [
+    "origin\thttps://github.com/worawit/blutter.git (fetch)",
+    "origin\thttps://github.com/worawit/blutter.git (push)"
+   ],
+   "last15": [
+    "4a60ac6 Merge pull request #217 from norkts/fix/dart311-leaf-runtime-ldur"
+   ],
+   "branches_recent": [
+    "main 2026-08-18",
+    "origin 2026-08-18",
+    "origin/main 2026-08-18"
+   ],
+   "dirty_files": 1
+  }
+ ],
+ "non_repo_trees": {
+  "armorx": {
+   "path": "/home/salamanka/armorx",
+   "size": "1.6G",
+   "top": [
+    "base_apk",
+    "re"
+   ]
+  },
+  "armorx-re": {
+   "path": "/home/salamanka/armorx-re",
+   "size": "533M",
+   "top": [
+    "analysis",
+    "inputs",
+    "logs",
+    "mygt408",
+    "repo"
+   ]
+  },
+  "armorx_research": {
+   "path": "/home/salamanka/armorx_research",
+   "size": "166M",
+   "top": [
+    "android_lab",
+    "bridge_windows_armorx",
+    "devmgr_static",
+    "dongle_baseline_v13",
+    "getmode_choreography",
+    "getmode_completion_audit",
+    "getmode_final_static_closure",
+    "getmode_recovery_read",
+    "getmode_transport",
+    "getmode_transport_v2",
+    "libusb_submission_closure",
+    "live_getmode",
+    "model_string_provenance",
+    "runtime_log_recovery"
+   ]
+  },
+  "armorx_handoff": {
+   "path": "/home/salamanka/armorx_handoff",
+   "size": "151M",
+   "top": [
+    "project"
+   ]
+  },
+  "armorx_git_handoff": {
+   "path": "/home/salamanka/armorx_git_handoff",
+   "size": "448K",
+   "top": [
+    "SHA256SUMS",
+    "armorx-handoff.hex",
+    "armorx-hermes-commits.patch",
+    "armorx-hermes-git-handoff.tar.gz",
+    "armorx-hermes-git-handoff.tar.gz.b64",
+    "changed-files.txt",
+    "chunk-00",
+    "chunk-01",
+    "chunk-02",
+    "chunk-03",
+    "chunk-04",
+    "chunk-05",
+    "chunk-06",
+    "commit-log.txt",
+    "diff-check.txt",
+    "diff-stat.txt",
+    "hexchunk-00",
+    "hexchunk-01",
+    "hexchunk-02",
+    "hexchunk-03",
+    "hexchunk-04",
+    "hexchunk-05",
+    "hexchunk-06",
+    "hexchunk-07",
+    "hexchunk-08"
+   ]
+  },
+  "armorx_work": {
+   "path": "/home/salamanka/armorx_work",
+   "size": "20K",
+   "top": [
+    "build_return_zip.py",
+    "iat.py",
+    "selftest.py",
+    "selftest_frames.py"
+   ]
+  }
+ },
+ "newest_evidence_repo": {
+  "path": "/home/salamanka/armorx-lab",
+  "branch": "research/physical-armorx-live-2026-09-27",
+  "head": "9f57cc7edfc1d4a97a35a88b18d7b5fe3c22444f",
+  "why": "contains the completed official-vs-harness differential (OFFICIAL_WORKS_HARNESS_SILENT) and the newest commits"
+ },
+ "starting_live_result": {
+  "classification": "OFFICIAL_WORKS_HARNESS_SILENT",
+  "durable_baseline_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "durability": "DURABLE_OK",
+  "vocabulary": "STAGED_OK != DURABLE_OK",
+  "d2_unknowns": {
+   "D2-U-007": "NARROWED_STILL_UNKNOWN",
+   "D2-U-008": "REFUTED",
+   "D2-U-009": "SUPPORTED_NOT_CAUSAL"
+  }
+ },
+ "action_doors_closed": [
+  "no popups",
+  "no sounds",
+  "no notifications",
+  "no operator waits",
+  "no ArmorX scan/connect",
+  "no adapter ownership changes",
+  "no real phone / ADB",
+  "no hardware packets",
+  "no config writes",
+  "no flashing",
+  "no reboot"
+ ],
+ "no_regression_rules": [
+  "D2 input is EVENT-DRIVEN: zero idle frames != failure",
+  "do not convert app-side dependencies into device-wide claims",
+  "do not promote INFERRED to PROVEN",
+  "preserve historical reports; annotate corrections with dates"
+ ]
+}

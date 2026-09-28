@@ -1,0 +1,145 @@
+[
+ {
+  "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/units/gamepadset.dart",
+  "class": "::",
+  "function": "static _ writeDpiConfig(/* No info */) async )",
+  "addr": "0x7fdee4",
+  "calls": [
+   "::getCheckSum",
+   "::writeDevice"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 252,
+    "data": [
+     0
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 166,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/widgets/armor-x_pro/armorx_pro_root.dart",
+  "class": "_ArmorXProWidgetState",
+  "function": "_ getZKMVer(/* No info */) async )",
+  "addr": "0x7617f4",
+  "calls": [
+   "::getCheckSum"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 11,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 180,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/widgets/rainbow/rainbow_more.dart",
+  "class": "_RainbowMoreWidget",
+  "function": "_ getInputModel(/* No info */) async )",
+  "addr": "0x8afa98",
+  "calls": [
+   "::getCheckSum"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 212,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 125,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/widgets/rainbow/rainbow_root.dart",
+  "class": "_RainbowWidget",
+  "function": "_ getZKMVer(/* No info */) async )",
+  "addr": "0x800610",
+  "calls": [
+   "::getCheckSum"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 11,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 180,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/widgets/rainbow/rainbow_tab_config_1s.dart",
+  "class": "_RainbowTabConfig1sWidgetState",
+  "function": "_ getDeviceConfig(/* No info */) async )",
+  "addr": "0x810d2c",
+  "calls": [
+   "::getCheckSum"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 214,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 127,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/widgets/rainbow/rainbow_test.dart",
+  "class": "_RainbowTestState",
+  "function": "_ testModeSwitch(/* No info */) async )",
+  "addr": "0x8b1d68",
+  "calls": [],
+  "frames": [
+   {
+    "start": 165,
+    "len": 5,
+    "opcode": 210,
+    "data": [
+     1
+    ],
+    "stored_checksum": 0,
+    "computed_checksum": 125,
+    "checksum_ok": true
+   }
+  ]
+ },
+ {
+  "file": "/home/salamanka/armorx/re/blutter_out/asm/moojiang/widgets/general/configs_config.dart",
+  "class": "_ConfigsConfigWidgetState",
+  "function": "_ getDeviceConfig(/* No info */) async )",
+  "addr": "0x8abc64",
+  "calls": [
+   "::getCheckSum"
+  ],
+  "frames": [
+   {
+    "start": 165,
+    "len": 4,
+    "opcode": 214,
+    "data": [],
+    "stored_checksum": 0,
+    "computed_checksum": 127,
+    "checksum_ok": true
+   }
+  ]
+ }
+]

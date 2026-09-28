@@ -1,0 +1,706 @@
+
+===== 4.0.8-rainbow (10 blocks) =====
+
+--- 0xb08f98 size=0x48 _ createState(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::_RainbowTestState'), ('pp+0x59a90', 'TypeArguments:')]
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x9f6264 size=0xf24 _ build(/* No info */) {
+  calls: [('dart:core', '_GrowableList::_growToNextCapacity'), ('package:flutter/src/material/app_bar.dart', 'AppBar::AppBar'), ('package:flutter/src/widgets/image.dart', 'Image::Image.asset'), ('package:flutter/src/widgets/scroll_view.dart', 'ListView::ListView'), ('package:moojiang/units/theme.dart', '_CircleButtonState::l10n'), ('pp+0x11588', 'Obj'), ('pp+0x115a0', 'List'), ('pp+0x11610', 'Obj'), ('pp+0x11620', 'Obj'), ('pp+0x11628', 'Obj'), ('pp+0x11630', 'Obj'), ('pp+0x11ae0', 'Obj'), ('pp+0x11c58', 'TypeArguments:'), ('pp+0x11c60', 'Obj'), ('pp+0x11c68', 'Obj'), ('pp+0x12f90', 'Obj'), ('pp+0x2f0f0', 'Obj'), ('pp+0x41a58', 'List'), ('pp+0x41b48', 'Obj'), ('pp+0x4718', 'Obj'), ('pp+0x57d0', 'Obj'), ('pp+0x598a0', 'IMM:'), ('pp+0x598a8', 'IMM:'), ('pp+0x598b0', 'IMM:'), ('pp+0x5b418', 'AnonymousClosure:'), ('pp+0x5b420', 'List'), ('pp+0x5b428', 'Obj'), ('pp+0x5b430', 'Obj'), ('pp+0x5b468', 'Obj'), ('pp+0x65e0', 'TypeArguments:'), ('pp+0xa318', 'Field')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_3b', 'field_43', 'field_47', 'field_4b', 'field_53', 'field_57', 'field_5b', 'field_63', 'field_6b', 'field_7', 'field_73', 'field_7b', 'field_83', 'field_8b', 'field_93', 'field_9b', 'field_a3', 'field_ab', 'field_b', 'field_b3', 'field_bb', 'field_cb', 'field_d3', 'field_e3', 'field_f', 'field_f3', 'field_ff']
+  instance: [('AlignmentDirectional', 'b17e61'), ('Axis', 'b31bc1'), ('Clip', 'b33e81'), ('Clip', 'b33ea1'), ('ColorSpace', 'b33e21'), ('CrossAxisAlignment', 'b31661'), ('Device', 'b2ede1'), ('Dir', 'b2f001'), ('Dir', 'b2f021'), ('EdgeInsets', 'b16f01'), ('MainAxisAlignment', 'b31701'), ('MainAxisAlignment', 'b31761'), ('MainAxisSize', 'b317c1'), ('StackFit', 'b31421'), ('TextStyle', 'b24361'), ('VerticalDirection', 'b31ba1')]
+  cmp: ['w16', 'w16']
+  awaits: 0
+  strings: ['Button Test', 'L', 'L3', 'LB', 'LT', 'M1', 'M2', 'M3', 'M4', 'R', 'R3', 'RB', 'RT', 'assets/images_new/key_m8_h.png', 'assets/images_new/key_m8_n.png', 'elevation', 'height', 'key_menu', 'key_view', 'padding', 'title', 'width', 'ボタンテスト', '按键测试']
+
+--- 0xa54b9c size=0x78 _ didChangeDependencies(/* No info */) {
+  calls: [('pp+0x118', 'List'), ('pp+0x75e0', 'TypeArguments:')]
+  fields: ['field_1f', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0xacf744 size=0x130 _ initState(/* No info */) {
+  calls: [('dart:core', '_GrowableList::_growToNextCapacity'), ('pp+0x180', 'TypeParameter:'), ('pp+0x5b470', 'AnonymousClosure:'), ('pp+0x5b478', 'Null')]
+  fields: ['field_53', 'field_7', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL', 'NULL']
+  awaits: 0
+  strings: []
+
+--- 0xacf874 size=0x88 [closure] void <anonymous closure>(dynamic, Duration) {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::testModeSwitch'), ('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::subscribeCharacteristic'), ('pp+0x118', 'List'), ('pp+0x75e0', 'TypeArguments:')]
+  fields: ['field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0xacf8fc size=0xe0 _ subscribeCharacteristic(/* No info */) async {
+  calls: [('dart:async', '_StreamImpl::listen'), ('pp+0x118', 'List'), ('pp+0x238', 'TypeArguments:'), ('pp+0x5b488', 'AnonymousClosure:'), ('pp+0x75e0', 'TypeArguments:'), ('pp+0x7d8', 'List'), ('pp+0x8b20', 'TypeArguments:')]
+  fields: ['field_1b', 'field_43', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0xacf9dc size=0x88 [closure] void <anonymous closure>(dynamic, List<int>) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::analysisData')]
+  fields: ['field_f']
+  instance: []
+  cmp: ['#0x172']
+  awaits: 0
+  strings: []
+
+--- 0xacfa64 size=0x1248 _ analysisData(/* No info */) {
+  calls: [('dart:core', '_IntegerImplementation::_toPow2String'), ('dart:core', 'int::parse'), ('dart:typed_data', 'Int8List::Int8List.fromList'), ('dart:typed_data', 'Uint8List::Uint8List.fromList'), ('dart:typed_data', '_ByteBuffer::asByteData'), ('package:flutter/src/widgets/framework.dart', 'State::setState'), ('pp+0x36d0', 'List'), ('pp+0x5b490', 'Function:'), ('pp+0x5b498', 'IMM:'), ('pp+0x5b4a0', 'Function:'), ('pp+0xac10', 'List'), ('pp+0xb38', 'List')]
+  fields: ['field_13', 'field_1b', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_67', 'field_6b', 'field_6f', 'field_7', 'field_73', 'field_77', 'field_7b', 'field_7f', 'field_83', 'field_87', 'field_8b', 'field_8f', 'field_93', 'field_97', 'field_9b', 'field_9f', 'field_a3', 'field_a7', 'field_ab', 'field_af', 'field_b3', 'field_b7', 'field_bb', 'field_bf', 'field_c3', 'field_c7', 'field_cb', 'field_cf', 'field_d3', 'field_db', 'field_e3', 'field_eb', 'field_f3', 'field_fb', 'field_ff']
+  instance: []
+  cmp: ['#4', 'w1', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2']
+  awaits: 0
+  strings: ['radix']
+
+--- 0xadd7e0 size=0x80 _ dispose(/* No info */) {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::testModeSwitch')]
+  fields: ['field_1b', 'field_1f']
+  instance: []
+  cmp: ['NULL', 'NULL']
+  awaits: 0
+  strings: []
+
+--- 0xb08fe0 size=0x23c _ _RainbowTestState(/* No info */) {
+  calls: []
+  fields: ['field_13', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_67', 'field_6b', 'field_6f', 'field_73', 'field_77', 'field_7b', 'field_7f', 'field_83', 'field_87', 'field_8b', 'field_8f', 'field_93', 'field_97', 'field_9b', 'field_9f', 'field_a3', 'field_a7', 'field_ab', 'field_af', 'field_b3', 'field_b7', 'field_bb', 'field_bf', 'field_c3', 'field_c7', 'field_cb', 'field_cf', 'field_d3', 'field_db', 'field_e3', 'field_eb', 'field_f3', 'field_fb', 'field_ff']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+===== 4.0.8-bt (38 blocks) =====
+
+--- 0x80dbfc size=0x10c _ getDeviceConfig(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0x80dd28 size=0xec _ write(/* No info */) async {
+  calls: [('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothCharacteristic::properties'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothCharacteristic::write')]
+  fields: ['field_23', 'field_3f', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL', 'NULL']
+  awaits: 1
+  strings: ['写入', '等待初始化完成']
+
+--- 0x80fbbc size=0x130 _ getCheckSum(/* No info */) {
+  calls: [('dart:core', '_IntegerImplementation::_toPow2String'), ('dart:core', 'int::_handleFormatError'), ('dart:core', 'int::_parse')]
+  fields: ['field_7', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: ['Attempt to execute code removed by Dart AOT compiler (TFA)']
+
+--- 0x826814 size=0x38 get _ notifyCharacteristicStream(/* No info */) {
+  calls: [('pp+0x8b20', 'TypeArguments:')]
+  fields: ['field_43', 'field_b']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x8b4c24 size=0x10c _ getBriCompConfig(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0x8b4d30 size=0x10c _ getStepLength(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0x8b4e3c size=0x2d4 _ getDpi(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0x41b48', 'Obj'), ('pp+0x41b68', 'Obj'), ('pp+0x41b88', 'Obj'), ('pp+0x41ba8', 'Obj'), ('pp+0x54870', 'Obj'), ('pp+0xa318', 'Field'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: [('Device', 'b2edc1'), ('Device', 'b2ede1'), ('Device', 'b2ee61'), ('Device', 'b2ee81'), ('Device', 'b2eee1')]
+  cmp: ['w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16']
+  awaits: 1
+  strings: []
+
+--- 0x8b5158 size=0xd4 _ disconnect(/* No info */) async {
+  calls: [('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothDevice::disconnect'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::connectionState'), ('pp+0x238', 'TypeArguments:'), ('pp+0x240', 'Field'), ('pp+0x8b18', 'Obj')]
+  fields: ['field_13', 'field_33', 'field_3f', 'field_b']
+  instance: [('BluetoothConnectionState', 'b2f921')]
+  cmp: ['w16', 'NULL']
+  awaits: 0
+  strings: []
+
+--- 0x8b56bc size=0x50 set _ connectionState=(/* No info */) {
+  calls: [('package:flutter/src/foundation/change_notifier.dart', 'ChangeNotifier::notifyListeners')]
+  fields: ['field_3b']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x8b60f0 size=0x10c _ getMTU(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0x8b61fc size=0x10c _ getZKMVer(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0x8b672c size=0x134 _ getBattery(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: ['getBattery']
+
+--- 0x8b6860 size=0x10c _ readFirmware(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0x8b72a8 size=0xac _ readBattery(/* No info */) {
+  calls: [('dart:async', 'Future::Future'), ('dart:async', '_Future::then'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothCharacteristic::read'), ('pp+0x40', 'List'), ('pp+0x4f010', 'AnonymousClosure:'), ('pp+0x4f018', 'AnonymousClosure:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_2b', 'field_2f']
+  instance: []
+  cmp: ['NULL', 'NULL']
+  awaits: 0
+  strings: []
+
+--- 0x8b7354 size=0x8 [closure] int <anonymous closure>(dynamic) {
+  calls: []
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x8b735c size=0x48 [closure] int <anonymous closure>(dynamic, List<int>) {
+  calls: []
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x943668 size=0x110 _ reset(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0x9ca154 size=0x78 _ stopScan(/* No info */) {
+  calls: [('package:moojiang/units/ble/bluetooth_manager_center.dart', 'BluetoothManagerCenter::_getInstance'), ('package:moojiang/units/ble/bluetooth_manager_center.dart', 'BluetoothManagerCenter::stopScan')]
+  fields: ['field_37']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0x9e17fc size=0x120 _ stopCalibration(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0x9e1a08 size=0x124 _ startCalibration(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0xa84258 size=0x10c _ getInputModel(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0xabaef4 size=0x148 _ testModeSwitch(/* No info */) async {
+  calls: [('dart:core', '_StringBase::_interpolate'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: ['cmd: ']
+
+--- 0xabd35c size=0x10c _ getConnectModel(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0xac759c size=0x1a8 _ scan(/* No info */) {
+  calls: [('dart:async', '_StreamImpl::listen'), ('dart:collection', 'ListBase::contains'), ('dart:core', '_GrowableList::_growToNextCapacity'), ('package:moojiang/units/ble/bluetooth_manager_center.dart', 'BluetoothManagerCenter::_getInstance'), ('package:moojiang/units/ble/bluetooth_manager_center.dart', 'BluetoothManagerCenter::flutterBlueScanStream'), ('package:moojiang/units/ble/bluetooth_manager_center.dart', 'BluetoothManagerCenter::scan'), ('pp+0x4f6b0', 'AnonymousClosure:'), ('pp+0x7d8', 'List')]
+  fields: ['field_13', 'field_37', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0xac9354 size=0x174 [closure] void <anonymous closure>(dynamic, List<ScanResult>) {
+  calls: [('dart:core', 'Iterable::forEach'), ('dart:core', '_GrowableList::_GrowableList'), ('dart:core', '_StringBase::_interpolate'), ('pp+0x458', 'List'), ('pp+0x4ae70', 'TypeArguments:'), ('pp+0x4f6c0', 'AnonymousClosure:'), ('pp+0x4f6c8', 'AnonymousClosure:')]
+  fields: ['field_13', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: ['scan result: ']
+
+--- 0xac94c8 size=0xcc [closure] void <anonymous closure>(dynamic, ScanResult) {
+  calls: [('dart:core', '_GrowableList::_growToNextCapacity')]
+  fields: ['field_7', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0xac9594 size=0x88 [closure] bool <anonymous closure>(dynamic, ScanResult) {
+  calls: [('pp+0x7d8', 'List')]
+  fields: ['field_7', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0xac9a88 size=0xe0 _ connect(/* No info */) async {
+  calls: [('dart:async', '_StreamImpl::listen'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothDevice::cancelWhenDisconnected'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothDevice::connect'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothDevice::connectionState'), ('pp+0x4f4c8', 'AnonymousClosure:'), ('pp+0x4f4d0', 'List'), ('pp+0x7d8', 'List'), ('pp+0xa8', 'List')]
+  fields: ['field_13', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: ['delayed', 'next']
+
+--- 0xac9e5c size=0x24c [closure] Future<void> <anonymous closure>(dynamic, BluetoothConnectionState) async {
+  calls: [('package:flutter/src/foundation/change_notifier.dart', 'ChangeNotifier::notifyListeners'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothDevice::requestMtu'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::initGattServices'), ('pp+0x132e8', 'Obj'), ('pp+0x238', 'TypeArguments:'), ('pp+0x240', 'Field'), ('pp+0x458', 'List')]
+  fields: ['field_13', 'field_33', 'field_3b', 'field_3f', 'field_b', 'field_f']
+  instance: [('BluetoothConnectionState', 'b2f901')]
+  cmp: ['w16', 'w16', 'w16']
+  awaits: 2
+  strings: ['等待初始化完成']
+
+--- 0xaca0a8 size=0x71c _ initGattServices(/* No info */) async {
+  calls: [('dart:async', '_AsyncCompleter::complete'), ('dart:core', '_OneByteString::'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothDevice::cancelWhenDisconnected'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothDevice::discoverServices'), ('package:flutter_blue_plus_platform_interface/src/guid.dart', 'Guid::str128'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::onCharacteristicChanged'), ('pp+0x7d8', 'List'), ('pp+0xa8', 'List')]
+  fields: ['field_13', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_3f', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL', 'NULL', 'NULL']
+  awaits: 2
+  strings: ['00000000-0000-1000-8000-00805f9b34fb', '0000180a-0000-1000-8000-00805f9b34fb', '0000180f-0000-1000-8000-00805f9b34fb', '00002a19-0000-1000-8000-00805f9b34fb', '00002a24-0000-1000-8000-00805f9b34fb', '00002a26-0000-1000-8000-00805f9b34fb', '0000f530-1212-efde-1523-785feabcd123', '0000f531-1212-efde-1523-785feabcd123', '0000f532-1212-efde-1523-785feabcd123', '0000ffe1-0000-1000-8000-00805f9b34fb', '0000ffe2-0000-1000-8000-00805f9b34fb', '完成 initGattServices']
+
+--- 0xaca7c4 size=0x9c _ onCharacteristicChanged(/* No info */) async {
+  calls: [('dart:async', '_StreamImpl::listen'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothCharacteristic::lastValueStream'), ('package:flutter_blue_plus/flutter_blue_plus.dart', 'BluetoothCharacteristic::setNotifyValue'), ('pp+0x13460', 'TypeArguments:'), ('pp+0x4f538', 'AnonymousClosure:'), ('pp+0x7d8', 'List')]
+  fields: ['field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0xacb7f8 size=0x94 [closure] void <anonymous closure>(dynamic, List<int>) {
+  calls: [('dart:async', '_BroadcastStreamController::add')]
+  fields: ['field_43', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0xace808 size=0x10c _ getChargingLightEffect(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0xace914 size=0x114 _ getMotionList(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0xacea28 size=0x114 _ getMotionDpi(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0xacf618 size=0x12c _ getDeviceUUID(/* No info */) async {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::getCheckSum'), ('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::write'), ('pp+0x238', 'TypeArguments:'), ('pp+0xee8', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 1
+  strings: []
+
+--- 0xd31dc4 size=0x40 static BluetoothModel instance() {
+  calls: [('package:moojiang/units/ble/bluetooth_mode.dart', 'BluetoothModel::BluetoothModel._')]
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0xd31e04 size=0x12c _ BluetoothModel._(/* No info */) {
+  calls: [('pp+0x1ad8', 'Field'), ('pp+0x238', 'TypeArguments:'), ('pp+0x240', 'Field'), ('pp+0x8b18', 'Obj'), ('pp+0x8b20', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_3b', 'field_3f', 'field_43', 'field_7', 'field_b', 'field_f']
+  instance: [('BluetoothConnectionState', 'b2f921')]
+  cmp: ['w16', 'w16']
+  awaits: 0
+  strings: []
+
+===== 2.24-rainbow (13 blocks) =====
+
+--- 0x8c3bc0 size=0x1118 _ build(/* No info */) {
+  calls: [('dart:async', 'Future::Future.delayed'), ('dart:async', '_Future::then'), ('dart:core', '_GrowableList::_GrowableList'), ('package:flutter/src/material/app_bar.dart', 'AppBar::AppBar'), ('package:flutter/src/widgets/scroll_view.dart', 'ListView::ListView'), ('package:intl/intl.dart', 'Intl::_message'), ('package:moojiang/generated/l10n.dart', 'S::key_L'), ('package:moojiang/generated/l10n.dart', 'S::key_R'), ('package:moojiang/generated/l10n.dart', 'S::of'), ('pp+0x105d8', 'TypeArguments:'), ('pp+0x10e08', 'Obj'), ('pp+0x10e10', 'Obj'), ('pp+0x10f20', 'Obj'), ('pp+0x130', 'TypeArguments:'), ('pp+0x160', 'List'), ('pp+0x27998', 'Obj'), ('pp+0x39c8', 'Obj'), ('pp+0x420', 'TypeArguments:'), ('pp+0x4ee50', 'AnonymousClosure:'), ('pp+0x4ee58', 'AnonymousClosure:'), ('pp+0x4ee60', 'List'), ('pp+0x4ee68', 'Obj'), ('pp+0x4ee70', 'Obj'), ('pp+0x4ee78', 'Obj'), ('pp+0x4ee80', 'Obj'), ('pp+0x4ee98', 'Obj'), ('pp+0x4eea0', 'List'), ('pp+0x58', 'List'), ('pp+0x6bc0', 'Obj'), ('pp+0x6f68', 'Obj'), ('pp+0x70a0', 'Obj'), ('pp+0xd140', 'Obj'), ('pp+0xdb80', 'Obj'), ('pp+0xe670', 'Obj'), ('pp+0xe680', 'Obj'), ('pp+0xe688', 'Obj'), ('pp+0xe6b8', 'TypeArguments:'), ('pp+0xe6c0', 'Obj'), ('pp+0xe6d0', 'Obj'), ('pp+0xe6d8', 'Obj'), ('pp+0xe6f0', 'Obj'), ('pp+0xe940', 'Obj')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_2b', 'field_33', 'field_3b', 'field_43', 'field_47', 'field_4b', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_6b', 'field_73', 'field_7b', 'field_83', 'field_8b', 'field_93', 'field_9b', 'field_a3', 'field_ab', 'field_b', 'field_b3', 'field_bb', 'field_c3', 'field_cb', 'field_db', 'field_eb', 'field_f', 'field_fb']
+  instance: [('AlignmentDirectional', '9dfb91'), ('AlignmentDirectional', '9dfc31'), ('Axis', '9f1981'), ('Clip', '9f35a1'), ('Clip', '9f35e1'), ('Color', '9ea811'), ('CrossAxisAlignment', '9f1461'), ('DeviceConnectionState', '9ef2e1'), ('Dir', '9efac1'), ('Dir', '9efae1'), ('DragStartBehavior', '9f2621'), ('Duration', '9f3851'), ('EdgeInsets', '9df2c1'), ('Icon', '9e8b91'), ('IconData', '9dd891'), ('IconData', '9dd8b1'), ('MainAxisAlignment', '9f14c1'), ('MainAxisAlignment', '9f14e1'), ('MainAxisSize', '9f1561'), ('StackFit', '9f1201'), ('TextStyle', '9e6e71'), ('VerticalDirection', '9f1961'), ('_IconButtonVariant', '9f2381')]
+  cmp: ['NULL', 'w16']
+  awaits: 0
+  strings: ['Button Test', 'L3', 'LB', 'LT', 'M1', 'M2', 'M3', 'M4', 'R3', 'RB', 'RT', 'elevation', 'key_L3', 'key_LB', 'key_LT', 'key_M1', 'key_M2', 'key_M3', 'key_M4', 'key_R3', 'key_RB', 'key_RT', 'leading', 'padding', 'rainbow_test']
+
+--- 0x8c4de8 size=0x60 [closure] Null <anonymous closure>(dynamic, dynamic) {
+  calls: [('package:flutter/src/widgets/framework.dart', 'State::setState'), ('pp+0x4eea8', 'AnonymousClosure:')]
+  fields: ['field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x91cf94 size=0x48 _ initState(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::subscribeCharacteristic'), ('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::testModeSwitch')]
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x91cfdc size=0xc8 _ subscribeCharacteristic(/* No info */) async {
+  calls: [('dart:async', '_AsBroadcastStream::listen'), ('package:moojiang/units/ble/ble_characteristic.dart', 'BleCharacteristic::notifyCharacteristicStream'), ('pp+0x160', 'List'), ('pp+0x1780', 'TypeArguments:'), ('pp+0x4eeb0', 'AnonymousClosure:')]
+  fields: ['field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0x91d0a4 size=0x8c [closure] void <anonymous closure>(dynamic, List<int>) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::analysisData')]
+  fields: ['field_f']
+  instance: []
+  cmp: ['#0x172']
+  awaits: 0
+  strings: []
+
+--- 0x91d130 size=0x1250 _ analysisData(/* No info */) {
+  calls: [('dart:core', 'RangeError::RangeError.range'), ('dart:core', '_IntegerImplementation::_toPow2String'), ('dart:core', 'int::parse'), ('dart:typed_data', 'Int8List::Int8List.fromList'), ('dart:typed_data', 'Uint8List::Uint8List.fromList'), ('dart:typed_data', '_ByteBuffer::asByteData'), ('package:flutter/src/widgets/framework.dart', 'State::setState'), ('pp+0x1258', 'List'), ('pp+0x258', 'List'), ('pp+0x490', 'List'), ('pp+0x4eeb8', 'Function:'), ('pp+0x4eec0', 'IMM:'), ('pp+0x4eec8', 'Function:')]
+  fields: ['field_13', 'field_1b', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_67', 'field_6b', 'field_6f', 'field_7', 'field_73', 'field_77', 'field_7b', 'field_7f', 'field_83', 'field_87', 'field_8b', 'field_8f', 'field_93', 'field_97', 'field_9b', 'field_9f', 'field_a3', 'field_a7', 'field_ab', 'field_af', 'field_b3', 'field_b7', 'field_bb', 'field_bf', 'field_c3', 'field_c7', 'field_cb', 'field_d3', 'field_db', 'field_e3', 'field_eb', 'field_f3', 'field_fb', 'field_ff']
+  instance: []
+  cmp: ['#0x24', 'w1', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2']
+  awaits: 0
+  strings: ['byteOffset', 'radix']
+
+--- 0x91e380 size=0xe4 _ testModeSwitch(/* No info */) async {
+  calls: [('pp+0x1780', 'TypeArguments:'), ('pp+0x258', 'List'), ('pp+0x8e0', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 1
+  strings: []
+
+--- 0x93367c size=0xa0 _ dispose(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::testModeSwitch1'), ('pp+0x47708', 'Obj')]
+  fields: ['field_1b', 'field_b']
+  instance: [('DeviceConnectionState', '9ef301')]
+  cmp: ['NULL', 'NULL', 'w16']
+  awaits: 0
+  strings: []
+
+--- 0x93371c size=0xc4 _ testModeSwitch1(/* No info */) {
+  calls: [('pp+0x258', 'List'), ('pp+0x8e0', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0x93f6e0 size=0x210 _ _RainbowTestState(/* No info */) {
+  calls: []
+  fields: ['field_13', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_67', 'field_6b', 'field_6f', 'field_73', 'field_77', 'field_7b', 'field_7f', 'field_83', 'field_87', 'field_8b', 'field_8f', 'field_93', 'field_97', 'field_9b', 'field_9f', 'field_a3', 'field_a7', 'field_ab', 'field_af', 'field_b3', 'field_b7', 'field_bb', 'field_bf', 'field_c3', 'field_c7', 'field_cb', 'field_d3', 'field_db', 'field_e3', 'field_eb', 'field_f3', 'field_fb', 'field_ff']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x93f698 size=0x48 _ createState(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::_RainbowTestState'), ('pp+0x4da10', 'TypeArguments:')]
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x9f75f8 size=0x54 _ build(/* No info */) {
+  calls: [('pp+0x49768', 'TypeArguments:'), ('pp+0x4ced0', 'AnonymousClosure:')]
+  fields: ['field_13', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x9f764c size=0xa0 [closure] _RainbowTest <anonymous closure>(dynamic, BuildContext, BleCharacteristic, ConnectionStateUpdate, Widget?) {
+  calls: [('pp+0x40ba0', 'AnonymousClosure:')]
+  fields: ['field_13', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+===== 2.23-rainbow (12 blocks) =====
+
+--- 0x829638 size=0x103c _ build(/* No info */) {
+  calls: [('dart:async', 'Future::Future.delayed'), ('dart:async', '_Future::then'), ('dart:core', '_GrowableList::_GrowableList'), ('package:flutter/src/material/app_bar.dart', 'AppBar::AppBar'), ('package:flutter/src/widgets/scroll_view.dart', 'ListView::ListView'), ('package:intl/intl.dart', 'Intl::_message'), ('package:moojiang/generated/l10n.dart', 'S::key_L'), ('package:moojiang/generated/l10n.dart', 'S::key_L3'), ('package:moojiang/generated/l10n.dart', 'S::key_LB'), ('package:moojiang/generated/l10n.dart', 'S::key_LT'), ('package:moojiang/generated/l10n.dart', 'S::key_M1'), ('package:moojiang/generated/l10n.dart', 'S::key_M2'), ('package:moojiang/generated/l10n.dart', 'S::key_M3'), ('package:moojiang/generated/l10n.dart', 'S::key_M4'), ('package:moojiang/generated/l10n.dart', 'S::key_R'), ('package:moojiang/generated/l10n.dart', 'S::key_R3'), ('package:moojiang/generated/l10n.dart', 'S::key_RB'), ('package:moojiang/generated/l10n.dart', 'S::key_RT'), ('package:moojiang/generated/l10n.dart', 'S::of'), ('pp+0x10108', 'TypeArguments:'), ('pp+0x10c48', 'Obj'), ('pp+0x10c50', 'Obj'), ('pp+0x10d78', 'Obj'), ('pp+0x10d80', 'Obj'), ('pp+0x10d88', 'Obj'), ('pp+0x10d90', 'Obj'), ('pp+0x110', 'List'), ('pp+0x188', 'TypeArguments:'), ('pp+0x27820', 'Obj'), ('pp+0x2e8', 'TypeArguments:'), ('pp+0x3e8', 'List'), ('pp+0x42a8', 'Obj'), ('pp+0x4df50', 'AnonymousClosure:'), ('pp+0x4df58', 'AnonymousClosure:'), ('pp+0x4df60', 'List'), ('pp+0x4df68', 'Obj'), ('pp+0x4df70', 'Obj'), ('pp+0x4df78', 'Obj'), ('pp+0x4df80', 'Obj'), ('pp+0x4df98', 'Obj'), ('pp+0x4dfa0', 'List'), ('pp+0x70f0', 'Obj'), ('pp+0x7900', 'Obj'), ('pp+0x7a48', 'Obj'), ('pp+0xd718', 'Obj'), ('pp+0xdf28', 'Obj'), ('pp+0xe7a0', 'Obj'), ('pp+0xe7b0', 'Obj'), ('pp+0xe7e8', 'TypeArguments:'), ('pp+0xe7f0', 'Obj'), ('pp+0xea30', 'Obj')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_2b', 'field_33', 'field_3b', 'field_43', 'field_47', 'field_4b', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_6b', 'field_73', 'field_7b', 'field_83', 'field_8b', 'field_93', 'field_9b', 'field_a3', 'field_ab', 'field_b', 'field_b3', 'field_bb', 'field_c3', 'field_d3', 'field_e3', 'field_f', 'field_f3', 'field_ff']
+  instance: [('AlignmentDirectional', '8f9a41'), ('AlignmentDirectional', '8f9ac1'), ('Axis', '910201'), ('Clip', '911cc1'), ('Clip', '911d01'), ('Color', '9098a1'), ('CrossAxisAlignment', '90fca1'), ('DeviceConnectionState', '90de81'), ('Dir', '90e5c1'), ('Dir', '90e5e1'), ('DragStartBehavior', '910d61'), ('Duration', '911fb1'), ('EdgeInsets', '8f9451'), ('Icon', '907c01'), ('IconData', '8f7781'), ('IconData', '8f77a1'), ('MainAxisAlignment', '90fd41'), ('MainAxisAlignment', '90fd61'), ('MainAxisSize', '90fdc1'), ('StackFit', '90fa01'), ('TextStyle', '906751'), ('VerticalDirection', '9101a1')]
+  cmp: ['NULL', 'w16']
+  awaits: 0
+  strings: ['Button Test', 'elevation', 'leading', 'padding', 'rainbow_test']
+
+--- 0x82a76c size=0x64 [closure] Null <anonymous closure>(dynamic, dynamic) {
+  calls: [('package:flutter/src/widgets/framework.dart', 'State::setState'), ('pp+0x4dfa8', 'AnonymousClosure:')]
+  fields: ['field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x8819d0 size=0xa8 _ dispose(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::testModeSwitch1'), ('pp+0x47858', 'Obj')]
+  fields: ['field_b']
+  instance: [('DeviceConnectionState', '90dea1')]
+  cmp: ['NULL', 'NULL', 'w16']
+  awaits: 0
+  strings: []
+
+--- 0x881a78 size=0xc8 _ testModeSwitch1(/* No info */) {
+  calls: [('pp+0x250', 'List'), ('pp+0xb68', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0x8b0504 size=0x4c _ initState(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::subscribeCharacteristic'), ('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::testModeSwitch')]
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x8b0550 size=0x104 _ subscribeCharacteristic(/* No info */) async {
+  calls: [('pp+0x110', 'List'), ('pp+0x4dfb0', 'AnonymousClosure:'), ('pp+0x5f8', 'TypeArguments:')]
+  fields: ['field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0x8b0654 size=0x16d4 [closure] void <anonymous closure>(dynamic, List<int>) {
+  calls: [('dart:core', 'RangeError::RangeError.range'), ('dart:core', '_IntegerImplementation::_toPow2String'), ('dart:core', 'int::parse'), ('dart:typed_data', 'Int8List::Int8List.fromList'), ('dart:typed_data', 'Uint8List::Uint8List.fromList'), ('dart:typed_data', '_ByteBuffer::asByteData'), ('package:flutter/src/widgets/framework.dart', 'State::setState'), ('pp+0x1538', 'List'), ('pp+0x250', 'List'), ('pp+0x28', 'Sentinel'), ('pp+0x4d0', 'List'), ('pp+0x4dfb8', 'Field'), ('pp+0x4dfc0', 'Field'), ('pp+0x4dfc8', 'Field'), ('pp+0x4dfd0', 'Field'), ('pp+0x4dfd8', 'Field'), ('pp+0x4dfe0', 'Field'), ('pp+0x4dfe8', 'Field'), ('pp+0x4dff0', 'Field'), ('pp+0x4dff8', 'Field'), ('pp+0x4e000', 'Field'), ('pp+0x4e008', 'Field'), ('pp+0x4e010', 'Field'), ('pp+0x4e018', 'Field'), ('pp+0x4e020', 'Field'), ('pp+0x4e028', 'Field'), ('pp+0x4e030', 'Field'), ('pp+0x4e038', 'Field'), ('pp+0x4e040', 'Field'), ('pp+0x4e048', 'Field'), ('pp+0x4e050', 'Field'), ('pp+0x4e058', 'Field'), ('pp+0x4e060', 'Function:'), ('pp+0x4e068', 'IMM:'), ('pp+0x4e070', 'Function:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_67', 'field_6b', 'field_6f', 'field_7', 'field_73', 'field_77', 'field_7b', 'field_7f', 'field_83', 'field_87', 'field_8b', 'field_8f', 'field_93', 'field_97', 'field_9b', 'field_9f', 'field_a3', 'field_a7', 'field_ab', 'field_af', 'field_b3', 'field_b7', 'field_bb', 'field_bf', 'field_c3', 'field_cb', 'field_d3', 'field_db', 'field_e3', 'field_eb', 'field_f', 'field_f3', 'field_fb', 'field_ff']
+  instance: []
+  cmp: ['w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w1', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2']
+  awaits: 0
+  strings: ['byteOffset', 'radix']
+
+--- 0x8b1d68 size=0xe8 _ testModeSwitch(/* No info */) async {
+  calls: [('pp+0x250', 'List'), ('pp+0x5f8', 'TypeArguments:'), ('pp+0xb68', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 1
+  strings: []
+
+--- 0x925a60 size=0x10c _ _RainbowTestState(/* No info */) {
+  calls: []
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_67', 'field_6b', 'field_6f', 'field_73', 'field_77', 'field_7b', 'field_7f', 'field_83', 'field_87', 'field_8b', 'field_8f', 'field_93', 'field_97', 'field_9b', 'field_9f', 'field_a3', 'field_a7', 'field_ab', 'field_af', 'field_b3', 'field_b7', 'field_bb', 'field_bf', 'field_c3', 'field_cb', 'field_d3', 'field_db', 'field_e3', 'field_eb', 'field_f3', 'field_fb', 'field_ff']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x4e6f84 size=0x54 _ build(/* No info */) {
+  calls: [('pp+0x495f0', 'TypeArguments:'), ('pp+0x4bfb8', 'AnonymousClosure:')]
+  fields: ['field_13', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x4e6fd8 size=0xe8 [closure] _RainbowTest <anonymous closure>(dynamic, BuildContext, BleDeviceInteractor, ConnectionStateUpdate, Widget?) {
+  calls: [('pp+0x40f30', 'AnonymousClosure:'), ('pp+0x40f38', 'AnonymousClosure:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x925a14 size=0x4c _ createState(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::_RainbowTestState'), ('pp+0x4d300', 'TypeArguments:')]
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+===== 2.22-rainbow (14 blocks) =====
+
+--- 0x9b7860 size=0x4c _ createState(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::_RainbowTestState'), ('pp+0x488e8', 'TypeArguments:')]
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x96b904 size=0x54 _ build(/* No info */) {
+  calls: [('pp+0x432d8', 'TypeArguments:'), ('pp+0x467f0', 'AnonymousClosure:')]
+  fields: ['field_13', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x96b958 size=0xe8 [closure] _RainbowTest <anonymous closure>(dynamic, BuildContext, BleDeviceInteractor, ConnectionStateUpdate, Widget?) {
+  calls: [('pp+0x3d698', 'AnonymousClosure:'), ('pp+0x3d6a0', 'AnonymousClosure:')]
+  fields: ['field_13', 'field_1b', 'field_b', 'field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x8e1fcc size=0x1c4 _ _RainbowTestState(/* No info */) {
+  calls: []
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_67', 'field_6b', 'field_6f', 'field_73', 'field_77', 'field_7b', 'field_7f', 'field_83', 'field_87', 'field_8b', 'field_8f', 'field_93', 'field_97', 'field_9b', 'field_9f', 'field_a3', 'field_a7', 'field_ab', 'field_af', 'field_b3', 'field_b7', 'field_bb', 'field_bf', 'field_c3', 'field_cb', 'field_d3', 'field_db', 'field_e3', 'field_eb', 'field_f3', 'field_fb', 'field_ff']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x8e1e94 size=0x4c _ initState(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::subscribeCharacteristic'), ('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::testModeSwitch')]
+  fields: []
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []
+
+--- 0x95a864 size=0xa4 _ dispose(/* No info */) {
+  calls: [('package:moojiang/widgets/rainbow/rainbow_test.dart', '_RainbowTestState::testModeSwitch1'), ('pp+0x41ba0', 'Obj')]
+  fields: ['field_b']
+  instance: [('DeviceConnectionState', '8fcb51')]
+  cmp: ['NULL', 'NULL', 'w16']
+  awaits: 0
+  strings: []
+
+--- 0x8e3a88 size=0x15c _ testModeSwitch(/* No info */) async {
+  calls: [('pp+0x28', 'Sentinel'), ('pp+0x2e0', 'Field'), ('pp+0x358', 'List'), ('pp+0x49900', 'AnonymousClosure:'), ('pp+0x538', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_b', 'field_f']
+  instance: []
+  cmp: ['w16']
+  awaits: 0
+  strings: []
+
+--- 0x8e1efc size=0xd0 _ testModeSwitch1(/* No info */) {
+  calls: [('pp+0x358', 'List'), ('pp+0xb68', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0x8e2190 size=0x118 _ subscribeCharacteristic(/* No info */) async {
+  calls: [('pp+0x28', 'Sentinel'), ('pp+0x2e0', 'Field'), ('pp+0x358', 'List'), ('pp+0x49830', 'AnonymousClosure:'), ('pp+0x538', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_b', 'field_f']
+  instance: []
+  cmp: ['w16']
+  awaits: 0
+  strings: []
+
+--- 0x9457cc size=0x10a0 _ build(/* No info */) {
+  calls: [('dart:async', 'Future::Future.delayed'), ('dart:async', '_Future::then'), ('dart:core', '_GrowableList::_GrowableList'), ('package:flutter/src/material/app_bar.dart', 'AppBar::AppBar'), ('package:flutter/src/widgets/scroll_view.dart', 'ListView::ListView'), ('package:intl/intl.dart', 'Intl::_message'), ('package:moojiang/generated/l10n.dart', 'S::key_L'), ('package:moojiang/generated/l10n.dart', 'S::key_L3'), ('package:moojiang/generated/l10n.dart', 'S::key_LB'), ('package:moojiang/generated/l10n.dart', 'S::key_LT'), ('package:moojiang/generated/l10n.dart', 'S::key_M1'), ('package:moojiang/generated/l10n.dart', 'S::key_M2'), ('package:moojiang/generated/l10n.dart', 'S::key_M3'), ('package:moojiang/generated/l10n.dart', 'S::key_M4'), ('package:moojiang/generated/l10n.dart', 'S::key_R'), ('package:moojiang/generated/l10n.dart', 'S::key_R3'), ('package:moojiang/generated/l10n.dart', 'S::key_RB'), ('package:moojiang/generated/l10n.dart', 'S::key_RT'), ('package:moojiang/generated/l10n.dart', 'S::of'), ('pp+0x118', 'List'), ('pp+0x230', 'TypeArguments:'), ('pp+0x254a8', 'Obj'), ('pp+0x2e690', 'Obj'), ('pp+0x3108', 'TypeArguments:'), ('pp+0x348', 'List'), ('pp+0x4618', 'Obj'), ('pp+0x497d0', 'AnonymousClosure:'), ('pp+0x497d8', 'AnonymousClosure:'), ('pp+0x497e0', 'List'), ('pp+0x497e8', 'Obj'), ('pp+0x497f0', 'Obj'), ('pp+0x497f8', 'Obj'), ('pp+0x49800', 'Obj'), ('pp+0x49818', 'Obj'), ('pp+0x49820', 'List'), ('pp+0xb4e8', 'Obj'), ('pp+0xc1f0', 'Obj'), ('pp+0xc1f8', 'Obj'), ('pp+0xc200', 'Obj'), ('pp+0xc210', 'Obj'), ('pp+0xc240', 'TypeArguments:'), ('pp+0xc248', 'Obj'), ('pp+0xc638', 'Obj'), ('pp+0xc9a8', 'Obj'), ('pp+0xdca0', 'TypeArguments:'), ('pp+0xde20', 'Obj'), ('pp+0xe988', 'Obj'), ('pp+0xe990', 'Obj'), ('pp+0xeae8', 'Obj'), ('pp+0xeaf0', 'Obj'), ('pp+0xeaf8', 'Obj'), ('pp+0xeb00', 'Obj')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_2b', 'field_33', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_5b', 'field_5f', 'field_63', 'field_6b', 'field_73', 'field_7b', 'field_83', 'field_8b', 'field_93', 'field_9b', 'field_a3', 'field_ab', 'field_b', 'field_b3', 'field_bb', 'field_c3', 'field_d3', 'field_e3', 'field_f', 'field_f3', 'field_ff']
+  instance: [('Alignment', '8ea1b1'), ('AlignmentDirectional', '8ea0d1'), ('Axis', '900ee1'), ('Clip', '902be1'), ('Clip', '902c01'), ('Color', '8f6cb1'), ('CrossAxisAlignment', '900921'), ('DeviceConnectionState', '8fcb11'), ('Dir', '8fcf91'), ('Dir', '8fcfb1'), ('DragStartBehavior', '901ba1'), ('Duration', '903231'), ('EdgeInsets', '8e94a1'), ('EdgeInsets', '8e9ce1'), ('Icon', '8f5941'), ('IconData', '8e8461'), ('IconData', '8e8481'), ('MainAxisAlignment', '900a01'), ('MainAxisAlignment', '900a21'), ('MainAxisSize', '900a41'), ('StackFit', '900701'), ('TextStyle', '8f3b31'), ('VerticalDirection', '900ec1')]
+  cmp: ['NULL', 'w16']
+  awaits: 0
+  strings: ['Button Test', 'elevation', 'leading', 'padding', 'rainbow_test']
+
+--- 0x8e22a8 size=0x160 [closure] dynamic async_op(dynamic, dynamic, dynamic) {
+  calls: [('pp+0x118', 'List'), ('pp+0x49838', 'AnonymousClosure:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_b']
+  instance: []
+  cmp: ['NULL']
+  awaits: 0
+  strings: []
+
+--- 0x8e2408 size=0x1680 [closure] void <anonymous closure>(dynamic, List<int>) {
+  calls: [('dart:core', 'RangeError::RangeError.range'), ('dart:core', '_IntegerImplementation::toRadixString'), ('dart:core', 'int::parse'), ('dart:typed_data', 'Int8List::Int8List.fromList'), ('dart:typed_data', 'Uint8List::Uint8List.fromList'), ('dart:typed_data', '_ByteBuffer::asByteData'), ('package:flutter/src/widgets/framework.dart', 'State::setState'), ('pp+0x19c0', 'List'), ('pp+0x28', 'Sentinel'), ('pp+0x358', 'List'), ('pp+0x480', 'List'), ('pp+0x49840', 'Field'), ('pp+0x49848', 'Field'), ('pp+0x49850', 'Field'), ('pp+0x49858', 'Field'), ('pp+0x49860', 'Field'), ('pp+0x49868', 'Field'), ('pp+0x49870', 'Field'), ('pp+0x49878', 'Field'), ('pp+0x49880', 'Field'), ('pp+0x49888', 'Field'), ('pp+0x49890', 'Field'), ('pp+0x49898', 'Field'), ('pp+0x498a0', 'Field'), ('pp+0x498a8', 'Field'), ('pp+0x498b0', 'Field'), ('pp+0x498b8', 'Field'), ('pp+0x498c0', 'Field'), ('pp+0x498c8', 'Field'), ('pp+0x498d0', 'Field'), ('pp+0x498d8', 'Field'), ('pp+0x498e0', 'Field'), ('pp+0x498e8', 'Function:'), ('pp+0x498f0', 'IMM:'), ('pp+0x498f8', 'Function:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_33', 'field_37', 'field_3b', 'field_3f', 'field_43', 'field_47', 'field_4b', 'field_4f', 'field_53', 'field_57', 'field_5b', 'field_5f', 'field_63', 'field_67', 'field_6b', 'field_6f', 'field_7', 'field_73', 'field_77', 'field_7b', 'field_7f', 'field_83', 'field_87', 'field_8b', 'field_8f', 'field_93', 'field_97', 'field_9b', 'field_9f', 'field_a3', 'field_a7', 'field_ab', 'field_af', 'field_b3', 'field_b7', 'field_bb', 'field_bf', 'field_c3', 'field_cb', 'field_d3', 'field_db', 'field_e3', 'field_eb', 'field_f3', 'field_fb', 'field_ff']
+  instance: []
+  cmp: ['w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w16', 'w1', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2', 'w2']
+  awaits: 0
+  strings: ['byteOffset', 'radix']
+
+--- 0x8e3be4 size=0x224 [closure] dynamic async_op(dynamic, dynamic, dynamic) {
+  calls: [('pp+0x358', 'List'), ('pp+0xb68', 'TypeArguments:')]
+  fields: ['field_13', 'field_1b', 'field_1f', 'field_23', 'field_27', 'field_2b', 'field_2f', 'field_b', 'field_f']
+  instance: []
+  cmp: ['NULL', 'NULL']
+  awaits: 2
+  strings: []
+
+--- 0x9468cc size=0x64 [closure] Null <anonymous closure>(dynamic, dynamic) {
+  calls: [('package:flutter/src/widgets/framework.dart', 'State::setState'), ('pp+0x49828', 'AnonymousClosure:')]
+  fields: ['field_f']
+  instance: []
+  cmp: []
+  awaits: 0
+  strings: []

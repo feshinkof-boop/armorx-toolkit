@@ -1,0 +1,50 @@
+{
+ "frame_count": 155,
+ "frame_count_expected": 155,
+ "matches": true,
+ "length_histogram": {
+  "18 bytes": 155
+ },
+ "checksum_valid_all": 155,
+ "checksum_invalid": 0,
+ "distinct_masks": {
+  "00000000": 126,
+  "00000001": 29
+ },
+ "non_bit0_bits_ever_set": [],
+ "transitions": [
+  {
+   "delta_s": 104.86,
+   "mask": "00000001",
+   "event": "PRESS"
+  },
+  {
+   "delta_s": 105.086,
+   "mask": "00000000",
+   "event": "RELEASE"
+  },
+  {
+   "delta_s": 105.929,
+   "mask": "00000001",
+   "event": "PRESS"
+  },
+  {
+   "delta_s": 106.165,
+   "mask": "00000000",
+   "event": "RELEASE"
+  }
+ ],
+ "gap_stats_s": {
+  "min": 0.0095,
+  "median": 0.0117,
+  "max": 0.0248
+ },
+ "cadence_note": "held-button reports repeat ~every 12 ms; repetitions are the same press, not new presses",
+ "idle_window": {
+  "from_s": 68.498,
+  "to_s": 129.526,
+  "button_frames": 0,
+  "status": "VALID_EVENT_DRIVEN_SILENCE"
+ },
+ "discrepancies": []
+}

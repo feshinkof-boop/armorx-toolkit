@@ -205,6 +205,88 @@ def fragment_config(opcode: int, payload: bytes, chunk: int
     return frames, commit
 
 
+# ---------------------------------------------------------------------------------------------
+# Button Test input frames (RX) - parser only; nothing here designs bytes
+# ---------------------------------------------------------------------------------------------
+
+BUTTON_HEADER = 0xA5
+BUTTON_OPCODE = 0x12
+BUTTON_SUBCODE = 0x02
+BUTTON_FRAME_LEN = 18
+
+# Bit index == key id. Confirmed live against the official 4.0.8 session (2026-09-27):
+# A produced mask 00000001 and release produced 00000000.
+KEY_NAMES_PROVEN_LIVE: Dict[int, str] = {0: "A"}
+
+
+@dataclass
+class ButtonFrame:
+    """One decoded 18-byte Button Test report.
+
+    Layout (PROVEN LIVE, official 4.0.8 session 2026-09-27, and consistent with the 4.0.8
+    static parser gate `frame[2] == 0x02`):
+        [0]    0xA5
+        [1]    0x12
+        [2]    0x02          subcode / frame kind
+        [3..6] button mask, u32 BIG-endian; bit index == key id
+        [7..14] axes
+        [15]   LT
+        [16]   RT
+        [17]   checksum = sum(bytes[0..16]) & 0xFF
+    """
+    raw: bytes
+    mask: int
+    axes: bytes
+    lt: int
+    rt: int
+    checksum_ok: bool
+    keys: List[int] = field(default_factory=list)
+
+
+def parse_button_frame(raw: bytes) -> Optional[ButtonFrame]:
+    """Parse a Button Test input frame, or return None if it is not one.
+
+    Returning None for anything that is not a well-formed 18-byte button frame is deliberate: the
+    D2 command echo (`A5 05 D2 01 7D`) and every other 5-byte reply must never be mistaken for
+    input. A frame with a bad length, header, subcode or checksum is NOT input evidence.
+    """
+    if len(raw) != BUTTON_FRAME_LEN:
+        return None
+    if raw[0] != BUTTON_HEADER or raw[1] != BUTTON_OPCODE or raw[2] != BUTTON_SUBCODE:
+        return None
+    if checksum(raw[:BUTTON_FRAME_LEN - 1]) != raw[BUTTON_FRAME_LEN - 1]:
+        return None
+    mask = int.from_bytes(raw[3:7], "big")
+    return ButtonFrame(raw=raw, mask=mask, axes=raw[7:15], lt=raw[15], rt=raw[16],
+                       checksum_ok=True, keys=key_ids(mask))
+
+
+def key_ids(mask: int) -> List[int]:
+    """Bit index == key id (NOT id+1). A = 0, B = 1, X = 3, ... (project key map)."""
+    return [i for i in range(32) if mask & (1 << i)]
+
+
+def press_transitions(frames: List[bytes]) -> List[Dict[str, object]]:
+    """Collapse a stream of button frames into PRESS/RELEASE transitions per key id.
+
+    A held button is reported ~every 12 ms; those repeats are the SAME press and must not be
+    counted as new presses. Only a 0->1 change of a key's bit is a PRESS and only a 1->0 change
+    is a RELEASE. Non-frames are ignored.
+    """
+    parsed = [pf for pf in (parse_button_frame(f) for f in frames) if pf is not None]
+    events: List[Dict[str, object]] = []
+    state: Dict[int, bool] = {}
+    for pf in parsed:
+        for kid in range(32):
+            down = bool(pf.mask & (1 << kid))
+            if down and not state.get(kid, False):
+                events.append({"key_id": kid, "event": "PRESS", "mask": f"{pf.mask:08x}", "raw": pf.raw.hex()})
+            elif not down and state.get(kid, False):
+                events.append({"key_id": kid, "event": "RELEASE", "mask": f"{pf.mask:08x}", "raw": pf.raw.hex()})
+            state[kid] = down
+    return events
+
+
 def _selfcheck() -> None:
     bad = []
     for name, (frame, _ev) in KNOWN_FRAMES.items():
