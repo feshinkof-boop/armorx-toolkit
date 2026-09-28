@@ -29,6 +29,51 @@
    "bytes": 684,
    "sha256": "d4943fa1074e3ac7bd7f46c8af414cb50e1222f662aab957494375c1acf5f863",
    "tracked_in_git": true
+  },
+  "q32s-symbol-map.json": {
+   "bytes": 12424,
+   "sha256": "aa4803f804767a3b968a300011bb443125679983addc05299589d6933744b310",
+   "tracked_in_git": true
+  },
+  "q32s-isa.json": {
+   "bytes": 692,
+   "sha256": "8dab3b3da0510e6e15ff5f65104faa29e07a632025c2b9e1c21d987c79e47176",
+   "tracked_in_git": true
+  },
+  "rom-validation.json": {
+   "bytes": 1243,
+   "sha256": "2cb9935922cadf372a5cd7ec54bf1f7c31e918417111f307e109743cafe583eb",
+   "tracked_in_git": true
+  },
+  "rom-symbols.json": {
+   "bytes": 14643,
+   "sha256": "fb098a570cc8979de4ebc919ddd397ad3112e798dfd1d1522910ed1838095ec1",
+   "tracked_in_git": true
+  },
+  "v41-table-branches.json": {
+   "bytes": 2407,
+   "sha256": "3a1fa808517f457b40051d31f3df22f1748c207f804cbcc5a1ae101658f9cf21",
+   "tracked_in_git": true
+  },
+  "v41-table-branches-image-wide.json": {
+   "bytes": 61657,
+   "sha256": "61f1edd8fde64a8c5240926d47532fc72b3b7ef0f14755ab62c714f7b9d2f5ec",
+   "tracked_in_git": true
+  },
+  "armorx-command-dispatch-full.json": {
+   "bytes": 29769,
+   "sha256": "450bd7638f15e95421c76e59dc8508ea85609a33a3016eb3302004a4c34d3d79",
+   "tracked_in_git": true
+  },
+  "armorx-command-dispatch-full.md": {
+   "bytes": 7253,
+   "sha256": "14b49affbf5cebde34fd5f4e769bfa350e7cb44459d74a0ade41b42457036768",
+   "tracked_in_git": true
+  },
+  "armorx-command-dispatch-full.dot": {
+   "bytes": 2581,
+   "sha256": "ba5f8c9a2d683092be78e50b29b1fcc224148cee95c7077052c1df816c9810f2",
+   "tracked_in_git": true
   }
  },
  "regenerate_with": "tools/q32s/ (see tools/q32s/README.md)",

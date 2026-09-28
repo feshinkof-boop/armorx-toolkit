@@ -273,12 +273,12 @@
   {
    "id": "FW-U-016",
    "question": "Is the F7 step-length value ever produced by the firmware?",
-   "status": "OPEN",
+   "status": "PARTIALLY_RESOLVED",
    "evidence": [
     "app.bin string corpus contains 'xbox info:step=%d', 'jstep[%d] time=%x,%x' (V41) / 'stepj[%d] time=%d' (V2224)",
     "the app-side provenance work already proved the app consumes an inbound F7 event frame (does not imply the body firmware emits one)"
    ],
-   "answer": "Not yet determined. Firmware-side search for the F7 dispatcher entry requires disassembly.",
+   "answer": "The F7 handler 0x1e08860 reads its payload byte as b[r9+3] (r9 = frame start, so this is payload[0], not a checksum, whenever the frame is longer than 4 bytes). It compares that byte against 2, stores it into state+0x150, and only for the values 0 and 1 continues to 0x1e0642c (the shared builder) on a path that emits opcode 0xF6. A live A5 04 F7 A0 has NO payload byte, so b[r9+3] is the checksum 0xA0, which is neither 0 nor 1 - the handler stores it and exits without emitting anything. This is a STRONG EVIDENCE explanation of the live F7 read silence and is NOT promoted to F7_WRITE_ONLY.",
    "ruled_out": [],
    "next_offline_step": "Locate the F7 opcode arm of the frame dispatcher once FW-U-021 is resolved",
    "next_hardware_step": "A guarded, read-only F7 listen experiment (already prepared; NOT tonight)",
@@ -396,7 +396,7 @@
   {
    "id": "FW-U-023",
    "question": "Where are the D6, D8, FC, F6, AB and 0B families handled, if not in armorx_cmd_dispatch?",
-   "status": "OPEN",
+   "status": "PARTIALLY_RESOLVED",
    "priority": "high",
    "evidence": [
     "0x1e08772 compares only 0x2F/0x70/0xD2/0xD4/0xD7/0xF7/0xF8/0xF9/0xFA/0xFF",
@@ -404,7 +404,7 @@
     "0x1e0a944 compares 0x0B twice",
     "results/firmware/armorx-command-dispatch.json"
    ],
-   "answer": "Not yet answered. The dispatcher chain does not test those opcodes, so either a second dispatcher exists, or the frames reach the device through a different path (transport-level or a different service).",
+   "answer": "FOUND: 0x0B -> 0x1e089e8, 0x19 -> 0x1e08d24 (state byte, shared with D2), 0x05 -> factory/diagnostic sub-dispatch at 0x1e08e62/0x1e08e78, D6 -> 0x1e0921c, D7 -> 0x1e09232, D8 -> 0x1e0928c, D9 -> 0x1e09346 - all via range-gated tbh tables (0x1e089c4 for 0x0B..0x1B, 0x1e09060 for 0xD4..0xD9, 0x1e08a04 for 0xE1..0xE5) that the previous pass's compare-only extractor could not see. NOT FOUND: FC and F6 do not appear in any of the three tables, and the 0xE6..0xFF branch at 0x1e08e8c accepts only 0xEF, so 0xFC/0xF6 fall to the default handler 0x1e08ff2. AB likewise does not appear in any extracted table. D6/D8/0B are therefore SETTLED and the open part is specifically FC/F6/AB.",
    "ruled_out": [],
    "next_offline_step": "Extract the compare structure of 0x1e0aff2 and 0x1e0a944 (0B lives there), and de-nest the sub-switches in 0x1e08772 to see whether D6/D8/FC are reached under a sub-command byte.",
    "next_hardware_step": null,
@@ -415,15 +415,19 @@
   {
    "id": "FW-U-024",
    "question": "Does the handler base register (r9) point at the frame start or at the payload?",
-   "status": "OPEN",
+   "status": "RESOLVED",
    "priority": "critical",
    "evidence": [
     "armorx_cmd_dispatch reads payload bytes as b[r9 + 0x2], b[r9 + 0x3], b[r9 + 0x4]",
     "the F7 handler compares b[r9+0x3] against 0x2 and the D4 path reads b[r9+0x3]/b[r9+0x4]",
     "live frames are A5 04 F7 A0 (last byte is the checksum) and A5 04 D4 7D"
    ],
-   "answer": "Not yet answered. For a 4-byte frame the byte at frame[3] is the checksum, so this decides whether the F7 read is being interpreted as a value write or is rejected.",
-   "ruled_out": [],
+   "answer": "r9 = FRAME START. The parser prologue fixes it: 0x1e08778 r13 = r0 (context arg), 0x1e0877e r9 = r1 (second argument), and the very first payload access is 0x1e08792 r1 = b[r9 + 0x2], compared immediately against 0x2F/0x70/0xD2/0xD4/0xD7/0xF7/0xF8/0xF9/0xFA/0xFF. In every live frame the opcode sits at frame[2] (A5 04 0B B4, A5 05 D2 01 7D, A5 05 FC 80 26), so r9+0 = magic (0xA5), r9+1 = length, r9+2 = opcode, r9+3.. = payload, and the highest field read anywhere in the parser is r9+7, consistent with the app's longest frame (A5 08 ...). The checksum byte is frame[len-1], which coincides with r9+3 only for 4-byte frames - which is exactly why a bare F7 read looks like a payload write",
+   "ruled_out": [
+    "r9 = payload start",
+    "r9 = opcode byte",
+    "r9 = parser cursor past the header"
+   ],
    "next_offline_step": "Read the frame handler prologue and its caller to fix r9's origin, then re-read the F7 handler with that base.",
    "next_hardware_step": null,
    "dependencies": []
@@ -431,13 +435,13 @@
   {
    "id": "FW-U-025",
    "question": "Which function computes the protocol checksum (live-proven: sum of preceding bytes)?",
-   "status": "OPEN",
+   "status": "PARTIALLY_RESOLVED",
    "priority": "high",
    "evidence": [
     "frame_err_checksum (0x1e070da) is the checksum-error printer called from the frame handler",
     "0x1e05c66 builds 0xDC-byte records and hashes 8 bytes with '...len=%d crc=%x' (record integrity, not necessarily the frame checksum)"
    ],
-   "answer": "Not yet answered. The frame handler validates and reports a checksum failure, but the summing routine itself is not yet identified.",
+   "answer": "The RECORD integrity routine is now identified: 0x1e05628 is a reflected (LSB-first) nibble-table CRC-16 with init 0xFFFF, and 0x1e0566a is the record-header validator that reads a big-endian length at [2..3], rejects len<4 or len>max, then calls 0x1e05628(ptr+2, len-2) and compares the result against the big-endian value stored at [0..1]. That matches the live-validated CRC-16/MODBUS (poly 0xA001, init 0xFFFF) of the 144-byte config, which is STRONG EVIDENCE that 0x1e05628 is the config CRC. The FRAME level checksum (live-proven to be a plain sum of the preceding bytes) is a different mechanism and its routine is still not identified - it is likely inline, which is why only the error printer (0x1e070da) was found.",
    "ruled_out": [],
    "next_offline_step": "Follow the call made between the length check and the checksum-error branch in 0x1e08772; the callee is the checksum routine.",
    "next_hardware_step": null,
@@ -452,7 +456,7 @@
     "D2 handler entry recovered at 0x1e08d24 (fall-through of the rOP != 0xD2 test)",
     "live: no D2 frames are produced for analog-only change; a digital trigger produces a report carrying both the RT digital bit and the RT analog byte"
    ],
-   "answer": "Partly: the handler entry point is known, but the send condition inside it has not been read out yet.",
+   "answer": "The D2 handler 0x1e08d24 is now read: it decodes the payload byte (r4 = b[r9+3]) into an enabled value, stores it at state+0x10 (0x19 stores to state+0x11 through the same block), and when the enable condition holds calls 0x1e04b38 (app_select_24g). The D2 REPORT SEND GATE itself (the condition that emits A5 12 02 frames) has still not been read out - it is in the report builder, not in this handler.",
    "ruled_out": [],
    "next_offline_step": "Read 0x1e08d24 and find the dirty-flag/compare that gates report construction, then match it against the capture evidence.",
    "next_hardware_step": null,
@@ -474,6 +478,54 @@
    "ruled_out": [],
    "next_offline_step": "Trace the callers of 0x1e1569a (gyro calibration) for the sensor bus accesses, and find the opcode family that reaches the switch_lights code.",
    "next_hardware_step": null,
+   "dependencies": []
+  },
+  {
+   "id": "FW-U-028",
+   "question": "Why does the CRC routine load its table from 0x1e29900 when the CRC-16/MODBUS nibble table is at 0x1e297e0?",
+   "status": "OPEN",
+   "priority": "medium",
+   "evidence": [
+    "0x1e05632: r2 = 0x1e29900 (immediate bytes c2 ff 00 99 e2 01)",
+    "the reflected CRC-16/MODBUS nibble table (16 halfwords: 0000 cc01 d801 1400 f001 3c00 2800 e401 a001 6c00 7800 b401 5000 9c01 8801 4400) occurs exactly once in the image, at file offset 0x297e0 = address 0x1e297e0, delta 0x120",
+    "the bytes at 0x1e29900 are the assert string 'P33 SYS SOFT RESET : P3_PR_PWR[4]=1' followed by 'soft_reset_exception'/'soft_reset_assert'",
+    "string xrefs elsewhere are not shifted (0x1e2754c is 'n=%d crc=%x' exactly as the corpus says), so this is not a global file/address offset"
+   ],
+   "answer": "Not answered. Either the routine's table is populated at runtime at 0x1e29900 (over the assert pool) or the immediate is a stale/unrelocated address. Practical implication: record CRC values must be computed with the live-validated algorithm, not by reading the table at whatever address an immediate names.",
+   "ruled_out": [
+    "a global file-offset/relocation shift for the whole image"
+   ],
+   "next_offline_step": "Trace any startup copy whose destination is 0x1e29900 with source 0x1e297e0",
+   "dependencies": []
+  },
+  {
+   "id": "FW-U-029",
+   "question": "Why does the firmware 0xD6 handler return a single 16-bit value when the live capture showed a 144-byte D6 read?",
+   "status": "OPEN",
+   "priority": "high",
+   "evidence": [
+    "0x1e0921c (the only 0xD6 target in every extracted dispatch table) reads [state+0x1b0], extracts the big-endian 16-bit field at +2..3 and replies with opcode 0xD6 - it never inspects the payload or loop over fragments",
+    "live: the D6 read returned 144 bytes in 9x20 + 1x14 byte fragments and D7 was verified against that 144-byte SHA"
+   ],
+   "answer": "Not answered. Either the live 144-byte read was attributed to the wrong opcode, or a second 0xD6 path exists outside the parser (for example a config-engine entry reached from the 0x2F..0xE0 chain rather than from the D4..D9 table). Do NOT treat the live 'D6 = 144-byte read' label as firmware-confirmed until this is closed.",
+   "ruled_out": [],
+   "next_offline_step": "Read the 0x2F..0xE0 chain arms that do not dispatch to the D4..D9 table, and the 0x1e0aff2/0x1e0a944 hotspots, looking for a second 0xD6 compare",
+   "dependencies": [
+    "FW-U-023"
+   ]
+  },
+  {
+   "id": "FW-U-030",
+   "question": "Why does the 0x0B handler load the constant 0x32 (50) when the live reply payload was 0x30 (48)?",
+   "status": "OPEN",
+   "priority": "low",
+   "evidence": [
+    "0x1e089e8: r0 = 0x32; b[sp+4] = r0; r2 = sp+4; r1 = 0xb; goto 0x1e08e5a (TX tail) - r1 = 0x0B confirms the case-to-opcode mapping",
+    "live: A5 04 0B B4 -> A5 05 0B 30 E5, i.e. payload 0x30 and checksum 0xE5 = 0xA5+0x05+0x0B+0x30"
+   ],
+   "answer": "Not answered. The 2-count difference may be a later adjustment on the TX path or a different runtime value; the live value is the authoritative one.",
+   "ruled_out": [],
+   "next_offline_step": "Follow the 0x1e08e5a TX tail with r1 = 0x0B and r2 = buffer",
    "dependencies": []
   }
  ]

@@ -1,0 +1,904 @@
+{
+ "artifact": "armorx-command-dispatch-full",
+ "image": "V41 app.bin (base 0x01E00000, entry 0x01E00120)",
+ "parser": {
+  "address": "0x1e08772",
+  "opcode_register": "r1",
+  "opcode_offset_in_frame": "r9+2 (b[r9+2])",
+  "buffer_argument": "r0 -> r13 (transport/state context), r1 -> r9 (frame), r2 -> r6 (frame length)"
+ },
+ "dispatch_structure": {
+  "0x00..0x2E": "tbh table 0x1e089c4 for opcodes 0x0B..0x1B; other opcodes fall to 0x1e08e5e (where opcode 0x05 is handled) else 0x1e08ff2 (default)",
+  "0x2F..0xE0": "if/else chain at 0x1e08d1a (opcode compares: 0x2F, 0x70, 0xD2, 0xD4, 0xD7, 0xF7, 0xF8, 0xF9, 0xFA)",
+  "D-family (second level)": "the tbh table at 0x1e09060 re-reads b[r9+2] and dispatches 0xD4..0xD9; it is a SECOND-LEVEL dispatch, reached from inside the 0x2F..0xE0 handling, not a sibling of the chain. 0xD4 and 0xD7 therefore have both a chain entry (0x1e08944 / 0x1e08a68) and a table entry (0x1e0906e / 0x1e09232); do NOT collapse them until the level relationship is read out in full",
+  "0xE1..0xE5": "tbh table 0x1e08a04",
+  "0xE6..0xFF": "single check at 0x1e08e8c: only 0xEF is accepted, everything else (including FC and F6) falls to 0x1e08ff2 (default/unsupported)"
+ },
+ "table_branches": [
+  {
+   "branch": "0x1e089c4",
+   "op": "tbh",
+   "cases": 17,
+   "table_start": "0x1e089c6",
+   "table_end": "0x1e089e8",
+   "gate": {
+    "addr": "0x1e089be",
+    "text": "if (r2 > 0x10) goto 0x49c <fw_start+0x8E5E : 1e08e5e >"
+   },
+   "index_reg": "r3",
+   "index_src": "r1",
+   "base_model": "table_start",
+   "entry_scale": 2,
+   "alignment": 1.0,
+   "targets": [
+    "0x1e089e8",
+    "0x1e08ff2",
+    "0x1e08fac",
+    "0x1e08fbc",
+    "0x1e08fce",
+    "0x1e08ff2",
+    "0x1e08ff2",
+    "0x1e08ff2",
+    "0x1e08ff2",
+    "0x1e08ff2",
+    "0x1e08ff2",
+    "0x1e08ff2",
+    "0x1e08ff2",
+    "0x1e08fe0",
+    "0x1e08d24",
+    "0x1e090b8",
+    "0x1e09122"
+   ],
+   "raw_entries": [
+    17,
+    790,
+    755,
+    763,
+    772,
+    790,
+    790,
+    790,
+    790,
+    790,
+    790,
+    790,
+    790,
+    781,
+    431,
+    889,
+    942
+   ]
+  },
+  {
+   "branch": "0x1e08a04",
+   "op": "tbh",
+   "cases": 5,
+   "table_start": "0x1e08a06",
+   "table_end": "0x1e08a10",
+   "gate": {
+    "addr": "0x1e089fe",
+    "text": "if (r0 > 0x4) goto 0x48a <fw_start+0x8E8C : 1e08e8c >"
+   },
+   "index_reg": "r2",
+   "index_src": "r1",
+   "base_model": "table_start",
+   "entry_scale": 2,
+   "alignment": 1.0,
+   "targets": [
+    "0x1e08a10",
+    "0x1e08f36",
+    "0x1e08ff2",
+    "0x1e08f60",
+    "0x1e08f84"
+   ],
+   "raw_entries": [
+    5,
+    664,
+    758,
+    685,
+    703
+   ]
+  },
+  {
+   "branch": "0x1e08e78",
+   "op": "tbh",
+   "cases": 6,
+   "table_start": "0x1e08e7a",
+   "table_end": "0x1e08e86",
+   "gate": {
+    "addr": "0x1e08e72",
+    "text": "if (r0 > 0x5) goto 0x52c <fw_start+0x93A2 : 1e093a2 >"
+   },
+   "index_reg": "r1",
+   "index_src": "r1",
+   "base_model": "table_start",
+   "entry_scale": 2,
+   "alignment": 1.0,
+   "targets": [
+    "0x1e08e86",
+    "0x1e093aa",
+    "0x1e093b0",
+    "0x1e093b8",
+    "0x1e093c8",
+    "0x1e093ce"
+   ],
+   "raw_entries": [
+    6,
+    664,
+    667,
+    671,
+    679,
+    682
+   ]
+  },
+  {
+   "branch": "0x1e09060",
+   "op": "tbh",
+   "cases": 6,
+   "table_start": "0x1e09062",
+   "table_end": "0x1e0906e",
+   "gate": {
+    "addr": "0x1e0905a",
+    "text": "if (r0 > 0x5) goto 0x19a <fw_start+0x91F8 : 1e091f8 >"
+   },
+   "index_reg": "r1",
+   "index_src": "r1",
+   "base_model": "table_start",
+   "entry_scale": 2,
+   "alignment": 1.0,
+   "targets": [
+    "0x1e0906e",
+    "0x1e091fc",
+    "0x1e0921c",
+    "0x1e09232",
+    "0x1e0928c",
+    "0x1e09346"
+   ],
+   "raw_entries": [
+    6,
+    205,
+    221,
+    232,
+    277,
+    370
+   ]
+  }
+ ],
+ "chain_entries": {
+  "function": "0x1e08772",
+  "function_end": "0x1e0948c",
+  "instructions_examined": 1027,
+  "range_gates": [
+   {
+    "reg": "r1",
+    "value": "0xd6",
+    "at": "0x1e0881c",
+    "raw": "ifs (r1 > 0xd6) goto 0x2c <fw_start+0x884E : 1e0884e >"
+   },
+   {
+    "reg": "r1",
+    "value": "0x6f",
+    "at": "0x1e08822",
+    "raw": "ifs (r1 > 0x6f) goto 0x114 <fw_start+0x893A : 1e0893a >"
+   },
+   {
+    "reg": "r1",
+    "value": "0xf7",
+    "at": "0x1e0884e",
+    "raw": "ifs (r1 > 0xf7) goto 0x12e <fw_start+0x8982 : 1e08982 >"
+   },
+   {
+    "reg": "r1",
+    "value": "0x2e",
+    "at": "0x1e089b6",
+    "raw": "ifs (r1 > 0x2e) goto 0x3a <fw_start+0x89F4 : 1e089f4 >"
+   },
+   {
+    "reg": "r2",
+    "value": "0x10",
+    "at": "0x1e089be",
+    "raw": "if (r2 > 0x10) goto 0x49c <fw_start+0x8E5E : 1e08e5e >"
+   },
+   {
+    "reg": "r0",
+    "value": "0x4",
+    "at": "0x1e089fe",
+    "raw": "if (r0 > 0x4) goto 0x48a <fw_start+0x8E8C : 1e08e8c >"
+   },
+   {
+    "reg": "r0",
+    "value": "0x1",
+    "at": "0x1e08ba8",
+    "raw": "if (r0 > 0x1) goto 0x1ba <fw_start+0x8D66 : 1e08d66 >"
+   },
+   {
+    "reg": "r0",
+    "value": "0x5",
+    "at": "0x1e08e72",
+    "raw": "if (r0 > 0x5) goto 0x52c <fw_start+0x93A2 : 1e093a2 >"
+   },
+   {
+    "reg": "r0",
+    "value": "0xa",
+    "at": "0x1e08ff6",
+    "raw": "if (r0 > 0xa) goto 0x370 <fw_start+0x936A : 1e0936a >"
+   },
+   {
+    "reg": "r0",
+    "value": "0xe",
+    "at": "0x1e09028",
+    "raw": "if (r0 > 0xe) goto 0x1c8 <fw_start+0x91F4 : 1e091f4 >"
+   },
+   {
+    "reg": "r0",
+    "value": "0x5",
+    "at": "0x1e0905a",
+    "raw": "if (r0 > 0x5) goto 0x19a <fw_start+0x91F8 : 1e091f8 >"
+   },
+   {
+    "reg": "r1",
+    "value": "0xdc",
+    "at": "0x1e092be",
+    "raw": "if (r1 > 0xdc) goto 0x15a <fw_start+0x941C : 1e0941c >"
+   },
+   {
+    "reg": "r1",
+    "value": "0x3",
+    "at": "0x1e092cc",
+    "raw": "if (r1 > 0x3) goto 0x1c <fw_start+0x92EC : 1e092ec >"
+   },
+   {
+    "reg": "r1",
+    "value": "0x1",
+    "at": "0x1e09462",
+    "raw": "if (r1 > 0x1) goto 0x2 <fw_start+0x9468 : 1e09468 >"
+   },
+   {
+    "reg": "r1",
+    "value": "0x1",
+    "at": "0x1e09470",
+    "raw": "if (r1 > 0x1) goto 0x8 <fw_start+0x947C : 1e0947c >"
+   }
+  ],
+  "handlers": [
+   {
+    "opcode": 2,
+    "opcode_hex": "0x02",
+    "compare_at": "0x1e08864",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e08868",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0x2) goto 0x6 <fw_start+0x886E : 1e0886e >",
+    "family": "UNKNOWN",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 5,
+    "opcode_hex": "0x05",
+    "compare_at": "0x1e08e5e",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e08e62",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0x5) goto 0x190 <fw_start+0x8FF2 : 1e08ff2 >",
+    "family": "UNKNOWN",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 13,
+    "opcode_hex": "0x0d",
+    "compare_at": "0x1e091de",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e091e2",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0xd) goto 0x1b4 <fw_start+0x9396 : 1e09396 >",
+    "family": "UNKNOWN",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 25,
+    "opcode_hex": "0x19",
+    "compare_at": "0x1e08826",
+    "reg": "r1",
+    "test": "==",
+    "handler": "0x1e08d32",
+    "handler_note": null,
+    "raw": "if (r1 == 0x19) goto 0x2 <fw_start+0x8D32 : 1e08d32 >",
+    "family": "UNKNOWN",
+    "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+   },
+   {
+    "opcode": 27,
+    "opcode_hex": "0x1b",
+    "compare_at": "0x1e0882a",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e0882e",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0x1b) goto 0x186 <fw_start+0x89B4 : 1e089b4 >",
+    "family": "UNKNOWN",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 47,
+    "opcode_hex": "0x2f",
+    "compare_at": "0x1e08d1a",
+    "reg": "r1",
+    "test": "==",
+    "handler": "0x1e0914a",
+    "handler_note": null,
+    "raw": "if (r1 == 0x2f) goto 0x42c <fw_start+0x914A : 1e0914a >",
+    "family": "unknown family seen in dispatch chain",
+    "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+   },
+   {
+    "opcode": 112,
+    "opcode_hex": "0x70",
+    "compare_at": "0x1e0893a",
+    "reg": "r1",
+    "test": "==",
+    "handler": "0x1e093e4",
+    "handler_note": null,
+    "raw": "if (r1 == 0x70) goto 0xaa6 <fw_start+0x93E4 : 1e093e4 >",
+    "family": "unknown family seen in dispatch chain",
+    "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+   },
+   {
+    "opcode": 210,
+    "opcode_hex": "0xd2",
+    "compare_at": "0x1e08d1e",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e08d24",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0xd2) goto 0x2ce <fw_start+0x8FF2 : 1e08ff2 >",
+    "family": "D2 input-report enable/disable (live: A5 05 D2 01 7D / A5 05 D2 00 7C)",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 212,
+    "opcode_hex": "0xd4",
+    "compare_at": "0x1e087c8",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e087ce",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0xd4) goto 0x1e6 <fw_start+0x89B4 : 1e089b4 >",
+    "family": "D4 query (live: A5 04 D4 7D -> A5 07 D4 11 01 00 92)",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 212,
+    "opcode_hex": "0xd4",
+    "compare_at": "0x1e0893e",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e08944",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0xd4) goto 0x70 <fw_start+0x89B4 : 1e089b4 >",
+    "family": "D4 query (live: A5 04 D4 7D -> A5 07 D4 11 01 00 92)",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 215,
+    "opcode_hex": "0xd7",
+    "compare_at": "0x1e08854",
+    "reg": "r1",
+    "test": "==",
+    "handler": "0x1e08a68",
+    "handler_note": null,
+    "raw": "if (r1 == 0xd7) goto 0x20e <fw_start+0x8A68 : 1e08a68 >",
+    "family": "D7 configuration write",
+    "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+   },
+   {
+    "opcode": 239,
+    "opcode_hex": "0xef",
+    "compare_at": "0x1e08e8c",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e08e92",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0xef) goto 0x160 <fw_start+0x8FF2 : 1e08ff2 >",
+    "family": "UNKNOWN",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 247,
+    "opcode_hex": "0xf7",
+    "compare_at": "0x1e0885a",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e08860",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0xf7) goto 0x154 <fw_start+0x89B4 : 1e089b4 >",
+    "family": "F7 stick step-length / step accuracy",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   },
+   {
+    "opcode": 248,
+    "opcode_hex": "0xf8",
+    "compare_at": "0x1e08982",
+    "reg": "r1",
+    "test": "==",
+    "handler": "0x1e08b86",
+    "handler_note": null,
+    "raw": "if (r1 == 0xf8) goto 0x1fe <fw_start+0x8B86 : 1e08b86 >",
+    "family": "F8 brightness-compensation config (app: A5 04 F8)",
+    "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+   },
+   {
+    "opcode": 249,
+    "opcode_hex": "0xf9",
+    "compare_at": "0x1e087c2",
+    "reg": "r1",
+    "test": "==",
+    "handler": "0x1e08912",
+    "handler_note": null,
+    "raw": "if (r1 == 0xf9) goto 0x14a <fw_start+0x8912 : 1e08912 >",
+    "family": "unknown family seen in dispatch chain",
+    "evidence": "PROVEN STATIC (opcode compared in the frame handler)"
+   },
+   {
+    "opcode": 250,
+    "opcode_hex": "0xfa",
+    "compare_at": "0x1e08988",
+    "reg": "r1",
+    "test": "!=",
+    "handler": "0x1e0898e",
+    "handler_note": "fall-through block after the != test",
+    "raw": "if (r1 != 0xfa) goto 0x26 <fw_start+0x89B4 : 1e089b4 >",
+    "family": "unknown family seen in dispatch chain",
+    "evidence": "STRONG EVIDENCE (fell through the != test)"
+   }
+  ]
+ },
+ "routes": [
+  {
+   "opcode": "0x0b",
+   "sub_index": null,
+   "handler": "0x1e089e8",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": "status query",
+   "confidence": "STRONG EVIDENCE",
+   "detail": "handler 0x1e089e8 loads the immediate 0x32 into a 1-byte response buffer (b[sp+4] = 0x32) then jumps to the shared TX tail 0x1e08e5a with r1 = 0x0B == the opcode, confirming the case->opcode mapping. Live reply was A5 05 0B 30 E5 (payload 0x30 = 48) vs this immediate 0x32 = 50: the constant and the live value differ by 2 and the difference is NOT yet explained (FW-U-029)",
+   "handler_function": null
+  },
+  {
+   "opcode": "0x0c",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x0d",
+   "sub_index": null,
+   "handler": "0x1e08fac",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x0e",
+   "sub_index": null,
+   "handler": "0x1e08fbc",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x0f",
+   "sub_index": null,
+   "handler": "0x1e08fce",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x10",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x11",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x12",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x13",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x14",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x15",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x16",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x17",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x18",
+   "sub_index": null,
+   "handler": "0x1e08fe0",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x19",
+   "sub_index": null,
+   "handler": "0x1e08d24",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": "state set (byte at state+0x11)",
+   "confidence": "STRONG EVIDENCE",
+   "detail": "shares the block at 0x1e08d24 with 0xD2; at 0x1e08d2c the opcode selects the destination (0x19 -> r8+0x11, else r8+0x10), payload byte r4 = b[r9+3] is stored there",
+   "handler_function": null
+  },
+  {
+   "opcode": "0x1a",
+   "sub_index": null,
+   "handler": "0x1e090b8",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0x1b",
+   "sub_index": null,
+   "handler": "0x1e09122",
+   "via": "tbh table at 0x1e089c4 (table_start 0x1e089c6)",
+   "range_justification": "r2 = r1 + -0xb ; if (r2 > 0x10) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0xe1",
+   "sub_index": null,
+   "handler": "0x1e08a10",
+   "via": "tbh table at 0x1e08a04 (table_start 0x1e08a06)",
+   "range_justification": "r0 = r1 + -0xe1 ; if (r0 > 0x4) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0xe2",
+   "sub_index": null,
+   "handler": "0x1e08f36",
+   "via": "tbh table at 0x1e08a04 (table_start 0x1e08a06)",
+   "range_justification": "r0 = r1 + -0xe1 ; if (r0 > 0x4) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0xe3",
+   "sub_index": null,
+   "handler": "0x1e08ff2",
+   "via": "tbh table at 0x1e08a04 (table_start 0x1e08a06)",
+   "range_justification": "r0 = r1 + -0xe1 ; if (r0 > 0x4) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0xe4",
+   "sub_index": null,
+   "handler": "0x1e08f60",
+   "via": "tbh table at 0x1e08a04 (table_start 0x1e08a06)",
+   "range_justification": "r0 = r1 + -0xe1 ; if (r0 > 0x4) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0xe5",
+   "sub_index": null,
+   "handler": "0x1e08f84",
+   "via": "tbh table at 0x1e08a04 (table_start 0x1e08a06)",
+   "range_justification": "r0 = r1 + -0xe1 ; if (r0 > 0x4) goto <outside>",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": null,
+   "sub_index": 0,
+   "handler": "0x1e08e86",
+   "via": "tbh table at 0x1e08e78 (table_start 0x1e08e7a)",
+   "range_justification": "r0 = payload[0] & 0x7F ; if (r0 > 0x5) goto <default> (sub-dispatch inside opcode 0x05, not an opcode range)",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": null,
+   "sub_index": 1,
+   "handler": "0x1e093aa",
+   "via": "tbh table at 0x1e08e78 (table_start 0x1e08e7a)",
+   "range_justification": "r0 = payload[0] & 0x7F ; if (r0 > 0x5) goto <default> (sub-dispatch inside opcode 0x05, not an opcode range)",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": null,
+   "sub_index": 2,
+   "handler": "0x1e093b0",
+   "via": "tbh table at 0x1e08e78 (table_start 0x1e08e7a)",
+   "range_justification": "r0 = payload[0] & 0x7F ; if (r0 > 0x5) goto <default> (sub-dispatch inside opcode 0x05, not an opcode range)",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": null,
+   "sub_index": 3,
+   "handler": "0x1e093b8",
+   "via": "tbh table at 0x1e08e78 (table_start 0x1e08e7a)",
+   "range_justification": "r0 = payload[0] & 0x7F ; if (r0 > 0x5) goto <default> (sub-dispatch inside opcode 0x05, not an opcode range)",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": null,
+   "sub_index": 4,
+   "handler": "0x1e093c8",
+   "via": "tbh table at 0x1e08e78 (table_start 0x1e08e7a)",
+   "range_justification": "r0 = payload[0] & 0x7F ; if (r0 > 0x5) goto <default> (sub-dispatch inside opcode 0x05, not an opcode range)",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": null,
+   "sub_index": 5,
+   "handler": "0x1e093ce",
+   "via": "tbh table at 0x1e08e78 (table_start 0x1e08e7a)",
+   "range_justification": "r0 = payload[0] & 0x7F ; if (r0 > 0x5) goto <default> (sub-dispatch inside opcode 0x05, not an opcode range)",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0xd4",
+   "sub_index": null,
+   "handler": "0x1e0906e",
+   "via": "tbh table at 0x1e09060 (table_start 0x1e09062)",
+   "range_justification": "r0 = r1 + -0xd4 ; if (r0 > 0x5) goto 0x1e091f8",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0xd5",
+   "sub_index": null,
+   "handler": "0x1e091fc",
+   "via": "tbh table at 0x1e09060 (table_start 0x1e09062)",
+   "range_justification": "r0 = r1 + -0xd4 ; if (r0 > 0x5) goto 0x1e091f8",
+   "semantics": null,
+   "confidence": "INFERRED (route only)",
+   "detail": null,
+   "handler_function": null
+  },
+  {
+   "opcode": "0xd6",
+   "sub_index": null,
+   "handler": "0x1e0921c",
+   "via": "tbh table at 0x1e09060 (table_start 0x1e09062)",
+   "range_justification": "r0 = r1 + -0xd4 ; if (r0 > 0x5) goto 0x1e091f8",
+   "semantics": "config CRC query (16-bit)",
+   "confidence": "STRONG EVIDENCE",
+   "detail": "0x1e0921c reads [state+0x1b0], extracts the big-endian 16-bit value at record offset 2..3 (b[+3]<<8 | b[+2]) and replies with opcode 0xD6 via the shared TX builder 0x1e09426. NOTE: this contradicts the live-observed 144-byte D6 read - recorded as FW-U-028",
+   "handler_function": null
+  },
+  {
+   "opcode": "0xd7",
+   "sub_index": null,
+   "handler": "0x1e09232",
+   "via": "tbh table at 0x1e09060 (table_start 0x1e09062)",
+   "range_justification": "r0 = r1 + -0xd4 ; if (r0 > 0x5) goto 0x1e091f8",
+   "semantics": "config write (144-byte staging)",
+   "confidence": "PROVEN STATIC",
+   "detail": "0x1e09232 copies len-4 payload bytes into a 144-byte staging buffer (sp+560), validates it with 0x1e0566a(length 0x90), then loops 4 times (r7 = 0..3) over record indices and calls 0x1e05c66 (record writer) when staging[0x70+i] differs; finishes with 0x1e069c2 and 0x1e059a2",
+   "handler_function": null
+  },
+  {
+   "opcode": "0xd8",
+   "sub_index": null,
+   "handler": "0x1e0928c",
+   "via": "tbh table at 0x1e09060 (table_start 0x1e09062)",
+   "range_justification": "r0 = r1 + -0xd4 ; if (r0 > 0x5) goto 0x1e091f8",
+   "semantics": "single 220-byte record write",
+   "confidence": "PROVEN STATIC",
+   "detail": "0x1e0928c takes payload[0..] as a 220-byte (0xDC) record validated by 0x1e0566a, selects the destination by payload[2] (b[r9+6]) into the record array [state+0x1b8] with stride 0xDC, and bounds-checks the index <= 0xDC",
+   "handler_function": null
+  },
+  {
+   "opcode": "0xd9",
+   "sub_index": null,
+   "handler": "0x1e09346",
+   "via": "tbh table at 0x1e09060 (table_start 0x1e09062)",
+   "range_justification": "r0 = r1 + -0xd4 ; if (r0 > 0x5) goto 0x1e091f8",
+   "semantics": "record read (220-byte records)",
+   "confidence": "PROVEN STATIC",
+   "detail": "0x1e09346 reads the 16-bit header word of record payload[0] (index < 4) from [state+0x1b8] with stride 0xDC and replies with opcode 0xD9 via 0x1e09426",
+   "handler_function": null
+  }
+ ],
+ "handler_semantics": {
+  "0x05": {
+   "name": "factory/diagnostic",
+   "kind": "sub-dispatch",
+   "detail": "6-way tbh on (payload[0] & 0x7F) at 0x1e08e78; sub-cases call 0x1e0701c (case 0, head-error report), 0x1e070da (case 1, checksum-error report), 0x1e07156 (case 2), 0x1e0710a (case 3), 0x1e04a92(3,1) (case 4), 0x1e04a92(3,0) (case 5). Error-report and flash/VM-test callees => factory/diagnostic class, not normal config",
+   "confidence": "STRONG EVIDENCE"
+  },
+  "0x0b": {
+   "name": "status query",
+   "kind": "read",
+   "detail": "handler 0x1e089e8 loads the immediate 0x32 into a 1-byte response buffer (b[sp+4] = 0x32) then jumps to the shared TX tail 0x1e08e5a with r1 = 0x0B == the opcode, confirming the case->opcode mapping. Live reply was A5 05 0B 30 E5 (payload 0x30 = 48) vs this immediate 0x32 = 50: the constant and the live value differ by 2 and the difference is NOT yet explained (FW-U-029)",
+   "confidence": "STRONG EVIDENCE"
+  },
+  "0x19": {
+   "name": "state set (byte at state+0x11)",
+   "kind": "write",
+   "detail": "shares the block at 0x1e08d24 with 0xD2; at 0x1e08d2c the opcode selects the destination (0x19 -> r8+0x11, else r8+0x10), payload byte r4 = b[r9+3] is stored there",
+   "confidence": "STRONG EVIDENCE"
+  },
+  "0xd2": {
+   "name": "input-report enable/disable",
+   "kind": "write",
+   "detail": "0x1e08d24 stores the decoded payload byte at state+0x10; when the enable condition holds it calls 0x1e04b38 (app_select_24g). This is the same block 0x19 shares",
+   "confidence": "PROVEN STATIC"
+  },
+  "0xd6": {
+   "name": "config CRC query (16-bit)",
+   "kind": "read",
+   "detail": "0x1e0921c reads [state+0x1b0], extracts the big-endian 16-bit value at record offset 2..3 (b[+3]<<8 | b[+2]) and replies with opcode 0xD6 via the shared TX builder 0x1e09426. NOTE: this contradicts the live-observed 144-byte D6 read - recorded as FW-U-028",
+   "confidence": "STRONG EVIDENCE"
+  },
+  "0xd7": {
+   "name": "config write (144-byte staging)",
+   "kind": "write",
+   "detail": "0x1e09232 copies len-4 payload bytes into a 144-byte staging buffer (sp+560), validates it with 0x1e0566a(length 0x90), then loops 4 times (r7 = 0..3) over record indices and calls 0x1e05c66 (record writer) when staging[0x70+i] differs; finishes with 0x1e069c2 and 0x1e059a2",
+   "confidence": "PROVEN STATIC"
+  },
+  "0xd8": {
+   "name": "single 220-byte record write",
+   "kind": "write",
+   "detail": "0x1e0928c takes payload[0..] as a 220-byte (0xDC) record validated by 0x1e0566a, selects the destination by payload[2] (b[r9+6]) into the record array [state+0x1b8] with stride 0xDC, and bounds-checks the index <= 0xDC",
+   "confidence": "PROVEN STATIC"
+  },
+  "0xd9": {
+   "name": "record read (220-byte records)",
+   "kind": "read",
+   "detail": "0x1e09346 reads the 16-bit header word of record payload[0] (index < 4) from [state+0x1b8] with stride 0xDC and replies with opcode 0xD9 via 0x1e09426",
+   "confidence": "PROVEN STATIC"
+  }
+ },
+ "shared_helpers": {
+  "0x1e05628": "CRC-16 routine: init 0xFFFF, LSB-first (reflected) nibble-table update, 16 halfword entries, returns low 16 bits. Matches the live-validated CRC-16/MODBUS (poly 0xA001, init 0xFFFF) used by the 144-byte config",
+  "0x1e0566a": "record-header validator: len = BE16 at [2..3]; rejects len<4 or len>max; computes 0x1e05628(ptr+2, len-2) and compares against the BE16 stored at [0..1]; prints 0x1e27206/0x1e27213 on mismatch",
+  "0x1e0642c": "shared frame/response builder (r0 = context r13, r1 = opcode, r2 = data, r3 = value/extra) - called from the F7 path and from the factory path",
+  "0x1e09426": "shared TX tail for the opcode/record replies",
+  "0x1e05c66": "record writer: builds a 0xDC (220) byte record with a CRC header (calls 0x1e05628 over 8 bytes for the header test, string 'n=%d crc=%x')",
+  "0x1e06998": "record-index translation used by the D7 loop",
+  "0x1e059a2": "post-write finaliser called by the D7 path (stride/param handling)"
+ },
+ "state_globals": {
+  "0x4850_base+0x10": "D2 input-report enable byte (written by the D2 handler)",
+  "0x4850_base+0x11": "sibling state byte written by opcode 0x19",
+  "0x4850_base+0x150": "F7 step-length/step-accuracy state byte",
+  "0x4850_base+0x1b0": "pointer to the object whose [2..3] the D6 handler reports",
+  "0x4850_base+0x1b8": "base of the 220-byte (0xDC) record array used by D7/D8/D9"
+ },
+ "open_contradictions": [
+  "FW-U-028: firmware 0xD6 returns a single 16-bit value, while live capture showed a 144-byte D6 read; the opcode attribution of the live read needs re-checking",
+  "FW-U-027: the CRC routine at 0x1e05628 loads its table base from the immediate 0x1e29900, but the CRC-16/MODBUS nibble table is at 0x1e297e0 (delta 0x120) and the bytes at 0x1e29900 are the assert string 'P33 SYS SOFT RESET : P3_PR_PWR[4]=1'"
+ ]
+}

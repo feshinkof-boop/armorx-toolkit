@@ -226,6 +226,161 @@
    "category": "storage",
    "grade": "STRONG EVIDENCE",
    "evidence": "references '[SDFILE]sdfile mount failed!!!'"
+  },
+  {
+   "address": "0x1e089c4",
+   "name": "armorx_dispatch_table_low",
+   "category": "dispatch",
+   "grade": "PROVEN STATIC",
+   "evidence": "tbh, 17 cases covering opcodes 0x0B..0x1B; entries are halfword offsets, target = table_start + entry*2; 1.0 of targets are instruction boundaries inside the parser",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e08a04",
+   "name": "armorx_dispatch_table_high",
+   "category": "dispatch",
+   "grade": "PROVEN STATIC",
+   "evidence": "tbh, 5 cases covering opcodes 0xE1..0xE5; 1.0 alignment",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e08e78",
+   "name": "armorx_dispatch_sub_0x05",
+   "category": "dispatch",
+   "grade": "PROVEN STATIC",
+   "evidence": "tbh, 6 cases on (payload[0] & 0x7F) inside opcode 0x05 (factory/diagnostic); 1.0 alignment",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e09060",
+   "name": "armorx_dispatch_table_d",
+   "category": "dispatch",
+   "grade": "PROVEN STATIC",
+   "evidence": "tbh, 6 cases covering opcodes 0xD4..0xD9 (D6/D7/D8/D9 handlers); 1.0 alignment",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e089e8",
+   "name": "armorx_handler_0B",
+   "category": "protocol-handler",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "handler 0x1e089e8 loads the immediate 0x32 into a 1-byte response buffer (b[sp+4] = 0x32) then jumps to the shared TX tail 0x1e08e5a with r1 = 0x0B == the opcode, confirming the case->opcode mapping. Live reply was A5 05 0B 30 E5 (payload 0x30 = 48) vs this immediate 0x32 = 50: the constant and the live value differ by 2 and the difference is NOT yet explained (FW-U-029)",
+   "version": "V41",
+   "opcode": "0x0b",
+   "callers": [
+    "0x1e08772"
+   ],
+   "callees": []
+  },
+  {
+   "address": "0x1e0921c",
+   "name": "armorx_handler_D6",
+   "category": "protocol-handler",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "0x1e0921c reads [state+0x1b0], extracts the big-endian 16-bit value at record offset 2..3 (b[+3]<<8 | b[+2]) and replies with opcode 0xD6 via the shared TX builder 0x1e09426. NOTE: this contradicts the live-observed 144-byte D6 read - recorded as FW-U-028",
+   "version": "V41",
+   "opcode": "0xd6",
+   "callers": [
+    "0x1e08772"
+   ],
+   "callees": []
+  },
+  {
+   "address": "0x1e09232",
+   "name": "armorx_handler_D7",
+   "category": "protocol-handler",
+   "grade": "PROVEN STATIC",
+   "evidence": "0x1e09232 copies len-4 payload bytes into a 144-byte staging buffer (sp+560), validates it with 0x1e0566a(length 0x90), then loops 4 times (r7 = 0..3) over record indices and calls 0x1e05c66 (record writer) when staging[0x70+i] differs; finishes with 0x1e069c2 and 0x1e059a2",
+   "version": "V41",
+   "opcode": "0xd7",
+   "callers": [
+    "0x1e08772"
+   ],
+   "callees": []
+  },
+  {
+   "address": "0x1e0928c",
+   "name": "armorx_handler_D8",
+   "category": "protocol-handler",
+   "grade": "PROVEN STATIC",
+   "evidence": "0x1e0928c takes payload[0..] as a 220-byte (0xDC) record validated by 0x1e0566a, selects the destination by payload[2] (b[r9+6]) into the record array [state+0x1b8] with stride 0xDC, and bounds-checks the index <= 0xDC",
+   "version": "V41",
+   "opcode": "0xd8",
+   "callers": [
+    "0x1e08772"
+   ],
+   "callees": []
+  },
+  {
+   "address": "0x1e09346",
+   "name": "armorx_handler_D9",
+   "category": "protocol-handler",
+   "grade": "PROVEN STATIC",
+   "evidence": "0x1e09346 reads the 16-bit header word of record payload[0] (index < 4) from [state+0x1b8] with stride 0xDC and replies with opcode 0xD9 via 0x1e09426",
+   "version": "V41",
+   "opcode": "0xd9",
+   "callers": [
+    "0x1e08772"
+   ],
+   "callees": []
+  },
+  {
+   "address": "0x1e05628",
+   "name": "armorx_crc16",
+   "category": "crc/record",
+   "grade": "PROVEN STATIC",
+   "evidence": "CRC-16 routine: init 0xFFFF, LSB-first (reflected) nibble-table update, 16 halfword entries, returns low 16 bits. Matches the live-validated CRC-16/MODBUS (poly 0xA001, init 0xFFFF) used by the 144-byte config",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e0566a",
+   "name": "armorx_record_header_validate",
+   "category": "crc/record",
+   "grade": "PROVEN STATIC",
+   "evidence": "record-header validator: len = BE16 at [2..3]; rejects len<4 or len>max; computes 0x1e05628(ptr+2, len-2) and compares against the BE16 stored at [0..1]; prints 0x1e27206/0x1e27213 on mismatch",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e09426",
+   "name": "armorx_tx_tail",
+   "category": "protocol-core",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "shared TX tail for the opcode/record replies",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e06998",
+   "name": "armorx_helper",
+   "category": "protocol-core",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "record-index translation used by the D7 loop",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e059a2",
+   "name": "armorx_helper",
+   "category": "protocol-core",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "post-write finaliser called by the D7 path (stride/param handling)",
+   "version": "V41",
+   "callers": [],
+   "callees": []
   }
  ]
 }

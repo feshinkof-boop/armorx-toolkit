@@ -301,3 +301,92 @@ and `results/final/armorx-firmware-symbol-map.md`.
 * FC/F6: no FC compare exists in the dispatcher, and F6 appears only as the opcode emitted by the
   F7 path. This **contradicts** the assumption that FC is handled in this dispatcher and is
   recorded as a contradiction, not smoothed over.
+
+---
+
+## §31 - Firmware semantics pass (2026-09-28): parser base, dispatch tables, D6/D7/D8
+
+This section records the second firmware-semantics pass. All addresses are from the decrypted V41
+`app.bin` (base `0x01E00000`). Nothing here required hardware.
+
+### 31.1 FW-U-024 CLOSED - the handler base register
+
+`armorx_cmd_dispatch` (0x1e08772) resolves its arguments in the prologue:
+
+```
+1e08778: r13 = r0          ; arg0 -> transport/state context
+1e0877e: r9  = r1          ; arg1 -> the frame
+1e08792: r1  = b[r9 + 0x2] ; the opcode, compared against the opcode table below
+```
+
+So **r9 = frame start**: `r9+0` = magic (0xA5), `r9+1` = length, `r9+2` = opcode, `r9+3..` = payload.
+The highest field read anywhere in the parser is `r9+7`. Consequence: for a **4-byte frame the
+payload byte at `r9+3` is the checksum byte** - the F7 handler's `b[r9+3]` read is a payload read
+that, for `A5 04 F7 A0`, reads the checksum `0xA0`.
+
+### 31.2 DISPATCH CORRECTION - the parser uses jump tables, not an if/else chain
+
+The previous pass's compare-only extractor could not see this. The parser splits the opcode into
+four ranges and uses **two `tbh` jump tables** plus one chain plus one sub-table:
+
+| opcode range | mechanism |
+|---|---|
+| 0x0B..0x1B | `tbh` table at `0x1e089c4` (17 cases) |
+| 0x2F..0xE0 | if/else chain at `0x1e08d1a` (0x2F, 0x70, 0xD2, 0xD4, 0xD7, 0xF7, 0xF8, 0xF9, 0xFA) |
+| 0xE1..0xE5 | `tbh` table at `0x1e08a04` (5 cases) |
+| 0xE6..0xFF | `0x1e08e8c` accepts **only 0xEF**; everything else -> default `0x1e08ff2` |
+| (second level) | `tbh` table at `0x1e09060` dispatches **0xD4..0xD9** |
+
+Table entry encoding, verified on both tables: `target = table_start + entry*2`, `table_start` being
+the instruction immediately after the `tbh`. All four parser tables resolve with **100% of targets
+on instruction boundaries inside the parser**.
+
+### 31.3 Handlers recovered in this pass
+
+| opcode | handler | semantics | grade |
+|---|---|---|---|
+| 0x0B | `0x1e089e8` | status query; loads the constant 0x32 into a 1-byte reply (`r1 = 0x0B` in the handler confirms the case mapping) | STRONG EVIDENCE |
+| 0x19 | `0x1e08d24` | state set; shares the D2 block, writes `state+0x11` (D2 writes `state+0x10`) | STRONG EVIDENCE |
+| 0x05 | `0x1e08e62`+`0x1e08e78` | **factory/diagnostic** sub-dispatch on `payload[0] & 0x7F` (6 cases -> 0x1e0701c, 0x1e070da, 0x1e07156, 0x1e0710a, 0x1e04a92) | STRONG EVIDENCE |
+| 0xD6 | `0x1e0921c` | reads `[state+0x1b0]` and replies with the big-endian 16-bit field at +2..3 | STRONG EVIDENCE |
+| 0xD7 | `0x1e09232` | **config write**: `len-4` payload bytes -> 144-byte (0x90) staging at `sp+560`, validated by `0x1e0566a`, then a 4-iteration loop calling the record writer `0x1e05c66`, finalised by `0x1e069c2`/`0x1e059a2` | PROVEN STATIC |
+| 0xD8 | `0x1e0928c` | **single 220-byte (0xDC) record write**, validated by `0x1e0566a`, index = `payload[2]`, into the array at `[state+0x1b8]` with stride 0xDC | PROVEN STATIC |
+| 0xD9 | `0x1e09346` | **record read** (index = `payload[0]`, < 4), replies with 0xD9 | PROVEN STATIC |
+
+### 31.4 The 144-byte config is stored as 220-byte records
+
+`D7` stages **0x90 = 144 bytes** and then writes through `0x1e05c66`, which builds a **0xDC = 220-byte
+record**. `0x1e0566a` is the shared record-header validator: length = big-endian 16-bit at `[2..3]`
+(rejected if < 4 or > max), then it computes `0x1e05628(ptr+2, len-2)` and compares against the
+big-endian 16-bit value at `[0..1]`. `0x1e05628` is a reflected (LSB-first) nibble-table CRC-16 with
+init `0xFFFF` - i.e. the **CRC-16/MODBUS** family that the live work independently validated on the
+144-byte config (stored `0x2c40` = computed `0x2c40` on the baseline, `0xbfd4` on the mutant).
+
+### 31.5 F7 silence explained (still NOT called write-only)
+
+With `r9` settled, the F7 handler `0x1e08860` reads `b[r9+3]` = **payload[0]**. It stores that byte
+at `state+0x150` and continues to the builder `0x1e0642c` (an F6 emission path) only for the values
+`0` and `1`. A live `A5 04 F7 A0` carries **no payload byte**, so the handler reads the checksum
+`0xA0` - neither 0 nor 1 - stores it, and produces no reply. That is STRONG EVIDENCE for the
+observed silence and is **not** promoted to `F7_WRITE_ONLY`.
+
+### 31.6 Corrections and new unknowns (not buried)
+
+* **FC and F6 are not in any extracted dispatch table**, and `0x1e08e8c` accepts only `0xEF` above
+  0xE5 - so both fall to the default handler `0x1e08ff2`. The assumed location of the FC/F6 DPI
+  handlers is **CONTRADICTED**; they must be reached from another entry point.
+* **FW-U-029 (new, high):** firmware `0xD6` returns a single 16-bit value, which contradicts the
+  live-observed 144-byte D6 read. The opcode attribution of that live read must be re-checked.
+* **FW-U-028 (new):** the CRC routine loads its table base from the immediate `0x1e29900`, but the
+  CRC-16/MODBUS nibble table occurs exactly once in the image at `0x1e297e0` (delta 0x120), and the
+  bytes at `0x1e29900` are the assert string `P33 SYS SOFT RESET : P3_PR_PWR[4]=1`.
+* **FW-U-030 (new, low):** the 0x0B handler's constant `0x32` vs the live reply payload `0x30`.
+
+### 31.7 Tooling
+
+`tools/q32s/q32s_tables.py` recovers range-gated `tbh`/`tbb` tables (the extractor now walks through
+the index-scaling instruction to the bounds check and names the raw opcode register behind the
+rebase). Image-wide it finds **102 tables, 38 fully aligned** - a candidate pool
+for other dispatchers beyond the command parser. `tools/q32s/q32s_dispatch_full.py` builds the merged
+dispatch model (34 routes) and `tools/firmware/fw_ledger_report.py` renders the
+unknown ledger deterministically from its JSON.
