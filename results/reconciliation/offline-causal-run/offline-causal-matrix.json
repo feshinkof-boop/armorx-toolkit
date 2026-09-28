@@ -1,0 +1,299 @@
+{
+ "note": "C0/C1/C2 executed against the virtual ARMOR-X Pro; ground truth = official fixtures",
+ "results": [
+  {
+   "case": "C0",
+   "hypothesis": "H_PRECLEAR_MATTERS",
+   "writes": [
+    "a505d2007c",
+    "a505d2017d"
+   ],
+   "device": {
+    "d2_enabled": true,
+    "muted_by_preclear": true,
+    "preclear_is_fatal": true,
+    "config_bytes": 144,
+    "d6_frames": 10,
+    "d6_frame_lengths": [
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     14
+    ],
+    "writes": [
+     "a505d2007c",
+     "a505d2017d"
+    ],
+    "button_frames_emitted": 0
+   },
+   "recorder": {
+    "rx_total": 4,
+    "valid_status": 0,
+    "keys": []
+   },
+   "verdict": {
+    "verdict": "NO_IDLE_FRAMES_OBSERVED",
+    "meaning": "expected when nothing was pressed; NOT a failure",
+    "valid_frames": 0
+   }
+  },
+  {
+   "case": "C1",
+   "hypothesis": "H_PRECLEAR_MATTERS",
+   "writes": [
+    "a505d2017d"
+   ],
+   "device": {
+    "d2_enabled": true,
+    "muted_by_preclear": false,
+    "preclear_is_fatal": true,
+    "config_bytes": 144,
+    "d6_frames": 10,
+    "d6_frame_lengths": [
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     14
+    ],
+    "writes": [
+     "a505d2017d"
+    ],
+    "button_frames_emitted": 10
+   },
+   "recorder": {
+    "rx_total": 12,
+    "valid_status": 10,
+    "keys": [
+     0
+    ]
+   },
+   "verdict": {
+    "verdict": "A_TWICE_PROVEN",
+    "valid_frames": 10,
+    "keys": [
+     0
+    ],
+    "transitions": 4,
+    "meaning": "PRESS/RELEASE/PRESS/RELEASE for key A"
+   }
+  },
+  {
+   "case": "C2",
+   "hypothesis": "H_PRECLEAR_MATTERS",
+   "writes": [
+    "a50cef0000000000000000a0",
+    "a5040bb4",
+    "a504e28b",
+    "a504d47d",
+    "a504d67f",
+    "a505d2017d"
+   ],
+   "device": {
+    "d2_enabled": true,
+    "muted_by_preclear": false,
+    "preclear_is_fatal": true,
+    "config_bytes": 144,
+    "d6_frames": 10,
+    "d6_frame_lengths": [
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     14
+    ],
+    "writes": [
+     "a50cef0000000000000000a0",
+     "a5040bb4",
+     "a504e28b",
+     "a504d47d",
+     "a504d67f",
+     "a505d2017d"
+    ],
+    "button_frames_emitted": 10
+   },
+   "recorder": {
+    "rx_total": 26,
+    "valid_status": 10,
+    "keys": [
+     0
+    ]
+   },
+   "verdict": {
+    "verdict": "A_TWICE_PROVEN",
+    "valid_frames": 10,
+    "keys": [
+     0
+    ],
+    "transitions": 4,
+    "meaning": "PRESS/RELEASE/PRESS/RELEASE for key A"
+   }
+  },
+  {
+   "case": "C0",
+   "hypothesis": "H_PRECLEAR_HARMLESS",
+   "writes": [
+    "a505d2007c",
+    "a505d2017d"
+   ],
+   "device": {
+    "d2_enabled": true,
+    "muted_by_preclear": false,
+    "preclear_is_fatal": false,
+    "config_bytes": 144,
+    "d6_frames": 10,
+    "d6_frame_lengths": [
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     14
+    ],
+    "writes": [
+     "a505d2007c",
+     "a505d2017d"
+    ],
+    "button_frames_emitted": 10
+   },
+   "recorder": {
+    "rx_total": 14,
+    "valid_status": 10,
+    "keys": [
+     0
+    ]
+   },
+   "verdict": {
+    "verdict": "A_TWICE_PROVEN",
+    "valid_frames": 10,
+    "keys": [
+     0
+    ],
+    "transitions": 4,
+    "meaning": "PRESS/RELEASE/PRESS/RELEASE for key A"
+   }
+  },
+  {
+   "case": "C1",
+   "hypothesis": "H_PRECLEAR_HARMLESS",
+   "writes": [
+    "a505d2017d"
+   ],
+   "device": {
+    "d2_enabled": true,
+    "muted_by_preclear": false,
+    "preclear_is_fatal": false,
+    "config_bytes": 144,
+    "d6_frames": 10,
+    "d6_frame_lengths": [
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     14
+    ],
+    "writes": [
+     "a505d2017d"
+    ],
+    "button_frames_emitted": 10
+   },
+   "recorder": {
+    "rx_total": 12,
+    "valid_status": 10,
+    "keys": [
+     0
+    ]
+   },
+   "verdict": {
+    "verdict": "A_TWICE_PROVEN",
+    "valid_frames": 10,
+    "keys": [
+     0
+    ],
+    "transitions": 4,
+    "meaning": "PRESS/RELEASE/PRESS/RELEASE for key A"
+   }
+  },
+  {
+   "case": "C2",
+   "hypothesis": "H_PRECLEAR_HARMLESS",
+   "writes": [
+    "a50cef0000000000000000a0",
+    "a5040bb4",
+    "a504e28b",
+    "a504d47d",
+    "a504d67f",
+    "a505d2017d"
+   ],
+   "device": {
+    "d2_enabled": true,
+    "muted_by_preclear": false,
+    "preclear_is_fatal": false,
+    "config_bytes": 144,
+    "d6_frames": 10,
+    "d6_frame_lengths": [
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     20,
+     14
+    ],
+    "writes": [
+     "a50cef0000000000000000a0",
+     "a5040bb4",
+     "a504e28b",
+     "a504d47d",
+     "a504d67f",
+     "a505d2017d"
+    ],
+    "button_frames_emitted": 10
+   },
+   "recorder": {
+    "rx_total": 26,
+    "valid_status": 10,
+    "keys": [
+     0
+    ]
+   },
+   "verdict": {
+    "verdict": "A_TWICE_PROVEN",
+    "valid_frames": 10,
+    "keys": [
+     0
+    ],
+    "transitions": 4,
+    "meaning": "PRESS/RELEASE/PRESS/RELEASE for key A"
+   }
+  }
+ ]
+}

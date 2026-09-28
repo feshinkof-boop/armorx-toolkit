@@ -1,0 +1,11 @@
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"t": 0.0002, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a505d2007c", "label": "D2 disable (harness pre-clear)", "write_mode": "without_response"}
+{"t": 0.0002, "event": "sleep", "detail": "let the pre-clear settle"}
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"t": 1.5006, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a505d2017d", "label": "D2 enable", "write_mode": "without_response"}
+{"t": 1.5006, "event": "operator_prompt_raised", "detail": "armorx_d2_causal_c0_a_twice"}
+{"t": 13.8508, "event": "operator_prompt_result", "detail": "action_id=armorx_d2_causal_c0_a_twice rc=0"}
+{"t": 13.8509, "event": "observe_start", "detail": "0.4s"}
+{"t": 14.2514, "event": "observe_end", "detail": "valid_status_frames=0 (event-driven: zero idle frames is NORMAL, not failure)"}

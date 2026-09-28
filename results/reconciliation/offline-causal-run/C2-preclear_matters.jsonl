@@ -1,0 +1,38 @@
+{"event": "rx", "raw": "a50cefbb921542f21f55802a", "kind": "other"}
+{"t": 0.0001, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a50cef0000000000000000a0", "label": "EF query (official pre-D2, PROVEN LIVE 2026-09-27)", "write_mode": "without_response"}
+{"event": "rx", "raw": "a5050b30e5", "kind": "other"}
+{"t": 0.0002, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a5040bb4", "label": "0B version query (official pre-D2)", "write_mode": "without_response"}
+{"event": "rx", "raw": "a510e22741025a4a2d5854000000007e", "kind": "other"}
+{"t": 0.0002, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a504e28b", "label": "E2 firmware query (official pre-D2)", "write_mode": "without_response"}
+{"event": "rx", "raw": "a507d411010092", "kind": "other"}
+{"t": 0.0002, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a504d47d", "label": "D4 query (official pre-D2)", "write_mode": "without_response"}
+{"event": "rx", "raw": "a414d6012c40009033ff000000000000000000bd", "kind": "other"}
+{"event": "rx", "raw": "a414d602000000000001001e1e4646000001005a", "kind": "other"}
+{"event": "rx", "raw": "a414d6031e1e464600000200020200000000005f", "kind": "other"}
+{"event": "rx", "raw": "a414d6040a3c3c2a000000000a3c3c2a000000ea", "kind": "other"}
+{"event": "rx", "raw": "a414d605000a3c3c2a000000000000000000003f", "kind": "other"}
+{"event": "rx", "raw": "a414d60600000000000000000000000000000094", "kind": "other"}
+{"event": "rx", "raw": "a414d60700000000000000000000000000000095", "kind": "other"}
+{"event": "rx", "raw": "a414d608000000000000000001020304050607b2", "kind": "other"}
+{"event": "rx", "raw": "a414d60908090a0b0c0d0e0f1011121314151678", "kind": "other"}
+{"event": "rx", "raw": "a40ed60a010d191a1b1c1d1e1f64", "kind": "other"}
+{"t": 0.0002, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a504d67f", "label": "D6 configuration read request (official pre-D2; 10 reply frames: nine A4 14 D6 NN + one A4 0E D6 0A)", "write_mode": "without_response"}
+{"t": 0.0003, "event": "wait_fragments", "detail": "a414d6 expect>=9"}
+{"t": 0.0003, "event": "fragments_received", "detail": "9 (expected >= 9)"}
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"t": 0.0003, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a505d2017d", "label": "D2 enable (after official read burst, no pre-clear)", "write_mode": "without_response"}
+{"t": 0.0003, "event": "operator_prompt_raised", "detail": "armorx_d2_causal_c2_a_twice"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000000fd6500b6fc4f0158000075", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000000fd6500b6fc4f0158000075", "kind": "valid_status"}
+{"t": 9.138, "event": "operator_prompt_result", "detail": "action_id=armorx_d2_causal_c2_a_twice rc=0"}
+{"t": 9.1381, "event": "observe_start", "detail": "0.4s"}
+{"t": 9.5386, "event": "observe_end", "detail": "valid_status_frames=10 (event-driven: zero idle frames is NORMAL, not failure)"}

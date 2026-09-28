@@ -1,0 +1,21 @@
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"t": 0.0001, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a505d2007c", "label": "D2 disable (harness pre-clear)", "write_mode": "without_response"}
+{"t": 0.0001, "event": "sleep", "detail": "let the pre-clear settle"}
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"event": "rx", "raw": "a505d2017d", "kind": "other"}
+{"t": 1.5003, "dir": "TX", "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb", "hex": "a505d2017d", "label": "D2 enable", "write_mode": "without_response"}
+{"t": 1.5003, "event": "operator_prompt_raised", "detail": "armorx_d2_causal_c0_a_twice"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000000fd6500b6fc4f0158000075", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000001fd6500b6fc4f0158000076", "kind": "valid_status"}
+{"event": "rx", "raw": "a5120200000000fd6500b6fc4f0158000075", "kind": "valid_status"}
+{"t": 11.5087, "event": "operator_prompt_result", "detail": "action_id=armorx_d2_causal_c0_a_twice rc=0"}
+{"t": 11.5088, "event": "observe_start", "detail": "0.4s"}
+{"t": 11.9097, "event": "observe_end", "detail": "valid_status_frames=10 (event-driven: zero idle frames is NORMAL, not failure)"}
