@@ -1,0 +1,19 @@
+### bluetooth state 2026-09-27T19:33:40-04:00
+  enabled: false
+  state: OFF
+  address: XX:XX:XX:XX:E7:38
+  name: iQOO 11S
+	[■]: create_metadata_after_bonding
+	[■]: donot_validate_bond_state_from_profiles
+	[■]: guard_bonded_device_properties
+	[■]: guest_mode_bond
+	[ ]: identity_address_null_if_unknown
+	[■]: identity_address_type_api
+	[ ]: ignore_unrelated_cancel_bond
+	[■]: prevent_service_connections_on_remove_bond
+	[■]: remove_address_map_on_unbond
+	[ ]: set_addressed_player
+
+### bonded devices (bt_config / settings)
+
+### armorx in bond list?

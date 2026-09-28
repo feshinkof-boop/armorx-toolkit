@@ -1,0 +1,7 @@
+{
+ "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "expected": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+ "verdict": "CONFIG_BASELINE_MATCH",
+ "method": "read-only D6 via id15-experiment.py --probe after the official session disconnected (fresh read this pass)",
+ "durability_note": "readback integrity confirmation only - NOT a new durability proof; baseline remains DURABLE_OK"
+}

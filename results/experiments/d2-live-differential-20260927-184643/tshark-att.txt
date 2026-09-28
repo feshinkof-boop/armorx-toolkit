@@ -1,11 +1,33 @@
 # ATT-level evidence
 
-## tshark attempt (honest record)
+## tshark attempt — CORRECTED 2026-09-27
 
-`tshark -r raw/btmon.btsnoop -Y btatt` returned **no frames** for this capture (capinfos: 231+
-packets, encapsulation "Bluetooth Linux Monitor"). TShark 4.6.4 did not decode the btatt layer
-here, so it is **not** the ATT evidence source. The mature tool `btmon -r <capture>` (the same tool
-that recorded it) decodes ATT operations, handles and values, and was used instead.
+The original record here said tshark "returned **no frames**" and "did not decode the btatt layer",
+and concluded it could not be the ATT evidence source. **That conclusion was wrong.** The capture is
+readable, but **tshark is AppArmor-confined on this host and cannot read anything under
+/home/salamanka**: every `tshark -r <path under home>` call aborted with a permission error that was
+misread as a decoder limitation.
+
+Re-tested with the identical capture copied to /tmp:
+
+    $ cp raw/btmon.btsnoop /tmp/harness_check.btsnoop && chmod 644 /tmp/harness_check.btsnoop
+    $ tshark -r /tmp/harness_check.btsnoop | wc -l
+    174
+    $ tshark -r /tmp/harness_check.btsnoop -Y btatt -T json | jq length
+    44
+    $ tshark -r /tmp/harness_check.btsnoop -Y btatt
+    92  24.229792 localhost -> 2d:37:35:6d:66:11  ATT  Sent Exchange MTU Request, Client Rx MTU: 517
+    94  24.252204 2d:37:35:6d:66:11 -> localhost  ATT  Rcvd Exchange MTU Response, Server Rx MTU: 64
+
+tshark opcode histogram for this capture: 0x52 x4 (Write Command), 0x1b x4 (Handle Value
+Notification), 0x12 x4 / 0x13 x4, 0x0a x8 / 0x0b x8, 0x10 x4 / 0x11 x3, 0x02/0x03 (MTU), 0x01 x2.
+
+Its control-plane view **agrees exactly** with the btmon-derived table below — the same
+`a5040bb4`, `a505d2007c`, `a505d2017d` on handle `0x0075` carried as ATT `0x52`, notifications on
+`0x0077`. Two independent decoders, one result.
+
+**Operational lesson for future passes: copy captures to /tmp (anything outside the AppArmor-confined
+home) before invoking tshark.**
 
 ## Decoded control-plane events (btmon -r, full capture)
 

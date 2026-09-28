@@ -27,3 +27,12 @@
 {"event":"acknowledged","action_id":"armorx_power_on_harness_session","acknowledged_at":"2026-09-27T19:11:06-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_power_on_harness_3","acknowledged_at":"2026-09-27T19:19:56-04:00","response":"done","status":"ACK"}
 {"event":"acknowledged","action_id":"armorx_android_usb_setup","acknowledged_at":"2026-09-27T19:27:05-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_android_usb_test","acknowledged_at":"2026-09-27T19:32:32-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_android_hci_snoop","acknowledged_at":"2026-09-27T19:34:28-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_official_power_on","acknowledged_at":"2026-09-27T19:43:55-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_official_connect","acknowledged_at":"2026-09-27T19:44:45-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_official_button_test_open","acknowledged_at":"2026-09-27T19:45:56-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_official_a_twice","acknowledged_at":"2026-09-27T19:46:25-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_official_exit_bt","acknowledged_at":"2026-09-27T19:46:49-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_official_disconnect","acknowledged_at":"2026-09-27T19:47:24-04:00","response":"done","status":"ACK"}
+{"event":"acknowledged","action_id":"armorx_final_d6_read","acknowledged_at":"2026-09-27T20:00:14-04:00","response":"done","status":"ACK"}

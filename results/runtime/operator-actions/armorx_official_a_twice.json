@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_official_a_twice",
+ "title": "ArmorX Official Button Test",
+ "response": "done",
+ "clicked_at": "2026-09-27T19:46:25-04:00",
+ "gui": "kdialog",
+ "pid": 236111
+}

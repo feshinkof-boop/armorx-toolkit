@@ -44,17 +44,17 @@ official app was never observed. **Earliest proven material difference: UNKNOWN 
   (7.50 ms / latency 0 / 2000 ms / MTU 64 / CCCD 0x0078=0100); official side unobservable.
 - **D2-U-007** (why D2 stays silent): **UNKNOWN**, unchanged.
 
-## Configuration integrity
+## Configuration integrity (provenance corrected)
 
-No Bluetooth traffic was sent by this host during this pass (no harness session was run, per the
-brief's instruction not to recapture Linux), so no write could have altered the device
-configuration. The previously verified readback stands:
+**LAST VERIFIED D6 SHA-256:** `bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`
+**LAST VERIFIED CONFIG_BASELINE_MATCH:** YES
+**Source:** the preceding completed BLE experiment.
 
-`D6 sha256 = bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` -> **CONFIG_BASELINE_MATCH** (earlier pass).
-
-That remains a **readback integrity confirmation**, not a new durability proof. The baseline is
-still **DURABLE_OK** from the earlier `write -> readback -> idle/settle -> power cycle -> D6 exact
-match` procedure; immediate readback alone would only be **STAGED_OK**.
+**No new D6 read was performed during this ADB-blocked pass**, because no ArmorX BLE operation
+occurred — the plain fact is that this pass produced no device state to verify. The baseline
+remains **DURABLE_OK** (from the earlier `write -> readback -> idle/settle -> power cycle -> D6
+exact match` procedure); immediate readback alone is only **STAGED_OK**. The baseline value itself
+is unaltered — this is a provenance correction, not a re-measurement.
 
 ## Unblock
 

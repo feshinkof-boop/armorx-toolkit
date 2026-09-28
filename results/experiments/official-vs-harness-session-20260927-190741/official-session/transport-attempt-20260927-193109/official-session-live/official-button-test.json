@@ -1,0 +1,44 @@
+{
+ "idle_window": {
+  "window_s": 61.028,
+  "valid_button_frames": 0,
+  "note": "the official app produces ZERO frames while nothing is pressed - the stream is event-driven, not continuous"
+ },
+ "a_twice": {
+  "performed": true,
+  "transitions": [
+   {
+    "t": 1790563580.293,
+    "mask": "00000001",
+    "event": "PRESS (bit0 = key id 0 = A)"
+   },
+   {
+    "t": 1790563580.518,
+    "mask": "00000000",
+    "event": "RELEASE"
+   },
+   {
+    "t": 1790563581.361,
+    "mask": "00000001",
+    "event": "PRESS"
+   },
+   {
+    "t": 1790563581.598,
+    "mask": "00000000",
+    "event": "RELEASE"
+   }
+  ],
+  "press1_ms": 225,
+  "gap_ms": 843,
+  "press2_ms": 237,
+  "frames_total": 155,
+  "frames_with_A_bit": 29,
+  "frames_idle_mask": 126,
+  "other_bits_ever_set": "NONE",
+  "frame_length": 18,
+  "frame_form": "a51202 .. BE-u32 mask at [3..6] .. trailer",
+  "checksum_valid": true,
+  "first_frame_latency_after_d2_enable_s": 36.362
+ },
+ "verdict": "OFFICIAL BUTTON TEST WORKS on this unit: A press/release proven, bit index 0 confirmed."
+}

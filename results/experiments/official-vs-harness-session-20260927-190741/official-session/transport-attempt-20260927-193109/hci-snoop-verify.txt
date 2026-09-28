@@ -1,0 +1,7 @@
+### snoop verification 2026-09-27T19:34:33-04:00
+persist.bluetooth.btsnooplogmode = 
+persist.bluetooth.btsnoopdefaultmode = 
+persist.bluetooth.btsnoopfile = 
+settings.global.bluetooth_hci_log = null
+bluetooth enabled:   enabled: true
+btsnoop file: ls: /data/misc/bluetooth/logs/: Permission denied

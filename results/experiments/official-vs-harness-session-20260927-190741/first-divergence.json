@@ -1,22 +1,18 @@
 {
- "earliest_proven_material_difference": "UNKNOWN",
- "computable": false,
- "reason": "the official-app session was never captured (ANDROID_HCI_CAPTURE_UNAVAILABLE), so no official-vs-harness comparison at any stage can be proven",
- "harness_side_observations_that_are_NOT_divergences": [
-  {
-   "id": "HARNESS_EXTRA_WRITE_D2_PRECLEAR",
-   "detail": "harness sends D2 OFF (a505d2007c) before the D2 enable; the reconstructed official workflow showed no pre-clear",
-   "status": "observation about our side only - NOT evidence about the precondition"
-  },
-  {
-   "id": "HARNESS_LINK_UNBONDED_UNENCRYPTED",
-   "detail": "no pairing/SMP/encryption on the harness link",
-   "status": "measured fact; whether the official app differs is UNKNOWN"
-  }
+ "earliest_proven_material_difference": "OFFICIAL_CONNECTION_INTERVAL_DIFFERENT",
+ "computable": true,
+ "chronology": [
+  "connection parameters (t~0-3 s): official 30->7.5->30->11.25 ms / timeouts 5->2 s; harness 7.5 ms / 2 s, 1 update",
+  "MTU (t~1 s): SAME (64 both) - after Android's default 23 exchange",
+  "CCCD (t~1.3 s): SAME handle 0x0078",
+  "security: SAME (unbonded, unencrypted)",
+  "pre-D2 writes (t~59 s): official adds EF/E2/D4/D6(8 fragments) - EXTRA_OFFICIAL_WRITE_OBSERVED",
+  "D2 enable: IDENTICAL (a505d2017d, Write Command 0x52, handle 0x0075, echo received)",
+  "RX: OFFICIAL 155 button frames on A presses; HARNESS 0"
  ],
+ "causality": "none claimed; correlation only",
  "explicitly_not_labelled": [
-  "MISSING_PRECONDITION",
-  "OFFICIAL_WRITES_COMMAND_X_BEFORE_D2"
+  "MISSING_PRECONDITION"
  ],
  "no_unknown_official_traffic_replayed": true
 }

@@ -994,5 +994,77 @@
   "function": "",
   "snippet_file": "",
   "notes": "ANDROID_HCI_CAPTURE_UNAVAILABLE - verdict PARTIAL"
+ },
+ {
+  "id": "D2-LIVE-AX-001",
+  "build": "4.0.8",
+  "category": "TX",
+  "claim": "official D2 enable is a505d2017d carried as ATT Write Command (0x52) on handle 0x0075 with a 5-byte echo - IDENTICAL to the harness",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/official-gatt-sequence.json",
+  "address": "0x0075",
+  "function": "",
+  "snippet_file": "",
+  "notes": "frame 6567, +68.5 s after connect"
+ },
+ {
+  "id": "D2-LIVE-AX-002",
+  "build": "4.0.8",
+  "category": "RX",
+  "claim": "official Button Test streams 155 valid 18-byte A5 12 02 frames; A press/release proven; bit index 0 = A; only bit 0 ever set; 0 frames while idle (event-driven)",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/official-button-test.json",
+  "address": "0x0077",
+  "function": "",
+  "snippet_file": "",
+  "notes": "press 0.225 s, gap 0.843 s, press 0.237 s"
+ },
+ {
+  "id": "D2-LIVE-AX-003",
+  "build": "4.0.8",
+  "category": "SEC",
+  "claim": "the official link is UNBONDED and UNENCRYPTED (ArmorX absent from the phone bond list; 0 SMP frames; 0 encryption change events) - refutes the bonding/encryption hypothesis",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/official-hci-summary.json",
+  "address": "",
+  "function": "",
+  "snippet_file": "android-bond-security.json",
+  "notes": "D2-U-008 REFUTED"
+ },
+ {
+  "id": "D2-LIVE-AX-004",
+  "build": "4.0.8",
+  "category": "PRE",
+  "claim": "official pre-D2 sequence includes EF a50cef0000000000000000a0, E2 a504e28b, D4 a504d47d and a full D6 config read (8 fragments) - none of which the harness sends",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/official-gatt-sequence.json",
+  "address": "0x0075",
+  "function": "",
+  "snippet_file": "",
+  "notes": "EXTRA_OFFICIAL_WRITE_OBSERVED - NOT a proven precondition"
+ },
+ {
+  "id": "D2-LIVE-AX-005",
+  "build": "4.0.8",
+  "category": "CONN",
+  "claim": "official link: interval 30->7.5->30->11.25 ms over 4 updates, latency 0, supervision 5 s -> 2 s; MTU 64; CCCD 0x0078 at +1.34 s",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/official-hci-summary.json",
+  "address": "",
+  "function": "",
+  "snippet_file": "",
+  "notes": "earliest material difference vs harness (7.50 ms)"
+ },
+ {
+  "id": "D2-LIVE-AX-006",
+  "build": "4.0.8",
+  "category": "XVER",
+  "claim": "installed APK is byte-identical to the repository official 4.0.8 build (base.apk 64e0832b.., arm64 split 2e9805fc..), not debuggable, no instrumentation library",
+  "grade": "PROVEN LIVE",
+  "artifact": "results/experiments/official-vs-harness-session-20260927-190741/official-session/transport-attempt-20260927-193109/official-session-live/app-identity.json",
+  "address": "",
+  "function": "",
+  "snippet_file": "apk-sha256.txt",
+  "notes": "OFFICIAL_4_0_8_MATCH"
  }
 ]

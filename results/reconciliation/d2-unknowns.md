@@ -102,3 +102,29 @@ resolution**:
 New harness-side observation (about our implementation, **not** evidence of a missing precondition):
 `HARNESS_EXTRA_WRITE_D2_PRECLEAR` — the harness sends D2 OFF before the D2 enable; the
 reconstructed official workflow showed no such pre-clear.
+
+## Update — OFFICIAL ANDROID SESSION CAPTURED (2026-09-27, COMPLETE)
+
+The official BIGBIG WON 4.0.8 session was captured on the real phone (vivo V2304A, HCI snoop via
+bugreport; snoop sha256 bbaf10bd337a840ee0316291cd53f442859b55d8ce10c2414973d9c59248ba2f) and
+compared with the preserved harness session. Classification: **OFFICIAL_WORKS_HARNESS_SILENT**.
+
+- **D2-U-008** (bonding/encryption): **REFUTED.** The ArmorX is absent from the phone's 8 bonded
+  devices; the capture contains 0 SMP frames and 0 encryption-change events. Official streams on an
+  unbonded, unencrypted link — the same state as the harness.
+- **D2-U-009** (MTU/PHY/connection parameters): **SUPPORTED (not causal).** MTU is equal (64 both;
+  Android merely opened with the default 23 then exchanged 512->64) and no PHY update occurred, but
+  the connection-interval profile differs: official 30->7.5->30->11.25 ms across four link-layer
+  updates, harness 7.50 ms with one. This is the EARLIEST proven material difference
+  (`OFFICIAL_CONNECTION_INTERVAL_DIFFERENT`).
+- **D2-U-007** (why the harness is silent): **NARROWED, still UNKNOWN.** Eliminated by direct
+  evidence: D2 value (`a505d2017d`), ATT write type (Write Command 0x52), handle (0x0075), the echo,
+  MTU, CCCD behaviour (handle 0x0078), and security state — all identical between official and
+  harness. Leading remaining candidate: the pre-D2 device-info + full-config read burst the harness
+  omits (EF `a50cef0000000000000000a0`, E2 `a504e28b`, D4 `a504d47d`, D6 `a504d67f` + 8 reply
+  fragments), observed ~9 s before the official D2 enable. Recorded as
+  `EXTRA_OFFICIAL_WRITE_OBSERVED`, **not** as a proven precondition. Secondary candidate: the
+  interval difference.
+- The stream is **event-driven**: the official app received **0** frames while nothing was pressed
+  and 155 frames while A was pressed (press/release/press/release, bit index 0). The harness's
+  historical "0 idle frames" was therefore never evidence of failure by itself.

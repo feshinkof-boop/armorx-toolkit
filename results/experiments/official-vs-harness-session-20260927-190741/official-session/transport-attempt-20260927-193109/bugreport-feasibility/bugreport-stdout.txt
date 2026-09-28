@@ -1,0 +1,2 @@
+/data/user_de/0/com.android.shell/files/bugreports/bugreport-PD2304-BP2A.250605.031.A3-2026-09-28-02-35-52.zip: 1 file pulled, 0 skipped. 40.8 MB/s (48631671 bytes in 1.138s)
+Bug report copied to ./bugreport-PD2304-BP2A.250605.031.A3-2026-09-28-02-35-52.zip

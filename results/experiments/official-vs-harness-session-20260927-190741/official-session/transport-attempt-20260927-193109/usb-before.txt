@@ -1,0 +1,17 @@
+### lsusb (baseline) 2026-09-27T19:31:09-04:00
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 1ea7:0066 SHARKOON Technologies GmbH [Mediatrack Edge Mini Keyboard]
+Bus 001 Device 003: ID 0489:e10d Foxconn / Hon Hai 
+Bus 001 Device 005: ID 0bda:b720 Realtek Semiconductor Corp. RTL8723BU 802.11b/g/n WLAN Adapter
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+
+### lsusb -t (baseline)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/16p, 480M
+    |__ Port 003: Dev 002, If 0, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 003: Dev 002, If 1, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 006: Dev 003, If 0, Class=Wireless, Driver=btusb, 12M
+    |__ Port 006: Dev 003, If 1, Class=Wireless, Driver=btusb, 12M
+    |__ Port 008: Dev 005, If 0, Class=Wireless, Driver=btusb, 480M
+    |__ Port 008: Dev 005, If 1, Class=Wireless, Driver=btusb, 480M
+    |__ Port 008: Dev 005, If 2, Class=Vendor Specific Class, Driver=rtl8xxxu, 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/4p, 20000M/x2

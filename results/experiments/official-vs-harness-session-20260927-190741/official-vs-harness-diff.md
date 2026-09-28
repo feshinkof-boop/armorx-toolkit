@@ -1,79 +1,100 @@
-# Official app vs Linux harness — normalized session differential
+# Official app vs Linux harness — session differential (COMPLETE)
 
-**Overall status: PARTIAL.** The harness stage is fully captured and decoded. The official-app stage
-was **not captured**: `ANDROID_HCI_CAPTURE_UNAVAILABLE` (no ADB transport, so no btsnoop, no
-bugreport, no logcat). Comparison is therefore **staged-by-stage with the official column empty** —
-and deliberately **not** substituted with guesses or with static-analysis assumptions.
+**Overall status: COMPLETE.** The official BIGBIG WON 4.0.8 session was captured on the real phone
+(Android HCI snoop, extracted via bugreport) and compared stage-by-stage with the preserved Linux
+harness session.
+
+## Result
+
+**`OFFICIAL_WORKS_HARNESS_SILENT`** — the official app's Button Test produces valid `A5 12 02`
+frames on this unit, while the Linux harness received none. The D2 command itself is **identical**
+in both, so the difference is not the D2 protocol.
 
 ## CONNECTION
 
-| field | official | harness |
-|---|---|---|
-| captured | NO | yes |
-| role | NOT_CAPTURED | **Central** |
-| peer address type | NOT_CAPTURED | **Public** |
-| connection interval | NOT_CAPTURED | **7.50 ms** (0x0006) |
-| peripheral latency | NOT_CAPTURED | **0** |
-| supervision timeout | NOT_CAPTURED | **2000 ms** (0x00c8) |
-| PHY | NOT_CAPTURED | not reported by this adapter's capture |
-| link-layer updates | NOT_CAPTURED | 1 `LE Connection Update` at t≈24.9 s |
+| field | official (Android) | harness (Linux) | same? |
+|---|---|---|---|
+| role | Central | Central | ✅ |
+| peer address type | Public | Public | ✅ |
+| connection interval | **11.25 ms** (history 30 → 7.5 → 30 → 11.25) | **7.50 ms** (1 update) | ❌ **OFFICIAL_CONNECTION_INTERVAL_DIFFERENT** |
+| peripheral latency | 0 | 0 | ✅ |
+| supervision timeout | 2000 ms (after 5 s) | 2000 ms | ✅ |
+| PHY | no PHY update events | not reported | – |
 
 ## SECURITY
 
-| field | official | harness |
-|---|---|---|
-| pre-existing bond | **UNKNOWN** (unreadable) | **none** |
-| pairing / SMP activity | NOT_CAPTURED | **zero events** |
-| encryption before D2 | NOT_CAPTURED | **not encrypted** |
+| field | official | harness | same? |
+|---|---|---|---|
+| bonded | **no** (ArmorX absent from the phone's 8 bonded devices) | no | ✅ |
+| encrypted | **no** (0 SMP frames, 0 encryption-change events) | no | ✅ |
 
-The harness link is unbonded and unencrypted. That is the `D2-U-008` condition, now **measured** for
-our side — but with no official capture, it remains an untested hypothesis, not a finding.
+→ **D2-U-008 REFUTED**: the official app streams on an unbonded, unencrypted link, exactly like ours.
 
 ## ATT / GATT
 
+| field | official | harness | same? |
+|---|---|---|---|
+| ATT MTU | 64 (after Android's default 23 exchange, then 512→64) | 64 | ✅ |
+| CCCD | Write Request, handle `0x0078`, +1.34 s | handle `0x0078` = `0100` | ✅ |
+| FFE1 / FFE2 / CCCD handles | `0x0075` / `0x0077` / `0x0078` | `0x0075` / `0x0077` / `0x0078` | ✅ |
+
+## APPLICATION SEQUENCE (this is where they differ)
+
+```text
+official:  connect -> MTU(23) -> MTU(512->64) -> CCCD 0x0078 -> [58 s idle]
+           -> EF  a50cef0000000000000000a0   -> reply a50cefbb921542f21f55802a
+           -> 0B  a5040bb4                   -> reply a5050b30e5
+           -> E2  a504e28b                   -> reply a510e22741025a4a2d5854000000007e
+           -> D4  a504d47d                   -> reply a507d411010092
+           -> D6  a504d67f                   -> 8 reply fragments a414d6NN.. (full config read)
+           -> D2 enable a505d2017d           (Write Command 0x52, handle 0x0075) -> echo x2
+
+harness:   connect -> MTU(512->64) -> CCCD 0x0078 -> 0B a5040bb4 -> D2 OFF a505d2007c -> D2 enable a505d2017d
+```
+
+→ **`EXTRA_OFFICIAL_WRITE_OBSERVED`**: the app performs a device-info + **full configuration read**
+(EF, E2, D4, D6) before D2 that our harness never sends. The harness also pre-clears D2 OFF, which
+the app does not. **Neither is labelled `MISSING_PRECONDITION`** — causality is not established.
+
+## D2 ITSELF — identical
+
 | field | official | harness |
 |---|---|---|
-| ATT MTU (server rx / client rx) | NOT_CAPTURED | **64 / 517** → negotiated **64** |
-| service/characteristic discovery | NOT_CAPTURED | Read By Group Type ×4, Read By Type ×1, Read ×8 |
-| CCCD operation | NOT_CAPTURED | one write, handle `0x0078`, value `0100` |
-| FFE1 / FFE2 handles | NOT_CAPTURED | `0x0075` / `0x0077` (CCCD `0x0078`) |
-| notification enable timing | NOT_CAPTURED | before the 0B query (t≈25.0 s) |
-
-## APPLICATION SEQUENCE
-
-| step | official | harness |
-|---|---|---|
-| connection → first write | NOT_CAPTURED | CCCD subscribe |
-| all writes before D2 | NOT_CAPTURED | CCCD subscribe → **0B query `a5040bb4`** → **D2 OFF `a505d2007c`** |
-| 0B control query | NOT_CAPTURED | sent t=25.01 → reply `a5050b30e5` t=25.03 |
-| D2 enable | NOT_CAPTURED | t=**28.52**, ATT **Write Command (0x52)** = write-without-response |
-| D2 response | NOT_CAPTURED | 5-byte echo only (t=28.54) |
+| value | `a505d2017d` | `a505d2017d` |
+| ATT op | **Write Command (0x52)** | **Write Command (0x52)** |
+| handle | `0x0075` | `0x0075` |
+| response | 5-byte echo ×2 | 5-byte echo |
+| disable | `a505d2007c`, Write Command, +129.5 s | `a505d2007c`, Write Command |
 
 ## RX
 
 | field | official | harness |
 |---|---|---|
-| idle `A5 12 02` frames | NOT_CAPTURED | **0** |
-| button frames | NOT_CAPTURED | 0 (no physical action was justified) |
-| notifications total | NOT_CAPTURED | 4 (1× 0B reply, 3× D2 echoes) |
+| idle `A5 12 02` frames | **0** | 0 |
+| frames with A pressed | **155** | 0 |
+| first frame after enable | +36.36 s (when A was first pressed) | – |
+| event-driven | yes | (untested with a press in that session) |
 
-## EXIT
+The official app produces **zero** frames while nothing is pressed — the stream is event-driven.
+The harness's historical `0 idle frames` was therefore never evidence of failure by itself.
 
-| step | official | harness |
-|---|---|---|
-| D2 disable | NOT_CAPTURED | t=38.53, Write Command, echo received |
-| CCCD teardown | NOT_CAPTURED | none observed on the link before disconnect |
-| disconnect | NOT_CAPTURED | `Disconnect Complete` at t≈42.1 s |
+A-button proof (official session, bit index 0 = A):
 
-## Notable absences relative to the brief's expectations
+```text
+PRESS   mask 00000001  t=+104.86 s
+RELEASE mask 00000000  +0.225 s
+PRESS   mask 00000001  +1.068 s
+RELEASE mask 00000000  +1.305 s
+```
+18-byte frames, valid checksums, only bit 0 ever set, ~12 ms repeat cadence while held.
 
-The brief anticipated pairs such as `OFFICIAL_LINK_ENCRYPTED_BEFORE_D2 / HARNESS_UNENCRYPTED`. Only
-the harness half of each pair could be measured, so **no paired finding is asserted**. The harness
-values that *would* become interesting if the official session turns out to differ are recorded
-above as measured facts, unpaired.
+## Earliest proven material difference
 
-Also observed here that was **not** in the static reconstruction: BlueZ issues a link-layer
-`LE Connection Update` shortly after connecting, and the harness sends a **D2 OFF before the D2
-enable** (a pre-clear our harness adds; the official static workflow showed no such pre-clear).
-That second one is a real harness-side extra, recorded as `HARNESS_EXTRA_WRITE_D2_PRECLEAR` — an
-observation about **our** side, not evidence about the missing precondition.
+**`OFFICIAL_CONNECTION_INTERVAL_DIFFERENT`** — official final interval **11.25 ms** after four
+link-layer updates vs the harness's **7.50 ms** after one; it occurs in the first seconds, before
+every other difference. Causality: **not established**.
+
+The first *protocol-level* difference is the pre-D2 config/status read burst
+(`EXTRA_OFFICIAL_WRITE_OBSERVED`), ~9 s before the D2 enable.
+
+No unknown official traffic was replayed from Linux.

@@ -1,0 +1,84 @@
+{
+ "note": "every write on the ArmorX link before the D2 enable, classified",
+ "connection_delta_s": {
+  "mtu_1": -1790562999.163,
+  "mtu_2": -1790562998.793,
+  "cccd": -1790562998.663
+ },
+ "writes_before_d2": [
+  {
+   "frame": 6245,
+   "delta_s": 58.96,
+   "value": "a50cef0000000000000000a0",
+   "opcode": "0xEF",
+   "classification": "UNKNOWN (EXTRA_OFFICIAL_WRITE_OBSERVED)",
+   "reply_frame": 6247,
+   "reply": "a50cefbb921542f21f55802a"
+  },
+  {
+   "frame": 6248,
+   "delta_s": 59.0,
+   "value": "a5040bb4",
+   "opcode": "0x0B",
+   "classification": "KNOWN_PROTOCOL",
+   "reply_frame": 6250,
+   "reply": "a5050b30e5"
+  },
+  {
+   "frame": 6251,
+   "delta_s": 59.03,
+   "value": "a504e28b",
+   "opcode": "0xE2",
+   "classification": "STATUS (identity/firmware read)",
+   "reply_frame": 6255,
+   "reply": "a510e22741025a4a2d5854000000007e"
+  },
+  {
+   "frame": 6257,
+   "delta_s": 59.08,
+   "value": "a504d47d",
+   "opcode": "0xD4",
+   "classification": "STATUS",
+   "reply_frame": 6259,
+   "reply": "a507d411010092"
+  },
+  {
+   "frame": 6265,
+   "delta_s": 59.29,
+   "value": "a504d67f",
+   "opcode": "0xD6",
+   "classification": "CONFIG_READ",
+   "reply_frames": [
+    6267,
+    6268,
+    6269,
+    6270,
+    6272,
+    6273,
+    6274,
+    6276
+   ],
+   "reply_form": "a414d6NN.. (20-byte fragments, 8 of them)"
+  }
+ ],
+ "d2_enable": {
+  "frame": 6567,
+  "op": "Write Command (0x52)",
+  "handle": "0x0075",
+  "value": "a505d2017d",
+  "delta_from_connect_s": 68.498,
+  "echo_frames": [
+   6569,
+   6570
+  ]
+ },
+ "d2_disable": {
+  "frame": 8617,
+  "op": "Write Command (0x52)",
+  "handle": "0x0075",
+  "value": "a505d2007c",
+  "delta_from_connect_s": 129.526,
+  "echo_frames": [],
+  "writes_after_disable": []
+ }
+}

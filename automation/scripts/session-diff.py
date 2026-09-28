@@ -6,8 +6,11 @@ Two decoders, because the two capture formats need different mature tools:
   * Android btsnoop ("btsnoop" encapsulation)  -> tshark JSON (`-T json` on btatt/bthci_evt/btsmp)
   * Linux btmon capture ("Bluetooth Linux Monitor") -> `btmon -r` text
 
-tshark 4.6.4 on this host decodes 0 frames from the Linux-monitor encapsulation, which is why the
-harness side is not run through tshark. That split is deliberate and recorded in the outputs.
+NOTE (corrected 2026-09-27): an earlier pass believed tshark could not decode this host's Linux
+btmon capture. It can. The real obstacle was that tshark is AppArmor-confined here and cannot read
+files under /home/salamanka; copying a capture to /tmp makes tshark decode it normally (verified:
+174 frames, 44 ATT ops, agreeing exactly with the btmon-derived control plane). The harness side is
+still decoded with `btmon -r` for its richer HCI detail, with tshark as an independent cross-check.
 
 Stages compared (chronological, not by packet count):
   CONNECTION, SECURITY, ATT/GATT, APPLICATION SEQUENCE, RX, EXIT

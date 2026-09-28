@@ -1,0 +1,26 @@
+### dumpsys package com.moojiang.bigbigwon.mygt 2026-09-27T19:33:26-04:00
+    flags=0x0
+    codePath=/data/app/~~yT8dDL7zDRDlDzwwLA-F-A==/com.moojiang.bigbigwon.mygt-6fyw6MQCTr3fjX7KbAGQcQ==
+    versionCode=409 minSdk=24 targetSdk=36
+    versionName=4.0.8
+    flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    lastUpdateTime=2026-09-27 14:02:49
+      android.permission.BLUETOOTH_CONNECT
+      android.permission.BLUETOOTH_PRIVILEGED
+      android.permission.BLUETOOTH_ADVERTISE
+      android.permission.BLUETOOTH_SCAN
+      firstInstallTime=2026-09-27 14:02:49
+        android.permission.ACCESS_FINE_LOCATION: granted=true, flags=[ USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED|524288]
+        android.permission.BLUETOOTH_CONNECT: granted=true, flags=[ USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.ACCESS_COARSE_LOCATION: granted=true, flags=[ USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.BLUETOOTH_ADVERTISE: granted=true, flags=[ USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+        android.permission.BLUETOOTH_SCAN: granted=true, flags=[ USER_SET|USER_SENSITIVE_WHEN_GRANTED|USER_SENSITIVE_WHEN_DENIED]
+      firstInstallTime=1970-01-01 03:00:00
+      firstInstallTime=1970-01-01 03:00:00
+
+### pm path
+package:/data/app/~~yT8dDL7zDRDlDzwwLA-F-A==/com.moojiang.bigbigwon.mygt-6fyw6MQCTr3fjX7KbAGQcQ==/base.apk
+package:/data/app/~~yT8dDL7zDRDlDzwwLA-F-A==/com.moojiang.bigbigwon.mygt-6fyw6MQCTr3fjX7KbAGQcQ==/split_config.ar.apk
+package:/data/app/~~yT8dDL7zDRDlDzwwLA-F-A==/com.moojiang.bigbigwon.mygt-6fyw6MQCTr3fjX7KbAGQcQ==/split_config.arm64_v8a.apk
+package:/data/app/~~yT8dDL7zDRDlDzwwLA-F-A==/com.moojiang.bigbigwon.mygt-6fyw6MQCTr3fjX7KbAGQcQ==/split_config.en.apk
+package:/data/app/~~yT8dDL7zDRDlDzwwLA-F-A==/com.moojiang.bigbigwon.mygt-6fyw6MQCTr3fjX7KbAGQcQ==/split_config.xxhdpi.apk

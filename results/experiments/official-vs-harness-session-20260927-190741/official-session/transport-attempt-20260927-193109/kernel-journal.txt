@@ -1,0 +1,26 @@
+Sep 27 19:27:17.600723 salamanka-systemproductname kernel: usb 1-7: Device not responding to setup address.
+Sep 27 19:27:17.808801 salamanka-systemproductname kernel: usb 1-7: device not accepting address 28, error -71
+Sep 27 19:27:17.808919 salamanka-systemproductname kernel: usb 1-7: WARN: invalid context state for evaluate context command.
+Sep 27 19:27:17.920720 salamanka-systemproductname kernel: usb 1-7: new full-speed USB device number 29 using xhci_hcd
+Sep 27 19:27:17.920840 salamanka-systemproductname kernel: usb 1-7: Device not responding to setup address.
+Sep 27 19:27:18.132774 salamanka-systemproductname kernel: usb 1-7: Device not responding to setup address.
+Sep 27 19:27:18.336762 salamanka-systemproductname kernel: usb 1-7: device not accepting address 29, error -71
+Sep 27 19:27:18.336883 salamanka-systemproductname kernel: usb 1-7: WARN: invalid context state for evaluate context command.
+Sep 27 19:27:18.336931 salamanka-systemproductname kernel: usb usb1-port7: unable to enumerate USB device
+Sep 27 19:29:44.538722 salamanka-systemproductname kernel: audit: type=1400 audit(1790551784.536:500): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2336 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+Sep 27 19:32:16.842762 salamanka-systemproductname kernel: usb 1-7: new high-speed USB device number 30 using xhci_hcd
+Sep 27 19:32:16.967718 salamanka-systemproductname kernel: usb 1-7: New USB device found, idVendor=2d95, idProduct=6013, bcdDevice= 5.15
+Sep 27 19:32:16.973557 salamanka-systemproductname kernel: usb 1-7: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+Sep 27 19:32:16.973647 salamanka-systemproductname kernel: usb 1-7: Product: iQOO 11S
+Sep 27 19:32:16.973720 salamanka-systemproductname kernel: usb 1-7: Manufacturer: vivo
+Sep 27 19:32:16.973785 salamanka-systemproductname kernel: usb 1-7: SerialNumber: 10AD730KL6001AY
+Sep 27 19:32:17.007723 salamanka-systemproductname kernel: usb-storage 1-7:1.1: USB Mass Storage device detected
+Sep 27 19:32:17.007939 salamanka-systemproductname kernel: scsi host8: usb-storage 1-7:1.1
+Sep 27 19:32:17.008159 salamanka-systemproductname kernel: usbcore: registered new interface driver usb-storage
+Sep 27 19:32:17.011728 salamanka-systemproductname kernel: usbcore: registered new interface driver uas
+Sep 27 19:32:18.040656 salamanka-systemproductname kernel: scsi 8:0:0:0: CD-ROM            Linux    File-CD Gadget   0515 PQ: 0 ANSI: 2
+Sep 27 19:32:18.041719 salamanka-systemproductname kernel: sr 8:0:0:0: Power-on or device reset occurred
+Sep 27 19:32:18.042061 salamanka-systemproductname kernel: sr 8:0:0:0: [sr0] scsi-1 drive
+Sep 27 19:32:18.043715 salamanka-systemproductname kernel: cdrom: Uniform CD-ROM driver Revision: 3.20
+Sep 27 19:32:18.053716 salamanka-systemproductname kernel: sr 8:0:0:0: Attached scsi CD-ROM sr0
+Sep 27 19:32:18.053874 salamanka-systemproductname kernel: sr 8:0:0:0: Attached scsi generic sg0 type 5

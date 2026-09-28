@@ -1,0 +1,10 @@
+Bugreport provenance (raw source preserved, not overwritten)
+  file     : bugreport-PD2304-BP2A.250605.031.A3-2026-09-28-02-47-31.zip
+  sha256   : fe7ba473853a5a2d712b533fb9da62b7ab55227324cfcb02dcdabe44b93f2f8a
+  size     : 45400258 bytes
+  obtained : adb -s 10AD730KL6001AY bugreport .   (Android 16, no root, no security change)
+  contains : FS/data/misc/bluetooth/logs/bt_hci_20260928_023405_d.cfa  -> copied to raw/android-official-session.cfa
+  snoop sha256: bbaf10bd337a840ee0316291cd53f442859b55d8ce10c2414973d9c59248ba2f
+  note     : the .cfa is a plain BTSnoop v1 (HCI UART) file; tshark decodes it directly.
+  note     : the bugreport zip and its unzipped tree are kept on disk but excluded from git by
+             .gitignore (size); the captured snoop itself IS committed under raw/.

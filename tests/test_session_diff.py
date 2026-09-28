@@ -41,20 +41,31 @@ def test_classify_does_not_treat_an_echo_as_a_button_frame():
         assert sd.classify({"value": echo, "opcode": "Handle Value Notification"}) != "BUTTON_FRAME"
 
 
-def test_official_side_is_recorded_as_not_captured():
-    """The official half must stay marked unavailable - never silently filled in."""
-    diff = json.loads((SES / "official-vs-harness-diff.json").read_text())
+def test_partial_pass_record_is_preserved_and_honest():
+    """The PARTIAL-era record must survive intact in the snapshot (it documents a real blocked pass).
+
+    The living documents legitimately advanced to COMPLETE once the official session was captured;
+    these assertions therefore run against the preserved snapshot, plus the placeholder artifacts.
+    """
+    snap = SES / "official-session/completion-20260927-192908/partial-snapshot"
+    diff = json.loads((snap / "official-vs-harness-diff.json").read_text())
     assert diff["overall_status"] == "PARTIAL"
     assert diff["official_session"]["captured"] is False
     assert diff["official_session"]["reason"] == "ANDROID_HCI_CAPTURE_UNAVAILABLE"
     for stage in ("connection", "security", "att_gatt", "application_sequence", "rx", "exit"):
         assert diff[stage]["official"]["status"] == "NOT_CAPTURED", stage
+    # the placeholder artifacts still record the absence, and are not overwritten by the later capture
     summ = json.loads((SES / "official-session/official-hci-summary.json").read_text())
     assert summ["captured"] is False
+    assert (SES / "official-session/raw/CAPTURE_UNAVAILABLE.txt").exists()
+    # and the living documents now say the opposite - both must coexist
+    live = json.loads((SES / "official-vs-harness-diff.json").read_text())
+    assert live["overall_status"] == "COMPLETE"
 
 
-def test_no_divergence_is_claimed_without_an_official_capture():
-    fd = json.loads((SES / "first-divergence.json").read_text())
+def test_no_divergence_was_claimed_before_the_capture():
+    """In the blocked pass the earliest difference was UNKNOWN - that record is preserved."""
+    fd = json.loads((SES / "official-session/completion-20260927-192908/partial-snapshot/first-divergence.json").read_text())
     assert fd["earliest_proven_material_difference"] == "UNKNOWN"
     assert fd["computable"] is False
     assert "MISSING_PRECONDITION" in fd["explicitly_not_labelled"]
@@ -92,5 +103,8 @@ def test_final_d6_is_the_durable_baseline_and_not_a_new_durability_claim():
     assert d6["sha256"] == "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
     assert d6["verdict"] == "CONFIG_BASELINE_MATCH"
     assert "NOT a new durability proof" in d6["durability_note"]
+    # the blocked-pass verdict keeps its PARTIAL wording; the completed verdict says COMPLETE
+    partial_verdict = (SES / "official-session/completion-20260927-192908/partial-snapshot/verdict.md").read_text()
+    assert "PARTIAL" in partial_verdict
     verdict = (SES / "verdict.md").read_text()
-    assert "PARTIAL" in verdict and "DURABLE_OK" in verdict and "STAGED_OK" in verdict
+    assert "COMPLETE" in verdict and "DURABLE_OK" in verdict and "STAGED_OK" in verdict

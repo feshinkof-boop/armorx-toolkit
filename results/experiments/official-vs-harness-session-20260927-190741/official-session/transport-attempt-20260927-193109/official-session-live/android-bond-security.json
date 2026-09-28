@@ -1,0 +1,20 @@
+{
+ "generated_at": "2026-09-27T20:00:09.283741-04:00",
+ "measurable": true,
+ "armorx_bond_state": "BOND_NONE (the ArmorX is not among the phone's 8 bonded devices)",
+ "bonded_devices": [
+  "HUAWEI FreeBuds",
+  "Jib+",
+  "MATEBOOKE2023",
+  "Elantra",
+  "SoundCore nano",
+  "SUZUKI",
+  "MY CAR",
+  "Bluetooth"
+ ],
+ "encryption_state": "not encrypted (0 SMP frames, 0 encryption-change events on the ArmorX link)",
+ "smp_activity": "none",
+ "hci_snoop_log": "enabled (settings secure bluetooth_hci_log=1; persist.sys.bluetooth.btsnooplogmode=full)",
+ "existing_bonds_preserved": true,
+ "nothing_unpaired": true
+}

@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "armorx_android_hci_snoop",
+ "title": "ArmorX Android Capture",
+ "response": "done",
+ "clicked_at": "2026-09-27T19:34:28-04:00",
+ "gui": "kdialog",
+ "pid": 234033
+}

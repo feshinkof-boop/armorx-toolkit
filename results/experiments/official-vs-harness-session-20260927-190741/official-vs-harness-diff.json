@@ -1,117 +1,174 @@
 {
  "schema_version": 1,
- "generated_at": "2026-09-27T19:22:13.313954-04:00",
- "overall_status": "PARTIAL",
+ "generated_at": "2026-09-27T20:02:10.904602-04:00",
+ "overall_status": "COMPLETE",
  "official_session": {
-  "captured": false,
-  "reason": "ANDROID_HCI_CAPTURE_UNAVAILABLE"
+  "captured": true,
+  "source": "Android HCI snoop extracted via bugreport",
+  "snoop_sha256": "bbaf10bd337a840ee0316291cd53f442859b55d8ce10c2414973d9c59248ba2f"
  },
  "connection": {
   "official": {
-   "status": "NOT_CAPTURED"
+   "role": "Central",
+   "peer_address_type": "Public",
+   "interval_ms": 11.25,
+   "interval_history_ms": [
+    30.0,
+    7.5,
+    30.0,
+    11.25
+   ],
+   "updates": 4,
+   "peripheral_latency": 0,
+   "supervision_timeout_ms": 2000,
+   "phy": "no PHY update events (1M)"
   },
   "harness": {
    "role": "Central",
    "peer_address_type": "Public",
-   "connection_interval_ms": 7.5,
+   "interval_ms": 7.5,
+   "interval_history_ms": [
+    7.5
+   ],
+   "updates": 1,
    "peripheral_latency": 0,
    "supervision_timeout_ms": 2000,
-   "phy": "NOT_REPORTED_BY_THIS_ADAPTER_CAPTURE"
-  }
+   "phy": "not reported"
+  },
+  "same": false,
+  "note": "OFFICIAL_CONNECTION_INTERVAL_DIFFERENT: final interval 11.25 ms vs 7.50 ms; official applied 4 link-layer updates, harness 1"
  },
  "security": {
   "official": {
-   "status": "NOT_CAPTURED"
+   "bonded": false,
+   "encrypted": false,
+   "smp_frames": 0,
+   "encryption_change_events": 0,
+   "armorx_in_phone_bond_list": false
   },
   "harness": {
    "bonded": false,
    "encrypted": false,
-   "pairing_or_smp_events": 0,
-   "note": "the harness link is UNBONDED and UNENCRYPTED - this is the D2-U-008 condition, now measured for our side"
-  }
+   "smp_frames": 0
+  },
+  "same": true,
+  "note": "both links unbonded and unencrypted -> D2-U-008 REFUTED"
  },
  "att_gatt": {
   "official": {
-   "status": "NOT_CAPTURED"
-  },
-  "harness": {
-   "att_mtu_server_rx": 64,
-   "att_mtu_client_rx": 517,
-   "att_mtu_negotiated": 64,
+   "mtu_exchanges": [
+    {
+     "request": 23,
+     "response": 23
+    },
+    {
+     "request_client_rx": 512,
+     "response_server_rx": 64
+    }
+   ],
+   "mtu_negotiated": 64,
+   "cccd": {
+    "op": "Write Request",
+    "handle": "0x0078",
+    "delta_s": 1.34
+   },
    "handles": {
     "FFE1_write": "0x0075",
     "FFE2_notify": "0x0077",
     "FFE2_cccd": "0x0078"
+   }
+  },
+  "harness": {
+   "mtu_negotiated": 64,
+   "cccd": {
+    "handle": "0x0078",
+    "value": "0100"
    },
-   "cccd_first": null,
-   "discovery": "GATT discovery over Read By Group Type / Read By Type / Read requests; CCCD written once per connection"
-  }
+   "handles": {
+    "FFE1_write": "0x0075",
+    "FFE2_notify": "0x0077",
+    "FFE2_cccd": "0x0078"
+   }
+  },
+  "same": true,
+  "note": "same MTU (64) and same handles; the earlier 23-MTU reading was only Android's initial default exchange"
  },
  "application_sequence": {
   "official": {
-   "status": "NOT_CAPTURED"
+   "writes_before_d2": [
+    "EF a50cef0000000000000000a0",
+    "0B a5040bb4",
+    "E2 a504e28b",
+    "D4 a504d47d",
+    "D6 a504d67f (full config read, 8 reply fragments)",
+    "D2 enable"
+   ],
+   "d2_preclear": null
   },
   "harness": {
-   "zero_b_query": {
-    "dir": "TX",
-    "pkt": 110,
-    "t": 25.012666,
-    "op": "Write Command",
-    "handle": "0x0075",
-    "value": "a5040bb4"
-   },
-   "zero_b_reply": {
-    "dir": "RX",
-    "pkt": 112,
-    "t": 25.032717,
-    "op": "Handle Value Notification",
-    "handle": "0x0077",
-    "value": "a5050b30e5"
-   },
-   "d2_enable": {
-    "dir": "TX",
-    "pkt": 116,
-    "t": 28.520716,
-    "op": "Write Command",
-    "handle": "0x0075",
-    "value": "a505d2017d"
-   },
-   "d2_disable": {
-    "dir": "TX",
-    "pkt": 113,
-    "t": 27.01686,
-    "op": "Write Command",
-    "handle": "0x0075",
-    "value": "a505d2007c"
-   },
    "writes_before_d2": [
     "CCCD subscribe",
-    "0B control query",
-    "D2 OFF (pre-clear)"
-   ]
-  }
+    "0B a5040bb4",
+    "D2 OFF a505d2007c (pre-clear)"
+   ],
+   "d2_preclear": "a505d2007c"
+  },
+  "same": false,
+  "note": "EXTRA_OFFICIAL_WRITE_OBSERVED: the app performs a device-info + full-config read burst (EF, E2, D4, D6) that the harness omits; the harness additionally pre-clears D2, which the app does not"
+ },
+ "d2": {
+  "official": {
+   "frame": 6567,
+   "att_op": "Write Command (0x52)",
+   "handle": "0x0075",
+   "value": "a505d2017d",
+   "delta_from_connect_s": 68.5,
+   "echo_frames": [
+    6569,
+    6570
+   ],
+   "disable": {
+    "att_op": "Write Command (0x52)",
+    "value": "a505d2007c",
+    "delta_from_connect_s": 129.5
+   }
+  },
+  "harness": {
+   "att_op": "Write Command (0x52)",
+   "handle": "0x0075",
+   "value": "a505d2017d",
+   "echo": true
+  },
+  "same": true,
+  "note": "IDENTICAL D2 command, write type, handle and echo behaviour"
  },
  "rx": {
   "official": {
-   "status": "NOT_CAPTURED"
+   "idle_button_frames": 0,
+   "button_frames_total": 155,
+   "event_driven": true,
+   "first_frame_after_enable_s": 36.36,
+   "a_press_release_proven": true,
+   "mapping_bit": 0
   },
   "harness": {
-   "valid_button_frames": 0,
-   "idle_frames": 0,
-   "notifications": {
-    "0B reply": 1,
-    "D2 echoes": 3
-   }
-  }
+   "idle_button_frames": 0,
+   "button_frames_total": 0
+  },
+  "same": false,
+  "note": "OFFICIAL_WORKS_HARNESS_SILENT: with A pressed the official app receives 155 valid A5 12 02 frames; the harness received none in its 10 s idle window (and the official app also produces none while idle - the stream is event-driven)"
  },
- "exit": {
-  "official": {
-   "status": "NOT_CAPTURED"
-  },
-  "harness": {
-   "d2_disable_sent": true,
-   "att_op": "Write Command (0x52)",
-   "disconnect_complete": true
-  }
- }
+ "earliest_proven_material_difference": {
+  "id": "OFFICIAL_CONNECTION_INTERVAL_DIFFERENT",
+  "detail": "official final interval 11.25 ms after 4 link-layer updates; harness 7.50 ms after 1",
+  "when": "within the first ~3 s of the connection (earliest of all differences)",
+  "causality": "NOT established"
+ },
+ "first_protocol_level_difference": {
+  "id": "EXTRA_OFFICIAL_WRITE_OBSERVED",
+  "detail": "EF (a50cef0000000000000000a0), E2, D4 and a full D6 config read (8 fragments) precede the official D2 enable; the harness sends only 0B",
+  "when": "~59 s after connect, ~9 s before the D2 enable",
+  "causality": "NOT established - explicitly NOT labelled MISSING_PRECONDITION"
+ },
+ "leakage": "no unknown official traffic was replayed from Linux"
 }

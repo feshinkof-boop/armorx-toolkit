@@ -1,7 +1,9 @@
 # official-vs-harness-session — official-vs-harness-session-20260927-190741
 
-**Status: PARTIAL** — harness session complete; official-app session not captured
-(`ANDROID_HCI_CAPTURE_UNAVAILABLE`).
+**Status: COMPLETE** — official Android session captured and compared with the preserved harness session.
+
+**Classification: `OFFICIAL_WORKS_HARNESS_SILENT`.** See `verdict.md` and `official-vs-harness-diff.md`.
+The original PARTIAL-pass documents are preserved under `official-session/completion-20260927-192908/partial-snapshot/`.
 
 ## Layout
 
@@ -55,3 +57,21 @@ official-app traffic was replayed** (none was captured to replay).
   (`USB_DEVICE_NOT_PRESENT`: no USB device after an acknowledged operator setup request, and
   `adb connect ...:5555` refused). See `official-session/completion-20260927-192908/verdict.md`.
   The harness measurements above are unaffected and were not recaptured.
+
+## Provenance note (D6)
+
+**LAST VERIFIED D6 SHA-256:** `bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6`
+**LAST VERIFIED CONFIG_BASELINE_MATCH:** YES
+**Source:** the preceding completed BLE experiment.
+
+**No new D6 read was performed during the ADB-blocked completion pass** — no ArmorX BLE operation
+took place in it. Baseline remains **DURABLE_OK**; the value is unaltered.
+
+## Decoder correction (2026-09-27)
+
+It was previously recorded that tshark could not decode the Linux-monitor encapsulation. **Wrong:**
+tshark is AppArmor-confined here and cannot read files under `/home/salamanka`, which produced a
+permission error mistaken for a decoder limitation. With the identical capture copied to `/tmp`,
+tshark decodes it (174 frames, 44 ATT operations) and **agrees exactly** with the `btmon -r`
+extraction: D2 enable/disable as ATT `0x52` on handle `0x0075`, notifications on `0x0077`, MTU
+client 517 / server 64.

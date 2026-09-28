@@ -1,0 +1,10 @@
+### identity 2026-09-27T19:33:20-04:00
+ro.product.manufacturer = vivo
+ro.product.model = V2304A
+ro.product.device = PD2304
+ro.build.version.release = 16
+ro.build.version.sdk = 36
+ro.build.fingerprint = vivo/PD2304/PD2304:16/BP2A.250605.031.A3/compiler260723100829:user/release-keys
+
+### emulator check
+physical device (no emulator identifiers)

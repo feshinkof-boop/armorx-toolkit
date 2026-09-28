@@ -1,0 +1,26 @@
+### lsusb (after) 2026-09-27T19:33:02-04:00
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 1ea7:0066 SHARKOON Technologies GmbH [Mediatrack Edge Mini Keyboard]
+Bus 001 Device 003: ID 0489:e10d Foxconn / Hon Hai 
+Bus 001 Device 005: ID 0bda:b720 Realtek Semiconductor Corp. RTL8723BU 802.11b/g/n WLAN Adapter
+Bus 001 Device 030: ID 2d95:6013 vivo iQOO 11S
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+
+### lsusb -t (after)
+/:  Bus 001.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/16p, 480M
+    |__ Port 003: Dev 002, If 0, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 003: Dev 002, If 1, Class=Human Interface Device, Driver=usbhid, 12M
+    |__ Port 006: Dev 003, If 0, Class=Wireless, Driver=btusb, 12M
+    |__ Port 006: Dev 003, If 1, Class=Wireless, Driver=btusb, 12M
+    |__ Port 007: Dev 030, If 0, Class=Imaging, Driver=[none], 480M
+    |__ Port 007: Dev 030, If 1, Class=Mass Storage, Driver=usb-storage, 480M
+    |__ Port 007: Dev 030, If 2, Class=Vendor Specific Class, Driver=usbfs, 480M
+    |__ Port 008: Dev 005, If 0, Class=Wireless, Driver=btusb, 480M
+    |__ Port 008: Dev 005, If 1, Class=Wireless, Driver=btusb, 480M
+    |__ Port 008: Dev 005, If 2, Class=Vendor Specific Class, Driver=rtl8xxxu, 480M
+/:  Bus 002.Port 001: Dev 001, Class=root_hub, Driver=xhci_hcd/4p, 20000M/x2
+
+### adb devices
+List of devices attached
+10AD730KL6001AY        device usb:1-7 product:PD2304 model:V2304A device:PD2304 transport_id:1
+
