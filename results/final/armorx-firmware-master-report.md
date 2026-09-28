@@ -98,9 +98,14 @@ The images parse with the public JieLi unpacker as `format: jl-new-fw`, **FS ver
 
 The application targets **JieLi AC6321A** (`board_ac6321a.c` inside the app; `bd19` board directory;
 AC63 SDK ships `board_ac632n_demo_cfg.h` / `board_ac6321a_demo_cfg.h` under `cpu/bd19`).
-Instruction-level ISA identification was **not achieved**: no BD19/q32s disassembler was available
-offline (`FW-U-021`). ARM/Thumb, RISC-V and 8051 are ruled out by the SDK core layout and entry
-convention.
+
+**ISA = JieLi q32s (`ELF32-q32s`, BD19 core)** — `STRONG EVIDENCE`. The SDK's
+`cpu/bd19/tools/rom.lst` is a full disassembly of the BD19 ROM (9,747 parsed instructions, lengths
+2/4/6 bytes = 16/32/48-bit); counting the 48 most frequent ROM opcode prefixes in each decrypted
+`app.bin` at any alignment gives **~99,000–100,300 hits per MiB versus 749 per MiB in random data
+(≈133× enrichment)**, uniform across body and dongle builds. ARM/Thumb, RISC-V and 8051 are ruled
+out. A working q32s **decoder was not built** in this shift, so instruction boundaries still cannot
+be walked (`FW-U-021`, PARTIALLY_RESOLVED). Details: `results/firmware/isa-identification.md`.
 
 ## 11. Memory map
 

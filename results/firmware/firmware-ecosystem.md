@@ -87,9 +87,11 @@ one JieLi uboot + one config tool for the whole family; only `app.bin` + `isd_co
   `AC632N`, PID `AC632N_TRANS`, `bd19` board directory).
 * The AC63 SDK ships per-core toolchains under `cpu/{bd19,bd29,br23,br25,br30,br34}` and board configs
   named `board_ac632n_demo_cfg.h` / `board_ac6321a_demo_cfg.h` → **AC632N/AC6321A are BD19-family**.
-* Instruction set: **UNKNOWN at instruction level** — no BD19/q32s disassembler was available offline
-  (the SDK ships no Linux objdump for the core; `ghidra-jieli` was used for format knowledge only).
-  This is a *tooling* gap, not evidence of a different architecture.
+* Instruction set: **q32s (`ELF32-q32s`)** — `STRONG EVIDENCE`. The SDK's `cpu/bd19/tools/rom.lst`
+  (full BD19 ROM disassembly, 16/32/48-bit instruction lengths) supplies 48 opcode prefixes that
+  occur **≈133× more often** in every `app.bin` than in random data. No q32s *decoder* exists
+  offline yet, so this is an ISA identification, not a disassembly
+  (`results/firmware/isa-identification.md`, ledger `FW-U-021`).
 
 ## 7. What the application contains (string evidence, PROVEN)
 

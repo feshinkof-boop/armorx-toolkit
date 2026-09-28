@@ -1,0 +1,22 @@
+{
+  "fw-AC63_BT_SDK": {
+    "commit": "fdc018de81629e21e594d677cf05f87d288be0f0",
+    "url": "https://github.com/Jieli-Tech/fw-AC63_BT_SDK.git",
+    "date": "2025-03-18"
+  },
+  "jl-misctools": {
+    "commit": "0a5b12db0ef38f3042acffbe2452730a37fd2405",
+    "url": "https://github.com/kagaimiq/jl-misctools.git",
+    "date": "2025-02-20"
+  },
+  "jl-uboot-tool": {
+    "commit": "adb3f18889e88ac512ce0a3c4d8cc3d3cb30696a",
+    "url": "https://github.com/kagaimiq/jl-uboot-tool.git",
+    "date": "2025-03-16"
+  },
+  "Android-JL_OTA": {
+    "commit": "4bf054e1ae6e549b617e266cea733576c80c55d5",
+    "url": "https://github.com/Jieli-Tech/Android-JL_OTA.git",
+    "date": "2026-07-02"
+  }
+}

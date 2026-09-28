@@ -24,7 +24,8 @@ _generated 2026-09-28 — scope: ArmorX Pro firmware/updater ecosystem (four ope
 | `FW-U-018` | What is the meaning of the isd_config.ini chip key (6413 / 13462)? | **PARTIALLY_RESOLVED** | low |
 | `FW-U-019` | Do the V41 USB-host/2.4G strings mean the controller can host USB devices? | **PARTIALLY_RESOLVED** | medium |
 | `FW-U-020` | Is the updater's transfer protocol JieLi UBOOT or a custom USB protocol? | **OPEN** | high |
-| `FW-U-021` | Which instruction set does the AC6321A app use and how do we disassemble it? | **DEFERRED_REQUIRES_NEW_TOOLING** | critical |
+| `FW-U-021` | Which instruction set does the AC6321A app use, and how do we disassemble it? | **PARTIALLY_RESOLVED** | critical |
+| `FW-U-022` | How much of the vendor firmware is stock JieLi SDK code? | **RESOLVED** | high |
 
 ---
 
@@ -312,20 +313,42 @@ _generated 2026-09-28 — scope: ArmorX Pro firmware/updater ecosystem (four ope
 
 **Depends on:** FW-U-012
 
-## FW-U-021 — Which instruction set does the AC6321A app use and how do we disassemble it?
+## FW-U-021 — Which instruction set does the AC6321A app use, and how do we disassemble it?
 
-**Status:** DEFERRED_REQUIRES_NEW_TOOLING  |  **Priority:** critical
+**Status:** PARTIALLY_RESOLVED  |  **Priority:** critical
 
-**Answer:** Architecture is the JieLi BD19-family core; no working offline disassembler was available in this run.
+**Answer:** ISA = JieLi q32s (ELF32-q32s, BD19 core) — STRONG EVIDENCE, uniform across body and dongle builds. A working q32s decoder was NOT built in this shift, so instruction boundaries in app.bin still cannot be walked.
 
 **Evidence:**
 * app base 0x01E00000, entry 0x01E00120, board bd19/ac6321a
-* the public AC63 SDK ships no Linux disassembler for the core; no BD19/q32s objdump available offline
+* SDK cpu/bd19/tools/rom.lst is a full disassembly of the BD19 ROM, annotated 'file format ELF32-q32s' (9,747 parsed instructions; lengths 2/4/6 bytes = 16/32/48-bit)
+* opcode-prefix enrichment: the 48 most frequent ROM two-byte prefixes occur ~99,000-100,300 times per MiB in every app.bin vs 749 per MiB in random data (approx. 133x)
+* results/firmware/isa-identification.md
 
 **Ruled out:**
 * ARM/Thumb
 * RISC-V
-* 8051 (entry/vector layout and SDK core directories are all JieLi-specific)
+* 8051
+* non-code (compressed) app region
 
-**Next offline step:** Build/obtain a BD19 disassembler (JieLi toolchain or ghidra-jieli processor module) and produce the canonical symbol map
+**Next offline step:** Build the q32s decoder from rom.lst field layouts, or run JieLi's own Windows objdump under an emulated environment, then produce the canonical symbol map
+
+## FW-U-022 — How much of the vendor firmware is stock JieLi SDK code?
+
+**Status:** RESOLVED  |  **Priority:** high
+
+**Answer:** The bootloader, config tool and resource blob are shared stock JieLi components; only app.bin and isd_config.ini are vendor-distinct. This makes a stock-SDK-vs-ArmorX app diff the most promising offline route to isolating ArmorX-specific code once the ISA decoder exists.
+
+**Evidence:**
+* ArmorX V41 cfg_tool.bin is byte-identical (SHA-256 0ccc2fd57959...) to the stock AC63 SDK cpu/bd19/tools/cfg_tool.bin
+* uboot.boot (a64171c3cf41...) and p11_code.bin are byte-identical across all five packages, body and dongle
+* p11_code.bin differs from the SDK copy (vendor-modified resource)
+* public repo commits recorded in research/firmware/2026-09-28/tool-provenance.json
+
+**Ruled out:**
+* fully custom vendor toolchain for the boot/config layer
+
+**Next offline step:** Diff a stock AC63 SDK demo build's app image against ArmorX app.bin once q32s decoding works
+
+**Depends on:** FW-U-021
 
