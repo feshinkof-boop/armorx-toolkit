@@ -2,13 +2,13 @@
  "generated": "2026-09-27/28 overnight shift",
  "rule": "Every unknown carries what is ruled out, the best evidence, the next offline step and the next hardware step. Historical ids are kept, never silently retired.",
  "counts": {
+  "STATICALLY_EXHAUSTED": 7,
+  "DEFERRED_REQUIRES_HARDWARE": 11,
+  "UNOBSERVED_RESERVED_OR_UNUSED": 1,
   "ANALOG_PROVEN_LIVE / DIGITAL_NEGATIVE_RETRACTED": 1,
-  "DEFERRED_REQUIRES_HARDWARE": 9,
-  "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 3,
+  "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 4,
   "DEFERRED_REQUIRES_OPERATOR": 1,
-  "PHYSICALLY_RESOLVED": 1,
-  "STATICALLY_EXHAUSTED": 5,
-  "UNOBSERVED_RESERVED_OR_UNUSED": 1
+  "PHYSICALLY_RESOLVED": 1
  },
  "entries": [
   {
@@ -139,8 +139,8 @@
    "ruled_out": [
     "any in-binary mapping table"
    ],
-   "best_evidence": "the selector is a 4-bit mask; presets come from the vendor's server, so nothing in the APK maps selector->DPI App-side note: 0xFC appears in the write-result dispatcher (frame_config_macros.dart), so the app treats DPI writes as acknowledged.",
-   "next_offline_step": "-",
+   "best_evidence": "STATIC (2026-09-28): the writer `A5 05 FC <selector & 0x0F>` carries ONLY a 4-bit selector - no value byte, no clamp beyond the mask, and no numeric table anywhere in the binary. The preset table is server-side, which is why no selector->DPI mapping can be recovered from the APK.",
+   "next_offline_step": "none left in the APK for the numeric mapping; only a per-selector live differential of the reported DPI (deferred, needs a read path that returns a value)",
    "next_hardware_step": "none useful without the vendor table",
    "dependencies": [],
    "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
@@ -148,15 +148,15 @@
   },
   {
    "id": "DPI-U-002",
-   "question": "What is the shape of the DPI reply (live: a5 05 ff fc a5)?",
+   "question": "What is the shape of the DPI reply, and does it carry a value?",
    "priority": "MEDIUM",
    "ruled_out": [],
-   "best_evidence": "one live reply captured, checksum valid, semantics undecoded",
-   "next_offline_step": "a dedicated static search for the notification handler in all four builds - DONE this pass: no reply-side dispatch on 0xFC/0xF6 found (see results/reconciliation/static-increments-ledger-loop.md \u00a74), so this route is cold; the productive route is a live selector sweep",
+   "best_evidence": "LIVE: TX `A5 05 FC 80 26` -> RX `A5 05 FF FC A5`. STATIC (2026-09-28): the reply family is `A5 <len> FF <echoed opcode> <cks>`; byte[3] echoes the queried opcode; the captured reply has ZERO payload, so this query returns no numeric DPI value. The chained read (getDpi then getStepLength inside one notification handler) shows the official workflow is a read sequence.",
+   "next_offline_step": "find the 0xFF dispatch table and the per-opcode handlers; determine whether any 0xFF reply carries a payload at all",
    "next_hardware_step": "re-read the query and vary the selector while capturing, to see which field moves",
    "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN"
+   "classification": "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE",
+   "status": "PARTIALLY_RESOLVED"
   },
   {
    "id": "MOT-U-001",
@@ -300,7 +300,70 @@
    "opened_at": "2026-09-28",
    "rule_out": [],
    "resolved_at": "2026-09-28"
+  },
+  {
+   "id": "TRG-U-001",
+   "question": "What are the units, bounds, default and scope of the F7 step-length value?",
+   "priority": "high",
+   "ruled_out": "F7 is not a trigger parameter (no trigger string, no trigger field, tip text names the stick); not a per-stick setting (no index byte in the frame)",
+   "best_evidence": "`A5 07|08 F7 <flag> <lo> <hi> [<extra>] <cks>`; value is 16-bit little-endian from the model field `field_3b`; UI keys `step_accuracy_setting` / \u300c\u6b65\u957f\u7cbe\u5ea6\u8bbe\u7f6e\u300d; call sites gated on version >= 0x36",
+   "next_offline_step": "resolve `field_3b`'s producer and the slider bounds wired to the `step_accuracy_setting` widget",
+   "next_hardware_step": "only after a read-back path exists: read `A5 04 F7 A0`, then a same-value no-op write, then one adjacent change, then restore",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
+  },
+  {
+   "id": "TRG-U-002",
+   "question": "Does F7 configuration transform the reported D2 trigger analog bytes [15]/[16], or the actuation threshold/deadzone/range?",
+   "priority": "high",
+   "ruled_out": "NO code path connects F7 to the D2 frame contract: `getStepLength`/`writeStepLengthConfig` reference no trigger field and contain no clamp/scale/normalize/threshold code",
+   "best_evidence": "full disassembly read of both functions plus the callgraph; the frame carries only a bool + a 16-bit value",
+   "next_offline_step": "none - this is a static negative; do not re-open without new evidence",
+   "next_hardware_step": "none until a different command is implicated",
+   "dependencies": [],
+   "classification": "STATICALLY_EXHAUSTED",
+   "status": "CLOSED_NEGATIVE"
+  },
+  {
+   "id": "DPI-U-003",
+   "question": "What does the zero-payload `A5 05 FF FC A5` reply mean, and is DPI numeric or an index?",
+   "priority": "high",
+   "ruled_out": "the reply does not carry the current DPI value in the captured case",
+   "best_evidence": "live capture; static reply-envelope rule; `writeDpiConfig` transmits only `selector & 0x0F`",
+   "next_offline_step": "locate the 0xFF handler chain and confirm the expected reply length per opcode",
+   "next_hardware_step": "re-read `A5 05 FC 80 26` and decode the reply against the handler's expectation",
+   "dependencies": [
+    "DPI-U-001",
+    "DPI-U-002"
+   ],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
+  },
+  {
+   "id": "DPI-U-004",
+   "question": "Is the `A5 0B FC` transcription pair part of the DPI feature?",
+   "priority": "medium",
+   "ruled_out": "no - different length byte (0x0B), different callers (frame_config_macros start/stopTranscribe), and it controls macro recording, not DPI",
+   "best_evidence": "`startTranscribe` -> `A5 0B FC 01`, `stopTranscribe` -> `A5 0B FC 00`; neither touches the DPI model",
+   "next_offline_step": "none for DPI; track separately under the macro/transcribe backlog",
+   "next_hardware_step": "none",
+   "dependencies": [],
+   "classification": "STATICALLY_EXHAUSTED",
+   "status": "CLOSED_SEPARATE_FEATURE"
+  },
+  {
+   "id": "PRS-U-001",
+   "question": "Are DPI and step-length settings persistent on the device, or runtime-only?",
+   "priority": "medium",
+   "ruled_out": "they do not go through the D6/D7 commit path: both writers call `BluetoothModel::write` directly",
+   "best_evidence": "`writeDpiConfig` @0x9468e0 and `writeStepLengthConfig` end in a direct `write(frame)`; no D6/D7/D8 frame is built on either path",
+   "next_offline_step": "check whether the device answers a read of the written setting after a power cycle (needs hardware)",
+   "next_hardware_step": "read-only D6 SHA before/after a same-value no-op write, then a power cycle, then D6 again (deferred)",
+   "dependencies": [],
+   "classification": "DEFERRED_REQUIRES_HARDWARE",
+   "status": "OPEN"
   }
  ],
- "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md | 2026-09-28 key-ID closure session: all 26 requested physical controls are proven live except RT; KEY-U-001 and KEY-U-002 are both closed with dated evidence. | 2026-09-28: KEY-U-003 RESOLVED - bit 9 is RT's digital id (mask 0x00000200), proven by a one-variable W0/W1/W2 experiment. The key map is complete: 27/27 physical controls proven live."
+ "note_addendum": "Continuation loop run this pass; see results/reconciliation/static-increments-ledger-loop.md | 2026-09-28 key-ID closure session: all 26 requested physical controls are proven live except RT; KEY-U-001 and KEY-U-002 are both closed with dated evidence. | 2026-09-28: KEY-U-003 RESOLVED - bit 9 is RT's digital id (mask 0x00000200), proven by a one-variable W0/W1/W2 experiment. The key map is complete: 27/27 physical controls proven live. 2026-09-28: added TRG-U-001/002, DPI-U-003/004, PRS-U-001 and revised DPI-U-001/002 after the F7/F6/FC static pass."
 }

@@ -1,0 +1,33 @@
+digraph dpi_trigger {
+  rankdir=LR; node [shape=box, style=rounded, fontname="Helvetica"];
+  subgraph cluster_ui { label="UI / callbacks"; color="#8ab4f8";
+    ui_rainbow_more [label="rainbow_more.dart\n(DPI + step-length UI)"];
+    ui_simulate [label="config_simulate_command.dart\n(_requestStepLength, _handleConfigEvent)"]; }
+  subgraph cluster_enc { label="encoders"; color="#f6b26b";
+    ble_getDpi [label="getDpi @0x8b4e3c\nA5 05 FC 80 26"];
+    ble_getStep [label="getStepLength @0x8b4d30\nA5 04 F7 A0"];
+    gs_writeDpi [label="writeDpiConfig @0x946750\nA5 05 FC|F6 <sel&0x0F>"];
+    gs_writeStep [label="writeStepLengthConfig @0x9445d4\nA5 07|08 F7 <flag><lo><hi>"]; }
+  subgraph cluster_gate { label="gates"; color="#d9a7c7";
+    fw_gate [label="firmware gate (0xb6c): 0x35 -> F6, 0x36 -> F7 write"];
+    dev_gate [label="device-model gate (4 Instance_Device)"]; }
+  ble_write [label="BluetoothModel::write @0x80dd28\n(ATT write)"];
+  notify [label="notification handler\n[closure](dynamic, List<int>)"];
+  dev_reply [label="reply A5 05 FF FC A5\n(opcode 0xFF, echo, no payload)", color=green];
+  notify_closure -> ble_getDpi [label="calls (reply-triggered read)"];
+  notify_closure -> ble_getStepLength [label="calls (chained read after the DPI read)"];
+  ble_getDpi -> fw_gate [label="reads"];
+  ble_getDpi -> dev_gate [label="reads"];
+  ble_getDpi -> ble_write [label="writes"];
+  ble_getStepLength -> ble_write [label="writes"];
+  ui_rainbow_more -> gs_writeDpiConfig [label="onChanged(int)"];
+  ui_rainbow_more -> gs_writeStepLengthConfig [label="onChanged(bool) / onChanged(int)"];
+  ui_simulate -> ble_getStepLength [label="_requestStepLength / _scheduleStepLengthRead"];
+  ui_simulate -> gs_writeStepLengthConfig [label="simulate path write"];
+  gs_writeDpiConfig -> ble_write [label="writes"];
+  gs_writeStepLengthConfig -> ble_write [label="writes"];
+  gs_writeDpiConfig -> fw_gate [label="FC vs F6 selection"];
+  gs_writeStepLengthConfig -> fw_gate [label="requires version >= 0x36"];
+  ble_write -> dev_reply [label="device answer arrives as a notification"];
+  dev_reply -> notify_closure [label="dispatch back into the notification handler"];
+}

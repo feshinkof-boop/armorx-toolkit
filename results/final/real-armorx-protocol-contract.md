@@ -75,3 +75,21 @@ A4 <total frame length> <opcode> <ordinal> <payload...> <checksum>
 - Analog field roles `[7]`–`[14]` in the `0x02` status frame: **UNKNOWN** (they move with stick
   input; per-axis mapping not established).
 - Whether the unit answers RCSP at all: **UNKNOWN** — deliberately untested.
+
+
+## DATED ADDENDUM — 2026-09-28T07:05:00-04:00: F7 / F6 / FC rows
+
+| opcode | direction | frame | meaning | grade |
+|---|---|---|---|---|
+| `0xF7` | TX (read) | `A5 04 F7 A0` | read request for the **stick step-length / "step accuracy"** setting (`getStepLength` @0x8b4d30) | PROVEN STATIC |
+| `0xF7` | TX (write) | `A5 07\|08 F7 <flag> <lo> <hi> <cks>` | write of that setting (`writeStepLengthConfig` @0x9445d4), gated on version >= 0x36 | PROVEN STATIC (layout) |
+| `0xF6` | TX | `A5 05 F6 80 20` / `A5 04 F6 9F` / `A5 05 F6 <sel&0x0F> <cks>` | **legacy DPI** opcode, used instead of `FC` for specific device models when the version gate passes; introduced in 2.24 | PROVEN STATIC |
+| `0xFC` | TX/RX | `A5 05 FC 80 26` → `A5 05 FF FC A5` | DPI read request / reply (line above) | PROVEN LIVE |
+| `0xFC` | TX | `A5 05 FC <sel&0x0F> <cks>` | DPI write (selector only) | PROVEN STATIC |
+| `0xFC` | TX | `A5 0B FC 00` / `A5 0B FC 01` | macro transcription stop/start — **not** DPI | PROVEN STATIC |
+| `0xFF` | RX | `A5 05 FF FC A5` | reply envelope: `0xFF`, byte[3] echoes the queried opcode, zero payload | PROVEN LIVE |
+| `0xF6`/`0xF7`/`0xFC` | — | — | **absent in 2.22.0901** (exhaustive negative) | PROVEN STATIC (negative) |
+
+**F7 is not a trigger command** — see `real-trigger-travel.md`. The trigger family in this app is the
+`F7`-unrelated 扳机 vocabulary (deadzone/fast-trigger from the 2.2x-era `config_trigger.dart`), and no
+code path connects F7 to the live D2 analog trigger bytes `[15]`/`[16]`.

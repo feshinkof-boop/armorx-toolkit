@@ -334,3 +334,25 @@ per-window buckets, and an active `0B` liveness probe between windows (all three
 **State:** `a5 05 d2 00 7c` last write, clean disconnect, no D7/D8/config write; read-only D6 integrity
 `bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` → `CONFIG_BASELINE_MATCH`
 (`DURABLE_OK` unchanged).
+
+
+## DATED ADDENDUM — 2026-09-28T07:05:00-04:00: DPI / trigger-command phase (static only)
+
+New deliverables: `results/reconciliation/dpi-trigger-command-corpus.{json,md}`,
+`dpi-trigger-callgraph.{json,md,dot}`, `results/final/real-trigger-travel.md`, and the tool
+`automation/scripts/frame-literal-scan.py`.
+
+Three headline results:
+
+1. **`F7` is the stick step-length / "step accuracy" setting, not trigger travel.** The UI strings are
+   「步长精度设置」/「Step accuracy setting」 with the tip 「步长精度影响**摇杆**的精确度」 — it affects the
+   **stick**. The brief's trigger-travel hypothesis is recorded as **CONTRADICTED**, not silently dropped.
+2. **`FC` has three distinct roles**, now separated explicitly: DPI read (`A5 05 FC 80 26`, live-proven),
+   DPI write (`A5 05 FC <sel&0x0F>`), and macro transcription control (`A5 0B FC 00/01`).
+3. **`F6` is the legacy-DPI twin of `FC`**, selected by device model + firmware version inside a single
+   `getDpi` function — not a separate feature.
+
+Cross-version: **2.22.0901 has none of F7/F6/FC**; `FC` arrives in 2.23, `F6` and `F7` in 2.24.
+The frame-literal tool independently reproduces every live-known frame (`A5 05 FC 80 26`,
+`A5 05 D2 01 7D`, `A5 05 D2 00 7C`, `A5 04 0B B4`), which validates both the tool and the `sum8`
+checksum rule. No hardware was touched in this pass.

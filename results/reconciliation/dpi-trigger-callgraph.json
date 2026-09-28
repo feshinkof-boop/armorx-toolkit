@@ -1,0 +1,160 @@
+{
+ "generated": "2026-09-28",
+ "rule": "every edge was read from the disassembly; no inferred edge is presented as proven",
+ "nodes": [
+  {
+   "id": "ui.rainbow_more",
+   "kind": "UI",
+   "label": "widgets/rainbow/rainbow_more.dart - settings page (DPI + step-length controls)",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "ui.simulate",
+   "kind": "UI",
+   "label": "widgets/configV280/config_simulate_command.dart - command simulator (_requestStepLength, _scheduleStepLengthRead, _handleConfigEvent)",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "notify.closure",
+   "kind": "parser",
+   "label": "[closure] (dynamic, List<int>) - notification handler; requests getDpi() then getStepLength()",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "ble.getDpi",
+   "kind": "encoder",
+   "label": "BluetoothModel::getDpi @0x8b4e3c -> A5 05 FC 80 26 | A5 05 F6 80 20 | A5 04 F6 9F",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "ble.getStepLength",
+   "kind": "encoder",
+   "label": "BluetoothModel::getStepLength @0x8b4d30 -> A5 04 F7 A0",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "ble.write",
+   "kind": "transport",
+   "label": "BluetoothModel::write @0x80dd28 - ATT write of the frame, called by every builder and writer",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "gs.writeDpiConfig",
+   "kind": "encoder",
+   "label": "writeDpiConfig @0x946750 -> A5 05 FC|F6 <sel & 0x0F> <cks>",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "gs.writeStepLengthConfig",
+   "kind": "encoder",
+   "label": "writeStepLengthConfig @0x9445d4 -> A5 07|08 F7 <flag> <lo> <hi> <cks>",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "fw.gate",
+   "kind": "gate",
+   "label": "firmware-version gate: static field 0xb6c; 0x35 selects F6, 0x36 gates the F7 write",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "dev.gate",
+   "kind": "gate",
+   "label": "device-model gate: four Instance_Device compares in getDpi (same model set as the earlier FC/F6 pass)",
+   "grade": "PROVEN STATIC"
+  },
+  {
+   "id": "dev.reply",
+   "kind": "parser",
+   "label": "reply envelope A5 05 FF FC A5 - opcode 0xFF, byte[3] echoes the queried opcode, zero payload",
+   "grade": "PROVEN LIVE"
+  }
+ ],
+ "edges": [
+  {
+   "from": "notify.closure",
+   "to": "ble.getDpi",
+   "kind": "calls (reply-triggered read)"
+  },
+  {
+   "from": "notify.closure",
+   "to": "ble.getStepLength",
+   "kind": "calls (chained read after the DPI read)"
+  },
+  {
+   "from": "ble.getDpi",
+   "to": "fw.gate",
+   "kind": "reads"
+  },
+  {
+   "from": "ble.getDpi",
+   "to": "dev.gate",
+   "kind": "reads"
+  },
+  {
+   "from": "ble.getDpi",
+   "to": "ble.write",
+   "kind": "writes"
+  },
+  {
+   "from": "ble.getStepLength",
+   "to": "ble.write",
+   "kind": "writes"
+  },
+  {
+   "from": "ui.rainbow_more",
+   "to": "gs.writeDpiConfig",
+   "kind": "onChanged(int)"
+  },
+  {
+   "from": "ui.rainbow_more",
+   "to": "gs.writeStepLengthConfig",
+   "kind": "onChanged(bool) / onChanged(int)"
+  },
+  {
+   "from": "ui.simulate",
+   "to": "ble.getStepLength",
+   "kind": "_requestStepLength / _scheduleStepLengthRead"
+  },
+  {
+   "from": "ui.simulate",
+   "to": "gs.writeStepLengthConfig",
+   "kind": "simulate path write"
+  },
+  {
+   "from": "gs.writeDpiConfig",
+   "to": "ble.write",
+   "kind": "writes"
+  },
+  {
+   "from": "gs.writeStepLengthConfig",
+   "to": "ble.write",
+   "kind": "writes"
+  },
+  {
+   "from": "gs.writeDpiConfig",
+   "to": "fw.gate",
+   "kind": "FC vs F6 selection"
+  },
+  {
+   "from": "gs.writeStepLengthConfig",
+   "to": "fw.gate",
+   "kind": "requires version >= 0x36"
+  },
+  {
+   "from": "ble.write",
+   "to": "dev.reply",
+   "kind": "device answer arrives as a notification"
+  },
+  {
+   "from": "dev.reply",
+   "to": "notify.closure",
+   "kind": "dispatch back into the notification handler"
+  }
+ ],
+ "pinned_unknowns": [
+  "which received opcode triggers the getDpi()/getStepLength() pair (the handler branches on Smi-tagged values; the trigger is not yet pinned)",
+  "whether any UI control immediately reads back a written value",
+  "whether the device persists F7/FC writes (device-side; needs the deferred read-only D6 experiment)",
+  "no edge to D2 bytes [15]/[16] exists in the binary - F7 is not connected to the trigger analog path by any code found"
+ ]
+}
