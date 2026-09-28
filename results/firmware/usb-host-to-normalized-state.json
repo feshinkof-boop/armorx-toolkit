@@ -1,0 +1,19 @@
+{
+ "artifact": "usb-host-to-normalized-state",
+ "date": "2026-09-28",
+ "status": "PARTIAL - the receive buffer is still not located, but the normalization side is now characterised from both directions",
+ "forward": {
+  "chain": "Xbox controller -> ARMOR-X internal USB host -> 0x1e09ad4 step dispatcher -> ...",
+  "state": "the dispatcher is now instruction-level reconstructed; case 1 emits through the 0x1e0675c/0x1e0642c transmit helper family, so the dispatcher is not purely a receive path",
+  "gap": "no receive completion callback, no endpoint binding, no report-buffer allocation located"
+ },
+ "backward": {
+  "from": "state+0x1d4 <-> candidate at sp+1080",
+  "found": [
+   "the digital trigger bytes are synthesised at 0x1e0cfc0-0x1e0d02c from mask-bit edges 0x100/0x200 and written into candidate+0x0c/+0x0d",
+   "0x1e094de is a per-axis deadzone direction classifier (threshold 12000) returning one byte of direction bits - a candidate source for the digital direction part of the mask"
+  ],
+  "gap": "the analogue sources for +0x04/+0x06/+0x08/+0x0a and the exact store into state+0x1d4 remain untraced"
+ },
+ "honest_position": "The two directions have not met. What is proven is the trigger-byte synthesis and the classification function; what is not is the receive path itself."
+}

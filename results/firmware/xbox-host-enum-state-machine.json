@@ -1,0 +1,25 @@
+{
+ "artifact": "xbox-host-enum-state-machine",
+ "date": "2026-09-28",
+ "dispatcher": "0x1e09ad4",
+ "table": "0x1e09ae8",
+ "guard": "if (r0 > 0x6) goto 0x1e09c4c",
+ "cases": {
+  "0": "0x1e09b35 - 36 instructions, 8 calls, three stack byte writes",
+  "1": "0x1e09b9d - 96 instructions, 19 calls: calls 0x2fd222, then 0x1e066b6 three times with r0 = r0 >> 0x8 between them, then 0x1e0675c, then 0x2fd1d8",
+  "2/3/4": "0x1e09aee - shared: b[r4+0x5]=1, b[r1+0x9]=1, h[r4+0x2]=0xc00 (3072), h[r4+0x0]=r0",
+  "5/6": "0x1e09b32 - two instructions, falls through",
+  "default": "0x1e09c4c"
+ },
+ "key_finding": "case 1 routes through 0x1e0675c, one of the eight callers of 0x1e0642c - the helper chain the D-family transmit path uses. So the large arm is a transmit/request arm, and the 3072-byte length in the shared arm is a transfer length of that machinery.",
+ "not_proven": [
+  "that r0 is m_xbox_enum_step (candidate)",
+  "what 0x1e066b6 does with the extracted bytes",
+  "the completion callback"
+ ],
+ "proven": [
+  "seven cases plus default",
+  "the shared arm writes a 3072 length and two flag bytes",
+  "case 1 emits through the 0x1e0675c/0x1e0642c helper family"
+ ]
+}

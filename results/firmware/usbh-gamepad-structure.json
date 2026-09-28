@@ -35,5 +35,14 @@
   "the report length",
   "the callback and endpoint binding",
   "the consumer that writes state+0x1d4"
- ]
+ ],
+ "update_2026_09_28": {
+  "enum_dispatcher": "0x1e09ad4 seven-case step dispatch reconstructed; case 1 emits via 0x1e0675c",
+  "transfer_length": "3072 (0xc00) written in the shared case arm",
+  "still_unknown": [
+   "structure pointed to by usbh_gamepadp",
+   "report buffer and length",
+   "callback and endpoint binding"
+  ]
+ }
 }

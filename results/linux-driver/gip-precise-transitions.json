@@ -1,0 +1,29 @@
+{
+ "artifact": "gip-precise-transitions",
+ "date": "2026-09-28",
+ "capture": "results/experiments/armorx-precise-20260928-162535/usbmon/precise.pcap",
+ "capture_sha256": "1897625d4fcd7e4eba27b8ad2b94c16b4f8ac85f71760722610c36acb7636c6c",
+ "capture_bytes": 6731035,
+ "method": "one continuous usbmon capture plus a raw evdev reader on the controller event node, both realtime, aligned on capture-relative time",
+ "A": {
+  "evdev": "BTN_SOUTH (code 304) press t_rel 19.501, release 19.669",
+  "usb": "last frame before the event already has byte4=0x11 at 19.4976; first frame at/after has 0x11 at 19.5016",
+  "interpretation": "the wire LEADS the evdev event by up to about one frame period (~4 ms): report -> xpad -> input event. No firmware-side delay is claimed.",
+  "latency_window_ms": [
+   -3.4,
+   0.6
+  ]
+ },
+ "RT": {
+  "evdev": "ABS_RZ (code 5) rising 56, 332, 696, 1020 at 33.789-33.817 s; falling 764, 260, 0 at 35.643-35.659 s",
+  "usb": "the nearest frame to every rising sample reads the u16 at bytes 8-9 as 1020 (full); every falling sample reads 0",
+  "interpretation": "OPEN DISCREPANCY - the wire stayed binary (0 or full) while the input layer reported a smooth ramp. Reported, not explained.",
+  "candidate_explanations": [
+   "xpad-side scaling or filtering between raw report and ABS_RZ",
+   "my byte pairing for RT is wrong despite the differential windows",
+   "the controller emits a binary trigger and the ramp is generated in the input layer",
+   "sub-frame alignment error - excluded for A, not excluded for RT"
+  ]
+ },
+ "delivery_lag_s": "0.000 for six of seven events, 0.004 for one, so the reader's own delivery time is not a source of skew"
+}

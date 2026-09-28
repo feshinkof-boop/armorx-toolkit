@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "precise_rt",
+ "response": "done",
+ "clicked_at": "2026-09-28T16:26:14.993012-04:00",
+ "pid": 13015,
+ "title": "ARMOR-X ACTION REQUIRED - PRECISE RT",
+ "gui": "PySide6"
+}

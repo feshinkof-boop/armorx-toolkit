@@ -1,0 +1,32 @@
+{
+ "artifact": "rt-digital-synthesis",
+ "date": "2026-09-28",
+ "status": "PROVEN STATIC - the digital trigger bytes are synthesised by edge detection on the mask and written into the SAME candidate bytes the analogue copy fills",
+ "site": "0x1e0cfc0-0x1e0d02c inside the D2 candidate builder region",
+ "code": [
+  "0x1e0cfc0 r0 = b[r15+0x25]  ; previous toggle state",
+  "0x1e0cfc4 r1 = 1",
+  "0x1e0cfc6 if (r0 == 0) goto +2",
+  "0x1e0cfc8 r1 = 0",
+  "0x1e0cfca b[r15+0x25] = r1  ; store toggled state",
+  "0x1e0cfce r0 = r5 & r4  ; changed-bit set",
+  "0x1e0cfd2 if (r1 == 0) goto 0x1e0cff2",
+  "0x1e0cfd4 r1 = [sp+1080]; r4 = r1 | r0; [sp+1080] = r4  ; OR bits into candidate mask +0x00",
+  "0x1e0cfe0 if ((r0 & 0x100) == 0) goto 0x1e0cfea",
+  "0x1e0cfe4 r1 = 0xff; b[sp+1092] = r1  ; candidate +0x0c LT = 0xff",
+  "0x1e0cfea if ((r0 & 0x200) == 0) goto 0x1e0d012",
+  "0x1e0cfee r0 = 0xff; b[sp+1093] = r0  ; candidate +0x0d RT = 0xff",
+  "0x1e0cff2 falling-edge arm: r4 = r1 & ~r0; [sp+1080] = r4; b[sp+1092] = 0; b[sp+1093] = 0",
+  "0x1e0d012 r2 = [r15+0x1b0]; r0 = b[r2+0x78]",
+  "0x1e0d022 if (r0 == 8) goto +6 else b[sp+1092] = 0  ; device-dependent gate zeroes LT"
+ ],
+ "facts": [
+  "bits 0x100 (LT) and 0x200 (RT) are the only two mask bits this block handles",
+  "it writes 0xff into candidate+0x0c/+0x0d on a rising edge and 0x00 on a falling edge",
+  "candidate+0x0c/+0x0d are the same bytes the state+0x1d4 analogue copy fills, so each trigger byte has two writers",
+  "a descriptor byte at [r15+0x1b0]+0x78 == 8 zeroes the LT byte for that device class"
+ ],
+ "reconciliation": "This explains the live RT observations without contradiction: byte 16 takes 255 exactly when the RT mask bit toggles, and intermediate values (17, 27, 96) when it carries the analogue copy. The 0..255 spread in the W1 capture is the two write paths sharing one byte.",
+ "not_proven": "how r4/r5 (the changed-bit set) is formed is not traced, so the RT-only scheduling question is narrowed rather than closed",
+ "search": "the only two tests of 0x200 anywhere in the firmware are 0x1e0cfea and 0x1e0d008, both in this block"
+}

@@ -1,0 +1,25 @@
+{
+ "artifact": "gip-length-variants",
+ "date": "2026-09-28",
+ "resolved": true,
+ "evidence": {
+  "power_button_pcap": {
+   "last_32B_frame_t_s": 45.7805,
+   "first_48B_frame_t_s": 45.8125,
+   "last_48B_frame_t_s": 91.6228,
+   "counts": "11444 frames of 48 bytes type 0x20; a single 32-byte frame",
+   "source": "results/experiments/armorx-power-button-20260928-160852/usbmon/power-button.pcap"
+  },
+  "control_map_pcap": {
+   "frames_32B": 0,
+   "frames_48B": 35992
+  },
+  "precise_pcap": {
+   "frames": 12435,
+   "lengths": "all 48"
+  }
+ },
+ "classification": "One GIP input type (0x20, header 20 00 <seq> 2c) with a SHORT 32-byte form during the first ~46 s after enumeration and a 48-byte steady-state form thereafter. Same capture, same device, so this is not a decoder artefact.",
+ "retraction": "The earlier report's 594-of-32-bytes histogram came from a head-limited slice of the opening frames of that capture, i.e. exactly the startup phase, and was wrongly generalised. Steady-state length is 48.",
+ "not_proven": "what changes at t~45.8 s (xpad init completion vs controller extended state) is not proven"
+}
