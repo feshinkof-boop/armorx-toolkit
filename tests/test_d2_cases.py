@@ -139,7 +139,9 @@ def test_every_causal_case_asks_for_exactly_one_operator_action():
         prompts = [st for st in steps(case) if st["op"] == "operator_prompt"]
         assert len(prompts) == 1, case
         pr = prompts[0]
-        assert pr["button"] == "DONE" and pr["cancel_button"] == "CANCEL"
+        assert pr["button"] == "DONE"
+        # the cancel affordance must be present AND explicit (brief: CANCEL / STOP)
+        assert "CANCEL" in pr["cancel_button"].upper() and "STOP" in pr["cancel_button"].upper()
         assert pr["action_id"].startswith("armorx_d2_causal_")
         assert len(pr["action_id"]) > 10
 

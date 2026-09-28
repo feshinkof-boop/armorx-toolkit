@@ -90,8 +90,16 @@ class Recorder:
         self.csv = outdir / "timeline.csv"
         self.t0 = time.monotonic()
         self.frames: list[dict] = []
+        # A run id distinguishes records when several runs share this output directory: the file is
+        # appended to across runs, and monotonic_s restarts per process, so without an id a later
+        # analysis can silently splice two different sessions together (observed live: two C0 runs,
+        # one without the pre-clear and without the operator prompt, one with both).
+        self.run_id = f"{case}-{iso()}"
         if not self.csv.exists():
             self.csv.write_text("case,monotonic_s,event,detail\n")
+        with self.jsonl.open("a") as fh:
+            fh.write(json.dumps({"kind": "run_start", "run_id": self.run_id, "case": case,
+                                 "ts_utc": iso(), "pid": os.getpid()}) + "\n")
 
     def mark(self, event: str, detail: str = "") -> float:
         t = round(time.monotonic() - self.t0, 3)
@@ -100,7 +108,7 @@ class Recorder:
         return t
 
     def log(self, direction: str, uuid: str, payload: bytes, **extra) -> None:
-        rec = {"case": self.dir.name, "ts_utc": iso(),
+        rec = {"case": self.dir.name, "run_id": self.run_id, "ts_utc": iso(),
                "monotonic_s": self.mark(f"{direction}:{extra.get('label','')}", payload.hex()),
                "dir": direction, "uuid": uuid, "hex": payload.hex(), **extra}
         with self.jsonl.open("a") as fh:
@@ -127,24 +135,38 @@ class Recorder:
 # Known-good identity of the unit (from the repo's live captures). The address is static for this
 # device; the scan still prefers a name match so a different unit could never be mistaken for it.
 KNOWN_ADDRESSES = {a.upper() for a in ("2D:37:35:6D:66:11",)}
+# BlueZ/bleak report the company id byte-swapped relative to the wire order on this unit: the
+# advertisement carries fe ff on air and BlueZ surfaces it as 0xfffe. Accept both so identity matching
+# never depends on the stack's endianness convention.
+MFR_COMPANY_IDS = {0xFEFF, 0xFFFE}
+MFR_COMPANY_ID = 0xFEFF                       # kept for the scan output/summary
+MFR_PAYLOAD_PREFIX = bytes.fromhex("5a4a2d5854")   # "ZJ-XT" - the unit's own model string
 
 
 async def find_device(timeout: float = 20.0):
-    """Find the unit by advertised name, else by its known address.
+    """Find the unit by identity evidence, in this order:
 
-    The unit does not always put its local name in the advertisement (a scan response may carry
-    it), so matching the name alone produces false NOT_FOUND results - observed live: BlueZ listed
-    the device at RSSI -84 while a name-only matcher reported nothing.
+      1. advertised/local name starting with NAME_PREFIX;
+      2. the known address;
+      3. the manufacturer-data signature (company id 0xFEFF, payload starting 5a4a2d5854 = "ZJ-XT").
+
+    (3) exists because the advertised name is not always present - the unit may put it only in a scan
+    response - and requiring it produces false NOT_FOUND results. Observed live: BlueZ listed the
+    device at RSSI -84 while a name-only matcher reported nothing.
     """
     devs = await BleakScanner.discover(timeout=timeout, return_adv=True)
     by_addr = None
+    by_mfr = None
     for address, (dev, adv) in devs.items():
         name = dev.name or adv.local_name or ""
         if name.startswith(NAME_PREFIX):
             return dev, adv
         if address.upper() in KNOWN_ADDRESSES:
             by_addr = (dev, adv)
-    return by_addr if by_addr else (None, None)
+        if any(k in MFR_COMPANY_IDS and bytes(v).startswith(MFR_PAYLOAD_PREFIX)
+               for k, v in (adv.manufacturer_data or {}).items()):
+            by_mfr = (dev, adv)
+    return by_addr or by_mfr or (None, None)
 
 
 async def cmd_scan(args) -> int:
@@ -233,8 +255,13 @@ async def run_case(args) -> int:
             return 6
         cancelled = False
         try:
-            if case in ("C1", "C2"):
-                # Declarative cases: NO pre-clear, plus (C2) the official pre-D2 read burst.
+            if case in ("C0", "C1", "C2"):
+                # Declarative cases: C0 = pre-clear + enable, C1 = no pre-clear, C2 = no pre-clear plus
+                # the official pre-D2 read burst. All three ask the operator for ONE A-twice press.
+                #
+                # C0 used to fall through to the legacy inline branch below, which wrote D2_ON directly
+                # (no pre-clear at all) and never raised the operator prompt - so it could not answer
+                # the question it was named after. It is now the declarative case it claims to be.
                 steps = [st_ for st_ in case_sequence(case) if st_["op"] != "sanity"]
                 rec.mark("case_plan", CASE_DEFS[case]["description"])
                 await run_steps(client, rec, steps)

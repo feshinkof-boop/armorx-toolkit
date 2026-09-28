@@ -1,0 +1,26 @@
+{
+ "valid_frames": 167,
+ "malformed": 0,
+ "nonzero_mask": 25,
+ "bits": {
+  "0": 25
+ },
+ "transitions": [
+  {
+   "t": 44.697,
+   "state": "PRESS"
+  },
+  {
+   "t": 44.905,
+   "state": "RELEASE"
+  },
+  {
+   "t": 45.926,
+   "state": "PRESS"
+  },
+  {
+   "t": 46.098,
+   "state": "RELEASE"
+  }
+ ]
+}

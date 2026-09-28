@@ -1,17 +1,17 @@
 # ARMOR-X Pro - master unknown ledger
 
-Updated 2026-09-27/28. **20 entries.** Classifications: DEFERRED_REQUIRES_HARDWARE x9, DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE x3, DEFERRED_REQUIRES_OPERATOR x4, STATICALLY_EXHAUSTED x4.
+Updated 2026-09-28 after the live C0 physical test. **20 entries.** Classifications: DEFERRED_REQUIRES_HARDWARE x9, DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE x3, DEFERRED_REQUIRES_OPERATOR x3, STATICALLY_EXHAUSTED x5.
 
-Historical ids are preserved; resolved ones are marked RESOLVED with their evidence rather than deleted. Where an offline step was actually executed this pass it is marked DONE and points at `results/reconciliation/static-increments-ledger-loop.md`.
+Historical ids are preserved; resolved ones carry their evidence rather than being deleted. Offline steps executed in the overnight shift are marked DONE in `results/reconciliation/static-increments-ledger-loop.md`.
 
 | id | question | status | classification | next offline step | next hardware step |
 |---|---|---|---|---|---|
 | **D2-U-001** | What write type does the official app use for D2? | RESOLVED | `STATICALLY_EXHAUSTED` | - | - |
 | **D2-U-002** | What is the 0x24 comparison in the 2.24 Button-Test parser? | RESOLVED | `STATICALLY_EXHAUSTED` | - | - |
-| **D2-U-007** | Why did the harness appear silent after a D2 enable? | RESOLVED | `STATICALLY_EXHAUSTED` | - | - |
-| **D2-U-010** | Does a D2 OFF pre-clear before the D2 enable suppress streaming while a key IS pressed? | OPEN - the single first physical action | `DEFERRED_REQUIRES_OPERATOR` | done: C0/C1/C2 defined, executor tested, offline matrix committed | case C0 with a CONFIRMED A-twice press |
+| **D2-U-007** | Why did the harness appear silent after a D2 enable? | RESOLVED | `STATICALLY_EXHAUSTED` | none - closed | none - closed |
+| **D2-U-010** | Does a D2 OFF pre-clear before the D2 enable suppress streaming while a key IS pressed? | RESOLVED - C0_STREAMS_WITH_PRECLEAR | `STATICALLY_EXHAUSTED` | none - closed | none - closed |
 | **D2-U-008** | Does the device require a bonded/encrypted link? | REFUTED | `STATICALLY_EXHAUSTED` | - | - |
-| **D2-U-009** | Do the connection parameters cause the difference? | OPEN (weakest candidate) | `DEFERRED_REQUIRES_HARDWARE` | 11.25 ms mechanism documented (results/final/connection-params-11ms-experiment-11.25ms.md) | apply the documented OS-level mechanism, then repeat C0 |
+| **D2-U-009** | Do the connection parameters cause the difference? | NOT IMPLICATED (stays the weakest candidate; do not run unless a new failure appears) | `DEFERRED_REQUIRES_HARDWARE` | 11.25 ms mechanism documented (results/final/connection-params-11ms-experiment-11.25ms.md) | apply the documented OS-level mechanism, then repeat C0 |
 | **KEY-U-001** | Which buttons are ids 2, 5, 21, 22, 31, 32, 33? | OPEN | `DEFERRED_REQUIRES_OPERATOR` | - | one button per popup, operator-acknowledged, no order assumption |
 | **KEY-U-002** | Does RT (id 9) have a digital key id on this unit? | OPEN (proven negative as a digital bit) | `DEFERRED_REQUIRES_OPERATOR` | - | physical RT press with analog readback to decide analog-only vs absent |
 | **DPI-U-001** | What real DPI value does selector N mean? | OPEN | `DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE` | - | none useful without the vendor table |
@@ -73,33 +73,33 @@ Historical ids are preserved; resolved ones are marked RESOLVED with their evide
 
 **Ruled out:** a device-level difference between app and harness; a capability limit of the harness
 
-**Best evidence:** the harness captured 3,292 valid 18-byte frames across 26 ids with control plane 0B -> D2 ON (no pre-clear); every 'silent' window had no press requested
+**Best evidence:** Two independent facts. (1) The harness streams: 3,292 valid frames / 26 ids in the 2026-09-27 17:08 run under 0B -> D2 ON with no pre-clear. (2) PROVEN LIVE 2026-09-28: case C0 - WITH the D2 OFF pre-clear and a confirmed A-twice press - produced 167 valid frames including PRESS/RELEASE/PRESS/RELEASE on bit 0, while 0 frames arrived before the press and after the release. So the historical differential windows were silent because no physical press was requested in them, not because of any protocol state. EXPLANATION RECORDED, NOT ERASED: see results/reconciliation/d2-u007-harness-streaming-reconciliation.md and results/experiments/d2-c0-physical-20260928-054549/RESULT.md
 
-**Next offline step:** -
+**Next offline step:** none - closed
 
-**Next hardware step:** -
+**Next hardware step:** none - closed
 
 **Dependencies:** none
 
 **Classification:** `STATICALLY_EXHAUSTED`
 
-### D2-U-010 - OPEN - the single first physical action
+### D2-U-010 - RESOLVED - C0_STREAMS_WITH_PRECLEAR
 
 **Question:** Does a D2 OFF pre-clear before the D2 enable suppress streaming while a key IS pressed?
 
 **Priority:** CRITICAL
 
-**Ruled out:** nothing yet
+**Ruled out:** the D2 OFF pre-clear as a suppressor of button reports
 
-**Best evidence:** every streaming window lacked a pre-clear; every pre-cleared window lacked a press, so the two have never been separated. The offline virtual-device matrix shows case C0 discriminates the hypotheses
+**Best evidence:** PROVEN LIVE 2026-09-28: C0 (pre-clear present) + confirmed A-twice press = 167 valid frames, 4 transitions PRESS/RELEASE/PRESS/RELEASE on bit 0, only bit 0 set; 0 frames before the press and 0 after the release. C1/C2 were NOT run - the question was already answered.
 
-**Next offline step:** done: C0/C1/C2 defined, executor tested, offline matrix committed
+**Next offline step:** none - closed
 
-**Next hardware step:** case C0 with a CONFIRMED A-twice press
+**Next hardware step:** none - closed
 
 **Dependencies:** none
 
-**Classification:** `DEFERRED_REQUIRES_OPERATOR`
+**Classification:** `STATICALLY_EXHAUSTED`
 
 ### D2-U-008 - REFUTED
 
@@ -119,15 +119,15 @@ Historical ids are preserved; resolved ones are marked RESOLVED with their evide
 
 **Classification:** `STATICALLY_EXHAUSTED`
 
-### D2-U-009 - OPEN (weakest candidate)
+### D2-U-009 - NOT IMPLICATED (stays the weakest candidate; do not run unless a new failure appears)
 
 **Question:** Do the connection parameters cause the difference?
 
-**Priority:** LOW
+**Priority:** VERY LOW
 
 **Ruled out:** causality (explicitly not claimed)
 
-**Best evidence:** official 30 -> 7.5 -> 30 -> 11.25 ms (1 create + 3 update commands, verified) vs harness 7.5 ms; the app requests no interval profile at all
+**Best evidence:** official 30 -> 7.5 -> 30 -> 11.25 ms (1 create + 3 update commands, verified) vs harness 7.5 ms; the app requests no interval profile at all 2026-09-28: C0 streamed 167 frames with the harness's own 7.5 ms interval, so no interval change is needed to receive button reports.
 
 **Next offline step:** 11.25 ms mechanism documented (results/final/connection-params-11ms-experiment-11.25ms.md)
 

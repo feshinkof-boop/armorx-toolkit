@@ -83,6 +83,7 @@ async def run_steps(client: Any, rec: Any, steps: Iterable[dict]) -> None:
             proc = await asyncio.create_subprocess_exec(
                 *PROMPT_COMMAND, "--id", st["action_id"], "--title", st["title"],
                 "--message", st["message"], "--button", st["button"],
+                "--cancel", st.get("cancel_button", "CANCEL / STOP"),
                 stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
             ack = await proc.wait()
             rec.mark("operator_prompt_result", f"action_id={st['action_id']} rc={ack}")

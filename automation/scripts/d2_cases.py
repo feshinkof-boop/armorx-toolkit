@@ -78,10 +78,11 @@ def _a_twice_prompt(case: str) -> Dict[str, object]:
     """
     return {"op": "operator_prompt",
             "action_id": f"armorx_d2_causal_{case.lower()}_a_twice",
-            "title": "ArmorX D2 Causal Test",
+            # case-aware so the operator sees exactly which case they are running
+            "title": f"ArmorX D2 {case} Test",
             "message": A_TWICE_MESSAGE,
             "button": "DONE",
-            "cancel_button": "CANCEL"}
+            "cancel_button": "CANCEL / STOP"}
 
 
 def _observe() -> Dict[str, object]:

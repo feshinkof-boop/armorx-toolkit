@@ -2,9 +2,9 @@
  "generated": "2026-09-27/28 overnight shift",
  "rule": "Every unknown carries what is ruled out, the best evidence, the next offline step and the next hardware step. Historical ids are kept, never silently retired.",
  "counts": {
-  "STATICALLY_EXHAUSTED": 4,
-  "DEFERRED_REQUIRES_OPERATOR": 4,
+  "STATICALLY_EXHAUSTED": 5,
   "DEFERRED_REQUIRES_HARDWARE": 9,
+  "DEFERRED_REQUIRES_OPERATOR": 3,
   "DEFERRED_REQUIRES_NEW_EXTERNAL_EVIDENCE": 3
  },
  "entries": [
@@ -48,9 +48,9 @@
     "a device-level difference between app and harness",
     "a capability limit of the harness"
    ],
-   "best_evidence": "the harness captured 3,292 valid 18-byte frames across 26 ids with control plane 0B -> D2 ON (no pre-clear); every 'silent' window had no press requested",
-   "next_offline_step": "-",
-   "next_hardware_step": "-",
+   "best_evidence": "Two independent facts. (1) The harness streams: 3,292 valid frames / 26 ids in the 2026-09-27 17:08 run under 0B -> D2 ON with no pre-clear. (2) PROVEN LIVE 2026-09-28: case C0 - WITH the D2 OFF pre-clear and a confirmed A-twice press - produced 167 valid frames including PRESS/RELEASE/PRESS/RELEASE on bit 0, while 0 frames arrived before the press and after the release. So the historical differential windows were silent because no physical press was requested in them, not because of any protocol state. EXPLANATION RECORDED, NOT ERASED: see results/reconciliation/d2-u007-harness-streaming-reconciliation.md and results/experiments/d2-c0-physical-20260928-054549/RESULT.md",
+   "next_offline_step": "none - closed",
+   "next_hardware_step": "none - closed",
    "dependencies": [],
    "classification": "STATICALLY_EXHAUSTED",
    "status": "RESOLVED"
@@ -59,13 +59,15 @@
    "id": "D2-U-010",
    "question": "Does a D2 OFF pre-clear before the D2 enable suppress streaming while a key IS pressed?",
    "priority": "CRITICAL",
-   "ruled_out": [],
-   "best_evidence": "every streaming window lacked a pre-clear; every pre-cleared window lacked a press, so the two have never been separated. The offline virtual-device matrix shows case C0 discriminates the hypotheses",
-   "next_offline_step": "done: C0/C1/C2 defined, executor tested, offline matrix committed",
-   "next_hardware_step": "case C0 with a CONFIRMED A-twice press",
+   "ruled_out": [
+    "the D2 OFF pre-clear as a suppressor of button reports"
+   ],
+   "best_evidence": "PROVEN LIVE 2026-09-28: C0 (pre-clear present) + confirmed A-twice press = 167 valid frames, 4 transitions PRESS/RELEASE/PRESS/RELEASE on bit 0, only bit 0 set; 0 frames before the press and 0 after the release. C1/C2 were NOT run - the question was already answered.",
+   "next_offline_step": "none - closed",
+   "next_hardware_step": "none - closed",
    "dependencies": [],
-   "classification": "DEFERRED_REQUIRES_OPERATOR",
-   "status": "OPEN - the single first physical action"
+   "classification": "STATICALLY_EXHAUSTED",
+   "status": "RESOLVED - C0_STREAMS_WITH_PRECLEAR"
   },
   {
    "id": "D2-U-008",
@@ -86,18 +88,18 @@
   {
    "id": "D2-U-009",
    "question": "Do the connection parameters cause the difference?",
-   "priority": "LOW",
+   "priority": "VERY LOW",
    "ruled_out": [
     "causality (explicitly not claimed)"
    ],
-   "best_evidence": "official 30 -> 7.5 -> 30 -> 11.25 ms (1 create + 3 update commands, verified) vs harness 7.5 ms; the app requests no interval profile at all",
+   "best_evidence": "official 30 -> 7.5 -> 30 -> 11.25 ms (1 create + 3 update commands, verified) vs harness 7.5 ms; the app requests no interval profile at all 2026-09-28: C0 streamed 167 frames with the harness's own 7.5 ms interval, so no interval change is needed to receive button reports.",
    "next_offline_step": "11.25 ms mechanism documented (results/final/connection-params-11ms-experiment-11.25ms.md)",
    "next_hardware_step": "apply the documented OS-level mechanism, then repeat C0",
    "dependencies": [
     "D2-U-010 must fail first"
    ],
    "classification": "DEFERRED_REQUIRES_HARDWARE",
-   "status": "OPEN (weakest candidate)"
+   "status": "NOT IMPLICATED (stays the weakest candidate; do not run unless a new failure appears)"
   },
   {
    "id": "KEY-U-001",

@@ -1,0 +1,11 @@
+branch: research/physical-armorx-live-2026-09-27
+head: 0286036a0380bf3cf9e5f819351799c498d47159
+git status: 2 modified
+adapter_lab: hci1 E8:4E:06:8A:F2:00 usb 1-8 (0bda:b720)
+primary_net: wlp3s0 192.168.0.45 UP
+hci1:	Type: Primary  Bus: USB
+	BD Address: E8:4E:06:8A:F2:00  ACL MTU: 820:8  SCO MTU: 255:16
+	UP RUNNING 
+hci0:	Type: Primary  Bus: USB
+	BD Address: 4C:82:A9:93:53:0C  ACL MTU: 1024:7  SCO MTU: 240:8
+	UP RUNNING INQUIRY 

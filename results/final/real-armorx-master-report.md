@@ -12,6 +12,16 @@ The previous physical-pass report is preserved at
 
 ---
 
+## 0a. LIVE CLOSURE - 2026-09-28: the pre-clear is not a gate (C0 answered)
+
+Case **C0** was run on the real unit with the D2 OFF pre-clear **present** and a confirmed physical
+A-twice press: **167 valid 18-byte frames**, four transitions `PRESS → RELEASE → PRESS → RELEASE` on bit 0,
+only bit 0 set, 208 ms / 172 ms held, 1.021 s between presses, median held cadence 15.0 ms, and **0**
+frames before the press and after the release. Verdict **`C0_STREAMS_WITH_PRECLEAR`**. Per the decision
+tree the causal matrix stopped: **C1 and C2 were not run.** Post-test D6 read →
+**`CONFIG_BASELINE_MATCH`** (integrity readback only; durability is unchanged at `DURABLE_OK`).
+Full result: `results/experiments/d2-c0-physical-20260928-054549/RESULT.md`.
+
 ## 0. The headline correction (read this first)
 
 `OFFICIAL_WORKS_HARNESS_SILENT` - the finding that the harness receives nothing while the official app
@@ -74,8 +84,10 @@ interval history is stack/OS-driven, not app-requested (**PROVEN STATIC**).
 | frame | 18 bytes `A5 12 02 <mask u32 BE> <axes> <LT> <RT> <cks>`; bit index == key id | PROVEN LIVE |
 | A-twice proof | PRESS 580.293 → RELEASE 580.518 → PRESS 581.361 → RELEASE 581.598 (225/237 ms, gap 843 ms), only bit 0 | PROVEN LIVE |
 | held cadence | median ≈ 11.7 ms while held | PROVEN LIVE |
-| harness streaming | **3,292 frames / 26 ids** with `0B → D2 ON`, no pre-clear | PROVEN LIVE |
-| `D2-U-007` | **RESOLVED** (harness is not silent); residual = is the D2 **pre-clear** harmful *when a key is pressed*? never tested together | residual UNKNOWN |
+| harness streaming | **3,292 frames / 26 ids** with `0B → D2 ON`, no pre-clear (2026-09-27 17:08) | PROVEN LIVE |
+| **C0 with pre-clear** | **167 frames / 4 transitions on bit 0** with the pre-clear present and a confirmed press (2026-09-28 05:50) | **PROVEN LIVE** |
+| `D2-U-007` | **RESOLVED — explained.** Historical silent windows lacked a matched physical press; D2 is event-driven. Recorded with dated corrections, old reports preserved | PROVEN LIVE |
+| `D2-U-010` (pre-clear as a suppressor) | **RESOLVED — `C0_STREAMS_WITH_PRECLEAR`**: the pre-clear does not suppress reports. C1/C2 not needed | PROVEN LIVE |
 | `D2-U-008` (bonding/encryption required) | **REFUTED** - both sides unbonded/unencrypted | PROVEN LIVE |
 | `D2-U-009` (connection params differ) | **SUPPORTED, not causal** - intervals differ, app requests no profile | PROVEN LIVE / PROVEN STATIC |
 | `D2-U-002` (2.24 `0x24`) | **RESOLVED**: `0x24` is the tagged Smi of 18, compared against `data[1]` (`=0x12`) | PROVEN STATIC (verified byte-level) |

@@ -55,9 +55,10 @@ def test_unknown_ledger_is_complete_and_classified():
 def test_resolved_entries_are_not_left_open():
     d = load("results/reconciliation/master-unknown-ledger.json")
     by_id = {e["id"]: e for e in d["entries"]}
-    for rid in ("D2-U-001", "D2-U-002", "D2-U-007", "D2-U-008"):
-        assert by_id[rid]["status"] in ("RESOLVED", "REFUTED"), (rid, by_id[rid]["status"])
-    assert by_id["D2-U-010"]["status"].startswith("OPEN")
+    for rid in ("D2-U-001", "D2-U-002", "D2-U-007", "D2-U-008", "D2-U-010"):
+        assert by_id[rid]["status"].upper().startswith(("RESOLVED", "REFUTED")), (rid, by_id[rid]["status"])
+    # and the live C0 verdict must be named in the entry that closed on it
+    assert "C0_STREAMS_WITH_PRECLEAR" in by_id["D2-U-010"]["status"]
 
 
 def test_tomorrow_plan_states_the_press_requirement_and_stops_after_c0():

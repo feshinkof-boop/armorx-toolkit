@@ -1,9 +1,9 @@
 {
  "status": "ACK",
  "action_id": "armorx_d2_causal_c0_a_twice",
- "title": "ArmorX D2 Causal Test",
+ "title": "ArmorX D2 C0 Test",
  "response": "done",
- "clicked_at": "2026-09-28T05:32:31-04:00",
+ "clicked_at": "2026-09-28T05:50:15-04:00",
  "gui": "kdialog",
- "pid": 283852
+ "pid": 287862
 }

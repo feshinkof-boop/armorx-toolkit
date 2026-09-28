@@ -10,13 +10,14 @@
 # Exit: 0 = DONE clicked, 1 = cancelled/closed, 2 = dialog failed, 3 = GUI session unavailable
 set -uo pipefail
 LAB=/home/salamanka/armorx-lab
-ID=""; TITLE="ArmorX Lab"; MSG=""; BTN="DONE"
+ID=""; TITLE="ArmorX Lab"; MSG=""; BTN="DONE"; CANCEL=""
 while [ $# -gt 0 ]; do
   case "$1" in
     --id) ID="$2"; shift 2;;
     --title) TITLE="$2"; shift 2;;
     --message) MSG="$2"; shift 2;;
     --button) BTN="$2"; shift 2;;
+    --cancel) CANCEL="$2"; shift 2;;
     *) echo "unknown arg: $1" >&2; exit 2;;
   esac
 done
@@ -44,7 +45,14 @@ if [ -f "$WAV" ]; then
 fi
 
 # --- the modal dialog itself (blocking until clicked) ---
-"$LAB/automation/run-in-plasma-session.sh" kdialog --title "$TITLE" --msgbox "$MSG" --ok-label "$BTN"
+# One button by default (validated contract). When a cancel label is given we use the two-button form
+# so the operator always has an explicit CANCEL / STOP, as the experiment brief requires.
+if [ -n "$CANCEL" ]; then
+  "$LAB/automation/run-in-plasma-session.sh" kdialog --title "$TITLE" --yesno "$MSG" \
+      --yes-label "$BTN" --no-label "$CANCEL"
+else
+  "$LAB/automation/run-in-plasma-session.sh" kdialog --title "$TITLE" --msgbox "$MSG" --ok-label "$BTN"
+fi
 rc=$?
 now=$(date -Is)
 if [ "$rc" -eq 0 ]; then
