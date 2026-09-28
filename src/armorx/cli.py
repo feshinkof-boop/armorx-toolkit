@@ -12,7 +12,10 @@ from typing import Sequence
 from . import __version__
 from . import community as community_mod
 from . import config as config_mod
+from . import device as device_mod
+from . import gip as gip_mod
 from . import macro as macro_mod
+from . import protocol as protocol_mod
 
 
 def _write_json(path: str | None, obj, *, compact: bool = False) -> None:
@@ -273,6 +276,208 @@ def cmd_community_import(args: argparse.Namespace) -> int:
     return 0
 
 
+
+# ---------------------------------------------------------------------------
+# device (read-only discovery and diagnostics)
+# ---------------------------------------------------------------------------
+
+def cmd_device_list(args: argparse.Namespace) -> int:
+    candidates = device_mod.scan_devices(known_only=args.known_only)
+    payload = {
+        "count": len(candidates),
+        "supported_count": sum(1 for c in candidates if c.identity.known),
+        "devices": [c.to_dict() for c in candidates],
+        "note": ("No supported device found is a normal result; discovery is read-only "
+                 "and never sends anything to a device."),
+    }
+    _write_json(args.output, payload)
+    if not args.output and not candidates:
+        print("no USB devices discovered", file=sys.stderr)
+    return 0
+
+
+def cmd_device_inspect(args: argparse.Namespace) -> int:
+    candidates = device_mod.scan_devices(known_only=False)
+    target = device_mod.find_by_path(candidates, args.device)
+    if target is None:
+        _write_json(args.output, {
+            "found": False,
+            "selected": args.device,
+            "candidates": [c.identity.to_dict() for c in candidates],
+            "message": "the requested device is not present; this is a normal result",
+        })
+        return 0
+    _write_json(args.output, {"found": True, **device_mod.explain_device(target)})
+    return 0
+
+
+def cmd_device_doctor(args: argparse.Namespace) -> int:
+    result = device_mod.doctor()
+    _write_json(args.output, result)
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# protocol (offline framing)
+# ---------------------------------------------------------------------------
+
+def cmd_protocol_decode(args: argparse.Namespace) -> int:
+    data = protocol_mod.decode_hex(args.hex)
+    frames = protocol_mod.split_stream(data) if args.stream else [data]
+    parsed = [protocol_mod.parse_frame(f) for f in frames]
+    report = protocol_mod.DecodeReport(frames=parsed)
+    _write_json(args.output, report.to_dict())
+    return 0
+
+
+def cmd_protocol_build(args: argparse.Namespace) -> int:
+    try:
+        opcode = int(args.opcode, 16)
+    except ValueError:
+        print(f"error: opcode must be hex, got {args.opcode!r}", file=sys.stderr)
+        return 2
+    payload = protocol_mod.decode_hex(args.payload) if args.payload else b""
+    try:
+        if args.fragment is not None:
+            frame = protocol_mod.build_a4(opcode, args.fragment, payload)
+        else:
+            frame = protocol_mod.build_a5(opcode, payload)
+    except protocol_mod.FrameError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    if args.output:
+        Path(args.output).write_bytes(frame)
+        _write_json(None, {"wrote": args.output, "bytes": len(frame),
+                           "hex": " ".join(f"{b:02X}" for b in frame)})
+    else:
+        print(" ".join(f"{b:02X}" for b in frame))
+    return 0
+
+
+def cmd_protocol_opcodes(args: argparse.Namespace) -> int:
+    rows = [protocol_mod.describe_opcode(code) for code in sorted(protocol_mod.OPCODES)]
+    _write_json(args.output, {"count": len(rows), "opcodes": rows,
+                              "note": "opcodes absent from this table are unknown, not silent"})
+    return 0
+
+
+def cmd_protocol_describe(args: argparse.Namespace) -> int:
+    image = protocol_mod.decode_hex(args.image)
+    frames = protocol_mod.fragment_config_image(int(args.opcode, 16), image)
+    payload = {
+        "opcode": args.opcode,
+        "image_bytes": len(image),
+        "fragment_count": len(frames),
+        "fragments": [" ".join(f"{b:02X}" for b in f) for f in frames],
+        "note": "offline construction only; nothing is transmitted",
+    }
+    _write_json(args.output, payload)
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# gip (offline Xbox GIP input parsing)
+# ---------------------------------------------------------------------------
+
+def cmd_gip_decode(args: argparse.Namespace) -> int:
+    data = protocol_mod.decode_hex(args.hex)
+    try:
+        report = gip_mod.parse_gip_input(data, strict=not args.lax)
+    except gip_mod.GipError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    _write_json(args.output, report.to_dict())
+    return 0
+
+
+def cmd_gip_forms(_: argparse.Namespace) -> int:
+    _write_json(None, {
+        "forms": device_mod.GIP_REPORT_FORMS,
+        "fields": {
+            "sequence": "byte 2",
+            "A": "byte 4 bit 0x10",
+            "M1": "byte 4 bit 0x20",
+            "M2": "byte 5 bit 0x40",
+            "LT": "bytes 6-7, 16-bit little-endian",
+            "RT": "bytes 8-9, 16-bit little-endian",
+            "left_stick": "bytes 10-13",
+            "right_stick": "bytes 14-17",
+            "counters": "bytes 40-47 in the 48-byte form; semantics unknown",
+        },
+        "note": "every offset above was established by differential analysis of live captures",
+    })
+    return 0
+
+
+def _add_device_commands(groups) -> None:
+    device = groups.add_parser("device", help="read-only device discovery and diagnostics")
+    device_sub = device.add_subparsers(dest="device_command", required=True)
+
+    p = device_sub.add_parser("list", help="scan the USB bus without touching any device")
+    p.add_argument("--known-only", action="store_true", help="only recognized identities")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_device_list)
+
+    p = device_sub.add_parser("inspect", help="explain one device in detail")
+    p.add_argument("device", help="sysfs path, usb path (e.g. 1-7) or vid:pid")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_device_inspect)
+
+    p = device_sub.add_parser("doctor", help="diagnose whether this machine can talk to hardware")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_device_doctor)
+
+
+def _add_protocol_commands(groups) -> None:
+    protocol = groups.add_parser("protocol", help="offline ARMORX frame tools")
+    protocol_sub = protocol.add_subparsers(dest="protocol_command", required=True)
+
+    p = protocol_sub.add_parser("decode", help="decode one frame or a whole byte stream")
+    p.add_argument("hex", help="hex bytes, e.g. 'A5 04 0B B4'")
+    p.add_argument("--stream", action="store_true", help="treat the input as pipelined frames")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_protocol_decode)
+
+    p = protocol_sub.add_parser("build", help="build a frame offline (nothing is transmitted)")
+    p.add_argument("--opcode", required=True, help="hex opcode, e.g. D6")
+    p.add_argument("--payload", help="hex payload")
+    p.add_argument("--fragment", type=int, help="build an A4 fragment with this index")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_protocol_build)
+
+    p = protocol_sub.add_parser("opcodes", help="list recovered opcodes and their evidence")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_protocol_opcodes)
+
+    p = protocol_sub.add_parser("describe-image", help="fragment a 144-byte config image (offline)")
+    p.add_argument("--opcode", default="D7", help="hex opcode, default D7")
+    p.add_argument("--image", required=True, help="144 hex bytes")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_protocol_describe)
+
+
+def _add_gip_commands(groups) -> None:
+    gip = groups.add_parser("gip", help="offline Xbox GIP input parsing")
+    gip_sub = gip.add_subparsers(dest="gip_command", required=True)
+
+    p = gip_sub.add_parser("decode", help="decode one type-0x20 input report")
+    p.add_argument("hex", help="hex bytes of the report")
+    p.add_argument("--lax", action="store_true", help="do not enforce observed prefix bytes")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_gip_decode)
+
+    p = gip_sub.add_parser("forms", help="show the observed report forms and field offsets")
+    p.add_argument("--compact", action="store_true")
+    p.set_defaults(func=cmd_gip_forms)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="armorx",
@@ -439,6 +644,10 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("-o", "--output")
     p.set_defaults(func=cmd_community_import)
+
+    _add_device_commands(groups)
+    _add_protocol_commands(groups)
+    _add_gip_commands(groups)
 
     return parser
 
