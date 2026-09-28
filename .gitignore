@@ -28,3 +28,14 @@ static/jadx/**
 # results/final/firmware-inventory.json instead of committed (see real-firmware-mode.md)
 firmware/original/**
 tools/vendor/**
+
+# firmware shift 2026-09-28: extracted trees stay out of git (hashed in firmware-manifest.json);
+# metadata JSON at the workspace root IS committed
+research/firmware/2026-09-28/originals/**
+research/firmware/2026-09-28/chinese-v41/**
+research/firmware/2026-09-28/intl-v41/**
+research/firmware/2026-09-28/v32/**
+research/firmware/2026-09-28/unpacked/**
+# large derived JSON (regenerable: tools/firmware/armorx_fw_compare.py + reports)
+research/firmware/2026-09-28/string-corpus.json
+research/firmware/2026-09-28/cross-version.json

@@ -1,0 +1,414 @@
+{
+  "generated": "2026-09-28",
+  "pairs": [
+    {
+      "chinese": "01 \u5347\u7ea7\u6559\u7a0b \u8bf7\u770b\u5b98\u7f51\u94fe\u63a5.txt",
+      "international": null,
+      "size_c": 99,
+      "size_i": null,
+      "sha256": "27c6009c7a8b06704658e2972a9fbb7f363967881193fe72e53ca6299d0f3108",
+      "identical": null
+    },
+    {
+      "chinese": "01\u6218\u7532X Pro\u56fa\u4ef6-V41.bup",
+      "international": null,
+      "size_c": 2126734,
+      "size_i": null,
+      "sha256": "80eeaf1fe07ed8150cf288a3e0e522cab818ca46e3a13c0adc41f2235b08cc90",
+      "identical": null
+    },
+    {
+      "chinese": "01\u63a5\u6536\u5668\u56fa\u4ef6-V3600-dongle.bup",
+      "international": null,
+      "size_c": 1847656,
+      "size_i": null,
+      "sha256": "e9ef748e6e2d9e0859cba933851ff1649711387abe7ebeb4d28783324a9b8c6f",
+      "identical": null
+    },
+    {
+      "chinese": "BIGBIG_WON_2.22.1226.apk",
+      "international": null,
+      "size_c": 28032675,
+      "size_i": null,
+      "sha256": "3fdbbae3c54c399aea6076e5edc65066420433db7c9e88d5f12a171670529c2c",
+      "identical": null
+    },
+    {
+      "chinese": "BTUpgrade_V1.9/BTUpgrade.dll",
+      "international": "BTUpgrade_V1.9/BTUpgrade.dll",
+      "size_c": 340512,
+      "size_i": 340512,
+      "sha256": "dbb16755f15c99afa37e324cfbb1ec2cb25a2504ce66657fc37a8223f4917821",
+      "identical": true
+    },
+    {
+      "chinese": "BTUpgrade_V1.9/BTUpgrade_HX.dll",
+      "international": "BTUpgrade_V1.9/BTUpgrade_HX.dll",
+      "size_c": 364576,
+      "size_i": 364576,
+      "sha256": "c2ee97a4975182146b9093492e68a3336cdd529d97696ea4d013066ec9c4dda6",
+      "identical": true
+    },
+    {
+      "chinese": "BTUpgrade_V1.9/BUpgrade.exe",
+      "international": "BTUpgrade_V1.9/BUpgrade.exe",
+      "size_c": 2088960,
+      "size_i": 2088960,
+      "sha256": "385aeca9d1ead883ace8759a5362a01711e092c9f9808750dca6f4c4c0c4619c",
+      "identical": true
+    },
+    {
+      "chinese": "BTUpgrade_V1.9/Devices.dll",
+      "international": "BTUpgrade_V1.9/Devices.dll",
+      "size_c": 2135040,
+      "size_i": 2135040,
+      "sha256": "e8888d62f792293f88170b5ffe1830d18d17039f08b8d839f010b762040f2a21",
+      "identical": true
+    },
+    {
+      "chinese": null,
+      "international": "Firmware ArmorX-Pro V41.bup",
+      "size_c": null,
+      "size_i": 2126734,
+      "sha256": "80eeaf1fe07ed8150cf288a3e0e522cab818ca46e3a13c0adc41f2235b08cc90",
+      "identical": null
+    },
+    {
+      "chinese": null,
+      "international": "Firmware USB dongle V3600.bup",
+      "size_c": null,
+      "size_i": 1847656,
+      "sha256": "e9ef748e6e2d9e0859cba933851ff1649711387abe7ebeb4d28783324a9b8c6f",
+      "identical": null
+    },
+    {
+      "chinese": "BTUpgrade_V1.9/Skin.dll",
+      "international": "BTUpgrade_V1.9/Skin.dll",
+      "size_c": 86645,
+      "size_i": 86645,
+      "sha256": "0ddb8d7c5b0b6efe904e6645c9fd95a48f968cd221de8908a7ea0b7f4184478f",
+      "identical": true
+    },
+    {
+      "chinese": "BTUpgrade_V1.9/USBUpgrade.dll",
+      "international": "BTUpgrade_V1.9/USBUpgrade.dll",
+      "size_c": 8704,
+      "size_i": 8704,
+      "sha256": "fad660bc7e006c58f37db9d75b72bf30c089ef62fc4e72673cbfd424d247b5e5",
+      "identical": true
+    },
+    {
+      "chinese": "BTUpgrade_V1.9/Upgrade.dll",
+      "international": "BTUpgrade_V1.9/Upgrade.dll",
+      "size_c": 2489856,
+      "size_i": 2489856,
+      "sha256": "d4a4bf0bca2b564a3616dc7c81983b4083e3387ad918a215d8013a9f07f283a3",
+      "identical": true
+    },
+    {
+      "chinese": "BTUpgrade_V1.9/bugrade.log",
+      "international": "BTUpgrade_V1.9/bugrade.log",
+      "size_c": 1951,
+      "size_i": 1951,
+      "sha256": "b8cd424a86cfef31f55a45aef038b85176d9d23a15dd6c7604c95c560593cf29",
+      "identical": true
+    },
+    {
+      "chinese": null,
+      "international": "upgrade log-Firmware.txt",
+      "size_c": null,
+      "size_i": 2244,
+      "sha256": "d7cf6fe4aae69bdbf707920cadf6f30f43849d0cde2ad58dd5773e01dbf1ab08",
+      "identical": null
+    },
+    {
+      "chinese": "\u66f4\u65b0\u65e5\u5fd7 APP\u7248\u672c.txt",
+      "international": null,
+      "size_c": 1340,
+      "size_i": null,
+      "sha256": "f571b9ea9a0c4b564d8bc689ce20d62e5365d58e81ed8ed056938801c6330afe",
+      "identical": null
+    },
+    {
+      "chinese": "\u66f4\u65b0\u65e5\u5fd7 \u56fa\u4ef6\u7248\u672c.txt",
+      "international": null,
+      "size_c": 2707,
+      "size_i": null,
+      "sha256": "a93eaeae5f7afa5dc4a3bd543e737092c19e27512725df0ae8a59671253b0bf6",
+      "identical": null
+    }
+  ],
+  "chinese_tree_total": 39527455,
+  "intl_tree_total": 11492878,
+  "apk": {
+    "size": 28032675,
+    "sha256": "3fdbbae3c54c399aea6076e5edc65066420433db7c9e88d5f12a171670529c2c"
+  },
+  "chinese": {
+    "01 \u5347\u7ea7\u6559\u7a0b \u8bf7\u770b\u5b98\u7f51\u94fe\u63a5.txt": {
+      "size": 99,
+      "sha256": "27c6009c7a8b06704658e2972a9fbb7f363967881193fe72e53ca6299d0f3108"
+    },
+    "01\u6218\u7532X Pro\u56fa\u4ef6-V41.bup": {
+      "size": 2126734,
+      "sha256": "80eeaf1fe07ed8150cf288a3e0e522cab818ca46e3a13c0adc41f2235b08cc90"
+    },
+    "01\u63a5\u6536\u5668\u56fa\u4ef6-V3600-dongle.bup": {
+      "size": 1847656,
+      "sha256": "e9ef748e6e2d9e0859cba933851ff1649711387abe7ebeb4d28783324a9b8c6f"
+    },
+    "BIGBIG_WON_2.22.1226.apk": {
+      "size": 28032675,
+      "sha256": "3fdbbae3c54c399aea6076e5edc65066420433db7c9e88d5f12a171670529c2c"
+    },
+    "BTUpgrade_V1.9/BTUpgrade.dll": {
+      "size": 340512,
+      "sha256": "dbb16755f15c99afa37e324cfbb1ec2cb25a2504ce66657fc37a8223f4917821"
+    },
+    "BTUpgrade_V1.9/BTUpgrade_HX.dll": {
+      "size": 364576,
+      "sha256": "c2ee97a4975182146b9093492e68a3336cdd529d97696ea4d013066ec9c4dda6"
+    },
+    "BTUpgrade_V1.9/BUpgrade.exe": {
+      "size": 2088960,
+      "sha256": "385aeca9d1ead883ace8759a5362a01711e092c9f9808750dca6f4c4c0c4619c"
+    },
+    "BTUpgrade_V1.9/Devices.dll": {
+      "size": 2135040,
+      "sha256": "e8888d62f792293f88170b5ffe1830d18d17039f08b8d839f010b762040f2a21"
+    },
+    "BTUpgrade_V1.9/Skin.dll": {
+      "size": 86645,
+      "sha256": "0ddb8d7c5b0b6efe904e6645c9fd95a48f968cd221de8908a7ea0b7f4184478f"
+    },
+    "BTUpgrade_V1.9/USBUpgrade.dll": {
+      "size": 8704,
+      "sha256": "fad660bc7e006c58f37db9d75b72bf30c089ef62fc4e72673cbfd424d247b5e5"
+    },
+    "BTUpgrade_V1.9/Upgrade.dll": {
+      "size": 2489856,
+      "sha256": "d4a4bf0bca2b564a3616dc7c81983b4083e3387ad918a215d8013a9f07f283a3"
+    },
+    "BTUpgrade_V1.9/bugrade.log": {
+      "size": 1951,
+      "sha256": "b8cd424a86cfef31f55a45aef038b85176d9d23a15dd6c7604c95c560593cf29"
+    },
+    "\u66f4\u65b0\u65e5\u5fd7 APP\u7248\u672c.txt": {
+      "size": 1340,
+      "sha256": "f571b9ea9a0c4b564d8bc689ce20d62e5365d58e81ed8ed056938801c6330afe"
+    },
+    "\u66f4\u65b0\u65e5\u5fd7 \u56fa\u4ef6\u7248\u672c.txt": {
+      "size": 2707,
+      "sha256": "a93eaeae5f7afa5dc4a3bd543e737092c19e27512725df0ae8a59671253b0bf6"
+    }
+  },
+  "international": {
+    "BTUpgrade_V1.9/BTUpgrade.dll": {
+      "size": 340512,
+      "sha256": "dbb16755f15c99afa37e324cfbb1ec2cb25a2504ce66657fc37a8223f4917821"
+    },
+    "BTUpgrade_V1.9/BTUpgrade_HX.dll": {
+      "size": 364576,
+      "sha256": "c2ee97a4975182146b9093492e68a3336cdd529d97696ea4d013066ec9c4dda6"
+    },
+    "BTUpgrade_V1.9/BUpgrade.exe": {
+      "size": 2088960,
+      "sha256": "385aeca9d1ead883ace8759a5362a01711e092c9f9808750dca6f4c4c0c4619c"
+    },
+    "BTUpgrade_V1.9/Devices.dll": {
+      "size": 2135040,
+      "sha256": "e8888d62f792293f88170b5ffe1830d18d17039f08b8d839f010b762040f2a21"
+    },
+    "BTUpgrade_V1.9/Skin.dll": {
+      "size": 86645,
+      "sha256": "0ddb8d7c5b0b6efe904e6645c9fd95a48f968cd221de8908a7ea0b7f4184478f"
+    },
+    "BTUpgrade_V1.9/USBUpgrade.dll": {
+      "size": 8704,
+      "sha256": "fad660bc7e006c58f37db9d75b72bf30c089ef62fc4e72673cbfd424d247b5e5"
+    },
+    "BTUpgrade_V1.9/Upgrade.dll": {
+      "size": 2489856,
+      "sha256": "d4a4bf0bca2b564a3616dc7c81983b4083e3387ad918a215d8013a9f07f283a3"
+    },
+    "BTUpgrade_V1.9/bugrade.log": {
+      "size": 1951,
+      "sha256": "b8cd424a86cfef31f55a45aef038b85176d9d23a15dd6c7604c95c560593cf29"
+    },
+    "Firmware ArmorX-Pro V41.bup": {
+      "size": 2126734,
+      "sha256": "80eeaf1fe07ed8150cf288a3e0e522cab818ca46e3a13c0adc41f2235b08cc90"
+    },
+    "Firmware USB dongle V3600.bup": {
+      "size": 1847656,
+      "sha256": "e9ef748e6e2d9e0859cba933851ff1649711387abe7ebeb4d28783324a9b8c6f"
+    },
+    "upgrade log-Firmware.txt": {
+      "size": 2244,
+      "sha256": "d7cf6fe4aae69bdbf707920cadf6f30f43849d0cde2ad58dd5773e01dbf1ab08"
+    }
+  },
+  "v32": {
+    "Pro\u7248\u56fa\u4ef6-\u6218\u7532 V32/\u6218\u7532pro\u56fa\u4ef6V32.bup": {
+      "size": 1048972,
+      "sha256": "b13f66559b21b56ca8c72effcd05236c998262a851bfd4ceff1c110303c463d2"
+    },
+    "Pro\u7248\u56fa\u4ef6-\u6218\u7532 V32/\u63a5\u6536\u5668\u56fa\u4ef6V3000-dongle.bup": {
+      "size": 866148,
+      "sha256": "1f16627342413516887ae68b765027e05ca9a187bb90bf6b21c452749d862cfd"
+    },
+    "Pro\u7248\u56fa\u4ef6-\u6218\u7532 V32/\u66f4\u65b0\u65e5\u5fd7 APP\u7248\u672c.txt": {
+      "size": 978,
+      "sha256": "e9f65ff65ccff40d2b4ef0fd513975ff97bec6a8aede2cd1e72cd13af1f21934"
+    },
+    "Pro\u7248\u56fa\u4ef6-\u6218\u7532 V32/\u66f4\u65b0\u65e5\u5fd7 \u56fa\u4ef6\u7248\u672c.txt": {
+      "size": 972,
+      "sha256": "4353d1a89d51f837f42bd3a8831f16d9a1e6465db7eb480683e6596aca99b848"
+    },
+    "\u58a8\u5c06\u5347\u7ea7\u5de5\u5177BUpgrade v1.1(log).7z": {
+      "size": 1668629,
+      "sha256": "ca9cbe8a9bc981a5999ac609740f1d6ac9cf0d5b5464f98964ecd9ab7f6d8348"
+    }
+  },
+  "comparison_collapsed_by_hash": [
+    {
+      "artifact_sha256": "3fdbbae3c54c399aea6076e5edc65066420433db7c9e88d5f12a171670529c2c",
+      "size": 28032675,
+      "names": [
+        "BIGBIG_WON_2.22.1226.apk"
+      ],
+      "verdict": "CHINESE_ONLY"
+    },
+    {
+      "artifact_sha256": "d4a4bf0bca2b564a3616dc7c81983b4083e3387ad918a215d8013a9f07f283a3",
+      "size": 2489856,
+      "names": [
+        "BTUpgrade_V1.9/Upgrade.dll",
+        "BTUpgrade_V1.9/Upgrade.dll"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "e8888d62f792293f88170b5ffe1830d18d17039f08b8d839f010b762040f2a21",
+      "size": 2135040,
+      "names": [
+        "BTUpgrade_V1.9/Devices.dll",
+        "BTUpgrade_V1.9/Devices.dll"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "80eeaf1fe07ed8150cf288a3e0e522cab818ca46e3a13c0adc41f2235b08cc90",
+      "size": 2126734,
+      "names": [
+        "01\u6218\u7532X Pro\u56fa\u4ef6-V41.bup",
+        "Firmware ArmorX-Pro V41.bup"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "385aeca9d1ead883ace8759a5362a01711e092c9f9808750dca6f4c4c0c4619c",
+      "size": 2088960,
+      "names": [
+        "BTUpgrade_V1.9/BUpgrade.exe",
+        "BTUpgrade_V1.9/BUpgrade.exe"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "e9ef748e6e2d9e0859cba933851ff1649711387abe7ebeb4d28783324a9b8c6f",
+      "size": 1847656,
+      "names": [
+        "01\u63a5\u6536\u5668\u56fa\u4ef6-V3600-dongle.bup",
+        "Firmware USB dongle V3600.bup"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "c2ee97a4975182146b9093492e68a3336cdd529d97696ea4d013066ec9c4dda6",
+      "size": 364576,
+      "names": [
+        "BTUpgrade_V1.9/BTUpgrade_HX.dll",
+        "BTUpgrade_V1.9/BTUpgrade_HX.dll"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "dbb16755f15c99afa37e324cfbb1ec2cb25a2504ce66657fc37a8223f4917821",
+      "size": 340512,
+      "names": [
+        "BTUpgrade_V1.9/BTUpgrade.dll",
+        "BTUpgrade_V1.9/BTUpgrade.dll"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "0ddb8d7c5b0b6efe904e6645c9fd95a48f968cd221de8908a7ea0b7f4184478f",
+      "size": 86645,
+      "names": [
+        "BTUpgrade_V1.9/Skin.dll",
+        "BTUpgrade_V1.9/Skin.dll"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "fad660bc7e006c58f37db9d75b72bf30c089ef62fc4e72673cbfd424d247b5e5",
+      "size": 8704,
+      "names": [
+        "BTUpgrade_V1.9/USBUpgrade.dll",
+        "BTUpgrade_V1.9/USBUpgrade.dll"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "a93eaeae5f7afa5dc4a3bd543e737092c19e27512725df0ae8a59671253b0bf6",
+      "size": 2707,
+      "names": [
+        "\u66f4\u65b0\u65e5\u5fd7 \u56fa\u4ef6\u7248\u672c.txt"
+      ],
+      "verdict": "CHINESE_ONLY"
+    },
+    {
+      "artifact_sha256": "d7cf6fe4aae69bdbf707920cadf6f30f43849d0cde2ad58dd5773e01dbf1ab08",
+      "size": 2244,
+      "names": [
+        "upgrade log-Firmware.txt"
+      ],
+      "verdict": "INTERNATIONAL_ONLY"
+    },
+    {
+      "artifact_sha256": "b8cd424a86cfef31f55a45aef038b85176d9d23a15dd6c7604c95c560593cf29",
+      "size": 1951,
+      "names": [
+        "BTUpgrade_V1.9/bugrade.log",
+        "BTUpgrade_V1.9/bugrade.log"
+      ],
+      "verdict": "IDENTICAL_PRESENT_IN_BOTH"
+    },
+    {
+      "artifact_sha256": "f571b9ea9a0c4b564d8bc689ce20d62e5365d58e81ed8ed056938801c6330afe",
+      "size": 1340,
+      "names": [
+        "\u66f4\u65b0\u65e5\u5fd7 APP\u7248\u672c.txt"
+      ],
+      "verdict": "CHINESE_ONLY"
+    },
+    {
+      "artifact_sha256": "27c6009c7a8b06704658e2972a9fbb7f363967881193fe72e53ca6299d0f3108",
+      "size": 99,
+      "names": [
+        "01 \u5347\u7ea7\u6559\u7a0b \u8bf7\u770b\u5b98\u7f51\u94fe\u63a5.txt"
+      ],
+      "verdict": "CHINESE_ONLY"
+    }
+  ],
+  "answer": {
+    "firmware_payload_identical": true,
+    "armorx_v41_bup_sha256": "80eeaf1fe07ed8150cf288a3e0e522cab818ca46e3a13c0adc41f2235b08cc90",
+    "dongle_v3600_bup_sha256": "e9ef748e6e2d9e0859cba933851ff1649711387abe7ebeb4d28783324a9b8c6f",
+    "all_7_updater_files_identical": true,
+    "size_difference_explanation": "the Chinese package ships the 28,032,675-byte Android APK BIGBIG_WON_2.22.1226.apk; the international package omits it. 28,034,577 B total difference = APK + 1,902 B of CN-only text logs.",
+    "chinese_tree_total_bytes": 39527455,
+    "intl_tree_total_bytes": 11492878
+  }
+}

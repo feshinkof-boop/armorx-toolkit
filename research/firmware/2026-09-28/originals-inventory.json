@@ -1,0 +1,94 @@
+{
+  "generated": "2026-09-28T08:18:41-0400",
+  "source_dir": "/home/salamanka/Downloads",
+  "files": [
+    {
+      "filename": "\u6218\u7532Xpro \u56fa\u4ef6V41.zip",
+      "downloads_path": "/home/salamanka/Downloads/\u6218\u7532Xpro \u56fa\u4ef6V41.zip",
+      "size": 36528812,
+      "size_human": "34.837 MiB",
+      "mtime": "2026-09-28T08:09:33-0400",
+      "mtime_ns": 1790597373961425892,
+      "inode": 264451,
+      "mode": "0o100664",
+      "file": "Zip archive data, at least v2.0 to extract, compression method=store",
+      "mime": "application/zip",
+      "xattrs": {},
+      "hashes": {
+        "sha256": "2554f7eba6df55d6748fabd414ee9c5219bc171d1c5a595c000e890a1b95a77c",
+        "sha1": "02d390f8cda7d779660014ec46c1951b3116ee72",
+        "md5": "d5729ae68d804cda89fca968d49bae8d",
+        "blake2b": "d4754af93166f8601541f3446d4e5759335b8b83a9b7636649f2f414e433b56a160fadd7e6ab1f0d3b43efd847d157249547597201ddebf6157a226b20751e94",
+        "blake3": "unavailable"
+      },
+      "evidence_copy": "/home/salamanka/armorx-lab/research/firmware/2026-09-28/originals/\u6218\u7532Xpro \u56fa\u4ef6V41.zip",
+      "evidence_copy_readonly": true
+    },
+    {
+      "filename": "\u6218\u7532Xpro \u56fa\u4ef6V32 20220815.rar",
+      "downloads_path": "/home/salamanka/Downloads/\u6218\u7532Xpro \u56fa\u4ef6V32 20220815.rar",
+      "size": 3364439,
+      "size_human": "3.209 MiB",
+      "mtime": "2026-09-28T08:06:40-0400",
+      "mtime_ns": 1790597200447920285,
+      "inode": 264249,
+      "mode": "0o100664",
+      "file": "RAR archive data, v5",
+      "mime": "application/vnd.rar",
+      "xattrs": {},
+      "hashes": {
+        "sha256": "895eff064e1769e53625f5f24804ae5e43b34d3a324467a1467f4c85b37bfaa5",
+        "sha1": "e99cde149263e3ae4d38e59d74354d1d117d3da6",
+        "md5": "f7dd7b3e03b352845bdbc23115734fef",
+        "blake2b": "ae261b7c2bc5f3baab57125f79cf76d76a158dea3799b645e9fc7ba6367927a7a33855e010d7d2bd1bca57536b9ef92fc20cafb46568f285417969e7ed977205",
+        "blake3": "unavailable"
+      },
+      "evidence_copy": "/home/salamanka/armorx-lab/research/firmware/2026-09-28/originals/\u6218\u7532Xpro \u56fa\u4ef6V32 20220815.rar",
+      "evidence_copy_readonly": true
+    },
+    {
+      "filename": "ArmorX-Pro-Firmware-V2224.bup",
+      "downloads_path": "/home/salamanka/Downloads/ArmorX-Pro-Firmware-V2224.bup",
+      "size": 970968,
+      "size_human": "0.926 MiB",
+      "mtime": "2026-09-28T08:06:14-0400",
+      "mtime_ns": 1790597174024604705,
+      "inode": 264356,
+      "mode": "0o100664",
+      "file": "data",
+      "mime": "application/octet-stream",
+      "xattrs": {},
+      "hashes": {
+        "sha256": "fac80953f97f6e2e49dc3d1b2b188a0eda8f7c5f5a2e8007e7feb74e0d4ebbcb",
+        "sha1": "6155a9bd64d49967be044ca571589ba4b9b4fdd7",
+        "md5": "0c89b13da60c1e21c1da1b2134ae9e12",
+        "blake2b": "37cd641331ac8c400b51f25da549fcc0e808512bcb44ec8b7494bc9713663c42190700d1320d115cea86daf361d30790fd2586b8b3fa9e4c82ba623e15ce4f5f",
+        "blake3": "unavailable"
+      },
+      "evidence_copy": "/home/salamanka/armorx-lab/research/firmware/2026-09-28/originals/ArmorX-Pro-Firmware-V2224.bup",
+      "evidence_copy_readonly": true
+    },
+    {
+      "filename": "Firmware ArmorX-Pro V41.rar",
+      "downloads_path": "/home/salamanka/Downloads/Firmware ArmorX-Pro V41.rar",
+      "size": 6070709,
+      "size_human": "5.789 MiB",
+      "mtime": "2026-09-28T08:05:18-0400",
+      "mtime_ns": 1790597118065054183,
+      "inode": 264251,
+      "mode": "0o100664",
+      "file": "RAR archive data, v5",
+      "mime": "application/vnd.rar",
+      "xattrs": {},
+      "hashes": {
+        "sha256": "feabbfd072ea6090be55c3a59faae5d5b76993bec4e50a430aedb80f86f87ec6",
+        "sha1": "19ee836dae56abcadb075491de0ceede5fc18ec0",
+        "md5": "c513da1c8e721d6aa1c1ff84516cda2f",
+        "blake2b": "955c78e55419224af6a892aea21e95a32724e604b4345351f46024e1d9d2891d5b8991849787ac733f0b420b406dd883a69a3842858f4b633697f12c827d0f0c",
+        "blake3": "unavailable"
+      },
+      "evidence_copy": "/home/salamanka/armorx-lab/research/firmware/2026-09-28/originals/Firmware ArmorX-Pro V41.rar",
+      "evidence_copy_readonly": true
+    }
+  ]
+}

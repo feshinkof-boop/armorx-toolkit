@@ -1,0 +1,223 @@
+{
+  "generated": "2026-09-28T08:24:55-0400",
+  "packages": [
+    {
+      "source": "research/firmware/2026-09-28/chinese-v41/01\u6218\u7532X Pro\u56fa\u4ef6-V41.bup",
+      "size": 2126734,
+      "sha256": "80eeaf1fe07ed8150cf288a3e0e522cab818ca46e3a13c0adc41f2235b08cc90",
+      "bup_header": {
+        "magic": "BigBigWon Upgrade Pack",
+        "format_revision": "0x00010000",
+        "board_code": "0x001d0100",
+        "board_code_low": 0,
+        "board_code_model": 1,
+        "version_string": "V41",
+        "slot_a_name": "XT_XBOX_update_s_v41_20230208.uf",
+        "slot_b_name": "XT_XBOX_update_s_v41_20230209.uf",
+        "file": "research/firmware/2026-09-28/chinese-v41/01\u6218\u7532X Pro\u56fa\u4ef6-V41.bup",
+        "file_size": 2126734,
+        "first_record_offset": 143,
+        "slot_a_span": 1063293,
+        "slot_a_span_matches": true,
+        "chunk_count": 35,
+        "image_size": 1124288,
+        "image_sha256": "3c73727214801bea5097ad289c6672db3cca6dc9aaf5ea52cf5a81ff0598de26",
+        "slot_b_span": 1063294,
+        "slots_with_data": [
+          "XT_XBOX_update_s_v41_20230208.uf",
+          "XT_XBOX_update_s_v41_20230209.uf"
+        ]
+      },
+      "chunks": 35,
+      "images": [
+        {
+          "slot": 0,
+          "name": "XT_XBOX_update_s_v41_20230208.uf",
+          "path": "research/firmware/2026-09-28/unpacked/01\u6218\u7532X Pro\u56fa\u4ef6-V41__slot0_XT_XBOX_update_s_v41_20230208.image.bin",
+          "size": 1124288,
+          "sha256": "3c73727214801bea5097ad289c6672db3cca6dc9aaf5ea52cf5a81ff0598de26",
+          "jieli": {
+            "stdout": "#\n# research/firmware/2026-09-28/unpacked/01\u6218\u7532X Pro\u56fa\u4ef6-V41__slot0_XT_XBOX_update_s_v41_20230208.image.bin\n#\n\n[!] [Errno 2] No such file or directory: 'research/firmware/2026-09-28/unpacked/01\u6218\u7532X Pro\u56fa\u4ef6-V41__slot0_XT_XBOX_update_s_v41_20230208.image.bin'\n\n",
+            "returncode": 0
+          }
+        },
+        {
+          "slot": 1,
+          "name": "XT_XBOX_update_s_v41_20230209.uf",
+          "path": "research/firmware/2026-09-28/unpacked/01\u6218\u7532X Pro\u56fa\u4ef6-V41__slot1_XT_XBOX_update_s_v41_20230209.image.bin",
+          "size": 1124288,
+          "sha256": "94adda19631f0c3bb8ddd24ec831477153eac1beb67fb4ca734a93fe7eeb2a04"
+        }
+      ]
+    },
+    {
+      "source": "research/firmware/2026-09-28/intl-v41/Firmware USB dongle V3600.bup",
+      "size": 1847656,
+      "sha256": "e9ef748e6e2d9e0859cba933851ff1649711387abe7ebeb4d28783324a9b8c6f",
+      "bup_header": {
+        "magic": "BigBigWon Upgrade Pack",
+        "format_revision": "0x00010000",
+        "board_code": "0x001e0100",
+        "board_code_low": 0,
+        "board_code_model": 1,
+        "version_string": "V360",
+        "slot_a_name": "XT_DONGLE_update_v36_20221116.uf",
+        "slot_b_name": "XT_DONGLE_updateHJX_v36_20221116",
+        "file": "research/firmware/2026-09-28/intl-v41/Firmware USB dongle V3600.bup",
+        "file_size": 1847656,
+        "first_record_offset": 143,
+        "slot_a_span": 923740,
+        "slot_a_span_matches": true,
+        "chunk_count": 31,
+        "image_size": 989120,
+        "image_sha256": "dcfc58886e132db06d91a5a7b290868d83ad9bbbae1115d78d2bb3f3ce9d8a35",
+        "slot_b_span": 923769,
+        "slots_with_data": [
+          "XT_DONGLE_update_v36_20221116.uf",
+          "XT_DONGLE_updateHJX_v36_20221116"
+        ]
+      },
+      "chunks": 31,
+      "images": [
+        {
+          "slot": 0,
+          "name": "XT_DONGLE_update_v36_20221116.uf",
+          "path": "research/firmware/2026-09-28/unpacked/Firmware USB dongle V3600__slot0_XT_DONGLE_update_v36_20221116.image.bin",
+          "size": 989120,
+          "sha256": "dcfc58886e132db06d91a5a7b290868d83ad9bbbae1115d78d2bb3f3ce9d8a35",
+          "jieli": {
+            "stdout": "#\n# research/firmware/2026-09-28/unpacked/Firmware USB dongle V3600__slot0_XT_DONGLE_update_v36_20221116.image.bin\n#\n\n[!] [Errno 2] No such file or directory: 'research/firmware/2026-09-28/unpacked/Firmware USB dongle V3600__slot0_XT_DONGLE_update_v36_20221116.image.bin'\n\n",
+            "returncode": 0
+          }
+        },
+        {
+          "slot": 1,
+          "name": "XT_DONGLE_updateHJX_v36_20221116",
+          "path": "research/firmware/2026-09-28/unpacked/Firmware USB dongle V3600__slot1_XT_DONGLE_updateHJX_v36_20221116.image.bin",
+          "size": 989120,
+          "sha256": "663fdc85bfd77b09d6710fbc151b7688bb0eab9e728316522b6777cca3164b50"
+        }
+      ]
+    },
+    {
+      "source": "research/firmware/2026-09-28/v32/Pro\u7248\u56fa\u4ef6-\u6218\u7532 V32/\u6218\u7532pro\u56fa\u4ef6V32.bup",
+      "size": 1048972,
+      "sha256": "b13f66559b21b56ca8c72effcd05236c998262a851bfd4ceff1c110303c463d2",
+      "bup_header": {
+        "magic": "BigBigWon Upgrade Pack",
+        "format_revision": "0x00010000",
+        "board_code": "0x00160100",
+        "board_code_low": 0,
+        "board_code_model": 1,
+        "version_string": "V32",
+        "slot_a_name": "null.bin",
+        "slot_b_name": "te_s_v32_20220806.ufw",
+        "file": "research/firmware/2026-09-28/v32/Pro\u7248\u56fa\u4ef6-\u6218\u7532 V32/\u6218\u7532pro\u56fa\u4ef6V32.bup",
+        "file_size": 1048972,
+        "first_record_offset": 123,
+        "slot_a_span": 1048849,
+        "slot_a_span_matches": true,
+        "chunk_count": 34,
+        "image_size": 1109440,
+        "image_sha256": "9dc7c2a67a358fb148555f5da5b6a39469a3f516ae30e976de80eb45a29c3c83",
+        "slots_with_data": [
+          "null.bin"
+        ]
+      },
+      "chunks": 34,
+      "images": [
+        {
+          "slot": 0,
+          "name": "null.bin",
+          "path": "research/firmware/2026-09-28/unpacked/\u6218\u7532pro\u56fa\u4ef6V32__slot0_null.image.bin",
+          "size": 1109440,
+          "sha256": "9dc7c2a67a358fb148555f5da5b6a39469a3f516ae30e976de80eb45a29c3c83",
+          "jieli": {
+            "stdout": "#\n# research/firmware/2026-09-28/unpacked/\u6218\u7532pro\u56fa\u4ef6V32__slot0_null.image.bin\n#\n\n[!] [Errno 2] No such file or directory: 'research/firmware/2026-09-28/unpacked/\u6218\u7532pro\u56fa\u4ef6V32__slot0_null.image.bin'\n\n",
+            "returncode": 0
+          }
+        }
+      ]
+    },
+    {
+      "source": "research/firmware/2026-09-28/v32/Pro\u7248\u56fa\u4ef6-\u6218\u7532 V32/\u63a5\u6536\u5668\u56fa\u4ef6V3000-dongle.bup",
+      "size": 866148,
+      "sha256": "1f16627342413516887ae68b765027e05ca9a187bb90bf6b21c452749d862cfd",
+      "bup_header": {
+        "magic": "BigBigWon Upgrade Pack",
+        "format_revision": "0x00010000",
+        "board_code": "0x00170100",
+        "board_code_low": 0,
+        "board_code_model": 1,
+        "version_string": "V300",
+        "slot_a_name": "null.bin",
+        "slot_b_name": "date_v30_20220809.ufw",
+        "file": "research/firmware/2026-09-28/v32/Pro\u7248\u56fa\u4ef6-\u6218\u7532 V32/\u63a5\u6536\u5668\u56fa\u4ef6V3000-dongle.bup",
+        "file_size": 866148,
+        "first_record_offset": 123,
+        "slot_a_span": 866025,
+        "slot_a_span_matches": true,
+        "chunk_count": 29,
+        "image_size": 937920,
+        "image_sha256": "72c0e2f8eef02cf046f1234bc045eb00a0c4c286abaf1771d3563a0d43bc42a6",
+        "slots_with_data": [
+          "null.bin"
+        ]
+      },
+      "chunks": 29,
+      "images": [
+        {
+          "slot": 0,
+          "name": "null.bin",
+          "path": "research/firmware/2026-09-28/unpacked/\u63a5\u6536\u5668\u56fa\u4ef6V3000-dongle__slot0_null.image.bin",
+          "size": 937920,
+          "sha256": "72c0e2f8eef02cf046f1234bc045eb00a0c4c286abaf1771d3563a0d43bc42a6",
+          "jieli": {
+            "stdout": "#\n# research/firmware/2026-09-28/unpacked/\u63a5\u6536\u5668\u56fa\u4ef6V3000-dongle__slot0_null.image.bin\n#\n\n[!] [Errno 2] No such file or directory: 'research/firmware/2026-09-28/unpacked/\u63a5\u6536\u5668\u56fa\u4ef6V3000-dongle__slot0_null.image.bin'\n\n",
+            "returncode": 0
+          }
+        }
+      ]
+    },
+    {
+      "source": "research/firmware/2026-09-28/originals/ArmorX-Pro-Firmware-V2224.bup",
+      "size": 970968,
+      "sha256": "fac80953f97f6e2e49dc3d1b2b188a0eda8f7c5f5a2e8007e7feb74e0d4ebbcb",
+      "bup_header": {
+        "magic": "BigBigWon Upgrade Pack",
+        "format_revision": "0x00010000",
+        "board_code": "0x00000100",
+        "board_code_low": 0,
+        "board_code_model": 1,
+        "version_string": "2224",
+        "slot_a_name": "1.bin",
+        "slot_b_name": "te_s_v24_20220613.ufw",
+        "file": "research/firmware/2026-09-28/originals/ArmorX-Pro-Firmware-V2224.bup",
+        "file_size": 970968,
+        "first_record_offset": 123,
+        "slot_a_span": 970845,
+        "slot_a_span_matches": true,
+        "chunk_count": 32,
+        "image_size": 1037760,
+        "image_sha256": "65940d0b0756b624c475a9f8d6c1e301e72be7fbe37fb908684f9d6d7a9a0df2",
+        "slots_with_data": [
+          "1.bin"
+        ]
+      },
+      "chunks": 32,
+      "images": [
+        {
+          "slot": 0,
+          "name": "1.bin",
+          "path": "research/firmware/2026-09-28/unpacked/ArmorX-Pro-Firmware-V2224__slot0_1.image.bin",
+          "size": 1037760,
+          "sha256": "65940d0b0756b624c475a9f8d6c1e301e72be7fbe37fb908684f9d6d7a9a0df2",
+          "jieli": {
+            "stdout": "#\n# research/firmware/2026-09-28/unpacked/ArmorX-Pro-Firmware-V2224__slot0_1.image.bin\n#\n\n[!] [Errno 2] No such file or directory: 'research/firmware/2026-09-28/unpacked/ArmorX-Pro-Firmware-V2224__slot0_1.image.bin'\n\n",
+            "returncode": 0
+          }
+        }
+      ]
+    }
+  ]
+}
