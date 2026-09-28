@@ -9,6 +9,8 @@ ble/bumble/venv/**
 logs/**
 ble/virtual-armorx/logs/**
 *.bin
+!results/linux-driver/hid-report-descriptor.bin
+*.pcap
 # emulator disk images and downloaded binaries are not source
 avd/research/avd-home/**
 avd/reference/avd-home/**

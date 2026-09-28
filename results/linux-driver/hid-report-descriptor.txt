@@ -1,0 +1,24 @@
+# F20 (413d:2106) HID report descriptor - decoded
+# raw=067aff0901a1010902a1000903150025ff75089540810209059102c0c0  len=29  sha256=f0e418decf688e7409ccebc1beb79a8d8c8c60e5c70150c5de7b056575bb366f
+
+06 7A    Usage Page             0xff7a
+09 01    Usage                  0x1
+A1 01    Collection             0x1
+09 02    Usage                  0x2
+A1 00    Collection             0x0
+09 03    Usage                  0x3
+15 00    Logical Min            0x0
+25 FF    Logical Max            0xff
+75 08    Report Size            0x8
+95 40    Report Count           0x40
+81 02    Input Data,Var,Abs     0x2
+09 05    Usage                  0x5
+91 02    Output Data,Var,Abs    0x2
+C0       End Collection         
+C0       End Collection         
+
+Conclusion: one application collection on Usage Page 0xFF7A with a 64-byte
+variable input report and a 64-byte variable output report, NO report ID, and NO
+standard gamepad usages (no buttons, no axes). This is a vendor passthrough device:
+the kernel creates hidraw but no /dev/input/event node, which matches the live node list.
+The 64-byte wMaxPacketSize equals the 64-byte report count, so reports are unfragmented.

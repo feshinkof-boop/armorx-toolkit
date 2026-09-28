@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "f20_connect_pristine",
+ "response": "done",
+ "clicked_at": "2026-09-28T14:56:49.837746-04:00",
+ "pid": 31972,
+ "title": "ARMOR-X ACTION REQUIRED - CONNECT F20",
+ "gui": "PySide6"
+}

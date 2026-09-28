@@ -1,0 +1,60 @@
+[   61.056339] wlxe84e068af1ff: authenticated
+[   61.057412] wlxe84e068af1ff: associate with 72:62:8b:74:4e:20 (try 1/3)
+[   61.076935] wlxe84e068af1ff: RX AssocResp from 72:62:8b:74:4e:20 (capab=0x1411 status=0 aid=20)
+[   61.077492] usb 1-8: rtl8xxxu_bss_info_changed: HT supported
+[   61.078333] wlxe84e068af1ff: associated
+[   61.437568] wlxe84e068af1ff: Limiting TX power to 30 (30 - 0) dBm as advertised by 72:62:8b:74:4e:20
+[   68.002289] wlxe84e068af1ff: deauthenticating from 72:62:8b:74:4e:20 by local choice (Reason: 3=DEAUTH_LEAVING)
+[   72.967461] audit: type=1400 audit(1790602553.396:259): apparmor="DENIED" operation="open" class="file" profile="snap.firefox.firefox" name="/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/snap.firefox.firefox-be36cf68-d054-4032-a090-6108a3ac492e.scope/cpu.max" pid=4043 comm=57656220436F6E74656E74 requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+[   76.792219] audit: type=1400 audit(1790602557.221:260): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[   81.565627] audit: type=1400 audit(1790602561.995:261): apparmor="DENIED" operation="open" class="file" profile="snap.firefox.firefox" name="/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/snap.firefox.firefox-be36cf68-d054-4032-a090-6108a3ac492e.scope/cpu.max" pid=4109 comm=57656220436F6E74656E74 requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+[   82.903811] audit: type=1400 audit(1790602563.333:262): apparmor="DENIED" operation="open" class="file" profile="snap.firefox.firefox" name="/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/snap.firefox.firefox-be36cf68-d054-4032-a090-6108a3ac492e.scope/cpu.max" pid=4147 comm=57656220436F6E74656E74 requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+[   96.302487] audit: type=1400 audit(1790602576.730:263): apparmor="DENIED" operation="open" class="file" profile="snap.firefox.firefox" name="/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/snap.firefox.firefox-be36cf68-d054-4032-a090-6108a3ac492e.scope/cpu.max" pid=4255 comm=57656220436F6E74656E74 requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+[   96.302587] audit: type=1400 audit(1790602576.730:264): apparmor="DENIED" operation="open" class="file" profile="snap.firefox.firefox" name="/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/app.slice/snap.firefox.firefox-be36cf68-d054-4032-a090-6108a3ac492e.scope/cpu.max" pid=4249 comm=57656220436F6E74656E74 requested_mask="r" denied_mask="r" fsuid=1000 ouid=1000
+[   96.517148] audit: type=1400 audit(1790602576.945:265): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[   96.672659] audit: type=1400 audit(1790602577.100:266): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[   96.700958] audit: type=1400 audit(1790602577.128:267): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[   96.771591] audit: type=1400 audit(1790602577.199:268): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[  835.314863] audit: type=1400 audit(1790603315.721:269): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[  855.187781] audit: type=1400 audit(1790603335.593:270): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 1385.589074] perf: interrupt took too long (2517 > 2500), lowering kernel.perf_event_max_sample_rate to 79000
+[ 1562.402895] audit: type=1400 audit(1790604042.791:271): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 1580.977493] audit: type=1400 audit(1790604061.365:272): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 2002.779667] perf: interrupt took too long (3240 > 3146), lowering kernel.perf_event_max_sample_rate to 61000
+[ 2054.410706] audit: type=1400 audit(1790604534.786:273): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 2738.573706] audit: type=1400 audit(1790605218.930:274): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 2903.470465] audit: type=1400 audit(1790605383.824:275): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 3452.137238] audit: type=1400 audit(1790605932.475:276): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 3452.625113] audit: type=1400 audit(1790605932.963:277): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 4126.238944] audit: type=1400 audit(1790606606.559:278): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 4296.194689] audit: type=1400 audit(1790606776.510:279): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 4658.063602] audit: type=1400 audit(1790607138.370:280): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 4775.201129] perf: interrupt took too long (4064 > 4050), lowering kernel.perf_event_max_sample_rate to 49000
+[ 4928.414799] audit: type=1400 audit(1790607408.714:281): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[ 5263.654086] audit: type=1400 audit(1790607743.944:282): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[14437.319882] lockdown_is_locked_down: 5 callbacks suppressed
+[14437.319885] Lockdown: systemd-logind: hibernation is restricted; see man kernel_lockdown.7
+[14437.321803] Lockdown: systemd-logind: hibernation is restricted; see man kernel_lockdown.7
+[14437.321917] Lockdown: systemd-logind: hibernation is restricted; see man kernel_lockdown.7
+[14437.322025] Lockdown: systemd-logind: hibernation is restricted; see man kernel_lockdown.7
+[14437.322033] Lockdown: systemd-logind: hibernation is restricted; see man kernel_lockdown.7
+[17787.827218] audit: type=1400 audit(1790620267.791:283): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[18036.993924] audit: type=1400 audit(1790620516.950:284): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[18312.554695] audit: type=1400 audit(1790620792.504:285): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[18639.731747] audit: type=1400 audit(1790621119.672:286): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[18792.258435] audit: type=1400 audit(1790621272.195:287): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[18836.444195] audit: type=1400 audit(1790621316.380:288): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[18940.014418] audit: type=1400 audit(1790621419.947:289): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[19031.784050] audit: type=1400 audit(1790621511.715:290): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[19062.850087] audit: type=1400 audit(1790621542.780:291): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[19162.242612] audit: type=1400 audit(1790621642.171:292): apparmor="DENIED" operation="symlink" class="file" profile="snap.firefox.firefox" name="/dev/char/195:254" pid=2585 comm="CanvasRenderer" requested_mask="c" denied_mask="c" fsuid=1000 ouid=1000
+[19267.667249] audit: type=1400 audit(1790621747.592:293): apparmor="DENIED" operation="capable" class="cap" profile="tcpdump" pid=31793 comm="tcpdump" capability=2  capname="dac_read_search"
+[19272.017825] audit: type=1400 audit(1790621751.942:294): apparmor="DENIED" operation="open" class="file" profile="tshark" name="/proc/sys/vm/nr_hugepages" pid=31869 comm="tshark" requested_mask="r" denied_mask="r" fsuid=0 ouid=0
+[19272.218390] audit: type=1400 audit(1790621752.143:295): apparmor="DENIED" operation="ptrace" class="ptrace" profile="tshark" pid=31869 comm="tshark" requested_mask="read" denied_mask="read" peer="unconfined"
+[19272.230797] audit: type=1400 audit(1790621752.155:296): apparmor="DENIED" operation="open" class="file" profile="tshark" name="/home/salamanka/armorx-lab/results/experiments/f20-usb-baseline-20260928-145536/usbmon/f20-insertion.pcap" pid=31869 comm="tshark" requested_mask="r" denied_mask="r" fsuid=0 ouid=983
+[19321.864102] usb 1-7: new full-speed USB device number 5 using xhci_hcd
+[19321.991295] usb 1-7: New USB device found, idVendor=413d, idProduct=2106, bcdDevice= 1.00
+[19321.991302] usb 1-7: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[19321.991304] usb 1-7: Product: HID zk
+[19321.991305] usb 1-7: Manufacturer: Zikway
+[19322.001124] hid-generic 0003:413D:2106.0003: hiddev1,hidraw2: USB HID v1.11 Device [Zikway HID zk] on usb-0000:00:14.0-7/input0

@@ -1,0 +1,21 @@
+ls: cannot access '/dev/input/js*': No such file or directory
+crw------- 1 root root  238,  0 Sep 28 09:34 /dev/hidraw0
+crw------- 1 root root  238,  1 Sep 28 09:34 /dev/hidraw1
+crw-rw---- 1 root input  13, 64 Sep 28 09:34 /dev/input/event0
+crw-rw---- 1 root input  13, 65 Sep 28 09:34 /dev/input/event1
+crw-rw---- 1 root input  13, 74 Sep 28 09:34 /dev/input/event10
+crw-rw---- 1 root input  13, 75 Sep 28 09:34 /dev/input/event11
+crw-rw---- 1 root input  13, 76 Sep 28 09:34 /dev/input/event12
+crw-rw---- 1 root input  13, 77 Sep 28 09:34 /dev/input/event13
+crw-rw---- 1 root input  13, 78 Sep 28 09:34 /dev/input/event14
+crw-rw---- 1 root input  13, 79 Sep 28 09:34 /dev/input/event15
+crw-rw---- 1 root input  13, 80 Sep 28 09:34 /dev/input/event16
+crw-rw---- 1 root input  13, 81 Sep 28 09:34 /dev/input/event17
+crw-rw---- 1 root input  13, 66 Sep 28 09:34 /dev/input/event2
+crw-rw---- 1 root input  13, 67 Sep 28 09:34 /dev/input/event3
+crw-rw---- 1 root input  13, 68 Sep 28 09:34 /dev/input/event4
+crw-rw---- 1 root input  13, 69 Sep 28 09:34 /dev/input/event5
+crw-rw---- 1 root input  13, 70 Sep 28 09:34 /dev/input/event6
+crw-rw---- 1 root input  13, 71 Sep 28 09:34 /dev/input/event7
+crw-rw---- 1 root input  13, 72 Sep 28 09:34 /dev/input/event8
+crw-rw---- 1 root input  13, 73 Sep 28 09:34 /dev/input/event9

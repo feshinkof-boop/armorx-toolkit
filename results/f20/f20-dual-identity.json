@@ -1,0 +1,130 @@
+{
+ "artifact": "armorx-f20-live-usb",
+ "date": "2026-09-28",
+ "capture": "results/experiments/f20-usb-baseline-20260928-145536",
+ "capture_sha256": "fe9cd775c93ae2962f7d77a0772b2a57d06914fe450f570260f14fc663385601",
+ "headline": "The F20 is a DUAL-IDENTITY receiver. With no controller associated it enumerates as a vendor HID device (413d:2106, Zikway 'HID zk', usage page 0xFF7A, 64-byte unfragmented reports, no kernel input node). The moment the ArmorX/Xbox assembly associates wirelessly it DISCONNECTS on the same physical port 1-7 and re-enumerates as a Microsoft Xbox controller (045e:0b12, bcdDevice 5.18) with the xpad driver and a real /dev/input/js0.",
+ "vendor_mode": {
+  "vid_pid": "413d:2106",
+  "manufacturer": "Zikway",
+  "product": "HID zk",
+  "bcdDevice": "1.00",
+  "speed": "full speed 12 Mbps",
+  "interfaces": "1 HID interface, subclass 0 protocol 0, 2 endpoints",
+  "endpoints": "0x83 IN interrupt 64 B bInterval 8; 0x03 OUT interrupt 64 B bInterval 8",
+  "hid_report_descriptor_sha256": "f0e418decf688e7409ccebc1beb79a8d8c8c60e5c70150c5de7b056575bb366f",
+  "hid_report_descriptor_len": 29,
+  "nodes": "hidraw2 + hiddev1, NO /dev/input/event, NO /dev/input/js",
+  "receiver_alone_traffic": "12 interrupt IN URBs and 3 interrupt OUT URBs over 155 s, NONE carrying data; last activity t=73.6 s, then silence. No periodic reports at all."
+ },
+ "xbox_mode": {
+  "vid_pid": "045e:0b12",
+  "bcdDevice": "5.18",
+  "manufacturer": "Microsoft",
+  "product": "Controller",
+  "serial_ascii": "09710769957143",
+  "interfaces": "3, all vendor-specific (subclass 71, protocol 208 = GIP)",
+  "interface0": "xpad bound, 2 endpoints: 0x02 OUT 64 B bInterval 4, 0x82 IN 64 B bInterval 2",
+  "interface1_2": "vendor-specific, no driver bound",
+  "nodes": "/dev/input/js0 and event18, handlers kbd event18 js0; /proc/bus/input/devices Name=Microsoft Xbox Series S|X Controller",
+  "traffic": "17,164 interrupt IN URBs vs 3 before association; 26 control transfers; GIP traffic at roughly 8 ms cadence"
+ },
+ "transition_timeline": [
+  [
+   "19321.864",
+   "usb 1-7: new full-speed USB device number 5",
+   "F20 inserted (vendor mode)"
+  ],
+  [
+   "19322.001",
+   "hid-generic 0003:413D:2106.0003: hiddev1,hidraw2",
+   "vendor HID bound, no /dev/input node"
+  ],
+  [
+   "19341.276",
+   "hid-generic 0003:413D:2106.0004: hiddev1,hidraw2 (again)",
+   "vendor HID re-probe"
+  ],
+  [
+   "19542.747",
+   "usb 1-7: USB disconnect, device number 5",
+   "wireless association tears down vendor identity"
+  ],
+  [
+   "19543.118",
+   "usb 1-7: new full-speed USB device number 6",
+   "re-enumeration attempt"
+  ],
+  [
+   "19543.248",
+   "unable to read config index 0 descriptor/start: -71",
+   "attempt 1 fails"
+  ],
+  [
+   "19543.839",
+   "usb 1-7: new full-speed USB device number 7",
+   "attempt 2"
+  ],
+  [
+   "19543.951",
+   "device descriptor read/64, error -32",
+   "attempt 2 fails"
+  ],
+  [
+   "19544.276",
+   "usb usb1-port7: attempt power cycle",
+   "host power-cycles the port"
+  ],
+  [
+   "19544.655",
+   "usb 1-7: new full-speed USB device number 8",
+   "attempt 3 succeeds"
+  ],
+  [
+   "19544.876",
+   "New USB device found, idVendor=045e, idProduct=0b12, bcdDevice= 5.18",
+   "identity is now a Microsoft Xbox controller"
+  ],
+  [
+   "19544.876",
+   "Product: Controller / Manufacturer: Microsoft / SerialNumber: 3039373130373639393537313433",
+   "strings come from the controller, relayed by the receiver"
+  ],
+  [
+   "19544.937",
+   "input: Microsoft Xbox Series S|X Controller as .../1-7/1-7:1.0/input/input19",
+   "xpad creates the input node"
+  ],
+  [
+   "19544.957",
+   "usbcore: registered new interface driver xpad",
+   "xpad now owns the device"
+  ]
+ ],
+ "gip_samples": {
+  "gip_announce_0x02": "0220021c7eed8791cf2400005e04120b05001800040000000804010001000100",
+  "gip_input_0x20_first": "2000012c010000000000000000000000000000000000000000000000000000000000000000000000f82aa60df82aa60d",
+  "gip_input_0x20_second": "2000022c010000000000000000000000000000000000000000000000000000000000000000000000384aa60d384aa60d",
+  "host_init_out_0x05": "0520000100",
+  "host_init_out_0x0a": "0a200103000114",
+  "host_init_out_0x06": "062002020100"
+ },
+ "hypothesis_status": {
+  "413D:2106": "PROVEN LIVE (vendor mode)",
+  "FF7A": "PROVEN LIVE (vendor mode HID usage page)",
+  "64-byte logical report": "PROVEN LIVE (both modes: report count 0x40 and wMaxPacketSize 0x40)",
+  "previous assumption that F20 keeps exposing the vendor HID interface": "CONTRADICTED - in Xbox mode the HID interface is gone and the device presents three vendor-specific GIP interfaces instead"
+ },
+ "not_done": [
+  "per-control input mapping popups (A/B/X/Y, sticks, triggers) - not run this pass",
+  "female USB port purpose and experiment - untouched, nothing connected",
+  "USB trio correlation with F20 fields - open; the vendor-mode FF7A 64-byte report is the most likely host of the ArmorX vendor protocol"
+ ],
+ "safety": {
+  "popups": "two, both ACKed and closed",
+  "capture": "tcpdump stopped, no process left",
+  "device_writes": "none - passive capture only",
+  "config": "no D7/D8/DPI/lighting/macro/BLE writes",
+  "flash": "none"
+ }
+}
