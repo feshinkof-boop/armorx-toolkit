@@ -1,0 +1,44 @@
+commit 3b2d07de8fec31950531783558333d0844ce388d
+Author:     Hermes Agent <hermes@local>
+AuthorDate: Fri Sep 25 16:22:49 2026 -0400
+Commit:     Hermes Agent <hermes@local>
+CommitDate: Fri Sep 25 16:22:49 2026 -0400
+
+    docs: reconcile verified Android/Windows findings into canonical docs
+    
+    - android-protocol: EF request zeros proven static; EF reply -> devUuid flow;
+      0E narrowed to post-write command; D2 corrected to test-mode UI; dispatch
+      closure section added (E2 absence stated rigorously)
+    - config-format: factory templates, config-length derivation, A4 length-byte
+      rule, 280/484 families (not ARMOR-X Pro)
+    - usb-protocol: AB path decoded (send pacing + marker-delimited receive
+      reassembly); EF request-bytes unknown resolved for Android client
+    - bridge-status: probe timing reviewed against verified Android init order
+    - community-api: three-client endpoint matrix cross-reference
+    - research-status: second-pass static closure milestone recorded
+    - new research notes: EF dataflow, BLE callgraph, server API map,
+      Windows AB/web-bridge/probe-timing
+
+commit c981e7356eb60542759fd9241c92262bffd0e26f
+Author:     Hermes Agent <hermes@local>
+AuthorDate: Fri Sep 25 16:12:23 2026 -0400
+Commit:     Hermes Agent <hermes@local>
+CommitDate: Fri Sep 25 16:12:23 2026 -0400
+
+    research: verify Android frame builders, dispatchers, and default-config templates
+    
+    - verify 2.23.0609 APK identity (sha256 7ed18b77..., versionCode 12) and
+      2.24.0919 (versionCode 24); record provenance in artifact manifest
+    - index 13 (2.23) / 21 (2.24) FFE1 frame-builder functions and 5/10 FFE2
+      response dispatchers from the existing Blutter dumps (no rerun)
+    - reconcile internal list construction vs captured wire frames: length
+      byte = total frame bytes; A4 len = chunk+5; EF request carries eight
+      compiled zero literals; checksums recomputed and validated
+    - extract 4 (2.23) / 8 (2.24) factory default config templates; 240B and
+      484B templates self-validate CRC-16/MODBUS; live ARMOR-X Pro config
+      matches the bc536085 144-byte template except recomputed CRC
+    - prove checkConfigLength derivation (-2/0xFE terminator) and 2.24
+      280/484 length-routed families (C1 Pro-class, not ARMOR-X Pro)
+    - rigorous E2 absence proof for both builds; D2 classified to test-mode UI
+    - semantic 2.23 vs 2.24 differential; opcode index; config family map
+    - add deterministic extraction/index scripts + tests (20 pass)
