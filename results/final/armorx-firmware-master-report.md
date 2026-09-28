@@ -390,3 +390,82 @@ rebase). Image-wide it finds **102 tables, 38 fully aligned** - a candidate pool
 for other dispatchers beyond the command parser. `tools/q32s/q32s_dispatch_full.py` builds the merged
 dispatch model (34 routes) and `tools/firmware/fw_ledger_report.py` renders the
 unknown ledger deterministically from its JSON.
+
+---
+
+## §32 - Protocol family reconciliation (2026-09-28): A5/A4 are ONE opcode space
+
+### 32.1 The contradiction is resolved - there was never a second namespace
+
+The earlier "A5/D6 returns 16 bits" versus "live D6 read 144 bytes" contradiction is closed, and the
+live label was right. `A5` and `A4` are not independent command namespaces: they are the two
+**framing modes** of a single opcode space.
+
+Raw wire evidence, `results/experiments/physical-20260927-170455-noop-d7/raw-tx-rx.log`:
+
+```
+TX a5040bb4                          A5, 4 bytes      status query
+RX a5050b30e5                        A5, 5 bytes      status reply
+TX a414d7012c40009033ff000000000000000000be   A4, 20 bytes, ordinal 01
+TX a414d702..  a414d703.. ... a414d709       A4, 20 bytes, ordinals 02..09
+TX a40ed70a010d191a1b1c1d1e1f65      A4, 14 bytes, ordinal 0a   config write
+RX a505d70081                        A5, 5 bytes      acknowledgement
+TX a504d67f                          A5, 4 bytes      config read (0x7f = sum8 of a5+04+d6)
+RX a414d6012c40...bd ... a40ed60a...64        A4, ordinals 01..0a  config response
+```
+
+The ten `A4/D6` payloads reassemble to **144 bytes** whose SHA-256 is
+`bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6` - the project's durable config
+baseline, an exact match. All 24 frames satisfy the frame checksum (sum8).
+
+### 32.2 Firmware proof of the framing rule
+
+`0x1e05dc0` is the frame builder and it decides the magic by SIZE:
+
+```
+1e05dc4: r2 = 0xa5 ; b[r4+0] = 0xA5            default: single frame
+1e05dcc: r2 = h[r1+0x4]                        payload length from the descriptor
+1e05dce: r3 = capacity - 4
+1e05dd2: ifs (r2 <= r3) goto <single-frame tail>
+1e05dd6: r2 = 0xa4 ; b[r4+0] = 0xA4            does not fit -> fragmented
+1e05dda-1e05de4: nfrags = (len + 2) / (capacity - 5)
+```
+
+For 144 bytes in a 20-byte buffer: `(144+2)/15 = 9.73 -> 10 fragments`, i.e. `9 x 15 + 1 x 9 = 144` -
+exactly the observed wire shape. The `A5/D6` handler `0x1e0921c` extracts the record's big-endian
+**length** field (bytes 2..3 = `0x0090` = 144) from the descriptor at `[state+0x1b0]`; the builder then
+streams the whole 144-byte record. So the handler is a record-read, not a bare 16-bit query.
+
+### 32.3 The frame checksum (FW-U-025, frame half) - `0x1e05dae`
+
+```
+1e05db2: r3 = b[r0 ++= 1]
+1e05db6: r2 += r3
+1e05dbc: r0 = r2.l (u)
+```
+
+Plain **sum8**, distinct from the record CRC-16/MODBUS at `0x1e05628`. Verified against every frame
+in the log. The two mechanisms must never be conflated.
+
+### 32.4 Response path and the FF echo (explains A5/FC)
+
+`0x1e09426` (reached by D6/D7/D8/D9) is `0x1e0642c` (post a response entry, else send directly via
+`0x1e06418`) followed by `0x1fd3d0` (transport send). It then emits an **A5/FF frame whose payload is
+the request's opcode byte** (`0x1e09446: r2 = r9 + 2`, `0x1e0944a: r1 = 0xff`) and, for a non-FF
+request, jumps to the shared tail `0x1e08e5a`. That is exactly live `A5 05 FC 80 26 -> A5 05 FF FC A5`,
+and the local corpus confirms one FF echo per FC request (2 and 2).
+
+### 32.5 RX has no magic check
+
+A whole-image search finds **no compare against 0xA4, 0xA5 or 0xAB**, so the RX parser `0x1e08772`
+accepts either framing. The magic is decided only on the transmit side (`0x1e064b4` checks
+`b[frame+0] == 0xA5`, `0x1e064ce/0x1e064d4` accept `0xA4`, `0x1e064da` reads the ordinal at `frame[3]`).
+
+### 32.6 Retired false positives (corrections, not buried)
+
+* `0x1e0aff2` and `0x1e0a944` were carried in the ledger as "0B compare hotspots". They are
+  **not** protocol dispatchers: `0x1e0a97c`/`0x1e0a98c` compute `r0 = r9 | 1 ; if (r0 != 0xb)`, a test
+  for the value pair **{0x0A, 0x0B}**, and `0x1e0a944` is a `tbb` dispatch on an index <= 6 selecting
+  string pointers; `0x1e0aff2` is a 32-iteration mask-table builder over `r15+0x124`.
+* `tools/ble/parse_btsnoop.py` initially used a 20-byte record header and mis-decoded direction and
+  timestamp; btmon writes the 24-byte shape `orig, incl, flags, drops, ts`.

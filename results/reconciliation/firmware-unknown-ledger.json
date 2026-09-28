@@ -396,15 +396,16 @@
   {
    "id": "FW-U-023",
    "question": "Where are the D6, D8, FC, F6, AB and 0B families handled, if not in armorx_cmd_dispatch?",
-   "status": "PARTIALLY_RESOLVED",
+   "status": "RESOLVED",
    "priority": "high",
    "evidence": [
     "0x1e08772 compares only 0x2F/0x70/0xD2/0xD4/0xD7/0xF7/0xF8/0xF9/0xFA/0xFF",
-    "0x1e0aff2 compares 0xA5 and 0x0B (three 0B references) and calls the frame handler",
     "0x1e0a944 compares 0x0B twice",
-    "results/firmware/armorx-command-dispatch.json"
+    "results/firmware/armorx-command-dispatch.json",
+    "0x1e0aff2 and 0x1e0a944 RETIRED as false positives - see FW-U-031",
+    "no magic-byte compare exists in the image (grep for == / != against 0xA4, 0xA5, 0xAB returns nothing)"
    ],
-   "answer": "FOUND: 0x0B -> 0x1e089e8, 0x19 -> 0x1e08d24 (state byte, shared with D2), 0x05 -> factory/diagnostic sub-dispatch at 0x1e08e62/0x1e08e78, D6 -> 0x1e0921c, D7 -> 0x1e09232, D8 -> 0x1e0928c, D9 -> 0x1e09346 - all via range-gated tbh tables (0x1e089c4 for 0x0B..0x1B, 0x1e09060 for 0xD4..0xD9, 0x1e08a04 for 0xE1..0xE5) that the previous pass's compare-only extractor could not see. NOT FOUND: FC and F6 do not appear in any of the three tables, and the 0xE6..0xFF branch at 0x1e08e8c accepts only 0xEF, so 0xFC/0xF6 fall to the default handler 0x1e08ff2. AB likewise does not appear in any extracted table. D6/D8/0B are therefore SETTLED and the open part is specifically FC/F6/AB.",
+   "answer": "ALL FAMILIES LOCATED. There is ONE RX parser (0x1e08772) and it does not check the frame magic at all (no compare against 0xA4/0xA5/0xAB exists anywhere in the image), so A5 and A4 frames take identical paths. Handler map: 0x05 -> 0x1e08e62 (factory sub-dispatch), 0x0B -> 0x1e089e8, 0x19 -> 0x1e08d24, 0xD2 -> 0x1e08d24, 0xD4 -> 0x1e08944/0x1e0906e, 0xD5 -> 0x1e091fc, 0xD6 -> 0x1e0921c (config record read -> A4/D6 stream), 0xD7 -> 0x1e08a68/0x1e09232 (config write), 0xD8 -> 0x1e0928c (single 220-byte record write), 0xD9 -> 0x1e09346 (record read), 0xE1/0xE2/0xE4/0xE5 via table 0x1e08a04, 0xEF, 0xF7 -> 0x1e08860, 0xF8, 0xF9, 0xFA, 0xFF. FC and F6 are genuinely absent from the parser and are explained separately: an A5/FC request produces the generic A5/FF echo (0x1e09446-0x1e0944c), which is exactly the live capture.",
    "ruled_out": [],
    "next_offline_step": "Extract the compare structure of 0x1e0aff2 and 0x1e0a944 (0B lives there), and de-nest the sub-switches in 0x1e08772 to see whether D6/D8/FC are reached under a sub-command byte.",
    "next_hardware_step": null,
@@ -435,13 +436,16 @@
   {
    "id": "FW-U-025",
    "question": "Which function computes the protocol checksum (live-proven: sum of preceding bytes)?",
-   "status": "PARTIALLY_RESOLVED",
+   "status": "RESOLVED",
    "priority": "high",
    "evidence": [
     "frame_err_checksum (0x1e070da) is the checksum-error printer called from the frame handler",
-    "0x1e05c66 builds 0xDC-byte records and hashes 8 bytes with '...len=%d crc=%x' (record integrity, not necessarily the frame checksum)"
+    "0x1e05c66 builds 0xDC-byte records and hashes 8 bytes with '...len=%d crc=%x' (record integrity, not necessarily the frame checksum)",
+    "frame sum8 routine 0x1e05dae (loop over bytes, returns the low byte)",
+    "all frames in results/experiments/physical-20260927-170455-noop-d7/raw-tx-rx.log pass sum8",
+    "record CRC routine 0x1e05628 + validator 0x1e0566a (len from BE16 at [2..3])"
    ],
-   "answer": "The RECORD integrity routine is now identified: 0x1e05628 is a reflected (LSB-first) nibble-table CRC-16 with init 0xFFFF, and 0x1e0566a is the record-header validator that reads a big-endian length at [2..3], rejects len<4 or len>max, then calls 0x1e05628(ptr+2, len-2) and compares the result against the big-endian value stored at [0..1]. That matches the live-validated CRC-16/MODBUS (poly 0xA001, init 0xFFFF) of the 144-byte config, which is STRONG EVIDENCE that 0x1e05628 is the config CRC. The FRAME level checksum (live-proven to be a plain sum of the preceding bytes) is a different mechanism and its routine is still not identified - it is likely inline, which is why only the error printer (0x1e070da) was found.",
+   "answer": "BOTH HALVES CLOSED and they are different mechanisms, as suspected. FRAME checksum = plain sum8 over the frame excluding the final byte, computed by 0x1e05dae (0x1e05db2 r3 = b[r0 ++= 1]; 0x1e05db6 r2 += r3; 0x1e05dbc r0 = r2.l). Every frame in the live D7/D6 transaction log satisfies it (verified programmatically over all 20 frames). RECORD checksum = CRC-16/MODBUS (poly 0xA001, init 0xFFFF) via 0x1e05628, validated by 0x1e0566a over record bytes 2..len with the result stored big-endian at bytes 0..1. The two must never be conflated.",
    "ruled_out": [],
    "next_offline_step": "Follow the call made between the length check and the checksum-error branch in 0x1e08772; the callee is the checksum routine.",
    "next_hardware_step": null,
@@ -501,14 +505,22 @@
   {
    "id": "FW-U-029",
    "question": "Why does the firmware 0xD6 handler return a single 16-bit value when the live capture showed a 144-byte D6 read?",
-   "status": "OPEN",
+   "status": "RESOLVED",
    "priority": "high",
    "evidence": [
     "0x1e0921c (the only 0xD6 target in every extracted dispatch table) reads [state+0x1b0], extracts the big-endian 16-bit field at +2..3 and replies with opcode 0xD6 - it never inspects the payload or loop over fragments",
-    "live: the D6 read returned 144 bytes in 9x20 + 1x14 byte fragments and D7 was verified against that 144-byte SHA"
+    "live: the D6 read returned 144 bytes in 9x20 + 1x14 byte fragments and D7 was verified against that 144-byte SHA",
+    "raw log: TX a5040bb4 / RX a5050b30e5; TX a414d7012c40009033ff000000000000000000be ... a40ed70a010d191a1b1c1d1e1f65; RX a505d70081; TX a504d67f; RX a414d6012c40...bd ... a40ed60a...64",
+    "reassembled 144 bytes sha256 = bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6 = the durable baseline",
+    "firmware framing builder 0x1e05dc0; magic check on TX at 0x1e064b4; no magic check exists anywhere for RX",
+    "results/reconciliation/protocol-family-model.json"
    ],
-   "answer": "Not answered. Either the live 144-byte read was attributed to the wrong opcode, or a second 0xD6 path exists outside the parser (for example a config-engine entry reached from the 0x2F..0xE0 chain rather than from the D4..D9 table). Do NOT treat the live 'D6 = 144-byte read' label as firmware-confirmed until this is closed.",
-   "ruled_out": [],
+   "answer": "RESOLVED AND NOT A CONTRADICTION. A5 and A4 are not separate opcode namespaces: they are the two framing modes of one opcode space. RAW WIRE EVIDENCE (results/experiments/physical-20260927-170455-noop-d7/raw-tx-rx.log): the D7 write goes out as TEN A4 frames (a4 14 d7 01 ... a4 14 d7 09, then the 14-byte a4 0e d7 0a), the device acknowledges with an A5 frame (a5 05 d7 00 81), the D6 read request goes out as a SINGLE A5 frame (a5 04 d6 7f, 0x7f = sum8 of a5+04+d6) and the device answers with TEN A4 frames (a4 14 d6 01 ..) whose payloads reassemble to 144 bytes with SHA-256 bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6 - the project's durable config baseline, an exact match. FIRMWARE PROOF: 0x1e05dc0 writes magic 0xA5 and flips it to 0xA4 when the payload does not fit the transport buffer, computing nfrags = (len + 2) / (capacity - 5): for 144 bytes and a 20-byte buffer that is (144+2)/15 = 9.73 -> 10 fragments, exactly what the wire shows (9 x 15 + 1 x 9 = 144). The A5/D6 handler 0x1e0921c extracts the record's big-endian LENGTH field (bytes 2..3 = 0x0090 = 144) from the descriptor at [state+0x1b0]; the builder then streams the whole 144-byte record. So the live 'D6 = 144-byte read' label was RIGHT and the earlier 'D6 returns only 16 bits' reading was INCOMPLETE, not wrong: the 16-bit value is the record length that drives the fragmentation.",
+   "ruled_out": [
+    "A4 is a separate opcode namespace",
+    "the live D6 read was mislabelled",
+    "the firmware D6 handler is a bare 16-bit query"
+   ],
    "next_offline_step": "Read the 0x2F..0xE0 chain arms that do not dispatch to the D4..D9 table, and the 0x1e0aff2/0x1e0a944 hotspots, looking for a second 0xD6 compare",
    "dependencies": [
     "FW-U-023"
@@ -527,6 +539,26 @@
    "ruled_out": [],
    "next_offline_step": "Follow the 0x1e08e5a TX tail with r1 = 0x0B and r2 = buffer",
    "dependencies": []
+  },
+  {
+   "id": "FW-U-031",
+   "question": "Where do FC and F6 enter the device, given the A5 parser accepts only 0xEF above 0xE5?",
+   "status": "PARTIALLY_RESOLVED",
+   "priority": "high",
+   "evidence": [
+    "live corpus (1255 host-side frames in local btsnoop): a5/fc appears 2x and a5/ff 2x - one FF echo per FC request",
+    "0x1e09426 (the post/builder entry used by the whole D family) ends by emitting an A5/FF frame whose payload byte is the REQUEST's opcode byte (0x1e09446: r2 = r9+2 ; 0x1e0944a: r1 = 0xff)",
+    "0x1e0aff2/0x1e0a944 contain no protocol 0B or A5 compares: r0 = r9 | 1 ; if (r0 != 0xb) tests the value pair {0x0A,0x0B}, and 0x1e0aff2 is a 32-iteration mask-table builder"
+   ],
+   "answer": "FC does reach the device: the live corpus shows an A5/FF frame answering each A5/FC request, and the FF frame is the generic echo produced at 0x1e09426. What is NOT found is a dedicated FC/F6 handler in the parser, so the likely model is that FC is accepted as a 'set DPI' request that mutates state and answers with the generic echo rather than with FC data. The two hotspot leads were retired as false positives.",
+   "ruled_out": [
+    "0x1e0aff2 / 0x1e0a944 as protocol dispatchers",
+    "the FF echo as an FC-specific reply"
+   ],
+   "next_offline_step": "Read the 0x2F..0xE0 chain arms that emit the echo, and the arms between 0xD2 and 0xE0, looking for where FC-state is stored",
+   "dependencies": [
+    "FW-U-023"
+   ]
   }
  ]
 }

@@ -381,6 +381,60 @@
    "version": "V41",
    "callers": [],
    "callees": []
+  },
+  {
+   "address": "0x1e05dc0",
+   "name": "armorx_frame_build",
+   "category": "framing",
+   "grade": "PROVEN STATIC",
+   "evidence": "writes magic 0xA5 (0x1e05dc4) and flips to 0xA4 when the payload exceeds capacity-4 (0x1e05dd6); computes nfrags = (len+2)/(capacity-5) (0x1e05dda-0x1e05de4). This is the A5-vs-A4 framing rule.",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1e05dae",
+   "name": "armorx_frame_checksum_sum8",
+   "category": "checksum",
+   "grade": "PROVEN STATIC",
+   "evidence": "sum8 loop: r3 = b[r0++]; r2 += r3; return r2.l. Every frame in the live D7/D6 transaction log satisfies it.",
+   "version": "V41",
+   "callers": [],
+   "callees": []
+  },
+  {
+   "address": "0x1fd3d0",
+   "name": "transport_send",
+   "category": "transport",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "library send called directly after 0x1e0642c in 0x1e09426; result stored at [r8+0x158].",
+   "version": "V41",
+   "callers": [
+    "0x1e09426"
+   ],
+   "callees": []
+  },
+  {
+   "address": "0x1e06418",
+   "name": "armorx_response_send_direct",
+   "category": "protocol-core",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "direct-send fallback of 0x1e0642c (called when no queue entry is free).",
+   "version": "V41",
+   "callers": [
+    "0x1e0642c"
+   ],
+   "callees": []
+  },
+  {
+   "address": "0x1e064b4",
+   "name": "armorx_tx_frame_magic_check",
+   "category": "framing",
+   "grade": "STRONG EVIDENCE",
+   "evidence": "TX path reads b[frame+0] and requires 0xA5 (0x1e064b4) or A4 (0x1e064ce/0x1e064d4), then reads the fragment ordinal at frame[3] (0x1e064da).",
+   "version": "V41",
+   "callers": [],
+   "callees": []
   }
  ]
 }
