@@ -1,0 +1,121 @@
+{
+ "artifact": "armorx-d2-trigger-path",
+ "date": "2026-09-28",
+ "image": "V41 app.bin base 0x01E00000",
+ "headline": "The D2 report is emitted when the 14-byte input payload CHANGES. 0x1e0dad2 does a library memcmp of the current input state against the previous payload and skips the report when they are equal; when they differ it snapshots 28 bytes and arms a 100-iteration repeat counter.",
+ "trigger_path": [
+  {
+   "addr": "0x1e0ef36",
+   "role": "entry thunk (34 bytes, NO in-image caller) - a tbb selector on the low nibble of r0 that calls 0x1e0f154 for the general arm",
+   "evidence": [
+    "1e0ef4a: tbb [r0]",
+    "1e0ef4c: call 0x1e0f154"
+   ],
+   "grade": "PROVEN STATIC",
+   "note": "no in-image caller means it is registered with / invoked by the library - the event source is outside the app image"
+  },
+  {
+   "addr": "0x1e0f154",
+   "role": "mid layer (4964 bytes, strings ' %x err=%d', ' switch mode')",
+   "callers": [
+    "0x1e0ef36"
+   ]
+  },
+  {
+   "addr": "0x1e0ac14",
+   "role": "the real container of the D2 emitter (990 bytes) - the periodic/tick body",
+   "strings": [
+    "_timer. %d",
+    "d sync%d..."
+   ],
+   "evidence": [
+    "1e0ac1a: call 0x1e0654a (loop guard)",
+    "1e0ac32/1e0ac38: drains a queue and calls the A5 dispatcher 0x1e08772 with r1 = [r9+0x98], r2 = h[r9+0x9c]",
+    "1e0ac40: if (r0 != 0) loop back to 0x1e0ac2c",
+    "1e0ac42/1e0ac58: call 0x1fbbba (tick), r0 -= [r9+0x14], if (r0 < 0x1f5) skip the periodic section - a 501-tick gate",
+    "1e0ac4c: r15 = 0x4850 - the state base carrying +0x10, +0x11, +0x3a, +0x1b4"
+   ]
+  },
+  {
+   "addr": "0x1e0da8e",
+   "role": "sets state+0x1b4 = 2 and clears state+0x1b4+0x8/+0xc and state+0x17",
+   "evidence": [
+    "1e0da8a: r0 = r15 + 0x1b4",
+    "1e0da8e: [r0 + 0x0] = 0x2",
+    "1e0da94: b[r0 + 0xc] = 0",
+    "1e0da9a: [r0 + 0x8] = 0",
+    "1e0da96: b[r15 + 0x17] = 0"
+   ]
+  },
+  {
+   "addr": "0x1e0daa6",
+   "role": "periodic gate for the report",
+   "evidence": [
+    "1e0daa6: r0 = [r15 + 0x18c] (last report time)",
+    "1e0daaa: r1 = [r8 + 0x50]",
+    "1e0daae: r2 = h[r9 + 0x12] (interval)",
+    "1e0dab4: if (r0 < r2) goto 0x1e0c6a6 (return, no report)",
+    "1e0daba: [r8 + 0x50] = r0 (stamp)"
+   ]
+  },
+  {
+   "addr": "0x1e0dad2",
+   "role": "THE CHANGE DECISION",
+   "evidence": [
+    "1e0dac2: r4 = r12 + 0x8c (r12 = 0x4e40, so the input state lives at 0x4ecc)",
+    "1e0dac6: r1 = sp + 1080 ; r2 = 0xe",
+    "1e0dace: call 0x2f92fa (library compare of 14 bytes)",
+    "1e0dad2: if (r0 == 0x0) goto 0x1e0db1c  <-- equal means NO new report",
+    "1e0dad4/1e0dadc: call 0x2f92e4 (copy 28 bytes into the snapshot)",
+    "1e0dae0: b[r15 + 0x3a] = 0x64 (repeat counter = 100)"
+   ]
+  },
+  {
+   "addr": "0x1e0db0c",
+   "role": "the A5 12 02 builder (previous pass)"
+  }
+ ],
+ "d2_send_if": {
+  "expression": "emit(A5 12 02, 14-byte payload)  IFF  b[state+0x10] != 0  AND  memcmp(state14 @ 0x4ecc, previous14) != 0",
+  "repeat": "after a detected change the counter b[state+0x3a] = 100 is decremented in the loop 0x1e0db1c-0x1e0db32 and the report is re-sent while it is nonzero; the unchanged path jumps straight into that same counter logic",
+  "periodic_gate": "the enclosing tick body additionally requires (tick - [state+0x18c]) >= h[r9+0x12] before touching the report block",
+  "unit": "the 0x1f5 threshold at 0x1e0ac58 and the r9+0x12 interval are tick counts of the 0x1fbbba tick source - NO time unit is claimed"
+ },
+ "zero_idle_explanation": {
+  "proven_mechanism": "the report is not free-running: 0x1e0dad2 compares the current 14-byte input state with the last one and skips when equal. Idle therefore produces no frames even with D2 enabled.",
+  "grade": "PROVEN STATIC"
+ },
+ "rt_no_self_trigger": {
+  "status": "CONTRADICTION - NOT EXPLAINED",
+  "why": "the compared region is 14 bytes = mask u32 + 4 axes + LT + RT, so an RT analogue change would make the memcmp differ and would trip the very gate that fires reports. That conflicts with the live observation that RT-only movement emits nothing.",
+  "resolution_hypothesis_to_test": "the RT byte at 0x4ecc+0x0e may only be refreshed under a digital-event condition, or the compared buffer may be a filtered state rather than the raw axes. Not proven - do not report RT as explained.",
+  "next": "find every writer of 0x4ecc+0x0e and 0x4ecc+0x04..+0x0c and check whether the RT byte is updated unconditionally."
+ },
+ "state_0x1b4_meaning": {
+  "values_seen": [
+   {
+    "value": 2,
+    "addr": "0x1e0da8e",
+    "context": "the report/sync block entry"
+   },
+   {
+    "value": 3,
+    "addr": "0x1e05cae",
+    "context": "the record writer"
+   }
+  ],
+  "conclusion": "a MODE/STATE selector with at least two values, not a dirty flag. The earlier 'dirty' terminology is retired for this field.",
+  "reader": "0x1e06842 ORs it with state+0x1c4 and early-outs when nonzero"
+ },
+ "not_advanced": [
+  "RT/LT source writers",
+  "button scanner",
+  "0x1e096b4/0x1e09ad4/0x1e09ce0",
+  "M1-M4 record semantics",
+  "macro engine",
+  "F7/FC/F6",
+  "cross-version",
+  "dongle V3600",
+  "second MCU"
+ ]
+}
