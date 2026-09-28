@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "ctrl_lt",
+ "response": "done",
+ "clicked_at": "2026-09-28T16:17:47.774847-04:00",
+ "pid": 9441,
+ "title": "ARMOR-X ACTION REQUIRED - LT",
+ "gui": "PySide6"
+}

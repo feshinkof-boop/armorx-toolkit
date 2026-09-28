@@ -1,0 +1,9 @@
+{
+ "status": "ACK",
+ "action_id": "ctrl_lx",
+ "response": "done",
+ "clicked_at": "2026-09-28T16:18:17.029078-04:00",
+ "pid": 9684,
+ "title": "ARMOR-X ACTION REQUIRED - LEFT STICK",
+ "gui": "PySide6"
+}

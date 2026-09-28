@@ -1,0 +1,39 @@
+{
+ "artifact": "usbh-gamepad-structure",
+ "date": "2026-09-28",
+ "diagnostic_string": "usbh_socket_en = %d, m_xbox_enum_step= %d, usbh_gamepad_ready= %d, usbh_gamepadp = %p",
+ "named_symbols": [
+  "usbh_socket_en",
+  "m_xbox_enum_step",
+  "usbh_gamepad_ready",
+  "usbh_gamepadp",
+  "usbh_gamepad_dev_index"
+ ],
+ "transfer_setup": {
+  "site": "0x1e09aee (shared case arm of 0x1e09ad4)",
+  "length_field": "h[r4+0x2] = 0xc00 (3072)",
+  "flag_fields": [
+   "b[r4+0x5] = 1",
+   "b[r1+0x9] = 1"
+  ]
+ },
+ "enum_step": {
+  "consumer": "0x1e09ad4 dispatch on r0 with `if (r0 > 6)` and `tbb [r0]`",
+  "states": 7,
+  "note": "not proven identical to the m_xbox_enum_step variable; both are candidates for the same state, unproven"
+ },
+ "object_pointer": "usbh_gamepadp: no allocation, assignment, clear or free site has been located yet; only its use in the diagnostic string is proven",
+ "proven": [
+  "the trio belongs to the USB host path",
+  "0x1e09ad4 is a 7-case step dispatcher",
+  "the shared arm sets a 3072-byte transfer length",
+  "0x1e096b4 performs repeated big-endian 32-bit extraction"
+ ],
+ "unknown": [
+  "the structure pointed to by usbh_gamepadp",
+  "where the report buffer lives",
+  "the report length",
+  "the callback and endpoint binding",
+  "the consumer that writes state+0x1d4"
+ ]
+}

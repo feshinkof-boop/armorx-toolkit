@@ -55,7 +55,7 @@ class TestTrioEvidence:
 
     def test_trio_is_not_claimed_complete(self):
         txt = (REPO / "results" / "firmware" / "usb-trio-reconstruction.md").read_text()
-        assert "not complete" in txt
+        assert "structurally reconstructed, not field-matched" in txt
 
     def test_direct_to_d2_map_has_no_fabricated_fields(self):
         m = json.loads((REPO / "results" / "firmware" / "direct-usb-to-d2-map.json").read_text())
