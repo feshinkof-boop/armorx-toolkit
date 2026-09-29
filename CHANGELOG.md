@@ -2,18 +2,57 @@
 
 All notable project changes are documented here.
 
-## 0.3.0 - 2026-09-29
+## 0.3.0 — 2026-09-29
+
+Python/Linux/offline toolkit release. The Windows configurator remains on its
+separate validated **v0.2.1** release line.
+
+### Added
+
+- Added read-only Linux USB discovery and diagnostics for the observed
+  `413D:2106` and `045E:0B12` personalities.
+- Added offline A5/A4 frame parsing/building, checksum validation, fragmentation,
+  reassembly and opcode evidence metadata.
+- Added offline Xbox type-`0x20` GIP decoding with proven A, M1, M2, LT and RT
+  fields while preserving unknown bytes.
+- Added classic usbmon PCAP/raw/hex capture inspection.
+- Added privacy-sanitized diagnostics bundles for issue reports.
+- Added canonical config/macro exchange envelopes with deterministic SHA-256
+  content IDs.
+- Added `device`, `protocol`, `gip`, `capture` and `exchange` CLI groups.
 
 ### Validated
 
-- LT, RT, A, M1 and M2 validated against real hardware with timestamp-exact wire
-  to `evdev` correlation.
-- The `045e:0b12` <-> `413d:2106` power-state transition observed live on the same port.
+- Observed `045e:0b12` <-> `413d:2106` live on the same USB port.
+- Correlated LT/RT wire values to `ABS_Z`/`ABS_RZ` sample-for-sample.
+- Live-confirmed A, M1 and M2 wire bits against evdev.
+- Matched capture-parser output against independent extraction on real usbmon
+  captures.
+- Passed **187 tests** with zero skips; GitHub Actions is green on Python
+  3.10, 3.11, 3.12 and 3.13.
+- Built wheel/sdist, installed the wheel in a clean environment and smoke-tested
+  the CLI.
 
 ### Fixed
 
-- The GIP decoder reported stick axes as raw unsigned words without stating that
-  the signedness and scaling are unestablished.
+- Corrected USB interface numbering on multi-interface devices.
+- Corrected printable sysfs serial presentation.
+- Separated non-blocking hidraw permission findings from doctor failures.
+- Prevented incidental `0xA5` bytes inside GIP reports from creating phantom A5
+  frames.
+- Stopped claiming unproven stick signedness/scaling.
+- Corrected the earlier "32-byte startup form" characterization: a controlled
+  340-second capture begun before power-on produced **76,382 48-byte reports and
+  zero 32-byte reports**. The 32-byte form remains an unreproduced historical
+  observation, not a general startup claim.
+
+### Safety / scope
+
+- v0.3.0 is read-only with respect to attached devices; public commands do not
+  expose configuration writes, macro writes, arbitrary HID output, OTA or
+  firmware flashing.
+- Research firmware artifacts, private raw captures and guided experiment
+  tooling remain outside the public package.
 
 ## 0.2.2 — 2026-09-28
 

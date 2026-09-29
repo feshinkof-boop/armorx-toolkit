@@ -24,7 +24,7 @@ Build, inspect, remap, validate, and research **ARMORX Pro** configurations and 
 
 ## Overview
 
-> **Latest project release:** **v0.2.2** is a public research/protocol documentation snapshot. The latest downloadable Windows configurator remains **v0.2.1**, and the Python toolkit package remains **v0.2.0**.
+> **Latest project release:** **v0.3.0** is the Python/Linux/offline toolkit release with read-only USB discovery, GIP/protocol decoding, capture inspection, diagnostics bundles, and exchange tooling. The latest downloadable Windows configurator remains **v0.2.1**.
 
 **ArmorX Toolkit** is a community-driven interoperability project for the **BIGBIG WON ARMORX Pro**, an accessory for **Xbox controllers**.
 
@@ -171,17 +171,17 @@ Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Installation
 
-> **Public release scope:** project release **v0.2.2** publishes the latest research/protocol documentation. The current public Windows configurator remains **v0.2.1**, and the Python toolkit/CLI remains **v0.2.0**. The internal Windows research/capture application, Autopilot workflows, raw BLE/USB capture, guided hardware experiments, and researcher-only diagnostics are **not** part of the public Windows release.
+> **Public release scope:** **v0.3.0** is the Python/Linux/offline toolkit release. It adds read-only device discovery, Xbox GIP parsing, A4/A5 protocol tooling, usbmon capture inspection, privacy-sanitized diagnostics bundles, and config/macro exchange envelopes. The current public Windows configurator remains **v0.2.1**; researcher-only firmware analysis, raw private captures, Autopilot workflows, guided experiments, and device-write tooling are not part of the v0.3.0 package.
 
 
 ### Windows 10/11 x64
 
 Use the **[v0.2.1 installer](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1-Setup.exe)** (recommended) or the **[portable v0.2.1 EXE](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1.exe)**. Turn on ARMOR-X Pro and choose **Connect / Recover**. The app reads the controller's own 144-byte configuration image, preserves unknown bytes, automatically backs up the current device image before writes, and verifies writes by reading all 144 bytes back.
 
-### Python toolkit v0.2.0
+### Python toolkit v0.3.0
 
 ```bash
-python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.2.0
+python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.3.0
 armorx --version
 ```
 
