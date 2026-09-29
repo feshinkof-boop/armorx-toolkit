@@ -34,6 +34,7 @@ try:
         QSpinBox, QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
         QTextEdit, QVBoxLayout, QWidget,
     )
+    from .gui_macro_widget import MacroTimelineEditor
     from .gui_visual import StickVisualEditor, TriggerVisualEditor
     QT_AVAILABLE = True
 except ImportError:
@@ -250,6 +251,9 @@ if QT_AVAILABLE:
             profile_layout.addWidget(self.profile_list)
             profile_layout.addLayout(row)
             self.tabs.addTab(profiles, "Profiles")
+
+            self.macro_editor = MacroTimelineEditor()
+            self.tabs.addTab(self.macro_editor, "Macros")
 
             actions = QHBoxLayout()
             self.reset_button = QPushButton("Reset changes")

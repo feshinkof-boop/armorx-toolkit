@@ -152,3 +152,36 @@ def test_visual_trigger_editor_stays_in_sync_with_advanced_spinbox():
         assert window.session.byte_field(field) == 64
     finally:
         window.close()
+
+
+def test_macro_editor_is_available_without_loaded_controller_config():
+    app = _application()
+    window = _window()
+    try:
+        labels = [window.tabs.tabText(i) for i in range(window.tabs.count())]
+        assert "Macros" in labels
+        assert window.session is None
+        assert window.macro_editor.draft.validate() == []
+        assert window.macro_editor.table.rowCount() == 1
+    finally:
+        window.close()
+
+
+def test_macro_editor_builds_chord_timeline_without_ble():
+    app = _application()
+    window = _window()
+    try:
+        editor = window.macro_editor
+        editor.name_edit.setText("GUI Combo")
+        editor.trigger_combo.setCurrentText("M2")
+        editor.table.cellWidget(0, 1).setText("B+RT")
+        editor.table.cellWidget(0, 1).editingFinished.emit()
+        app.processEvents()
+        obj = editor.draft.to_object()
+        from armorx import macro as M
+        rows = M.decode_macro_json(obj["macroJson"])
+        assert obj["macroName"] == "GUI Combo"
+        assert obj["runKeyName"] == "M2"
+        assert rows[0]["mapListDecoded"] == [1, 9]
+    finally:
+        window.close()

@@ -53,7 +53,7 @@ The project focuses on:
 | CLI | Unified `armorx` command |
 | Windows GUI | Public Windows 10/11 x64 BLE configurator |
 | Linux BLE | Guarded live read / apply / rollback with automatic backup and read-back verification |
-| Linux GUI | PySide6 configurator with guarded BLE, profiles, exact diff, and visual stick/trigger editors — v0.5.0 dev line |
+| Linux GUI | PySide6 configurator with guarded BLE, profiles, visual stick/trigger editors, and offline macro timeline — v0.5.0 dev line |
 | Research | PROVEN / STRONG EVIDENCE / UNKNOWN evidence levels |
 | Quality | Pytest suite + GitHub Actions |
 
@@ -75,7 +75,7 @@ The Windows app supports Connect / Recover, configuration read, sticks, triggers
 <!-- LINUX_GUI_PREVIEW_START -->
 ## Linux GUI preview
 
-The **v0.5.0 development line** adds a Linux desktop configurator (PySide6) on top of the released v0.4.0 BLE backend: the same guarded read / apply / rollback workflow as the CLI, plus local profiles, a changes view, and visual stick/trigger deadzone + recovered curve-byte editors. It drives the identical backend functions, so its safety guarantees are the CLI's: two identical reads before any write, an automatic backup written and re-opened, exact diff review with undecoded bytes refused, a native confirmation showing the decoded plan, read-back verification, and a rollback that writes the saved image unchanged. Nothing is exposed for unrelated live state, and no raw opcode or payload can be sent from it. Not yet released — it ships with v0.5.0.
+The **v0.5.0 development line** adds a Linux desktop configurator (PySide6) on top of the released v0.4.0 BLE backend: the same guarded read / apply / rollback workflow as the CLI, plus local profiles, a changes view, visual stick/trigger deadzone + recovered curve-byte editors, and an offline 16-step macro timeline editor. It drives the identical backend functions, so its safety guarantees are the CLI's: two identical reads before any write, an automatic backup written and re-opened, exact diff review with undecoded bytes refused, a native confirmation showing the decoded plan, read-back verification, and a rollback that writes the saved image unchanged. Nothing is exposed for unrelated live state, and no raw opcode or payload can be sent from it. Not yet released — it ships with v0.5.0.
 
 | Live configuration summary | Rear-button remapping |
 | --- | --- |
