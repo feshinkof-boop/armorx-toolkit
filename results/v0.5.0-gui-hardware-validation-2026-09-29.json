@@ -1,0 +1,322 @@
+{
+  "backend": "armorx.live.apply_config / rollback_config (released v0.4.0)",
+  "backup": {
+    "bin_is_pre_write_baseline": true,
+    "bin_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "directory": "<XDG_DATA_HOME>/armorx-toolkit/backups",
+    "files": {
+      "bin": "gui-backup-20260929-081850.bin",
+      "json": "gui-backup-20260929-081850.json",
+      "session": "gui-backup-20260929-081850.session.json",
+      "sha256": "gui-backup-20260929-081850.sha256"
+    },
+    "prefix": "gui-backup-20260929-081850",
+    "session_format": "armorx-live-apply-session-v1"
+  },
+  "branch": "dev/v0.5.0-linux-gui",
+  "bugs": [
+    {
+      "file": "src/armorx/gui.py",
+      "fix": "keep a strong reference to the runnable until finished is delivered",
+      "id": "GUI-BUSY-001",
+      "new_write_path_added": false,
+      "reproduced_hardware_free": true,
+      "severity": "blocking",
+      "summary": "a completed background task could leave the window permanently busy (result lost / finished lost) so every action button stayed disabled",
+      "tests_added": 3
+    }
+  ],
+  "d7": {
+    "ack_observed": true,
+    "acknowledgement": "a5 05 d7 00 81",
+    "checksums_valid": true,
+    "data_bytes": [
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      15,
+      9
+    ],
+    "fragments": 10,
+    "indexes": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "span_ms": 96
+  },
+  "date": "2026-09-29",
+  "final_power_cycle": {
+    "final_config_equals_original": true,
+    "final_crc": "0x2C40",
+    "final_m1": "B",
+    "final_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "off_identity": "413d:2106",
+    "on_identity": "045e:0b12"
+  },
+  "format": "armorx-v0.5.0-gui-hardware-validation-v1",
+  "gui_apply_result": "APPLIED",
+  "gui_diff": {
+    "changed_offsets": [
+      0,
+      1,
+      135
+    ],
+    "rows": [
+      {
+        "after": 188,
+        "before": 44,
+        "class": "crc",
+        "field": "crc16",
+        "offset": 0
+      },
+      {
+        "after": 77,
+        "before": 64,
+        "class": "crc",
+        "field": "crc16",
+        "offset": 1
+      },
+      {
+        "after": 0,
+        "before": 1,
+        "class": "map_key",
+        "field": "mapKeys[23]",
+        "offset": 135
+      }
+    ],
+    "unknown_changed_bytes": 0,
+    "working_crc": "0xBC4D",
+    "working_sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1"
+  },
+  "gui_hardware_validation": "PASS",
+  "gui_launch": {
+    "apply_disabled_before_config": true,
+    "frozen_ui": false,
+    "ok": true,
+    "rollback_disabled_before_config": true,
+    "tabs": [
+      "Summary",
+      "Rear buttons",
+      "Sticks / triggers / turbo",
+      "Changes",
+      "Profiles"
+    ],
+    "tabs_enabled_before_config": true,
+    "title": "ArmorX Toolkit 0.4.0 \u2014 Linux",
+    "traceback": false
+  },
+  "gui_live_read": {
+    "baseline_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "battery": 83,
+    "crc": "0x2C40",
+    "crc_valid": true,
+    "d6_fragments": 10,
+    "declared_length": 144,
+    "firmware": "2741",
+    "frozen_ui": false,
+    "length": 144,
+    "model": "ZJ-XT",
+    "ok": true,
+    "worker_path": true
+  },
+  "gui_rollback_result": "RESTORED",
+  "gui_scan": {
+    "advertisements": 23,
+    "candidate_reason": "local name starts with 'ARMOR-X Pro'",
+    "classified": "ARMOR-X Pro_11",
+    "columns": [
+      "Name",
+      "Address",
+      "RSSI",
+      "Candidate reason"
+    ],
+    "ok": true,
+    "responsive": true,
+    "rssi": -67,
+    "selected_via": "scan-table double-click"
+  },
+  "m1_original": 1,
+  "m1_target": 0,
+  "persistence": {
+    "command": "a5 05 0e 00 b8",
+    "notifications": 2,
+    "sent": 1
+  },
+  "physical_m1": {
+    "A_bit_0x10_reports": 73,
+    "M1_bit_0x20_reports": 0,
+    "button_byte_sequence": [
+      "0x01",
+      "0x11",
+      "0x01"
+    ],
+    "method": "passive usbmon of the controller",
+    "report_size": 48,
+    "report_type": "0x20",
+    "reports_analysed": 10653,
+    "result": "PROVEN: M1 emits A and not the previous B mapping",
+    "wrote_to_device": false
+  },
+  "profile_load": {
+    "ble_operation_on_load": false,
+    "bytes_equal_baseline": true,
+    "crc_valid": true,
+    "note": "session was changed to M1 -> X first, then the profile restored the exact baseline bytes",
+    "ok": true
+  },
+  "profile_privacy": {
+    "ble_address": false,
+    "home_path": false,
+    "hostname": false,
+    "ok": true,
+    "serial": false,
+    "token": false,
+    "username": false
+  },
+  "profile_save": {
+    "bytes": 144,
+    "crc": "0x2C40",
+    "format": "armorx-gui-profile-v1",
+    "metadata": [
+      "model",
+      "firmware"
+    ],
+    "name": "GUI Hardware Baseline",
+    "ok": true,
+    "sha256_matches_bytes": true,
+    "sha256_matches_live_baseline": true
+  },
+  "qt": {
+    "binding": "PySide6",
+    "platform": "wayland",
+    "version": "6.11.2"
+  },
+  "qt_apply_confirmation": {
+    "accepted": true,
+    "backup_file": "gui-backup-20260929-081850.bin",
+    "buttons": [
+      "APPLY",
+      "Cancel"
+    ],
+    "changed_bytes": 3,
+    "dialog": "ArmorX \u2014 Apply & Verify",
+    "inspected_before_click": true,
+    "known_field_changes": 3,
+    "method": "qt-dialog",
+    "showed_current_sha": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "showed_firmware": true,
+    "showed_model": true,
+    "showed_target_sha": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+    "undecoded_changed_bytes": 0,
+    "widget": "QMessageBox"
+  },
+  "qt_rollback_confirmation": {
+    "accepted": true,
+    "backup_file": "gui-backup-20260929-081850.bin",
+    "backup_is_pre_write_baseline": true,
+    "buttons": [
+      "APPLY",
+      "Cancel"
+    ],
+    "clicked_by": "operator in the native dialog (the harness watcher logged button_missing on three ticks and did not click)",
+    "dialog": "ArmorX \u2014 Rollback",
+    "method": "qt-dialog",
+    "showed_backup_sha": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "showed_current_sha": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+    "widget": "QMessageBox"
+  },
+  "ready_for_visual_editors_macro_ui": true,
+  "recovery_safety": {
+    "backup_reachable_after_failure": true,
+    "delegates_to_live_rollback_config": true,
+    "profiles_tab_available_without_config": true,
+    "refuses_unrelated_state": true,
+    "rollback_button_enabled_with_backup": true,
+    "summary_shows_last_backup": true
+  },
+  "restore_verify": {
+    "crc": "0x2C40",
+    "differing_offsets": 0,
+    "length": 144,
+    "m1": "B",
+    "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
+  },
+  "rollback_detail": {
+    "allow_unrelated_state_exposed": false,
+    "allow_unrelated_state_used": false,
+    "byte_for_byte_match": true,
+    "d7": {
+      "acknowledgement": "a5 05 d7 00 81",
+      "fragments": 10
+    },
+    "persistence": {
+      "command": "a5 05 0e 00 b8",
+      "notifications": 2,
+      "sent": 1
+    },
+    "restore_d6_1": {
+      "byte_for_byte_match": true,
+      "crc": "0x2C40",
+      "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
+    },
+    "restore_d6_2": {
+      "byte_for_byte_match": true,
+      "crc": "0x2C40",
+      "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
+    },
+    "restored_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "session_record": "gui-backup-20260929-081850.session.json",
+    "state_classification": "known_target"
+  },
+  "screenshots": {
+    "address_free": true,
+    "private_captures_kept_local": true,
+    "staged": [
+      "01-live-configuration-summary.png",
+      "02-rear-button-remapping.png",
+      "03-changes-diff.png",
+      "04-profiles.png"
+    ]
+  },
+  "target_survived_power_cycle": {
+    "crc_after_cycle": "0xBC4D",
+    "m1_after_cycle": "A",
+    "ok": true,
+    "sha_after_cycle": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+    "usb_identity": "045e:0b12 -> absent -> 413d:2106 -> 045e:0b12"
+  },
+  "test_count": {
+    "collected": 354,
+    "failed": 0,
+    "passed": 354,
+    "skipped": 0
+  },
+  "tip_at_session_start": "a2741c98198060e632ee87505343111eaf7936be",
+  "verify_d6_1": {
+    "byte_for_byte_match": true,
+    "crc": "0xBC4D",
+    "length": 144,
+    "sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+    "state": "TARGET"
+  },
+  "verify_d6_2": {
+    "byte_for_byte_match": true,
+    "crc": "0xBC4D",
+    "length": 144,
+    "sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+    "state": "TARGET"
+  }
+}
