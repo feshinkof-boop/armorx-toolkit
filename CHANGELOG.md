@@ -4,6 +4,17 @@ All notable project changes are documented here.
 
 ## 0.3.0 - 2026-09-29
 
+### Validated
+
+- LT, RT, A, M1 and M2 validated against real hardware with timestamp-exact wire
+  to `evdev` correlation.
+- The `045e:0b12` <-> `413d:2106` power-state transition observed live on the same port.
+
+### Fixed
+
+- The GIP decoder reported stick axes as raw unsigned words without stating that
+  the signedness and scaling are unestablished.
+
 ## 0.2.2 — 2026-09-28
 
 Public research and protocol-documentation snapshot. This release updates the public repository with the latest reproducible ARMOR-X Pro / F20 findings while keeping research/capture tooling separate from the end-user Windows application.

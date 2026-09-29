@@ -80,7 +80,17 @@ class GipInputReport:
             "triggers": {"LT": self.lt, "RT": self.rt,
                          "note": "16-bit little-endian; the Xbox report carries no digital "
                                  "RT bit, so any digital trigger state is produced by the device"},
-            "sticks": {"left": list(self.left_stick), "right": list(self.right_stick)},
+            "sticks": {
+                "left": list(self.left_stick),
+                "right": list(self.right_stick),
+                "left_s16": [_as_s16(v) for v in self.left_stick],
+                "right_s16": [_as_s16(v) for v in self.right_stick],
+                "note": "raw 16-bit little-endian words exactly as they appear on the wire; "
+                        "the signed reading is shown for convenience only. Neither the "
+                        "signedness nor the scaling to the host axis range has been "
+                        "established: a live stick sweep correlated to evdev has not been "
+                        "recorded, so treat a stick value as raw, not as an axis position.",
+            },
             "counters": list(self.counters) if self.counters else None,
             "counters_evidence": "monotonic 32-bit values; whether they are timestamps is unknown",
             "unknown_spans": [[start, end] for start, end in self.unknown_spans],
@@ -157,6 +167,11 @@ def parse_gip_input(data: bytes | bytearray, *, strict: bool = True) -> GipInput
         counters=counters,
         unknown_spans=spans,
     )
+
+
+def _as_s16(value: int) -> int:
+    """Two's-complement reading of a raw 16-bit word. Convenience only, never authoritative."""
+    return value - 0x10000 if value >= 0x8000 else value
 
 
 def is_probable_input_report(data: bytes | bytearray) -> bool:

@@ -15,7 +15,7 @@ def make_tree(tmp_path: Path):
     (entry / "idProduct").write_text("0b12")
     (entry / "product").write_text("Controller")
     (entry / "manufacturer").write_text("Microsoft")
-    (entry / "serial").write_text("09710769957143")
+    (entry / "serial").write_text("01234567890123")
     (entry / "speed").write_text("12")
     (entry / "bcdDevice").write_text("0518")
     iface = root / "1-7:1.0"
@@ -39,7 +39,7 @@ def test_bundle_records_the_toolkit_version(tmp_path):
 def test_serial_numbers_are_not_included(tmp_path):
     data = bundle(tmp_path)
     text = json.dumps(data)
-    assert "09710769957143" not in text
+    assert "01234567890123" not in text
     for device in data["devices"]:
         assert not device["identity"].get("serial")
 

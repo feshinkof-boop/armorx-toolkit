@@ -1,0 +1,208 @@
+{
+ "session": "v0.3.0 supervised interactive hardware validation",
+ "date": "2026-09-29",
+ "operator": "present, acknowledged each action through a KDE popup (click = ACK, no chat confirmation required)",
+ "device": "ARMOR-X Pro attached by USB; one physical controller connected to it",
+ "alerting": {
+  "method": "kdialog inside the live Plasma session, one sound per alert",
+  "verification": "the popup was photographed on screen while open; a critical notify-send bubble also rendered; the first two popups came back with a machine-readable ACK",
+  "fallbacks": "paplay -> pw-play for sound; kdialog -> notify-send for visibility",
+  "acknowledgement": "results/runtime/operator-actions/<id>.json"
+ },
+ "power_transition": {
+  "from": {
+   "vid_pid": "045e:0b12",
+   "manufacturer": "Microsoft",
+   "product": "Controller",
+   "bcd_device": "0518",
+   "usb_path": "1-7",
+   "devnum": 12
+  },
+  "to": {
+   "vid_pid": "413d:2106",
+   "manufacturer": "Zikway",
+   "product": "HID zk",
+   "bcd_device": "0100",
+   "usb_path": "1-7",
+   "devnum": 13,
+   "serial": null,
+   "interfaces": [
+    {
+     "number": 0,
+     "class": 3,
+     "subclass": 0,
+     "protocol": 0,
+     "driver": "usbhid"
+    }
+   ],
+   "hidraw": [
+    "/dev/hidraw2"
+   ],
+   "input_nodes": []
+  },
+  "same_physical_port": true,
+  "kernel_events": [
+   "03:58:15 USB disconnect, device number 12",
+   "03:58:16 new full-speed USB device number 13 at 1-7, 413d:2106 Zikway HID zk",
+   "03:58:16 hid-generic binds, hiddev1 and hidraw2 created, no input node"
+  ],
+  "off_state_report_descriptor": {
+   "length": 29,
+   "sha256": "f0e418decf688e7409ccebc1beb79a8d8c8c60e5c70150c5de7b056575bb366f",
+   "matches_previously_recorded_f20_identity": true,
+   "meaning": "the off-state vendor identity of the ARMOR-X body is byte-identical to the F20 receiver identity, including the report descriptor"
+  },
+  "second_transition_back_on": {
+   "vid_pid": "045e:0b12",
+   "usb_path": "1-7",
+   "devnum": 16,
+   "note": "the ON transition showed two failed attempts first: device 15 with two EPIPE (-32) descriptor read errors, then device 16 succeeded",
+   "kernel_events": [
+    "03:59:18 new full-speed USB device number 15, descriptor read/64 error -32 (x2)",
+    "03:59:19 new full-speed USB device number 16, 045e:0b12 bcdDevice 5.18",
+    "03:59:19 input: Microsoft Xbox Series S|X Controller"
+   ]
+  },
+  "off_state_silence": {
+   "observed": true,
+   "detail": "during the 33 s the unit was off, the vendor HID device produced no payload traffic in the capture"
+  }
+ },
+ "transition_32_48": {
+  "result": "NOT REPRODUCED",
+  "detail": "a capture was started 34 s before power-on and ran 340 s. Every one of the 76,382 type-0x20 reports was 48 bytes; not a single 32-byte report appeared.",
+  "first_report": {
+   "offset_from_capture_start_s": 34.47,
+   "offset_from_enumeration_s": 0.05,
+   "bytes": "2000012c01000000"
+  },
+  "conclusion": "the earlier single observation that the stream starts in a 32-byte form and switches near 45.8 s is NOT supported by this run; the steady 48-byte form was present from the first report, 50 ms after enumeration. The cause and the existence of the startup form remain UNKNOWN.",
+  "captures": [
+   "power-on-startup.pcap (340 s)",
+   "power-state.pcap (independent, 18 min)"
+  ]
+ },
+ "controls": {
+  "LT": {
+   "capture": "phase4-lt.pcap",
+   "wire_field": "bytes 6-7 u16 LE",
+   "wire_values": [
+    0,
+    192,
+    680,
+    1020,
+    436,
+    0
+   ],
+   "timestamps": [
+    "04:12:39.206",
+    "04:12:39.214",
+    "04:12:39.222",
+    "04:12:40.854",
+    "04:12:40.862"
+   ],
+   "evdev": "ABS_Z, identical values at identical timestamps",
+   "match": "exact, sample for sample",
+   "digital_mask_bits_set": "none"
+  },
+  "RT": {
+   "capture": "phase5-rt.pcap",
+   "wire_field": "bytes 8-9 u16 LE",
+   "wire_values": [
+    0,
+    280,
+    828,
+    1020,
+    740,
+    284,
+    0
+   ],
+   "timestamps": [
+    "04:14:38.251",
+    "04:14:38.257",
+    "04:14:38.271",
+    "04:14:39.557",
+    "04:14:39.565",
+    "04:14:39.573"
+   ],
+   "evdev": "ABS_RZ, identical values at identical timestamps",
+   "match": "exact, sample for sample",
+   "digital_mask_bits_set": "none"
+  },
+  "A": {
+   "capture": "phase6-a.pcap",
+   "wire_field": "byte 4 bit 0x10",
+   "observed": "0x01 -> 0x11 -> 0x01",
+   "evdev": "EV_KEY code 304 (BTN_SOUTH) 1 then 0",
+   "match": "wire event 40 microseconds before the evdev event",
+   "result": "PROVEN LIVE"
+  },
+  "M1": {
+   "capture": "phase7-m1.pcap",
+   "wire_field": "byte 4 bit 0x20",
+   "observed": "0x01 -> 0x21 -> 0x01",
+   "evdev": "EV_KEY code 305 1 then 0",
+   "match": "wire event 40 microseconds before the evdev event",
+   "result": "PROVEN LIVE"
+  },
+  "M2": {
+   "capture": "phase8-m2.pcap",
+   "wire_field": "byte 5 bit 0x40",
+   "observed": "0x00 -> 0x40 -> 0x00",
+   "evdev": "EV_KEY code 317 1 then 0",
+   "match": "wire event 40 microseconds before the evdev event",
+   "result": "PROVEN LIVE"
+  }
+ },
+ "constant_bits": {
+  "byte4_bit0_0x01": "present in every report including idle; not a button",
+  "byte5_bit1_0x02": "seen briefly around the power-off in the independent capture; meaning UNKNOWN"
+ },
+ "wire_evdev_correlation": {
+  "result": "exact",
+  "summary": "every control was correlated by timestamp, not by nearest frame. Trigger values agreed sample for sample, and button edges agreed to within one report interval (40 microseconds).",
+  "resolves": "the open discrepancy in which the input layer was thought to report a smooth trigger ramp while the wire looked binary. Both show the same coarse, quantised sequence: three rising samples in about 20 ms and two falling samples in about 16 ms, for a pull the operator performed over about two seconds."
+ },
+ "trigger_quantisation": {
+  "observation": "a deliberately slow two-second pull is reported as a fast three-step rise in about 20 ms, then a 1.3 s hold at 1020, then a two-step fall in about 16 ms",
+  "lt_samples": [
+   192,
+   680,
+   1020,
+   436
+  ],
+  "rt_samples": [
+   280,
+   828,
+   1020,
+   740,
+   284
+  ],
+  "scale": "1020 appears to be full scale; the intermediate values are not evenly spaced",
+  "cause": "UNKNOWN"
+ },
+ "cross_validation": {
+  "captures_checked": 6,
+  "toolkit_matches_independent_extraction": true,
+  "phantom_frames": 0,
+  "unknown_spans": 0,
+  "report_lengths": "48 bytes only",
+  "sequences": "255 distinct, full rollover",
+  "gip_decode": "reproduced A, M1, M2, LT and RT exactly for the real pressed reports"
+ },
+ "defects_found": {
+  "count": 1,
+  "item": "the GIP decoder reported stick axes as raw unsigned words with no signedness or scaling caveat, while the repository documents sticks as signed elsewhere",
+  "action": "the decoder now reports the raw words and the two's-complement reading plus an explicit note that neither signedness nor the scaling to the host axis range is established, because no stick sweep was correlated to evdev",
+  "regression": "tests/test_live_interactive_reports.py plus tests/fixtures/live-interactive-2026-09-29.json built from the real reports"
+ },
+ "agent_writes": false,
+ "kernel_driver_writes": "xpad initialisation only, automatic",
+ "not_done": [
+  "stick sweep correlated to evdev",
+  "D-pad and other buttons",
+  "power-button timing",
+  "vendor-personality payload test with the hidraw node readable",
+  "the 32-byte form"
+ ]
+}

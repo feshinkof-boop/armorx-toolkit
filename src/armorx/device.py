@@ -164,7 +164,7 @@ def _decode_serial(raw: str | None) -> str | None:
 
     The kernel prints a string descriptor as a hex dump when it is not plain
     ASCII, so ``/sys/bus/usb/devices/.../serial`` can read as
-    ``3039373130373639393537313433`` for the serial ``09710769957143``. Both
+    ``3031323334353637383930313233`` for the serial ``01234567890123``. Both
     forms are useful: the decoded one is what the device actually reports, the
     raw one is what sysfs says. Only a fully printable decode is substituted.
     """

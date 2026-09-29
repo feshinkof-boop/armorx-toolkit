@@ -47,8 +47,25 @@ command in this release transmits to a device.
   exactly, and one real defect was found and fixed: a GIP report whose sequence
   byte is `0xA5` could produce a phantom checksum-valid frame.
 
+## Interactive validation, 2026-09-29 (operator present)
+
+* LT, RT, A, M1 and M2 were exercised with one popup per action and the wire was
+  correlated to `evdev` by timestamp, never by nearest frame: both triggers
+  matched `ABS_Z`/`ABS_RZ` sample for sample, and the three buttons matched their
+  key events to within one report interval.
+* The power-state transition `045e:0b12` <-> `413d:2106` was observed live on the
+  same USB port, including the off-state report descriptor, which is byte-identical
+  to the F20 receiver identity.
+* One decoder defect was found and fixed: stick axes were reported as raw unsigned
+  words with no caveat even though the project documents sticks as signed
+  elsewhere. The decoder now reports both readings and states that neither the
+  signedness nor the scaling to the host axis range is established.
+* Regression tests were added from the real captured reports.
+
 ## Not validated
 
-* Interactive controls: LT, RT, buttons, M1/M2 and the power button.
-* The vendor personality `413D:2106`, which was not re-observed today.
-* The 32 to 48 byte report transition, whose cause remains unknown.
+* Stick signedness and scaling: no stick sweep has been correlated to evdev.
+* The 32-byte starting report form did not appear at all in a 340 s capture that
+  began before power-on; the earlier 45.8 s switchover observation is unreproduced.
+* The D-pad, View, Menu, Guide, L3/R3 and Capture buttons.
+* Reading the vendor personality's hidraw node, which is root-only by default.

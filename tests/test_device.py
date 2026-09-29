@@ -184,14 +184,17 @@ def test_interface_numbers_are_read_from_after_the_dot(tmp_path):
 
 
 def test_hex_encoded_sysfs_serial_is_decoded(tmp_path):
-    """Regression: sysfs prints the serial as a hex dump, not as text."""
+    """Regression: sysfs prints the serial as a hex dump, not as text.
+
+    The values are synthetic: no real device serial belongs in the repository.
+    """
     root = tmp_path / "sysfs"
     root.mkdir()
     entry = make_usb_entry(root, "1-7", "045e", "0b12")
-    (entry / "serial").write_text("3039373130373639393537313433")
+    (entry / "serial").write_text("3031323334353637383930313233")
     candidate = device.scan_devices(sysfs_root=root, hidraw_root=tmp_path / "h",
                                     input_root=tmp_path / "i")[0]
-    assert candidate.identity.serial == "09710769957143"
+    assert candidate.identity.serial == "01234567890123"
 
 
 def test_plain_serial_is_left_alone(tmp_path):
