@@ -299,10 +299,15 @@ async def read_config(transport: AsyncLiveTransport, *, timeout: float = 4.0,
                    if i not in fragments]
         raise LiveTimeout(f"D6 incomplete: missing fragment(s) {missing}")
 
-    image = protocol_mod.reassemble_a4(
-        [fragments[i] for i in sorted(fragments)],
-        opcode=0xD6,
-    )
+    try:
+        image = protocol_mod.reassemble_a4(
+            [fragments[i] for i in sorted(fragments)],
+            opcode=0xD6,
+        )
+    except protocol_mod.FrameError as exc:
+        # A malformed fragment set must be a clean refusal, never a traceback:
+        # a caller acting on this image may be about to write it back.
+        raise LiveError(f"D6 fragments could not be reassembled: {exc}") from exc
     _validate_image(image)
     if report is not None:
         report["fragment_count"] = len(fragments)
@@ -692,3 +697,446 @@ def _find_ack(notifications: list[dict], opcode: int) -> dict:
     return {"observed": False,
             "note": "no acknowledgement notification was seen in the bounded window; "
                     "this is recorded as an absence, not as a rejection"}
+
+
+# ---------------------------------------------------------------------------
+# supervised reversible M1 remap (experimental, single purpose)
+# ---------------------------------------------------------------------------
+#
+# One logical change only: mapKeys[23] (the M1 source) becomes A. The target is
+# derived in memory from the live baseline. The command accepts no target image,
+# no opcode and no payload; the only image it will ever write during a restore is
+# the baseline it saved itself, and its SHA-256 must match the session record.
+
+M1_MAPKEY_INDEX = 23
+M1_MAPKEY_OFFSET = config_mod.MAPKEYS_START + M1_MAPKEY_INDEX          # 135
+M1_SOURCE_CODE = int(config_mod.MAP_KEY_CODES["M1"])                   # 23
+M1_TARGET_NAME = "A"
+M1_TARGET_CODE = int(config_mod.MAP_KEY_CODES[M1_TARGET_NAME])         # 0
+EXPECTED_MUTATION_OFFSETS = (0, 1, M1_MAPKEY_OFFSET)                   # CRC + mapKeys[23]
+SESSION_FORMAT = "armorx-reversible-m1-session-v1"
+
+
+def build_m1_remap_target(baseline: bytes) -> dict:
+    """Derive the M1 -> A target in memory from the live baseline.
+
+    Refuses anything but the single expected logical change.
+    """
+    baseline = bytes(baseline)
+    _validate_image(baseline)
+    current = baseline[M1_MAPKEY_OFFSET]
+    target = bytearray(baseline)
+    target[M1_MAPKEY_OFFSET] = M1_TARGET_CODE
+    crc = config_mod.crc16_gamepad(list(target[2:]))
+    target[0] = (crc >> 8) & 0xFF
+    target[1] = crc & 0xFF
+    target = bytes(target)
+    summary = image_summary(target)
+    if summary["actual_length"] != config_mod.CONFIG_LEN:
+        raise LiveError("target length is not 144 bytes")
+    if summary["declared_length"] != config_mod.CONFIG_LEN:
+        raise LiveError("target declared length is not 144")
+    if not summary["crc_matches"]:
+        raise LiveError("target CRC does not verify")
+    plan = plan_config_change(baseline, target)
+    changed = tuple(sorted(d["offset"] for d in plan["differences"]))
+    if changed != EXPECTED_MUTATION_OFFSETS:
+        raise LiveError(
+            f"refusing this mutation: expected the changed offsets {EXPECTED_MUTATION_OFFSETS}, "
+            f"got {changed}")
+    return {
+        "baseline": baseline,
+        "target": target,
+        "current_m1_code": current,
+        "current_m1_name": config_mod.CANONICAL_KEY_NAMES.get(current, f"0x{current:02X}"),
+        "target_m1_code": M1_TARGET_CODE,
+        "target_m1_name": M1_TARGET_NAME,
+        "changed_offsets": list(changed),
+        "differences": plan["differences"],
+        "target_summary": summary,
+        "baseline_summary": image_summary(baseline),
+    }
+
+
+def classify_image(image: bytes, baseline: bytes, target: bytes | None) -> str:
+    """Classify a live image against the session's images, never guessing."""
+    image = bytes(image)
+    if image == bytes(baseline):
+        return "BASELINE"
+    if target is not None and image == bytes(target):
+        return "TARGET"
+    return "UNEXPECTED"
+
+
+def save_session_record(prefix: str | Path, record: dict) -> dict:
+    path = Path(prefix).with_suffix(".session.json")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return {"session_record": path.name, "session_format": record.get("format")}
+
+
+def load_session_record(prefix: str | Path) -> dict:
+    path = Path(prefix).with_suffix(".session.json")
+    if not path.exists():
+        raise LiveError(f"no session record at {path.name}; run the apply stage first")
+    record = json.loads(path.read_text(encoding="utf-8"))
+    if record.get("format") != SESSION_FORMAT:
+        raise LiveError("session record has an unexpected format")
+    return record
+
+
+def load_saved_baseline(prefix: str | Path, record: dict) -> bytes:
+    """Reopen the baseline this toolkit saved, and prove it is still that image.
+
+    An image supplied by anyone other than this toolkit cannot pass: its SHA-256
+    must equal the baseline SHA recorded in the session record.
+    """
+    base = Path(prefix)
+    bin_path = base.with_suffix(".bin")
+    if not bin_path.exists():
+        raise LiveError(f"no saved baseline at {bin_path.name}")
+    image = bin_path.read_bytes()
+    _validate_image(image)
+    sha = hashlib.sha256(image).hexdigest()
+    expected = record.get("baseline_sha256")
+    if not expected or sha != expected:
+        raise LiveError("saved baseline does not match the session record SHA-256; refusing")
+    return image
+
+
+def _image_meta(image: bytes) -> dict:
+    summary = image_summary(image)
+    return {"sha256": summary["sha256"], "bytes": summary["actual_length"],
+            "crc": summary["stored_crc_hex"]}
+
+
+async def _write_image_and_persist(transport: AsyncLiveTransport, image: bytes, *,
+                                   fragment_delay: float, ack_window: float) -> dict:
+    """D7-write one image, record the bounded window, then send 0E exactly once."""
+    image = bytes(image)
+    _validate_image(image)
+    frames = protocol_mod.fragment_config_image(0xD7, image)
+    if len(frames) != protocol_mod.FRAGMENT_COUNT:
+        raise LiveError("internal error: fragment count mismatch")
+    result: dict[str, Any] = {"fragments": [], "sent": 0}
+    try:
+        transport.allow_mutating = True
+        for index, frame in enumerate(frames, start=1):
+            await transport.send(frame, mutating=True)
+            result["fragments"].append({
+                "index": index,
+                "frame_bytes": len(frame),
+                "data_bytes": len(frame) - 5,
+                "checksum_ok": protocol_mod.parse_frame(frame).checksum_ok,
+                "at": round(time.time(), 3),
+            })
+            result["sent"] = index
+            if fragment_delay:
+                await asyncio.sleep(fragment_delay)
+        result["notifications"] = await collect_notifications(transport, window=ack_window)
+    finally:
+        transport.allow_mutating = False
+    result["acknowledgement"] = _find_ack(result["notifications"], 0xD7)
+    result["ack_observed"] = result["acknowledgement"]["observed"]
+
+    persist: dict[str, Any] = {"request_hex": PERSIST_REQUEST.hex(" "), "sent": 0}
+    if PERSIST_REQUEST.hex(" ") != PERSIST_FRAME_HEX:
+        raise LiveError("internal error: persistence frame mismatch")
+    try:
+        transport.allow_mutating = True
+        await transport.send(PERSIST_REQUEST, mutating=True)
+        persist["sent"] = 1
+        persist["notifications"] = await collect_notifications(transport, window=ack_window)
+    finally:
+        transport.allow_mutating = False
+    persist["notification_count"] = len(persist["notifications"])
+    persist["acknowledgement"] = _find_ack(persist["notifications"], 0x0E)
+    result["persist"] = persist
+    return result
+
+
+async def _dual_read_and_compare(transport: AsyncLiveTransport, *, expected: bytes,
+                                 timeout: float, settle: float) -> dict:
+    """Two D6 reads that must both equal ``expected`` exactly."""
+    readback: dict[str, Any] = {"attempts": []}
+    for attempt in (1, 2):
+        details: dict = {}
+        image = await read_config(transport, timeout=timeout, report=details)
+        differences = _offset_differences(expected, image)
+        readback["attempts"].append({
+            "attempt": attempt,
+            **image_summary(image),
+            "fragment_count": details.get("fragment_count"),
+            "byte_for_byte_match": not differences,
+            "differences": differences,
+            "state": classify_image(image, expected, None),
+        })
+        if differences:
+            break
+        if attempt == 1 and settle:
+            await asyncio.sleep(settle)
+    readback["matches"] = bool(readback["attempts"]) and all(
+        a["byte_for_byte_match"] for a in readback["attempts"])
+    readback["complete"] = len(readback["attempts"]) == 2
+    return readback
+
+
+async def validate_reversible_m1(
+    transport: AsyncLiveTransport,
+    *,
+    backup_prefix: str | Path | None = None,
+    authorized: bool = False,
+    stage: str = "apply",
+    timeout: float = 4.0,
+    ack_window: float = 1.5,
+    fragment_delay: float = 0.01,
+    settle: float = 2.0,
+    identity: dict | None = None,
+) -> dict:
+    """Apply, check or restore the supervised M1 -> A reversible mutation.
+
+    ``stage='check'`` is read-only and classifies the live image.
+    ``stage='restore'`` writes back only the baseline this toolkit saved.
+    """
+    if stage not in {"apply", "check", "restore"}:
+        raise LiveError(f"unknown stage: {stage}")
+    report: dict[str, Any] = {
+        "command": "armorx live validate-reversible-m1",
+        "stage": stage,
+        "status": "REFUSED",
+        "mutation": "mapKeys[23] (M1 source) -> A",
+        "never_accepts_a_target_image": True,
+        "mutating_commands_exposed_by_this_command": False,
+        "general_apply_command_exposed": False,
+    }
+    if backup_prefix is None:
+        report["refusal_reason"] = "no backup prefix was given; refusing to continue"
+        return report
+
+    if stage == "check":
+        record = load_session_record(backup_prefix)
+        target_sha = record.get("target_sha256")
+        target = None
+        try:
+            baseline = load_saved_baseline(backup_prefix, record)
+        except LiveError as exc:
+            report["refusal_reason"] = str(exc)
+            return report
+        details: dict = {}
+        try:
+            image = await read_config(transport, timeout=timeout, report=details)
+        except LiveError as exc:
+            report["refusal_reason"] = f"D6 read failed: {exc}"
+            return report
+        summary = image_summary(image)
+        state = classify_image(image, baseline, None)
+        if state == "UNEXPECTED" and target_sha and summary["sha256"] == target_sha:
+            state = "TARGET"
+        report["status"] = "OK"
+        report["observed_state"] = state
+        report["observed"] = {**summary, "fragment_count": details.get("fragment_count")}
+        report["baseline_sha256"] = record.get("baseline_sha256")
+        report["target_sha256"] = target_sha
+        report["restore_authorized"] = state == "TARGET"
+        report["this_session_mutation"] = record.get("this_session_mutation")
+        if state == "UNEXPECTED":
+            report["restore_authorized"] = False
+            report["operator_alert_required"] = True
+            report["guidance"] = ("the live image is neither this session's baseline nor its "
+                                 "target; do not write, alert the operator and preserve evidence")
+        return report
+
+    # ---- apply or restore ------------------------------------------------
+    preflight_details: dict = {}
+    try:
+        image_1 = await read_config(transport, timeout=timeout, report=preflight_details)
+    except LiveError as exc:
+        report["refusal_reason"] = f"first D6 read failed: {exc}"
+        return report
+    report["first_read"] = {"ok": True, **image_summary(image_1),
+                            "fragment_count": preflight_details.get("fragment_count")}
+
+    # One prefix for the whole session: the recovery baseline, its .sha256 and the
+    # session record the restore stage will reopen. The operator supplies a prefix
+    # such as <dir>/baseline-original.
+    backup_path = str(backup_prefix)
+    if stage == "apply":
+        report["stage_name"] = "preflight"
+        try:
+            report["baseline_backup"] = save_baseline(
+                backup_path, image_1, fragments=preflight_details.get("fragments"),
+                identity=identity)
+        except OSError as exc:
+            report["refusal_reason"] = f"baseline backup failed: {exc}"
+            return report
+    else:
+        report["stage_name"] = "restore-preflight"
+        try:
+            record = load_session_record(backup_prefix)
+            baseline_image = load_saved_baseline(backup_prefix, record)
+        except LiveError as exc:
+            report["refusal_reason"] = str(exc)
+            return report
+        saved_summary = image_summary(baseline_image)
+        report["saved_baseline"] = saved_summary
+        report["saved_baseline_note"] = (
+            "the restore image is the baseline this toolkit saved before the mutation; "
+            "its SHA-256 must match the session record")
+        live_summary = image_summary(image_1)
+        if live_summary["sha256"] == saved_summary["sha256"]:
+            report["status"] = "NO_RESTORE_NEEDED"
+            report["observed_state"] = "BASELINE"
+            report["note"] = "the live configuration already equals the saved baseline"
+            return report
+        target_sha = record.get("target_sha256")
+        state = "TARGET" if target_sha and live_summary["sha256"] == target_sha else "UNEXPECTED"
+        report["observed_state"] = state
+        if state == "UNEXPECTED":
+            # Phase rule: an unrecognised third state is never written over.
+            report["refusal_reason"] = (
+                "the live image is neither this session's baseline nor its target; refusing "
+                "to write, alert the operator and preserve every artifact")
+            report["operator_alert_required"] = True
+            return report
+        image_1 = baseline_image          # the restore image is the saved baseline
+        report["restore_source_sha256"] = saved_summary["sha256"]
+        if not authorized:
+            report["refusal_reason"] = ("operator authorization not given; re-run with "
+                                       "--authorized only after the popup was acknowledged")
+            return report
+        report["operator_authorized"] = True
+        report["write"] = await _write_image_and_persist(
+            transport, baseline_image, fragment_delay=fragment_delay, ack_window=ack_window)
+        try:
+            readback = await _dual_read_and_compare(transport, expected=baseline_image,
+                                                    timeout=timeout, settle=settle)
+        except LiveError as exc:
+            report["status"] = "FAIL"
+            report["failure_reason"] = f"post-restore D6 read failed: {exc}"
+            return report
+        report["readback"] = readback
+        report["byte_for_byte_match"] = readback["matches"]
+        report["final_sha256"] = readback["attempts"][-1]["sha256"] if readback["attempts"] else None
+        report["status"] = "RESTORED" if readback["matches"] and readback["complete"] else "FAIL"
+        report["restored_baseline_sha256"] = saved_summary["sha256"]
+        return report
+
+    # apply: a second preflight read must match the first exactly
+    report["stage_name"] = "repeat-read"
+    second_details: dict = {}
+    try:
+        image_2 = await read_config(transport, timeout=timeout, report=second_details)
+    except LiveError as exc:
+        report["refusal_reason"] = f"second D6 read failed: {exc}"
+        return report
+    report["second_read"] = {"ok": True, **image_summary(image_2),
+                             "fragment_count": second_details.get("fragment_count")}
+    identical = bytes(image_1) == bytes(image_2)
+    report["repeated_reads_identical"] = identical
+    if not identical:
+        report["refusal_reason"] = ("two consecutive live D6 reads differ; no write is attempted")
+        return report
+
+    baseline = bytes(image_1)
+    report["baseline_sha256"] = hashlib.sha256(baseline).hexdigest()
+    report["baseline_m1"] = {
+        "offset": M1_MAPKEY_OFFSET,
+        "code": baseline[M1_MAPKEY_OFFSET],
+        "name": config_mod.CANONICAL_KEY_NAMES.get(baseline[M1_MAPKEY_OFFSET],
+                                                   f"0x{baseline[M1_MAPKEY_OFFSET]:02X}"),
+    }
+    report["historical_baseline_match"] = (
+        report["baseline_sha256"] == "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6")
+
+    # this experiment only makes sense if M1 is not already A
+    if baseline[M1_MAPKEY_OFFSET] == M1_TARGET_CODE:
+        report["status"] = "ABORTED_ALREADY_A"
+        report["refusal_reason"] = ("mapKeys[23] already equals A, so this particular mutation "
+                                   "has nothing to apply; no D7 and no 0E were sent")
+        return report
+
+    report["stage_name"] = "target"
+    try:
+        plan = build_m1_remap_target(baseline)
+    except LiveError as exc:
+        report["refusal_reason"] = str(exc)
+        return report
+    target = plan["target"]
+    report["target"] = {
+        "sha256": plan["target_summary"]["sha256"],
+        "bytes": plan["target_summary"]["actual_length"],
+        "declared_length": plan["target_summary"]["declared_length"],
+        "crc_matches": plan["target_summary"]["crc_matches"],
+        "m1_code": plan["target_m1_code"],
+        "m1_name": plan["target_m1_name"],
+        "changed_offsets": plan["changed_offsets"],
+    }
+    report["target_differences"] = plan["differences"]
+    report["expected_changed_offsets"] = list(EXPECTED_MUTATION_OFFSETS)
+
+    report["stage_name"] = "authorization"
+    report["operator_authorized"] = bool(authorized)
+    if not authorized:
+        report["refusal_reason"] = ("operator authorization not given; re-run with --authorized "
+                                   "only after the popup was acknowledged")
+        return report
+
+    session_record = {
+        "format": SESSION_FORMAT,
+        "created": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "mutation": f"mapKeys[{M1_MAPKEY_INDEX}] (M1 source) -> {M1_TARGET_NAME}",
+        "baseline_sha256": report["baseline_sha256"],
+        "baseline_bytes": len(baseline),
+        "baseline_m1_code": baseline[M1_MAPKEY_OFFSET],
+        "target_sha256": plan["target_summary"]["sha256"],
+        "target_m1_code": plan["target_m1_code"],
+        "target_changed_offsets": plan["changed_offsets"],
+        "device": {k: v for k, v in (identity or {}).items()
+                   if k in {"model", "firmware", "battery", "transport"}},
+        "this_session_mutation": False,
+    }
+    report["session_record"] = save_session_record(backup_path, session_record)
+
+    report["stage_name"] = "apply"
+    report["write"] = await _write_image_and_persist(
+        transport, target, fragment_delay=fragment_delay, ack_window=ack_window)
+
+    report["stage_name"] = "verify-target"
+    try:
+        readback = await _dual_read_and_compare(transport, expected=target,
+                                                timeout=timeout, settle=settle)
+    except LiveError as exc:
+        report["status"] = "FAIL"
+        report["failure_reason"] = f"post-write D6 read failed: {exc}"
+        return report
+    report["readback"] = readback
+    report["byte_for_byte_match"] = readback["matches"]
+    report["target_sha256"] = plan["target_summary"]["sha256"]
+    report["final_sha256"] = readback["attempts"][-1]["sha256"] if readback["attempts"] else None
+    if not readback["matches"]:
+        last = readback["attempts"][-1]["sha256"] if readback["attempts"] else None
+        state = "UNEXPECTED"
+        if last == report["baseline_sha256"]:
+            state = "BASELINE"
+        elif last == report["target_sha256"]:
+            state = "TARGET"
+        report["observed_state"] = state
+        report["status"] = "FAIL"
+        report["failure_reason"] = ("the live configuration does not match the target byte for "
+                                   "byte; no further write was attempted")
+        report["guidance"] = {
+            "BASELINE": "the device already holds the original baseline; no restore is needed",
+            "TARGET": "the device holds the target; a restore of the saved baseline is authorized",
+            "UNEXPECTED": ("neither this session's baseline nor its target; do not write again, "
+                           "alert the operator and preserve every artifact"),
+        }[state]
+        return report
+
+    session_record["this_session_mutation"] = True
+    report["session_record"] = save_session_record(backup_path, session_record)
+    report["status"] = "APPLIED"
+    report["this_session_mutation"] = True
+    report["next_required_step"] = (
+        "restore the saved original baseline with --stage restore --authorized, then confirm "
+        "with --stage check")
+    return report

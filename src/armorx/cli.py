@@ -774,6 +774,36 @@ def cmd_live_validate_write_gate(args: argparse.Namespace) -> int:
     return {"PASS": 0, "FAIL": 1}.get(result.get("status"), 2)
 
 
+async def _live_reversible_m1(args: argparse.Namespace) -> dict:
+    transport = live_mod.BleakLiveTransport(address=args.address,
+                                            connect_timeout=args.connect_timeout)
+    await transport.connect()
+    try:
+        identity = await live_mod.read_identity(transport)
+        return await live_mod.validate_reversible_m1(
+            transport,
+            backup_prefix=args.backup_prefix,
+            authorized=args.authorized,
+            stage=args.stage,
+            timeout=args.reply_timeout,
+            ack_window=args.ack_window,
+            settle=args.settle,
+            identity=identity,
+        )
+    finally:
+        await transport.close()
+
+
+def cmd_live_validate_reversible_m1(args: argparse.Namespace) -> int:
+    """Supervised M1 -> A reversible test. Takes no target image by design."""
+    result = _run_live(_live_reversible_m1(args))
+    if result is None:
+        return 2
+    _write_json(args.output, result, compact=args.compact)
+    return {"OK": 0, "APPLIED": 0, "RESTORED": 0, "NO_RESTORE_NEEDED": 0,
+            "FAIL": 1}.get(result.get("status"), 2)
+
+
 def cmd_live_plan(args: argparse.Namespace) -> int:
     try:
         baseline = live_mod.load_image(args.baseline)
@@ -837,6 +867,25 @@ def _add_live_commands(groups) -> None:
     p.add_argument("--compact", action="store_true")
     p.add_argument("-o", "--output")
     p.set_defaults(func=cmd_live_validate_write_gate)
+
+    p = sub.add_parser(
+        "validate-reversible-m1",
+        help="supervised reversible M1->A test; takes no target image",
+    )
+    p.add_argument("--address", required=True)
+    p.add_argument("--backup-prefix", required=True,
+                   help="path prefix for baseline-original.json/.bin/.sha256 and the session record")
+    p.add_argument("--stage", choices=("apply", "check", "restore"), default="apply",
+                   help="apply the M1->A target, classify the live image, or restore the saved baseline")
+    p.add_argument("--authorized", action="store_true",
+                   help="only after the operator popup was acknowledged")
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--ack-window", type=float, default=1.5)
+    p.add_argument("--settle", type=float, default=2.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_validate_reversible_m1)
 
     p = sub.add_parser("plan", help="compare two saved 144-byte images offline")
     p.add_argument("baseline")

@@ -1,0 +1,180 @@
+{
+  "artifact": "armorx-toolkit v0.4.0 supervised reversible M1 -> A mutation",
+  "authorization": {
+    "ack": "accepted",
+    "note": "no write is possible without the explicit --authorized flag",
+    "popup": "ARMOR-X v0.4 REVERSIBLE CONFIG TEST",
+    "unauthorized_preflight_refusal": "operator authorization not given; re-run with --authorized only after the popup was acknowledged"
+  },
+  "command": "armorx live validate-reversible-m1 --stage apply|check|restore (takes no target image by design)",
+  "date": "2026-09-29",
+  "failures_or_retries": {
+    "evdev_host_view": "the host evdev node for the controller is root-only, so the host input view was not readable; the wire report is the device's own claim and is decisive",
+    "note": "one D7 write of the target and one D7 write of the restore image; no automatic retry loop ran and no write was ever repeated blindly",
+    "writes_performed": 2
+  },
+  "final_after_power_cycle": {
+    "crc_valid": true,
+    "equals_original_baseline": true,
+    "length": 144,
+    "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "state": "BASELINE"
+  },
+  "original_baseline": {
+    "crc": "0x2C40",
+    "crc_valid": true,
+    "length": 144,
+    "mapKeys[23] (M1 source)": {
+      "code": 1,
+      "name": "B",
+      "offset": 135
+    },
+    "matches_historical_baseline": true,
+    "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "two_preflight_reads_identical": true
+  },
+  "persistence_after_power_cycle": {
+    "crc_valid": true,
+    "equals_target": true,
+    "observed_sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+    "state": "TARGET"
+  },
+  "physical_effect": {
+    "capture": "usbmon1, 27032 packets, 13042 type-0x20 48-byte reports",
+    "host_evdev_note": "the host evdev node for the controller is root-only, so the host input view was not readable; the wire report is the device's own claim and is decisive",
+    "method": "passive usbmon capture of the USB GIP stream (no prompts, no writes)",
+    "observed": "byte 4 went 0x01 -> 0x11 -> 0x01 (bit 0x10 = A); byte 5 stayed 0x00",
+    "operator_action": "one press-and-release of the physical M1 button at 2026-09-29T06:03:44 (local)",
+    "prediction": "with M1 remapped to A, a press must report A (bit 0x10) and not M1 (bit 0x20)",
+    "press_duration_s": 0.288,
+    "verdict": "PROVEN"
+  },
+  "privacy": {
+    "ble_address": "withheld (local runtime only)",
+    "host_data": "not recorded",
+    "serial_number": "not read, not recorded"
+  },
+  "restore": {
+    "byte_for_byte_match": true,
+    "d6_read_1": {
+      "actual_length": 144,
+      "attempt": 1,
+      "byte_for_byte_match": true,
+      "computed_crc": 11328,
+      "computed_crc_hex": "0x2C40",
+      "crc_matches": true,
+      "declared_length": 144,
+      "differences": [],
+      "fragment_count": 10,
+      "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+      "state": "BASELINE",
+      "stored_crc": 11328,
+      "stored_crc_hex": "0x2C40"
+    },
+    "d6_read_2": {
+      "actual_length": 144,
+      "attempt": 2,
+      "byte_for_byte_match": true,
+      "computed_crc": 11328,
+      "computed_crc_hex": "0x2C40",
+      "crc_matches": true,
+      "declared_length": 144,
+      "differences": [],
+      "fragment_count": 10,
+      "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+      "state": "BASELINE",
+      "stored_crc": 11328,
+      "stored_crc_hex": "0x2C40"
+    },
+    "d7_ack": {
+      "checksum_ok": true,
+      "observed": true,
+      "payload_hex": "00",
+      "raw_hex": "a5 05 d7 00 81"
+    },
+    "d7_fragments": 10,
+    "persistence_frames_sent": 1,
+    "persistence_notifications": 2,
+    "source": "the baseline this toolkit saved before the mutation",
+    "source_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
+  },
+  "result": "PASS",
+  "target": {
+    "changed_offsets": [
+      0,
+      1,
+      135
+    ],
+    "crc_valid": true,
+    "derived_from": "the live D6 read taken immediately before the write",
+    "diff_set_is_exactly_crc_plus_mapkeys_23": true,
+    "differences": [
+      {
+        "after": 188,
+        "before": 44,
+        "offset": 0
+      },
+      {
+        "after": 77,
+        "before": 64,
+        "offset": 1
+      },
+      {
+        "after": 0,
+        "before": 1,
+        "offset": 135
+      }
+    ],
+    "length": 144,
+    "mapKeys[23]": {
+      "code": 0,
+      "name": "A"
+    },
+    "sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1"
+  },
+  "target_verification": {
+    "byte_for_byte_match": true,
+    "d6_read_1": {
+      "actual_length": 144,
+      "attempt": 1,
+      "byte_for_byte_match": true,
+      "computed_crc": 48205,
+      "computed_crc_hex": "0xBC4D",
+      "crc_matches": true,
+      "declared_length": 144,
+      "differences": [],
+      "fragment_count": 10,
+      "sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+      "state": "BASELINE",
+      "stored_crc": 48205,
+      "stored_crc_hex": "0xBC4D"
+    },
+    "d6_read_2": {
+      "actual_length": 144,
+      "attempt": 2,
+      "byte_for_byte_match": true,
+      "computed_crc": 48205,
+      "computed_crc_hex": "0xBC4D",
+      "crc_matches": true,
+      "declared_length": 144,
+      "differences": [],
+      "fragment_count": 10,
+      "sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+      "state": "BASELINE",
+      "stored_crc": 48205,
+      "stored_crc_hex": "0xBC4D"
+    }
+  },
+  "target_write": {
+    "d7_ack": {
+      "checksum_ok": true,
+      "observed": true,
+      "payload_hex": "00",
+      "raw_hex": "a5 05 d7 00 81"
+    },
+    "d7_fragments": 10,
+    "persistence_frame": "a5 05 0e 00 b8",
+    "persistence_frames_sent": 1,
+    "persistence_notifications": 2
+  }
+}

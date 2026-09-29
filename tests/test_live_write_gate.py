@@ -219,7 +219,8 @@ def test_no_general_write_command_is_exposed():
     import armorx.cli as cli_mod
     live_parser = parser._subparsers._group_actions[0].choices["live"]
     assert sorted(live_parser._subparsers._group_actions[0].choices) == [
-        "backup", "info", "plan", "read-config", "scan", "validate-write-gate"]
+        "backup", "info", "plan", "read-config", "scan", "validate-reversible-m1",
+        "validate-write-gate"]
 
 
 def test_no_local_path_or_user_name_reaches_the_report(tmp_path):
