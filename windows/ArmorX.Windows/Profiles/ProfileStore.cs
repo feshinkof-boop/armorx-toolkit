@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text.Json;
 using ArmorX.Windows.Config;
 
@@ -6,11 +7,15 @@ namespace ArmorX.Windows.Profiles;
 public sealed class ProfileStore
 {
     private readonly JsonSerializerOptions _json = new() { WriteIndented = true };
-    public string DirectoryPath { get; } = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "ArmorX", "Profiles");
+    public string DirectoryPath { get; }
 
-    public ProfileStore() => Directory.CreateDirectory(DirectoryPath);
+    public ProfileStore(string? directoryPath = null)
+    {
+        DirectoryPath = directoryPath ?? Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "ArmorX", "Profiles");
+        Directory.CreateDirectory(DirectoryPath);
+    }
 
     public async Task SaveAsync(string name, ArmorXConfig144 config, string? deviceModel, string? firmware)
     {
@@ -23,7 +28,8 @@ public sealed class ProfileStore
             SavedUtc = DateTimeOffset.UtcNow,
             DeviceModel = deviceModel,
             Firmware = firmware,
-            ConfigBase64 = Convert.ToBase64String(config.ToArray())
+            ConfigBase64 = Convert.ToBase64String(config.ToArray()),
+            ConfigSha256 = Hash(config.ToArray())
         };
 
         await WriteProfileAsync(profile, overwrite: true);
@@ -110,10 +116,7 @@ public sealed class ProfileStore
 
     private async Task WriteProfileAsync(ArmorXProfile profile, bool overwrite)
     {
-        profile.Name = NormalizeName(profile.Name);
-        if (profile.GetConfigBytes().Length != ArmorXConfig144.Size)
-            throw new InvalidDataException("Profile does not contain a 144-byte ARMOR-X Pro configuration.");
-
+        profile = ValidateProfile(profile);
         var path = PathFor(profile.Name);
         if (!overwrite && File.Exists(path))
             throw new IOException($"A profile named '{profile.Name}' already exists.");
@@ -132,6 +135,16 @@ public sealed class ProfileStore
         if (bytes.Length != ArmorXConfig144.Size)
             throw new InvalidDataException("Profile does not contain a 144-byte ARMOR-X Pro configuration.");
 
+        var config = new ArmorXConfig144(bytes);
+        if (!config.CrcValid)
+            throw new InvalidDataException("Profile configuration CRC is invalid.");
+
+        var actualHash = Hash(bytes);
+        if (!string.IsNullOrWhiteSpace(profile.ConfigSha256) &&
+            !string.Equals(profile.ConfigSha256, actualHash, StringComparison.OrdinalIgnoreCase))
+            throw new InvalidDataException("Profile SHA-256 does not match its configuration bytes.");
+
+        profile.ConfigSha256 = actualHash;
         return profile;
     }
 
@@ -166,4 +179,7 @@ public sealed class ProfileStore
 
     private static bool PathsEqual(string a, string b) =>
         string.Equals(Path.GetFullPath(a), Path.GetFullPath(b), StringComparison.OrdinalIgnoreCase);
+
+    private static string Hash(byte[] bytes) =>
+        Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 }

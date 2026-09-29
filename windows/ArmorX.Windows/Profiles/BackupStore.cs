@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text.Json;
 using ArmorX.Windows.Config;
 
@@ -10,6 +11,7 @@ public sealed class ArmorXBackup
     public string? DeviceModel { get; set; }
     public string? Firmware { get; set; }
     public string ConfigBase64 { get; set; } = string.Empty;
+    public string? ConfigSha256 { get; set; }
     public byte[] GetConfigBytes() => Convert.FromBase64String(ConfigBase64);
 }
 
@@ -34,7 +36,8 @@ public sealed class BackupStore
             Reason = reason,
             DeviceModel = deviceModel,
             Firmware = firmware,
-            ConfigBase64 = Convert.ToBase64String(config.ToArray())
+            ConfigBase64 = Convert.ToBase64String(config.ToArray()),
+            ConfigSha256 = Hash(config.ToArray())
         };
 
         var safeReason = string.Concat(reason.Select(ch =>
@@ -54,8 +57,17 @@ public sealed class BackupStore
             {
                 var item = JsonSerializer.Deserialize<ArmorXBackup>(
                     await File.ReadAllTextAsync(path), _json);
-                if (item is not null && item.GetConfigBytes().Length == ArmorXConfig144.Size)
-                    return item;
+                if (item is null) continue;
+                var bytes = item.GetConfigBytes();
+                if (bytes.Length != ArmorXConfig144.Size) continue;
+                var config = new ArmorXConfig144(bytes);
+                if (!config.CrcValid) continue;
+                var hash = Hash(bytes);
+                if (!string.IsNullOrWhiteSpace(item.ConfigSha256) &&
+                    !string.Equals(item.ConfigSha256, hash, StringComparison.OrdinalIgnoreCase))
+                    continue;
+                item.ConfigSha256 = hash;
+                return item;
             }
             catch
             {
@@ -65,4 +77,7 @@ public sealed class BackupStore
 
         return null;
     }
+
+    private static string Hash(byte[] bytes) =>
+        Convert.ToHexString(SHA256.HashData(bytes)).ToLowerInvariant();
 }

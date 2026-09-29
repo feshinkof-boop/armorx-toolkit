@@ -88,6 +88,35 @@ public partial class App : System.Windows.Application
             if (merged.GetByte(100) != 0x5A || merged.GetByte(135) != 1 || !merged.CrcValid)
                 throw new InvalidOperationException("Safe merge self-test failed.");
 
+            var tempProfiles = Path.Combine(Path.GetTempPath(), "ArmorX-SelfTest-" + Guid.NewGuid().ToString("N"));
+            try
+            {
+                var store = new ArmorX.Windows.Profiles.ProfileStore(tempProfiles);
+                store.SaveAsync("Self Test", config, "TEST", "TEST").GetAwaiter().GetResult();
+                var loaded = store.LoadAsync("Self Test").GetAwaiter().GetResult();
+                if (!loaded.GetConfigBytes().SequenceEqual(config.ToArray()))
+                    throw new InvalidOperationException("Profile round-trip self-test failed.");
+
+                var file = Directory.EnumerateFiles(tempProfiles, "*.json").Single();
+                var text = File.ReadAllText(file);
+                var marker = Convert.ToBase64String(config.ToArray());
+                var tampered = config.ToArray();
+                tampered[20] ^= 1;
+                File.WriteAllText(file, text.Replace(marker, Convert.ToBase64String(tampered)));
+                try
+                {
+                    _ = store.LoadAsync("Self Test").GetAwaiter().GetResult();
+                    throw new InvalidOperationException("Tampered profile was accepted.");
+                }
+                catch (InvalidDataException)
+                {
+                }
+            }
+            finally
+            {
+                try { if (Directory.Exists(tempProfiles)) Directory.Delete(tempProfiles, true); } catch { }
+            }
+
             return true;
         }
         catch
