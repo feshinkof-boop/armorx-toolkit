@@ -36,6 +36,46 @@ QUICK_FIELDS = (
     "turboSpeedIdx",
 )
 
+STICK_VISUAL_FIELDS = {
+    "left": {
+        "dz_center": "stickLeftDZCenter",
+        "dz_side": "stickLeftDZSide",
+        "curve_mode": "stickLeftCurveModeb",
+        "curve_ydivx": "stickLeftCurveYDivx",
+        "pt1_x": "stickLeftCurveSpeedORpt1x",
+        "pt1_y": "stickLeftCurveSmootORpt1y",
+        "pt2_x": "stickLeftCurveCurveORpt2x",
+        "pt2_y": "stickLeftCurveRes0ORpt2y",
+    },
+    "right": {
+        "dz_center": "stickRightDZCenter",
+        "dz_side": "stickRightDZSide",
+        "curve_mode": "stickRightCurveModeb",
+        "curve_ydivx": "stickRightCurveYDivx",
+        "pt1_x": "stickRightCurveSpeedORpt1x",
+        "pt1_y": "stickRightCurveSmootORpt1y",
+        "pt2_x": "stickRightCurveCurveORpt2x",
+        "pt2_y": "stickRightCurveRes0ORpt2y",
+    },
+}
+
+TRIGGER_VISUAL_FIELDS = {
+    "left": {
+        "dz_center": "triggerLeftDZCenter",
+        "dz_side": "triggerLeftDZSide",
+    },
+    "right": {
+        "dz_center": "triggerRightDZCenter",
+        "dz_side": "triggerRightDZSide",
+    },
+}
+
+GUI_EDITABLE_FIELDS = tuple(dict.fromkeys(
+    list(QUICK_FIELDS)
+    + [field for side in STICK_VISUAL_FIELDS.values() for field in side.values()]
+    + [field for side in TRIGGER_VISUAL_FIELDS.values() for field in side.values()]
+))
+
 
 def _validated(image: bytes | bytearray | list[int]) -> bytes:
     data = bytes(image)
@@ -123,14 +163,32 @@ class GuiConfigSession:
         }
 
     def set_byte_field(self, field: str, value: int) -> None:
-        if field not in QUICK_FIELDS:
-            raise ValueError(f"{field} is not a milestone-1 GUI field")
+        if field not in GUI_EDITABLE_FIELDS:
+            raise ValueError(f"{field} is not a GUI-editable byte field")
         self._apply(f"{field}={int(value)}")
 
     def byte_field(self, field: str) -> int:
-        if field not in QUICK_FIELDS:
-            raise ValueError(f"{field} is not a milestone-1 GUI field")
+        if field not in GUI_EDITABLE_FIELDS:
+            raise ValueError(f"{field} is not a GUI-editable byte field")
         return self.working[config_mod.BYTE_FIELDS[field]]
+
+    def stick_visual(self, side: str) -> dict[str, int]:
+        key = str(side).lower()
+        if key not in STICK_VISUAL_FIELDS:
+            raise ValueError("stick side must be left or right")
+        return {
+            role: self.byte_field(field)
+            for role, field in STICK_VISUAL_FIELDS[key].items()
+        }
+
+    def trigger_visual(self, side: str) -> dict[str, int]:
+        key = str(side).lower()
+        if key not in TRIGGER_VISUAL_FIELDS:
+            raise ValueError("trigger side must be left or right")
+        return {
+            role: self.byte_field(field)
+            for role, field in TRIGGER_VISUAL_FIELDS[key].items()
+        }
 
     def export_json(self, path: str | Path) -> None:
         _validated(self.working)

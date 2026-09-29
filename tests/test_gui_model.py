@@ -5,7 +5,14 @@ import json
 import pytest
 
 from armorx import config as C
-from armorx.gui_model import GuiConfigSession, QUICK_FIELDS, REAR_BUTTONS
+from armorx.gui_model import (
+    GUI_EDITABLE_FIELDS,
+    GuiConfigSession,
+    QUICK_FIELDS,
+    REAR_BUTTONS,
+    STICK_VISUAL_FIELDS,
+    TRIGGER_VISUAL_FIELDS,
+)
 
 
 def baseline() -> bytes:
@@ -78,7 +85,7 @@ def test_export_bin_reopens(tmp_path):
 
 def test_unknown_gui_field_is_refused():
     session = GuiConfigSession.from_image(baseline())
-    with pytest.raises(ValueError, match="milestone-1 GUI field"):
+    with pytest.raises(ValueError, match="GUI-editable byte field"):
         session.set_byte_field("reserved_after_turbo", 1)
 
 
@@ -89,3 +96,43 @@ def test_accept_working_as_baseline_clears_diff():
     session.accept_working_as_baseline()
     assert session.changed is False
     assert session.diff()["identical"] is True
+
+
+def test_curve_visual_field_edit_changes_only_crc_and_recovered_byte():
+    session = GuiConfigSession.from_image(baseline())
+    field = STICK_VISUAL_FIELDS["left"]["pt1_x"]
+    offset = C.BYTE_FIELDS[field]
+    session.set_byte_field(field, 77)
+    offsets = {change["offset"] for change in session.diff()["changes"]}
+    assert offsets == {0, 1, offset}
+    assert session.validation()["crc_matches"] is True
+
+
+def test_stick_visual_snapshot_matches_raw_fields():
+    session = GuiConfigSession.from_image(baseline())
+    for role, field in STICK_VISUAL_FIELDS["right"].items():
+        session.set_byte_field(field, 10 + len(role))
+    values = session.stick_visual("right")
+    assert set(values) == set(STICK_VISUAL_FIELDS["right"])
+    for role, field in STICK_VISUAL_FIELDS["right"].items():
+        assert values[role] == session.working[C.BYTE_FIELDS[field]]
+
+
+def test_trigger_visual_edit_preserves_unknown_bytes():
+    session = GuiConfigSession.from_image(baseline())
+    before = session.working
+    field = TRIGGER_VISUAL_FIELDS["left"]["dz_center"]
+    offset = C.BYTE_FIELDS[field]
+    session.set_byte_field(field, 93)
+    changed = {i for i, (a, b) in enumerate(zip(before, session.working)) if a != b}
+    assert changed == {0, 1, offset}
+
+
+def test_all_visual_fields_are_gui_editable_known_bytes():
+    expected = {
+        field for side in STICK_VISUAL_FIELDS.values() for field in side.values()
+    } | {
+        field for side in TRIGGER_VISUAL_FIELDS.values() for field in side.values()
+    }
+    assert expected <= set(GUI_EDITABLE_FIELDS)
+    assert all(field in C.BYTE_FIELDS for field in expected)

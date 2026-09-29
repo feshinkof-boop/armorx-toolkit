@@ -116,3 +116,39 @@ def test_clicks_are_ignored_while_a_task_is_running():
         assert started == ["scan"]
     finally:
         window.close()
+
+
+def test_visual_stick_editor_updates_model_and_exact_diff():
+    from armorx import config as C
+    from armorx.gui_model import GuiConfigSession, STICK_VISUAL_FIELDS
+
+    app = _application()
+    window = _window()
+    try:
+        window._load_session(GuiConfigSession.from_image(bytes(C.fresh())))
+        field = STICK_VISUAL_FIELDS["left"]["pt1_x"]
+        offset = C.BYTE_FIELDS[field]
+        window.stick_editors["left"].controls["pt1_x"].spin.setValue(91)
+        app.processEvents()
+        assert window.session.byte_field(field) == 91
+        offsets = {c["offset"] for c in window.session.diff()["changes"]}
+        assert offsets == {0, 1, offset}
+    finally:
+        window.close()
+
+
+def test_visual_trigger_editor_stays_in_sync_with_advanced_spinbox():
+    from armorx import config as C
+    from armorx.gui_model import GuiConfigSession, TRIGGER_VISUAL_FIELDS
+
+    app = _application()
+    window = _window()
+    try:
+        window._load_session(GuiConfigSession.from_image(bytes(C.fresh())))
+        field = TRIGGER_VISUAL_FIELDS["left"]["dz_center"]
+        window.field_boxes[field].setValue(64)
+        app.processEvents()
+        assert window.trigger_editors["left"].center.value() == 64
+        assert window.session.byte_field(field) == 64
+    finally:
+        window.close()

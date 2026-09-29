@@ -18,7 +18,12 @@ from . import __version__
 from . import config as config_mod
 from . import confirm as confirm_mod
 from . import gui_workflow as workflow
-from .gui_model import GuiConfigSession, QUICK_FIELDS, REAR_BUTTONS
+from .gui_model import (
+    GUI_EDITABLE_FIELDS,
+    GuiConfigSession,
+    QUICK_FIELDS,
+    REAR_BUTTONS,
+)
 
 try:
     from PySide6.QtCore import QObject, QRunnable, QThreadPool, Signal, Slot
@@ -29,6 +34,7 @@ try:
         QSpinBox, QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
         QTextEdit, QVBoxLayout, QWidget,
     )
+    from .gui_visual import StickVisualEditor, TriggerVisualEditor
     QT_AVAILABLE = True
 except ImportError:
     QT_AVAILABLE = False
@@ -187,6 +193,28 @@ if QT_AVAILABLE:
                 self.map_boxes[source] = combo
             self.tabs.addTab(rear_page, "Rear buttons")
 
+            stick_page = QWidget()
+            stick_layout = QHBoxLayout(stick_page)
+            self.stick_editors = {
+                "left": StickVisualEditor("left"),
+                "right": StickVisualEditor("right"),
+            }
+            for editor in self.stick_editors.values():
+                editor.fieldChanged.connect(self._visual_field_changed)
+                stick_layout.addWidget(editor, 1)
+            self.tabs.addTab(stick_page, "Stick visuals")
+
+            trigger_page = QWidget()
+            trigger_layout = QHBoxLayout(trigger_page)
+            self.trigger_editors = {
+                "left": TriggerVisualEditor("left"),
+                "right": TriggerVisualEditor("right"),
+            }
+            for editor in self.trigger_editors.values():
+                editor.fieldChanged.connect(self._visual_field_changed)
+                trigger_layout.addWidget(editor, 1)
+            self.tabs.addTab(trigger_page, "Trigger visuals")
+
             tuning_page = QWidget()
             tuning_layout = QFormLayout(tuning_page)
             self.field_boxes: dict[str, QSpinBox] = {}
@@ -198,7 +226,7 @@ if QT_AVAILABLE:
                 )
                 tuning_layout.addRow(field, spin)
                 self.field_boxes[field] = spin
-            self.tabs.addTab(tuning_page, "Sticks / triggers / turbo")
+            self.tabs.addTab(tuning_page, "Advanced bytes")
 
             self.diff_table = QTableWidget(0, 5)
             self.diff_table.setHorizontalHeaderLabels(
@@ -381,6 +409,10 @@ if QT_AVAILABLE:
                     combo.setCurrentIndex(index if index >= 0 else 0)
                 for field, spin in self.field_boxes.items():
                     spin.setValue(self.session.byte_field(field))
+                for side, editor in self.stick_editors.items():
+                    editor.set_values(self.session.stick_visual(side))
+                for side, editor in self.trigger_editors.items():
+                    editor.set_values(self.session.trigger_visual(side))
             finally:
                 self._updating = False
             self._refresh_summary()
@@ -435,8 +467,16 @@ if QT_AVAILABLE:
             if self._updating or self.session is None:
                 return
             self.session.set_byte_field(field, value)
-            self._refresh_summary()
-            self._refresh_diff()
+            self._refresh_controls()
+
+        def _visual_field_changed(self, field: str, value: int) -> None:
+            if self._updating or self.session is None:
+                return
+            if field not in GUI_EDITABLE_FIELDS:
+                QMessageBox.critical(self, "ArmorX", f"Unsupported visual field: {field}")
+                return
+            self.session.set_byte_field(field, value)
+            self._refresh_controls()
 
         @Slot()
         def reset_changes(self) -> None:
