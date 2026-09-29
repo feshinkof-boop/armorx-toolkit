@@ -53,6 +53,7 @@ The project focuses on:
 | CLI | Unified `armorx` command |
 | Windows GUI | Public Windows 10/11 x64 BLE configurator |
 | Linux BLE | Guarded live read / apply / rollback with automatic backup and read-back verification |
+| Linux GUI | Desktop configurator (PySide6) over the same guarded BLE backend — v0.5.0 dev line |
 | Research | PROVEN / STRONG EVIDENCE / UNKNOWN evidence levels |
 | Quality | Pytest suite + GitHub Actions |
 
@@ -70,6 +71,21 @@ ArmorX Toolkit includes a public Windows 10/11 x64 configurator for ARMOR-X Pro 
 The Windows app supports Connect / Recover, configuration read, sticks, triggers, gyro, turbo, M1-M4 remapping, local profiles, and full-image Apply & Verify with read-back verification. **v0.2.1 adds automatic pre-write backups, exact pending-change review, reversible restore, and safer merge-on-fresh-device-image writes.** The screenshots above show the v0.2.0 layout.
 
 <!-- WINDOWS_GUI_PREVIEW_END -->
+
+<!-- LINUX_GUI_PREVIEW_START -->
+## Linux GUI preview
+
+The **v0.5.0 development line** adds a Linux desktop configurator (PySide6) on top of the released v0.4.0 BLE backend: the same guarded read / apply / rollback workflow as the CLI, plus local profiles and a changes view. It drives the identical backend functions, so its safety guarantees are the CLI's: two identical reads before any write, an automatic backup written and re-opened, exact diff review with undecoded bytes refused, a native confirmation showing the decoded plan, read-back verification, and a rollback that writes the saved image unchanged. Nothing is exposed for unrelated live state, and no raw opcode or payload can be sent from it. Not yet released — it ships with v0.5.0.
+
+| Live configuration summary | Rear-button remapping |
+| --- | --- |
+| ![ArmorX Linux configurator live configuration summary](docs/assets/linux/v0.5.0/01-live-configuration-summary.webp) | ![ArmorX Linux configurator rear-button remapping](docs/assets/linux/v0.5.0/02-rear-button-remapping.webp) |
+| **Changes / pending diff** | **Local profiles** |
+| ![ArmorX Linux configurator pending changes](docs/assets/linux/v0.5.0/03-changes-diff.webp) | ![ArmorX Linux configurator local profiles](docs/assets/linux/v0.5.0/04-profiles.webp) |
+
+These screenshots come from the supervised hardware validation run on the real ARMOR-X Pro (a real `M1 -> A` remap applied, power-cycled, verified, and rolled back to the original image). They are rendered from the configuration tabs only, so no BLE address, host name, user name or path appears in them.
+
+<!-- LINUX_GUI_PREVIEW_END -->
 
 ## ARMORX Pro / Xbox key mapping
 
