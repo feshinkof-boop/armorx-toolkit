@@ -204,7 +204,10 @@ def reassemble_a4(frames: Iterable[bytes | Frame], *, opcode: int | None = None,
         if opcode is not None and fr.opcode != opcode:
             continue
         seen_opcodes.add(fr.opcode)
-        slots[fr.fragment_index or 0] = bytes(fr.payload)
+        index = fr.fragment_index or 0
+        if index in slots:
+            raise FrameError(f"duplicate fragment index {index}")
+        slots[index] = bytes(fr.payload)
     if not slots:
         raise FrameError("no fragments matched")
     if len(seen_opcodes) > 1:
@@ -248,6 +251,8 @@ def split_stream(data: bytes) -> list[bytes]:
     while offset < len(data):
         if offset + 2 > len(data):
             raise FrameError(f"trailing {len(data) - offset} byte(s) cannot form a frame")
+        if data[offset] not in (FAMILY_A5, FAMILY_A4):
+            raise FrameError(f"unsupported family byte 0x{data[offset]:02X} at offset {offset}")
         length = data[offset + 1]
         if length < 4:
             raise FrameError(f"frame at offset {offset} declares an impossible length {length}")
@@ -255,7 +260,10 @@ def split_stream(data: bytes) -> list[bytes]:
         if end > len(data):
             raise FrameError(f"frame at offset {offset} claims {length} bytes but only "
                              f"{len(data) - offset} remain")
-        frames.append(data[offset:end])
+        candidate = data[offset:end]
+        if candidate[-1] != checksum(candidate[:-1]):
+            raise FrameError(f"frame at offset {offset} has a bad checksum")
+        frames.append(candidate)
         offset = end
     return frames
 
