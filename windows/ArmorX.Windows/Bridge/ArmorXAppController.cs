@@ -346,7 +346,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
         var cfg = RequireConfig();
         var baseline = _deviceBaseline ?? throw new InvalidOperationException("Read a device baseline before applying.");
 
-        return await RunBusyAsync("Preparing safe write...", async () =>
+        return await RunBusyAsync<object>("Preparing safe write...", async () =>
         {
             var current = await ReadStableConfigAsync(session, CancellationToken.None);
             var desired = cfg.BuildForWrite();
@@ -426,7 +426,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
     private async Task<object> PrepareRestoreAsync()
     {
         var session = RequireSession();
-        return await RunBusyAsync("Preparing backup restore...", async () =>
+        return await RunBusyAsync<object>("Preparing backup restore...", async () =>
         {
             var backup = await _backups.LoadLatestAsync() ??
                          throw new InvalidOperationException("No automatic backup is available.");
@@ -552,7 +552,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
 
     private async Task<object> ImportProfileAsync()
     {
-        var dialog = new OpenFileDialog
+        var dialog = new Microsoft.Win32.OpenFileDialog
         {
             Title = "Import ArmorX profile",
             Filter = "ArmorX profile (*.json)|*.json|JSON files (*.json)|*.json"
@@ -566,7 +566,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
     private async Task<object> ExportProfileAsync(JsonElement payload)
     {
         var name = payload.GetProperty("name").GetString() ?? string.Empty;
-        var dialog = new SaveFileDialog
+        var dialog = new Microsoft.Win32.SaveFileDialog
         {
             Title = "Export ArmorX profile",
             FileName = name + ".json",
@@ -581,7 +581,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
     private object OpenTextFile(JsonElement payload)
     {
         var filter = payload.TryGetProperty("filter", out var f) ? f.GetString() : null;
-        var dialog = new OpenFileDialog
+        var dialog = new Microsoft.Win32.OpenFileDialog
         {
             Title = payload.TryGetProperty("title", out var t) ? t.GetString() ?? "Open file" : "Open file",
             Filter = string.IsNullOrWhiteSpace(filter) ? "JSON files (*.json)|*.json|All files (*.*)|*.*" : filter
@@ -599,7 +599,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
     {
         var suggested = payload.TryGetProperty("name", out var n) ? n.GetString() : "armorx.json";
         var text = payload.GetProperty("text").GetString() ?? string.Empty;
-        var dialog = new SaveFileDialog
+        var dialog = new Microsoft.Win32.SaveFileDialog
         {
             Title = payload.TryGetProperty("title", out var t) ? t.GetString() ?? "Save file" : "Save file",
             FileName = suggested,
@@ -613,7 +613,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
 
     private async Task<object> ExportDiagnosticsAsync()
     {
-        var dialog = new SaveFileDialog
+        var dialog = new Microsoft.Win32.SaveFileDialog
         {
             Title = "Export ArmorX Studio diagnostics",
             FileName = $"ArmorX-Studio-Diagnostics-{DateTime.Now:yyyyMMdd-HHmmss}.txt",

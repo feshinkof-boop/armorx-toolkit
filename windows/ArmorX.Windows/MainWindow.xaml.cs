@@ -75,7 +75,7 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show(
+            System.Windows.MessageBox.Show(
                 ex.ToString(),
                 "ArmorX Studio - startup error",
                 MessageBoxButton.OK,
