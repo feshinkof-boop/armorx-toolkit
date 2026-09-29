@@ -1,0 +1,74 @@
+name: Windows v0.6 React desktop
+
+on:
+  push:
+    branches: [dev/v0.6.0-windows-react]
+    paths:
+      - "windows/**"
+      - ".github/workflows/windows-v0.6.yml"
+  pull_request:
+    paths:
+      - "windows/**"
+      - ".github/workflows/windows-v0.6.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Frontend install and tests
+        shell: pwsh
+        working-directory: windows/frontend
+        run: |
+          npm install
+          npm test -- --run
+          npm run build
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore and compile .NET host
+        shell: pwsh
+        run: |
+          dotnet restore .\windows\ArmorX.Windows\ArmorX.Windows.csproj
+          dotnet build .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release --no-restore
+
+      - name: Publish self-contained Windows app
+        shell: pwsh
+        run: |
+          $out = Join-Path $PWD 'artifacts\win-x64'
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false -o $out
+          if (-not (Test-Path "$out\ArmorX-Studio.exe")) { throw 'ArmorX-Studio.exe missing' }
+          if (-not (Test-Path "$out\wwwroot\index.html")) { throw 'React wwwroot missing from publish' }
+
+      - name: Core and XAML smoke tests
+        shell: pwsh
+        run: |
+          $exe = '.\artifacts\win-x64\ArmorX-Studio.exe'
+          $p = Start-Process $exe -ArgumentList '--self-test' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Core self-test failed: $($p.ExitCode)" }
+          $p = Start-Process $exe -ArgumentList '--ui-smoke' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "UI smoke failed: $($p.ExitCode)" }
+
+      - name: Package CI preview
+        shell: pwsh
+        run: |
+          Compress-Archive -Path .\artifacts\win-x64\* -DestinationPath .\ArmorX-Studio-v0.6.0-alpha-win-x64.zip -Force
+          $hash = (Get-FileHash .\ArmorX-Studio-v0.6.0-alpha-win-x64.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  ArmorX-Studio-v0.6.0-alpha-win-x64.zip" | Set-Content -Encoding ascii .\ArmorX-Studio-v0.6.0-alpha-SHA256SUMS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-Studio-v0.6.0-alpha
+          path: |
+            ArmorX-Studio-v0.6.0-alpha-win-x64.zip
+            ArmorX-Studio-v0.6.0-alpha-SHA256SUMS.txt
