@@ -1,0 +1,73 @@
+{
+ "artifact": "d2-emission-ordering",
+ "status": "PARTIALLY_PROVEN_STATIC",
+ "date": "2026-09-29",
+ "question": "prove the control-flow ordering between the trigger synthesis, the candidate-mask intersection, the 14-byte memcmp and the D2 send decision",
+ "method": "Same CFG (0x1e0ac14-0x1e0e414). Dominance verdicts computed with block indices; concrete paths computed between the synthesis block, the r13 copy and the memcmp.",
+ "dominance_verdicts": {
+  "note": "ordered_verdict() with block indices; addresses must not be passed, that yields a spurious UNREACHABLE",
+  "synthesis(0x1e0cfc0) vs memcmp(0x1e0dad2)": "CYCLIC_BOTH_ORDERS_POSSIBLE",
+  "r13copy(0x1e0cd2e) vs build14(0x1e0dafe)": "CYCLIC_BOTH_ORDERS_POSSIBLE",
+  "r13copy(0x1e0cd2e) vs build28(0x1e0e2c2)": "CYCLIC_BOTH_ORDERS_POSSIBLE",
+  "interpretation": "the container is a periodic loop, so no pair among these blocks dominates the other. The earlier dominance-based 'sequential population' claim is NOT reproducible under block-index semantics and is corrected: ordering evidence must come from concrete paths, not dominance."
+ },
+ "concrete_paths": {
+  "synthesis_to_memcmp": {
+   "blocks": 42,
+   "first": [
+    "0x1e0cfc0",
+    "0x1e0cfc4",
+    "0x1e0cfc6",
+    "0x1e0cfca",
+    "0x1e0cfce",
+    "0x1e0cfd2",
+    "0x1e0cfd4",
+    "0x1e0cfd8",
+    "0x1e0cfdc",
+    "0x1e0cfe0",
+    "0x1e0cfea",
+    "0x1e0d012"
+   ]
+  },
+  "memcmp_to_synthesis": {
+   "blocks": 105,
+   "first": [
+    "0x1e0dad2",
+    "0x1e0db1c",
+    "0x1e0db26",
+    "0x1e0db28",
+    "0x1e0db32",
+    "0x1e0c6a6",
+    "0x1e0c6aa",
+    "0x1e0c6ba",
+    "0x1e0c6be",
+    "0x1e0c6c2",
+    "0x1e0c6c4",
+    "0x1e0c8c0"
+   ]
+  },
+  "r13copy_to_memcmp": {
+   "blocks": 48
+  },
+  "r13copy_to_synthesis": {
+   "blocks": 61
+  }
+ },
+ "buffer_identity": "the memcmp at 0x1e0dad2 compares r1 = sp+1080 with r2 = 0x0e against the last-sent mirror at 0x4ecc. sp+1080 is exactly the buffer written by the copy at 0x1e0cd2e and by the synthesis block (0x1e0cef8/0x1e0cf00 mask, 0x1e0cec6/0x1e0ceec trigger bytes). The comparison operand IS the synthesis output buffer - same stack frame, same address.",
+ "answers": {
+  "can_an_analogue_trigger_movement_change_internal_state_without_causing_a_D2_report": "YES. The candidate buffer is written on every pass that reaches the synthesis or the copy, while emission additionally requires b[r15+0x10] != 0, a memcmp difference, the periodic tick gate and the repeat counter. A change can therefore be reflected in internal state without an emitted frame - which is what the live captures show (zero idle frames, frames only on change).",
+  "does_the_synthesis_happen_before_the_state_compared_by_memcmp": "On the concrete path yes: the synthesis writes the exact buffer the memcmp then reads as its first operand. Globally this cannot be stated as dominance because both orders are reachable across loop iterations.",
+  "is_the_edge_toggle_path_necessary_for_an_emitted_D2_change": "NO. The analogue copy path (r13 = state+0x1d4 copied at 0x1e0cd2e) writes candidate+0x0c/+0x0d, so an analogue change can be seen by the memcmp without the toggle path. The toggle path is what produces the 0x00/0xFF digital form, so it is sufficient but not necessary. This is the direct answer to the RT-only question."
+ },
+ "not_proven": [
+  "a per-iteration ordering guarantee (would need immediate post-dominator analysis on a single-pass slice, not available from this tool)",
+  "which pass the send gate actually fires on",
+  "whether the emulate/other arms write sp+1080 between the synthesis and the memcmp"
+ ],
+ "corrections": [
+  "r5 & r4 is an INTERSECTION of [r15+0x1d0] and the current candidate mask, not a changed-bit mask.",
+  "0x1e094de is a deadzone/direction classifier, not the normalized-record producer.",
+  "the previous 'sequential by dominance' population claim is not reproducible under block-index semantics."
+ ],
+ "pseudocode": "per tick (whole-function loop):\n  if (b[r15+0x10] == 0) skip emission\n  copy state+0x1d4 -> candidate(sp+1080, 28 bytes) when the change detector reports a difference\n  if (b[r8+0x1d6]) { byte = arm(0, candidate[+0x0c]); candidate[+0x0c] = byte; set/clear mask bit 0x100 by (byte != 0) }\n  if (b[r8+0x1db]) { byte = arm(1, candidate[+0x0d]); candidate[+0x0d] = byte; set/clear mask bit 0x200 by (byte != 0) }\n  ... toggle block: r0 = [r15+0x1d0] & candidate_mask; if empty skip\n  if (memcmp(candidate, last_sent@0x4ecc, 14) != 0) { copy 28 bytes to 0x4ecc; counter = 100; build 14-byte or 28-byte frame; emit }\n  arm(index, value): per-channel hysteresis state machine at base+index, base = candidate+0x0a"
+}

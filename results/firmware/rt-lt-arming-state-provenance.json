@@ -1,0 +1,53 @@
+{
+ "artifact": "rt-lt-arming-state-provenance",
+ "status": "PROVEN STATIC",
+ "date": "2026-09-29",
+ "question": "what object does r4 point into at the 0x1e0a426 call sites, and what gates those blocks?",
+ "method": "CFG built by tools/q32s/q32s_cfg.py over 0x1e0ac14-0x1e0e414 (one function, 4311 blocks, 3112 reachable); concrete path from the function entry 0x1e0ac14 to the caller block at 0x1e0ceb0; r4 definitions collected along that path.",
+ "call_sites": [
+  {
+   "addr": "0x1e0cec2",
+   "channel_index": "r0 = 0x0",
+   "gate": "b[r8+0x1d6] != 0 (tested at 0x1e0ceb6, else jump to 0x1e0cedc)",
+   "byte_in": "b[sp+1092] (candidate+0x0c, LT)",
+   "byte_out": "b[sp+1092] = r0 (0x1e0cec6)",
+   "mask": "bit 0x100 set from r0 != 0 at 0x1e0ced2/0x1e0ced4, cleared with r1 & 0xfffffeff at 0x1e0cece"
+  },
+  {
+   "addr": "0x1e0cee8",
+   "channel_index": "r0 = 0x1 (0x1e0cee6)",
+   "gate": "b[r8+0x1db] != 0 (tested at 0x1e0cedc, else jump to 0x1e0cf44)",
+   "byte_in": "b[sp+1093] (candidate+0x0d, RT)",
+   "byte_out": "b[sp+1093] = r0 (0x1e0ceec)",
+   "mask": "bit 0x200 set at 0x1e0cef8, cleared with r1 & 0xfffffdff at 0x1e0cef4"
+  }
+ ],
+ "r4_provenance": {
+  "path_length_blocks": 146,
+  "definitions_along_the_path": [
+   "0x1e0acba r4 = 0x0",
+   "0x1e0ada4 r4 = [sp+36]",
+   "0x1e0ae44 r4 |= r1",
+   "0x1e0ccf2 r4 = b[r15+0x36] (u)",
+   "0x1e0cd24 r4 = sp + 1080",
+   "0x1e0cd58 r4 += 0xa"
+  ],
+  "reaching_definition": "0x1e0cd58 (r4 = sp + 1080 + 0xa = sp+1090); no further r4 definition occurs before either call",
+  "why_it_matters": "r4 = sp+1080 is the candidate buffer base proven earlier (the 28-byte record copy at 0x1e0cd2e writes sp+1080). The +0xa offset is exactly candidate+0x0a, which is why the axis writers immediately before use r2 = r4: sp+1090."
+ },
+ "per_channel_state": {
+  "addressing": "base + index + offset, where base = sp+1090 and index is the channel number (0 = LT, 1 = RT)",
+  "arrays": "two-entry byte arrays: +0x76 previous reading, +0x78 mode, +0x7a hysteresis counter, +0x7c armed byte",
+  "concrete_stack_slots": "previous sp+1198/sp+1199, mode sp+1200/sp+1201, counter sp+1202/sp+1203, armed sp+1204/sp+1205",
+  "residency": "stack-resident inside the same frame as the candidate buffer; not a persistent object",
+  "accessed_only_by": "0x1e0a426 (its 11 accesses are the only ones in the image touching +0x76/+0x78/+0x7a/+0x7c relative to its own base register)"
+ },
+ "initialization": "No initializer was found that writes these arrays before first use on the entry-to-caller path; the first call therefore observes zero-initialised state. Recorded as an inference from the path walk, not as a proven explicit initializer.",
+ "mode_byte_domain": "Only the values 0 and 1 are written (0x1e0a478 stores 1, 0x1e0a4a4-0x1e0a4a6 stores 0) and only equality with 0 / 1 is tested (0x1e0a43c, 0x1e0a462). No other value is produced or consumed; whether a value above 1 can arise from any other writer is unbounded by evidence, so the field is documented as 0/1 with an explicit unknown.",
+ "lt_reaches_equivalent_logic": "YES - LT and RT call the same helper 0x1e0a426 with different channel indices, under different gate bytes. The earlier statement that LT is only ever set to 0xff directly is therefore INCOMPLETE and is corrected here.",
+ "corrections": [
+  "r5 & r4 is an INTERSECTION between the persistent field [r15+0x1d0] and the current candidate mask; it is not a changed-bit mask.",
+  "0x1e094de is a deadzone/direction classifier, not the producer of the 28-byte normalized record."
+ ],
+ "gate_observation": "RT block gated by b[r8+0x1db], LT block by b[r8+0x1d6]; both are single-byte state flags in the same object r8, tested before any helper call."
+}
