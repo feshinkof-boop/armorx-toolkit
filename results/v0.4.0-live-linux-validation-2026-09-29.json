@@ -1,0 +1,232 @@
+{
+ "session": "v0.4.0 Linux BLE live backend, supervised read-path validation",
+ "date": "2026-09-29",
+ "mode": "read-only: no D7, no 0E, no allow_mutating, no configuration change, no frame replay",
+ "host": {
+  "bluetooth": "active; two controllers present. BlueZ powered its default controller for the scan; the lab dongle was never used, and the default controller was returned to its original powered-off state at the end of the session"
+ },
+ "scan": {
+  "command": "armorx live scan --seconds 12",
+  "devices_seen": 16,
+  "armorx_candidates": 1,
+  "candidate": {
+   "name_pattern": "ARMOR-X Pro_11 (exact name redacted in public artefacts)",
+   "rssi": -75,
+   "is_armorx": true,
+   "address": "redacted"
+  },
+  "note": "addresses are kept only in local runtime artefacts and never in this document, the repository or the PR"
+ },
+ "identity": {
+  "model": "ZJ-XT",
+  "firmware": "2741",
+  "battery": 87,
+  "transport": "ble",
+  "note": "read today from the device; the historically recorded values are confirmed, not assumed"
+ },
+ "gatt": {
+  "independent_enumerator": "read-only bleak enumeration, no writes and no subscriptions",
+  "service_under_test": {
+   "uuid": "00000000-0000-1000-8000-00805f9b34fb",
+   "handle": 115,
+   "remark": "an unusual but genuinely advertised service; it is not a decode artefact of the toolkit"
+  },
+  "characteristics": {
+   "FFE1": {
+    "uuid": "0000ffe1-0000-1000-8000-00805f9b34fb",
+    "handle": 116,
+    "properties": [
+     "write-without-response",
+     "write"
+    ]
+   },
+   "FFE2": {
+    "uuid": "0000ffe2-0000-1000-8000-00805f9b34fb",
+    "handle": 118,
+    "properties": [
+     "read",
+     "notify"
+    ]
+   }
+  },
+  "others": [
+   "180F Battery",
+   "1800 GAP",
+   "AE00 vendor (AE01 write, AE02 notify)",
+   "180A Device Information"
+  ],
+  "handle_drift": "the ATT handles read one lower than the values recorded in the 2026-09-26 session (116/118 versus 117/119); the descriptors and properties are the same, so this is recorded as an observation, not an error"
+ },
+ "d6_read_1": {
+  "bytes": 144,
+  "declared_length": 144,
+  "stored_crc": "0x2C40",
+  "computed_crc": "0x2C40",
+  "crc_matches": true,
+  "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "fragments": 10
+ },
+ "d6_read_2": {
+  "bytes": 144,
+  "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "identical_to_read_1": true,
+  "crc_matches": true,
+  "offset_differences": []
+ },
+ "d6_read_3_after_fix": {
+  "bytes": 144,
+  "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "fragment_count": 10,
+  "fragment_accounting": [
+   {
+    "index": 1,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 2,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 3,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 4,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 5,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 6,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 7,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 8,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 9,
+    "frame_bytes": 20,
+    "data_bytes": 15,
+    "checksum_ok": true
+   },
+   {
+    "index": 10,
+    "frame_bytes": 20,
+    "data_bytes": 9,
+    "checksum_ok": true
+   }
+  ]
+ },
+ "backup": {
+  "command": "armorx live backup",
+  "format": "armorx-live-backup-v1",
+  "bytes": 144,
+  "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "reopens_with_config_validate": true,
+  "config_validate_crc_matches": true,
+  "matches_stable_d6_read": true,
+  "contains_fragment_accounting": true
+ },
+ "privacy": {
+  "ble_address": false,
+  "usb_serial": false,
+  "hostname_value": false,
+  "username": false,
+  "home_path": false,
+  "tokens": false,
+  "checked_by": "direct inspection of the written baseline plus the same scan applied to the read artefacts"
+ },
+ "offline_plan": {
+  "baseline_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+  "target_sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+  "target_crc_matches": true,
+  "changed_bytes": 3,
+  "differences": [
+   {
+    "offset": 0,
+    "role": "CRC high byte"
+   },
+   {
+    "offset": 1,
+    "role": "CRC low byte"
+   },
+   {
+    "offset": 135,
+    "role": "mapKeys[23] (M1) 1 -> 0 (A)"
+   }
+  ],
+  "mutating_commands_exposed": false,
+  "applied": false
+ },
+ "research_cross_check": {
+  "client": "ble/real-device/armorx_real.py, read-only phase",
+  "uuid_match": true,
+  "d6_request_bytes": "A5 04 D6 7F in both implementations",
+  "fragment_count": 10,
+  "fragment_indexes": "1..10 in both",
+  "reassembled_length": 144,
+  "declared_length": "0090 in both",
+  "stored_crc": "2c40 in both",
+  "image_comparison": {
+   "result": "byte-identical, 0 differing offsets out of 144",
+   "against": "the research client's saved output from the 2026-09-27 physical sessions",
+   "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
+  },
+  "live_rerun": {
+   "attempted": true,
+   "result": "link not established",
+   "detail": "three LE create-connection attempts on the lab dongle failed with COMMAND_DISALLOWED_ERROR after the advertisement was seen; adapter ownership was restored automatically. Not retried further, because the byte-level comparison against the client's stored output already covers the comparison this phase asks for",
+   "independence_note": "the reassembly implementations differ: the research client concatenates fragments in arrival order, the toolkit reassembles by fragment index and refuses conflicting duplicates"
+  },
+  "preamble_note": "the research client sends 0B, EF, D4 and E2 before D6; the toolkit sends D6 alone and still received all ten fragments with a valid image, so the preamble is not required for a D6 read"
+ },
+ "defects": {
+  "found": 1,
+  "item": "read-config and backup proved the 144-byte image but recorded nothing about the fragments it was reassembled from",
+  "fix": "read_config now fills a report dict with the fragment count and per-fragment index, frame size, data size and checksum status; read-config and backup both carry it",
+  "regression": "three hardware-free tests on the scripted transport plus one CLI payload test",
+  "weakened_tests": false
+ },
+ "not_done": [
+  "D7",
+  "0E",
+  "allow_mutating",
+  "any configuration write",
+  "any frame replay",
+  "the live rerun of the research client"
+ ],
+ "next_gate": {
+  "requirement": "a byte-identical no-op D7 round trip, supervised",
+  "steps": [
+   "save the live baseline first",
+   "D7 the validated byte-identical image",
+   "issue 0E persistence",
+   "D6 read back and require an exact byte and SHA match",
+   "only then expose a real configuration mutation"
+  ]
+ },
+ "agent_writes": false
+}

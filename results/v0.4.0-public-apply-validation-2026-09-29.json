@@ -1,0 +1,295 @@
+{
+  "format": "armorx-v0.4.0-public-apply-validation-v1",
+  "date": "2026-09-29",
+  "branch": "dev/v0.4.0-live-linux",
+  "tip_before": "94f95b34beea7c9b460147670db2f62073a3b433",
+  "device": {
+    "model": "ZJ-XT",
+    "firmware": "2741",
+    "transport": "ble"
+  },
+  "session": "software-and-hardware validation of the public apply/rollback commands",
+  "baseline": {
+    "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "bytes": 144,
+    "declared_length": 144,
+    "crc_hex": "0x2C40",
+    "crc_matches": true,
+    "fragment_count": 10,
+    "two_public_reads_identical": true,
+    "matches_historical_baseline": true,
+    "request_hex": "a5 04 d6 7f"
+  },
+  "target": {
+    "sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+    "bytes": 144,
+    "declared_length": 144,
+    "crc_hex": "0xBC4D",
+    "crc_matches": true,
+    "built_with": "armorx config map baseline.json M1=A -o target-m1-a.json",
+    "diff_offsets": [
+      {
+        "offset": 0,
+        "before": 44,
+        "after": 188,
+        "classification": "crc",
+        "field": "crc16"
+      },
+      {
+        "offset": 1,
+        "before": 64,
+        "after": 77,
+        "classification": "crc",
+        "field": "crc16"
+      },
+      {
+        "offset": 135,
+        "before": 1,
+        "after": 0,
+        "classification": "map_key",
+        "field": "mapKeys[23]",
+        "source": "M1",
+        "old_target": "B",
+        "new_target": "A"
+      }
+    ],
+    "unknown_changed_bytes": 0,
+    "changed_bytes": 3
+  },
+  "public_apply": {
+    "dry_run": {
+      "status": "DRY_RUN",
+      "live_reads_identical": true,
+      "mutating_frames_sent": 0,
+      "allow_mutating_enabled": false,
+      "backup_files": [
+        "public-apply-baseline.json",
+        "public-apply-baseline.bin",
+        "public-apply-baseline.sha256"
+      ],
+      "backup_sha256_equals_live": true,
+      "backup_reopened_sha256_matches": true,
+      "backup_bytes_equal_manual_baseline": true,
+      "unknown_byte_count": 0,
+      "confirmation_text_lists": [
+        "device model",
+        "firmware",
+        "current SHA-256",
+        "target SHA-256",
+        "changed bytes",
+        "known field changes",
+        "undecoded changed bytes",
+        "backup file"
+      ]
+    },
+    "confirmation": {
+      "method": "kdialog",
+      "accepted": true,
+      "dialog_verified_on_screen_by_screenshot": true,
+      "title": "ARMOR-X configuration change"
+    },
+    "result": {
+      "status": "APPLIED"
+    },
+    "d7": {
+      "fragments": 10,
+      "indexes": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "data_bytes_per_fragment": [
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        15,
+        9
+      ],
+      "all_checksums_valid": true,
+      "duration_ms": 101,
+      "ack_observed": true,
+      "ack_hex": "a5 05 d7 00 81"
+    },
+    "persist": {
+      "request_hex": "a5 05 0e 00 b8",
+      "sent": 1,
+      "notifications": 2,
+      "notifications_identical": true
+    },
+    "verification_reads": [
+      {
+        "attempt": 1,
+        "sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+        "state": "TARGET",
+        "byte_for_byte_match": true,
+        "crc_matches": true
+      },
+      {
+        "attempt": 2,
+        "sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+        "state": "TARGET",
+        "byte_for_byte_match": true,
+        "crc_matches": true
+      }
+    ],
+    "connect_attempts": 2,
+    "retries_all_before_the_first_mutating_frame": true
+  },
+  "physical_m1": {
+    "method": "passive usbmon capture started before the operator action",
+    "usbmon_records": 25519,
+    "controller_records": 23970,
+    "gip_type20_reports": 11980,
+    "button_byte_transitions": [
+      {
+        "byte4": "0x01",
+        "A_bit_0x10": false,
+        "M1_bit_0x20": false
+      },
+      {
+        "byte4": "0x11",
+        "A_bit_0x10": true,
+        "M1_bit_0x20": false
+      },
+      {
+        "byte4": "0x01",
+        "A_bit_0x10": false,
+        "M1_bit_0x20": false
+      }
+    ],
+    "reports_with_A_bit_0x10": 78,
+    "reports_with_M1_bit_0x20": 0,
+    "verdict": "M1 now emits A on the wire, exactly the mapping that was written",
+    "evdev": "not correlated: the controller input node is not readable as this user",
+    "single_press": true
+  },
+  "target_power_cycle_persistence": {
+    "usb_identity_sequence": [
+      "045e:0b12",
+      "absent",
+      "413d:2106",
+      "045e:0b12"
+    ],
+    "post_cycle_read_sha256": "e91ee3d0ff22d56e1b2f24921c49cfee80f87de8a616dbe10c51c9f0183e61c1",
+    "post_cycle_bytes": 144,
+    "post_cycle_crc_matches": true,
+    "survived": true
+  },
+  "public_rollback": {
+    "backup_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "backup_sha256_file_matches": true,
+    "backup_json_matches": true,
+    "backup_length": 144,
+    "dry_run": {
+      "status": "DRY_RUN",
+      "mutating_frames_sent": 0,
+      "required_allow_unrelated_state": true,
+      "reason": "the backup was written by the build that predates the session-record fix; see product_bugs",
+      "state_classification": "different"
+    },
+    "confirmation": {
+      "method": "kdialog",
+      "accepted": true
+    },
+    "result": {
+      "status": "RESTORED",
+      "state_classification": "different"
+    },
+    "wrote": "the exact saved .bin bytes, never a rebuilt decoded image",
+    "d7": {
+      "fragments": 10,
+      "ack_observed": true,
+      "ack_hex": "a5 05 d7 00 81"
+    },
+    "persist": {
+      "request_hex": "a5 05 0e 00 b8",
+      "sent": 1,
+      "notifications": 2
+    },
+    "verification_reads": [
+      {
+        "attempt": 1,
+        "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+        "state": "BASELINE"
+      },
+      {
+        "attempt": 2,
+        "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+        "state": "BASELINE"
+      }
+    ],
+    "restored_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
+  },
+  "final": {
+    "power_cycle_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "bytes": 144,
+    "crc_hex": "0x2C40",
+    "crc_matches": true,
+    "final_config_equals_original": true
+  },
+  "fixed_pair_revalidation": {
+    "apply": {
+      "status": "APPLIED",
+      "confirmation": "kdialog",
+      "session_record_written": true,
+      "record_format": "armorx-live-apply-session-v1",
+      "verification_states": [
+        "TARGET",
+        "TARGET"
+      ]
+    },
+    "rollback": {
+      "status": "RESTORED",
+      "state_classification": "known_target",
+      "override_required": false,
+      "session_record": "fixed-pair-baseline.session.json",
+      "verification_states": [
+        "BASELINE",
+        "BASELINE"
+      ]
+    },
+    "final_sha256_after_revalidation": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6"
+  },
+  "product_bugs": [
+    {
+      "id": "APPLY-ROLLBACK-PAIR-001",
+      "summary": "public apply never wrote the session record that rollback reads, so a normal apply-then-rollback pair required --allow-unrelated-state",
+      "reproduced": "yes, on real hardware during this session",
+      "fix": "apply records its intent (baseline sha, target sha, changed offsets, base file name, device model/firmware) before the D7 write and marks apply_verified after verification",
+      "regression_tests": 5,
+      "revalidated_on_hardware": "yes - fixed apply wrote the record, rollback with no override returned RESTORED/known_target"
+    }
+  ],
+  "report_classification_correction": {
+    "issue": "verification attempts were labelled by the caller's expectation, so a matching target read reported state BASELINE",
+    "fix": "attempts now carry matches_expected plus a state derived from the session's own baseline and target",
+    "regression_tests": 7
+  },
+  "privacy_scan": {
+    "reports_scanned": 17,
+    "ble_address_present_in_reports": false,
+    "username_present": false,
+    "home_path_present": false,
+    "serial_present": false,
+    "hostname_present": false,
+    "tokens_present": false,
+    "notes": "local scan output (live scan) contains addresses by design and stays in the local runtime directory"
+  },
+  "tests": {
+    "count": 324,
+    "failed": 0,
+    "skipped": 0
+  }
+}

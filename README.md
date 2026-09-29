@@ -24,7 +24,7 @@ Build, inspect, remap, validate, and research **ARMORX Pro** configurations and 
 
 ## Overview
 
-> **Latest project release:** **v0.3.0** is the Python/Linux/offline toolkit release with read-only USB discovery, GIP/protocol decoding, capture inspection, diagnostics bundles, and exchange tooling. The latest downloadable Windows configurator remains **v0.2.1**.
+> **Latest project release:** **v0.4.0** adds guarded Linux BLE configuration reads, writes, verification, and rollback on top of the v0.3.0 offline toolkit. The latest downloadable Windows configurator remains the separate **v0.2.1** release.
 
 **ArmorX Toolkit** is a community-driven interoperability project for the **BIGBIG WON ARMORX Pro**, an accessory for **Xbox controllers**.
 
@@ -52,6 +52,7 @@ The project focuses on:
 | Community | Read-oriented config-list and share-code client |
 | CLI | Unified `armorx` command |
 | Windows GUI | Public Windows 10/11 x64 BLE configurator |
+| Linux BLE | Guarded live read / apply / rollback with automatic backup and read-back verification |
 | Research | PROVEN / STRONG EVIDENCE / UNKNOWN evidence levels |
 | Quality | Pytest suite + GitHub Actions |
 
@@ -171,17 +172,17 @@ Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Installation
 
-> **Public release scope:** **v0.3.0** is the Python/Linux/offline toolkit release. It adds read-only device discovery, Xbox GIP parsing, A4/A5 protocol tooling, usbmon capture inspection, privacy-sanitized diagnostics bundles, and config/macro exchange envelopes. The current public Windows configurator remains **v0.2.1**; researcher-only firmware analysis, raw private captures, Autopilot workflows, guided experiments, and device-write tooling are not part of the v0.3.0 package.
+> **Public release scope:** **v0.4.0** keeps the offline/protocol tooling from v0.3.0 and adds guarded Linux BLE configuration access: live reads, automatic pre-write backups, exact diffs, confirmation, full-image D7 writes, one persistence command, double D6 verification, and exact-byte rollback. The public Windows configurator remains the separate **v0.2.1** release; researcher-only firmware analysis, raw private captures, and Autopilot workflows are not part of the public package.
 
 
 ### Windows 10/11 x64
 
 Use the **[v0.2.1 installer](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1-Setup.exe)** (recommended) or the **[portable v0.2.1 EXE](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1.exe)**. Turn on ARMOR-X Pro and choose **Connect / Recover**. The app reads the controller's own 144-byte configuration image, preserves unknown bytes, automatically backs up the current device image before writes, and verifies writes by reading all 144 bytes back.
 
-### Python toolkit v0.3.0
+### Python toolkit v0.4.0
 
 ```bash
-python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.3.0
+python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.4.0
 armorx --version
 ```
 
@@ -192,6 +193,41 @@ git clone https://github.com/feshinkof-boop/armorx-toolkit.git
 cd armorx-toolkit
 python -m pip install -e .
 ```
+
+### Linux BLE configuration (v0.4.0)
+
+Install the optional BLE backend from the tagged source:
+
+```bash
+python -m pip install "armorx-toolkit[live] @ git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.4.0"
+```
+
+Read and back up the current configuration:
+
+```bash
+armorx live scan
+armorx live read-config --address <BLE-address> -o current.json
+armorx live backup --address <BLE-address> -o baseline.json
+```
+
+Apply a validated target or restore a backup:
+
+```bash
+armorx live apply target.json --address <BLE-address>
+armorx live rollback <backup-prefix> --address <BLE-address>
+```
+
+The write path reads the live configuration twice, creates and reopens a
+pre-write backup, shows the exact decoded/unknown diff, asks for confirmation,
+writes the complete 144-byte image, persists it once, and requires two exact
+D6 read-backs. Changes to undecoded bytes are refused by default. Rollback writes
+the exact saved `.bin` bytes rather than rebuilding a configuration. There is
+no raw opcode/payload console.
+
+See [the v0.4.0 Linux BLE write guide](docs/v0.4.0-live-apply.md). The
+`validate-write-gate` and `validate-reversible-m1` commands are retained as
+clearly-labelled experimental validation tools, not normal configuration
+workflows.
 
 ## Unified CLI
 

@@ -2,6 +2,63 @@
 
 All notable project changes are documented here.
 
+## 0.4.0 — 2026-09-29
+
+Linux BLE configuration release. The Windows configurator remains on its
+separate validated **v0.2.1** release line.
+
+### Added
+
+- Added `armorx live scan`, `info`, `read-config`, `backup`, and `plan`
+  for the proven Linux/Bleak path.
+- Added `armorx live apply TARGET --address ADDRESS`: two agreeing live D6
+  reads, automatic pre-write backup, reopened SHA verification, exact byte and
+  decoded field diff, unknown-byte refusal, operator confirmation, ten D7
+  fragments, one `0E` persistence frame, and two exact D6 verifications.
+- Added `armorx live rollback PREFIX --address ADDRESS`, which restores the
+  exact saved `.bin` bytes after validating the backup trio and live state.
+- Added reusable `armorx.diff` and `armorx.confirm` modules.
+- Added conservative BLE scan reasoning through `candidate_reason`; anonymous
+  advertisements are not guessed to be ARMOR-X devices.
+- Retained `validate-write-gate` and `validate-reversible-m1` as explicitly
+  experimental validation commands.
+
+### Safety
+
+- Writes touching undecoded/reserved bytes are refused by default unless the
+  operator explicitly enables `--allow-unknown-diff`.
+- Normal interactive writes require confirmation; non-interactive automation
+  requires both `--yes` and `--acknowledge-backup`.
+- Connection retries happen only before the first mutating frame. A connection
+  loss after mutation begins triggers read-only state classification, never a
+  blind D7 retry or automatic rollback.
+- Public reports and backups omit BLE addresses, usernames, hostnames, home
+  paths, serial numbers and tokens.
+
+### Validated
+
+- Public `apply` and `rollback` were validated end-to-end against real
+  ARMOR-X Pro hardware on Linux on 2026-09-29.
+- A public M1 B→A write changed exactly the two CRC bytes plus
+  `mapKeys[23]`, produced the expected physical A report on the USB GIP wire,
+  survived a power cycle, and was then restored byte-for-byte.
+- Public rollback wrote the exact saved baseline, passed two D6 read-backs, and
+  the restoration survived a final power cycle.
+- The corrected apply→rollback pair was revalidated on hardware without an
+  override after adding the session record used by rollback.
+- Test suite: **324 passed, 0 failed, 0 skipped** before release-prep-only
+  documentation/version changes; GitHub Actions is green on Python 3.10–3.13.
+
+### Fixed
+
+- Public `apply` now records its session intent before D7 so a following
+  rollback recognizes the written target without `--allow-unrelated-state`.
+- Read-back reports classify images as `BASELINE`, `TARGET`, or
+  `UNEXPECTED` from the session images instead of from the caller's expected
+  value.
+- Cleaned stale live-command help text and a privacy-test fixture that had used
+  a real BLE address.
+
 ## 0.3.0 — 2026-09-29
 
 Python/Linux/offline toolkit release. The Windows configurator remains on its

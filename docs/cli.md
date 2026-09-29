@@ -205,3 +205,22 @@ armorx device doctor --bundle d.json --include-hostname  # opt in to the hostnam
 The bundle omits usernames, home paths, the hostname, USB serial numbers and
 MAC/Bluetooth addresses unless explicitly requested, and the omission list is
 recorded inside the bundle itself.
+
+## `armorx live` (v0.4.0)
+
+| command | purpose |
+| --- | --- |
+| `armorx live scan` | scan locally for ARMOR-X advertisements; conservative classification with a `candidate_reason` |
+| `armorx live info --address A` | read standard identity characteristics (model, firmware, battery) |
+| `armorx live read-config --address A` | read the 144-byte configuration over the proven `D6` read |
+| `armorx live backup --address A -o f.json` | read and save the configuration before any future write |
+| `armorx live plan base.json target.json` | compare two saved images offline (no device) |
+| `armorx live apply TARGET --address A` | write a configuration: automatic backup, decoded diff, confirmation, `D7`, one `0E`, two `D6` verifications |
+| `armorx live rollback PREFIX --address A` | write back the exact bytes of a saved backup |
+| `armorx live validate-write-gate --address A` | supervised byte-identical no-op write (experimental) |
+| `armorx live validate-reversible-m1 --address A` | supervised reversible M1 -> A experiment (experimental) |
+
+These commands are part of v0.4.0. See `docs/v0.4.0-live-apply.md` for the
+write path and its safety model. The two `validate-*` commands remain explicitly
+experimental validation tools. There is no raw opcode or payload console, and
+none is planned.

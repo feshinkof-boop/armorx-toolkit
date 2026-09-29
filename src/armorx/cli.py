@@ -4,8 +4,10 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Sequence
 
@@ -18,6 +20,7 @@ from . import exchange as exchange_mod
 from . import gip as gip_mod
 from . import macro as macro_mod
 from . import protocol as protocol_mod
+from . import live as live_mod
 
 
 def _write_json(path: str | None, obj, *, compact: bool = False) -> None:
@@ -653,6 +656,373 @@ def _add_exchange_commands(groups) -> None:
     p.add_argument("--compact", action="store_true")
     p.set_defaults(func=cmd_exchange_schema)
 
+
+# ---------------------------------------------------------------------------
+# live (experimental BLE access; mutating writes are not exposed yet)
+# ---------------------------------------------------------------------------
+
+def _run_live(coro):
+    try:
+        return asyncio.run(coro)
+    except live_mod.LiveError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return None
+
+
+def cmd_live_scan(args: argparse.Namespace) -> int:
+    devices = _run_live(live_mod.scan_ble(seconds=args.seconds))
+    if devices is None:
+        return 2
+    _write_json(args.output, {
+        "devices": devices,
+        "count": len(devices),
+        "armorx_count": sum(1 for d in devices if d["is_armorx"]),
+        "note": "addresses are shown locally for connection only; do not publish them in issue reports",
+    })
+    return 0
+
+
+async def _live_identity(address: str, timeout: float) -> dict:
+    transport = live_mod.BleakLiveTransport(address=address, connect_timeout=timeout)
+    await transport.connect()
+    try:
+        return await live_mod.read_identity(transport)
+    finally:
+        await transport.close()
+
+
+def cmd_live_info(args: argparse.Namespace) -> int:
+    result = _run_live(_live_identity(args.address, args.connect_timeout))
+    if result is None:
+        return 2
+    _write_json(args.output, result)
+    return 0
+
+
+async def _live_read(address: str, connect_timeout: float,
+                     reply_timeout: float) -> tuple[dict, bytes, dict]:
+    transport = live_mod.BleakLiveTransport(address=address, connect_timeout=connect_timeout)
+    await transport.connect()
+    details: dict = {}
+    try:
+        identity = await live_mod.read_identity(transport)
+        image = await live_mod.read_config(transport, timeout=reply_timeout, report=details)
+        return identity, image, details
+    finally:
+        await transport.close()
+
+
+def cmd_live_read_config(args: argparse.Namespace) -> int:
+    result = _run_live(_live_read(args.address, args.connect_timeout, args.reply_timeout))
+    if result is None:
+        return 2
+    identity, image, details = result
+    payload = {
+        "bytes": list(image),
+        "summary": live_mod.image_summary(image),
+        "fragment_count": details.get("fragment_count"),
+        "fragments": details.get("fragments", []),
+        "device": identity,
+        "note": "D6 read only; no configuration mutation is performed",
+    }
+    _write_json(args.output, payload)
+    return 0
+
+
+def cmd_live_backup(args: argparse.Namespace) -> int:
+    result = _run_live(_live_read(args.address, args.connect_timeout, args.reply_timeout))
+    if result is None:
+        return 2
+    identity, image, details = result
+    document = live_mod.backup_document(image, identity=identity,
+                                        fragments=details.get("fragments"))
+    Path(args.output).write_text(json.dumps(document, indent=2, sort_keys=True) + "\n",
+                                 encoding="utf-8")
+    _write_json(None, {
+        "wrote": args.output,
+        "sha256": document["summary"]["sha256"],
+        "bytes": len(image),
+        "privacy": document["privacy"],
+    })
+    return 0
+
+
+async def _live_write_gate(args: argparse.Namespace) -> dict:
+    transport = live_mod.BleakLiveTransport(address=args.address,
+                                           connect_timeout=args.connect_timeout)
+    await transport.connect()
+    try:
+        identity = await live_mod.read_identity(transport)
+        return await live_mod.validate_write_gate(
+            transport,
+            backup_prefix=args.backup_prefix,
+            authorized=args.authorized,
+            timeout=args.reply_timeout,
+            ack_window=args.ack_window,
+            settle=args.settle,
+            identity=identity,
+        )
+    finally:
+        await transport.close()
+
+
+def cmd_live_validate_write_gate(args: argparse.Namespace) -> int:
+    """Supervised byte-identical no-op D7 gate. Takes no target image by design."""
+    result = _run_live(_live_write_gate(args))
+    if result is None:
+        return 2
+    _write_json(args.output, result, compact=args.compact)
+    return {"PASS": 0, "FAIL": 1}.get(result.get("status"), 2)
+
+
+async def _live_reversible_m1(args: argparse.Namespace) -> dict:
+    transport = live_mod.BleakLiveTransport(address=args.address,
+                                            connect_timeout=args.connect_timeout)
+    await transport.connect()
+    try:
+        identity = await live_mod.read_identity(transport)
+        return await live_mod.validate_reversible_m1(
+            transport,
+            backup_prefix=args.backup_prefix,
+            authorized=args.authorized,
+            stage=args.stage,
+            timeout=args.reply_timeout,
+            ack_window=args.ack_window,
+            settle=args.settle,
+            identity=identity,
+        )
+    finally:
+        await transport.close()
+
+
+def cmd_live_validate_reversible_m1(args: argparse.Namespace) -> int:
+    """Supervised M1 -> A reversible test. Takes no target image by design."""
+    result = _run_live(_live_reversible_m1(args))
+    if result is None:
+        return 2
+    _write_json(args.output, result, compact=args.compact)
+    return {"OK": 0, "APPLIED": 0, "RESTORED": 0, "NO_RESTORE_NEEDED": 0,
+            "FAIL": 1}.get(result.get("status"), 2)
+
+
+async def _live_apply(args: argparse.Namespace) -> dict:
+    target = live_mod.load_image(args.target)          # validated offline, before any BLE
+    transport = live_mod.BleakLiveTransport(address=args.address,
+                                            connect_timeout=args.connect_timeout)
+    connection = await live_mod.connect_with_retries(transport, attempts=args.connect_attempts)
+    if not connection["ok"]:
+        return {"command": "armorx live apply", "status": "REFUSED",
+                "refusal_reason": "could not connect to the device",
+                "connect_attempts": connection["attempts"],
+                "never_wrote": True}
+    try:
+        identity = await live_mod.read_identity(transport)
+        result = await live_mod.apply_config(
+            transport, target,
+            backup_prefix=args.backup_prefix,
+            automation=bool(args.yes and args.acknowledge_backup),
+            dry_run=args.dry_run,
+            allow_unknown_diff=args.allow_unknown_diff,
+            identity=identity,
+            timeout=args.reply_timeout,
+            ack_window=args.ack_window,
+            settle=args.settle,
+        )
+    finally:
+        await transport.close()
+    result["connect_attempts"] = connection["attempts"]
+    return result
+
+
+def default_backup_prefix(target: str) -> str:
+    """Automatic pre-write backup prefix: beside the target, timestamped."""
+    return f"{str(Path(target).with_suffix(''))}-backup-{time.strftime('%Y%m%d-%H%M%S')}"
+
+
+def cmd_live_apply(args: argparse.Namespace) -> int:
+    if args.yes and not args.acknowledge_backup:
+        print("error: --yes also requires --acknowledge-backup: automation needs both "
+              "explicit switches", file=sys.stderr)
+        return 2
+    if not args.backup_prefix:
+        args.backup_prefix = default_backup_prefix(args.target)
+    result = _run_live(_live_apply(args))
+    if result is None:
+        return 2
+    _write_json(args.output, result, compact=args.compact)
+    return {"APPLIED": 0, "NO_CHANGE": 0, "DRY_RUN": 0, "RESTORED": 0,
+            "FAIL": 1, "UNEXPECTED_STATE": 1}.get(result.get("status"), 2)
+
+
+async def _live_rollback(args: argparse.Namespace) -> dict:
+    transport = live_mod.BleakLiveTransport(address=args.address,
+                                            connect_timeout=args.connect_timeout)
+    connection = await live_mod.connect_with_retries(transport, attempts=args.connect_attempts)
+    if not connection["ok"]:
+        return {"command": "armorx live rollback", "status": "REFUSED",
+                "refusal_reason": "could not connect to the device",
+                "connect_attempts": connection["attempts"], "never_wrote": True}
+    try:
+        identity = await live_mod.read_identity(transport)
+        result = await live_mod.rollback_config(
+            transport, args.backup_prefix,
+            automation=bool(args.yes and args.acknowledge_backup),
+            allow_unrelated_state=args.allow_unrelated_state,
+            dry_run=args.dry_run,
+            identity=identity,
+            timeout=args.reply_timeout,
+            ack_window=args.ack_window,
+            settle=args.settle,
+        )
+    finally:
+        await transport.close()
+    result["connect_attempts"] = connection["attempts"]
+    return result
+
+
+def cmd_live_rollback(args: argparse.Namespace) -> int:
+    if args.yes and not args.acknowledge_backup:
+        print("error: --yes also requires --acknowledge-backup: automation needs both "
+              "explicit switches", file=sys.stderr)
+        return 2
+    result = _run_live(_live_rollback(args))
+    if result is None:
+        return 2
+    _write_json(args.output, result, compact=args.compact)
+    return {"APPLIED": 0, "NO_CHANGE": 0, "DRY_RUN": 0, "RESTORED": 0,
+            "FAIL": 1, "UNEXPECTED_STATE": 1}.get(result.get("status"), 2)
+
+
+def cmd_live_plan(args: argparse.Namespace) -> int:
+    try:
+        baseline = live_mod.load_image(args.baseline)
+        target = live_mod.load_image(args.target)
+        plan = live_mod.plan_config_change(baseline, target)
+    except (ValueError, live_mod.LiveError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    _write_json(args.output, plan)
+    return 0
+
+
+def _add_live_commands(groups) -> None:
+    live = groups.add_parser(
+        "live",
+        help="Linux BLE configuration access with guarded apply/rollback",
+    )
+    sub = live.add_subparsers(dest="live_command", required=True)
+
+    p = sub.add_parser("scan", help="scan for ARMOR-X BLE advertisements")
+    p.add_argument("--seconds", type=float, default=8.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_scan)
+
+    p = sub.add_parser("info", help="connect and read standard device identity characteristics")
+    p.add_argument("--address", required=True)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_info)
+
+    p = sub.add_parser("read-config", help="read the current 144-byte config over proven D6")
+    p.add_argument("--address", required=True)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_read_config)
+
+    p = sub.add_parser("backup", help="read and save the current config before any future write")
+    p.add_argument("--address", required=True)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("-o", "--output", required=True)
+    p.set_defaults(func=cmd_live_backup)
+
+    p = sub.add_parser("apply", help="write a configuration file to the device "
+                                     "(automatic backup, diff, confirmation, D7, 0E, D6 x2)")
+    p.add_argument("target", help=".json configuration or 144-byte .bin to write")
+    p.add_argument("--address", required=True)
+    p.add_argument("--backup-prefix", help="prefix for the automatic pre-write backup "
+                                          "(default: <target>-backup-<timestamp>)")
+    p.add_argument("--dry-run", action="store_true", help="plan and back up, write nothing")
+    p.add_argument("--allow-unknown-diff", action="store_true",
+                   help="write even when undecoded bytes would change (refused by default)")
+    p.add_argument("--yes", action="store_true",
+                   help="automation: requires --acknowledge-backup, skips the dialog")
+    p.add_argument("--acknowledge-backup", action="store_true",
+                   help="automation: confirms you know the pre-write backup is written")
+    p.add_argument("--connect-attempts", type=int, default=3)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--ack-window", type=float, default=1.5)
+    p.add_argument("--settle", type=float, default=2.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_apply)
+
+    p = sub.add_parser("rollback", help="restore the exact bytes of a saved backup")
+    p.add_argument("backup_prefix", help="the backup prefix used by apply/backup")
+    p.add_argument("--address", required=True)
+    p.add_argument("--allow-unrelated-state", action="store_true",
+                   help="overwrite a configuration this backup was not written before")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--yes", action="store_true")
+    p.add_argument("--acknowledge-backup", action="store_true")
+    p.add_argument("--connect-attempts", type=int, default=3)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--ack-window", type=float, default=1.5)
+    p.add_argument("--settle", type=float, default=2.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_rollback)
+
+    p = sub.add_parser(
+        "validate-write-gate",
+        help="supervised byte-identical no-op D7 gate; takes no target image",
+    )
+    p.add_argument("--address", required=True)
+    p.add_argument("--backup-prefix", required=True,
+                   help="path prefix for baseline-before-write.json/.bin/.sha256")
+    p.add_argument("--authorized", action="store_true",
+                   help="only after the operator popup was acknowledged")
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--ack-window", type=float, default=1.5)
+    p.add_argument("--settle", type=float, default=2.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_validate_write_gate)
+
+    p = sub.add_parser(
+        "validate-reversible-m1",
+        help="supervised reversible M1->A test; takes no target image",
+    )
+    p.add_argument("--address", required=True)
+    p.add_argument("--backup-prefix", required=True,
+                   help="path prefix for baseline-original.json/.bin/.sha256 and the session record")
+    p.add_argument("--stage", choices=("apply", "check", "restore"), default="apply",
+                   help="apply the M1->A target, classify the live image, or restore the saved baseline")
+    p.add_argument("--authorized", action="store_true",
+                   help="only after the operator popup was acknowledged")
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--ack-window", type=float, default=1.5)
+    p.add_argument("--settle", type=float, default=2.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_validate_reversible_m1)
+
+    p = sub.add_parser("plan", help="compare two saved 144-byte images offline")
+    p.add_argument("baseline")
+    p.add_argument("target")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_plan)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="armorx",
@@ -825,6 +1195,7 @@ def build_parser() -> argparse.ArgumentParser:
     _add_gip_commands(groups)
     _add_capture_commands(groups)
     _add_exchange_commands(groups)
+    _add_live_commands(groups)
 
     return parser
 
