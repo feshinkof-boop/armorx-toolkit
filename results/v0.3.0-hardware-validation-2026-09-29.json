@@ -1,0 +1,152 @@
+{
+ "session": "v0.3.0-hardware-validation-2026-09-29",
+ "capture_dir": "results/hardware-validation/<timestamp>/ (local, not committed)",
+ "device_initial": {
+  "vid_pid": "045e:0b12",
+  "manufacturer": "Microsoft",
+  "product": "Controller",
+  "bcd_device": "0518",
+  "usb_path": "1-7",
+  "speed": "full",
+  "interfaces": [
+   {
+    "number": 0,
+    "class": 255,
+    "subclass": 71,
+    "protocol": 208,
+    "driver": "xpad"
+   },
+   {
+    "number": 1,
+    "class": 255,
+    "subclass": 71,
+    "protocol": 208,
+    "driver": null
+   },
+   {
+    "number": 2,
+    "class": 255,
+    "subclass": 71,
+    "protocol": 208,
+    "driver": null
+   }
+  ],
+  "input_nodes": [
+   "/dev/input/js0",
+   "/dev/input/event18"
+  ],
+  "hidraw": [],
+  "serial": "<omitted>",
+  "enumeration_time": "2026-09-29T03:06:01-04:00"
+ },
+ "device_final": {
+  "vid_pid": "045e:0b12",
+  "present": true,
+  "js0": true,
+  "shutdown_observed": false,
+  "reenumeration_observed": false
+ },
+ "toolkit_commands": [
+  "device list",
+  "device list --known-only",
+  "device inspect 1-7",
+  "device doctor",
+  "device doctor --bundle",
+  "capture inspect <capture> --summary"
+ ],
+ "discovery_validation": {
+  "result": "pass_after_fix",
+  "devices_seen": 6,
+  "supported": 1,
+  "bugs": [
+   "interface numbers all reported as 1",
+   "sysfs serial reported as a hex dump instead of the decoded value"
+  ]
+ },
+ "doctor_validation": {
+  "ok": true,
+  "blocking_checks": [],
+  "findings": [
+   "hidraw_permissions"
+  ],
+  "bug": "a restricted hidraw node forced ok=false although no read-only path needs hidraw"
+ },
+ "bundle_privacy": {
+  "username": false,
+  "home_path": false,
+  "hostname": false,
+  "serial": false,
+  "mac": false,
+  "token": false
+ },
+ "capture": {
+  "duration_s": 120,
+  "records": 62702,
+  "gip_reports": 30009,
+  "lengths": {
+   "48": 30009
+  },
+  "distinct_sequences": 255,
+  "frames": 0,
+  "unknown_spans": 0
+ },
+ "transition_32_48": {
+  "status": "NOT_REPRODUCED",
+  "reason": "first capture started 98 s after enumeration; stream already steady 48-byte",
+  "cause": "UNKNOWN"
+ },
+ "parser_validation": {
+  "independent_extraction": {
+   "records": 62702,
+   "gip": 30009,
+   "seqs": 255
+  },
+  "toolkit": {
+   "records": 62702,
+   "gip": 30009,
+   "seqs": 255
+  },
+  "bug": "8 phantom A5 frames from GIP reports whose sequence byte was 0xA5",
+  "fixed": true
+ },
+ "unknown_traffic": [
+  {
+   "endpoint": "0x82",
+   "length": 7,
+   "records": 490,
+   "prefixes": [
+    "0200ff",
+    "020000"
+   ]
+  },
+  {
+   "endpoint": "0x82",
+   "length": 4,
+   "records": 450
+  },
+  {
+   "endpoint": "0x84",
+   "lengths": [
+    98,
+    106,
+    240
+   ],
+   "note": "contains A5 bytes, no valid frames"
+  }
+ ],
+ "interactive_tests_pending": [
+  "LT sweep",
+  "RT sweep",
+  "button presses",
+  "M1/M2",
+  "power button",
+  "personality transition"
+ ],
+ "agent_writes": false,
+ "kernel_driver_writes": "xpad initialisation traffic only (automatic)",
+ "version_bumped_to": "0.3.0",
+ "merged": false,
+ "tagged": false,
+ "released": false,
+ "serial_note": "the sysfs serial is deliberately not recorded in this artifact"
+}

@@ -1,0 +1,117 @@
+{
+  "shift": "overnight-v0.3.0-offline-2026-09-29",
+  "branch": "dev/v0.3.0-offline-2026-09-29",
+  "research_branch_created": "research/xbox-rt-threshold-2026-09-29",
+  "research_tip_new": "e302829",
+  "research_tip_untouched": "8747846",
+  "commits": [
+    "feat: add offline protocol framing and Xbox GIP parsing libraries",
+    "feat: add read-only device discovery, diagnostics and transport seams",
+    "feat: add device, protocol and gip CLI groups",
+    "docs: add the v0.3.0 release plan, Linux support and offline tool docs",
+    "docs: add the overnight shift handoff with the 0x1e0a426 result",
+    "fix: make doctor no-device result host-independent",
+    "docs: correct overnight handoff after CI repair"
+  ],
+  "research_commits": [
+    "research: fully reverse 0x1e0a426, the trigger arming state machine"
+  ],
+  "tests": {
+    "before": "public suite as shipped on main",
+    "after": "98 passed, 0 failed, 0 skipped in GitHub Actions on Python 3.10-3.13 after post-shift CI repair",
+    "explicit_skips": [],
+    "overnight_local": "96 passed, 0 failed, 0 skipped before the two CI regression tests were added"
+  },
+  "modules_added": [
+    "armorx.protocol",
+    "armorx.gip",
+    "armorx.device",
+    "armorx.transport"
+  ],
+  "cli_added": [
+    "device list",
+    "device inspect",
+    "device doctor",
+    "protocol decode",
+    "protocol build",
+    "protocol opcodes",
+    "protocol describe-image",
+    "gip decode",
+    "gip forms"
+  ],
+  "docs_added": [
+    "docs/v0.3.0-release-plan.md",
+    "docs/linux-support.md",
+    "docs/offline-tools.md",
+    "RELEASE_NOTES_v0.3.0-draft.md",
+    "docs/overnight-v0.3.0-handoff-2026-09-29.md"
+  ],
+  "version": {
+    "package": "0.2.0",
+    "intended_bump": "0.3.0",
+    "tag_created": false,
+    "released": false,
+    "merged_to_main": false
+  },
+  "hardware_validation_required": [
+    "identity recognition against a real unit",
+    "vendor interface payload behaviour",
+    "gip 32->48 transition cause",
+    "rt digital path end to end",
+    "hidraw permission diagnostics",
+    "windows application"
+  ],
+  "blockers": [
+    "BLOCKER-HW-001 no usb device connected this shift",
+    "BLOCKER-HW-002 no android device connected",
+    "BLOCKER-ENV-001 hermes interpreter lacks pytest; suite runs with /usr/bin/python3.14"
+  ],
+  "static_re": {
+    "function": "0x1e0a426",
+    "status": "PROVEN STATIC",
+    "size_bytes": 166,
+    "callers": [
+      "0x1e0cee8"
+    ],
+    "summary": "per-channel arming/hysteresis state machine; returns 0xFF when armed else 0x00, which the caller writes into candidate+0x0d and uses to set or clear mask bit 0x200",
+    "state_offsets": {
+      "+0x76": "previous reading",
+      "+0x78": "mode",
+      "+0x7a": "hysteresis counter",
+      "+0x7c": "armed byte"
+    },
+    "open": [
+      "mode byte semantics",
+      "whether LT shares the helper",
+      "caller r4 provenance",
+      "the r8+0x1db / r8+0x1d6 gate observation is not yet in the research artifact"
+    ]
+  },
+  "next_10_priorities": [
+    "fold the r8+0x1db gate observation into the research artifact",
+    "dominance-order the synthesis block against the 14-byte memcmp",
+    "optional-dependency pcap reader for armorx capture inspect",
+    "shareable config/macro schema with hashing and validation",
+    "doctor diagnostics bundle for issue reports",
+    "validate device list against real usb topologies",
+    "explain the gip 32->48 transition",
+    "reverse 0x1e0a426 mode byte semantics and check LT sharing",
+    "property and fuzz tests for the parsers",
+    "prepare the 0.3.0 version bump"
+  ],
+  "safe_for_draft_rc": true,
+  "safe_for_validated_release": false,
+  "ci": {
+    "workflow": ".github/workflows/tests.yml",
+    "run_id": 36532070949,
+    "result": "success",
+    "python": [
+      "3.10",
+      "3.11",
+      "3.12",
+      "3.13"
+    ],
+    "repair_commit": "e6533171fc5e283043e5c38292d941f1b854e42e",
+    "root_cause": "doctor treated missing xpad as fatal on a no-device host; behavior is now conditional on whether an Xbox personality is present"
+  }
+}

@@ -151,3 +151,57 @@ The package modules live under:
 ```text
 src/armorx/
 ```
+
+## v0.3.0 offline groups
+
+```text
+armorx device list [--known-only]
+armorx device inspect <sysfs-path | usb-path | vid:pid>
+armorx device doctor
+
+armorx protocol decode "<hex>" [--stream]
+armorx protocol build --opcode <hex> [--payload <hex>] [--fragment <n>]
+armorx protocol opcodes
+armorx protocol describe-image --image "<144 hex bytes>" [--opcode D7]
+
+armorx gip decode "<hex>"
+armorx gip forms
+```
+
+None of these commands talk to a device. `armorx device doctor` is expected to
+exit 0 on a machine with no hardware and to say so.
+
+## Complete command surface after the offline work
+
+```text
+armorx config    decode | validate | keys | map | patch | create | configjson
+armorx macro     build | validate | inspect | keys
+armorx community list | import-code
+armorx device    list | inspect | doctor
+armorx protocol  decode | build | opcodes | describe-image
+armorx gip       decode | forms
+armorx capture   inspect | formats
+armorx exchange  export | inspect | verify | schema
+```
+
+Behaviour contract for the new groups:
+
+| situation | result |
+| --- | --- |
+| `--help` on any group | exit 0, no hardware touched |
+| no device present | `armorx device list` and `device doctor` exit 0 and say so |
+| malformed input | exit 2, one-line message on stderr, never a traceback |
+| content-id mismatch | `armorx exchange verify` exits 3 |
+| unknown opcode | reported as unknown, never guessed |
+
+Diagnostics bundle:
+
+```bash
+armorx device doctor --bundle diagnostics.json          # JSON, sanitised
+armorx device doctor --bundle diagnostics.txt --text     # human readable
+armorx device doctor --bundle d.json --include-hostname  # opt in to the hostname
+```
+
+The bundle omits usernames, home paths, the hostname, USB serial numbers and
+MAC/Bluetooth addresses unless explicitly requested, and the omission list is
+recorded inside the bundle itself.

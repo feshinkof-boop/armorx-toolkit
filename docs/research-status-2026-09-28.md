@@ -45,6 +45,10 @@ For the PC-visible type-`0x20` input stream, the live map currently includes:
 The earlier 32-byte vs 48-byte discrepancy is resolved as two lengths of the same observed type-`0x20` stream:
 
 - 32-byte startup form after enumeration;
+
+> Correction, 2026-09-29: a capture begun before power-on produced only the 48-byte
+> form from the first frame, 50 ms after enumeration, so the 32-byte form is no longer
+> described as a startup form. See `docs/v0.3.0-interactive-hardware-validation.md`.
 - 48-byte steady-state form;
 - in the preserved power-state capture, the last 32-byte frame occurs at about 45.7805 s and the first 48-byte frame at about 45.8125 s.
 
