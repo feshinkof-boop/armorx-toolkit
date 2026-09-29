@@ -198,3 +198,32 @@ def test_summarise_is_readable():
 def test_iter_payloads_skips_empty_records():
     data = pcap_bytes([usbmon_record(b""), usbmon_record(b"x")])
     assert list(capture.iter_payloads(capture.parse_pcap(data))) == [b"x"]
+
+
+def test_gip_report_is_not_also_scanned_for_frames():
+    """Regression from real hardware: a 48-byte GIP report whose sequence byte is
+    0xA5 produced eight checksum-valid 'frames' by coincidence in one capture."""
+    import struct as _struct
+    frame = bytearray(48)
+    frame[0], frame[1], frame[2], frame[3] = 0x20, 0x00, 0xA5, 0x2C
+    for index, value in enumerate((0x81, 0x02, 0, 0, 0, 0, 0x87, 0xFD)):
+        frame[4 + index] = value
+    # make the would-be frame checksum valid
+    total = sum(frame[2:45]) & 0xFF
+    frame[45] = total
+    from armorx import protocol as _p
+    assert _p.parse_frame(bytes(frame[2:46])).checksum_ok is True  # the coincidence is real
+    report = capture.inspect_bytes(pcap_bytes([usbmon_record(bytes(frame))]))
+    assert report.frames == []
+    assert len(report.gip_reports) == 1
+
+
+def test_frame_scanning_still_works_on_non_gip_payloads():
+    frames = protocol.build_a5(0x0B) + protocol.build_a5(0xD2, [0x01])
+    report = capture.inspect_bytes(pcap_bytes([usbmon_record(frames)]))
+    assert [f["opcode"] for f in report.frames] == [0x0B, 0xD2]
+
+
+def test_note_documents_the_gip_frame_rule():
+    report = capture.inspect_bytes(pcap_bytes([usbmon_record(gip_frame())]))
+    assert any("not also" in note for note in report.notes)

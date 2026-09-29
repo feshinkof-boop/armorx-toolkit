@@ -257,16 +257,22 @@ def inspect_bytes(data: bytes, *, name: str = "<memory>", usb_limit: int | None 
             "usbmon records were parsed with the built-in reader; payload bytes are the URB "
             "data as captured, nothing is decoded further without evidence"
         )
+        report.notes.append(
+            "payloads recognised as GIP input reports are decoded as such and are not also "
+            "scanned for A5/A4 frames: a 48-byte report whose sequence byte is 0xA5 can "
+            "otherwise produce a checksum-valid frame by coincidence, which real captures do"
+        )
         for packet in packets:
+            if gip_mod.is_probable_input_report(packet.data):
+                entry = gip_mod.parse_gip_input(packet.data, strict=False).to_dict()
+                entry["packet_index"] = packet.index
+                report.gip_reports.append(entry)
+                continue
             for frame in _frames_in_payload(packet.data):
                 info = protocol_mod.parse_frame(frame).to_dict()
                 info["packet_index"] = packet.index
                 info["timestamp"] = round(packet.timestamp, 6)
                 report.frames.append(info)
-            if gip_mod.is_probable_input_report(packet.data):
-                entry = gip_mod.parse_gip_input(packet.data, strict=False).to_dict()
-                entry["packet_index"] = packet.index
-                report.gip_reports.append(entry)
         return report
 
     report.kind = "raw"
