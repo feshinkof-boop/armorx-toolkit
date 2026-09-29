@@ -16,6 +16,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import json
+import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Protocol, Any
@@ -96,6 +97,12 @@ class MockLiveTransport:
     async def recv(self, timeout: float) -> bytes:
         if not self.notifications:
             raise LiveTimeout(f"no scripted notification within {timeout:.1f}s")
+        # ``None`` marks the end of a bounded window: the marker is consumed and
+        # reported as a timeout, so a scripted test can separate the D7, 0E and
+        # read-back windows without inventing a fake notification.
+        if self.notifications[0] is None:
+            self.notifications.pop(0)
+            raise LiveTimeout(f"no notification inside the window ({timeout:.1f}s)")
         return bytes(self.notifications.pop(0))
 
 
@@ -408,3 +415,280 @@ async def write_config_volatile(
 async def persist_config(transport: AsyncLiveTransport) -> None:
     """Internal test seam for the proven 0E persistence command."""
     await transport.send(PERSIST_REQUEST, mutating=True)
+
+
+# ---------------------------------------------------------------------------
+# no-op D7 write-safety gate
+# ---------------------------------------------------------------------------
+#
+# This is deliberately ONE narrow command. It never accepts a target image, an
+# opcode or a payload: the bytes it writes are the bytes it just read from the
+# device, and nothing else can enter this code path.
+
+D7_OPCODE = 0xD7
+PERSIST_FRAME_HEX = "a5 05 0e 00 b8"
+
+
+def save_baseline(prefix: str | Path, image: bytes, *, fragments=None,
+                  identity: dict | None = None) -> dict:
+    """Write the pre-write baseline as .json, .bin and .sha256.
+
+    The document never contains the BLE address, a serial number, a hostname or
+    a path.
+    """
+    image = bytes(image)
+    summary = image_summary(image)
+    base = Path(prefix)
+    base.parent.mkdir(parents=True, exist_ok=True)
+    json_path = base.with_suffix(".json")
+    bin_path = base.with_suffix(".bin")
+    sha_path = base.with_suffix(".sha256")
+    document = backup_document(image, identity=identity, fragments=fragments)
+    json_path.write_text(json.dumps(document, indent=2, sort_keys=True) + "\n",
+                         encoding="utf-8")
+    bin_path.write_bytes(image)
+    sha_path.write_text(summary["sha256"] + "\n", encoding="utf-8")
+    # Only base names are recorded: the report is meant to be publishable, so it
+    # must never carry a home path or a user name.
+    return {
+        "json": json_path.name,
+        "bin": bin_path.name,
+        "sha256_file": sha_path.name,
+        "sha256": summary["sha256"],
+        "bytes": len(image),
+    }
+
+
+async def collect_notifications(transport: AsyncLiveTransport, *, window: float,
+                                max_frames: int = 64) -> list[dict]:
+    """Drain FFE2 notifications for a bounded window.
+
+    Every raw notification is recorded even when it does not parse as a frame,
+    so nothing observed is silently dropped.
+    """
+    loop = asyncio.get_running_loop()
+    deadline = loop.time() + window
+    observed: list[dict] = []
+    while loop.time() < deadline:
+        remaining = deadline - loop.time()
+        if remaining <= 0:
+            break
+        try:
+            raw = await transport.recv(remaining)
+        except LiveTimeout:
+            break
+        except LiveError:
+            break
+        frames = _frames_from_notification(raw)
+        if not frames:
+            observed.append({"raw_hex": raw.hex(" "), "parsed": False,
+                             "note": "notification did not parse as a frame; kept as evidence"})
+        for frame in frames:
+            observed.append({
+                "raw_hex": raw.hex(" "),
+                "parsed": True,
+                "opcode": frame.opcode,
+                "opcode_hex": f"0x{frame.opcode:02X}",
+                "length": frame.length,
+                "payload_hex": frame.payload.hex(" "),
+                "checksum_ok": frame.checksum_ok,
+                "at": round(time.time(), 3),
+            })
+            if len(observed) >= max_frames:
+                return observed
+    return observed
+
+
+async def validate_write_gate(
+    transport: AsyncLiveTransport,
+    *,
+    backup_prefix: str | Path | None = None,
+    authorized: bool = False,
+    timeout: float = 4.0,
+    ack_window: float = 1.5,
+    fragment_delay: float = 0.01,
+    settle: float = 2.0,
+    identity: dict | None = None,
+) -> dict:
+    """Byte-identical no-op D7 write-back with 0E persistence and D6 read-back.
+
+    Refuses to write unless every preflight condition holds, and never writes
+    anything other than the image read from the device moments earlier.
+    """
+    report: dict[str, Any] = {
+        "command": "armorx live validate-write-gate",
+        "status": "REFUSED",
+        "stage": "preflight",
+        "mutating_commands_exposed_by_this_command": False,
+        "never_accepts_a_target_image": True,
+    }
+
+    # --- preflight read 1 -------------------------------------------------
+    first_details: dict = {}
+    try:
+        image_1 = await read_config(transport, timeout=timeout, report=first_details)
+    except LiveError as exc:
+        report["refusal_reason"] = f"first D6 read failed: {exc}"
+        report["first_read"] = {"ok": False, "error": str(exc)}
+        return report
+    summary_1 = image_summary(image_1)
+    report["first_read"] = {"ok": True, **summary_1,
+                            "fragment_count": first_details.get("fragment_count")}
+
+    # --- baseline before any mutation ------------------------------------
+    report["baseline_sha256"] = summary_1["sha256"]
+    if backup_prefix is None:
+        report["refusal_reason"] = "no backup prefix was given; refusing to continue"
+        return report
+    report["stage"] = "backup"
+    try:
+        report["backup"] = save_baseline(backup_prefix, image_1,
+                                        fragments=first_details.get("fragments"),
+                                        identity=identity)
+    except OSError as exc:
+        report["refusal_reason"] = f"baseline backup failed: {exc}"
+        return report
+
+    # --- preflight read 2 -------------------------------------------------
+    report["stage"] = "repeat-read"
+    second_details: dict = {}
+    try:
+        image_2 = await read_config(transport, timeout=timeout, report=second_details)
+    except LiveError as exc:
+        report["refusal_reason"] = f"second D6 read failed: {exc}"
+        report["second_read"] = {"ok": False, "error": str(exc)}
+        return report
+    summary_2 = image_summary(image_2)
+    repeated_identical = bytes(image_1) == bytes(image_2)
+    report["second_read"] = {"ok": True, **summary_2,
+                             "fragment_count": second_details.get("fragment_count")}
+    report["repeated_reads_identical"] = repeated_identical
+    report["repeated_read_differences"] = _offset_differences(image_1, image_2)
+    if not repeated_identical:
+        report["refusal_reason"] = ("two consecutive live D6 reads differ; the device is "
+                                    "changing configuration bytes, so no write is attempted")
+        return report
+
+    # --- operator authorization ------------------------------------------
+    report["stage"] = "authorization"
+    report["operator_authorized"] = bool(authorized)
+    if not authorized:
+        report["refusal_reason"] = ("operator authorization not given; re-run with "
+                                    "--authorized only after the popup was acknowledged")
+        return report
+
+    # --- the write, and only the bytes just read -------------------------
+    baseline = bytes(image_1)
+    frames = protocol_mod.fragment_config_image(D7_OPCODE, baseline)
+    if len(frames) != protocol_mod.FRAGMENT_COUNT:
+        report["refusal_reason"] = "internal error: fragment count mismatch"
+        return report
+
+    report["stage"] = "d7"
+    report["d7"] = {"fragments": [], "sent": 0}
+    try:
+        transport.allow_mutating = True
+        for index, frame in enumerate(frames, start=1):
+            await transport.send(frame, mutating=True)
+            report["d7"]["fragments"].append({
+                "index": index,
+                "frame_bytes": len(frame),
+                "data_bytes": len(frame) - 5,
+                "checksum_ok": protocol_mod.parse_frame(frame).checksum_ok,
+                "raw_hex": frame.hex(" "),
+                "at": round(time.time(), 3),
+            })
+            report["d7"]["sent"] = index
+            if fragment_delay:
+                await asyncio.sleep(fragment_delay)
+        report["d7"]["notifications"] = await collect_notifications(transport,
+                                                                   window=ack_window)
+    except LiveError as exc:
+        report["refusal_reason"] = f"D7 write failed: {exc}"
+        return report
+    finally:
+        transport.allow_mutating = False
+
+    acknowledgement = _find_ack(report["d7"]["notifications"], 0xD7)
+    report["d7"]["acknowledgement"] = acknowledgement
+    report["d7"]["ack_observed"] = acknowledgement["observed"]
+
+    # --- persistence, exactly once ---------------------------------------
+    report["stage"] = "persist"
+    report["persist"] = {"request_hex": PERSIST_REQUEST.hex(" "),
+                         "expected_hex": PERSIST_FRAME_HEX, "sent": 0}
+    if PERSIST_REQUEST.hex(" ") != PERSIST_FRAME_HEX:
+        report["refusal_reason"] = "internal error: persistence frame mismatch"
+        return report
+    try:
+        transport.allow_mutating = True
+        await transport.send(PERSIST_REQUEST, mutating=True)
+        report["persist"]["sent"] = 1
+        report["persist"]["notifications"] = await collect_notifications(transport,
+                                                                        window=ack_window)
+    except LiveError as exc:
+        report["refusal_reason"] = f"persistence command failed: {exc}"
+        return report
+    finally:
+        transport.allow_mutating = False
+    report["persist"]["notification_count"] = len(report["persist"]["notifications"])
+    report["persist"]["acknowledgement"] = _find_ack(report["persist"]["notifications"], 0x0E)
+
+    # --- decisive read-back ----------------------------------------------
+    report["stage"] = "read-back"
+    readback: dict[str, Any] = {"attempts": []}
+    try:
+        for attempt in (1, 2):
+            details: dict = {}
+            image = await read_config(transport, timeout=timeout, report=details)
+            summary = image_summary(image)
+            differences = _offset_differences(baseline, image)
+            readback["attempts"].append({
+                "attempt": attempt,
+                **summary,
+                "fragment_count": details.get("fragment_count"),
+                "byte_for_byte_match": not differences,
+                "differences": differences,
+            })
+            if attempt == 1 and differences:
+                break  # never attempt a repair loop
+            if attempt == 1 and settle:
+                await asyncio.sleep(settle)
+    except LiveError as exc:
+        readback["error"] = str(exc)
+        report["readback"] = readback
+        report["status"] = "FAIL"
+        report["failure_reason"] = f"post-write D6 read failed: {exc}"
+        return report
+    report["readback"] = readback
+
+    attempts = readback["attempts"]
+    identical = bool(attempts) and all(a["byte_for_byte_match"] for a in attempts)
+    report["byte_for_byte_match"] = identical
+    report["final_sha256"] = attempts[-1]["sha256"] if attempts else None
+    report["all_offsets_differing"] = (attempts[-1]["differences"] if attempts else [])
+    report["status"] = "PASS" if identical and len(attempts) == 2 else "FAIL"
+    if report["status"] == "FAIL":
+        report["failure_reason"] = ("post-write configuration does not match the baseline "
+                                    "byte for byte; no further write was attempted")
+    return report
+
+
+def _offset_differences(before: bytes, after: bytes) -> list[dict]:
+    """Exact differing offsets between two images, for the failure path."""
+    if len(before) != len(after):
+        return [{"length_mismatch": {"before": len(before), "after": len(after)}}]
+    return [{"offset": index, "before": before[index], "after": after[index]}
+            for index in range(len(before)) if before[index] != after[index]]
+
+
+def _find_ack(notifications: list[dict], opcode: int) -> dict:
+    """Report an acknowledgement if one was seen; never fabricate one."""
+    for entry in notifications:
+        if entry.get("parsed") and entry.get("opcode") == opcode:
+            return {"observed": True, "raw_hex": entry["raw_hex"],
+                    "checksum_ok": entry.get("checksum_ok"),
+                    "payload_hex": entry.get("payload_hex")}
+    return {"observed": False,
+            "note": "no acknowledgement notification was seen in the bounded window; "
+                    "this is recorded as an absence, not as a rejection"}

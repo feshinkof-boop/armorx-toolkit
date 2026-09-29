@@ -1,0 +1,78 @@
+{
+  "artifact": "armorx-toolkit v0.4.0 supervised no-op D7 write-safety gate",
+  "byte_for_byte_match": true,
+  "command": "armorx live validate-write-gate (takes no target image by design)",
+  "d7_write": {
+    "acknowledgement": {
+      "checksum_ok": true,
+      "observed": true,
+      "payload_hex": "00",
+      "raw_hex": "a5 05 d7 00 81"
+    },
+    "acknowledgement_absent_note": null,
+    "acknowledgement_observed": true,
+    "bytes_written": 144,
+    "first_fragment_at": 1790675226.567,
+    "fragment_count": 10,
+    "image_source": "the live D6 read taken immediately before the write",
+    "last_fragment_at": 1790675226.67,
+    "notification_count": 1
+  },
+  "date": "2026-09-29",
+  "differing_offsets": [],
+  "operator_authorized": true,
+  "persistence": {
+    "acknowledgement": {
+      "checksum_ok": true,
+      "observed": true,
+      "payload_hex": "00",
+      "raw_hex": "a5 05 0e 00 b8"
+    },
+    "frame": "a5 05 0e 00 b8",
+    "frames_sent": 1,
+    "notification_bytes": [
+      "a5 05 0e 00 b8"
+    ],
+    "notification_count": 2
+  },
+  "post_write_readback": [
+    {
+      "attempt": 1,
+      "byte_for_byte_match": true,
+      "crc_matches": true,
+      "declared_length": 144,
+      "differing_offsets": [],
+      "length": 144,
+      "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+      "stored_crc": "0x2C40"
+    },
+    {
+      "attempt": 2,
+      "byte_for_byte_match": true,
+      "crc_matches": true,
+      "declared_length": 144,
+      "differing_offsets": [],
+      "length": 144,
+      "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+      "stored_crc": "0x2C40"
+    }
+  ],
+  "pre_write": {
+    "computed_crc": "0x2C40",
+    "crc_matches": true,
+    "declared_length": 144,
+    "fragment_count": 10,
+    "length": 144,
+    "repeated_reads_identical": true,
+    "second_read_sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "sha256": "bdef9c619dba4836c89073df6e63860a21ad26a1c0b92946ae68fb68a895beb6",
+    "stored_crc": "0x2C40"
+  },
+  "privacy": {
+    "ble_address": "withheld (local runtime only)",
+    "host_data": "not recorded",
+    "serial_numbers": "not read, not recorded"
+  },
+  "result": "PASS",
+  "stage_reached": "read-back"
+}
