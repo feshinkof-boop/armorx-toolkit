@@ -762,6 +762,10 @@ M1_TARGET_NAME = "A"
 M1_TARGET_CODE = int(config_mod.MAP_KEY_CODES[M1_TARGET_NAME])         # 0
 EXPECTED_MUTATION_OFFSETS = (0, 1, M1_MAPKEY_OFFSET)                   # CRC + mapKeys[23]
 SESSION_FORMAT = "armorx-reversible-m1-session-v1"
+#: Session record written by the public ``live apply`` path. ``live rollback``
+#: reads ``target_sha256`` from it to decide whether the live configuration is
+#: the target that this backup was taken before.
+APPLY_SESSION_FORMAT = "armorx-live-apply-session-v1"
 
 
 def build_m1_remap_target(baseline: bytes) -> dict:
@@ -903,8 +907,16 @@ async def _write_image_and_persist(transport: AsyncLiveTransport, image: bytes, 
 
 
 async def _dual_read_and_compare(transport: AsyncLiveTransport, *, expected: bytes,
-                                 timeout: float, settle: float) -> dict:
-    """Two D6 reads that must both equal ``expected`` exactly."""
+                                 timeout: float, settle: float,
+                                 baseline: bytes | None = None,
+                                 target: bytes | None = None) -> dict:
+    """Two D6 reads that must both equal ``expected`` exactly.
+
+    ``expected`` is the image the caller demanded (the safety fact). ``baseline``
+    and ``target`` name the session's own images so each attempt is labelled by
+    what it actually is — the original baseline, the intended target, or an
+    unrelated image — instead of by whatever the caller happened to expect.
+    """
     readback: dict[str, Any] = {"attempts": []}
     for attempt in (1, 2):
         details: dict = {}
@@ -915,8 +927,12 @@ async def _dual_read_and_compare(transport: AsyncLiveTransport, *, expected: byt
             **image_summary(image),
             "fragment_count": details.get("fragment_count"),
             "byte_for_byte_match": not differences,
+            "matches_expected": not differences,
             "differences": differences,
-            "state": classify_image(image, expected, None),
+            "expected_sha256": image_summary(expected)["sha256"],
+            "state": classify_image(image,
+                                    baseline if baseline is not None else expected,
+                                    target),
         })
         if differences:
             break
@@ -1056,7 +1072,8 @@ async def validate_reversible_m1(
             transport, baseline_image, fragment_delay=fragment_delay, ack_window=ack_window)
         try:
             readback = await _dual_read_and_compare(transport, expected=baseline_image,
-                                                    timeout=timeout, settle=settle)
+                                                    timeout=timeout, settle=settle,
+                                                    baseline=baseline_image, target=None)
         except LiveError as exc:
             report["status"] = "FAIL"
             report["failure_reason"] = f"post-restore D6 read failed: {exc}"
@@ -1151,7 +1168,8 @@ async def validate_reversible_m1(
     report["stage_name"] = "verify-target"
     try:
         readback = await _dual_read_and_compare(transport, expected=target,
-                                                timeout=timeout, settle=settle)
+                                                timeout=timeout, settle=settle,
+                                                baseline=baseline, target=target)
     except LiveError as exc:
         report["status"] = "FAIL"
         report["failure_reason"] = f"post-write D6 read failed: {exc}"
@@ -1451,6 +1469,22 @@ async def apply_config(
         report["refusal_reason"] = "the operator declined the change; nothing was written"
         return report
 
+    # Record the intent *before* the write: if the transaction is interrupted the
+    # rollback path can still classify the live image as this session's target.
+    session_record = {
+        "format": APPLY_SESSION_FORMAT,
+        "created": time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+        "command": "armorx live apply",
+        "baseline_sha256": report["current"]["sha256"],
+        "target_sha256": report["target"]["sha256"],
+        "changed_offsets": [c["offset"] for c in changes["changes"]],
+        "backup_prefix": Path(backup_prefix).name,
+        "device": {k: v for k, v in (identity or {}).items()
+                   if k in {"model", "firmware", "transport"}},
+        "apply_verified": False,
+    }
+    report["session_record"] = save_session_record(backup_prefix, session_record)
+
     # --- write ------------------------------------------------------------
     report["stage"] = "d7"
     try:
@@ -1469,7 +1503,8 @@ async def apply_config(
     report["stage"] = "verify"
     try:
         readback = await _dual_read_and_compare(transport, expected=target,
-                                                timeout=timeout, settle=settle)
+                                                timeout=timeout, settle=settle,
+                                                baseline=current, target=target)
     except LiveError as exc:
         report["status"] = STATUS_FAIL
         report["failure_reason"] = f"post-write verification failed to read: {exc}"
@@ -1481,6 +1516,9 @@ async def apply_config(
     report["final_sha256"] = (readback["attempts"][-1]["sha256"] if readback["attempts"]
                               else None)
     if readback["matches"] and readback["complete"]:
+        session_record["apply_verified"] = True
+        session_record["verified_sha256"] = report["target"]["sha256"]
+        report["session_record"] = save_session_record(backup_prefix, session_record)
         report["status"] = STATUS_APPLIED
         return report
     state = _state_from_readback(readback, baseline_sha=report["current"]["sha256"],
@@ -1637,7 +1675,8 @@ async def rollback_config(
     report["stage"] = "verify"
     try:
         readback = await _dual_read_and_compare(transport, expected=baseline,
-                                                timeout=timeout, settle=settle)
+                                                timeout=timeout, settle=settle,
+                                                baseline=baseline, target=current)
     except LiveError as exc:
         report["status"] = STATUS_FAIL
         report["failure_reason"] = f"post-rollback verification failed to read: {exc}"

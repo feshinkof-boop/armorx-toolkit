@@ -2,6 +2,7 @@
 
 import argparse
 import asyncio
+import hashlib
 import json
 
 import pytest
@@ -398,6 +399,12 @@ def test_no_retry_after_the_first_d7_fragment(tmp_path):
 
 
 # --- privacy and CLI surface ------------------------------------------------
+def _third_image() -> bytes:
+    values = list(C.fresh())
+    values[91] = 6
+    return _canonical(values)
+
+
 def test_report_contains_no_private_values(tmp_path):
     current = _image()
     target = _remapped(0)
@@ -430,6 +437,71 @@ def test_default_backup_prefix_is_timestamped_and_beside_the_target(tmp_path):
     assert cli.cmd_live_apply(args) == 2
 
 
+# --- report classification wording (Phase 17) -------------------------------
+def test_target_verification_reads_are_labelled_target(tmp_path):
+    target = _remapped(0)
+    _t, result = _run(_script([_image(), _image()], [target, target]), target, tmp_path=tmp_path)
+    assert result["status"] == "APPLIED"
+    attempts = result["verification"]["attempts"]
+    assert [a["state"] for a in attempts] == ["TARGET", "TARGET"]
+    assert all(a["matches_expected"] for a in attempts)
+    assert all(a["expected_sha256"] == hashlib.sha256(target).hexdigest() for a in attempts)
+
+
+def test_an_unrelated_verification_read_is_labelled_unexpected(tmp_path):
+    target = _remapped(0)
+    third = _remapped(3)
+    _t, result = _run(_script([_image(), _image()], [third]), target, tmp_path=tmp_path)
+    assert result["verification"]["attempts"][0]["state"] == "UNEXPECTED"
+    assert result["live_state_after_failure"]["state"] == "UNEXPECTED"
+
+
+def test_a_readback_that_is_still_the_baseline_is_labelled_baseline(tmp_path):
+    target = _remapped(0)
+    _t, result = _run(_script([_image(), _image()], [_image()]), target, tmp_path=tmp_path)
+    assert result["verification"]["attempts"][0]["state"] == "BASELINE"
+    assert result["live_state_after_failure"]["state"] == "BASELINE"
+
+
+def test_dual_read_labels_follow_the_session_images_not_the_expectation():
+    """The helper still demands ``expected``; the label describes what it is."""
+    expected_image = _image()
+    transport = L.MockLiveTransport(notifications=list(_reads(expected_image, expected_image)))
+    readback = asyncio.run(L._dual_read_and_compare(
+        transport, expected=expected_image, timeout=1.0, settle=0.0,
+        baseline=_remapped(0), target=expected_image))
+    assert readback["attempts"][0]["state"] == "TARGET"      # it *is* the target
+    assert readback["attempts"][0]["matches_expected"] is True
+    transport = L.MockLiveTransport(notifications=list(_reads(expected_image, expected_image)))
+    readback = asyncio.run(L._dual_read_and_compare(
+        transport, expected=expected_image, timeout=1.0, settle=0.0))
+    assert readback["attempts"][0]["state"] == "BASELINE"    # fallback: the expectation
+
+
+def _help(argv):
+    import contextlib
+    import io
+    from armorx import cli as cli_mod
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer), pytest.raises(SystemExit):
+        cli_mod.main(argv)
+    return " ".join(buffer.getvalue().split())
+
+
+def test_public_live_help_does_not_claim_writes_are_unavailable():
+    """The group help must describe the commands that actually exist."""
+    text = _help(["--help"])
+    assert "guarded apply/rollback" in text
+    assert "not exposed yet" not in text
+
+
+def test_public_live_group_lists_both_write_commands():
+    text = _help(["live", "--help"])
+    assert "{scan,info,read-config,backup,apply,rollback" in text
+    assert "write a configuration file to the device" in text
+    assert "restore the exact bytes of a saved backup" in text
+
+
 def test_cli_has_no_opcode_or_payload_options():
     parser = cli.build_parser()
     for command in ("apply", "rollback"):
@@ -440,3 +512,80 @@ def test_cli_has_no_opcode_or_payload_options():
     for banned in ("console", "raw", "opcode", "send"):
         with pytest.raises(SystemExit):
             parser.parse_args(["live", banned, "--address", "AA:BB:CC:DD:EE:FF"])
+
+
+# --- Phase 16: apply and rollback must work as a pair ------------------------
+def test_apply_records_its_target_before_the_write(tmp_path):
+    """The record is written first, so an interrupted write is still rollbackable."""
+    target = _remapped(0)
+    prefix = tmp_path / "public-apply-baseline"
+    script = _script([_image(), _image()])
+    transport = _FailMidWrite(fail_on=1, notifications=script)
+    result = asyncio.run(L.apply_config(
+        transport, target, backup_prefix=prefix, confirmer=_accept,
+        settle=0.0, fragment_delay=0.0, ack_window=0.05))
+    assert result["status"] == "FAIL"
+    record = json.loads((tmp_path / "public-apply-baseline.session.json").read_text())
+    assert record["format"] == L.APPLY_SESSION_FORMAT
+    assert record["target_sha256"] == hashlib.sha256(target).hexdigest()
+    assert record["baseline_sha256"] == hashlib.sha256(_image()).hexdigest()
+    assert record["changed_offsets"] == [0, 1, 135]
+    assert record["apply_verified"] is False
+
+
+def test_apply_marks_the_record_verified_after_success(tmp_path):
+    target = _remapped(0)
+    prefix = tmp_path / "public-apply-baseline"
+    _t, result = _run(_script([_image(), _image()], [target, target]), target,
+                      tmp_path=tmp_path, prefix=prefix)
+    assert result["status"] == "APPLIED"
+    record = json.loads((tmp_path / "public-apply-baseline.session.json").read_text())
+    assert record["apply_verified"] is True
+    assert record["verified_sha256"] == hashlib.sha256(target).hexdigest()
+
+
+def test_the_session_record_carries_no_private_values(tmp_path):
+    target = _remapped(0)
+    prefix = tmp_path / "public-apply-baseline"
+    _t, result = _run(_script([_image(), _image()], [target, target]), target,
+                      tmp_path=tmp_path, prefix=prefix,
+                      identity={"model": "ZJ-XT", "firmware": "2741",
+                                "address": "2D:37:35:6D:66:11", "serial": "SECRET"})
+    text = (tmp_path / "public-apply-baseline.session.json").read_text()
+    assert "2D:37:35" not in text and "SECRET" not in text
+    assert "/home/" not in text and str(tmp_path) not in text
+    assert "public-apply-baseline" in text          # base name only
+
+
+def test_rollback_of_an_applied_target_needs_no_override(tmp_path):
+    """The regression this session found: apply then rollback, no extra flag."""
+    target = _remapped(0)
+    prefix = tmp_path / "public-apply-baseline"
+    _t, applied = _run(_script([_image(), _image()], [target, target]), target,
+                       tmp_path=tmp_path, prefix=prefix)
+    assert applied["status"] == "APPLIED"
+    script = _script([target], [_image(), _image()])
+    transport = L.MockLiveTransport(notifications=list(script))
+    rolled = asyncio.run(L.rollback_config(
+        transport, prefix, confirmer=_accept, settle=0.0, fragment_delay=0.0,
+        ack_window=0.05))
+    assert rolled["status"] == "RESTORED"
+    assert rolled["state_classification"] == "known_target"
+    assert rolled["session_record"] == "public-apply-baseline.session.json"
+
+
+def test_rollback_still_refuses_an_unrelated_image_despite_the_record(tmp_path):
+    target = _remapped(0)
+    prefix = tmp_path / "public-apply-baseline"
+    _t, applied = _run(_script([_image(), _image()], [target, target]), target,
+                       tmp_path=tmp_path, prefix=prefix)
+    assert applied["status"] == "APPLIED"
+    unrelated = _remapped(4)
+    script = _script([unrelated])
+    transport = L.MockLiveTransport(notifications=list(script))
+    rolled = asyncio.run(L.rollback_config(
+        transport, prefix, confirmer=_accept, settle=0.0, fragment_delay=0.0,
+        ack_window=0.05))
+    assert rolled["status"] == "REFUSED"
+    assert rolled["state_classification"] == "different"
+    assert [w for w in transport.writes if w["mutating"]] == []

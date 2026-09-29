@@ -908,7 +908,7 @@ def cmd_live_plan(args: argparse.Namespace) -> int:
 def _add_live_commands(groups) -> None:
     live = groups.add_parser(
         "live",
-        help="experimental Linux BLE access; configuration writes are not exposed yet",
+        help="Linux BLE configuration access with guarded apply/rollback",
     )
     sub = live.add_subparsers(dest="live_command", required=True)
 

@@ -5,6 +5,7 @@ transport, which marks the end of a bounded notification window with None.
 """
 
 import asyncio
+import hashlib
 import inspect
 import json
 from pathlib import Path
@@ -366,3 +367,37 @@ def test_artifacts_contain_no_private_values(tmp_path):
                    "/home/", str(tmp_path)):
         assert leaked not in blob
     assert "address" not in result.get("session_record", {})
+
+
+def test_target_verification_attempts_are_labelled_target(tmp_path):
+    """Phase 17 regression: a matching target read must not read as BASELINE."""
+    prefix = _prefix(tmp_path, "sess")
+    baseline = _live()
+    target = L.build_m1_remap_target(baseline)["target"]
+    _t, result = _run(_script([baseline, baseline], [target, target]), prefix=prefix)
+    assert result["status"] == "APPLIED"
+    attempts = result["readback"]["attempts"]
+    assert [a["state"] for a in attempts] == ["TARGET", "TARGET"]
+    assert all(a["matches_expected"] for a in attempts)
+    assert all(a["expected_sha256"] == hashlib.sha256(target).hexdigest() for a in attempts)
+
+
+def test_baseline_restore_reads_are_labelled_baseline(tmp_path):
+    prefix = _prefix(tmp_path, "sess")
+    baseline = _live()
+    target = L.build_m1_remap_target(baseline)["target"]
+    _t, applied = _run(_script([baseline, baseline], [target, target]), prefix=prefix)
+    assert applied["status"] == "APPLIED"
+    _t2, restored = _run(_script([target], [baseline, baseline]), prefix=prefix, stage="restore")
+    assert restored["status"] == "RESTORED"
+    assert [a["state"] for a in restored["readback"]["attempts"]] == ["BASELINE", "BASELINE"]
+
+
+def test_no_readback_attempt_is_ever_labelled_by_expectation_alone(tmp_path):
+    """An unrelated image must be UNEXPECTED, never BASELINE or TARGET."""
+    prefix = _prefix(tmp_path, "sess")
+    baseline = _live()
+    target = L.build_m1_remap_target(baseline)["target"]
+    other = _live(m1=4)
+    _t, result = _run(_script([baseline, baseline], [other]), prefix=prefix)
+    assert result["readback"]["attempts"][0]["state"] == "UNEXPECTED"
