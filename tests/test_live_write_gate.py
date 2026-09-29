@@ -204,23 +204,16 @@ def test_ack_is_recorded_and_absence_is_not_a_rejection(tmp_path):
     assert result2["status"] == "PASS"
 
 
-def test_no_general_write_command_is_exposed():
-    """The gate must not have grown a general apply/write-config command."""
+def test_no_raw_opcode_or_console_command_is_exposed():
+    """Write commands exist, but no raw opcode/payload console may."""
     parser = cli.build_parser()
-    for banned in ("apply", "write-config", "write", "console", "opcode",
-                   "raw", "send"):
+    for banned in ("write-config", "console", "opcode", "raw", "send", "exec"):
         with pytest.raises(SystemExit):
             parser.parse_args(["live", banned, "--address", "AA:BB:CC:DD:EE:FF"])
-    live_commands = sorted(
-        action.choices.keys()
-        for action in parser._subparsers._group_actions[0]._choices_actions and []
-    ) if False else None
-    # the live subcommand set is fixed and known
-    import armorx.cli as cli_mod
     live_parser = parser._subparsers._group_actions[0].choices["live"]
     assert sorted(live_parser._subparsers._group_actions[0].choices) == [
-        "backup", "info", "plan", "read-config", "scan", "validate-reversible-m1",
-        "validate-write-gate"]
+        "apply", "backup", "info", "plan", "read-config", "rollback", "scan",
+        "validate-reversible-m1", "validate-write-gate"]
 
 
 def test_no_local_path_or_user_name_reaches_the_report(tmp_path):

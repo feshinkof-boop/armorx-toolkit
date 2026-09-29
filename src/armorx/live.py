@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Protocol, Any
 
 from . import config as config_mod
+from . import diff as diff_mod
 from . import protocol as protocol_mod
 
 ARMORX_NAME_PREFIX = "ARMOR-X Pro"
@@ -211,15 +212,61 @@ async def scan_ble(*, seconds: float = 8.0) -> list[dict]:
         address = getattr(device, "address", None)
         rssi = getattr(adv, "rssi", None)
         service_uuids = list(getattr(adv, "service_uuids", None) or [])
+        named = name.upper().startswith(ARMORX_NAME_PREFIX.upper())
+        manufacturer = _manufacturer_summary(adv)
+        service_data = _service_data_summary(adv)
+        if named:
+            reason = f"local name starts with {ARMORX_NAME_PREFIX!r}"
+        elif not name:
+            reason = ("no local name in this advertisement, so it cannot be classified as "
+                      "an ARMOR-X; judge from the fields below or re-scan with the adapter "
+                      "that carries the local name")
+        else:
+            reason = f"local name {name!r} does not match {ARMORX_NAME_PREFIX!r}"
         rows.append({
             "name": name,
             "address": address,
             "rssi": rssi,
             "service_uuids": service_uuids,
-            "is_armorx": name.upper().startswith(ARMORX_NAME_PREFIX.upper()),
+            "manufacturer_data": manufacturer,
+            "service_data": service_data,
+            "anonymous": not bool(name),
+            "is_armorx": named,
+            "candidate_reason": reason,
         })
     rows.sort(key=lambda row: (not row["is_armorx"], row["name"], row["address"] or ""))
     return rows
+
+
+def _manufacturer_summary(adv) -> dict[str, str]:
+    """Company id -> payload hex, truncated; empty when the advertisement has none.
+
+    Advertisement payloads are device-level data, not personal data, but they are
+    still only for local use: they must not be published in artifacts.
+    """
+    raw = getattr(adv, "manufacturer_data", None) or {}
+    summary: dict[str, str] = {}
+    try:
+        for company, payload in raw.items():
+            data = bytes(payload)
+            text = data[:32].hex(" ")
+            if len(data) > 32:
+                text += f" ... ({len(data)} bytes)"
+            summary[f"0x{int(company):04X}"] = text
+    except (TypeError, ValueError):
+        return {}
+    return summary
+
+
+def _service_data_summary(adv) -> dict[str, str]:
+    raw = getattr(adv, "service_data", None) or {}
+    summary: dict[str, str] = {}
+    try:
+        for uuid, payload in raw.items():
+            summary[str(uuid)] = bytes(payload)[:32].hex(" ")
+    except (TypeError, ValueError):
+        return {}
+    return summary
 
 
 def _decode_text(raw: bytes) -> str:
@@ -1139,4 +1186,478 @@ async def validate_reversible_m1(
     report["next_required_step"] = (
         "restore the saved original baseline with --stage restore --authorized, then confirm "
         "with --stage check")
+    return report
+
+
+# ---------------------------------------------------------------------------
+# public apply / rollback (productised write path)
+# ---------------------------------------------------------------------------
+#
+# Both commands reuse the proven primitives above: read_config (D6),
+# _write_image_and_persist (D7 + one 0E) and _dual_read_and_compare. Nothing in
+# this section re-implements the protocol.
+
+CONNECT_ATTEMPTS_DEFAULT = 3
+CONNECT_RETRY_DELAY = 1.0
+
+STATUS_APPLIED = "APPLIED"
+STATUS_NO_CHANGE = "NO_CHANGE"
+STATUS_DRY_RUN = "DRY_RUN"
+STATUS_RESTORED = "RESTORED"
+STATUS_REFUSED = "REFUSED"
+STATUS_FAIL = "FAIL"
+STATUS_UNEXPECTED_STATE = "UNEXPECTED_STATE"
+
+
+def _default_confirmer(automation: bool):
+    from . import confirm as confirm_mod
+
+    def confirm(text: str, title: str):
+        return confirm_mod.confirm_change(text, title=title, automation=automation)
+
+    return confirm
+
+
+async def connect_with_retries(transport: AsyncLiveTransport, *,
+                               attempts: int = CONNECT_ATTEMPTS_DEFAULT,
+                               delay: float = CONNECT_RETRY_DELAY,
+                               sleep=asyncio.sleep) -> dict:
+    """Connect with a bounded number of attempts.
+
+    Only ever used before the first mutating frame: a connection lost mid-write
+    must never be answered by re-sending the transaction.
+    """
+    errors: list[str] = []
+    for attempt in range(1, max(1, attempts) + 1):
+        try:
+            await transport.connect()
+        except LiveError as exc:
+            errors.append(str(exc))
+            if attempt < attempts:
+                await sleep(delay)
+            continue
+        return {"ok": True, "attempts": attempt, "errors": errors}
+    return {"ok": False, "attempts": max(1, attempts), "errors": errors}
+
+
+def _state_from_readback(readback: dict, *, baseline_sha: str,
+                         target_sha: str | None) -> dict | None:
+    """Classify the state from a read-back that already happened.
+
+    Re-using the read-back avoids one more BLE round trip purely for diagnosis,
+    and it reflects the image the verification actually saw.
+    """
+    attempts = readback.get("attempts") or []
+    if not attempts:
+        return None
+    last = attempts[-1]
+    sha = last.get("sha256")
+    if not sha:
+        return None
+    if sha == baseline_sha:
+        state = "BASELINE"
+    elif target_sha and sha == target_sha:
+        state = "TARGET"
+    else:
+        state = "UNEXPECTED"
+    return {"reachable": True, "state": state, "sha256": sha,
+            "length": last.get("actual_length"), "crc_matches": last.get("crc_matches"),
+            "source": "the verification read-back itself"}
+
+
+async def _classify_live(transport: AsyncLiveTransport, *, baseline: bytes,
+                         target: bytes | None, timeout: float) -> dict:
+    """Read-only classification of the live image, used after a failed write."""
+    try:
+        image = await read_config(transport, timeout=timeout)
+    except LiveError as exc:
+        return {"reachable": False, "error": str(exc), "state": "UNREADABLE",
+                "sha256": None}
+    summary = image_summary(image)
+    state = classify_image(image, baseline, target)
+    return {"reachable": True, "state": state, "sha256": summary["sha256"],
+            "length": summary["actual_length"], "crc_matches": summary["crc_matches"]}
+
+
+def _confirmation_text(*, identity: dict | None, current_sha: str, target_sha: str,
+                       summary: str, diff: dict, backup_name: str,
+                       allow_unknown_diff: bool) -> str:
+    safe = {k: v for k, v in (identity or {}).items()
+            if k in {"model", "firmware", "transport"}}
+    lines = [
+        "Write this configuration to the controller?",
+        "",
+        f"device model: {safe.get('model', 'unknown')}",
+        f"firmware: {safe.get('firmware', 'unknown')}",
+        f"current SHA-256: {current_sha}",
+        f"target SHA-256:  {target_sha}",
+        f"changed bytes: {diff['total_changed_bytes']}",
+        f"known field changes: {len(diff['known_field_changes'])}",
+        f"undecoded changed bytes: {diff['unknown_byte_count']}"
+        + (" (explicitly allowed)" if allow_unknown_diff else ""),
+        f"backup file: {backup_name}",
+        "",
+        summary,
+        "",
+        "Click APPLY to write and persist, Cancel to abort with no write.",
+    ]
+    return "\n".join(lines)
+
+
+async def apply_config(
+    transport: AsyncLiveTransport,
+    target: bytes,
+    *,
+    backup_prefix: str | Path | None = None,
+    confirmer=None,
+    automation: bool = False,
+    dry_run: bool = False,
+    allow_unknown_diff: bool = False,
+    identity: dict | None = None,
+    timeout: float = 4.0,
+    ack_window: float = 1.5,
+    fragment_delay: float = 0.01,
+    settle: float = 2.0,
+    confirm_title: str = "ARMOR-X configuration change",
+) -> dict:
+    """Apply a validated target configuration and prove it landed.
+
+    The target is loaded offline by the caller; this function only ever writes
+    the image it was given, as ten full-image D7 fragments.
+    """
+    report: dict[str, Any] = {
+        "command": "armorx live apply",
+        "status": STATUS_REFUSED,
+        "stage": "target-validation",
+        "identity": {k: v for k, v in (identity or {}).items()
+                     if k in {"model", "firmware", "battery", "transport"}},
+        "dry_run": bool(dry_run),
+    }
+    target = bytes(target)
+    try:
+        _validate_image(target)
+    except LiveError as exc:
+        report["refusal_reason"] = f"target is not a valid 144-byte configuration: {exc}"
+        return report
+    report["target"] = {"sha256": image_summary(target)["sha256"],
+                        "crc": image_summary(target)["stored_crc_hex"],
+                        "length": len(target),
+                        "declared_length": image_summary(target)["declared_length"]}
+
+    # --- live reads -------------------------------------------------------
+    report["stage"] = "live-read-1"
+    first_details: dict = {}
+    try:
+        current = await read_config(transport, timeout=timeout, report=first_details)
+    except LiveError as exc:
+        report["refusal_reason"] = f"first live D6 read failed: {exc}"
+        return report
+    report["current"] = {"sha256": image_summary(current)["sha256"],
+                         "crc": image_summary(current)["stored_crc_hex"],
+                         "length": image_summary(current)["actual_length"],
+                         "declared_length": image_summary(current)["declared_length"],
+                         "fragment_count": first_details.get("fragment_count")}
+    report["stage"] = "live-read-2"
+    second_details: dict = {}
+    try:
+        current_2 = await read_config(transport, timeout=timeout, report=second_details)
+    except LiveError as exc:
+        report["refusal_reason"] = f"second live D6 read failed: {exc}"
+        return report
+    if bytes(current) != bytes(current_2):
+        report["refusal_reason"] = ("two consecutive live reads differ; the device is "
+                                    "changing underneath us, so nothing is written")
+        report["live_read_differences"] = _offset_differences(current, current_2)
+        return report
+    report["live_reads_identical"] = True
+
+    # --- target vs current ------------------------------------------------
+    report["stage"] = "compare"
+    if bytes(current) == target:
+        report["status"] = STATUS_NO_CHANGE
+        report["note"] = ("the device already holds this exact configuration; no D7 and "
+                          "no 0E were sent")
+        return report
+
+    # --- automatic backup, then prove it is on disk -----------------------
+    if backup_prefix is None:
+        report["refusal_reason"] = "no backup prefix was given; refusing to write"
+        return report
+    report["stage"] = "backup"
+    try:
+        backup = save_baseline(backup_prefix, current,
+                               fragments=first_details.get("fragments"), identity=identity)
+    except OSError as exc:
+        report["refusal_reason"] = f"backup could not be written: {exc}"
+        return report
+    report["backup"] = backup
+    report["stage"] = "backup-reopen"
+    try:
+        reopened = Path(backup_prefix).with_suffix(".bin").read_bytes()
+    except OSError as exc:
+        report["refusal_reason"] = f"backup could not be reopened: {exc}"
+        return report
+    reopen_sha = hashlib.sha256(reopened).hexdigest()
+    report["backup_reopened_sha256"] = reopen_sha
+    if reopen_sha != report["current"]["sha256"]:
+        report["refusal_reason"] = ("the reopened backup does not match the live image; "
+                                    "refusing to write")
+        return report
+    report["backup_verified"] = True
+
+    # --- diff and safety classification -----------------------------------
+    report["stage"] = "diff"
+    changes = diff_mod.diff_images(current, target)
+    report["diff"] = changes
+    report["diff_summary"] = diff_mod.summarise(changes)
+    report["unknown_byte_count"] = changes["unknown_byte_count"]
+    report["allow_unknown_diff"] = bool(allow_unknown_diff)
+    if changes["has_unknown_changes"] and not allow_unknown_diff:
+        report["refusal_reason"] = (
+            f"{changes['unknown_byte_count']} changed byte(s) are not decoded by any "
+            "recovered field; re-run with --allow-unknown-diff to write them anyway")
+        report["unknown_offsets"] = [c["offset"] for c in changes["unknown_byte_changes"]]
+        return report
+
+    report["rollback_available"] = True
+
+    # --- confirmation -----------------------------------------------------
+    report["stage"] = "confirmation"
+    text = _confirmation_text(identity=identity, current_sha=report["current"]["sha256"],
+                              target_sha=report["target"]["sha256"],
+                              summary=report["diff_summary"], diff=changes,
+                              backup_name=backup["bin"], allow_unknown_diff=allow_unknown_diff)
+    if dry_run:
+        report["status"] = STATUS_DRY_RUN
+        report["confirmation_text"] = text
+        report["note"] = "dry run: nothing was written, allow_mutating was never enabled"
+        report["mutating_frames_sent"] = 0
+        return report
+    confirmer = confirmer or _default_confirmer(automation)
+    try:
+        confirmation = confirmer(text, confirm_title)
+    except Exception as exc:  # a broken dialog must not write
+        report["refusal_reason"] = f"confirmation backend failed: {exc}"
+        return report
+    outcome = getattr(confirmation, "accepted", None)
+    method = getattr(confirmation, "method", "unknown")
+    report["confirmation"] = {"method": method, "accepted": outcome,
+                              "detail": getattr(confirmation, "detail", "")}
+    if outcome is None:
+        report["refusal_reason"] = ("no confirmation backend was available; nothing was "
+                                    "written")
+        return report
+    if not outcome:
+        report["refusal_reason"] = "the operator declined the change; nothing was written"
+        return report
+
+    # --- write ------------------------------------------------------------
+    report["stage"] = "d7"
+    try:
+        report["write"] = await _write_image_and_persist(
+            transport, target, fragment_delay=fragment_delay, ack_window=ack_window)
+    except LiveError as exc:
+        report["status"] = STATUS_FAIL
+        report["failure_reason"] = f"the write failed: {exc}"
+        report["live_state_after_failure"] = await _classify_live(
+            transport, baseline=current, target=target, timeout=timeout)
+        report["guidance"] = ("do not write again automatically; classify the state and "
+                              "decide with the operator")
+        return report
+
+    # --- verification -----------------------------------------------------
+    report["stage"] = "verify"
+    try:
+        readback = await _dual_read_and_compare(transport, expected=target,
+                                                timeout=timeout, settle=settle)
+    except LiveError as exc:
+        report["status"] = STATUS_FAIL
+        report["failure_reason"] = f"post-write verification failed to read: {exc}"
+        report["live_state_after_failure"] = await _classify_live(
+            transport, baseline=current, target=target, timeout=timeout)
+        return report
+    report["verification"] = readback
+    report["byte_for_byte_match"] = readback["matches"]
+    report["final_sha256"] = (readback["attempts"][-1]["sha256"] if readback["attempts"]
+                              else None)
+    if readback["matches"] and readback["complete"]:
+        report["status"] = STATUS_APPLIED
+        return report
+    state = _state_from_readback(readback, baseline_sha=report["current"]["sha256"],
+                                target_sha=report["target"]["sha256"])
+    if state is None:
+        state = await _classify_live(transport, baseline=current, target=target,
+                                     timeout=timeout)
+    report["live_state_after_failure"] = state
+    report["status"] = (STATUS_UNEXPECTED_STATE if state.get("state") == "UNEXPECTED"
+                        else STATUS_FAIL)
+    report["failure_reason"] = ("the configuration read back does not match the target; "
+                                "nothing further was written")
+    return report
+
+
+def _verify_backup_trio(backup_prefix: str | Path) -> dict:
+    """Load a saved backup and prove the three files agree with each other."""
+    base = Path(backup_prefix)
+    json_path = base.with_suffix(".json")
+    bin_path = base.with_suffix(".bin")
+    sha_path = base.with_suffix(".sha256")
+    for path in (json_path, bin_path, sha_path):
+        if not path.exists():
+            raise LiveError(f"backup file {path.name} is missing")
+    image = bin_path.read_bytes()
+    _validate_image(image)
+    bin_sha = hashlib.sha256(image).hexdigest()
+    sha_file = sha_path.read_text(encoding="utf-8").strip().split()[0]
+    if sha_file != bin_sha:
+        raise LiveError("the .sha256 file does not match the .bin backup")
+    document = json.loads(json_path.read_text(encoding="utf-8"))
+    json_sha = (document.get("summary") or {}).get("sha256")
+    if json_sha and json_sha != bin_sha:
+        raise LiveError("the .json backup does not match the .bin backup")
+    return {"image": image, "sha256": bin_sha, "document": document,
+            "files": {"json": json_path.name, "bin": bin_path.name,
+                      "sha256": sha_path.name}}
+
+
+async def rollback_config(
+    transport: AsyncLiveTransport,
+    backup_prefix: str | Path,
+    *,
+    confirmer=None,
+    automation: bool = False,
+    allow_unrelated_state: bool = False,
+    dry_run: bool = False,
+    identity: dict | None = None,
+    timeout: float = 4.0,
+    ack_window: float = 1.5,
+    fragment_delay: float = 0.01,
+    settle: float = 2.0,
+    confirm_title: str = "ARMOR-X rollback",
+) -> dict:
+    """Write back the exact bytes of a saved backup.
+
+    The backup is authoritative: the image is never rebuilt from a decoded
+    document, only the saved ``.bin`` is used, and all three backup files must
+    agree before anything is written.
+    """
+    report: dict[str, Any] = {
+        "command": "armorx live rollback",
+        "status": STATUS_REFUSED,
+        "stage": "backup-verification",
+        "identity": {k: v for k, v in (identity or {}).items()
+                     if k in {"model", "firmware", "battery", "transport"}},
+        "dry_run": bool(dry_run),
+    }
+    try:
+        backup = _verify_backup_trio(backup_prefix)
+    except (LiveError, OSError, ValueError, json.JSONDecodeError) as exc:
+        report["refusal_reason"] = f"backup is not usable: {exc}"
+        return report
+    baseline = backup["image"]
+    report["backup"] = {"files": backup["files"], "sha256": backup["sha256"],
+                        "length": len(baseline),
+                        "crc": image_summary(baseline)["stored_crc_hex"]}
+
+    report["stage"] = "live-read"
+    try:
+        current = await read_config(transport, timeout=timeout)
+    except LiveError as exc:
+        report["refusal_reason"] = f"live D6 read failed: {exc}"
+        return report
+    current_sha = image_summary(current)["sha256"]
+    report["current"] = {"sha256": current_sha, "crc": image_summary(current)["stored_crc_hex"]}
+
+    if bytes(current) == bytes(baseline):
+        report["status"] = STATUS_NO_CHANGE
+        report["note"] = "the device already holds the backup configuration"
+        return report
+
+    record = None
+    record_path = Path(backup_prefix).with_suffix(".session.json")
+    if record_path.exists():
+        try:
+            record = json.loads(record_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            record = None
+    known_target = bool(record and record.get("target_sha256") == current_sha)
+    report["state_classification"] = ("known_target" if known_target
+                                      else "already_backup" if bytes(current) == bytes(baseline)
+                                      else "different")
+    report["session_record"] = record_path.name if record else None
+    if not known_target and not allow_unrelated_state:
+        report["refusal_reason"] = (
+            "the live configuration is not the target this backup was written before; "
+            "re-run with --allow-unrelated-state to overwrite it anyway")
+        return report
+
+    report["stage"] = "confirmation"
+    text = "\n".join([
+        "Restore this saved configuration to the controller?",
+        "",
+        f"backup SHA-256: {backup['sha256']}",
+        f"current SHA-256: {current_sha}",
+        f"backup file: {backup['files']['bin']}",
+        "",
+        "Click APPLY to write and persist, Cancel to abort with no write.",
+    ])
+    if dry_run:
+        report["status"] = STATUS_DRY_RUN
+        report["confirmation_text"] = text
+        report["mutating_frames_sent"] = 0
+        return report
+    confirmer = confirmer or _default_confirmer(automation)
+    try:
+        confirmation = confirmer(text, confirm_title)
+    except Exception as exc:
+        report["refusal_reason"] = f"confirmation backend failed: {exc}"
+        return report
+    outcome = getattr(confirmation, "accepted", None)
+    report["confirmation"] = {"method": getattr(confirmation, "method", "unknown"),
+                              "accepted": outcome,
+                              "detail": getattr(confirmation, "detail", "")}
+    if outcome is None:
+        report["refusal_reason"] = "no confirmation backend was available; nothing was written"
+        return report
+    if not outcome:
+        report["refusal_reason"] = "the operator declined the rollback; nothing was written"
+        return report
+
+    report["stage"] = "d7"
+    try:
+        report["write"] = await _write_image_and_persist(
+            transport, baseline, fragment_delay=fragment_delay, ack_window=ack_window)
+    except LiveError as exc:
+        report["status"] = STATUS_FAIL
+        report["failure_reason"] = f"the rollback write failed: {exc}"
+        report["live_state_after_failure"] = await _classify_live(
+            transport, baseline=baseline, target=None, timeout=timeout)
+        return report
+
+    report["stage"] = "verify"
+    try:
+        readback = await _dual_read_and_compare(transport, expected=baseline,
+                                                timeout=timeout, settle=settle)
+    except LiveError as exc:
+        report["status"] = STATUS_FAIL
+        report["failure_reason"] = f"post-rollback verification failed to read: {exc}"
+        report["live_state_after_failure"] = await _classify_live(
+            transport, baseline=baseline, target=None, timeout=timeout)
+        return report
+    report["verification"] = readback
+    report["byte_for_byte_match"] = readback["matches"]
+    report["final_sha256"] = (readback["attempts"][-1]["sha256"] if readback["attempts"]
+                              else None)
+    if readback["matches"] and readback["complete"]:
+        report["status"] = STATUS_RESTORED
+        report["restored_sha256"] = backup["sha256"]
+        return report
+    state = _state_from_readback(readback, baseline_sha=backup["sha256"], target_sha=None)
+    if state is None:
+        state = await _classify_live(transport, baseline=baseline, target=None,
+                                     timeout=timeout)
+    report["live_state_after_failure"] = state
+    report["status"] = (STATUS_UNEXPECTED_STATE if state.get("state") == "UNEXPECTED"
+                        else STATUS_FAIL)
+    report["failure_reason"] = "the configuration read back does not match the backup"
     return report

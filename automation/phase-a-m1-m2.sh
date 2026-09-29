@@ -2,7 +2,7 @@
 # phase-a-m1-m2.sh -- three sequential single-action popups, each with its own
 # passive usbmon capture and its own read-only evdev log. One button per popup.
 set -uo pipefail
-cd /home/salamanka/armorx-lab
+cd "$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 D=results/hardware-validation/hw-interactive-20260929-0354
 EVNODE=/dev/input/event18
 

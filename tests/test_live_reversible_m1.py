@@ -327,9 +327,9 @@ def test_a_mismatched_target_write_fails_and_never_rewrites(tmp_path):
 
 
 # --- requirement 20: no general apply command, no target input --------------
-def test_no_general_apply_command_and_no_target_input():
+def test_no_raw_opcode_command_and_no_target_input_for_the_reversible_test():
     parser = cli.build_parser()
-    for banned in ("apply", "write-config", "write", "console", "raw", "opcode"):
+    for banned in ("write-config", "console", "raw", "opcode", "send"):
         with pytest.raises(SystemExit):
             parser.parse_args(["live", banned, "--address", "AA:BB:CC:DD:EE:FF"])
     with pytest.raises(SystemExit):

@@ -7,6 +7,7 @@ import argparse
 import asyncio
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Sequence
 
@@ -804,6 +805,94 @@ def cmd_live_validate_reversible_m1(args: argparse.Namespace) -> int:
             "FAIL": 1}.get(result.get("status"), 2)
 
 
+async def _live_apply(args: argparse.Namespace) -> dict:
+    target = live_mod.load_image(args.target)          # validated offline, before any BLE
+    transport = live_mod.BleakLiveTransport(address=args.address,
+                                            connect_timeout=args.connect_timeout)
+    connection = await live_mod.connect_with_retries(transport, attempts=args.connect_attempts)
+    if not connection["ok"]:
+        return {"command": "armorx live apply", "status": "REFUSED",
+                "refusal_reason": "could not connect to the device",
+                "connect_attempts": connection["attempts"],
+                "never_wrote": True}
+    try:
+        identity = await live_mod.read_identity(transport)
+        result = await live_mod.apply_config(
+            transport, target,
+            backup_prefix=args.backup_prefix,
+            automation=bool(args.yes and args.acknowledge_backup),
+            dry_run=args.dry_run,
+            allow_unknown_diff=args.allow_unknown_diff,
+            identity=identity,
+            timeout=args.reply_timeout,
+            ack_window=args.ack_window,
+            settle=args.settle,
+        )
+    finally:
+        await transport.close()
+    result["connect_attempts"] = connection["attempts"]
+    return result
+
+
+def default_backup_prefix(target: str) -> str:
+    """Automatic pre-write backup prefix: beside the target, timestamped."""
+    return f"{str(Path(target).with_suffix(''))}-backup-{time.strftime('%Y%m%d-%H%M%S')}"
+
+
+def cmd_live_apply(args: argparse.Namespace) -> int:
+    if args.yes and not args.acknowledge_backup:
+        print("error: --yes also requires --acknowledge-backup: automation needs both "
+              "explicit switches", file=sys.stderr)
+        return 2
+    if not args.backup_prefix:
+        args.backup_prefix = default_backup_prefix(args.target)
+    result = _run_live(_live_apply(args))
+    if result is None:
+        return 2
+    _write_json(args.output, result, compact=args.compact)
+    return {"APPLIED": 0, "NO_CHANGE": 0, "DRY_RUN": 0, "RESTORED": 0,
+            "FAIL": 1, "UNEXPECTED_STATE": 1}.get(result.get("status"), 2)
+
+
+async def _live_rollback(args: argparse.Namespace) -> dict:
+    transport = live_mod.BleakLiveTransport(address=args.address,
+                                            connect_timeout=args.connect_timeout)
+    connection = await live_mod.connect_with_retries(transport, attempts=args.connect_attempts)
+    if not connection["ok"]:
+        return {"command": "armorx live rollback", "status": "REFUSED",
+                "refusal_reason": "could not connect to the device",
+                "connect_attempts": connection["attempts"], "never_wrote": True}
+    try:
+        identity = await live_mod.read_identity(transport)
+        result = await live_mod.rollback_config(
+            transport, args.backup_prefix,
+            automation=bool(args.yes and args.acknowledge_backup),
+            allow_unrelated_state=args.allow_unrelated_state,
+            dry_run=args.dry_run,
+            identity=identity,
+            timeout=args.reply_timeout,
+            ack_window=args.ack_window,
+            settle=args.settle,
+        )
+    finally:
+        await transport.close()
+    result["connect_attempts"] = connection["attempts"]
+    return result
+
+
+def cmd_live_rollback(args: argparse.Namespace) -> int:
+    if args.yes and not args.acknowledge_backup:
+        print("error: --yes also requires --acknowledge-backup: automation needs both "
+              "explicit switches", file=sys.stderr)
+        return 2
+    result = _run_live(_live_rollback(args))
+    if result is None:
+        return 2
+    _write_json(args.output, result, compact=args.compact)
+    return {"APPLIED": 0, "NO_CHANGE": 0, "DRY_RUN": 0, "RESTORED": 0,
+            "FAIL": 1, "UNEXPECTED_STATE": 1}.get(result.get("status"), 2)
+
+
 def cmd_live_plan(args: argparse.Namespace) -> int:
     try:
         baseline = live_mod.load_image(args.baseline)
@@ -850,6 +939,45 @@ def _add_live_commands(groups) -> None:
     p.add_argument("--reply-timeout", type=float, default=4.0)
     p.add_argument("-o", "--output", required=True)
     p.set_defaults(func=cmd_live_backup)
+
+    p = sub.add_parser("apply", help="write a configuration file to the device "
+                                     "(automatic backup, diff, confirmation, D7, 0E, D6 x2)")
+    p.add_argument("target", help=".json configuration or 144-byte .bin to write")
+    p.add_argument("--address", required=True)
+    p.add_argument("--backup-prefix", help="prefix for the automatic pre-write backup "
+                                          "(default: <target>-backup-<timestamp>)")
+    p.add_argument("--dry-run", action="store_true", help="plan and back up, write nothing")
+    p.add_argument("--allow-unknown-diff", action="store_true",
+                   help="write even when undecoded bytes would change (refused by default)")
+    p.add_argument("--yes", action="store_true",
+                   help="automation: requires --acknowledge-backup, skips the dialog")
+    p.add_argument("--acknowledge-backup", action="store_true",
+                   help="automation: confirms you know the pre-write backup is written")
+    p.add_argument("--connect-attempts", type=int, default=3)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--ack-window", type=float, default=1.5)
+    p.add_argument("--settle", type=float, default=2.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_apply)
+
+    p = sub.add_parser("rollback", help="restore the exact bytes of a saved backup")
+    p.add_argument("backup_prefix", help="the backup prefix used by apply/backup")
+    p.add_argument("--address", required=True)
+    p.add_argument("--allow-unrelated-state", action="store_true",
+                   help="overwrite a configuration this backup was not written before")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--yes", action="store_true")
+    p.add_argument("--acknowledge-backup", action="store_true")
+    p.add_argument("--connect-attempts", type=int, default=3)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--ack-window", type=float, default=1.5)
+    p.add_argument("--settle", type=float, default=2.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_rollback)
 
     p = sub.add_parser(
         "validate-write-gate",
