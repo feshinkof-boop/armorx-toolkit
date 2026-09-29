@@ -1,6 +1,6 @@
 {
  "session": "v0.3.0-hardware-validation-2026-09-29",
- "capture_dir": "/home/salamanka/armorx-lab/results/hardware-validation/hw-validation-20260929-030643",
+ "capture_dir": "results/hardware-validation/<timestamp>/ (local, not committed)",
  "device_initial": {
   "vid_pid": "045e:0b12",
   "manufacturer": "Microsoft",
@@ -147,5 +147,6 @@
  "version_bumped_to": "0.3.0",
  "merged": false,
  "tagged": false,
- "released": false
+ "released": false,
+ "serial_note": "the sysfs serial is deliberately not recorded in this artifact"
 }
