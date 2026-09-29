@@ -80,3 +80,12 @@ def test_unknown_gui_field_is_refused():
     session = GuiConfigSession.from_image(baseline())
     with pytest.raises(ValueError, match="milestone-1 GUI field"):
         session.set_byte_field("reserved_after_turbo", 1)
+
+
+def test_accept_working_as_baseline_clears_diff():
+    session = GuiConfigSession.from_image(baseline())
+    session.set_map("M1", "A")
+    assert session.changed
+    session.accept_working_as_baseline()
+    assert session.changed is False
+    assert session.diff()["identical"] is True

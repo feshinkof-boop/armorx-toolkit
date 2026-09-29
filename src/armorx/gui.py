@@ -1,67 +1,41 @@
-"""PySide6 desktop shell for ArmorX Toolkit.
+"""PySide6 desktop configurator for ArmorX Toolkit v0.5 development.
 
-Milestone 1 is deliberately conservative: it scans BLE, reads the live
-configuration, opens existing configs, edits already-decoded fields, previews
-the exact diff, and exports a validated target.  Live Apply/Rollback remain in
-the proven CLI for this first GUI milestone; the desktop write transaction will
-be wired only after the GUI confirmation/backup workflow is covered by tests.
+The desktop reuses the released v0.4 live backend. It never implements the wire
+protocol itself: live reads, guarded apply and rollback delegate to
+armorx.live through armorx.gui_workflow.
 """
 from __future__ import annotations
 
 import argparse
 import asyncio
 import sys
+import threading
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable
 
 from . import __version__
 from . import config as config_mod
-from . import live as live_mod
+from . import confirm as confirm_mod
+from . import gui_workflow as workflow
 from .gui_model import GuiConfigSession, QUICK_FIELDS, REAR_BUTTONS
 
-try:  # optional dependency: importing armorx itself must not require Qt
-    from PySide6.QtCore import QObject, QRunnable, QThreadPool, Signal, Slot, Qt
+try:
+    from PySide6.QtCore import QObject, QRunnable, QThreadPool, Signal, Slot
     from PySide6.QtWidgets import (
-        QApplication,
-        QComboBox,
-        QFileDialog,
-        QFormLayout,
-        QGridLayout,
-        QGroupBox,
-        QHBoxLayout,
-        QHeaderView,
-        QLabel,
-        QLineEdit,
-        QMainWindow,
-        QMessageBox,
-        QPushButton,
-        QSpinBox,
-        QStatusBar,
-        QTabWidget,
-        QTableWidget,
-        QTableWidgetItem,
-        QTextEdit,
-        QVBoxLayout,
-        QWidget,
+        QApplication, QComboBox, QFileDialog, QFormLayout, QGridLayout,
+        QGroupBox, QHBoxLayout, QHeaderView, QInputDialog, QLabel, QLineEdit,
+        QListWidget, QMainWindow, QMessageBox, QProgressBar, QPushButton,
+        QSpinBox, QStatusBar, QTabWidget, QTableWidget, QTableWidgetItem,
+        QTextEdit, QVBoxLayout, QWidget,
     )
     QT_AVAILABLE = True
-except ImportError:  # pragma: no cover - exercised by console smoke manually
+except ImportError:
     QT_AVAILABLE = False
 
 
-async def _read_live(address: str) -> dict[str, Any]:
-    transport = live_mod.BleakLiveTransport(address=address)
-    await transport.connect()
-    try:
-        identity = await live_mod.read_identity(transport)
-        details: dict[str, Any] = {}
-        image = await live_mod.read_config(transport, report=details)
-        return {"identity": identity, "image": image, "details": details}
-    finally:
-        await transport.close()
-
-
 async def _scan_live(seconds: float = 8.0) -> list[dict[str, Any]]:
+    from . import live as live_mod
     return await live_mod.scan_ble(seconds=seconds)
 
 
@@ -90,26 +64,78 @@ if QT_AVAILABLE:
                 self.signals.finished.emit()
 
 
+    @dataclass
+    class _ConfirmationTicket:
+        message: str
+        title: str
+        event: threading.Event
+        result: confirm_mod.ConfirmationResult | None = None
+
+
+    class QtConfirmationBridge(QObject):
+        requested = Signal(object)
+
+        def __init__(self, parent=None):
+            super().__init__(parent)
+            self.requested.connect(self._show)
+
+        def __call__(self, message: str, title: str):
+            ticket = _ConfirmationTicket(message, title, threading.Event())
+            self.requested.emit(ticket)
+            if not ticket.event.wait(900):
+                return confirm_mod.ConfirmationResult(
+                    None, "qt-dialog", "confirmation timed out"
+                )
+            return ticket.result or confirm_mod.ConfirmationResult(
+                None, "qt-dialog", "dialog returned no result"
+            )
+
+        @Slot(object)
+        def _show(self, ticket: _ConfirmationTicket) -> None:
+            try:
+                box = QMessageBox()
+                box.setWindowTitle(ticket.title)
+                box.setIcon(QMessageBox.Icon.Warning)
+                box.setText("Review this controller configuration change.")
+                box.setInformativeText(ticket.message)
+                apply_button = box.addButton("APPLY", QMessageBox.ButtonRole.AcceptRole)
+                box.addButton("Cancel", QMessageBox.ButtonRole.RejectRole)
+                box.exec()
+                accepted = box.clickedButton() is apply_button
+                ticket.result = confirm_mod.ConfirmationResult(
+                    accepted, "qt-dialog",
+                    "Qt dialog accepted" if accepted else "Qt dialog declined",
+                )
+            finally:
+                ticket.event.set()
+
+
     class ArmorXWindow(QMainWindow):
         def __init__(self) -> None:
             super().__init__()
             self.setWindowTitle(f"ArmorX Toolkit {__version__} — Linux")
-            self.resize(1050, 720)
+            self.resize(1120, 760)
             self.pool = QThreadPool.globalInstance()
             self.session: GuiConfigSession | None = None
             self.identity: dict[str, Any] = {}
             self._updating = False
+            self._busy = False
+            self.confirm_bridge = QtConfirmationBridge(self)
+            self.profile_store = workflow.ProfileStore()
+            self.last_backup_prefix: Path | None = None
+            self.pending_backup_prefix: Path | None = None
             self._build_ui()
             self._set_loaded(False)
+            self.refresh_profiles()
 
         def _build_ui(self) -> None:
             root = QWidget()
             outer = QVBoxLayout(root)
-
             device_box = QGroupBox("Device")
             device = QGridLayout(device_box)
             self.address = QLineEdit()
             self.address.setPlaceholderText("BLE address")
+            self.address.textChanged.connect(lambda: self._refresh_action_state())
             self.scan_button = QPushButton("Scan")
             self.read_button = QPushButton("Read live config")
             self.open_button = QPushButton("Open config…")
@@ -134,7 +160,6 @@ if QT_AVAILABLE:
 
             self.tabs = QTabWidget()
             outer.addWidget(self.tabs, 1)
-
             self.summary = QTextEdit()
             self.summary.setReadOnly(True)
             self.tabs.addTab(self.summary, "Summary")
@@ -142,9 +167,8 @@ if QT_AVAILABLE:
             rear_page = QWidget()
             rear_layout = QFormLayout(rear_page)
             self.map_boxes: dict[str, QComboBox] = {}
-            canonical = [
-                (code, name) for code, name in sorted(config_mod.CANONICAL_KEY_NAMES.items())
-            ]
+            canonical = [(code, name) for code, name in
+                         sorted(config_mod.CANONICAL_KEY_NAMES.items())]
             for source in REAR_BUTTONS:
                 combo = QComboBox()
                 for code, name in canonical:
@@ -178,20 +202,36 @@ if QT_AVAILABLE:
             )
             self.tabs.addTab(self.diff_table, "Changes")
 
+            profiles = QWidget()
+            profile_layout = QVBoxLayout(profiles)
+            self.profile_list = QListWidget()
+            row = QHBoxLayout()
+            self.profile_save = QPushButton("Save current as profile…")
+            self.profile_load = QPushButton("Load")
+            self.profile_delete = QPushButton("Delete")
+            row.addWidget(self.profile_save)
+            row.addWidget(self.profile_load)
+            row.addWidget(self.profile_delete)
+            profile_layout.addWidget(self.profile_list)
+            profile_layout.addLayout(row)
+            self.tabs.addTab(profiles, "Profiles")
+
             actions = QHBoxLayout()
             self.reset_button = QPushButton("Reset changes")
             self.export_button = QPushButton("Export target…")
+            self.rollback_button = QPushButton("Rollback last backup")
             self.apply_button = QPushButton("Apply & Verify")
-            self.apply_button.setEnabled(False)
-            self.apply_button.setToolTip(
-                "Milestone 1 keeps live writes in the proven CLI; GUI Apply lands next."
-            )
             actions.addWidget(self.reset_button)
             actions.addStretch(1)
             actions.addWidget(self.export_button)
+            actions.addWidget(self.rollback_button)
             actions.addWidget(self.apply_button)
             outer.addLayout(actions)
 
+            self.progress = QProgressBar()
+            self.progress.setRange(0, 0)
+            self.progress.hide()
+            outer.addWidget(self.progress)
             self.setCentralWidget(root)
             self.setStatusBar(QStatusBar())
 
@@ -201,18 +241,36 @@ if QT_AVAILABLE:
             self.scan_table.cellDoubleClicked.connect(self.select_scan_row)
             self.reset_button.clicked.connect(self.reset_changes)
             self.export_button.clicked.connect(self.export_target)
+            self.apply_button.clicked.connect(self.apply_and_verify)
+            self.rollback_button.clicked.connect(self.rollback_last_backup)
+            self.profile_save.clicked.connect(self.save_profile)
+            self.profile_load.clicked.connect(self.load_profile)
+            self.profile_delete.clicked.connect(self.delete_profile)
+            self.profile_list.itemDoubleClicked.connect(lambda _item: self.load_profile())
 
         def _set_busy(self, busy: bool, text: str = "") -> None:
+            self._busy = busy
             self.scan_button.setEnabled(not busy)
             self.read_button.setEnabled(not busy)
             self.open_button.setEnabled(not busy)
+            self.progress.setVisible(busy)
             if text:
                 self.statusBar().showMessage(text)
+            self._refresh_action_state()
 
         def _set_loaded(self, loaded: bool) -> None:
             self.tabs.setEnabled(loaded)
             self.reset_button.setEnabled(loaded)
             self.export_button.setEnabled(loaded)
+            self._refresh_action_state()
+
+        def _refresh_action_state(self) -> None:
+            has_session = self.session is not None
+            has_address = bool(self.address.text().strip())
+            self.apply_button.setEnabled(has_session and has_address and not self._busy)
+            self.rollback_button.setEnabled(
+                self.last_backup_prefix is not None and has_address and not self._busy
+            )
 
         def _task(self, factory, on_result, message: str) -> None:
             self._set_busy(True, message)
@@ -262,7 +320,7 @@ if QT_AVAILABLE:
             if not address:
                 QMessageBox.warning(self, "ArmorX", "Choose or enter a BLE address first.")
                 return
-            self._task(lambda: _read_live(address), self._read_result,
+            self._task(lambda: workflow.read_live_config(address), self._read_result,
                        "Reading live ARMOR-X configuration…")
 
         @Slot(object)
@@ -311,6 +369,7 @@ if QT_AVAILABLE:
                 self._updating = False
             self._refresh_summary()
             self._refresh_diff()
+            self._refresh_action_state()
 
         def _refresh_summary(self) -> None:
             if self.session is None:
@@ -324,10 +383,12 @@ if QT_AVAILABLE:
                 "",
                 f"Length: {v['actual_length']} (declared {v['declared_length']})",
                 f"CRC: {v['stored_crc_hex']} (valid: {v['crc_matches']})",
-                f"Changed from baseline: {self.session.changed}",
+                f"Changed from loaded baseline: {self.session.changed}",
                 "",
                 self.session.diff_summary(),
             ]
+            if self.last_backup_prefix is not None:
+                lines.extend(["", f"Last rollback backup: {self.last_backup_prefix.name}"])
             self.summary.setPlainText("\n".join(lines))
             self.device_state.setText(
                 "Configuration loaded" + (" — modified" if self.session.changed else "")
@@ -340,11 +401,9 @@ if QT_AVAILABLE:
             self.diff_table.setRowCount(len(changes))
             for row, change in enumerate(changes):
                 values = [
-                    str(change["offset"]),
-                    change.get("classification") or "",
+                    str(change["offset"]), change.get("classification") or "",
                     change.get("field") or change.get("region") or "",
-                    str(change["before"]),
-                    str(change["after"]),
+                    str(change["before"]), str(change["after"]),
                 ]
                 for col, value in enumerate(values):
                     self.diff_table.setItem(row, col, QTableWidgetItem(value))
@@ -352,8 +411,7 @@ if QT_AVAILABLE:
         def _map_changed(self, source: str) -> None:
             if self._updating or self.session is None:
                 return
-            combo = self.map_boxes[source]
-            self.session.set_map(source, int(combo.currentData()))
+            self.session.set_map(source, int(self.map_boxes[source].currentData()))
             self._refresh_summary()
             self._refresh_diff()
 
@@ -394,14 +452,166 @@ if QT_AVAILABLE:
                 return
             self.statusBar().showMessage(f"Exported {Path(path).name}")
 
+        @Slot()
+        def apply_and_verify(self) -> None:
+            if self.session is None:
+                return
+            address = self.address.text().strip()
+            if not address:
+                QMessageBox.warning(self, "ArmorX", "Choose or enter a BLE address first.")
+                return
+            prefix = workflow.default_backup_prefix()
+            self.pending_backup_prefix = prefix
+            target = bytes(self.session.working)
+            self._task(
+                lambda: workflow.apply_target(
+                    address, target, backup_prefix=prefix,
+                    confirmer=self.confirm_bridge,
+                ),
+                self._apply_result,
+                "Applying configuration and verifying two read-backs…",
+            )
+
+        @Slot(object)
+        def _apply_result(self, report: dict[str, Any]) -> None:
+            status = report.get("status")
+            if status in {"APPLIED", "NO_CHANGE"}:
+                if status == "APPLIED" and self.pending_backup_prefix is not None:
+                    self.last_backup_prefix = self.pending_backup_prefix
+                if self.session is not None:
+                    self.session.accept_working_as_baseline()
+                    self._refresh_controls()
+                QMessageBox.information(
+                    self, "ArmorX",
+                    f"Apply result: {status}\n\nFinal SHA-256: "
+                    f"{report.get('final_sha256') or report.get('target', {}).get('sha256', 'n/a')}"
+                )
+            else:
+                reason = report.get("failure_reason") or report.get("refusal_reason") or (
+                    "The write did not complete successfully."
+                )
+                QMessageBox.warning(
+                    self, "ArmorX — Apply not completed",
+                    f"Status: {status}\n\n{reason}\n\nNo automatic retry was performed."
+                )
+            self.pending_backup_prefix = None
+            self._refresh_summary()
+            self._refresh_action_state()
+
+        @Slot()
+        def rollback_last_backup(self) -> None:
+            if self.last_backup_prefix is None:
+                return
+            address = self.address.text().strip()
+            if not address:
+                QMessageBox.warning(self, "ArmorX", "Choose or enter a BLE address first.")
+                return
+            prefix = self.last_backup_prefix
+            self._task(
+                lambda: workflow.rollback_backup(
+                    address, prefix, confirmer=self.confirm_bridge
+                ),
+                self._rollback_result,
+                "Restoring the last pre-write backup and verifying…",
+            )
+
+        @Slot(object)
+        def _rollback_result(self, report: dict[str, Any]) -> None:
+            status = report.get("status")
+            if status in {"RESTORED", "NO_CHANGE"}:
+                try:
+                    image = workflow.backup_image(self.last_backup_prefix)
+                    self._load_session(GuiConfigSession.from_image(image))
+                except Exception as exc:
+                    QMessageBox.warning(
+                        self, "ArmorX",
+                        f"Rollback succeeded but the UI could not reopen the backup: {exc}"
+                    )
+                else:
+                    QMessageBox.information(
+                        self, "ArmorX",
+                        f"Rollback result: {status}\nOriginal backup is active."
+                    )
+            else:
+                reason = report.get("failure_reason") or report.get("refusal_reason") or (
+                    "Rollback did not complete successfully."
+                )
+                QMessageBox.warning(
+                    self, "ArmorX — Rollback not completed",
+                    f"Status: {status}\n\n{reason}\n\nNo automatic retry was performed."
+                )
+            self._refresh_summary()
+            self._refresh_action_state()
+
+        def refresh_profiles(self) -> None:
+            self.profile_list.clear()
+            try:
+                rows = self.profile_store.list()
+            except Exception as exc:
+                self.statusBar().showMessage(f"Could not read profiles: {exc}")
+                return
+            for row in rows:
+                self.profile_list.addItem(row["name"])
+
+        @Slot()
+        def save_profile(self) -> None:
+            if self.session is None:
+                return
+            name, ok = QInputDialog.getText(self, "Save profile", "Profile name")
+            if not ok or not name.strip():
+                return
+            try:
+                self.profile_store.save(
+                    name, self.session.working,
+                    metadata={
+                        "model": self.identity.get("model"),
+                        "firmware": self.identity.get("firmware"),
+                    },
+                )
+            except Exception as exc:
+                QMessageBox.critical(self, "ArmorX", str(exc))
+                return
+            self.refresh_profiles()
+            self.statusBar().showMessage(f"Saved profile {name.strip()}")
+
+        @Slot()
+        def load_profile(self) -> None:
+            item = self.profile_list.currentItem()
+            if item is None:
+                return
+            try:
+                image = self.profile_store.load(item.text())
+            except Exception as exc:
+                QMessageBox.critical(self, "ArmorX", str(exc))
+                return
+            self.identity = {}
+            self._load_session(GuiConfigSession.from_image(image))
+            self.statusBar().showMessage(f"Loaded profile {item.text()}")
+
+        @Slot()
+        def delete_profile(self) -> None:
+            item = self.profile_list.currentItem()
+            if item is None:
+                return
+            answer = QMessageBox.question(
+                self, "Delete profile", f"Delete local profile '{item.text()}'?"
+            )
+            if answer != QMessageBox.StandardButton.Yes:
+                return
+            try:
+                self.profile_store.delete(item.text())
+            except Exception as exc:
+                QMessageBox.critical(self, "ArmorX", str(exc))
+                return
+            self.refresh_profiles()
+
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="armorx-gui",
         description="ArmorX Toolkit Linux desktop configurator (v0.5 development)",
     )
-    parser.add_argument("--version", action="version",
-                        version=f"%(prog)s {__version__}")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     return parser
 
 
@@ -422,5 +632,5 @@ def main(argv: list[str] | None = None) -> int:
     return int(app.exec())
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     raise SystemExit(main())

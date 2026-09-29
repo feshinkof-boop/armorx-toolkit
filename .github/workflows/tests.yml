@@ -29,6 +29,7 @@ jobs:
           armorx live --help > /dev/null
           armorx live apply --help > /dev/null
           armorx live rollback --help > /dev/null
+          armorx-gui --version > /dev/null
       - name: Run tests
         run: python -m pytest
 
@@ -54,3 +55,4 @@ jobs:
           /tmp/armorx-release-smoke/bin/armorx live --help > /dev/null
           /tmp/armorx-release-smoke/bin/armorx live apply --help > /dev/null
           /tmp/armorx-release-smoke/bin/armorx live rollback --help > /dev/null
+          /tmp/armorx-release-smoke/bin/armorx-gui --version > /dev/null

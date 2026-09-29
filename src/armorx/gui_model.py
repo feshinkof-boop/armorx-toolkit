@@ -78,6 +78,11 @@ class GuiConfigSession:
     def reset(self) -> None:
         self.working = self.baseline
 
+    def accept_working_as_baseline(self) -> None:
+        """Mark the current validated working image as the new baseline."""
+        self.working = _validated(self.working)
+        self.baseline = self.working
+
     @property
     def changed(self) -> bool:
         return self.working != self.baseline
