@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import asyncio
 import json
 import sys
 from pathlib import Path
@@ -18,6 +19,7 @@ from . import exchange as exchange_mod
 from . import gip as gip_mod
 from . import macro as macro_mod
 from . import protocol as protocol_mod
+from . import live as live_mod
 
 
 def _write_json(path: str | None, obj, *, compact: bool = False) -> None:
@@ -653,6 +655,147 @@ def _add_exchange_commands(groups) -> None:
     p.add_argument("--compact", action="store_true")
     p.set_defaults(func=cmd_exchange_schema)
 
+
+# ---------------------------------------------------------------------------
+# live (experimental BLE access; mutating writes are not exposed yet)
+# ---------------------------------------------------------------------------
+
+def _run_live(coro):
+    try:
+        return asyncio.run(coro)
+    except live_mod.LiveError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return None
+
+
+def cmd_live_scan(args: argparse.Namespace) -> int:
+    devices = _run_live(live_mod.scan_ble(seconds=args.seconds))
+    if devices is None:
+        return 2
+    _write_json(args.output, {
+        "devices": devices,
+        "count": len(devices),
+        "armorx_count": sum(1 for d in devices if d["is_armorx"]),
+        "note": "addresses are shown locally for connection only; do not publish them in issue reports",
+    })
+    return 0
+
+
+async def _live_identity(address: str, timeout: float) -> dict:
+    transport = live_mod.BleakLiveTransport(address=address, connect_timeout=timeout)
+    await transport.connect()
+    try:
+        return await live_mod.read_identity(transport)
+    finally:
+        await transport.close()
+
+
+def cmd_live_info(args: argparse.Namespace) -> int:
+    result = _run_live(_live_identity(args.address, args.connect_timeout))
+    if result is None:
+        return 2
+    _write_json(args.output, result)
+    return 0
+
+
+async def _live_read(address: str, connect_timeout: float, reply_timeout: float) -> tuple[dict, bytes]:
+    transport = live_mod.BleakLiveTransport(address=address, connect_timeout=connect_timeout)
+    await transport.connect()
+    try:
+        identity = await live_mod.read_identity(transport)
+        image = await live_mod.read_config(transport, timeout=reply_timeout)
+        return identity, image
+    finally:
+        await transport.close()
+
+
+def cmd_live_read_config(args: argparse.Namespace) -> int:
+    result = _run_live(_live_read(args.address, args.connect_timeout, args.reply_timeout))
+    if result is None:
+        return 2
+    identity, image = result
+    payload = {
+        "bytes": list(image),
+        "summary": live_mod.image_summary(image),
+        "device": identity,
+        "note": "D6 read only; no configuration mutation is performed",
+    }
+    _write_json(args.output, payload)
+    return 0
+
+
+def cmd_live_backup(args: argparse.Namespace) -> int:
+    result = _run_live(_live_read(args.address, args.connect_timeout, args.reply_timeout))
+    if result is None:
+        return 2
+    identity, image = result
+    document = live_mod.backup_document(image, identity=identity)
+    Path(args.output).write_text(json.dumps(document, indent=2, sort_keys=True) + "\n",
+                                 encoding="utf-8")
+    _write_json(None, {
+        "wrote": args.output,
+        "sha256": document["summary"]["sha256"],
+        "bytes": len(image),
+        "privacy": document["privacy"],
+    })
+    return 0
+
+
+def cmd_live_plan(args: argparse.Namespace) -> int:
+    try:
+        baseline = live_mod.load_image(args.baseline)
+        target = live_mod.load_image(args.target)
+        plan = live_mod.plan_config_change(baseline, target)
+    except (ValueError, live_mod.LiveError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    _write_json(args.output, plan)
+    return 0
+
+
+def _add_live_commands(groups) -> None:
+    live = groups.add_parser(
+        "live",
+        help="experimental Linux BLE access; configuration writes are not exposed yet",
+    )
+    sub = live.add_subparsers(dest="live_command", required=True)
+
+    p = sub.add_parser("scan", help="scan for ARMOR-X BLE advertisements")
+    p.add_argument("--seconds", type=float, default=8.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_scan)
+
+    p = sub.add_parser("info", help="connect and read standard device identity characteristics")
+    p.add_argument("--address", required=True)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_info)
+
+    p = sub.add_parser("read-config", help="read the current 144-byte config over proven D6")
+    p.add_argument("--address", required=True)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_read_config)
+
+    p = sub.add_parser("backup", help="read and save the current config before any future write")
+    p.add_argument("--address", required=True)
+    p.add_argument("--connect-timeout", type=float, default=20.0)
+    p.add_argument("--reply-timeout", type=float, default=4.0)
+    p.add_argument("-o", "--output", required=True)
+    p.set_defaults(func=cmd_live_backup)
+
+    p = sub.add_parser("plan", help="compare two saved 144-byte images offline")
+    p.add_argument("baseline")
+    p.add_argument("target")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_live_plan)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="armorx",
@@ -825,6 +968,7 @@ def build_parser() -> argparse.ArgumentParser:
     _add_gip_commands(groups)
     _add_capture_commands(groups)
     _add_exchange_commands(groups)
+    _add_live_commands(groups)
 
     return parser
 
