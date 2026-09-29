@@ -31,7 +31,7 @@ test("dashboard, theme and contextual help", async ({ page }) => {
 
 test("button test emphasizes L3 R3 and analog triggers", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.getByRole("button", { name: "Button Test" }).click();
+  await page.getByRole("button", { name: "Button Test", exact: true }).click();
   await expect(page.getByText("Controller detected")).toBeVisible();
   await expect(page.locator(".l3Callout")).toContainText("CLICKED");
   await expect(page.locator(".triggerReadout").nth(0)).toContainText("58%");
@@ -42,7 +42,7 @@ test("button test emphasizes L3 R3 and analog triggers", async ({ page }) => {
 
 test("macro timeline supports adding and drag reordering", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.getByRole("button", { name: "Macro Studio" }).click();
+  await page.getByRole("button", { name: "Macro Studio", exact: true }).click();
   await expect(page.getByRole("heading", { name: "Build combos like a timeline." })).toBeVisible();
 
   const before = await page.locator(".macroStep").count();
@@ -58,7 +58,7 @@ test("macro timeline supports adding and drag reordering", async ({ page }) => {
 
 test("compact layout has no horizontal overflow", async ({ page }) => {
   await page.setViewportSize({ width: 760, height: 720 });
-  await page.getByRole("button", { name: "Button Test" }).click();
+  await page.getByRole("button", { name: "Button Test", exact: true }).click();
   const fits = await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
   expect(fits).toBe(true);
   await shot(page, "05-compact-button-test.png");

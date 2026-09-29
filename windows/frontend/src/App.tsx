@@ -134,7 +134,7 @@ function App() {
         </div>
         <nav>
           {nav.map((item) => (
-            <button key={item.id} className={page === item.id ? "active" : ""} onClick={() => setPage(item.id)}>
+            <button key={item.id} aria-label={item.label} className={page === item.id ? "active" : ""} onClick={() => setPage(item.id)}>
               <span className="navIcon">{item.icon}</span><span className="navLabel">{item.label}</span>
               {item.id === "buttons" && gamepad.connected && <i className="liveDot" />}
             </button>
