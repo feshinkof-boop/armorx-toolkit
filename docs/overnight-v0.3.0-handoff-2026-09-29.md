@@ -9,7 +9,7 @@
 | starting research tip | `8747846` (untouched) |
 | branch worked on | `dev/v0.3.0-offline-2026-09-29` |
 | ending commit | see `git log -1` on that branch |
-| commits created | 4 on the dev branch, 1 on a separate research branch |
+| commits created | 5 during the overnight shift on the dev branch; 2 post-shift repair/documentation commits; 1 on a separate research branch |
 | research branch created | `research/xbox-rt-threshold-2026-09-29` (tip `e302829`) |
 
 ## Tests
@@ -17,10 +17,27 @@
 | state | result |
 | --- | --- |
 | before | the public suite as shipped on `main` |
-| after | **96 passed, 0 failed, 0 skipped** (`PYTHONPATH=src /usr/bin/python3.14 -m pytest -q`) |
+| after | **98 passed, 0 failed, 0 skipped** in GitHub Actions on Python 3.10, 3.11, 3.12 and 3.13 after the post-shift CI repair; the overnight local run was 96 passed before the two regression tests were added |
 
 No test was skipped or deleted. Nothing requires hardware: discovery runs against a synthetic
 sysfs tree, GIP and framing tests use synthetic bytes built from the documented layout.
+
+## Post-shift CI repair
+
+GitHub Actions was present and caught one host-dependent diagnostic test that the overnight local
+run did not expose. On a clean runner with no `xpad` module loaded,
+`test_doctor_on_a_tree_without_devices` failed because `doctor()` treated the missing module as
+fatal even though no Xbox personality was attached.
+
+Commit `e653317` fixed the behavior instead of weakening the test:
+
+* no Xbox personality + no `xpad` => `xpad_module=not_needed`, diagnosis remains successful;
+* Xbox personality present + no `xpad` => `xpad_module=missing`, diagnosis fails with an actionable hint;
+* Xbox personality + `xpad` loaded => `xpad_module=present`.
+
+Two deterministic regression tests now mock the module state so the result does not depend on the
+host running pytest. GitHub Actions run `36532070949` passed all four supported Python versions
+(3.10-3.13), with **98 passed** in the 3.11 job.
 
 ## What was added
 
