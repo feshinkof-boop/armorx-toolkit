@@ -32,10 +32,12 @@ classifiers = [
 
 [project.scripts]
 armorx = "armorx.cli:main"
+armorx-gui = "armorx.gui:main"
 
 [project.optional-dependencies]
 capture = []
 live = ["bleak>=0.22"]
+gui = ["PySide6>=6.7", "bleak>=0.22"]
 dev = ["pytest>=8.0"]
 
 [tool.setuptools]
