@@ -1,7 +1,9 @@
 # v0.3.0 draft release notes
 
-Status: draft for a development branch. Nothing here is released, tagged or
-hardware-validated. No command in this release transmits to a device.
+Status: draft on a development branch. Nothing here is released or tagged, and
+PR #8 stays a draft. Read-only paths were validated against real hardware on
+2026-09-29; interactive controls were not (see the interactive checklist). No
+command in this release transmits to a device.
 
 ## Added
 
@@ -26,3 +28,27 @@ hardware-validated. No command in this release transmits to a device.
   report that nothing is present.
 * Offsets and opcode meanings were established from live captures and recovered
   documentation; unresolved items are labelled unknown in the code and the docs.
+
+
+## Hardware validation, 2026-09-29
+
+* Device discovery and `device doctor` were validated against an attached unit in
+  the `045E:0B12` personality. Two real defects were found and fixed: interface
+  numbering on multi-interface devices, and the sysfs serial being presented as a
+  hex dump.
+* `device doctor` no longer treats a restricted hidraw node as a blocking
+  condition, because none of the read-only paths need hidraw. It now reports
+  findings separately from blocking checks.
+* The diagnostics bundle was generated on the real host and scanned: no username,
+  home path, hostname, serial number, MAC address or credential appears in it.
+* A 120 s passive usbmon capture produced 62,702 records and 30,009 GIP reports,
+  all 48-byte, with the full 255-value sequence rollover.
+* The capture parser was checked against an independent extraction and matched
+  exactly, and one real defect was found and fixed: a GIP report whose sequence
+  byte is `0xA5` could produce a phantom checksum-valid frame.
+
+## Not validated
+
+* Interactive controls: LT, RT, buttons, M1/M2 and the power button.
+* The vendor personality `413D:2106`, which was not re-observed today.
+* The 32 to 48 byte report transition, whose cause remains unknown.
