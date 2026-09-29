@@ -26,5 +26,31 @@ jobs:
           armorx --version
           armorx config keys > /dev/null
           armorx macro keys > /dev/null
+          armorx live --help > /dev/null
+          armorx live apply --help > /dev/null
+          armorx live rollback --help > /dev/null
       - name: Run tests
         run: python -m pytest
+
+  package:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Build wheel and sdist
+        run: |
+          python -m pip install build
+          python -m build
+      - name: Clean-install wheel and smoke-test
+        run: |
+          python -m venv /tmp/armorx-release-smoke
+          /tmp/armorx-release-smoke/bin/python -m pip install --upgrade pip
+          /tmp/armorx-release-smoke/bin/python -m pip install dist/armorx_toolkit-0.4.0-py3-none-any.whl
+          test "$(/tmp/armorx-release-smoke/bin/armorx --version)" = "armorx 0.4.0"
+          /tmp/armorx-release-smoke/bin/armorx config keys > /dev/null
+          /tmp/armorx-release-smoke/bin/armorx live --help > /dev/null
+          /tmp/armorx-release-smoke/bin/armorx live apply --help > /dev/null
+          /tmp/armorx-release-smoke/bin/armorx live rollback --help > /dev/null

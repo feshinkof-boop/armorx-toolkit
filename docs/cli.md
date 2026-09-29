@@ -206,7 +206,7 @@ The bundle omits usernames, home paths, the hostname, USB serial numbers and
 MAC/Bluetooth addresses unless explicitly requested, and the omission list is
 recorded inside the bundle itself.
 
-## `armorx live` (development branch)
+## `armorx live` (v0.4.0)
 
 | command | purpose |
 | --- | --- |
@@ -220,6 +220,7 @@ recorded inside the bundle itself.
 | `armorx live validate-write-gate --address A` | supervised byte-identical no-op write (experimental) |
 | `armorx live validate-reversible-m1 --address A` | supervised reversible M1 -> A experiment (experimental) |
 
-These commands exist only on the development branch and are not part of a
-released version. See `docs/v0.4.0-live-apply.md` for the write path and its
-safety model. There is no raw opcode or payload console, and none is planned.
+These commands are part of v0.4.0. See `docs/v0.4.0-live-apply.md` for the
+write path and its safety model. The two `validate-*` commands remain explicitly
+experimental validation tools. There is no raw opcode or payload console, and
+none is planned.

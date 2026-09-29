@@ -4,4 +4,4 @@ Public Python API for BIGBIG WON ARMORX Pro configuration, macro, and
 community/config exchange tooling.
 """
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
