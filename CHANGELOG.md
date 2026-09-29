@@ -2,6 +2,63 @@
 
 All notable project changes are documented here.
 
+## 0.5.0 — 2026-09-29
+
+Linux desktop configurator release. The Windows configurator remains on its
+separate validated **v0.2.1** release line.
+
+### Added
+
+- Added the PySide6 `armorx-gui` desktop configurator over the released v0.4
+  live backend; the GUI does not implement a second D6/D7/0E path.
+- Added BLE scan/read, exact pending diff, M1-M4 remapping, automatic CRC
+  regeneration, native Apply & Verify confirmation, exact rollback, and
+  privacy-safe local profiles.
+- Added dedicated stick and trigger visual editors for recovered deadzone and
+  curve bytes. The previews are explicitly raw 0..255 byte-space views, not
+  claims about physical percentages or exact firmware transfer functions.
+- Added an offline 1..16 step macro timeline with M1-M4 triggers, tap/hold/cycle
+  modes, chords, hold/interval timing, reorder controls, validation, preview,
+  and JSON import/export over the recovered V41 portable macro model.
+- Added `armorx-desktop install|uninstall|status` for per-user KDE/freedesktop
+  launcher integration.
+- Added a Linux desktop release bundle containing the wheel and per-user
+  install/uninstall scripts, plus a SHA-256 manifest.
+- Added address-free Linux GUI preview assets for the visual and macro tabs.
+
+### Safety / scope
+
+- GUI Apply & Verify delegates to the same guarded `armorx.live.apply_config`
+  path validated for v0.4.0: D6 x2, backup/reopen, exact diff, unknown-byte
+  refusal, confirmation, one D7 transaction, one persistence command and D6 x2
+  verification.
+- GUI rollback delegates to `armorx.live.rollback_config` and does not expose
+  the unrelated-state override.
+- The macro timeline is offline only in v0.5.0; it does not write D8/device
+  macro payloads or call the community API.
+- Unknown map IDs and Share/Screenshot remain unresolved rather than guessed.
+
+### Validated
+
+- The real GUI path was supervised end-to-end on ARMOR-X Pro firmware 2741:
+  scan, D6 read, M1 B→A edit, native Qt confirmation, apply, physical M1 wire
+  proof, power-cycle persistence, GUI rollback and final byte-exact baseline
+  restoration all passed.
+- The target and restored baseline each passed two exact D6 read-backs; the
+  final power-cycle SHA matched the original baseline.
+- Local profile reload was proven offline with no BLE operation.
+- Pre-release development CI reached **374 passed, 0 failed, 0 skipped** before
+  release-prep-only version/documentation changes.
+
+### Fixed
+
+- Fixed `GUI-BUSY-001`: background Qt tasks are now retained until queued
+  result/finished signals reach the GUI, preventing a permanently busy window.
+- Kept a verified pre-write backup reachable after a later write/verification
+  failure while preserving backend state-classification/refusal rules.
+- Kept the Profiles tab usable from a cold start before loading a controller
+  configuration.
+
 ## 0.4.0 — 2026-09-29
 
 Linux BLE configuration release. The Windows configurator remains on its

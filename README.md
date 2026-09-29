@@ -24,7 +24,7 @@ Build, inspect, remap, validate, and research **ARMORX Pro** configurations and 
 
 ## Overview
 
-> **Latest project release:** **v0.4.0** adds guarded Linux BLE configuration reads, writes, verification, and rollback on top of the v0.3.0 offline toolkit. The latest downloadable Windows configurator remains the separate **v0.2.1** release.
+> **Latest project release:** **v0.5.0** adds the validated PySide6 Linux desktop configurator, visual stick/trigger editors, offline macro timeline, local profiles, and per-user desktop packaging on top of the guarded v0.4.0 BLE backend. The latest downloadable Windows configurator remains the separate **v0.2.1** release.
 
 **ArmorX Toolkit** is a community-driven interoperability project for the **BIGBIG WON ARMORX Pro**, an accessory for **Xbox controllers**.
 
@@ -53,7 +53,7 @@ The project focuses on:
 | CLI | Unified `armorx` command |
 | Windows GUI | Public Windows 10/11 x64 BLE configurator |
 | Linux BLE | Guarded live read / apply / rollback with automatic backup and read-back verification |
-| Linux GUI | PySide6 configurator with guarded BLE, profiles, visual stick/trigger editors, and offline macro timeline — v0.5.0 dev line |
+| Linux GUI | PySide6 configurator with guarded BLE, profiles, visual stick/trigger editors, offline macro timeline, and desktop launcher — v0.5.0 |
 | Research | PROVEN / STRONG EVIDENCE / UNKNOWN evidence levels |
 | Quality | Pytest suite + GitHub Actions |
 
@@ -75,7 +75,7 @@ The Windows app supports Connect / Recover, configuration read, sticks, triggers
 <!-- LINUX_GUI_PREVIEW_START -->
 ## Linux GUI preview
 
-The **v0.5.0 development line** adds a Linux desktop configurator (PySide6) on top of the released v0.4.0 BLE backend: the same guarded read / apply / rollback workflow as the CLI, plus local profiles, a changes view, visual stick/trigger deadzone + recovered curve-byte editors, and an offline 16-step macro timeline editor. It drives the identical backend functions, so its safety guarantees are the CLI's: two identical reads before any write, an automatic backup written and re-opened, exact diff review with undecoded bytes refused, a native confirmation showing the decoded plan, read-back verification, and a rollback that writes the saved image unchanged. Nothing is exposed for unrelated live state, and no raw opcode or payload can be sent from it. Not yet released — it ships with v0.5.0.
+**v0.5.0** adds a Linux desktop configurator (PySide6) on top of the guarded v0.4.0 BLE backend: the same guarded read / apply / rollback workflow as the CLI, plus local profiles, a changes view, visual stick/trigger deadzone + recovered curve-byte editors, and an offline 16-step macro timeline editor. It drives the identical backend functions, so its safety guarantees are the CLI's: two identical reads before any write, an automatic backup written and re-opened, exact diff review with undecoded bytes refused, a native confirmation showing the decoded plan, read-back verification, and a rollback that writes the saved image unchanged. Nothing is exposed for unrelated live state, and no raw opcode or payload can be sent from it.
 
 | Live configuration summary | Rear-button remapping |
 | --- | --- |
@@ -87,7 +87,7 @@ The **v0.5.0 development line** adds a Linux desktop configurator (PySide6) on t
 | **Offline macro timeline** | |
 | ![ArmorX Linux configurator macro timeline](docs/assets/linux/v0.5.0/07-macro-timeline.webp) | |
 
-The first four screenshots come from the supervised hardware validation run on the real ARMOR-X Pro. The visual-editor and macro screenshots are deterministic address-free renders from synthetic/local state. (a real `M1 -> A` remap applied, power-cycled, verified, and rolled back to the original image). They are rendered from the configuration tabs only, so no BLE address, host name, user name or path appears in them.
+The first four screenshots come from the supervised hardware validation run on the real ARMOR-X Pro, including a real `M1 -> A` remap that was applied, power-cycled, verified, and rolled back to the original image. The visual-editor and macro screenshots are deterministic address-free renders from synthetic/local state. No BLE address, host name, user name or path appears in the published Linux screenshots.
 
 <!-- LINUX_GUI_PREVIEW_END -->
 
@@ -192,17 +192,17 @@ Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Installation
 
-> **Public release scope:** **v0.4.0** keeps the offline/protocol tooling from v0.3.0 and adds guarded Linux BLE configuration access: live reads, automatic pre-write backups, exact diffs, confirmation, full-image D7 writes, one persistence command, double D6 verification, and exact-byte rollback. The public Windows configurator remains the separate **v0.2.1** release; researcher-only firmware analysis, raw private captures, and Autopilot workflows are not part of the public package.
+> **Public release scope:** **v0.5.0** keeps the guarded v0.4.0 Linux BLE read/apply/rollback path and adds the validated Linux desktop configurator, visual configuration editors, local profiles, offline macro timeline, launcher integration, and Linux desktop bundle. The public Windows configurator remains the separate **v0.2.1** release; researcher-only firmware analysis, raw private captures, Autopilot workflows, and device macro installation are not part of the public package.
 
 
 ### Windows 10/11 x64
 
 Use the **[v0.2.1 installer](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1-Setup.exe)** (recommended) or the **[portable v0.2.1 EXE](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1.exe)**. Turn on ARMOR-X Pro and choose **Connect / Recover**. The app reads the controller's own 144-byte configuration image, preserves unknown bytes, automatically backs up the current device image before writes, and verifies writes by reading all 144 bytes back.
 
-### Python toolkit v0.4.0
+### Python toolkit v0.5.0
 
 ```bash
-python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.4.0
+python -m pip install git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.5.0
 armorx --version
 ```
 
@@ -211,15 +211,35 @@ armorx --version
 ```bash
 git clone https://github.com/feshinkof-boop/armorx-toolkit.git
 cd armorx-toolkit
-python -m pip install -e .
+python -m pip install -e ".[gui,dev]"
 ```
 
-### Linux BLE configuration (v0.4.0)
+### Linux desktop configurator (v0.5.0)
+
+Recommended release bundle:
+
+```bash
+tar -xzf ArmorX-Toolkit-Linux-v0.5.0.tar.gz
+cd ArmorX-Toolkit-Linux-v0.5.0
+./install.sh
+```
+
+The bundle installs a private per-user virtual environment and adds an **ArmorX Toolkit** launcher to KDE/freedesktop application menus. Internet access is required during installation for PySide6 and Bleak. `./uninstall.sh` removes the application/launcher while preserving profiles and backups.
+
+Direct Python installation is also supported:
+
+```bash
+python -m pip install "armorx-toolkit[gui] @ git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.5.0"
+armorx-desktop install
+armorx-gui
+```
+
+### Linux BLE configuration (v0.4.0+)
 
 Install the optional BLE backend from the tagged source:
 
 ```bash
-python -m pip install "armorx-toolkit[live] @ git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.4.0"
+python -m pip install "armorx-toolkit[live] @ git+https://github.com/feshinkof-boop/armorx-toolkit.git@v0.5.0"
 ```
 
 Read and back up the current configuration:
