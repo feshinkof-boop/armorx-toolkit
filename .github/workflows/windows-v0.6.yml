@@ -73,3 +73,26 @@ jobs:
           path: |
             ArmorX-Studio-v0.6.0-alpha-win-x64.zip
             ArmorX-Studio-v0.6.0-alpha-SHA256SUMS.txt
+
+
+  visual-qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install frontend
+        working-directory: windows/frontend
+        run: |
+          npm install
+          npm audit --audit-level=moderate
+          npm run build
+          npx playwright install --with-deps chromium
+      - name: Responsive interaction and screenshot QA
+        working-directory: windows/frontend
+        run: npm run e2e
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-Studio-v0.6.0-visual-qa
+          path: windows/frontend/visual-output/*.png

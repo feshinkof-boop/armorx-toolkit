@@ -141,6 +141,25 @@ export const emptyGamepad: GamepadSnapshot = {
   timestamp: 0,
 };
 
+export const mockGamepad: GamepadSnapshot = {
+  connected: true,
+  name: "ArmorX preview controller",
+  leftX: 0.34,
+  leftY: 0.62,
+  rightX: -0.28,
+  rightY: -0.37,
+  leftTrigger: 0.58,
+  rightTrigger: 0.84,
+  buttons: {
+    A: true, B: false, X: false, Y: false,
+    LB: false, RB: true, L3: true, R3: false,
+    View: false, Menu: false,
+    DUp: false, DDown: false, DLeft: true, DRight: false,
+    P1: false, P2: false, P3: false, P4: false,
+  },
+  timestamp: 1,
+};
+
 async function mockInvoke(action: string, payload: Record<string, unknown>) {
   await new Promise((resolve) => setTimeout(resolve, 80));
   if (action === "state") return mockState;

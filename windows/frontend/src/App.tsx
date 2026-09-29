@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { bridge, emptyGamepad, mockState } from "./bridge";
+import { bridge, emptyGamepad, mockGamepad, mockState } from "./bridge";
 import { help } from "./help";
 import {
   buildMacroObject,
@@ -39,7 +39,7 @@ const nav: Array<{ id: Page; label: string; icon: string }> = [
 
 function App() {
   const [state, setState] = useState<StudioState>(mockState);
-  const [gamepad, setGamepad] = useState<GamepadSnapshot>(emptyGamepad);
+  const [gamepad, setGamepad] = useState<GamepadSnapshot>(bridge.native ? emptyGamepad : mockGamepad);
   const [page, setPage] = useState<Page>("dashboard");
   const [theme, setTheme] = useState<"dark" | "light">(
     (localStorage.getItem("armorx-theme") as "dark" | "light") ||
