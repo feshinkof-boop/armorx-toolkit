@@ -48,7 +48,7 @@ public sealed class TrayService : IDisposable
     {
         _status.Text = $"Status: {connection}";
         _battery.Text = $"Battery: {battery}";
-        _profile.Text = $"Profile: {string.IsNullOrWhiteSpace(profile) ? "Live configuration" : profile}";
+        _profile.Text = $"Profile: {(string.IsNullOrWhiteSpace(profile) ? "Live configuration" : profile)}";
         var shortConnection = connection.Length > 26 ? connection[..26] : connection;
         var shortProfile = string.IsNullOrWhiteSpace(profile) ? "Live" :
             (profile.Length > 18 ? profile[..18] : profile);
