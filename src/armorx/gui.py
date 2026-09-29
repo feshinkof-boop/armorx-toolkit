@@ -116,6 +116,13 @@ if QT_AVAILABLE:
             self.setWindowTitle(f"ArmorX Toolkit {__version__} — Linux")
             self.resize(1120, 760)
             self.pool = QThreadPool.globalInstance()
+            # Strong references to in-flight background tasks. QThreadPool
+            # drops its own reference to a runnable as soon as run() returns;
+            # a collected task takes its signal object with it, and Qt then
+            # silently discards a still-queued result/finished delivery. The
+            # visible symptom is a window stuck on "busy": the progress
+            # indicator never hides and every action button stays disabled.
+            self._tasks: set[Any] = set()
             self.session: GuiConfigSession | None = None
             self.identity: dict[str, Any] = {}
             self._updating = False
@@ -280,8 +287,14 @@ if QT_AVAILABLE:
             task = AsyncTask(factory)
             task.signals.result.connect(on_result)
             task.signals.error.connect(self._task_error)
-            task.signals.finished.connect(lambda: self._set_busy(False))
+            task.signals.finished.connect(lambda: self._finish_task(task))
+            self._tasks.add(task)
             self.pool.start(task)
+
+        def _finish_task(self, task: "AsyncTask") -> None:
+            """Release a finished task and stop the progress indicator."""
+            self._tasks.discard(task)
+            self._set_busy(False)
 
         def _task_error(self, message: str) -> None:
             self.statusBar().showMessage("Operation failed")
