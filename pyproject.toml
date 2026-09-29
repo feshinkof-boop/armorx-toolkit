@@ -33,6 +33,7 @@ classifiers = [
 [project.scripts]
 armorx = "armorx.cli:main"
 armorx-gui = "armorx.gui:main"
+armorx-desktop = "armorx.desktop:main"
 
 [project.optional-dependencies]
 capture = []

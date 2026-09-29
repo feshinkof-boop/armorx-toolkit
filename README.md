@@ -82,8 +82,12 @@ The **v0.5.0 development line** adds a Linux desktop configurator (PySide6) on t
 | ![ArmorX Linux configurator live configuration summary](docs/assets/linux/v0.5.0/01-live-configuration-summary.webp) | ![ArmorX Linux configurator rear-button remapping](docs/assets/linux/v0.5.0/02-rear-button-remapping.webp) |
 | **Changes / pending diff** | **Local profiles** |
 | ![ArmorX Linux configurator pending changes](docs/assets/linux/v0.5.0/03-changes-diff.webp) | ![ArmorX Linux configurator local profiles](docs/assets/linux/v0.5.0/04-profiles.webp) |
+| **Stick visual editor** | **Trigger visual editor** |
+| ![ArmorX Linux configurator stick visual editor](docs/assets/linux/v0.5.0/05-stick-visuals.webp) | ![ArmorX Linux configurator trigger visual editor](docs/assets/linux/v0.5.0/06-trigger-visuals.webp) |
+| **Offline macro timeline** | |
+| ![ArmorX Linux configurator macro timeline](docs/assets/linux/v0.5.0/07-macro-timeline.webp) | |
 
-These screenshots come from the supervised hardware validation run on the real ARMOR-X Pro (a real `M1 -> A` remap applied, power-cycled, verified, and rolled back to the original image). They are rendered from the configuration tabs only, so no BLE address, host name, user name or path appears in them.
+The first four screenshots come from the supervised hardware validation run on the real ARMOR-X Pro. The visual-editor and macro screenshots are deterministic address-free renders from synthetic/local state. (a real `M1 -> A` remap applied, power-cycled, verified, and rolled back to the original image). They are rendered from the configuration tabs only, so no BLE address, host name, user name or path appears in them.
 
 <!-- LINUX_GUI_PREVIEW_END -->
 
