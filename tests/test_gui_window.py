@@ -13,6 +13,10 @@ import time
 import pytest
 
 pytest.importorskip("PySide6")
+# Qt ships its own libraries, but the binding still needs system libs (libEGL,
+# libxkbcommon, fontconfig ...). importorskip on the widget module keeps such an
+# environment a SKIP instead of a collection error.
+QtWidgets = pytest.importorskip("PySide6.QtWidgets")
 
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
