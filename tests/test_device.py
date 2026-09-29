@@ -157,3 +157,74 @@ def test_gip_report_forms_record_unknown_transition():
     forms = device.GIP_REPORT_FORMS
     assert forms["startup"]["length"] == 32 and forms["steady"]["length"] == 48
     assert forms["transition_cause"]["evidence"] == "unknown"
+
+
+# --- regressions from real-hardware validation on 2026-09-29 -----------------
+
+def make_multi_interface_entry(root: Path, name: str, vid: str, pid: str, interfaces):
+    entry = make_usb_entry(root, name, vid, pid, interfaces=())
+    for index in interfaces:
+        iface = root / f"{name}:1.{index}"
+        iface.mkdir()
+        (iface / "bInterfaceClass").write_text("ff")
+        (iface / "bInterfaceSubClass").write_text("47")
+        (iface / "bInterfaceProtocol").write_text("d0")
+    return entry
+
+
+def test_interface_numbers_are_read_from_after_the_dot(tmp_path):
+    """Regression: every interface used to be reported as number 1."""
+    root = tmp_path / "sysfs"
+    root.mkdir()
+    make_multi_interface_entry(root, "1-7", "045e", "0b12", (0, 1, 2))
+    candidates = device.scan_devices(sysfs_root=root, hidraw_root=tmp_path / "h",
+                                     input_root=tmp_path / "i")
+    numbers = sorted(i.number for i in candidates[0].interfaces)
+    assert numbers == [0, 1, 2]
+
+
+def test_hex_encoded_sysfs_serial_is_decoded(tmp_path):
+    """Regression: sysfs prints the serial as a hex dump, not as text."""
+    root = tmp_path / "sysfs"
+    root.mkdir()
+    entry = make_usb_entry(root, "1-7", "045e", "0b12")
+    (entry / "serial").write_text("3039373130373639393537313433")
+    candidate = device.scan_devices(sysfs_root=root, hidraw_root=tmp_path / "h",
+                                    input_root=tmp_path / "i")[0]
+    assert candidate.identity.serial == "09710769957143"
+
+
+def test_plain_serial_is_left_alone(tmp_path):
+    root = tmp_path / "sysfs"
+    root.mkdir()
+    entry = make_usb_entry(root, "1-7", "045e", "0b12")
+    (entry / "serial").write_text("ABCDEF")
+    candidate = device.scan_devices(sysfs_root=root, hidraw_root=tmp_path / "h",
+                                    input_root=tmp_path / "i")[0]
+    assert candidate.identity.serial == "ABCDEF"
+
+
+def test_unprintable_serial_falls_back_to_the_raw_form(tmp_path):
+    assert device._decode_serial("fffe") == "fffe"
+    assert device._decode_serial(None) is None
+    assert device._decode_serial("plain") == "plain"
+
+
+def test_restricted_hidraw_is_a_finding_not_a_blocker(tmp_path):
+    """A restricted hidraw node must not make the read-only diagnosis fail."""
+    root = tmp_path / "sysfs"
+    root.mkdir()
+    make_usb_entry(root, "1-7", "413d", "2106")
+    hidraw = tmp_path / "hidraw"
+    (hidraw / "hidraw2").mkdir(parents=True)
+    result = device.doctor(sysfs_root=root, hidraw_root=hidraw, input_root=tmp_path / "i")
+    assert "hidraw_permissions" in result["findings"] or result["checks"]
+    assert result["ok"] is True
+    assert result["blocking_checks"] == []
+
+
+def test_missing_sysfs_is_a_blocking_check(tmp_path):
+    result = device.doctor(sysfs_root=tmp_path / "absent", hidraw_root=tmp_path / "h",
+                           input_root=tmp_path / "i")
+    assert result["ok"] is False
+    assert "usb_sysfs" in result["blocking_checks"]

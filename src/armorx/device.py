@@ -156,6 +156,30 @@ def _read(path: Path) -> str | None:
         return None
 
 
+_HEX_STRING = re.compile(r"^(?:[0-9a-fA-F]{2})+$")
+
+
+def _decode_serial(raw: str | None) -> str | None:
+    """Decode the sysfs serial form.
+
+    The kernel prints a string descriptor as a hex dump when it is not plain
+    ASCII, so ``/sys/bus/usb/devices/.../serial`` can read as
+    ``3039373130373639393537313433`` for the serial ``09710769957143``. Both
+    forms are useful: the decoded one is what the device actually reports, the
+    raw one is what sysfs says. Only a fully printable decode is substituted.
+    """
+    if raw is None:
+        return None
+    if len(raw) % 2 == 0 and _HEX_STRING.match(raw):
+        try:
+            decoded = bytes.fromhex(raw).decode("ascii")
+        except (ValueError, UnicodeDecodeError):
+            return raw
+        if decoded.isprintable():
+            return decoded
+    return raw
+
+
 def _read_int(path: Path, base: int = 16) -> int | None:
     text = _read(path)
     if text is None:
@@ -175,7 +199,10 @@ def _interfaces_for(device_path: Path) -> list[Interface]:
     interfaces: list[Interface] = []
     parent = device_path.name
     for child in sorted(device_path.parent.glob(f"{parent}:*")):
-        number_text = child.name.rsplit(":", 1)[-1].split(".")[0]
+        # "<device>:<configuration>.<interface>", e.g. "1-7:1.2" is interface 2
+        # of configuration 1. Taking the part before the dot reports every
+        # interface of a device as number 1, which real hardware exposed.
+        number_text = child.name.rsplit(".", 1)[-1]
         try:
             number = int(number_text)
         except ValueError:
@@ -245,7 +272,7 @@ def scan_devices(*, sysfs_root: str | os.PathLike[str] = DEFAULT_SYSFS_ROOT,
             vid=vid, pid=pid,
             manufacturer=_read(entry / "manufacturer"),
             product=_read(entry / "product"),
-            serial=_read(entry / "serial"),
+            serial=_decode_serial(_read(entry / "serial")),
             bcd_device=_read(entry / "bcdDevice"),
             usb_path=entry.name,
             speed=_speed_text(_read(entry / "speed")),
@@ -429,8 +456,11 @@ def doctor(*, sysfs_root: str | os.PathLike[str] = DEFAULT_SYSFS_ROOT,
         "the transition cause is unknown",
         EVIDENCE_STRONG,
     ))
+    blocking = [c for c in checks if c.status in ("missing", "error")]
     summary = {
-        "ok": all(c.status in ("ok", "info", "present", "not_needed", "empty", "none") for c in checks),
+        "ok": not blocking,
+        "blocking_checks": [c.name for c in checks if c.status in ("missing", "error")],
+        "findings": [c.name for c in checks if c.status in ("restricted", "empty", "none")],
         "checks": [c.to_dict() for c in checks],
         "candidates": [c.to_dict() for c in candidates],
         "devices_found": len(known),
