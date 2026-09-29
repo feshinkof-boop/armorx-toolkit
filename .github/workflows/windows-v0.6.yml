@@ -29,6 +29,7 @@ jobs:
         working-directory: windows/frontend
         run: |
           npm install
+          npm audit --audit-level=moderate
           npm test -- --run
           npm run build
 
