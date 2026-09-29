@@ -52,7 +52,7 @@ public sealed class ArmorXDeviceSession : IDisposable
             var ef = await efTask;
             if (ef.Length >= 12) DeviceUuid = Convert.ToHexString(ef.AsSpan(3, 8)).ToLowerInvariant();
         }
-        catch (TimeoutException) { Emit("EF response timed out; local config control can still be attempted."); }
+        catch (TimeoutException) { Emit("EF response timed out; local configuration is still available."); }
     }
 
     public async Task<ArmorXConfig144> ReadConfigAsync(CancellationToken cancellationToken = default)
@@ -69,7 +69,7 @@ public sealed class ArmorXDeviceSession : IDisposable
 
         try
         {
-            await Task.Delay(500, cancellationToken);
+            await Task.Delay(350, cancellationToken);
             await SendAsync(ArmorXFrames.ReadConfig, "D6/ReadConfig", cancellationToken);
             var bytes = await wait.WaitAsync(TimeSpan.FromSeconds(6), cancellationToken);
             var config = new ArmorXConfig144(bytes);
@@ -90,7 +90,9 @@ public sealed class ArmorXDeviceSession : IDisposable
         }
     }
 
-    public async Task<WriteVerifyResult> WriteAndVerifyAsync(ArmorXConfig144 config, CancellationToken cancellationToken = default)
+    public async Task<WriteVerifyResult> WriteAndVerifyAsync(
+        ArmorXConfig144 config,
+        CancellationToken cancellationToken = default)
     {
         config.RecalculateCrc();
         var expected = config.ToArray();
@@ -112,24 +114,32 @@ public sealed class ArmorXDeviceSession : IDisposable
         }
         catch (TimeoutException)
         {
-            Emit("No D7 acknowledgement observed; continuing to read-back verification.");
+            Emit("No D7 acknowledgement observed; verification will decide the result.");
         }
 
         var postTask = RegisterShortWaiter(ArmorXFrames.OpPostWrite, TimeSpan.FromSeconds(2), cancellationToken);
         await SendAsync(ArmorXFrames.PostWrite, "0E/PostWrite", cancellationToken);
         var postEchoSeen = false;
         try { await postTask; postEchoSeen = true; Emit("0E echo received."); }
-        catch (TimeoutException) { Emit("0E echo not observed; continuing to read-back verification."); }
+        catch (TimeoutException) { Emit("0E echo not observed; verification will decide the result."); }
 
-        var actualConfig = await ReadConfigAsync(cancellationToken);
-        var actual = actualConfig.ToArray();
-        var mismatches = Enumerable.Range(0, expected.Length).Where(i => expected[i] != actual[i]).ToArray();
-        var exact = mismatches.Length == 0;
+        var first = await ReadConfigAsync(cancellationToken);
+        var second = await ReadConfigAsync(cancellationToken);
+        var firstBytes = first.ToArray();
+        var secondBytes = second.ToArray();
+
+        var mismatch1 = Enumerable.Range(0, expected.Length).Where(i => expected[i] != firstBytes[i]).ToArray();
+        var mismatch2 = Enumerable.Range(0, expected.Length).Where(i => expected[i] != secondBytes[i]).ToArray();
+        var readsAgree = firstBytes.SequenceEqual(secondBytes);
+        var mismatches = mismatch1.Concat(mismatch2).Distinct().OrderBy(x => x).ToArray();
+        var exact = mismatch1.Length == 0 && mismatch2.Length == 0 && readsAgree;
+
         Emit(exact
-            ? "Read-back verification PASS: all 144 bytes match."
-            : $"Read-back verification FAILED: {mismatches.Length} byte(s) differ: {string.Join(", ", mismatches.Take(20))}{(mismatches.Length > 20 ? "..." : string.Empty)}");
+            ? "Read-back verification PASS: two 144-byte reads match the target exactly."
+            : $"Read-back verification FAILED: {mismatches.Length} target mismatch offset(s); reads agree={readsAgree}.");
 
-        return new WriteVerifyResult(exact, ackSeen, postEchoSeen, actualConfig, mismatches);
+        return new WriteVerifyResult(
+            exact, ackSeen, postEchoSeen, second, first, second, readsAgree, mismatches);
     }
 
     private Task<byte[]> RegisterShortWaiter(byte opcode, TimeSpan timeout, CancellationToken cancellationToken)
@@ -153,7 +163,7 @@ public sealed class ArmorXDeviceSession : IDisposable
         catch (OperationCanceledException)
         {
             if (_shortWaiters.TryRemove(opcode, out var current) && ReferenceEquals(current, tcs))
-                tcs.TrySetCanceled(cancellationToken);
+                current.TrySetCanceled(cancellationToken);
         }
     }
 
@@ -173,7 +183,6 @@ public sealed class ArmorXDeviceSession : IDisposable
             return;
         }
 
-        Emit($"RX: {ArmorXFrames.Hex(packet)}");
         var opcode = packet[2];
         if (packet[0] == ArmorXFrames.ShortHeader)
         {
@@ -225,4 +234,7 @@ public sealed record WriteVerifyResult(
     bool AckSeen,
     bool PostWriteEchoSeen,
     ArmorXConfig144 ReadBackConfig,
+    ArmorXConfig144 FirstReadBackConfig,
+    ArmorXConfig144 SecondReadBackConfig,
+    bool VerificationReadsAgree,
     IReadOnlyList<int> MismatchOffsets);
