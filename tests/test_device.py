@@ -108,14 +108,36 @@ def test_speed_is_translated_for_humans(tmp_path):
     assert candidate.identity.speed == "high (480 Mbps)"
 
 
-def test_doctor_on_a_tree_without_devices(tmp_path):
+def test_doctor_on_a_tree_without_devices(tmp_path, monkeypatch):
+    monkeypatch.setattr(device, "_module_names", lambda: set())
     empty = tmp_path / "empty-sysfs"
     empty.mkdir()
     result = device.doctor(sysfs_root=empty, hidraw_root=tmp_path / "no-hidraw",
                            input_root=tmp_path / "no-input")
     statuses = {c["check"]: c["status"] for c in result["checks"]}
     assert statuses["known_identities"] == "none"
+    assert statuses["xpad_module"] == "not_needed"
     assert result["devices_found"] == 0
+    assert result["ok"] is True
+
+
+def test_doctor_requires_xpad_when_xbox_personality_is_present(tmp_path, monkeypatch):
+    monkeypatch.setattr(device, "_module_names", lambda: set())
+    monkeypatch.setattr(device.os, "access", lambda *_args, **_kwargs: True)
+    root, hidraw, inp = make_tree(tmp_path)
+    result = device.doctor(sysfs_root=root, hidraw_root=hidraw, input_root=inp)
+    statuses = {c["check"]: c["status"] for c in result["checks"]}
+    assert statuses["xpad_module"] == "missing"
+    assert result["ok"] is False
+
+
+def test_doctor_passes_xpad_check_when_module_is_loaded(tmp_path, monkeypatch):
+    monkeypatch.setattr(device, "_module_names", lambda: {"xpad"})
+    monkeypatch.setattr(device.os, "access", lambda *_args, **_kwargs: True)
+    root, hidraw, inp = make_tree(tmp_path)
+    result = device.doctor(sysfs_root=root, hidraw_root=hidraw, input_root=inp)
+    statuses = {c["check"]: c["status"] for c in result["checks"]}
+    assert statuses["xpad_module"] == "present"
     assert result["ok"] is True
 
 

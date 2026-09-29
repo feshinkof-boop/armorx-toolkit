@@ -396,13 +396,28 @@ def doctor(*, sysfs_root: str | os.PathLike[str] = DEFAULT_SYSFS_ROOT,
                            "plugged in.",
     ))
     xpad_loaded = "xpad" in _module_names()
+    xbox_present = any(c.identity.vid_pid == "045e:0b12" for c in known)
+    if xpad_loaded:
+        xpad_status = "present"
+        xpad_detail = "xpad is loaded"
+        xpad_hint = None
+    elif xbox_present:
+        xpad_status = "missing"
+        xpad_detail = (
+            "xpad is not loaded while an Xbox personality is present; standard Linux "
+            "gamepad input nodes may not be available"
+        )
+        xpad_hint = "Load the xpad driver, then run 'armorx device doctor' again."
+    else:
+        xpad_status = "not_needed"
+        xpad_detail = "xpad is not loaded, but no Xbox personality is present"
+        xpad_hint = None
     checks.append(DoctorCheck(
         "xpad_module",
-        "present" if xpad_loaded else "absent",
-        "xpad is loaded" if xpad_loaded
-        else "xpad is not loaded; an Xbox personality will not produce input nodes",
+        xpad_status,
+        xpad_detail,
         EVIDENCE_STRONG,
-        None,
+        xpad_hint,
     ))
     xbox_stream = GIP_REPORT_FORMS
     checks.append(DoctorCheck(
@@ -413,7 +428,7 @@ def doctor(*, sysfs_root: str | os.PathLike[str] = DEFAULT_SYSFS_ROOT,
         EVIDENCE_STRONG,
     ))
     summary = {
-        "ok": all(c.status in ("ok", "info", "present", "empty", "none") for c in checks),
+        "ok": all(c.status in ("ok", "info", "present", "not_needed", "empty", "none") for c in checks),
         "checks": [c.to_dict() for c in checks],
         "candidates": [c.to_dict() for c in candidates],
         "devices_found": len(known),
