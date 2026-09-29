@@ -550,9 +550,9 @@ def test_the_session_record_carries_no_private_values(tmp_path):
     _t, result = _run(_script([_image(), _image()], [target, target]), target,
                       tmp_path=tmp_path, prefix=prefix,
                       identity={"model": "ZJ-XT", "firmware": "2741",
-                                "address": "2D:37:35:6D:66:11", "serial": "SECRET"})
+                                "address": "AA:BB:CC:DD:EE:FF", "serial": "SECRET"})
     text = (tmp_path / "public-apply-baseline.session.json").read_text()
-    assert "2D:37:35" not in text and "SECRET" not in text
+    assert "AA:BB:CC:DD:EE:FF" not in text and "SECRET" not in text
     assert "/home/" not in text and str(tmp_path) not in text
     assert "public-apply-baseline" in text          # base name only
 
