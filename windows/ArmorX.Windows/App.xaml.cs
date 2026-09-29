@@ -3,7 +3,7 @@ using ArmorX.Windows.Config;
 
 namespace ArmorX.Windows;
 
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -18,7 +18,7 @@ public partial class App : Application
             try
             {
                 var window = new MainWindow();
-                window.Measure(new Size(1280, 800));
+                window.Measure(new System.Windows.Size(1280, 800));
                 window.ForceCloseForTesting();
                 Shutdown(0);
             }
@@ -31,7 +31,7 @@ public partial class App : Application
 
         DispatcherUnhandledException += (_, args) =>
         {
-            MessageBox.Show(
+            System.Windows.MessageBox.Show(
                 args.Exception.ToString(),
                 "ArmorX Studio - unexpected error",
                 MessageBoxButton.OK,
@@ -47,7 +47,7 @@ public partial class App : Application
         }
         catch (Exception ex)
         {
-            MessageBox.Show(
+            System.Windows.MessageBox.Show(
                 ex.ToString(),
                 "ArmorX Studio - startup error",
                 MessageBoxButton.OK,
