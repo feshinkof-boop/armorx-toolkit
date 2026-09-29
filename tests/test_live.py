@@ -1,5 +1,6 @@
 """v0.4 live BLE foundation tests.  No BLE hardware is touched."""
 
+import argparse
 import asyncio
 import json
 
@@ -96,3 +97,61 @@ def test_load_image_accepts_backup_json(tmp_path):
     path = tmp_path / "backup.json"
     path.write_text(json.dumps(doc))
     assert L.load_image(path) == _image()
+
+
+def test_read_config_reports_the_fragment_accounting():
+    """The read path must report its ten fragments, not just the reassembled image.
+
+    Regression from the 2026-09-29 live validation: the artefact proved the image
+    but said nothing about how many fragments arrived or how large they were.
+    """
+    image = _image()
+    fragments = P.fragment_config_image(0xD6, image)
+    report: dict = {}
+    transport = L.MockLiveTransport(notifications=fragments)
+    result = asyncio.run(L.read_config(transport, report=report))
+    assert result == image
+    assert report["fragment_count"] == 10
+    indexes = [f["index"] for f in report["fragments"]]
+    assert indexes == list(range(1, 11))
+    assert all(f["checksum_ok"] for f in report["fragments"])
+    data_bytes = [f["data_bytes"] for f in report["fragments"]]
+    assert data_bytes == [15] * 9 + [9]
+    assert sum(data_bytes) == 144
+
+
+def test_read_config_still_works_without_a_report_dict():
+    image = _image()
+    transport = L.MockLiveTransport(notifications=P.fragment_config_image(0xD6, image))
+    assert asyncio.run(L.read_config(transport)) == image
+
+
+def test_backup_document_records_fragments_only_when_given():
+    image = _image()
+    plain = L.backup_document(image)
+    assert "fragments" not in plain
+    with_fragments = L.backup_document(
+        image, fragments=[{"index": 1, "frame_bytes": 20, "data_bytes": 15,
+                           "checksum_ok": True}])
+    assert with_fragments["fragments"][0]["index"] == 1
+
+
+def test_cli_read_config_payload_carries_the_fragment_accounting(tmp_path, monkeypatch):
+    from armorx import cli
+    image = _image()
+    details = {"fragment_count": 10,
+               "fragments": [{"index": i, "frame_bytes": 20, "data_bytes": 15,
+                              "checksum_ok": True} for i in range(1, 11)]}
+
+    async def fake_read(address, connect_timeout, reply_timeout):
+        return {"model": "ZJ-XT", "firmware": "2741", "battery": 87}, image, details
+
+    monkeypatch.setattr(cli, "_live_read", fake_read)
+    out = tmp_path / "read.json"
+    args = argparse.Namespace(address="AA:BB:CC:DD:EE:FF", connect_timeout=1.0,
+                              reply_timeout=1.0, compact=False, output=str(out))
+    assert cli.cmd_live_read_config(args) == 0
+    payload = json.loads(out.read_text())
+    assert payload["fragment_count"] == 10
+    assert [f["index"] for f in payload["fragments"]] == list(range(1, 11))
+    assert "AA:BB:CC:DD:EE:FF" not in out.read_text()

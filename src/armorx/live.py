@@ -257,8 +257,14 @@ def _frames_from_notification(raw: bytes) -> list[protocol_mod.Frame]:
         return []
 
 
-async def read_config(transport: AsyncLiveTransport, *, timeout: float = 4.0) -> bytes:
-    """Issue proven D6 and collect the ten indexed A4 configuration fragments."""
+async def read_config(transport: AsyncLiveTransport, *, timeout: float = 4.0,
+                      report: dict[str, Any] | None = None) -> bytes:
+    """Issue proven D6 and collect the ten indexed A4 configuration fragments.
+
+    When *report* is a dict it is filled with the fragment accounting for the
+    read, so a caller can record how many fragments arrived and how large each
+    one was instead of taking the reassembled image on trust.
+    """
     await transport.send(D6_REQUEST, mutating=False)
     loop = asyncio.get_running_loop()
     deadline = loop.time() + timeout
@@ -291,6 +297,17 @@ async def read_config(transport: AsyncLiveTransport, *, timeout: float = 4.0) ->
         opcode=0xD6,
     )
     _validate_image(image)
+    if report is not None:
+        report["fragment_count"] = len(fragments)
+        report["fragments"] = [
+            {
+                "index": index,
+                "frame_bytes": len(frame.raw),
+                "data_bytes": len(frame.payload),
+                "checksum_ok": frame.checksum_ok,
+            }
+            for index, frame in sorted(fragments.items())
+        ]
     return image
 
 
@@ -315,13 +332,14 @@ def image_summary(image: bytes) -> dict:
     }
 
 
-def backup_document(image: bytes, *, identity: dict | None = None) -> dict:
+def backup_document(image: bytes, *, identity: dict | None = None,
+                    fragments: list[dict[str, Any]] | None = None) -> dict:
     """Create a privacy-conscious baseline that config.load_config can reopen."""
     safe_identity = {
         key: value for key, value in (identity or {}).items()
         if key in {"model", "firmware", "battery", "transport"}
     }
-    return {
+    document = {
         "format": "armorx-live-backup-v1",
         "bytes": list(bytes(image)),
         "summary": image_summary(bytes(image)),
@@ -332,6 +350,9 @@ def backup_document(image: bytes, *, identity: dict | None = None) -> dict:
             "hostname_stored": False,
         },
     }
+    if fragments is not None:
+        document["fragments"] = fragments
+    return document
 
 
 def load_image(path: str | Path) -> bytes:

@@ -698,13 +698,15 @@ def cmd_live_info(args: argparse.Namespace) -> int:
     return 0
 
 
-async def _live_read(address: str, connect_timeout: float, reply_timeout: float) -> tuple[dict, bytes]:
+async def _live_read(address: str, connect_timeout: float,
+                     reply_timeout: float) -> tuple[dict, bytes, dict]:
     transport = live_mod.BleakLiveTransport(address=address, connect_timeout=connect_timeout)
     await transport.connect()
+    details: dict = {}
     try:
         identity = await live_mod.read_identity(transport)
-        image = await live_mod.read_config(transport, timeout=reply_timeout)
-        return identity, image
+        image = await live_mod.read_config(transport, timeout=reply_timeout, report=details)
+        return identity, image, details
     finally:
         await transport.close()
 
@@ -713,10 +715,12 @@ def cmd_live_read_config(args: argparse.Namespace) -> int:
     result = _run_live(_live_read(args.address, args.connect_timeout, args.reply_timeout))
     if result is None:
         return 2
-    identity, image = result
+    identity, image, details = result
     payload = {
         "bytes": list(image),
         "summary": live_mod.image_summary(image),
+        "fragment_count": details.get("fragment_count"),
+        "fragments": details.get("fragments", []),
         "device": identity,
         "note": "D6 read only; no configuration mutation is performed",
     }
@@ -728,8 +732,9 @@ def cmd_live_backup(args: argparse.Namespace) -> int:
     result = _run_live(_live_read(args.address, args.connect_timeout, args.reply_timeout))
     if result is None:
         return 2
-    identity, image = result
-    document = live_mod.backup_document(image, identity=identity)
+    identity, image, details = result
+    document = live_mod.backup_document(image, identity=identity,
+                                        fragments=details.get("fragments"))
     Path(args.output).write_text(json.dumps(document, indent=2, sort_keys=True) + "\n",
                                  encoding="utf-8")
     _write_json(None, {
