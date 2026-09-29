@@ -31,11 +31,13 @@ ArmorX Toolkit is intentionally evidence-driven. Items move from research to sta
 ## Tooling
 
 - [x] Turn the current scripts into a single installable CLI
-- [ ] Add a schema-aware config editor
-- [ ] Add a macro visualizer
+- [x] Add a schema-aware config editor
+- [x] Add a macro visualizer
 - [ ] Add a config diff command
 - [ ] Add import/export helpers for community-shared configs
 - [x] Add a public Windows desktop GUI
+- [x] Add a guarded Linux desktop GUI with visual config editor, local profiles and offline macro timeline
+- [x] Add per-user Linux desktop launcher/package
 
 ## Public Windows v0.2.1
 

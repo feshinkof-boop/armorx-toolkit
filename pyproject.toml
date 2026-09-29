@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "armorx-toolkit"
-version = "0.4.0"
+version = "0.5.0"
 description = "Open-source BIGBIG WON ARMORX Pro tooling for Xbox controller configs, key mapping and macros"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -32,10 +32,13 @@ classifiers = [
 
 [project.scripts]
 armorx = "armorx.cli:main"
+armorx-gui = "armorx.gui:main"
+armorx-desktop = "armorx.desktop:main"
 
 [project.optional-dependencies]
 capture = []
 live = ["bleak>=0.22"]
+gui = ["PySide6>=6.7", "bleak>=0.22"]
 dev = ["pytest>=8.0"]
 
 [tool.setuptools]
