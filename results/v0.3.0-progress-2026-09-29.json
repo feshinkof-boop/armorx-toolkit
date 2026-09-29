@@ -1,0 +1,62 @@
+{
+ "shift": "v0.3.0-offline-continuation-2026-09-29",
+ "branch": "dev/v0.3.0-offline-2026-09-29",
+ "starting_commit": "3caf8fb",
+ "commits_this_shift": 5,
+ "research_branch": "research/xbox-rt-threshold-2026-09-29",
+ "research_tip": "c16baea",
+ "tests_before": 98,
+ "tests_after": 169,
+ "skipped": 0,
+ "new_modules": [
+  "armorx.capture",
+  "armorx.exchange"
+ ],
+ "cli_added": [
+  "capture inspect",
+  "capture formats",
+  "exchange export",
+  "exchange inspect",
+  "exchange verify",
+  "exchange schema",
+  "device doctor --bundle"
+ ],
+ "fixes": [
+  "split_stream family/checksum validation",
+  "reassemble_a4 duplicate index detection"
+ ],
+ "ci": {
+  "platforms": [
+   "3.10",
+   "3.11",
+   "3.12",
+   "3.13"
+  ],
+  "status": "success",
+  "commit": "7e3d08a"
+ },
+ "packaging": {
+  "wheel": "dist/armorx_toolkit-0.2.0-py3-none-any.whl",
+  "sdist": "dist/armorx_toolkit-0.2.0.tar.gz",
+  "clean_venv_smoke": "pass",
+  "version": "0.2.0",
+  "bump_applied": false
+ },
+ "static_research": {
+  "mission1": "closed - r4 provenance and gates proven",
+  "mission2": "answered - ordering is per-pass; edge path sufficient but not necessary",
+  "tests": 535
+ },
+ "hardware_present": false,
+ "release_blockers": [
+  "identity recognition never run against hardware",
+  "doctor hidraw permissions only synthetic",
+  "vendor interface payload open",
+  "gip 32->48 transition unknown",
+  "rt digital path not observed end to end",
+  "no windows validation",
+  "version bump not applied"
+ ],
+ "safe_for_draft_rc": true,
+ "safe_for_validated_release": false
+}
