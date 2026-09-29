@@ -155,7 +155,8 @@ def test_doctor_is_json_serialisable(tmp_path):
 
 def test_gip_report_forms_record_unknown_transition():
     forms = device.GIP_REPORT_FORMS
-    assert forms["startup"]["length"] == 32 and forms["steady"]["length"] == 48
+    assert forms["short"]["length"] == 32 and forms["steady"]["length"] == 48
+    assert "not established" in forms["short"]["context"]
     assert forms["transition_cause"]["evidence"] == "unknown"
 
 

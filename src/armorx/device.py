@@ -67,7 +67,13 @@ KNOWN_IDENTITIES: dict[str, dict] = {
 
 #: Reports seen from the GIP personality.
 GIP_REPORT_FORMS = {
-    "startup": {"length": 32, "evidence": EVIDENCE_PROVEN},
+    "short": {
+        "length": 32,
+        "evidence": EVIDENCE_PROVEN,
+        "context": "the 32-byte length has been observed, but its role is not established: a "
+                   "capture begun before power-on on 2026-09-29 produced 48-byte reports from "
+                   "the first frame, so it is no longer described as a startup form",
+    },
     "steady": {"length": 48, "evidence": EVIDENCE_PROVEN},
     "transition_cause": {"value": None, "evidence": EVIDENCE_UNKNOWN,
                          "note": "why the stream moves from 32 to 48 bytes is unknown"},
@@ -452,7 +458,9 @@ def doctor(*, sysfs_root: str | os.PathLike[str] = DEFAULT_SYSFS_ROOT,
     checks.append(DoctorCheck(
         "gip_expectations",
         "info",
-        "input reports have been observed in 32-byte startup and 48-byte steady-state forms; "
+        "input reports have been observed in 32-byte and 48-byte forms; the 48-byte form is "
+        "the one seen in steady state and after every observed power-on, so the 32-byte form's "
+        "role is not established; "
         "the transition cause is unknown",
         EVIDENCE_STRONG,
     ))

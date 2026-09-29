@@ -44,9 +44,9 @@ def test_steady_state_form_parses():
     assert report.counters == (0x16F4, 0x16F4)
 
 
-def test_startup_form_parses_and_has_no_counters():
+def test_short_form_parses_and_has_no_counters():
     report = gip.parse_gip_input(synthetic_report(length=32))
-    assert report.length == 32 and report.form == "startup"
+    assert report.length == 32 and report.form == "short"
     assert report.counters is None
 
 

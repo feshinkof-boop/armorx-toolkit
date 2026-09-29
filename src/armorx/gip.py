@@ -123,7 +123,7 @@ def parse_gip_input(data: bytes | bytearray, *, strict: bool = True) -> GipInput
         if off < len(buf) and buf[off] != expected and strict:
             raise GipError(f"byte {off} is 0x{buf[off]:02X}, expected 0x{expected:02X}")
     if len(buf) in REPORT_LENS:
-        form = "startup" if len(buf) == REPORT_LEN_STARTUP else "steady"
+        form = "short" if len(buf) == REPORT_LEN_STARTUP else "steady"
     else:
         if strict:
             raise GipError(f"unexpected report length {len(buf)}; observed forms are "
