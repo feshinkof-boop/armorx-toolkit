@@ -259,9 +259,12 @@ if QT_AVAILABLE:
             self._refresh_action_state()
 
         def _set_loaded(self, loaded: bool) -> None:
-            self.tabs.setEnabled(loaded)
+            # Keep the tab widget available even before a config is loaded so a
+            # saved local profile can be opened from a fresh application start.
+            self.tabs.setEnabled(True)
             self.reset_button.setEnabled(loaded)
             self.export_button.setEnabled(loaded)
+            self.profile_save.setEnabled(loaded)
             self._refresh_action_state()
 
         def _refresh_action_state(self) -> None:
@@ -475,9 +478,16 @@ if QT_AVAILABLE:
         @Slot(object)
         def _apply_result(self, report: dict[str, Any]) -> None:
             status = report.get("status")
-            if status in {"APPLIED", "NO_CHANGE"}:
-                if status == "APPLIED" and self.pending_backup_prefix is not None:
+            # Once a real pre-write backup exists, keep it reachable even when
+            # the later D7/verification stage fails. The rollback backend will
+            # still refuse an unrelated/ambiguous live state by default.
+            backup_available = False
+            if self.pending_backup_prefix is not None:
+                backup_available = self.pending_backup_prefix.with_suffix(".bin").exists()
+                if backup_available:
                     self.last_backup_prefix = self.pending_backup_prefix
+
+            if status in {"APPLIED", "NO_CHANGE"}:
                 if self.session is not None:
                     self.session.accept_working_as_baseline()
                     self._refresh_controls()
@@ -490,9 +500,15 @@ if QT_AVAILABLE:
                 reason = report.get("failure_reason") or report.get("refusal_reason") or (
                     "The write did not complete successfully."
                 )
+                recovery = (
+                    "\n\nA verified pre-write backup is available through "
+                    "'Rollback last backup' if the backend classifies the live state as safe."
+                    if backup_available else ""
+                )
                 QMessageBox.warning(
                     self, "ArmorX — Apply not completed",
                     f"Status: {status}\n\n{reason}\n\nNo automatic retry was performed."
+                    f"{recovery}"
                 )
             self.pending_backup_prefix = None
             self._refresh_summary()
