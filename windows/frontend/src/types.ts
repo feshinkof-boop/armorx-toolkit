@@ -43,7 +43,15 @@ export type ConfigState = {
     gyro1: number[];
     gyro2: number[];
   };
+  baselineCurves?: {
+    left: number[];
+    right: number[];
+    gyro0: number[];
+    gyro1: number[];
+    gyro2: number[];
+  } | null;
   mappings: { m1: number; m2: number; m3: number; m4: number };
+  baselineMappings?: { m1: number; m2: number; m3: number; m4: number } | null;
   mappingTargets: { id: number; name: string }[];
 };
 

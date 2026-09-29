@@ -36,6 +36,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
     private bool _manualDisconnect;
     private bool _closing;
     private CancellationTokenSource? _guardianCts;
+    private CancellationTokenSource? _telemetryCts;
     private PreparedWrite? _preparedWrite;
 
     public event EventHandler? StateChanged;
@@ -232,6 +233,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
             await session.InitializeAsync(cancellationToken);
             _session = session;
             RememberAddress(address);
+            StartTelemetry(session);
 
             _connection = "Connected";
             _connectionDetail = $"{session.Model ?? "ARMOR-X Pro"} · firmware {session.Firmware ?? "—"}";
@@ -254,10 +256,38 @@ public sealed class ArmorXAppController : IAsyncDisposable
         }
     }
 
+    private void StartTelemetry(ArmorXDeviceSession session)
+    {
+        _telemetryCts?.Cancel();
+        _telemetryCts = new CancellationTokenSource();
+        var token = _telemetryCts.Token;
+        _ = Task.Run(async () =>
+        {
+            while (!token.IsCancellationRequested)
+            {
+                try
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(45), token);
+                    if (token.IsCancellationRequested || !ReferenceEquals(_session, session) || !_transport.IsConnected)
+                        return;
+                    if (_busy) continue;
+                    await session.RefreshBatteryAsync(token);
+                    NotifyState();
+                }
+                catch (OperationCanceledException) { return; }
+                catch
+                {
+                    // Battery telemetry is non-critical; the connection guardian handles real disconnects.
+                }
+            }
+        }, token);
+    }
+
     private async Task<object> DisconnectAsync()
     {
         _manualDisconnect = true;
         _guardianCts?.Cancel();
+        _telemetryCts?.Cancel();
         return await RunBusyAsync("Disconnecting...", async () =>
         {
             _session?.Dispose();
@@ -711,6 +741,9 @@ public sealed class ArmorXAppController : IAsyncDisposable
         var pending = baseline is { Length: ArmorXConfig144.Size }
             ? ConfigDiff.CompareEditable(baseline, desired.ToArray())
             : Array.Empty<ConfigByteChange>();
+        var baselineEditor = baseline is { Length: ArmorXConfig144.Size }
+            ? new EditableArmorXConfig(new ArmorXConfig144(baseline))
+            : null;
 
         return new
         {
@@ -718,9 +751,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
             crcValid = desired.CrcValid,
             pending = ChangePayload(pending),
             fields = ConfigFields(cfg),
-            baseline = baseline is { Length: ArmorXConfig144.Size }
-                ? ConfigFields(new EditableArmorXConfig(new ArmorXConfig144(baseline)))
-                : null,
+            baseline = baselineEditor is null ? null : ConfigFields(baselineEditor),
             curves = new
             {
                 left = cfg.LeftStickCurve.Select(x => x.Value).ToArray(),
@@ -729,10 +760,23 @@ public sealed class ArmorXAppController : IAsyncDisposable
                 gyro1 = cfg.GyroCurve1.Select(x => x.Value).ToArray(),
                 gyro2 = cfg.GyroCurve2.Select(x => x.Value).ToArray()
             },
+            baselineCurves = baselineEditor is null ? null : new
+            {
+                left = baselineEditor.LeftStickCurve.Select(x => x.Value).ToArray(),
+                right = baselineEditor.RightStickCurve.Select(x => x.Value).ToArray(),
+                gyro0 = baselineEditor.GyroCurve0.Select(x => x.Value).ToArray(),
+                gyro1 = baselineEditor.GyroCurve1.Select(x => x.Value).ToArray(),
+                gyro2 = baselineEditor.GyroCurve2.Select(x => x.Value).ToArray()
+            },
             mappings = new
             {
                 m1 = cfg.M1TargetId, m2 = cfg.M2TargetId,
                 m3 = cfg.M3TargetId, m4 = cfg.M4TargetId
+            },
+            baselineMappings = baselineEditor is null ? null : new
+            {
+                m1 = baselineEditor.M1TargetId, m2 = baselineEditor.M2TargetId,
+                m3 = baselineEditor.M3TargetId, m4 = baselineEditor.M4TargetId
             },
             mappingTargets = EditableArmorXConfig.ProvenMappingTargets.Select(x => new { id = x.Id, name = x.Name }).ToArray()
         };
@@ -880,6 +924,7 @@ public sealed class ArmorXAppController : IAsyncDisposable
     {
         _closing = true;
         _guardianCts?.Cancel();
+        _telemetryCts?.Cancel();
         _session?.Dispose();
         await _transport.DisposeAsync();
         _connectionGate.Dispose();

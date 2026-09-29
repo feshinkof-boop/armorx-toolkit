@@ -276,9 +276,9 @@ function Sticks({ state, patch }: { state: StudioState; patch: (f: string, v: nu
         The graphs use recovered raw 0–255 configuration bytes. They are excellent for comparing edits, but are not labeled as physical percentages until the firmware scaling is proven.
       </InfoBanner>
       <div className="twoCol">
-        <StickCard side="Left" fields={cfg.fields} baseline={cfg.baseline} curve={cfg.curves.left} prefix="leftCurve." patch={patch}
+        <StickCard side="Left" fields={cfg.fields} baseline={cfg.baseline} curve={cfg.curves.left} baselineCurve={cfg.baselineCurves?.left} prefix="leftCurve." patch={patch}
           centerKey="leftStickDeadzoneCenter" sideKey="leftStickDeadzoneSide" />
-        <StickCard side="Right" fields={cfg.fields} baseline={cfg.baseline} curve={cfg.curves.right} prefix="rightCurve." patch={patch}
+        <StickCard side="Right" fields={cfg.fields} baseline={cfg.baseline} curve={cfg.curves.right} baselineCurve={cfg.baselineCurves?.right} prefix="rightCurve." patch={patch}
           centerKey="rightStickDeadzoneCenter" sideKey="rightStickDeadzoneSide" />
       </div>
       <Card title="Global stick behavior" subtitle="Recovered common stick fields.">
@@ -291,8 +291,8 @@ function Sticks({ state, patch }: { state: StudioState; patch: (f: string, v: nu
   );
 }
 
-function StickCard({ side, fields, baseline, curve, prefix, patch, centerKey, sideKey }: {
-  side: string; fields: ConfigFields; baseline: ConfigFields | null; curve: number[]; prefix: string;
+function StickCard({ side, fields, baseline, curve, baselineCurve, prefix, patch, centerKey, sideKey }: {
+  side: string; fields: ConfigFields; baseline: ConfigFields | null; curve: number[]; baselineCurve?: number[]; prefix: string;
   patch: (f: string, v: number) => Promise<void>; centerKey: keyof ConfigFields; sideKey: keyof ConfigFields;
 }) {
   return (
@@ -306,7 +306,7 @@ function StickCard({ side, fields, baseline, curve, prefix, patch, centerKey, si
       <div className="curveControls">
         {curve.map((value, index) => (
           <SliderControl key={index} compact label={["Mode", "YDivx", "P1 X", "P1 Y", "P2 X", "P2 Y"][index]}
-            field={`${prefix}${index}`} value={value} patch={patch} spec={help.curve} />
+            field={`${prefix}${index}`} value={value} baseline={baselineCurve?.[index]} patch={patch} spec={help.curve} />
         ))}
       </div>
     </Card>
@@ -328,6 +328,9 @@ function Triggers({ state, patch, gamepad }: { state: StudioState; patch: (f: st
         </div>
         <TriggerTower label="RT" value={gamepad.rightTrigger} live />
       </div>
+      <Card title="Trigger mode" subtitle="Recovered raw mode byte — keep the loaded default unless you know the intended mode.">
+        <SliderControl label="Trigger mode byte" field="triggerMode" value={cfg.fields.triggerMode} baseline={cfg.baseline?.triggerMode} patch={patch} spec={help.triggerDeadzone} />
+      </Card>
       <div className="twoCol">
         <Card title="Left trigger" subtitle="Recovered LT deadzone bytes.">
           <SliderControl label="Center deadzone" field="triggerLeftDeadzoneCenter" value={cfg.fields.triggerLeftDeadzoneCenter} baseline={cfg.baseline?.triggerLeftDeadzoneCenter} patch={patch} spec={help.triggerDeadzone} />
@@ -363,7 +366,9 @@ function Gyro({ state, patch }: { state: StudioState; patch: (f: string, v: numb
           <Card key={gi} title={`Gyro curve ${gi + 1}`} subtitle="Recovered six-byte curve">
             <CurvePlot values={curve} />
             {curve.map((value, i) => (
-              <SliderControl key={i} compact label={`Byte ${i + 1}`} field={`gyro${gi}.${i}`} value={value} patch={patch} spec={help.curve} />
+              <SliderControl key={i} compact label={`Byte ${i + 1}`} field={`gyro${gi}.${i}`} value={value}
+                baseline={[cfg.baselineCurves?.gyro0, cfg.baselineCurves?.gyro1, cfg.baselineCurves?.gyro2][gi]?.[i]}
+                patch={patch} spec={help.curve} />
             ))}
           </Card>
         ))}
@@ -381,12 +386,15 @@ function Mapping({ state, patch }: { state: StudioState; patch: (f: string, v: n
         {(["m1", "m2", "m3", "m4"] as const).map((key, index) => {
           const field = `${key}TargetId`;
           const current = cfg.mappings[key];
-          const baseline = cfg.baseline ? undefined : undefined;
+          const baselineId = cfg.baselineMappings?.[key];
+          const baselineName = baselineId == null
+            ? "Loaded device mapping"
+            : cfg.mappingTargets.find((target) => target.id === baselineId)?.name || String(baselineId);
           return (
             <div className={`mappingCard m${index + 1}`} key={key}>
               <div className="mappingBadge">{key.toUpperCase()}</div>
               <div><h3>Rear button {index + 1}</h3><p>Map to a proven public input ID.</p></div>
-              <HelpTip spec={help.mapping} baseline={baseline == null ? "Loaded device mapping" : String(baseline)} />
+              <HelpTip spec={help.mapping} baseline={baselineName} />
               <select value={current} onChange={(e) => patch(field, Number(e.target.value))}>
                 {cfg.mappingTargets.map((target) => <option key={target.id} value={target.id}>{target.name} · {target.id}</option>)}
               </select>
@@ -555,7 +563,7 @@ function ButtonTest({ gamepad }: { gamepad: GamepadSnapshot }) {
   return (
     <div className="pageStack">
       <InfoBanner title="Live Windows input — read only">
-        This page reads the Windows Xbox-compatible Gamepad API. It never sends BLE or USB commands. L3/R3, stick motion and LT/RT pressure are highlighted in real time.
+        This page reads the Windows Xbox-compatible Gamepad API. It never sends BLE or USB commands. L3/R3, stick motion and LT/RT pressure are highlighted in real time. <HelpTip spec={help.buttonTest} />
       </InfoBanner>
       <div className="testerCard">
         <div className="testerTop">

@@ -55,6 +55,14 @@ public sealed class ArmorXDeviceSession : IDisposable
         catch (TimeoutException) { Emit("EF response timed out; local configuration is still available."); }
     }
 
+    public async Task<int?> RefreshBatteryAsync(CancellationToken cancellationToken = default)
+    {
+        var battery = await _transport.ReadCharacteristicAsync(
+            ArmorXBleTransport.BatteryUuid, cancellationToken);
+        BatteryPercent = battery is { Length: > 0 } ? battery[0] : null;
+        return BatteryPercent;
+    }
+
     public async Task<ArmorXConfig144> ReadConfigAsync(CancellationToken cancellationToken = default)
     {
         Task<byte[]> wait;
