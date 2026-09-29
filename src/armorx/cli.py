@@ -12,7 +12,9 @@ from typing import Sequence
 from . import __version__
 from . import community as community_mod
 from . import config as config_mod
+from . import capture as capture_mod
 from . import device as device_mod
+from . import exchange as exchange_mod
 from . import gip as gip_mod
 from . import macro as macro_mod
 from . import protocol as protocol_mod
@@ -277,6 +279,10 @@ def cmd_community_import(args: argparse.Namespace) -> int:
 
 
 
+def _toolkit_version() -> str:
+    return __version__
+
+
 # ---------------------------------------------------------------------------
 # device (read-only discovery and diagnostics)
 # ---------------------------------------------------------------------------
@@ -312,6 +318,16 @@ def cmd_device_inspect(args: argparse.Namespace) -> int:
 
 
 def cmd_device_doctor(args: argparse.Namespace) -> int:
+    if args.bundle:
+        bundle = device_mod.diagnostics_bundle(include_hostname=args.include_hostname,
+                                               toolkit_version=_toolkit_version())
+        Path(args.bundle).write_text(
+            device_mod.render_bundle_text(bundle) if args.text
+            else json.dumps(bundle, indent=2, sort_keys=True)
+        )
+        _write_json(args.output, {"bundle": args.bundle, "text": bool(args.text),
+                                  "privacy": bundle["privacy"]})
+        return 0
     result = device_mod.doctor()
     _write_json(args.output, result)
     return 0
@@ -427,6 +443,10 @@ def _add_device_commands(groups) -> None:
 
     p = device_sub.add_parser("doctor", help="diagnose whether this machine can talk to hardware")
     p.add_argument("--compact", action="store_true")
+    p.add_argument("--bundle", help="write a sanitised diagnostics bundle to this file")
+    p.add_argument("--include-hostname", action="store_true",
+                   help="include the machine hostname in the bundle (off by default)")
+    p.add_argument("--text", action="store_true", help="print the bundle as text instead of JSON")
     p.add_argument("-o", "--output")
     p.set_defaults(func=cmd_device_doctor)
 
@@ -477,6 +497,161 @@ def _add_gip_commands(groups) -> None:
     p.add_argument("--compact", action="store_true")
     p.set_defaults(func=cmd_gip_forms)
 
+
+
+# ---------------------------------------------------------------------------
+# capture (offline inspection of saved captures)
+# ---------------------------------------------------------------------------
+
+def cmd_capture_inspect(args: argparse.Namespace) -> int:
+    try:
+        report = capture_mod.inspect_file(args.file, usb_limit=args.limit)
+    except capture_mod.CaptureError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    except protocol_mod.FrameError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    if args.summary:
+        print(capture_mod.summarise(report))
+        hint = capture_mod.external_reader_hint()
+        if hint:
+            print(hint)
+        return 0
+    _write_json(args.output, report.to_dict())
+    return 0
+
+
+def cmd_capture_formats(_: argparse.Namespace) -> int:
+    _write_json(None, {
+        "supported": {
+            "hex-text": "whitespace, comma or colon separated hex bytes",
+            "raw": "binary bytes containing A5/A4 frames",
+            "usbmon-pcap": f"classic pcap with link type {capture_mod.DLT_USB_LINUX} or {capture_mod.DLT_USB_LINUX_MMAPPED}",
+        },
+        "unsupported": {"pcapng": "save as classic pcap, e.g. tshark -F pcap"},
+        "note": "no packet-processing dependency is required for any supported format",
+    })
+    return 0
+
+
+# ---------------------------------------------------------------------------
+# exchange (shareable local envelope)
+# ---------------------------------------------------------------------------
+
+def cmd_exchange_export(args: argparse.Namespace) -> int:
+    try:
+        payload = json.loads(Path(args.payload).read_text())
+    except FileNotFoundError:
+        print(f"error: {args.payload} does not exist", file=sys.stderr)
+        return 2
+    except json.JSONDecodeError as exc:
+        print(f"error: {args.payload} is not valid JSON: {exc.msg}", file=sys.stderr)
+        return 2
+    device_meta = json.loads(args.device) if args.device else {}
+    firmware_meta = json.loads(args.firmware) if args.firmware else {}
+    provenance = json.loads(args.provenance) if args.provenance else {}
+    try:
+        env = exchange_mod.create(args.content_type, payload, device=device_meta,
+                                  firmware=firmware_meta, provenance=provenance,
+                                  created=args.created, notes=args.notes,
+                                  toolkit_format=_toolkit_version())
+    except exchange_mod.ExchangeError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    if args.output and args.output.endswith(".json"):
+        exchange_mod.save(env, args.output)
+        _write_json(None, {"wrote": args.output, "content_id": env.content_id})
+    else:
+        print(env.to_json(indent=None if args.compact else 2), end="")
+    return 0
+
+
+def cmd_exchange_inspect(args: argparse.Namespace) -> int:
+    try:
+        env = exchange_mod.load(args.file)
+    except exchange_mod.ExchangeError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    _write_json(args.output, {"envelope": env.to_dict(), **exchange_mod.verify(env)})
+    return 0
+
+
+def cmd_exchange_verify(args: argparse.Namespace) -> int:
+    try:
+        env = exchange_mod.load(args.file)
+    except exchange_mod.ExchangeError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 2
+    result = exchange_mod.verify(env)
+    _write_json(args.output, result)
+    return 0 if result["content_id_ok"] else 3
+
+
+def cmd_exchange_schema(_: argparse.Namespace) -> int:
+    _write_json(None, {
+        "schema": exchange_mod.SCHEMA,
+        "content_types": list(exchange_mod.CONTENT_TYPES),
+        "evidence_levels": list(exchange_mod.EVIDENCE_LEVELS),
+        "max_payload_bytes": exchange_mod.MAX_PAYLOAD_BYTES,
+        "fields": {
+            "schema": "envelope schema identifier",
+            "content_type": "config or macro",
+            "toolkit_format": "toolkit version that wrote the envelope",
+            "device": "model and identity metadata, never serial numbers",
+            "firmware": "firmware metadata where known",
+            "provenance": "where the payload came from and its evidence level",
+            "created": "optional UTC timestamp",
+            "payload": "the configuration or macro content",
+            "content_id": "sha256 over the canonical body, excluding this field",
+        },
+        "note": "the content id is stable across whitespace and key ordering",
+    })
+    return 0
+
+
+def _add_capture_commands(groups) -> None:
+    capture = groups.add_parser("capture", help="inspect saved captures offline")
+    sub = capture.add_subparsers(dest="capture_command", required=True)
+    p = sub.add_parser("inspect", help="inspect a hex dump, raw stream or usbmon pcap")
+    p.add_argument("file")
+    p.add_argument("--limit", type=int, help="stop after this many usbmon records")
+    p.add_argument("--summary", action="store_true", help="one line summary instead of JSON")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_capture_inspect)
+    p = sub.add_parser("formats", help="list the supported capture formats")
+    p.add_argument("--compact", action="store_true")
+    p.set_defaults(func=cmd_capture_formats)
+
+
+def _add_exchange_commands(groups) -> None:
+    exchange = groups.add_parser("exchange", help="shareable configuration and macro envelopes")
+    sub = exchange.add_subparsers(dest="exchange_command", required=True)
+    p = sub.add_parser("export", help="wrap a JSON payload in an envelope")
+    p.add_argument("payload", help="path to a JSON file to wrap")
+    p.add_argument("--content-type", required=True, choices=list(exchange_mod.CONTENT_TYPES))
+    p.add_argument("--device", help="JSON object with device metadata")
+    p.add_argument("--firmware", help="JSON object with firmware metadata")
+    p.add_argument("--provenance", help="JSON object describing where the payload came from")
+    p.add_argument("--created", help="ISO-8601 UTC timestamp; omit to leave it unset")
+    p.add_argument("--notes")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output", help="write to this .json file instead of stdout")
+    p.set_defaults(func=cmd_exchange_export)
+    p = sub.add_parser("inspect", help="show an envelope with its verification result")
+    p.add_argument("file")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_exchange_inspect)
+    p = sub.add_parser("verify", help="verify the content id of an envelope")
+    p.add_argument("file")
+    p.add_argument("--compact", action="store_true")
+    p.add_argument("-o", "--output")
+    p.set_defaults(func=cmd_exchange_verify)
+    p = sub.add_parser("schema", help="describe the envelope schema")
+    p.add_argument("--compact", action="store_true")
+    p.set_defaults(func=cmd_exchange_schema)
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
@@ -648,6 +823,8 @@ def build_parser() -> argparse.ArgumentParser:
     _add_device_commands(groups)
     _add_protocol_commands(groups)
     _add_gip_commands(groups)
+    _add_capture_commands(groups)
+    _add_exchange_commands(groups)
 
     return parser
 

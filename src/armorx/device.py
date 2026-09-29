@@ -8,6 +8,8 @@ every claim. "No supported device found" is a successful result, not an error.
 from __future__ import annotations
 
 import os
+import platform
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable
@@ -463,3 +465,93 @@ def find_by_path(candidates: Iterable[DeviceCandidate], selected: str) -> Device
                       ident.vid_pid, f"{ident.vid:04x}", f"{ident.pid:04x}"):
             return candidate
     return None
+
+
+# ---------------------------------------------------------------------------
+# diagnostics bundle (safe to paste into an issue report)
+# ---------------------------------------------------------------------------
+
+_BUNDLE_KEY_PATTERNS = (
+    re.compile(r"serial", re.I),
+    re.compile(r"mac_?address|\bMAC\b"),
+    re.compile(r"bdaddr|bluetooth_?address"),
+    re.compile(r"token|secret|password|api_?key", re.I),
+)
+_HOME_RE = re.compile(r"/(?:home|Users|root)/[^/\s\"']+")
+
+
+def _clean_value(value):
+    if isinstance(value, str):
+        return _HOME_RE.sub("<home>", value)
+    if isinstance(value, dict):
+        return {k: _clean_value(v) for k, v in value.items()
+                if not any(p.search(k) for p in _BUNDLE_KEY_PATTERNS)}
+    if isinstance(value, list):
+        return [_clean_value(v) for v in value]
+    return value
+
+
+def diagnostics_bundle(*, include_hostname: bool = False, sysfs_root=None,
+                       hidraw_root=None, input_root=None, toolkit_version: str = "",
+                       usb_limit: int = 32) -> dict:
+    """Build a sanitised diagnostics bundle intended for public issue reports.
+
+    Deliberately omitted: usernames, home directory paths, hostname (unless asked
+    for), USB serial numbers, Bluetooth or MAC addresses, and any environment
+    value that looks like a credential.
+    """
+    kwargs = {}
+    if sysfs_root is not None:
+        kwargs["sysfs_root"] = sysfs_root
+    if hidraw_root is not None:
+        kwargs["hidraw_root"] = hidraw_root
+    if input_root is not None:
+        kwargs["input_root"] = input_root
+    result = doctor(**kwargs)
+    bundle = {
+        "toolkit_version": toolkit_version or "unknown",
+        "python": platform.python_version(),
+        "system": platform.system(),
+        "release": platform.release(),
+        "machine": platform.machine(),
+        "doctor": result,
+        "devices": [],
+        "usb_inventory_truncated": False,
+        "privacy": {
+            "omitted": ["usernames", "home paths", "usb serial numbers", "bluetooth/MAC addresses",
+                        "credentials"],
+            "hostname_included": bool(include_hostname),
+        },
+    }
+    if include_hostname:
+        bundle["hostname"] = platform.node()
+    for candidate in scan_devices(**kwargs):
+        entry = candidate.to_dict()
+        entry["identity"].pop("serial", None)
+        entry["identity"]["serial"] = "<omitted>" if candidate.identity.serial else None
+        bundle["devices"].append(entry)
+    bundle = _clean_value(bundle)
+    if len(bundle["devices"]) >= usb_limit:
+        bundle["usb_inventory_truncated"] = True
+    return bundle
+
+
+def render_bundle_text(bundle: dict) -> str:
+    """Human-readable rendering of a diagnostics bundle."""
+    lines = [f"armorx toolkit {bundle.get('toolkit_version')}",
+             f"python {bundle.get('python')} on {bundle.get('system')} {bundle.get('release')}",
+             ""]
+    for check in bundle["doctor"]["checks"]:
+        lines.append(f"[{check['status']}] {check['check']}: {check['detail']}")
+    lines.append("")
+    lines.append(f"recognized devices: {len(bundle['devices'])}")
+    for device in bundle["devices"]:
+        identity = device["identity"]
+        states = device["states"]
+        if states and isinstance(states[0], dict):
+            states = [s.get("name", "?") for s in states]
+        lines.append(f"  {identity['vid_pid']} {identity['usb_path']} "
+                     f"{identity.get('product') or '?'} -> {', '.join(states)}")
+    lines.append("")
+    lines.append("omitted for privacy: " + ", ".join(bundle["privacy"]["omitted"]))
+    return "\n".join(lines)
