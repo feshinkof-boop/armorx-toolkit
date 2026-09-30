@@ -637,8 +637,10 @@ public sealed class ArmorXAppController : IAsyncDisposable
             Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*"
         };
         if (dialog.ShowDialog() != true) return new { cancelled = true };
-        File.WriteAllText(dialog.FileName, text, new UTF8Encoding(false));
-        return new { cancelled = false, name = Path.GetFileName(dialog.FileName) };
+        var path = dialog.FileName;
+        if (string.IsNullOrWhiteSpace(path)) return new { cancelled = true };
+        File.WriteAllText(path, text, new UTF8Encoding(false));
+        return new { cancelled = false, name = Path.GetFileName(path) };
     }
 
     private async Task<object> ExportDiagnosticsAsync()

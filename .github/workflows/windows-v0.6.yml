@@ -29,6 +29,8 @@ jobs:
         shell: pwsh
         working-directory: windows/frontend
         run: |
+          $ErrorActionPreference = 'Stop'
+          $PSNativeCommandUseErrorActionPreference = $true
           npm install
           npm audit --audit-level=moderate
           npm test -- --run

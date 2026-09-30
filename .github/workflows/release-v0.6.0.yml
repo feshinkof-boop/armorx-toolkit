@@ -31,6 +31,8 @@ jobs:
         shell: pwsh
         working-directory: windows/frontend
         run: |
+          $ErrorActionPreference = 'Stop'
+          $PSNativeCommandUseErrorActionPreference = $true
           npm install
           npm audit --audit-level=moderate
           npm test -- --run
@@ -63,18 +65,26 @@ jobs:
       - name: Build installer
         shell: pwsh
         run: |
-          $iscc = @(
-            "$env:ProgramFiles(x86)\Inno Setup 6\ISCC.exe",
-            "$env:ProgramFiles\Inno Setup 6\ISCC.exe"
-          ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+          $ErrorActionPreference = 'Stop'
+          $PSNativeCommandUseErrorActionPreference = $true
+          $iscc = (Get-Command ISCC.exe -ErrorAction SilentlyContinue).Source
           if (-not $iscc) {
-            choco install innosetup -y --no-progress
-            $iscc = @(
-              "$env:ProgramFiles(x86)\Inno Setup 6\ISCC.exe",
-              "$env:ProgramFiles\Inno Setup 6\ISCC.exe"
-            ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+            $candidates = @(
+              "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
+              "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
+              "$env:ChocolateyInstall\bin\ISCC.exe"
+            )
+            $iscc = $candidates | Where-Object { $_ -and (Test-Path $_) } | Select-Object -First 1
+          }
+          if (-not $iscc) {
+            choco install innosetup -y --no-progress --force
+            $iscc = (Get-Command ISCC.exe -ErrorAction SilentlyContinue).Source
+            if (-not $iscc) {
+              $iscc = Get-ChildItem -Path @("${env:ProgramFiles(x86)}", "$env:ProgramFiles", "$env:ChocolateyInstall") -Filter ISCC.exe -File -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+            }
           }
           if (-not $iscc) { throw "Inno Setup ISCC.exe not found" }
+          Write-Host "Using Inno Setup compiler: $iscc"
           & $iscc .\windows\installer\ArmorX-Studio.iss
           if ($LASTEXITCODE -ne 0) { throw "ISCC failed: $LASTEXITCODE" }
           Copy-Item .\artifacts\installer\ArmorX-Studio-v0.6.0-Setup.exe .\ArmorX-Studio-v0.6.0-Setup.exe
