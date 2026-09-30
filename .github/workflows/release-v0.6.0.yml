@@ -50,18 +50,15 @@ jobs:
           if (-not (Test-Path "$out\ArmorX-Studio.exe")) { throw "ArmorX-Studio.exe missing" }
           if (-not (Test-Path "$out\wwwroot\index.html")) { throw "React wwwroot missing" }
 
-      - name: Core self-test
+      - name: Core backend self-test
         shell: pwsh
-        run: |
-          $exe = '.\artifacts\win-x64\ArmorX-Studio.exe'
-          $p = Start-Process $exe -ArgumentList '--self-test' -PassThru -Wait
-          if ($p.ExitCode -ne 0) { throw "Core self-test failed: $($p.ExitCode)" }
+        run: dotnet run --project .\windows\ArmorX.SelfTest\ArmorX.SelfTest.csproj -c Release
 
       - name: Package portable and source ZIPs
         shell: pwsh
         run: |
           Compress-Archive -Path .\artifacts\win-x64\* -DestinationPath .\ArmorX-Studio-v0.6.0-win-x64.zip -Force
-          git archive --format=zip --output=ArmorX-Studio-v0.6.0-source.zip HEAD windows/ArmorX.Windows windows/frontend windows/README.md windows/build.ps1 windows/run-dev.ps1 windows/installer
+          git archive --format=zip --output=ArmorX-Studio-v0.6.0-source.zip HEAD windows/ArmorX.Windows windows/ArmorX.SelfTest windows/frontend windows/README.md windows/build.ps1 windows/run-dev.ps1 windows/installer
 
       - name: Build installer
         shell: pwsh

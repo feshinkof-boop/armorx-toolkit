@@ -52,12 +52,9 @@ jobs:
           if (-not (Test-Path "$out\ArmorX-Studio.exe")) { throw 'ArmorX-Studio.exe missing' }
           if (-not (Test-Path "$out\wwwroot\index.html")) { throw 'React wwwroot missing from publish' }
 
-      - name: Core self-test
+      - name: Core backend self-test
         shell: pwsh
-        run: |
-          $exe = '.\artifacts\win-x64\ArmorX-Studio.exe'
-          $p = Start-Process $exe -ArgumentList '--self-test' -PassThru -Wait
-          if ($p.ExitCode -ne 0) { throw "Core self-test failed: $($p.ExitCode)" }
+        run: dotnet run --project .\windows\ArmorX.SelfTest\ArmorX.SelfTest.csproj -c Release
 
       - name: Package CI preview
         shell: pwsh
