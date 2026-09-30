@@ -1,0 +1,134 @@
+name: Publish ArmorX Studio v0.6.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "windows/**"
+      - "docs/assets/windows/v0.6.0/**"
+      - "README.md"
+      - "CHANGELOG.md"
+      - "RELEASE_NOTES_v0.6.0.md"
+      - ".github/workflows/release-v0.6.0.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Frontend quality gate
+        shell: pwsh
+        working-directory: windows/frontend
+        run: |
+          npm install
+          npm audit --audit-level=moderate
+          npm test -- --run
+          npm run build
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Build and publish win-x64
+        shell: pwsh
+        run: |
+          dotnet restore .\windows\ArmorX.Windows\ArmorX.Windows.csproj
+          dotnet build .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release --no-restore
+          $out = Join-Path $PWD 'artifacts\win-x64'
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false -o $out
+          if (-not (Test-Path "$out\ArmorX-Studio.exe")) { throw "ArmorX-Studio.exe missing" }
+          if (-not (Test-Path "$out\wwwroot\index.html")) { throw "React wwwroot missing" }
+
+      - name: Core and UI smoke
+        shell: pwsh
+        run: |
+          $exe = '.\artifacts\win-x64\ArmorX-Studio.exe'
+          $p = Start-Process $exe -ArgumentList '--self-test' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "Core self-test failed: $($p.ExitCode)" }
+          $p = Start-Process $exe -ArgumentList '--ui-smoke' -PassThru -Wait
+          if ($p.ExitCode -ne 0) { throw "UI smoke failed: $($p.ExitCode)" }
+
+      - name: Package portable and source ZIPs
+        shell: pwsh
+        run: |
+          Compress-Archive -Path .\artifacts\win-x64\* -DestinationPath .\ArmorX-Studio-v0.6.0-win-x64.zip -Force
+          git archive --format=zip --output=ArmorX-Studio-v0.6.0-source.zip HEAD windows/ArmorX.Windows windows/frontend windows/README.md windows/build.ps1 windows/run-dev.ps1 windows/installer
+
+      - name: Build installer
+        shell: pwsh
+        run: |
+          $iscc = @(
+            "$env:ProgramFiles(x86)\Inno Setup 6\ISCC.exe",
+            "$env:ProgramFiles\Inno Setup 6\ISCC.exe"
+          ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+          if (-not $iscc) {
+            choco install innosetup -y --no-progress
+            $iscc = @(
+              "$env:ProgramFiles(x86)\Inno Setup 6\ISCC.exe",
+              "$env:ProgramFiles\Inno Setup 6\ISCC.exe"
+            ) | Where-Object { Test-Path $_ } | Select-Object -First 1
+          }
+          if (-not $iscc) { throw "Inno Setup ISCC.exe not found" }
+          & $iscc .\windows\installer\ArmorX-Studio.iss
+          if ($LASTEXITCODE -ne 0) { throw "ISCC failed: $LASTEXITCODE" }
+          Copy-Item .\artifacts\installer\ArmorX-Studio-v0.6.0-Setup.exe .\ArmorX-Studio-v0.6.0-Setup.exe
+
+      - name: Generate and verify SHA-256 manifest
+        shell: pwsh
+        run: |
+          $files = @(
+            'ArmorX-Studio-v0.6.0-Setup.exe',
+            'ArmorX-Studio-v0.6.0-win-x64.zip',
+            'ArmorX-Studio-v0.6.0-source.zip'
+          )
+          $lines = foreach ($file in $files) {
+            $hash = (Get-FileHash $file -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $file"
+          }
+          $lines | Set-Content -Encoding ascii .\ArmorX-Studio-v0.6.0-SHA256SUMS.txt
+          foreach ($line in $lines) {
+            $parts = $line -split '  ', 2
+            $actual = (Get-FileHash $parts[1] -Algorithm SHA256).Hash.ToLowerInvariant()
+            if ($actual -ne $parts[0]) { throw "Checksum mismatch for $($parts[1])" }
+          }
+          Get-Content .\ArmorX-Studio-v0.6.0-SHA256SUMS.txt
+
+      - name: Upload release candidate artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-Studio-v0.6.0
+          path: |
+            ArmorX-Studio-v0.6.0-Setup.exe
+            ArmorX-Studio-v0.6.0-win-x64.zip
+            ArmorX-Studio-v0.6.0-source.zip
+            ArmorX-Studio-v0.6.0-SHA256SUMS.txt
+
+      - name: Publish GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if (gh release view v0.6.0 *> $null) {
+            Write-Host 'v0.6.0 already exists; not replacing an existing release.'
+            exit 0
+          }
+          gh release create v0.6.0 `
+            --target "$env:GITHUB_SHA" `
+            --title "ArmorX Studio v0.6.0 — Windows" `
+            --notes-file .\RELEASE_NOTES_v0.6.0.md `
+            --latest `
+            .\ArmorX-Studio-v0.6.0-Setup.exe `
+            .\ArmorX-Studio-v0.6.0-win-x64.zip `
+            .\ArmorX-Studio-v0.6.0-source.zip `
+            .\ArmorX-Studio-v0.6.0-SHA256SUMS.txt
