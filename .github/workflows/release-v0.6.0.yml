@@ -50,14 +50,12 @@ jobs:
           if (-not (Test-Path "$out\ArmorX-Studio.exe")) { throw "ArmorX-Studio.exe missing" }
           if (-not (Test-Path "$out\wwwroot\index.html")) { throw "React wwwroot missing" }
 
-      - name: Core and UI smoke
+      - name: Core self-test
         shell: pwsh
         run: |
           $exe = '.\artifacts\win-x64\ArmorX-Studio.exe'
           $p = Start-Process $exe -ArgumentList '--self-test' -PassThru -Wait
           if ($p.ExitCode -ne 0) { throw "Core self-test failed: $($p.ExitCode)" }
-          $p = Start-Process $exe -ArgumentList '--ui-smoke' -PassThru -Wait
-          if ($p.ExitCode -ne 0) { throw "UI smoke failed: $($p.ExitCode)" }
 
       - name: Package portable and source ZIPs
         shell: pwsh

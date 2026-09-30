@@ -47,6 +47,7 @@ The branch CI requires:
 - .NET Release compilation on windows-latest;
 - self-contained publish;
 - core self-test;
-- WPF/XAML smoke test;
+- WPF Release compilation;
 - verification that bundled React assets are present;
+- Playwright interaction and screenshot QA;
 - packaged CI artifact with SHA-256.

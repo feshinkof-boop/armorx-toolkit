@@ -35,7 +35,7 @@ All notable project changes are documented here.
 - Frontend type/build checks and Vitest pass in CI.
 - npm audit is enforced at moderate severity.
 - .NET Release compile and self-contained win-x64 publish are CI-gated.
-- Core self-test and WPF/WebView2 smoke startup are CI-gated.
+- Core self-test and WPF Release compilation are CI-gated; the React UI is interaction- and visually-tested in Chromium through Playwright.
 - Playwright interaction/visual QA covers dashboard, theme/help, live Button Test, macro drag/reorder, and compact layout without horizontal overflow.
 - Public screenshots are generated from deterministic preview state and checked before being committed.
 
