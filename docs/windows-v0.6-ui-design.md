@@ -1,6 +1,6 @@
 # Windows v0.6 UI/UX design notes
 
-Status: **v0.6.0 release candidate**.
+Status: **released as v0.6.0 on 2026-09-30**.
 
 ## Design direction
 
@@ -51,3 +51,24 @@ The branch CI requires:
 - verification that bundled React assets are present;
 - Playwright interaction and screenshot QA;
 - packaged CI artifact with SHA-256.
+
+
+## Release result
+
+ArmorX Studio v0.6.0 was published from `main` commit
+`c23c296351da579d04a645df49eaf9fed0c2ec2f`.
+
+Public release:
+
+https://github.com/feshinkof-boop/armorx-toolkit/releases/tag/v0.6.0
+
+Published Windows assets:
+
+- `ArmorX-Studio-v0.6.0-Setup.exe`
+- `ArmorX-Studio-v0.6.0-win-x64.zip`
+- `ArmorX-Studio-v0.6.0-source.zip`
+- `ArmorX-Studio-v0.6.0-SHA256SUMS.txt`
+
+The release workflow completed successfully after frontend quality checks,
+Windows publish, deterministic backend self-test, installer build, package
+creation, and SHA-256 verification.
