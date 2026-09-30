@@ -1,0 +1,111 @@
+name: Windows v0.6 React desktop
+
+on:
+  push:
+    branches: [dev/v0.6.0-windows-react]
+    paths:
+      - "windows/**"
+      - ".github/workflows/windows-v0.6.yml"
+  pull_request:
+    paths:
+      - "windows/**"
+      - ".github/workflows/windows-v0.6.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Frontend install and tests
+        shell: pwsh
+        working-directory: windows/frontend
+        run: |
+          npm install
+          npm audit --audit-level=moderate
+          npm test -- --run
+          npm run build
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore and compile .NET host
+        shell: pwsh
+        run: |
+          dotnet restore .\windows\ArmorX.Windows\ArmorX.Windows.csproj
+          dotnet build .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release --no-restore
+
+      - name: Publish self-contained Windows app
+        shell: pwsh
+        run: |
+          $out = Join-Path $PWD 'artifacts\win-x64'
+          dotnet publish .\windows\ArmorX.Windows\ArmorX.Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None -p:DebugSymbols=false -o $out
+          if (-not (Test-Path "$out\ArmorX-Studio.exe")) { throw 'ArmorX-Studio.exe missing' }
+          if (-not (Test-Path "$out\wwwroot\index.html")) { throw 'React wwwroot missing from publish' }
+
+      - name: Core backend self-test
+        shell: pwsh
+        run: dotnet run --project .\windows\ArmorX.SelfTest\ArmorX.SelfTest.csproj -c Release
+
+      - name: Package CI preview
+        shell: pwsh
+        run: |
+          Compress-Archive -Path .\artifacts\win-x64\* -DestinationPath .\ArmorX-Studio-v0.6.0-alpha-win-x64.zip -Force
+          $hash = (Get-FileHash .\ArmorX-Studio-v0.6.0-alpha-win-x64.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  ArmorX-Studio-v0.6.0-alpha-win-x64.zip" | Set-Content -Encoding ascii .\ArmorX-Studio-v0.6.0-alpha-SHA256SUMS.txt
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-Studio-v0.6.0-alpha
+          path: |
+            ArmorX-Studio-v0.6.0-alpha-win-x64.zip
+            ArmorX-Studio-v0.6.0-alpha-SHA256SUMS.txt
+
+
+  visual-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install frontend
+        working-directory: windows/frontend
+        run: |
+          npm install
+          npm audit --audit-level=moderate
+          npm run build
+          python -m pip install pillow
+          npx playwright install --with-deps chromium
+      - name: Responsive interaction and screenshot QA
+        working-directory: windows/frontend
+        run: npm run e2e
+      - name: Verify screenshots contain real page content
+        working-directory: windows/frontend
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageStat
+          from pathlib import Path
+          files = sorted(Path("visual-output").glob("*.png"))
+          assert len(files) >= 5, files
+          for path in files:
+              with Image.open(path) as im:
+                  assert im.width >= 760 and im.height >= 700, (path, im.size)
+                  stat = ImageStat.Stat(im.convert("L"))
+                  assert stat.stddev[0] > 18, (path, stat.stddev[0])
+                  print(path, im.size, round(stat.stddev[0], 2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ArmorX-Studio-v0.6.0-visual-qa
+          path: windows/frontend/visual-output/*.png

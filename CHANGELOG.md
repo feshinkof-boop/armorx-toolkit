@@ -2,6 +2,43 @@
 
 All notable project changes are documented here.
 
+## 0.6.0 — 2026-09-30
+
+**ArmorX Studio** replaces the legacy v0.2.1 interface as the recommended public Windows 10/11 x64 configurator.
+
+### Added
+
+- New React + TypeScript + Vite interface hosted by a .NET 8 WPF/WebView2 shell.
+- Responsive sidebar/bottom navigation for compact windows through ultrawide displays.
+- Instant dark/light theme toggle and an About dialog.
+- Contextual question-mark help with evidence wording, recommended guidance, and loaded device baseline/default values where available.
+- Dedicated read-only **Button Test** using Windows.Gaming.Input, with animated A/B/X/Y, D-pad, LB/RB, stick position, prominent L3/R3 click state, and analog LT/RT pressure visualization.
+- Visual stick/deadzone and recovered raw curve-byte editors.
+- Visual LT/RT tuning, gyro, turbo, M1-M4 remapping, profiles and diagnostics.
+- **Macro Studio** with draggable/reorderable 1–16 step timeline cards, key/chord palette, hold/gap timing, tap/long-press/cycle modes, validation, import/export.
+- Windows system tray showing connection, battery and active profile, with minimize-to-tray behavior.
+- Installer, portable ZIP, source ZIP and SHA-256 release manifest.
+
+### Safety
+
+- Two live configuration reads must agree and have valid CRC before a write can be reviewed.
+- Only known public editable offsets are merged into the fresh live image.
+- Write review shows exact byte changes plus current/target hashes and uses an expiring review token.
+- The controller is re-read before commit; changed live state aborts the write.
+- A complete pre-write backup is created.
+- One D7 transaction plus one persistence action is followed by **two exact 144-byte read-backs**.
+- No arbitrary raw opcode/payload console is exposed.
+- Macro Studio remains offline only; device macro installation is not claimed.
+
+### Quality
+
+- Frontend type/build checks and Vitest pass in CI.
+- npm audit is enforced at moderate severity.
+- .NET Release compile and self-contained win-x64 publish are CI-gated.
+- Core self-test and WPF Release compilation are CI-gated; the React UI is interaction- and visually-tested in Chromium through Playwright.
+- Playwright interaction/visual QA covers dashboard, theme/help, live Button Test, macro drag/reorder, and compact layout without horizontal overflow.
+- Public screenshots are generated from deterministic preview state and checked before being committed.
+
 ## 0.5.0 — 2026-09-29
 
 Linux desktop configurator release. The Windows configurator remains on its
