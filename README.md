@@ -24,7 +24,7 @@ Build, inspect, remap, validate, and research **ARMORX Pro** configurations and 
 
 ## Overview
 
-> **Latest project release:** **v0.5.0** adds the validated PySide6 Linux desktop configurator, visual stick/trigger editors, offline macro timeline, local profiles, and per-user desktop packaging on top of the guarded v0.4.0 BLE backend. The latest downloadable Windows configurator remains the separate **v0.2.1** release.
+> **Latest project release:** **v0.6.0** introduces **ArmorX Studio for Windows** — a responsive React/WebView2 desktop configurator with live button testing, visual L3/R3 and LT/RT feedback, drag-and-drop macro editing, profiles, tray status, contextual help, themes, and the hardened guarded write workflow. The Linux desktop toolkit remains available as v0.5.0.
 
 **ArmorX Toolkit** is a community-driven interoperability project for the **BIGBIG WON ARMORX Pro**, an accessory for **Xbox controllers**.
 
@@ -51,24 +51,32 @@ The project focuses on:
 | Config safety | Unknown/reserved bytes preserved when patching |
 | Community | Read-oriented config-list and share-code client |
 | CLI | Unified `armorx` command |
-| Windows GUI | Public Windows 10/11 x64 BLE configurator |
+| Windows GUI | **ArmorX Studio v0.6.0** — React/WebView2, live Button Test, visual tuning, profiles, macro timeline, system tray |
 | Linux BLE | Guarded live read / apply / rollback with automatic backup and read-back verification |
 | Linux GUI | PySide6 configurator with guarded BLE, profiles, visual stick/trigger editors, offline macro timeline, and desktop launcher — v0.5.0 |
 | Research | PROVEN / STRONG EVIDENCE / UNKNOWN evidence levels |
 | Quality | Pytest suite + GitHub Actions |
 
 <!-- WINDOWS_GUI_PREVIEW_START -->
-## Windows GUI preview
+## Windows GUI preview — ArmorX Studio v0.6.0
 
-ArmorX Toolkit includes a public Windows 10/11 x64 configurator for ARMOR-X Pro over BLE. The latest Windows release is **v0.2.1**: **[recommended installer](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1-Setup.exe)** or **[portable EXE](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1.exe)**. It provides normal end-user configuration only; the internal research/capture application and Research Autopilot are separate and are not part of the public GUI.
+**ArmorX Studio** is the recommended Windows 10/11 x64 application.
 
-| Connected + stick settings | Trigger settings |
+**[Download the v0.6.0 installer](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.6.0/ArmorX-Studio-v0.6.0-Setup.exe)** · **[Portable ZIP](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.6.0/ArmorX-Studio-v0.6.0-win-x64.zip)**
+
+| Dashboard | Stick editor + contextual help |
 | --- | --- |
-| ![ArmorX Windows connected and stick settings](docs/assets/windows/v0.2.0/01-main-connected.webp) | ![ArmorX Windows trigger settings](docs/assets/windows/v0.2.0/02-trigger-settings.webp) |
-| **Rear button remapping** | **Local profiles** |
-| ![ArmorX Windows rear-button remapping](docs/assets/windows/v0.2.0/03-rear-buttons.webp) | ![ArmorX Windows local profiles](docs/assets/windows/v0.2.0/04-profiles.webp) |
+| ![ArmorX Studio dashboard](docs/assets/windows/v0.6.0/01-dashboard-dark.png) | ![ArmorX Studio stick editor in light mode with help](docs/assets/windows/v0.6.0/02-sticks-light-help.png) |
+| **Live Button Test — L3/R3 + LT/RT** | **Macro Studio — drag/reorder timeline** |
+| ![ArmorX Studio live button tester](docs/assets/windows/v0.6.0/03-button-test-l3-triggers.png) | ![ArmorX Studio macro timeline](docs/assets/windows/v0.6.0/04-macro-studio.png) |
 
-The Windows app supports Connect / Recover, configuration read, sticks, triggers, gyro, turbo, M1-M4 remapping, local profiles, and full-image Apply & Verify with read-back verification. **v0.2.1 adds automatic pre-write backups, exact pending-change review, reversible restore, and safer merge-on-fresh-device-image writes.** The screenshots above show the v0.2.0 layout.
+Highlights include responsive compact/ultrawide layouts, instant dark/light themes, contextual **?** help with loaded baseline/default guidance, profiles, gyro/turbo/rear-button mapping, diagnostics, an About dialog, and a Windows system tray showing connection, battery, and active profile.
+
+The separate **Button Test** uses the read-only Windows Xbox-compatible Gamepad API and animates sticks, **L3/R3**, face buttons, D-pad, shoulders, and analog **LT/RT** pressure. Macro Studio provides a draggable 1–16 step offline V41 timeline with chords, hold/gap timing, and import/export.
+
+The normal write workflow requires two agreeing reads, merges only known editable fields into the fresh live image, reviews an exact diff, saves a full backup, sends one D7 plus one persistence action, then requires **two exact 144-byte read-backs**. No arbitrary raw command console is exposed.
+
+v0.2.1 remains available as a legacy release, but v0.6.0 replaces it as the recommended Windows application.
 
 <!-- WINDOWS_GUI_PREVIEW_END -->
 
@@ -192,12 +200,14 @@ Full reference: [docs/macro-format.md](docs/macro-format.md)
 
 ## Installation
 
-> **Public release scope:** **v0.5.0** keeps the guarded v0.4.0 Linux BLE read/apply/rollback path and adds the validated Linux desktop configurator, visual configuration editors, local profiles, offline macro timeline, launcher integration, and Linux desktop bundle. The public Windows configurator remains the separate **v0.2.1** release; researcher-only firmware analysis, raw private captures, Autopilot workflows, and device macro installation are not part of the public package.
+> **Public release scope:** **v0.6.0** adds ArmorX Studio for Windows while retaining the v0.5.0 Linux/Python toolkit. Research-only firmware analysis, raw private captures, Autopilot workflows, and device macro installation remain outside the normal public Windows application.
 
 
-### Windows 10/11 x64
+### Windows 10/11 x64 — ArmorX Studio v0.6.0
 
-Use the **[v0.2.1 installer](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1-Setup.exe)** (recommended) or the **[portable v0.2.1 EXE](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.2.1/ArmorX-Windows-v0.2.1.exe)**. Turn on ARMOR-X Pro and choose **Connect / Recover**. The app reads the controller's own 144-byte configuration image, preserves unknown bytes, automatically backs up the current device image before writes, and verifies writes by reading all 144 bytes back.
+Use the **[v0.6.0 installer](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.6.0/ArmorX-Studio-v0.6.0-Setup.exe)** (recommended) or the **[portable v0.6.0 ZIP](https://github.com/feshinkof-boop/armorx-toolkit/releases/download/v0.6.0/ArmorX-Studio-v0.6.0-win-x64.zip)**.
+
+Turn on ARMOR-X Pro and choose **Connect**. ArmorX Studio provides the responsive React UI, live Button Test, visual stick/trigger tuning, profiles, offline Macro Studio, tray status, exact change review, verified backups, and two-read-back Apply & Verify safety. The application is self-contained for .NET; Microsoft Edge WebView2 Runtime is required and is normally already present on supported Windows 10/11 systems.
 
 ### Python toolkit v0.5.0
 

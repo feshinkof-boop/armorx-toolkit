@@ -85,7 +85,7 @@ const zeroFields = {
 };
 
 export const mockState: StudioState = {
-  app: { name: "ArmorX Studio", version: "0.6.0-alpha.1", platform: "Windows", projectUrl: "#" },
+  app: { name: "ArmorX Studio", version: "0.6.0", platform: "Windows", projectUrl: "#" },
   connection: {
     connected: true,
     headline: "Connected",

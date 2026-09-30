@@ -14,7 +14,7 @@ namespace ArmorX.Windows.Bridge;
 
 public sealed class ArmorXAppController : IAsyncDisposable
 {
-    private const string AppVersion = "0.6.0-alpha.1";
+    private const string AppVersion = "0.6.0";
     private readonly ArmorXBleTransport _transport = new();
     private readonly ProfileStore _profiles = new();
     private readonly BackupStore _backups = new();

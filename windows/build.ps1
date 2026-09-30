@@ -4,7 +4,7 @@ $Frontend = Join-Path $Root 'frontend'
 $Project = Join-Path $Root 'ArmorX.Windows\ArmorX.Windows.csproj'
 $Out = Join-Path $Root 'publish\win-x64'
 
-Write-Host 'ArmorX Studio v0.6 development build'
+Write-Host 'ArmorX Studio v0.6.0 build'
 
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) { throw 'Node.js 20+ is required to build the React UI.' }
 if (-not (Get-Command dotnet -ErrorAction SilentlyContinue)) { throw '.NET 8 SDK is required.' }

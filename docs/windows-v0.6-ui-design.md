@@ -1,5 +1,7 @@
 # Windows v0.6 UI/UX design notes
 
+Status: **v0.6.0 release candidate**.
+
 ## Design direction
 
 ArmorX Studio uses a dark-first glass/graphite interface with violet and cyan

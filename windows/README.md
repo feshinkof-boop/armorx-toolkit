@@ -1,6 +1,6 @@
-# ArmorX Studio for Windows — v0.6 development
+# ArmorX Studio for Windows — v0.6.0
 
-This branch replaces the old WPF-only v0.2.1 interface with a responsive
+v0.6.0 replaces the old WPF-only v0.2.1 interface with a responsive
 **React + TypeScript** UI hosted inside a .NET 8 / WebView2 Windows application.
 
 The proven Windows BLE/config backend from v0.2.1 is retained and hardened; the
@@ -62,6 +62,6 @@ Development:
 
 ## Scope boundary
 
-The macro editor is offline in this development line. It builds the recovered
+The macro editor is offline in v0.6.0. It builds the recovered
 portable V41 macro JSON shape but does not claim that device macro installation
 has been proven.
