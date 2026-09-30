@@ -9,7 +9,7 @@ public partial class App : System.Windows.Application
     {
         if (e.Args.Any(x => string.Equals(x, "--self-test", StringComparison.OrdinalIgnoreCase)))
         {
-            Shutdown(RunSelfTest() ? 0 : 1);
+            Environment.Exit(RunSelfTest() ? 0 : 1);
             return;
         }
 
