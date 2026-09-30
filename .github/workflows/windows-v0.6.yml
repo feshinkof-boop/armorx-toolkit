@@ -31,7 +31,7 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $PSNativeCommandUseErrorActionPreference = $true
-          npm install
+          npm ci
           npm audit --audit-level=moderate
           npm test -- --run
           npm run build
@@ -84,7 +84,7 @@ jobs:
       - name: Install frontend
         working-directory: windows/frontend
         run: |
-          npm install
+          npm ci
           npm audit --audit-level=moderate
           npm run build
           python -m pip install pillow
