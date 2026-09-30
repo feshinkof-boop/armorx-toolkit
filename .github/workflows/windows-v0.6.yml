@@ -90,6 +90,7 @@ jobs:
           npm install
           npm audit --audit-level=moderate
           npm run build
+          python -m pip install pillow
           npx playwright install --with-deps chromium
       - name: Responsive interaction and screenshot QA
         working-directory: windows/frontend
