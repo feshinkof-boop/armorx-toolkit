@@ -12,11 +12,12 @@ on:
       - ".github/workflows/windows-v0.6.yml"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-test:
     runs-on: windows-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -77,6 +78,7 @@ jobs:
 
   visual-qa:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -92,6 +94,38 @@ jobs:
       - name: Responsive interaction and screenshot QA
         working-directory: windows/frontend
         run: npm run e2e
+      - name: Verify screenshots contain real page content
+        working-directory: windows/frontend
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageStat
+          from pathlib import Path
+          files = sorted(Path("visual-output").glob("*.png"))
+          assert len(files) >= 5, files
+          for path in files:
+              with Image.open(path) as im:
+                  assert im.width >= 760 and im.height >= 700, (path, im.size)
+                  stat = ImageStat.Stat(im.convert("L"))
+                  assert stat.stddev[0] > 18, (path, stat.stddev[0])
+                  print(path, im.size, round(stat.stddev[0], 2))
+          PY
+      - name: Stage README screenshots
+        if: github.event_name == 'push'
+        run: |
+          mkdir -p docs/assets/windows/v0.6.0
+          cp windows/frontend/visual-output/*.png docs/assets/windows/v0.6.0/
+      - name: Commit README screenshots
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/windows/v0.6.0/*.png
+          if git diff --cached --quiet; then
+            echo "Windows v0.6 screenshots already current"
+          else
+            git commit -m "docs: add ArmorX Studio v0.6 screenshots"
+            git push origin HEAD:dev/v0.6.0-windows-react
+          fi
       - uses: actions/upload-artifact@v4
         with:
           name: ArmorX-Studio-v0.6.0-visual-qa

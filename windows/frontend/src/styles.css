@@ -59,7 +59,11 @@ button { color: inherit; }
 .navIcon { width: 27px; text-align:center; font-size: 17px; color: var(--accent2); }.navLabel{font-weight:600;font-size:13px}.liveDot{margin-left:auto;width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 10px var(--mint)}
 .sidebarBottom { border-top: 1px solid var(--border); padding-top: 13px; }
 .miniDevice { display:flex; gap:10px; align-items:center; padding:8px; }.miniDevice div{display:flex;flex-direction:column;min-width:0}.miniDevice b{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.miniDevice small{font-size:10px;color:var(--muted);margin-top:3px}.statusOrb{width:11px;height:11px;border-radius:50%;background:#555;box-shadow:0 0 0 5px rgba(100,100,100,.1)}.statusOrb.online{background:var(--mint);box-shadow:0 0 12px rgba(56,231,160,.5),0 0 0 5px rgba(56,231,160,.09)}
-.main { min-width: 0; height: 100vh; display: grid; grid-template-rows: auto 3px 1fr auto; }
+.main { min-width: 0; height: 100vh; display: grid; grid-template-rows: auto 3px minmax(0,1fr) auto; }
+.topbar { grid-row: 1; }
+.busyBar { grid-row: 2; }
+.content { grid-row: 3; min-height: 0; }
+.applyDock { grid-row: 4; }
 .topbar { height: 78px; display:flex;align-items:center;justify-content:space-between;padding:0 28px;border-bottom:1px solid var(--border);background:rgba(9,11,16,.48);backdrop-filter:blur(20px) }
 :root[data-theme="light"] .topbar{background:rgba(244,246,251,.78)}
 .topbar h1{font-size:20px;margin:0 0 3px}.topbar p{font-size:11px;color:var(--muted);margin:0;max-width:650px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.topActions{display:flex;gap:8px;align-items:center}

@@ -21,6 +21,7 @@ public partial class App : System.Windows.Application
                 window.Measure(new System.Windows.Size(1280, 800));
                 window.ForceCloseForTesting();
                 Shutdown(0);
+                Environment.Exit(0);
             }
             catch
             {
